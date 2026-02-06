@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 400" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sagtaBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B6B9B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3B9DD9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="sagtaAccentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#E8A331;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F0B84D;stop-opacity:1" />
+    </linearGradient>
+    <pattern id="sagtaGrid" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+      <rect width="80" height="80" fill="none"/>
+      <line x1="0" y1="0" x2="80" y2="0" stroke="#ffffff" stroke-width="1" opacity="0.15"/>
+      <line x1="0" y1="0" x2="0" y2="80" stroke="#ffffff" stroke-width="1" opacity="0.15"/>
+    </pattern>
+  </defs>
+
+  <!-- Base gradient background -->
+  <rect width="1920" height="400" fill="url(#sagtaBgGrad)"/>
+
+  <!-- Survey grid overlay -->
+  <rect width="1920" height="400" fill="url(#sagtaGrid)"/>
+
+  <!-- Geometric brand pattern - left side -->
+  <g opacity="0.25">
+    <polygon points="0,0 180,0 90,180 0,90" fill="#ffffff"/>
+    <polygon points="40,140 220,140 130,320 40,230" fill="#ffffff"/>
+  </g>
+
+  <!-- Cadastral parcel shapes -->
+  <g fill="none" stroke="#ffffff" stroke-width="2" opacity="0.2">
+    <!-- Large parcel left -->
+    <polygon points="300,100 500,80 520,250 350,280 300,200"/>
+
+    <!-- Medium parcel center-left -->
+    <polygon points="520,80 700,100 680,280 520,250"/>
+
+    <!-- Large parcel center -->
+    <polygon points="800,60 1000,80 980,320 820,300 780,180"/>
+
+    <!-- Parcel center-right -->
+    <polygon points="1000,80 1150,100 1130,280 980,320"/>
+
+    <!-- Parcel right -->
+    <polygon points="1200,120 1350,90 1380,260 1220,290"/>
+  </g>
+
+  <!-- Survey beacon markers at parcel corners -->
+  <g fill="url(#sagtaAccentGrad)">
+    <!-- Parcel 1 corners -->
+    <circle cx="300" cy="100" r="8"/>
+    <circle cx="500" cy="80" r="8"/>
+    <circle cx="520" cy="250" r="8"/>
+    <circle cx="350" cy="280" r="8"/>
+    <circle cx="300" cy="200" r="8"/>
+
+    <!-- Parcel 2 corners -->
+    <circle cx="700" cy="100" r="8"/>
+    <circle cx="680" cy="280" r="8"/>
+
+    <!-- Parcel 3 corners -->
+    <circle cx="800" cy="60" r="8"/>
+    <circle cx="1000" cy="80" r="8"/>
+    <circle cx="980" cy="320" r="8"/>
+    <circle cx="820" cy="300" r="8"/>
+    <circle cx="780" cy="180" r="8"/>
+
+    <!-- Parcel 4 corners -->
+    <circle cx="1150" cy="100" r="8"/>
+    <circle cx="1130" cy="280" r="8"/>
+
+    <!-- Parcel 5 corners -->
+    <circle cx="1200" cy="120" r="8"/>
+    <circle cx="1350" cy="90" r="8"/>
+    <circle cx="1380" cy="260" r="8"/>
+    <circle cx="1220" cy="290" r="8"/>
+  </g>
+
+  <!-- Tripod/theodolite symbol -->
+  <g transform="translate(600, 180)" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.2">
+    <circle cx="0" cy="-30" r="15"/>
+    <line x1="-25" y1="40" x2="0" y2="-15"/>
+    <line x1="25" y1="40" x2="0" y2="-15"/>
+    <line x1="0" y1="40" x2="0" y2="-15"/>
+  </g>
+
+  <!-- Document/map symbol -->
+  <g transform="translate(1100, 200)" fill="#ffffff" opacity="0.15">
+    <rect x="-40" y="-50" width="80" height="100" rx="4"/>
+    <line x1="-30" y1="-35" x2="30" y2="-35" stroke="url(#sagtaBgGrad)" stroke-width="3"/>
+    <line x1="-30" y1="-20" x2="20" y2="-20" stroke="url(#sagtaBgGrad)" stroke-width="3"/>
+    <line x1="-30" y1="-5" x2="30" y2="-5" stroke="url(#sagtaBgGrad)" stroke-width="3"/>
+    <rect x="-30" y="10" width="40" height="30" stroke="url(#sagtaBgGrad)" stroke-width="2" fill="none"/>
+  </g>
+
+  <!-- Compass rose hint -->
+  <g transform="translate(450, 300)" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.15">
+    <circle cx="0" cy="0" r="25"/>
+    <line x1="0" y1="-30" x2="0" y2="30"/>
+    <line x1="-30" y1="0" x2="30" y2="0"/>
+    <polygon points="0,-25 5,-10 -5,-10" fill="#ffffff"/>
+  </g>
+
+  <!-- Orange accent shapes - right side -->
+  <g>
+    <polygon points="1920,0 1720,0 1820,130 1920,80" fill="url(#sagtaAccentGrad)" opacity="0.9"/>
+    <polygon points="1920,130 1780,180 1870,300 1920,260" fill="url(#sagtaAccentGrad)" opacity="0.7"/>
+    <polygon points="1650,80 1740,80 1695,200 1605,160" fill="url(#sagtaAccentGrad)" opacity="0.5"/>
+  </g>
+
+  <!-- Coordinate labels hint -->
+  <g fill="#ffffff" font-family="monospace" font-size="10" opacity="0.15">
+    <text x="280" y="90">Y: 2854320</text>
+    <text x="780" y="50">Y: 2854400</text>
+    <text x="1180" y="110">Y: 2854280</text>
+  </g>
+
+  <!-- QGIS logo hint (stylized) -->
+  <g transform="translate(1450, 280)" opacity="0.15">
+    <circle cx="0" cy="0" r="30" fill="#ffffff"/>
+    <text x="0" y="8" text-anchor="middle" font-family="Arial" font-size="20" font-weight="bold" fill="url(#sagtaBgGrad)">Q</text>
+  </g>
+
+  <!-- Subtle Kartoza pattern in corner -->
+  <g transform="translate(50, 280)" fill="#ffffff" opacity="0.2">
+    <path d="M0,0 L40,0 L40,20 L20,20 L20,40 L40,40 L40,60 L0,60 Z"/>
+    <path d="M50,0 L90,0 L90,60 L50,60 L50,40 L70,40 L70,20 L50,20 Z"/>
+  </g>
+</svg>

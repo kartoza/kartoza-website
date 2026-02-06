@@ -1,0 +1,95 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+{{ partial "contextmenu.html" . }}
+{{ partial "banner.html" . }}
+
+<section class="section solutions-section">
+    <div class="container">
+        <!-- Solutions Introduction -->
+        {{ if .Content }}
+        <div class="section-list-intro">
+            {{ .Content }}
+        </div>
+        {{ end }}
+
+        <!-- Solutions Grid -->
+        <div class="solutions-grid columns is-multiline">
+            {{ range (.Paginator 50).Pages }}
+            <div class="column is-4-desktop is-6-tablet">
+                <article class="solution-card">
+                    <div class="solution-card-icon">
+                        {{ if .Params.icon }}
+                        <i class="fas fa-{{ .Params.icon }}"></i>
+                        {{ else if .Params.thumbnail }}
+                        <img src="{{ .Params.thumbnail }}" alt="{{ .Title }}">
+                        {{ else }}
+                        <i class="fas fa-map-marked-alt"></i>
+                        {{ end }}
+                    </div>
+                    <h3 class="solution-card-title">
+                        <a href="{{ .Permalink }}">{{ .Title }}</a>
+                    </h3>
+                    {{ if .Params.tagline }}
+                    <p class="solution-card-tagline">{{ .Params.tagline }}</p>
+                    {{ end }}
+                    <p class="solution-card-description">
+                        {{ .Description | truncate 150 }}
+                    </p>
+                    <a href="{{ .Permalink }}" class="solution-card-link">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </article>
+            </div>
+            {{ end }}
+        </div>
+
+        <!-- Pagination -->
+        {{ if gt .Paginator.TotalPages 1 }}
+        <nav class="pagination is-centered section-pagination" role="navigation" aria-label="pagination">
+            {{ if .Paginator.HasPrev }}
+            <a class="pagination-previous" href="{{ .Paginator.Prev.URL }}">
+                <i class="fas fa-chevron-left"></i> Previous
+            </a>
+            {{ end }}
+            {{ if .Paginator.HasNext }}
+            <a class="pagination-next" href="{{ .Paginator.Next.URL }}">
+                Next <i class="fas fa-chevron-right"></i>
+            </a>
+            {{ end }}
+            <ul class="pagination-list">
+                {{ range .Paginator.Pagers }}
+                <li>
+                    <a class="pagination-link {{ if eq . $.Paginator }}is-current{{ end }}"
+                       href="{{ .URL }}"
+                       aria-label="Page {{ .PageNumber }}">
+                        {{ .PageNumber }}
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+        </nav>
+        {{ end }}
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section section-cta">
+    <div class="container has-text-centered">
+        <h2 class="title is-3">Need a Custom Geospatial Solution?</h2>
+        <p class="subtitle is-5">Let's discuss how we can help you achieve your mapping and data goals.</p>
+        <div class="section-cta-buttons">
+            <a class="button is-primary is-medium" href="{{ absURL "contact-us/" }}">
+                <span class="icon"><i class="fas fa-comments"></i></span>
+                <span>Start a Conversation</span>
+            </a>
+            <a class="button is-light is-medium" href="{{ absURL "portfolio/" }}">
+                <span class="icon"><i class="fas fa-briefcase"></i></span>
+                <span>See Our Portfolio</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+{{ partial "physics-scroll.html" . }}
+
+{{ partial "footer.html" . }}

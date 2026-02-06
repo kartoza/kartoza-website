@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 400" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="mcBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B6B9B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3B9DD9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="mcAccentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#E8A331;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F0B84D;stop-opacity:1" />
+    </linearGradient>
+    <pattern id="mcGridPattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+      <rect width="60" height="60" fill="none"/>
+      <path d="M60 0 L0 0 L0 60" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.1"/>
+    </pattern>
+  </defs>
+
+  <!-- Base gradient background -->
+  <rect width="1920" height="400" fill="url(#mcBgGrad)"/>
+
+  <!-- Grid overlay -->
+  <rect width="1920" height="400" fill="url(#mcGridPattern)"/>
+
+  <!-- Geometric brand pattern - left side -->
+  <g opacity="0.3">
+    <polygon points="0,0 200,0 100,200 0,100" fill="#ffffff"/>
+    <polygon points="50,150 250,150 150,350 50,250" fill="#ffffff"/>
+    <polygon points="150,50 350,50 250,250 150,150" fill="#ffffff"/>
+  </g>
+
+  <!-- City skyline silhouette -->
+  <g fill="#ffffff" opacity="0.08">
+    <rect x="100" y="250" width="80" height="150"/>
+    <rect x="200" y="200" width="60" height="200"/>
+    <rect x="280" y="230" width="100" height="170"/>
+    <rect x="400" y="180" width="70" height="220"/>
+    <rect x="490" y="220" width="90" height="180"/>
+    <rect x="600" y="260" width="60" height="140"/>
+  </g>
+
+  <!-- Orange accent shapes - right side -->
+  <g>
+    <polygon points="1920,0 1700,0 1800,150 1920,100" fill="url(#mcAccentGrad)" opacity="0.9"/>
+    <polygon points="1920,150 1750,200 1850,350 1920,300" fill="url(#mcAccentGrad)" opacity="0.7"/>
+    <polygon points="1600,100 1700,100 1650,250 1550,200" fill="url(#mcAccentGrad)" opacity="0.5"/>
+  </g>
+
+  <!-- Infrastructure icons scattered -->
+  <g fill="#ffffff" opacity="0.15">
+    <!-- Road/path icon -->
+    <path d="M800,300 L850,250 L900,300 L850,350 Z" stroke="#ffffff" stroke-width="2" fill="none"/>
+
+    <!-- Water drop -->
+    <path d="M1000,280 Q1020,250 1040,280 Q1040,320 1020,330 Q1000,320 1000,280" />
+
+    <!-- Building outline -->
+    <rect x="1150" y="250" width="50" height="80" stroke="#ffffff" stroke-width="2" fill="none"/>
+    <rect x="1160" y="260" width="12" height="15" fill="#ffffff"/>
+    <rect x="1178" y="260" width="12" height="15" fill="#ffffff"/>
+    <rect x="1160" y="285" width="12" height="15" fill="#ffffff"/>
+    <rect x="1178" y="285" width="12" height="15" fill="#ffffff"/>
+
+    <!-- Gear -->
+    <circle cx="1350" cy="290" r="30" stroke="#ffffff" stroke-width="3" fill="none"/>
+    <circle cx="1350" cy="290" r="12" fill="#ffffff"/>
+  </g>
+
+  <!-- Decorative lines -->
+  <g stroke="#ffffff" stroke-width="2" opacity="0.2">
+    <line x1="700" y1="400" x2="900" y2="200"/>
+    <line x1="750" y1="400" x2="950" y2="200"/>
+    <line x1="1100" y1="0" x2="1300" y2="200"/>
+    <line x1="1150" y1="0" x2="1350" y2="200"/>
+  </g>
+
+  <!-- Subtle Kartoza pattern in corner -->
+  <g transform="translate(50, 280)" fill="#ffffff" opacity="0.2">
+    <path d="M0,0 L40,0 L40,20 L20,20 L20,40 L40,40 L40,60 L0,60 Z"/>
+    <path d="M50,0 L90,0 L90,60 L50,60 L50,40 L70,40 L70,20 L50,20 Z"/>
+  </g>
+</svg>

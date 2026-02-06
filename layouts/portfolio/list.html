@@ -1,0 +1,111 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+{{ partial "contextmenu.html" . }}
+{{ partial "banner.html" . }}
+
+<section class="section portfolio-section">
+    <div class="container">
+        <!-- Portfolio Introduction -->
+        {{ if .Content }}
+        <div class="portfolio-intro">
+            {{ .Content }}
+        </div>
+        {{ end }}
+
+        <!-- Portfolio Grid -->
+        <div class="portfolio-grid columns is-multiline">
+            {{ range (.Paginator 50).Pages }}
+            <div class="column is-6-desktop is-12-tablet">
+                <article class="portfolio-card">
+                    {{ if .Params.thumbnail }}
+                    <div class="portfolio-card-image">
+                        <a href="{{ .Permalink }}">
+                            <img src="{{ .Params.thumbnail }}" alt="{{ .Title }}" loading="lazy">
+                            <div class="portfolio-card-overlay">
+                                <span class="view-project">
+                                    <i class="fas fa-eye"></i>
+                                    View Project
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                    {{ end }}
+                    <div class="portfolio-card-content">
+                        <h3 class="portfolio-card-title">
+                            <a href="{{ .Permalink }}">{{ .Title }}</a>
+                        </h3>
+                        {{ if .Params.client }}
+                        <p class="portfolio-card-client">
+                            <i class="fas fa-building"></i>
+                            {{ .Params.client }}
+                        </p>
+                        {{ end }}
+                        <p class="portfolio-card-description">
+                            {{ .Description | truncate 150 }}
+                        </p>
+                        {{ if .Params.tags }}
+                        <div class="portfolio-card-tags">
+                            {{ range first 3 .Params.tags }}
+                            <span class="tag">{{ . }}</span>
+                            {{ end }}
+                        </div>
+                        {{ end }}
+                        <a href="{{ .Permalink }}" class="portfolio-card-link">
+                            Learn More <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+            {{ end }}
+        </div>
+
+        <!-- Pagination -->
+        {{ if gt .Paginator.TotalPages 1 }}
+        <nav class="pagination is-centered portfolio-pagination" role="navigation" aria-label="pagination">
+            {{ if .Paginator.HasPrev }}
+            <a class="pagination-previous" href="{{ .Paginator.Prev.URL }}">
+                <i class="fas fa-chevron-left"></i> Previous
+            </a>
+            {{ end }}
+            {{ if .Paginator.HasNext }}
+            <a class="pagination-next" href="{{ .Paginator.Next.URL }}">
+                Next <i class="fas fa-chevron-right"></i>
+            </a>
+            {{ end }}
+            <ul class="pagination-list">
+                {{ range .Paginator.Pagers }}
+                <li>
+                    <a class="pagination-link {{ if eq . $.Paginator }}is-current{{ end }}"
+                       href="{{ .URL }}"
+                       aria-label="Page {{ .PageNumber }}">
+                        {{ .PageNumber }}
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+        </nav>
+        {{ end }}
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section portfolio-cta-section">
+    <div class="container has-text-centered">
+        <h2 class="title is-3">Ready to Start Your Project?</h2>
+        <p class="subtitle is-5">Let's discuss how Kartoza can help bring your geospatial vision to life.</p>
+        <div class="portfolio-cta-buttons">
+            <a class="button is-primary is-medium" href="{{ absURL "contact-us/" }}">
+                <span class="icon"><i class="fas fa-envelope"></i></span>
+                <span>Get in Touch</span>
+            </a>
+            <a class="button is-light is-medium" href="{{ absURL "solutions/" }}">
+                <span class="icon"><i class="fas fa-cogs"></i></span>
+                <span>View Our Solutions</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+{{ partial "physics-scroll.html" . }}
+
+{{ partial "footer.html" . }}

@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "WebFetch(domain:kartoza.com)",
+      "Bash(find:*)",
+      "Bash(curl:*)",
+      "Bash(nix-shell:*)",
+      "Bash(for page in about the_team merginmaps careers)",
+      "Bash(do echo -n \"$page: \")",
+      "Bash(done)",
+      "Bash(/home/timlinux/dev/hugo/Kartoza-Hugo/PROMPT.log)",
+      "Bash(for page in \"\" about/ the_team/ merginmaps/ careers/)",
+      "Bash(cd /home/timlinux/dev/hugo/Kartoza-Hugo/static/img/portfolio curl -sL -o kafue-flats.png \"https://kartoza.com/files/map5e7a11.png\" curl -sL -o planet-labs.png \"https://kartoza.com/files/fEB338K.png\" curl -sL -o fbis.png \"https://kartoza.com/files/fbis_KXPrSw2.png\" curl -sL -o healthsites.png \"https://kartoza.com/files/hs.io.png\" curl -sL -o myfarmweb.png \"https://kartoza.com/files/Screenshot_2019-09-13_at_21.06.09.png\" curl -sL -o energy-modelling-africa.png \"https://kartoza.com/files/training.png\" curl -sL -o ogun-state-lis.png \"https://kartoza.com/files/ogungis2.png\" curl -sL -o cadasta.png \"https://kartoza.com/files/cadasta.png\" curl -sL -o cape-town-marathon.png \"https://kartoza.com/files/Cape_Town_Marathon_w95ISN7.png\" curl -sL -o land-audit.png \"https://kartoza.com/files/image5.png\" curl -sL -o map-campaigner.png \"https://kartoza.com/files/hot_map_campaigner.png\" curl -sL -o seforall.png \"https://kartoza.com/files/ltQmJWB.jpg\" curl -sL -o forecast-action.png \"https://kartoza.com/files/Screenshot_2020-01-22_at_09.41.08.png\" curl -sL -o my-civitas.png \"https://kartoza.com/files/1SReLDa.png\" echo \"Batch 2 done\" ls /home/timlinux/dev/hugo/Kartoza-Hugo/static/img/portfolio/)",
+      "WebFetch(domain:civitas.kartoza.com)",
+      "Bash(git init:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

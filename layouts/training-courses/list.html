@@ -1,0 +1,101 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+{{ partial "contextmenu.html" . }}
+{{ partial "banner.html" . }}
+
+<section class="section training-section">
+    <div class="container">
+        <!-- Training Introduction -->
+        {{ if .Content }}
+        <div class="section-list-intro">
+            {{ .Content }}
+        </div>
+        {{ end }}
+
+        <!-- Training Grid -->
+        <div class="training-grid columns is-multiline">
+            {{ range (.Paginator 50).Pages }}
+            <div class="column is-4-desktop is-6-tablet">
+                <article class="training-card">
+                    {{ if .Params.thumbnail }}
+                    <div class="training-card-image">
+                        <a href="{{ .Permalink }}">
+                            <img src="{{ .Params.thumbnail }}" alt="{{ .Title }}" loading="lazy">
+                        </a>
+                        {{ if .Params.level }}
+                        <span class="training-card-badge">{{ .Params.level }}</span>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                    <div class="training-card-content">
+                        <h3 class="training-card-title">
+                            <a href="{{ .Permalink }}">{{ .Title }}</a>
+                        </h3>
+                        {{ if .Params.duration }}
+                        <p class="training-card-duration">
+                            <i class="fas fa-clock"></i>
+                            {{ .Params.duration }}
+                        </p>
+                        {{ end }}
+                        <p class="training-card-description">
+                            {{ .Description | truncate 120 }}
+                        </p>
+                        <a href="{{ .Permalink }}" class="training-card-link">
+                            View Course <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+            {{ end }}
+        </div>
+
+        <!-- Pagination -->
+        {{ if gt .Paginator.TotalPages 1 }}
+        <nav class="pagination is-centered section-pagination" role="navigation" aria-label="pagination">
+            {{ if .Paginator.HasPrev }}
+            <a class="pagination-previous" href="{{ .Paginator.Prev.URL }}">
+                <i class="fas fa-chevron-left"></i> Previous
+            </a>
+            {{ end }}
+            {{ if .Paginator.HasNext }}
+            <a class="pagination-next" href="{{ .Paginator.Next.URL }}">
+                Next <i class="fas fa-chevron-right"></i>
+            </a>
+            {{ end }}
+            <ul class="pagination-list">
+                {{ range .Paginator.Pagers }}
+                <li>
+                    <a class="pagination-link {{ if eq . $.Paginator }}is-current{{ end }}"
+                       href="{{ .URL }}"
+                       aria-label="Page {{ .PageNumber }}">
+                        {{ .PageNumber }}
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+        </nav>
+        {{ end }}
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section section-cta">
+    <div class="container has-text-centered">
+        <h2 class="title is-3">Ready to Expand Your GIS Skills?</h2>
+        <p class="subtitle is-5">Contact us for custom training programs tailored to your organization's needs.</p>
+        <div class="section-cta-buttons">
+            <a class="button is-primary is-medium" href="{{ absURL "contact-us/" }}">
+                <span class="icon"><i class="fas fa-envelope"></i></span>
+                <span>Request Training</span>
+            </a>
+            <a class="button is-light is-medium" href="{{ absURL "solutions/" }}">
+                <span class="icon"><i class="fas fa-cogs"></i></span>
+                <span>View Our Solutions</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+{{ partial "physics-scroll.html" . }}
+
+{{ partial "footer.html" . }}

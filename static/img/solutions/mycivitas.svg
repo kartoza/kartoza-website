@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B6B9B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3B9DD9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#E8A331;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F0B84D;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bgGrad)"/>
+
+  <!-- City skyline silhouette -->
+  <g fill="#ffffff" opacity="0.15">
+    <rect x="20" y="180" width="40" height="120"/>
+    <rect x="70" y="140" width="35" height="160"/>
+    <rect x="115" y="160" width="45" height="140"/>
+    <rect x="170" y="120" width="50" height="180"/>
+    <rect x="230" y="150" width="40" height="150"/>
+    <rect x="280" y="170" width="55" height="130"/>
+    <rect x="345" y="190" width="35" height="110"/>
+  </g>
+
+  <!-- Central icon: Building with gear -->
+  <g transform="translate(200, 130)">
+    <!-- Building -->
+    <rect x="-40" y="-50" width="80" height="100" fill="#ffffff" rx="4"/>
+    <rect x="-32" y="-40" width="20" height="15" fill="url(#bgGrad)" rx="2"/>
+    <rect x="12" y="-40" width="20" height="15" fill="url(#bgGrad)" rx="2"/>
+    <rect x="-32" y="-18" width="20" height="15" fill="url(#bgGrad)" rx="2"/>
+    <rect x="12" y="-18" width="20" height="15" fill="url(#bgGrad)" rx="2"/>
+    <rect x="-32" y="4" width="20" height="15" fill="url(#bgGrad)" rx="2"/>
+    <rect x="12" y="4" width="20" height="15" fill="url(#bgGrad)" rx="2"/>
+    <rect x="-12" y="25" width="24" height="25" fill="url(#accentGrad)" rx="2"/>
+
+    <!-- Gear overlay -->
+    <g transform="translate(35, -35)" fill="url(#accentGrad)">
+      <circle cx="0" cy="0" r="18" fill="none" stroke="url(#accentGrad)" stroke-width="6"/>
+      <rect x="-3" y="-25" width="6" height="10" rx="2"/>
+      <rect x="-3" y="15" width="6" height="10" rx="2"/>
+      <rect x="-25" y="-3" width="10" height="6" rx="2"/>
+      <rect x="15" y="-3" width="10" height="6" rx="2"/>
+      <rect x="12" y="-21" width="6" height="10" rx="2" transform="rotate(45)"/>
+      <rect x="-18" y="11" width="6" height="10" rx="2" transform="rotate(45)"/>
+      <rect x="11" y="12" width="6" height="10" rx="2" transform="rotate(-45)"/>
+      <rect x="-17" y="-18" width="6" height="10" rx="2" transform="rotate(-45)"/>
+    </g>
+  </g>
+
+  <!-- Text -->
+  <text x="200" y="260" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff">MyCivitas</text>
+  <text x="200" y="282" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-size="12" fill="#ffffff" opacity="0.8">Municipal Asset Management</text>
+</svg>

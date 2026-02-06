@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <!-- Kartoza Brand Pattern - Geometric shapes with blue, grey, and orange -->
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#ffffff"/>
+
+  <!-- Grey geometric shapes (middle/background) -->
+  <g fill="#d4dbe2">
+    <polygon points="400,0 700,0 600,300 350,250"/>
+    <polygon points="600,200 900,150 850,450 550,400"/>
+    <polygon points="300,400 550,350 500,650 280,600"/>
+    <polygon points="700,500 950,450 900,750 650,700"/>
+    <polygon points="500,750 750,700 700,1000 450,950"/>
+  </g>
+
+  <g fill="#9E9E9E">
+    <polygon points="800,100 1050,50 1000,350 750,300"/>
+    <polygon points="600,600 850,550 800,850 550,800"/>
+    <polygon points="900,700 1150,650 1100,950 850,900"/>
+  </g>
+
+  <g fill="#C8C8C8">
+    <polygon points="950,300 1200,250 1150,550 900,500"/>
+    <polygon points="750,850 1000,800 950,1080 700,1080"/>
+  </g>
+
+  <!-- Blue geometric shapes (left side) - Kartoza K pattern -->
+  <g fill="#3B9DD9">
+    <polygon points="0,200 150,200 150,400 100,400 100,320 50,380 0,380"/>
+    <polygon points="0,420 50,420 100,480 100,600 150,600 150,800 0,800"/>
+    <polygon points="100,320 150,260 250,400 200,400"/>
+    <polygon points="100,480 200,600 250,600 150,460"/>
+  </g>
+
+  <g fill="#1B6B9B">
+    <polygon points="0,0 200,0 150,150 0,150"/>
+    <polygon points="50,150 200,150 180,300 80,280"/>
+    <polygon points="0,850 180,850 150,1080 0,1080"/>
+    <polygon points="200,700 350,650 320,900 180,850"/>
+  </g>
+
+  <g fill="#5BB5E8">
+    <polygon points="180,50 350,0 300,200 150,180"/>
+    <polygon points="250,600 400,550 380,800 230,750"/>
+  </g>
+
+  <!-- Orange/Gold geometric shapes (right side) -->
+  <g fill="#E8A331">
+    <polygon points="1400,0 1650,0 1600,300 1380,250"/>
+    <polygon points="1500,350 1750,300 1700,600 1480,550"/>
+    <polygon points="1600,700 1850,650 1800,950 1580,900"/>
+    <polygon points="1700,200 1920,150 1920,450 1680,400"/>
+  </g>
+
+  <g fill="#D4922A">
+    <polygon points="1550,500 1800,450 1750,750 1530,700"/>
+    <polygon points="1650,850 1920,800 1920,1080 1630,1080"/>
+  </g>
+
+  <g fill="#F0B84D">
+    <polygon points="1450,150 1700,100 1650,400 1430,350"/>
+    <polygon points="1750,550 1920,500 1920,750 1730,700"/>
+    <circle cx="1800" cy="200" r="80"/>
+  </g>
+
+  <!-- White separator lines -->
+  <g stroke="#ffffff" stroke-width="8" fill="none">
+    <path d="M350,0 Q400,300 300,600 Q250,900 400,1080"/>
+    <path d="M1400,0 Q1350,400 1450,700 Q1500,900 1400,1080"/>
+  </g>
+</svg>

@@ -1,0 +1,191 @@
+/**
+* Kartoza background wallpaper
+*/
+body {
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 60%;
+    height: 80%;
+    background-image: url("/img/home-page-back-left.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.15;
+}
+
+/**
+* Hidden fallback
+*/
+[hidden] {
+    display: none;
+    visibility: hidden;
+}
+
+button.button {
+    border-radius: 10px;
+
+    @media screen and (max-width: 768px) {
+        width: 100%;
+    }
+}
+.narrow {
+    max-width: 768px !important;
+}
+
+a.heading-anchor {
+  visibility: hidden;
+}
+
+h1:hover > a.heading-anchor,
+h2:hover > a.heading-anchor,
+h3:hover > a.heading-anchor,
+h4:hover > a.heading-anchor,
+h5:hover > a.heading-anchor,
+h6:hover > a.heading-anchor {
+  visibility: visible;
+}
+
+/**
+ * Kartoza organic block styling
+ * Soft drop shadows and rounded corners for all block elements
+ */
+
+/* Notification blocks (used by block shortcode) */
+.notification {
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(27, 107, 155, 0.10), 0 1px 4px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.notification:hover {
+    box-shadow: 0 8px 28px rgba(27, 107, 155, 0.14), 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Cards (used on team page etc.) */
+.card {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(27, 107, 155, 0.10), 0 1px 4px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    border: none;
+}
+
+.card:hover {
+    box-shadow: 0 8px 28px rgba(27, 107, 155, 0.16), 0 2px 8px rgba(0, 0, 0, 0.08);
+    transform: translateY(-3px);
+}
+
+.card .card-image img {
+    object-fit: cover;
+}
+
+.card .card-content {
+    padding: 1.25rem;
+}
+
+.card .card-content .title {
+    color: #1B6B9B;
+    margin-bottom: 0.25rem;
+}
+
+.card .card-content .subtitle {
+    color: #E8A331;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+/* Block section backgrounds */
+section.is-fluid .notification {
+    border-radius: 16px;
+    box-shadow: 0 6px 24px rgba(27, 107, 155, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+/* Hero banner organic styling */
+.hero.has-bg-img {
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.hero .hero-body {
+    padding: 4rem 1.5rem;
+}
+
+.hero .title.hero-title {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Buttons - organic rounded with shadow */
+a.button, button.button, .button {
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(27, 107, 155, 0.12);
+    transition: box-shadow 0.25s ease, transform 0.25s ease, background-color 0.25s ease;
+    font-weight: 600;
+}
+
+a.button:hover, button.button:hover, .button:hover {
+    box-shadow: 0 4px 14px rgba(27, 107, 155, 0.20);
+    transform: translateY(-1px);
+}
+
+/* Info bar items */
+.info-bar .column {
+    border-radius: 10px;
+}
+
+/* Navbar - subtle bottom shadow */
+.navbar.is-fixed-top {
+    box-shadow: 0 2px 12px rgba(27, 107, 155, 0.08);
+}
+
+/* Footer - subtle top shadow */
+footer.footer {
+    border-top: 3px solid #3B9DD9;
+}
+
+/* Block section - full-width sections with organic transitions */
+section.is-fluid > .container.is-fluid {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+/* Ribbon styling to match brand */
+.ribbon {
+    border-radius: 0 12px 0 12px;
+}
+
+.second-ribbon {
+    border-radius: 12px 0 12px 0;
+}
+
+/* Explore section on homepage */
+.explore.container {
+    border-radius: 12px;
+}
+
+.explore .column.photo figure img {
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(27, 107, 155, 0.12);
+}
+
+/* Box elements */
+.box {
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(27, 107, 155, 0.10), 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* Pulldown toggle content */
+.pulldown-toggle {
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.pulldown-toggle:hover {
+    opacity: 0.85;
+}

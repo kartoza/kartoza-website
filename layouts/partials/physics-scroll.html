@@ -1,0 +1,166 @@
+<!-- Physics-based scroll animation -->
+<script>
+(function() {
+    'use strict';
+
+    // Physics simulation for scroll-based animations
+    class PhysicsCard {
+        constructor(element, index, totalColumns) {
+            this.element = element;
+            this.index = index;
+            this.targetY = 0;
+            this.currentY = 0;
+            this.velocity = 0;
+            this.isVisible = false;
+
+            // Physics constants
+            this.springStrength = 0.08;  // How fast it snaps back
+            this.damping = 0.85;         // How quickly it settles (lower = bouncier)
+            this.scrollInfluence = 0.3;  // How much scroll affects movement
+
+            // Stagger delay based on position
+            this.staggerDelay = (index % totalColumns) * 50 + Math.floor(index / totalColumns) * 30;
+
+            // Initialize with offset for entrance animation
+            this.currentY = 60;
+            this.element.style.opacity = '0';
+            this.element.style.transform = `translateY(${this.currentY}px)`;
+        }
+
+        update(scrollVelocity, deltaTime) {
+            if (!this.isVisible) return;
+
+            // Apply scroll velocity as an impulse
+            const impulse = scrollVelocity * this.scrollInfluence;
+            this.velocity += impulse;
+
+            // Spring force pulls toward target (0)
+            const springForce = (this.targetY - this.currentY) * this.springStrength;
+            this.velocity += springForce;
+
+            // Apply damping
+            this.velocity *= this.damping;
+
+            // Update position
+            this.currentY += this.velocity;
+
+            // Apply transform
+            this.element.style.transform = `translateY(${this.currentY}px)`;
+        }
+
+        show() {
+            if (this.isVisible) return;
+            this.isVisible = true;
+
+            setTimeout(() => {
+                this.element.style.opacity = '1';
+                this.element.style.transition = 'opacity 0.4s ease-out';
+            }, this.staggerDelay);
+        }
+    }
+
+    // Main controller
+    class GalleryPhysics {
+        constructor(selector, columnsEstimate) {
+            this.cards = [];
+            this.lastScrollY = window.scrollY;
+            this.scrollVelocity = 0;
+            this.lastTime = performance.now();
+            this.isRunning = false;
+            this.selector = selector;
+            this.columnsEstimate = columnsEstimate || 2;
+
+            this.init();
+        }
+
+        init() {
+            const cardElements = document.querySelectorAll(this.selector);
+
+            cardElements.forEach((el, index) => {
+                this.cards.push(new PhysicsCard(el, index, this.columnsEstimate));
+            });
+
+            if (this.cards.length === 0) return;
+
+            // Set up intersection observer for visibility
+            this.setupIntersectionObserver();
+
+            // Listen for scroll
+            window.addEventListener('scroll', () => this.onScroll(), { passive: true });
+
+            // Start animation loop
+            this.startLoop();
+        }
+
+        setupIntersectionObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const card = this.cards.find(c => c.element === entry.target);
+                    if (card && entry.isIntersecting) {
+                        card.show();
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '50px'
+            });
+
+            this.cards.forEach(card => observer.observe(card.element));
+        }
+
+        onScroll() {
+            const currentScrollY = window.scrollY;
+            this.scrollVelocity = (currentScrollY - this.lastScrollY) * 0.1;
+            this.lastScrollY = currentScrollY;
+        }
+
+        startLoop() {
+            if (this.isRunning) return;
+            this.isRunning = true;
+            this.animate();
+        }
+
+        animate() {
+            const currentTime = performance.now();
+            const deltaTime = (currentTime - this.lastTime) / 16.67; // Normalize to ~60fps
+            this.lastTime = currentTime;
+
+            // Decay scroll velocity over time
+            this.scrollVelocity *= 0.92;
+
+            // Update all cards
+            this.cards.forEach(card => {
+                card.update(this.scrollVelocity, deltaTime);
+            });
+
+            requestAnimationFrame(() => this.animate());
+        }
+    }
+
+    // Initialize when DOM is ready
+    function initPhysics() {
+        // Portfolio cards
+        if (document.querySelector('.portfolio-card')) {
+            new GalleryPhysics('.portfolio-card', 2);
+        }
+        // Training cards
+        if (document.querySelector('.training-card')) {
+            new GalleryPhysics('.training-card', 3);
+        }
+        // Solution cards
+        if (document.querySelector('.solution-card')) {
+            new GalleryPhysics('.solution-card', 3);
+        }
+        // Blog cards
+        if (document.querySelector('.blog-card')) {
+            new GalleryPhysics('.blog-card', 3);
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initPhysics);
+    } else {
+        initPhysics();
+    }
+})();
+</script>

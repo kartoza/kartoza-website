@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 400" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bimsBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B6B9B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3B9DD9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bimsGreenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2E7D32;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bimsAccentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#E8A331;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F0B84D;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Base gradient background -->
+  <rect width="1920" height="400" fill="url(#bimsBgGrad)"/>
+
+  <!-- Water/river waves at bottom -->
+  <g opacity="0.15">
+    <path d="M0,350 Q100,330 200,350 T400,350 T600,350 T800,350 T1000,350 T1200,350 T1400,350 T1600,350 T1800,350 T1920,350 L1920,400 L0,400 Z" fill="#ffffff"/>
+    <path d="M0,370 Q100,350 200,370 T400,370 T600,370 T800,370 T1000,370 T1200,370 T1400,370 T1600,370 T1800,370 T1920,370 L1920,400 L0,400 Z" fill="#ffffff"/>
+  </g>
+
+  <!-- Geometric brand pattern - left side -->
+  <g opacity="0.25">
+    <polygon points="0,0 180,0 90,180 0,90" fill="#ffffff"/>
+    <polygon points="40,140 220,140 130,320 40,230" fill="#ffffff"/>
+  </g>
+
+  <!-- Leaf/plant shapes scattered -->
+  <g fill="#4CAF50" opacity="0.2">
+    <ellipse cx="300" cy="200" rx="40" ry="70" transform="rotate(-30 300 200)"/>
+    <ellipse cx="350" cy="250" rx="30" ry="55" transform="rotate(20 350 250)"/>
+
+    <ellipse cx="550" cy="100" rx="35" ry="60" transform="rotate(-20 550 100)"/>
+    <ellipse cx="590" cy="140" rx="25" ry="50" transform="rotate(30 590 140)"/>
+
+    <ellipse cx="1500" cy="280" rx="45" ry="80" transform="rotate(-25 1500 280)"/>
+    <ellipse cx="1560" cy="320" rx="35" ry="65" transform="rotate(15 1560 320)"/>
+  </g>
+
+  <!-- Fish silhouettes -->
+  <g fill="#ffffff" opacity="0.12">
+    <!-- Fish 1 -->
+    <g transform="translate(700, 280)">
+      <ellipse cx="0" cy="0" rx="50" ry="25"/>
+      <polygon points="45,0 80,-20 80,20"/>
+    </g>
+
+    <!-- Fish 2 -->
+    <g transform="translate(900, 180) scale(0.7)">
+      <ellipse cx="0" cy="0" rx="50" ry="25"/>
+      <polygon points="45,0 80,-20 80,20"/>
+    </g>
+
+    <!-- Fish 3 -->
+    <g transform="translate(1100, 320) scale(0.8)">
+      <ellipse cx="0" cy="0" rx="50" ry="25"/>
+      <polygon points="45,0 80,-20 80,20"/>
+    </g>
+  </g>
+
+  <!-- Data points / occurrence markers -->
+  <g fill="url(#bimsAccentGrad)">
+    <circle cx="400" cy="150" r="8"/>
+    <circle cx="480" cy="280" r="6"/>
+    <circle cx="620" cy="200" r="7"/>
+    <circle cx="750" cy="120" r="5"/>
+    <circle cx="850" cy="300" r="8"/>
+    <circle cx="950" cy="250" r="6"/>
+    <circle cx="1050" cy="150" r="7"/>
+    <circle cx="1150" cy="280" r="5"/>
+    <circle cx="1250" cy="180" r="8"/>
+    <circle cx="1350" cy="320" r="6"/>
+    <circle cx="1450" cy="130" r="7"/>
+  </g>
+
+  <!-- Connection lines between data points -->
+  <g stroke="#ffffff" stroke-width="1" opacity="0.15">
+    <line x1="400" y1="150" x2="620" y2="200"/>
+    <line x1="620" y1="200" x2="850" y2="300"/>
+    <line x1="850" y1="300" x2="1050" y2="150"/>
+    <line x1="1050" y1="150" x2="1250" y2="180"/>
+    <line x1="1250" y1="180" x2="1450" y2="130"/>
+  </g>
+
+  <!-- Orange accent shapes - right side -->
+  <g>
+    <polygon points="1920,0 1720,0 1820,130 1920,80" fill="url(#bimsAccentGrad)" opacity="0.9"/>
+    <polygon points="1920,130 1780,180 1870,300 1920,260" fill="url(#bimsAccentGrad)" opacity="0.7"/>
+    <polygon points="1650,80 1740,80 1695,200 1605,160" fill="url(#bimsAccentGrad)" opacity="0.5"/>
+  </g>
+
+  <!-- Bird silhouettes -->
+  <g fill="#ffffff" opacity="0.1">
+    <path d="M1300,80 Q1320,60 1340,80 L1320,90 Z"/>
+    <path d="M1380,100 Q1400,80 1420,100 L1400,110 Z" transform="scale(0.8)"/>
+    <path d="M200,60 Q220,40 240,60 L220,70 Z"/>
+  </g>
+
+  <!-- Subtle Kartoza pattern in corner -->
+  <g transform="translate(50, 280)" fill="#ffffff" opacity="0.2">
+    <path d="M0,0 L40,0 L40,20 L20,20 L20,40 L40,40 L40,60 L0,60 Z"/>
+    <path d="M50,0 L90,0 L90,60 L50,60 L50,40 L70,40 L70,20 L50,20 Z"/>
+  </g>
+</svg>

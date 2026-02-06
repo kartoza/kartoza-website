@@ -1,0 +1,62 @@
+<footer class="footer">
+    <div class="container">
+        <div class="columns is-desktop">
+            <div class="column is-2-desktop">
+                <figure class="image is-128x128">
+                    <img alt="Kartoza Logo" src="{{ absURL "img/kartoza-logo.png" }}" />
+                </figure>
+            </div>
+            <div class="column mb-6">
+                <div class="columns is-desktop">
+                    {{- range site.Menus.footer }}
+                        <ul class="column mb-5">
+                            <li class="is-size-5 mb-5">
+                                <a href="{{ .URL }}" class="footertitle text-nowrap">
+                                    {{ .Name }}
+                                </a>
+                            </li>
+                            {{- range .Children }}
+                                <li class="mb-4">
+                                    <a class="has-text-white text-nowrap" href="{{ .URL }}">
+                                        {{ .Name }}
+                                    </a>
+                                </li>
+                            {{- end }}
+                        </ul>
+                    {{- end }}
+                </div>
+            </div>
+        </div>
+        <div class="columns is-desktop">
+            <div class="copyright column is-2-desktop has-text-white">
+                <p>&copy; {{ now.Year }} Kartoza (Pty) Ltd.</p>
+            </div>
+            <div class="column social-icons-links">
+                <a class="has-text-white" href="https://twitter.com/KartozaGeo" target="_blank">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+                <a class="has-text-white" href="https://www.instagram.com/kartozageo/" target="_blank">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a class="has-text-white" href="https://www.facebook.com/kartozaGIS" target="_blank">
+                    <i class="fa-brands fa-square-facebook"></i>
+                </a>
+                <a class="has-text-white" href="https://www.linkedin.com/company/kartoza-pty-ltd" target="_blank">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a class="has-text-white" href="https://www.github.com/orgs/kartoza" target="_blank">
+                    <i class="fa-brands fa-square-github"></i>
+                </a>
+                <a class="has-text-white" href="https://www.youtube.com/user/kartozachannel/feed" target="_blank">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+        <div class="columns is-desktop privacy-links">
+            <a href="{{ absURL "policies" }}" class="column is-narrow is-offset-2-desktop">Policies</a>
+            <a href="{{ absURL "contact-us" }}" class="column is-narrow">Contact</a>
+            <a href="{{ absURL "careers" }}" class="column is-narrow">Careers</a>
+        </div>
+    </div>
+</footer>
+

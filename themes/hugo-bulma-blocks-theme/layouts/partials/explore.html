@@ -1,0 +1,417 @@
+{{/* Homepage Sales Funnel - Redesigned for conversion */}}
+
+<!-- Hero Section with Bold Value Proposition -->
+<section class="hero is-fullheight-with-navbar hero-home">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-vcentered">
+                <div class="column is-5 hero-content">
+                    <h1 class="hero-company-name">Kartoza</h1>
+                    <p class="hero-tagline">Open Source Geospatial Experts</p>
+                    <p class="title is-1 hero-main-title">
+                        Power Your Maps.<br>
+                        <span class="text-gradient">Scale Your Impact.</span>
+                    </p>
+                    <p class="subtitle is-4 hero-description">
+                        Enterprise-grade GIS hosting, biodiversity systems, municipal asset management,
+                        and expert training — all built on open source.
+                    </p>
+                    <div class="hero-ctas">
+                        <a class="button is-primary is-medium cta-primary" href="https://geospatialhosting.com">
+                            <span class="icon"><i class="fas fa-server"></i></span>
+                            <span>Start with GeoSpatial Hosting</span>
+                        </a>
+                        <a class="button is-outlined is-medium cta-secondary" href="{{ absURL "contact-us/" }}">
+                            <span>Talk to an Expert</span>
+                            <span class="icon"><i class="fas fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="column is-7 hero-visual is-hidden-mobile">
+                    <div class="hero-image-container">
+                        <img src="{{ absURL "img/fbis.png" }}" alt="Kartoza GIS Solutions" class="hero-screenshot" />
+                        <div class="floating-badge badge-1">
+                            <i class="fas fa-globe-africa"></i>
+                            <span>100+ Global Clients</span>
+                        </div>
+                        <div class="floating-badge badge-2">
+                            <i class="fas fa-clock"></i>
+                            <span>24/7 Support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-scroll-indicator">
+        <a href="#products-section">
+            <span>Explore Our Solutions</span>
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </div>
+</section>
+
+<!-- Trust Bar -->
+<section class="section trust-bar">
+    <div class="container">
+        <p class="trust-text has-text-centered">Trusted by organizations worldwide</p>
+        <div class="trust-logos columns is-mobile is-multiline is-centered is-vcentered">
+            <div class="column is-narrow">
+                <span class="trust-item">World Bank</span>
+            </div>
+            <div class="column is-narrow">
+                <span class="trust-item">UNICEF</span>
+            </div>
+            <div class="column is-narrow">
+                <span class="trust-item">WWF</span>
+            </div>
+            <div class="column is-narrow">
+                <span class="trust-item">SANParks</span>
+            </div>
+            <div class="column is-narrow">
+                <span class="trust-item">IHE Delft</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Primary Products Section -->
+<section id="products-section" class="section products-section">
+    <div class="container">
+        <div class="section-header has-text-centered">
+            <h2 class="title is-2">Our Solutions</h2>
+            <p class="subtitle is-5">Enterprise-ready platforms built on open source technology</p>
+        </div>
+
+        <!-- Priority 1: GeoSpatial Hosting -->
+        <div class="product-card product-featured">
+            <div class="columns is-vcentered">
+                <div class="column is-6 product-info">
+                    <span class="product-badge">Most Popular</span>
+                    <h3 class="title is-3">
+                        <i class="fas fa-server product-icon"></i>
+                        GeoSpatial Hosting
+                    </h3>
+                    <p class="product-description">
+                        Fully managed cloud hosting for your GIS infrastructure. Deploy GeoServer,
+                        PostGIS, QGIS Server, GeoNode, and more — with automatic backups,
+                        SSL, and 24/7 monitoring.
+                    </p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Instant deployment of GIS servers</li>
+                        <li><i class="fas fa-check"></i> Automatic scaling and load balancing</li>
+                        <li><i class="fas fa-check"></i> Enterprise-grade security and DDoS protection</li>
+                        <li><i class="fas fa-check"></i> Expert GIS support included</li>
+                    </ul>
+                    <div class="product-cta">
+                        <a class="button is-primary is-medium" href="https://geospatialhosting.com">
+                            <span>View Hosting Plans</span>
+                            <span class="icon"><i class="fas fa-external-link-alt"></i></span>
+                        </a>
+                        <span class="price-hint">Starting from R2,500/month</span>
+                    </div>
+                </div>
+                <div class="column is-6 product-visual">
+                    <div class="product-image-wrapper">
+                        <img src="{{ absURL "img/portfolio/fbis.png" }}" alt="GeoSpatial Hosting Dashboard" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Grid - Priorities 2-4 -->
+        <div class="columns is-multiline product-grid">
+            <!-- Priority 2: MyCivitas -->
+            <div class="column is-4">
+                <div class="product-card-small">
+                    <div class="product-card-icon">
+                        <i class="fas fa-city"></i>
+                    </div>
+                    <h4 class="title is-4">MyCivitas</h4>
+                    <p class="product-card-subtitle">Municipal Asset Management</p>
+                    <p class="product-card-desc">
+                        Complete lifecycle management for municipal infrastructure. Track assets,
+                        schedule maintenance, and optimize budgets with spatial intelligence.
+                    </p>
+                    <ul class="product-card-features">
+                        <li>Asset inventory & mapping</li>
+                        <li>Condition assessments</li>
+                        <li>Maintenance scheduling</li>
+                        <li>Budget forecasting</li>
+                    </ul>
+                    <a class="button is-outlined is-fullwidth" href="{{ absURL "solutions/mycivitas/" }}">
+                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Priority 3: BIMS -->
+            <div class="column is-4">
+                <div class="product-card-small">
+                    <div class="product-card-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h4 class="title is-4">BIMS</h4>
+                    <p class="product-card-subtitle">Biodiversity Information Management</p>
+                    <p class="product-card-desc">
+                        Comprehensive biodiversity data platform for conservation organizations.
+                        Collect, manage, and analyze species occurrence data.
+                    </p>
+                    <ul class="product-card-features">
+                        <li>Species occurrence tracking</li>
+                        <li>Habitat mapping</li>
+                        <li>Conservation analytics</li>
+                        <li>Citizen science integration</li>
+                    </ul>
+                    <a class="button is-outlined is-fullwidth" href="{{ absURL "solutions/bims/" }}">
+                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Priority 4: Training -->
+            <div class="column is-4">
+                <div class="product-card-small">
+                    <div class="product-card-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4 class="title is-4">Training Courses</h4>
+                    <p class="product-card-subtitle">Professional GIS Education</p>
+                    <p class="product-card-desc">
+                        Expert-led courses for teams and individuals. Master QGIS, PostGIS,
+                        GeoServer, and more with hands-on practical training.
+                    </p>
+                    <ul class="product-card-features">
+                        <li>QGIS fundamentals to advanced</li>
+                        <li>Spatial database design</li>
+                        <li>Web mapping & GeoServer</li>
+                        <li>Custom corporate training</li>
+                    </ul>
+                    <a class="button is-outlined is-fullwidth" href="{{ absURL "training-courses/" }}">
+                        View Courses <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Secondary Services Section -->
+<section class="section services-section">
+    <div class="container">
+        <div class="section-header has-text-centered">
+            <h2 class="title is-3">Additional Services</h2>
+            <p class="subtitle is-6">Expert consulting, development, and specialized tools</p>
+        </div>
+
+        <div class="columns is-multiline services-grid">
+            <!-- Priority 5: SAGTA Map Exporter -->
+            <div class="column is-4">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-file-export"></i>
+                    </div>
+                    <h5 class="title is-5">SAGTA Map Exporter</h5>
+                    <p>Export compliant maps for South African surveying and cadastral requirements.</p>
+                    <a href="{{ absURL "solutions/sagta/" }}" class="service-link">
+                        Learn more <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Priority 6: Consulting -->
+            <div class="column is-4">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h5 class="title is-5">Consulting Services</h5>
+                    <p>Strategic GIS consulting for architecture, data strategy, and technology selection.</p>
+                    <a href="{{ absURL "solutions/consultancy/" }}" class="service-link">
+                        Learn more <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Priority 7: Project Management -->
+            <div class="column is-4">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h5 class="title is-5">GeoSpatial Project Management</h5>
+                    <p>End-to-end project management for complex GIS implementations and deployments.</p>
+                    <a href="{{ absURL "solutions/consultancy/" }}" class="service-link">
+                        Learn more <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Kartoza Section -->
+<section class="section why-section">
+    <div class="container">
+        <div class="columns is-vcentered">
+            <div class="column is-5">
+                <h2 class="title is-2">Why Work With Kartoza?</h2>
+                <p class="subtitle is-5">
+                    We're not just a vendor — we're open source contributors and community members.
+                </p>
+            </div>
+            <div class="column is-7">
+                <div class="columns is-multiline why-grid">
+                    <div class="column is-6">
+                        <div class="why-item">
+                            <div class="why-icon"><i class="fab fa-osi"></i></div>
+                            <h5>Open Source First</h5>
+                            <p>We contribute to QGIS, GeoServer, PostGIS and more. No vendor lock-in.</p>
+                        </div>
+                    </div>
+                    <div class="column is-6">
+                        <div class="why-item">
+                            <div class="why-icon"><i class="fas fa-globe-africa"></i></div>
+                            <h5>Global Experience</h5>
+                            <p>100+ clients across 6 continents. Local expertise, global reach.</p>
+                        </div>
+                    </div>
+                    <div class="column is-6">
+                        <div class="why-item">
+                            <div class="why-icon"><i class="fas fa-users-cog"></i></div>
+                            <h5>Expert Team</h5>
+                            <p>Core developers of major FOSS GIS projects on our team.</p>
+                        </div>
+                    </div>
+                    <div class="column is-6">
+                        <div class="why-item">
+                            <div class="why-icon"><i class="fas fa-headset"></i></div>
+                            <h5>Dedicated Support</h5>
+                            <p>Real human support from people who understand GIS.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Social Proof / Testimonial -->
+<section class="section testimonial-section">
+    <div class="container">
+        <div class="testimonial-card">
+            <div class="columns is-vcentered">
+                <div class="column is-8">
+                    <blockquote>
+                        <p class="testimonial-text">
+                            "Kartoza transformed our approach to biodiversity monitoring. Their BIMS platform
+                            and ongoing support have been invaluable to our conservation efforts."
+                        </p>
+                        <footer class="testimonial-author">
+                            <strong>SANParks Scientific Services</strong>
+                            <span>South African National Parks</span>
+                        </footer>
+                    </blockquote>
+                </div>
+                <div class="column is-4 has-text-centered">
+                    <a href="{{ absURL "portfolio/" }}" class="button is-light is-medium">
+                        <span class="icon"><i class="fas fa-briefcase"></i></span>
+                        <span>View Our Portfolio</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Final CTA Section -->
+<section class="section final-cta-section">
+    <div class="container has-text-centered">
+        <h2 class="title is-2">Ready to Transform Your GIS?</h2>
+        <p class="subtitle is-5">
+            Let's discuss how Kartoza can help you achieve your geospatial goals.
+        </p>
+        <div class="final-cta-buttons">
+            <a class="button is-primary is-large" href="{{ absURL "contact-us/" }}">
+                <span class="icon"><i class="fas fa-envelope"></i></span>
+                <span>Get in Touch</span>
+            </a>
+            <a class="button is-light is-large" href="https://geospatialhosting.com">
+                <span class="icon"><i class="fas fa-rocket"></i></span>
+                <span>Start Hosting Now</span>
+            </a>
+        </div>
+        <p class="cta-note">
+            <i class="fas fa-phone-alt"></i>
+            Or call us: <a href="tel:+27218138912">+27 21 813 8912</a>
+        </p>
+    </div>
+</section>
+
+<!-- Embedded Video Section -->
+<section class="section video-section">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-8">
+                <div class="video-wrapper">
+                    <div class="youtube" data-video-id="5a02yaDKAiE">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+                <p class="video-caption has-text-centered">
+                    <strong>Watch:</strong> Discover what Kartoza can do for your organization
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // YouTube video loader
+    var youtubeElements = document.querySelectorAll('.youtube');
+    youtubeElements.forEach(function(element) {
+        var videoId = element.getAttribute('data-video-id');
+        var maxResThumbnailUrl = 'https://img.youtube.com/vi/' + videoId + '/maxresdefault.jpg';
+        var fallbackThumbnailUrl = 'https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg';
+
+        var img = new Image();
+        img.onload = function() {
+            if (img.width > 120) {
+                element.style.backgroundImage = 'url(' + maxResThumbnailUrl + ')';
+            } else {
+                element.style.backgroundImage = 'url(' + fallbackThumbnailUrl + ')';
+            }
+        };
+        img.onerror = function() {
+            element.style.backgroundImage = 'url(' + fallbackThumbnailUrl + ')';
+        };
+        img.src = maxResThumbnailUrl;
+
+        element.addEventListener('click', function() {
+            var iframe = document.createElement('iframe');
+            iframe.setAttribute('width', '100%');
+            iframe.setAttribute('height', '100%');
+            iframe.setAttribute('src', 'https://www.youtube.com/embed/' + videoId + '?autoplay=1');
+            iframe.setAttribute('frameborder', '0');
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+            iframe.setAttribute('allowfullscreen', 'true');
+            this.innerHTML = '';
+            this.appendChild(iframe);
+        });
+    });
+
+    // Scroll animations with Intersection Observer
+    const animatedElements = document.querySelectorAll('.product-card, .product-card-small, .service-card, .why-item');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    animatedElements.forEach(el => observer.observe(el));
+});
+</script>

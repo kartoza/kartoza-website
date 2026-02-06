@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgGradBims" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B6B9B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3B9DD9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2E7D32;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradBims" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#E8A331;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F0B84D;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bgGradBims)"/>
+
+  <!-- Water/river pattern at bottom -->
+  <path d="M0 280 Q50 270 100 280 T200 280 T300 280 T400 280 L400 300 L0 300 Z" fill="#ffffff" opacity="0.1"/>
+  <path d="M0 270 Q50 260 100 270 T200 270 T300 270 T400 270 L400 300 L0 300 Z" fill="#ffffff" opacity="0.08"/>
+
+  <!-- Central icon group -->
+  <g transform="translate(200, 120)">
+    <!-- Leaf/Plant -->
+    <g transform="translate(-50, 0)">
+      <ellipse cx="0" cy="-20" rx="25" ry="40" fill="url(#greenGrad)" transform="rotate(-30)"/>
+      <ellipse cx="10" cy="10" rx="20" ry="35" fill="url(#greenGrad)" transform="rotate(20)"/>
+      <path d="M0 30 Q0 0 -15 -30" stroke="#2E7D32" stroke-width="4" fill="none"/>
+    </g>
+
+    <!-- Fish -->
+    <g transform="translate(50, 10)">
+      <ellipse cx="0" cy="0" rx="35" ry="18" fill="#ffffff"/>
+      <polygon points="30,0 50,-15 50,15" fill="#ffffff"/>
+      <circle cx="-15" cy="-5" r="5" fill="url(#bgGradBims)"/>
+      <path d="M-5 8 Q10 12 25 8" stroke="url(#bgGradBims)" stroke-width="2" fill="none"/>
+    </g>
+
+    <!-- Data points/markers -->
+    <circle cx="-70" cy="-50" r="8" fill="url(#accentGradBims)"/>
+    <circle cx="70" cy="-40" r="6" fill="url(#accentGradBims)"/>
+    <circle cx="-30" cy="50" r="7" fill="url(#accentGradBims)"/>
+    <circle cx="30" cy="-60" r="5" fill="url(#accentGradBims)"/>
+    <circle cx="80" cy="40" r="6" fill="url(#accentGradBims)"/>
+  </g>
+
+  <!-- Connection lines (data network) -->
+  <g stroke="#ffffff" stroke-width="1" opacity="0.3">
+    <line x1="130" y1="70" x2="270" y2="80"/>
+    <line x1="170" y1="170" x2="230" y2="60"/>
+    <line x1="280" y1="160" x2="230" y2="80"/>
+  </g>
+
+  <!-- Text -->
+  <text x="200" y="250" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff">BIMS</text>
+  <text x="200" y="275" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-size="12" fill="#ffffff" opacity="0.8">Biodiversity Information Management</text>
+</svg>

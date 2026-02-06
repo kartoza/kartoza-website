@@ -1,0 +1,38 @@
+<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{{ "/" | absURL }}">
+                <img src="{{ absURL "img/kartoza-logo.png" }}" alt="Kartoza" height="28">
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="kartoza-navbar">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div id="kartoza-navbar" class="navbar-menu">
+            <div class="navbar-end">
+                {{- range site.Menus.main }}
+                    {{- if .HasChildren }}
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link" href="{{ .URL }}">
+                                {{ .Name }}
+                            </a>
+                            <div class="navbar-dropdown">
+                                {{- range .Children }}
+                                    <a class="navbar-item" href="{{ .URL }}">
+                                        {{ .Name }}
+                                    </a>
+                                {{- end }}
+                            </div>
+                        </div>
+                    {{- else }}
+                        <a class="navbar-item" href="{{ .URL }}">
+                            {{ .Name }}
+                        </a>
+                    {{- end }}
+                {{- end }}
+            </div>
+        </div>
+    </div>
+</nav>

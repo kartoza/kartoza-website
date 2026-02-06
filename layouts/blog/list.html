@@ -1,0 +1,101 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+{{ partial "contextmenu.html" . }}
+{{ partial "banner.html" . }}
+
+<section class="section blog-section">
+    <div class="container">
+        <!-- Blog Introduction -->
+        {{ if .Content }}
+        <div class="section-list-intro">
+            {{ .Content }}
+        </div>
+        {{ end }}
+
+        <!-- Blog Grid -->
+        <div class="blog-grid columns is-multiline">
+            {{ range (.Paginator 12).Pages }}
+            <div class="column is-4-desktop is-6-tablet">
+                <article class="blog-card">
+                    {{ if .Params.thumbnail }}
+                    <div class="blog-card-image">
+                        <a href="{{ .Permalink }}">
+                            <img src="{{ .Params.thumbnail }}" alt="{{ .Title }}" loading="lazy">
+                        </a>
+                    </div>
+                    {{ end }}
+                    <div class="blog-card-content">
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date">
+                                <i class="fas fa-calendar-alt"></i>
+                                {{ .Date.Format "Jan 2, 2006" }}
+                            </span>
+                            {{ if .Params.author }}
+                            <span class="blog-card-author">{{ .Params.author }}</span>
+                            {{ end }}
+                        </div>
+                        <h3 class="blog-card-title">
+                            <a href="{{ .Permalink }}">{{ .Title }}</a>
+                        </h3>
+                        <p class="blog-card-excerpt">
+                            {{ .Description | default .Summary | truncate 120 }}
+                        </p>
+                        <a href="{{ .Permalink }}" class="blog-card-link">
+                            Read More <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+            {{ end }}
+        </div>
+
+        <!-- Pagination -->
+        {{ if gt .Paginator.TotalPages 1 }}
+        <nav class="pagination is-centered section-pagination" role="navigation" aria-label="pagination">
+            {{ if .Paginator.HasPrev }}
+            <a class="pagination-previous" href="{{ .Paginator.Prev.URL }}">
+                <i class="fas fa-chevron-left"></i> Previous
+            </a>
+            {{ end }}
+            {{ if .Paginator.HasNext }}
+            <a class="pagination-next" href="{{ .Paginator.Next.URL }}">
+                Next <i class="fas fa-chevron-right"></i>
+            </a>
+            {{ end }}
+            <ul class="pagination-list">
+                {{ range .Paginator.Pagers }}
+                <li>
+                    <a class="pagination-link {{ if eq . $.Paginator }}is-current{{ end }}"
+                       href="{{ .URL }}"
+                       aria-label="Page {{ .PageNumber }}">
+                        {{ .PageNumber }}
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+        </nav>
+        {{ end }}
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section section-cta">
+    <div class="container has-text-centered">
+        <h2 class="title is-3">Stay Updated on Open Source GIS</h2>
+        <p class="subtitle is-5">Follow us for the latest news, tutorials, and insights from the geospatial world.</p>
+        <div class="section-cta-buttons">
+            <a class="button is-primary is-medium" href="{{ absURL "contact-us/" }}">
+                <span class="icon"><i class="fas fa-envelope"></i></span>
+                <span>Get in Touch</span>
+            </a>
+            <a class="button is-light is-medium" href="{{ absURL "training-courses/" }}">
+                <span class="icon"><i class="fas fa-graduation-cap"></i></span>
+                <span>Explore Training</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+{{ partial "physics-scroll.html" . }}
+
+{{ partial "footer.html" . }}

@@ -1,0 +1,305 @@
+# May be overwritten in .github/workflows/github-pages.yml or other config files
+baseURL = 'https://kartoza.com/'
+languageCode = 'en-us'
+title = 'Kartoza'
+theme = 'hugo-bulma-blocks-theme'
+# Default pagination.
+# Can override this when needed e.g. {{ range (.Paginator 5).Pages }}
+[pagination]
+  paginate = 50
+
+# See https://mertbakir.gitlab.io/hugo/syntax-highlighting-in-hugo/
+pygmentsUseClasses = true
+pygmentsCodefences = true
+
+
+# Folders in these folders get published automatically
+staticDir = ['static']
+
+# See https://gohugo.io/templates/robots/
+enableRobotsTXT = false
+
+[taxonomies]
+  category = 'categories'
+  series = 'series'
+  tag = 'tags'
+  submenu = 'submenus'
+
+[params]
+# Min hugo version
+minHugoVersion = "0.139.0"
+description = "Kartoza - Open Source Geospatial Solutions"
+# Brand colours (Kartoza branding - extracted from brand pattern)
+# Blues
+primary1 = "#1B6B9B"
+primary2 = "#3B9DD9"
+primary3 = "#5BB5E8"
+# Greys
+primary4 = "#9E9E9E"
+primary5 = "#C8C8C8"
+# Orange/Gold
+primary6 = "#E8A331"
+primary1-invert = "#fff"
+primary2-invert = "#fff"
+primary3-invert = "#fff"
+primary4-invert = "#fff"
+primary5-invert = "#333"
+primary6-invert = "#fff"
+links = "#3B9DD9"
+complementary1 = "#E8A331"
+complementary2 = "#D4922A"
+complementary3 = "#F0B84D"
+complementary4 = "#9E9E9E"
+complementary5 = "#f0f4f7"
+complementary6 = "#1B6B9B"
+complementary7 = "#E8A331"
+complementary8 = "#3B9DD9"
+light1 = "#f7f9fb"
+light2 = "#e8ecf0"
+light3 = "#d4dbe2"
+dark1 = "#6B7B8D"
+dark2 = "#1a2a3a"
+text-primary1 = "#1a2a3a"
+text-primary2 = "#4D6370"
+# Bulma specific colours based on our branding
+black = "#1a2a3a"
+white = "#ffffff"
+grey-dark = "#3d4f5f"
+grey-darker = "#2a3a4a"
+grey-light = "#d4dbe2"
+primary = "#3B9DD9"
+danger = "#E55B3C"
+info = "#5BB5E8"
+success = "#4CAF50"
+warning = "#E8A331"
+link = "#3B9DD9"
+# Brand fonts
+heading-font = "'Roboto', sans-serif"
+text-font = "'Roboto', sans-serif"
+fancy-font = "'Roboto', sans-serif"
+
+menuFontClass = "is-size-6"
+## Gh repo edit link
+githubRepo = "https://github.com/kartoza/Kartoza-Hugo/"
+githubSubdir = "content"
+githubBranch = "main"
+
+## GH Repo for filing a new issue
+githubIssueUrl = "https://github.com/kartoza/Kartoza-Hugo/issues/new/choose"
+### Edit content repo
+githubEditUrl = "https://github.com/kartoza/Kartoza-Hugo/edit/main"
+### Radius for boxes (organic rounded)
+corner-radius = "12px"
+
+## Twitter handle for meta tags
+twitter = "@KartozaGeo"
+
+## This will turn on Cookie popup. True to show popup
+cookiesstate = false
+
+# Matomo - disabled for now
+matomoURL = ""
+matomoSiteId = ''
+
+# This will cause html in markdown files to be rendered directly
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+# Syntax highlighter for code blocks
+[markup.highlight]
+      codeFences = true
+      guessSyntax = true
+      hl_Lines = ""
+      lineNoStart = 1
+      lineNos = false
+      lineNumbersInTable = false
+      tabWidth = 4
+      noClasses = false
+      style = "monokai"
+
+[markup.tableOfContents]
+      endLevel = 3
+      ordered = false
+      startLevel = 2
+
+# =============================================================================
+#  MAIN NAVIGATION (navbar)
+# =============================================================================
+[menu]
+
+# -- About (dropdown) --
+[[menu.main]]
+  name = "About"
+  url = "/about/"
+  weight = 10
+
+[[menu.main]]
+  parent = "About"
+  name = "About Kartoza"
+  url = "/about/"
+  weight = 10
+
+[[menu.main]]
+  parent = "About"
+  name = "Team"
+  url = "/the_team/"
+  weight = 20
+
+[[menu.main]]
+  parent = "About"
+  name = "Partners"
+  url = "/merginmaps/"
+  weight = 30
+
+[[menu.main]]
+  parent = "About"
+  name = "Careers"
+  url = "/careers/"
+  weight = 40
+
+# -- Gallery (dropdown) --
+[[menu.main]]
+  name = "Gallery"
+  url = "/portfolio/"
+  weight = 20
+
+[[menu.main]]
+  parent = "Gallery"
+  name = "Portfolio"
+  url = "/portfolio/"
+  weight = 10
+
+[[menu.main]]
+  parent = "Gallery"
+  name = "Maps"
+  url = "/gallery/"
+  weight = 20
+
+[[menu.main]]
+  parent = "Gallery"
+  name = "Apps"
+  url = "/apps/"
+  weight = 30
+
+# -- Courses --
+[[menu.main]]
+  name = "Courses"
+  url = "/training-courses/"
+  weight = 30
+
+# -- Solutions --
+[[menu.main]]
+  name = "Solutions"
+  url = "/solutions/"
+  weight = 40
+
+# -- GeoSpatialHosting (external) --
+[[menu.main]]
+  name = "GeoSpatialHosting"
+  url = "https://geospatialhosting.com"
+  weight = 50
+
+# -- Blog --
+[[menu.main]]
+  name = "Blog"
+  url = "/blog/"
+  weight = 60
+
+# -- Contact --
+[[menu.main]]
+  name = "Contact"
+  url = "/contact-us/"
+  weight = 70
+
+# =============================================================================
+#  FOOTER NAVIGATION
+# =============================================================================
+
+# -- Navigate column --
+[[menu.footer]]
+  name = "Navigate"
+  url = "#"
+  weight = 10
+
+[[menu.footer]]
+  parent = "Navigate"
+  name = "Contact"
+  url = "/contact-us/"
+  weight = 10
+
+[[menu.footer]]
+  parent = "Navigate"
+  name = "Careers"
+  url = "/careers/"
+  weight = 20
+
+[[menu.footer]]
+  parent = "Navigate"
+  name = "Portfolio"
+  url = "/portfolio/"
+  weight = 30
+
+[[menu.footer]]
+  parent = "Navigate"
+  name = "Policies"
+  url = "/policies/"
+  weight = 40
+
+[[menu.footer]]
+  parent = "Navigate"
+  name = "Crowdfunding"
+  url = "/crowdfunding/"
+  weight = 50
+
+# -- Services column --
+[[menu.footer]]
+  name = "Services"
+  url = "/solutions/"
+  weight = 20
+
+[[menu.footer]]
+  parent = "Services"
+  name = "Solutions"
+  url = "/solutions/"
+  weight = 10
+
+[[menu.footer]]
+  parent = "Services"
+  name = "Training Courses"
+  url = "/training-courses/"
+  weight = 20
+
+[[menu.footer]]
+  parent = "Services"
+  name = "GeoSpatial Hosting"
+  url = "https://geospatialhosting.com"
+  weight = 30
+
+# -- Community column --
+[[menu.footer]]
+  name = "Community"
+  url = "/about/"
+  weight = 30
+
+[[menu.footer]]
+  parent = "Community"
+  name = "About Kartoza"
+  url = "/about/"
+  weight = 10
+
+[[menu.footer]]
+  parent = "Community"
+  name = "Team"
+  url = "/the_team/"
+  weight = 20
+
+[[menu.footer]]
+  parent = "Community"
+  name = "Blog"
+  url = "/blog/"
+  weight = 30
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
