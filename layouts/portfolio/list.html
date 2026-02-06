@@ -1,6 +1,5 @@
 {{ partial "header.html" . }}
 {{ partial "menu.html" . }}
-{{ partial "contextmenu.html" . }}
 {{ partial "banner.html" . }}
 
 <section class="section portfolio-section">
@@ -17,10 +16,10 @@
             {{ range (.Paginator 50).Pages }}
             <div class="column is-6-desktop is-12-tablet">
                 <article class="portfolio-card">
-                    {{ if .Params.thumbnail }}
                     <div class="portfolio-card-image">
                         <a href="{{ .Permalink }}">
-                            <img src="{{ .Params.thumbnail }}" alt="{{ .Title }}" loading="lazy">
+                            {{ $thumbnail := .Params.thumbnail | default "/img/banner-portfolio.png" }}
+                            <img src="{{ $thumbnail }}" alt="{{ .Title }}" loading="lazy">
                             <div class="portfolio-card-overlay">
                                 <span class="view-project">
                                     <i class="fas fa-eye"></i>
@@ -29,7 +28,6 @@
                             </div>
                         </a>
                     </div>
-                    {{ end }}
                     <div class="portfolio-card-content">
                         <h3 class="portfolio-card-title">
                             <a href="{{ .Permalink }}">{{ .Title }}</a>

@@ -1,6 +1,5 @@
 {{ partial "header.html" . }}
 {{ partial "menu.html" . }}
-{{ partial "contextmenu.html" . }}
 {{ partial "banner.html" . }}
 
 <section class="section blog-section">
@@ -12,69 +11,32 @@
         </div>
         {{ end }}
 
-        <!-- Blog Grid -->
-        <div class="blog-grid columns is-multiline">
-            {{ range (.Paginator 12).Pages }}
-            <div class="column is-4-desktop is-6-tablet">
-                <article class="blog-card">
-                    {{ if .Params.thumbnail }}
-                    <div class="blog-card-image">
-                        <a href="{{ .Permalink }}">
-                            <img src="{{ .Params.thumbnail }}" alt="{{ .Title }}" loading="lazy">
-                        </a>
-                    </div>
-                    {{ end }}
-                    <div class="blog-card-content">
-                        <div class="blog-card-meta">
-                            <span class="blog-card-date">
-                                <i class="fas fa-calendar-alt"></i>
-                                {{ .Date.Format "Jan 2, 2006" }}
-                            </span>
-                            {{ if .Params.author }}
-                            <span class="blog-card-author">{{ .Params.author }}</span>
-                            {{ end }}
-                        </div>
-                        <h3 class="blog-card-title">
-                            <a href="{{ .Permalink }}">{{ .Title }}</a>
-                        </h3>
-                        <p class="blog-card-excerpt">
-                            {{ .Description | default .Summary | truncate 120 }}
-                        </p>
-                        <a href="{{ .Permalink }}" class="blog-card-link">
-                            Read More <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </article>
-            </div>
-            {{ end }}
+        <!-- Blog Grid - Infinite Scroll Container -->
+        <div class="blog-grid columns is-multiline" id="blog-grid">
+            <!-- Initial posts will be loaded by JavaScript -->
         </div>
 
-        <!-- Pagination -->
-        {{ if gt .Paginator.TotalPages 1 }}
-        <nav class="pagination is-centered section-pagination" role="navigation" aria-label="pagination">
-            {{ if .Paginator.HasPrev }}
-            <a class="pagination-previous" href="{{ .Paginator.Prev.URL }}">
-                <i class="fas fa-chevron-left"></i> Previous
-            </a>
-            {{ end }}
-            {{ if .Paginator.HasNext }}
-            <a class="pagination-next" href="{{ .Paginator.Next.URL }}">
-                Next <i class="fas fa-chevron-right"></i>
-            </a>
-            {{ end }}
-            <ul class="pagination-list">
-                {{ range .Paginator.Pagers }}
-                <li>
-                    <a class="pagination-link {{ if eq . $.Paginator }}is-current{{ end }}"
-                       href="{{ .URL }}"
-                       aria-label="Page {{ .PageNumber }}">
-                        {{ .PageNumber }}
-                    </a>
-                </li>
-                {{ end }}
-            </ul>
-        </nav>
-        {{ end }}
+        <!-- Load More Button -->
+        <div class="blog-load-more" id="blog-load-more">
+            <button class="button is-primary is-medium" id="load-more-btn">
+                <span class="icon"><i class="fas fa-plus"></i></span>
+                <span>Load More Articles</span>
+            </button>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div class="blog-loading" id="blog-loading" style="display: none;">
+            <div class="blog-loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+            <span>Loading more articles...</span>
+        </div>
+
+        <!-- End of Posts Message -->
+        <div class="blog-end-message" id="blog-end" style="display: none;">
+            <i class="fas fa-check-circle"></i>
+            <span>You've reached the end!</span>
+        </div>
     </div>
 </section>
 
@@ -96,6 +58,176 @@
     </div>
 </section>
 
-{{ partial "physics-scroll.html" . }}
+<!-- Blog Posts Data -->
+<script id="blog-data" type="application/json">
+{{- $posts := slice -}}
+{{- range .RegularPages -}}
+    {{- $thumbnail := .Params.thumbnail -}}
+    {{- if or (not $thumbnail) (eq $thumbnail "/img/blog/placeholder.png") -}}
+        {{- $thumbnail = "/img/banner-blog.png" -}}
+    {{- end -}}
+    {{- $post := dict
+        "title" (.Title | replaceRE "^Kartoza - " "")
+        "url" .Permalink
+        "date" (.Date.Format "Jan 2, 2006")
+        "author" (.Params.author | default "")
+        "excerpt" (.Description | default .Summary | truncate 120 | plainify)
+        "thumbnail" $thumbnail
+    -}}
+    {{- $posts = $posts | append $post -}}
+{{- end -}}
+{{ $posts | jsonify }}
+</script>
+
+<!-- Infinite Scroll Script -->
+<script>
+(function() {
+    'use strict';
+
+    const POSTS_PER_LOAD = 9;
+    let allPosts = [];
+    let currentIndex = 0;
+    let isLoading = false;
+    let allPostsLoaded = false;
+
+    const blogGrid = document.getElementById('blog-grid');
+    const loadingEl = document.getElementById('blog-loading');
+    const endMessageEl = document.getElementById('blog-end');
+    const loadMoreContainer = document.getElementById('blog-load-more');
+    const loadMoreBtn = document.getElementById('load-more-btn');
+
+    // Parse blog data
+    try {
+        let rawData = document.getElementById('blog-data').textContent.trim();
+        // Hugo jsonify may double-encode - parse until we get an array
+        let parsed = JSON.parse(rawData);
+        while (typeof parsed === 'string') {
+            parsed = JSON.parse(parsed);
+        }
+        allPosts = parsed;
+    } catch (e) {
+        console.error('Failed to parse blog data:', e);
+        return;
+    }
+
+    // Create a blog card HTML
+    function createBlogCard(post) {
+        return `
+            <div class="column is-4-desktop is-6-tablet">
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <a href="${post.url}">
+                            <img src="${post.thumbnail}" alt="${post.title}" loading="lazy">
+                        </a>
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date">
+                                <i class="fas fa-calendar-alt"></i>
+                                ${post.date}
+                            </span>
+                            ${post.author ? `<span class="blog-card-author">${post.author}</span>` : ''}
+                        </div>
+                        <h3 class="blog-card-title">
+                            <a href="${post.url}">${post.title}</a>
+                        </h3>
+                        <p class="blog-card-excerpt">${post.excerpt}</p>
+                        <a href="${post.url}" class="blog-card-link">
+                            Read More <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        `;
+    }
+
+    // Load more posts
+    function loadMorePosts() {
+        if (isLoading || allPostsLoaded) return;
+
+        isLoading = true;
+        loadingEl.style.display = 'flex';
+
+        // Simulate a small delay for smooth UX
+        setTimeout(() => {
+            const postsToLoad = allPosts.slice(currentIndex, currentIndex + POSTS_PER_LOAD);
+
+            postsToLoad.forEach((post, index) => {
+                const cardHTML = createBlogCard(post);
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = cardHTML.trim();
+                const cardEl = tempDiv.firstChild;
+
+                // Add entrance animation with stagger
+                cardEl.style.opacity = '0';
+                cardEl.style.transform = 'translateY(30px)';
+                blogGrid.appendChild(cardEl);
+
+                // Trigger animation
+                setTimeout(() => {
+                    cardEl.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
+                    cardEl.style.opacity = '1';
+                    cardEl.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            currentIndex += POSTS_PER_LOAD;
+            isLoading = false;
+            loadingEl.style.display = 'none';
+
+            // Check if all posts loaded
+            if (currentIndex >= allPosts.length) {
+                allPostsLoaded = true;
+                loadMoreContainer.style.display = 'none';
+                endMessageEl.style.display = 'flex';
+            }
+        }, 300);
+    }
+
+    // Intersection Observer for infinite scroll
+    function setupInfiniteScroll() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !allPostsLoaded) {
+                    loadMorePosts();
+                }
+            });
+        }, {
+            rootMargin: '200px'
+        });
+
+        observer.observe(loadingEl);
+    }
+
+    // Initialize
+    function init() {
+        if (allPosts.length === 0) {
+            loadingEl.style.display = 'none';
+            loadMoreContainer.style.display = 'none';
+            endMessageEl.textContent = 'No blog posts found.';
+            endMessageEl.style.display = 'flex';
+            return;
+        }
+
+        // Load initial posts
+        loadMorePosts();
+
+        // Setup button click handler
+        loadMoreBtn.addEventListener('click', function() {
+            loadMorePosts();
+        });
+
+        // Setup infinite scroll as backup
+        setupInfiniteScroll();
+    }
+
+    // Start when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+</script>
 
 {{ partial "footer.html" . }}

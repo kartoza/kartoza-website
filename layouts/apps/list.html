@@ -1,0 +1,70 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+{{ partial "banner.html" . }}
+
+<section class="section apps-section">
+    <div class="container">
+        <!-- Apps Introduction -->
+        {{ if .Content }}
+        <div class="section-list-intro">
+            {{ .Content }}
+        </div>
+        {{ end }}
+
+        <!-- Apps Grid -->
+        <div class="apps-grid columns is-multiline">
+            {{ range .RegularPages }}
+            <div class="column is-4-desktop is-6-tablet">
+                <article class="app-card">
+                    <div class="app-card-image">
+                        <a href="{{ .Permalink }}">
+                            {{ $thumbnail := .Params.thumbnail | default "/img/banner-apps.png" }}
+                            <img src="{{ $thumbnail }}" alt="{{ .Title }}" loading="lazy">
+                        </a>
+                    </div>
+                    <div class="app-card-content">
+                        {{ if .Params.tags }}
+                        <div class="app-card-tags">
+                            {{ range first 2 .Params.tags }}
+                            <span class="app-card-tag">{{ . }}</span>
+                            {{ end }}
+                        </div>
+                        {{ end }}
+                        <h3 class="app-card-title">
+                            <a href="{{ .Permalink }}">{{ .Title }}</a>
+                        </h3>
+                        <p class="app-card-description">
+                            {{ .Description | truncate 120 }}
+                        </p>
+                        <a href="{{ .Permalink }}" class="app-card-link">
+                            View App <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section section-cta">
+    <div class="container has-text-centered">
+        <h2 class="title is-3">Need a Custom App Solution?</h2>
+        <p class="subtitle is-5">We build mobile and web applications that bring geospatial capabilities to the field.</p>
+        <div class="section-cta-buttons">
+            <a class="button is-primary is-medium" href="{{ absURL "contact-us/" }}">
+                <span class="icon"><i class="fas fa-mobile-alt"></i></span>
+                <span>Discuss Your App Idea</span>
+            </a>
+            <a class="button is-light is-medium" href="{{ absURL "solutions/" }}">
+                <span class="icon"><i class="fas fa-cogs"></i></span>
+                <span>View All Solutions</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+{{ partial "physics-scroll.html" . }}
+
+{{ partial "footer.html" . }}

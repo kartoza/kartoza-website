@@ -1,0 +1,162 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+
+<!-- App Hero Section -->
+<section class="app-hero">
+    <div class="app-hero-bg">
+        {{ $thumbnail := .Params.thumbnail }}
+        {{ if not $thumbnail }}
+            {{ $thumbnail = "/img/banner-apps.png" }}
+        {{ end }}
+        <img src="{{ $thumbnail }}" alt="{{ .Title }}" class="app-hero-image">
+        <div class="app-hero-overlay"></div>
+    </div>
+    <div class="container">
+        <a href="{{ absURL "apps/" }}" class="app-hero-back">
+            <i class="fas fa-arrow-left"></i>
+            Back to Apps
+        </a>
+        <div class="app-hero-content">
+            <div class="app-hero-meta">
+                {{ if .Params.tags }}
+                <div class="app-hero-tags">
+                    {{ range .Params.tags }}
+                    <span class="app-hero-tag">{{ . }}</span>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </div>
+            <h1 class="app-hero-title">{{ .Title }}</h1>
+            {{ if .Description }}
+            <p class="app-hero-subtitle">{{ .Description }}</p>
+            {{ end }}
+        </div>
+    </div>
+</section>
+
+<!-- App Content Section -->
+<article class="app-article">
+    <div class="container">
+        <div class="app-article-wrapper">
+            <!-- Main Content -->
+            <div class="app-article-content">
+                {{ .Content }}
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="app-article-sidebar">
+                <!-- App Info Card -->
+                <div class="sidebar-card app-info-card">
+                    <div class="app-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="app-info">
+                        <span class="app-label">Application</span>
+                        <span class="app-name">{{ .Title }}</span>
+                    </div>
+                </div>
+
+                <!-- Tags -->
+                {{ if .Params.tags }}
+                <div class="sidebar-card tags-card">
+                    <h4 class="sidebar-card-title">Categories</h4>
+                    <div class="sidebar-tags">
+                        {{ range .Params.tags }}
+                        <span class="sidebar-tag">{{ . }}</span>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
+
+                <!-- Share -->
+                <div class="sidebar-card share-card">
+                    <h4 class="sidebar-card-title">Share This App</h4>
+                    <div class="share-buttons">
+                        <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}"
+                           target="_blank" rel="noopener" class="share-btn share-twitter" title="Share on Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ .Permalink }}&title={{ .Title }}"
+                           target="_blank" rel="noopener" class="share-btn share-linkedin" title="Share on LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="mailto:?subject={{ .Title }}&body={{ .Permalink }}"
+                           class="share-btn share-email" title="Share via Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Other Apps -->
+                {{ $otherApps := where .Site.RegularPages "Section" "apps" | first 4 }}
+                {{ if gt (len $otherApps) 1 }}
+                <div class="sidebar-card related-card">
+                    <h4 class="sidebar-card-title">Other Apps</h4>
+                    <div class="related-posts">
+                        {{ range $otherApps }}
+                        {{ if ne .Permalink $.Permalink }}
+                        <a href="{{ .Permalink }}" class="related-post">
+                            <span class="related-post-title">{{ .Title | truncate 40 }}</span>
+                            <span class="related-post-date">{{ range first 1 .Params.tags }}{{ . }}{{ end }}</span>
+                        </a>
+                        {{ end }}
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
+            </aside>
+        </div>
+    </div>
+</article>
+
+<!-- CTA Section -->
+<section class="section app-cta-section">
+    <div class="container">
+        <div class="app-cta-content">
+            <h2 class="app-cta-title">Need a Custom App?</h2>
+            <p class="app-cta-text">We build mobile and web applications that bring geospatial capabilities to the field.</p>
+            <div class="app-cta-buttons">
+                <a class="button is-primary is-medium" href="{{ absURL "contact-us/" }}">
+                    <span class="icon"><i class="fas fa-comments"></i></span>
+                    <span>Discuss Your Project</span>
+                </a>
+                <a class="button is-light is-medium" href="{{ absURL "apps/" }}">
+                    <span class="icon"><i class="fas fa-mobile-alt"></i></span>
+                    <span>View All Apps</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Navigation -->
+<nav class="app-navigation">
+    <div class="container">
+        <div class="app-nav-wrapper">
+            {{ with .PrevInSection }}
+            <a href="{{ .Permalink }}" class="app-nav-link app-nav-prev">
+                <span class="app-nav-direction"><i class="fas fa-arrow-left"></i> Previous</span>
+                <span class="app-nav-title">{{ .Title | truncate 50 }}</span>
+            </a>
+            {{ else }}
+            <div class="app-nav-link app-nav-empty"></div>
+            {{ end }}
+
+            <a href="{{ absURL "apps/" }}" class="app-nav-all">
+                <i class="fas fa-th-large"></i>
+                All Apps
+            </a>
+
+            {{ with .NextInSection }}
+            <a href="{{ .Permalink }}" class="app-nav-link app-nav-next">
+                <span class="app-nav-direction">Next <i class="fas fa-arrow-right"></i></span>
+                <span class="app-nav-title">{{ .Title | truncate 50 }}</span>
+            </a>
+            {{ else }}
+            <div class="app-nav-link app-nav-empty"></div>
+            {{ end }}
+        </div>
+    </div>
+</nav>
+
+{{ partial "footer.html" . }}

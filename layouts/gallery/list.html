@@ -2,44 +2,48 @@
 {{ partial "menu.html" . }}
 {{ partial "banner.html" . }}
 
-<section class="section training-section">
+<section class="section gallery-section">
     <div class="container">
-        <!-- Training Introduction -->
+        <!-- Gallery Introduction -->
         {{ if .Content }}
         <div class="section-list-intro">
             {{ .Content }}
         </div>
         {{ end }}
 
-        <!-- Training Grid -->
-        <div class="training-grid columns is-multiline">
+        <!-- Gallery Grid -->
+        <div class="gallery-grid columns is-multiline">
             {{ range (.Paginator 50).Pages }}
-            <div class="column is-4-desktop is-6-tablet">
-                <article class="training-card">
-                    <div class="training-card-image">
+            <div class="column is-6-desktop is-12-tablet">
+                <article class="gallery-card">
+                    <div class="gallery-card-image">
                         <a href="{{ .Permalink }}">
-                            {{ $thumbnail := .Params.thumbnail | default "/img/banner-courses.png" }}
+                            {{ $thumbnail := .Params.thumbnail | default "/img/banner-gallery.png" }}
                             <img src="{{ $thumbnail }}" alt="{{ .Title }}" loading="lazy">
+                            <div class="gallery-card-overlay">
+                                <span class="view-map">
+                                    <i class="fas fa-map"></i>
+                                    View Map
+                                </span>
+                            </div>
                         </a>
-                        {{ if .Params.level }}
-                        <span class="training-card-badge">{{ .Params.level }}</span>
-                        {{ end }}
                     </div>
-                    <div class="training-card-content">
-                        <h3 class="training-card-title">
+                    <div class="gallery-card-content">
+                        <h3 class="gallery-card-title">
                             <a href="{{ .Permalink }}">{{ .Title }}</a>
                         </h3>
-                        {{ if .Params.duration }}
-                        <p class="training-card-duration">
-                            <i class="fas fa-clock"></i>
-                            {{ .Params.duration }}
+                        <p class="gallery-card-description">
+                            {{ .Description | truncate 150 }}
                         </p>
+                        {{ if .Params.tags }}
+                        <div class="gallery-card-tags">
+                            {{ range first 3 .Params.tags }}
+                            <span class="tag">{{ . }}</span>
+                            {{ end }}
+                        </div>
                         {{ end }}
-                        <p class="training-card-description">
-                            {{ .Description | truncate 120 }}
-                        </p>
-                        <a href="{{ .Permalink }}" class="training-card-link">
-                            View Course <i class="fas fa-arrow-right"></i>
+                        <a href="{{ .Permalink }}" class="gallery-card-link">
+                            Explore Map <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </article>
@@ -79,16 +83,16 @@
 <!-- CTA Section -->
 <section class="section section-cta">
     <div class="container has-text-centered">
-        <h2 class="title is-3">Ready to Expand Your GIS Skills?</h2>
-        <p class="subtitle is-5">Contact us for custom training programs tailored to your organization's needs.</p>
+        <h2 class="title is-3">Need a Custom Web Map?</h2>
+        <p class="subtitle is-5">We create beautiful, interactive maps tailored to your data and requirements.</p>
         <div class="section-cta-buttons">
             <a class="button is-primary is-medium" href="{{ absURL "contact-us/" }}">
                 <span class="icon"><i class="fas fa-envelope"></i></span>
-                <span>Request Training</span>
+                <span>Get in Touch</span>
             </a>
-            <a class="button is-light is-medium" href="{{ absURL "solutions/" }}">
-                <span class="icon"><i class="fas fa-cogs"></i></span>
-                <span>View Our Solutions</span>
+            <a class="button is-light is-medium" href="{{ absURL "portfolio/" }}">
+                <span class="icon"><i class="fas fa-briefcase"></i></span>
+                <span>View Our Portfolio</span>
             </a>
         </div>
     </div>

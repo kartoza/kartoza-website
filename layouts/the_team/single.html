@@ -1,0 +1,613 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+
+<!-- Team Hero Section -->
+<section class="team-hero">
+    <div class="team-hero-bg">
+        <div class="team-hero-map"></div>
+        <div class="team-hero-overlay"></div>
+    </div>
+    <div class="container">
+        <div class="team-hero-content">
+            <span class="team-hero-tagline">
+                <i class="fas fa-globe-africa"></i>
+                A Global Team
+            </span>
+            <h1 class="team-hero-title">The Kartoza Geeks</h1>
+            <p class="team-hero-subtitle">
+                Open source geospatial experts spread across the globe, united by our passion for making the world more mappable.
+            </p>
+            <div class="team-hero-stats">
+                <div class="team-stat">
+                    <span class="team-stat-number">25+</span>
+                    <span class="team-stat-label">Team Members</span>
+                </div>
+                <div class="team-stat">
+                    <span class="team-stat-number">8</span>
+                    <span class="team-stat-label">Countries</span>
+                </div>
+                <div class="team-stat">
+                    <span class="team-stat-number">10+</span>
+                    <span class="team-stat-label">Years Experience</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating location pins -->
+    <div class="team-hero-pins">
+        <div class="hero-pin" style="--pin-x: 25%; --pin-y: 45%;" title="South Africa">
+            <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="hero-pin" style="--pin-x: 30%; --pin-y: 25%;" title="Portugal">
+            <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="hero-pin" style="--pin-x: 65%; --pin-y: 40%;" title="Indonesia">
+            <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="hero-pin" style="--pin-x: 55%; --pin-y: 35%;" title="India">
+            <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="hero-pin" style="--pin-x: 35%; --pin-y: 55%;" title="Kenya">
+            <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="hero-pin" style="--pin-x: 32%; --pin-y: 50%;" title="Madagascar">
+            <i class="fas fa-map-marker-alt"></i>
+        </div>
+    </div>
+</section>
+
+<!-- Team Introduction -->
+<section class="team-intro">
+    <div class="container">
+        <div class="team-intro-content">
+            <div class="team-intro-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <p>We are a <strong>Free and Open Source GIS service provider</strong> with registered offices in South Africa and Portugal. We develop and maintain geographic information systems and train teams to use geospatial software to its full potential.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Leadership Section -->
+<section class="team-section team-leadership">
+    <div class="container">
+        <div class="team-section-header">
+            <div class="team-section-icon">
+                <i class="fas fa-crown"></i>
+            </div>
+            <h2 class="team-section-title">Leadership</h2>
+            <p class="team-section-subtitle">Guiding our mission and vision</p>
+        </div>
+        <div class="team-grid team-grid-leadership">
+            <div class="team-member team-member-featured">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/tim-sutton.jpg" alt="Tim Sutton" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>South Africa</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Tim Sutton</h3>
+                    <span class="team-member-role">Director</span>
+                    <p class="team-member-bio">Perpetual Honorary QGIS PSC Member who co-founded Kartoza in 2014. Focuses on humanitarian and environmental projects using open source geospatial technology.</p>
+                    <div class="team-member-coords">
+                        <span>-33.9249, 18.4241</span>
+                    </div>
+                </div>
+            </div>
+            <div class="team-member team-member-featured">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/gavin-fleming.png" alt="Gavin Fleming" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>South Africa</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Gavin Fleming</h3>
+                    <span class="team-member-role">Director</span>
+                    <p class="team-member-bio">Professional GISc Practitioner with an MSc in Genetics. Charter OSGeo member passionate about open source and open data.</p>
+                    <div class="team-member-coords">
+                        <span>-33.9249, 18.4241</span>
+                    </div>
+                </div>
+            </div>
+            <div class="team-member team-member-featured">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/marike-kruger.jpg" alt="Marike Kruger" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>South Africa</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Marike Kruger</h3>
+                    <span class="team-member-role">General Manager</span>
+                    <p class="team-member-bio">Over 13 years of management experience. Project manager with a proven track record in making significant contributions to organisational growth.</p>
+                    <div class="team-member-coords">
+                        <span>-33.9249, 18.4241</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Development Section -->
+<section class="team-section team-development">
+    <div class="container">
+        <div class="team-section-header">
+            <div class="team-section-icon">
+                <i class="fas fa-code"></i>
+            </div>
+            <h2 class="team-section-title">Development</h2>
+            <p class="team-section-subtitle">Building the future of geospatial</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/irwan-fathurrahman.jpg" alt="Irwan Fathurrahman" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Indonesia</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Irwan Fathurrahman</h3>
+                    <span class="team-member-role">Lead Developer</span>
+                    <p class="team-member-bio">Full stack web developer with expertise in Python, Java, PostgreSQL/Django. Lead developer of Healthsites.io.</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/zakki-muzakki.jpg" alt="Zakki Muzakki" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Indonesia</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Zakki Muzakki</h3>
+                    <span class="team-member-role">Software Developer</span>
+                    <p class="team-member-bio">Based in Central Java. Python/Django specialist and volunteer in the Python Jogja community.</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/dimas-ciputra.jpg" alt="Dimas Tri Ciputra" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Indonesia</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Dimas Tri Ciputra</h3>
+                    <span class="team-member-role">Senior Software Developer</span>
+                    <p class="team-member-bio">Informatics Engineering graduate with 8+ years building mobile and web applications.</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/danang-massandy.jpg" alt="Danang Tri Massandy" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Indonesia</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Danang Tri Massandy</h3>
+                    <span class="team-member-role">Senior Software Developer</span>
+                    <p class="team-member-bio">From Indonesia with 8 years experience. Passionate full stack developer.</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/jeff-osundwa.jpg" alt="Jeff Osundwa" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Kenya</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Jeff Osundwa</h3>
+                    <span class="team-member-role">QGIS Developer</span>
+                    <p class="team-member-bio">From Nairobi, Kenya. BSc Geospatial Information Science. Python specialist.</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/lova-andriarimalala.jpg" alt="Lova Andriarimalala" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Madagascar</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Lova Andriarimalala</h3>
+                    <span class="team-member-role">QGIS Full Stack Developer</span>
+                    <p class="team-member-bio">Based in Madagascar. Passionate Web GIS Developer with expertise in Python, Django, JavaScript.</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/juanique-voogt.jpg" alt="Juanique Voogt" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>South Africa</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Juanique Voogt</h3>
+                    <span class="team-member-role">Junior Full Stack Developer</span>
+                    <p class="team-member-bio">Passionate coder focused on continuous learning and knowledge sharing.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Training & Documentation Section -->
+<section class="team-section team-training">
+    <div class="container">
+        <div class="team-section-header">
+            <div class="team-section-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h2 class="team-section-title">Training & Documentation</h2>
+            <p class="team-section-subtitle">Sharing knowledge worldwide</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/seabilwe-tilodi.jpg" alt="Seabilwe Tilodi" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>South Africa</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Seabilwe Tilodi</h3>
+                    <span class="team-member-role">Head of Training</span>
+                    <p class="team-member-bio">MSc GIS and Remote Sensing. Passionate about applying open source software and open data for positive impact.</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/selma-vidimlic.jpg" alt="Selma Vidimlic Husic" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Bosnia</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Selma Vidimlic Husic</h3>
+                    <span class="team-member-role">QGIS Document Writer</span>
+                    <p class="team-member-bio">From Sarajevo. Studied Geography and Urban Planning. Passionate about protecting nature.</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/hefni-azzahra.jpg" alt="Hefni Azzahra" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Indonesia</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Hefni Azzahra</h3>
+                    <span class="team-member-role">Junior Document Writer</span>
+                    <p class="team-member-bio">Bachelor's in Geodetic Engineering with a strong interest in Geographic Information Systems.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GIS Specialists Section -->
+<section class="team-section team-gis">
+    <div class="container">
+        <div class="team-section-header">
+            <div class="team-section-icon">
+                <i class="fas fa-layer-group"></i>
+            </div>
+            <h2 class="team-section-title">GIS Specialists</h2>
+            <p class="team-section-subtitle">Mapping experts and spatial analysts</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/victoria-nyaga.jpg" alt="Victoria Nyaga" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Kenya</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Victoria Nyaga</h3>
+                    <span class="team-member-role">GIS Product Developer</span>
+                    <p class="team-member-bio">Based in Nairobi, Kenya. BA Engineering (Geospatial). Developed methods to map paddy rice using remote sensing.</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/jeremy-prior.jpg" alt="Jeremy Prior" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>South Africa</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Jeremy Prior</h3>
+                    <span class="team-member-role">GIS Specialist</span>
+                    <p class="team-member-bio">BSc Geoinformatics. Enjoys the conversion of raw data into useful visual interpretations.</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/lindie-strijdom.jpg" alt="Lindie Strijdom" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>South Africa</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Lindie Strijdom</h3>
+                    <span class="team-member-role">Junior Consultant</span>
+                    <p class="team-member-bio">Diploma in Geo-Information and Technology. Focused on spatial problem-solving and cartographic design.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DevOps Section -->
+<section class="team-section team-devops">
+    <div class="container">
+        <div class="team-section-header">
+            <div class="team-section-icon">
+                <i class="fas fa-server"></i>
+            </div>
+            <h2 class="team-section-title">DevOps & Infrastructure</h2>
+            <p class="team-section-subtitle">Keeping our systems running smoothly</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/tharanath-prabhu.png" alt="Tharanath Prabhu" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>India</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Tharanath Prabhu</h3>
+                    <span class="team-member-role">DevOps & System Administrator</span>
+                    <p class="team-member-bio">Based in Kerala, India. BTech Electronics and Communication Engineering. Linux specialist.</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/leon-greyling.png" alt="Leon Greyling" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>South Africa</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Leon Greyling</h3>
+                    <span class="team-member-role">DevOps Manager (Technical)</span>
+                    <p class="team-member-bio">Over 20 years IT experience. Expertise in development, systems administration, and DevOps.</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/bhaskar-pandranki.jpg" alt="Bhaskar Pandranki" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>India</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Bhaskar Pandranki</h3>
+                    <span class="team-member-role">DevOps Engineer</span>
+                    <p class="team-member-bio">Based in Vizag, India. Bachelor's Electronics & Communication Engineering. Cloud services expert.</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/moloko-mokubedi.jpg" alt="Moloko Mokubedi" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>South Africa</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Moloko Mokubedi</h3>
+                    <span class="team-member-role">Junior DevOps Engineer</span>
+                    <p class="team-member-bio">Early-career geospatial technologist with experience in GeoNode, GeoServer, PostGIS, and Docker.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Operations Section -->
+<section class="team-section team-operations">
+    <div class="container">
+        <div class="team-section-header">
+            <div class="team-section-icon">
+                <i class="fas fa-cogs"></i>
+            </div>
+            <h2 class="team-section-title">Operations & Administration</h2>
+            <p class="team-section-subtitle">The backbone of our organization</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/suzanne-sutton.jpg" alt="Suzanne Sutton" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>South Africa</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Suzanne Sutton</h3>
+                    <span class="team-member-role">Financial Administrator</span>
+                    <p class="team-member-bio">With Kartoza since 2016. Handles accounts payable/receivable and payroll. BA English Psychology from UNISA.</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/linmari-volschenk.png" alt="Lin-Mari Volschenk" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>South Africa</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Lin-Mari Volschenk</h3>
+                    <span class="team-member-role">Bookkeeper</span>
+                    <p class="team-member-bio">Certificate in Bookkeeping to Trial Balance. Training in Pastel and ICDL.</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/marina-vandermerwe.png" alt="Marina van der Merwe" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>South Africa</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Marina van der Merwe</h3>
+                    <span class="team-member-role">Relationship Manager</span>
+                    <p class="team-member-bio">Strategic and customer-focused. Specialising in CRM optimisation and enhancing client interactions.</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/lene-vanjaarsveld.jpg" alt="Lene van Jaarsveld" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>South Africa</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Lene van Jaarsveld</h3>
+                    <span class="team-member-role">Marketing Co-Ordinator</span>
+                    <p class="team-member-bio">BA Information Design. Dedicated graphic designer and marketing professional.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Project Management Section -->
+<section class="team-section team-pm">
+    <div class="container">
+        <div class="team-section-header">
+            <div class="team-section-icon">
+                <i class="fas fa-tasks"></i>
+            </div>
+            <h2 class="team-section-title">Project Management</h2>
+            <p class="team-section-subtitle">Delivering projects on time, every time</p>
+        </div>
+        <div class="team-grid team-grid-leadership">
+            <div class="team-member team-member-featured">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/elia-volschenk.jpg" alt="Elia Volschenk" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>South Africa</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Elia Volschenk</h3>
+                    <span class="team-member-role">Team Lead Scrum Master</span>
+                    <p class="team-member-bio">Started as Sales Representative, became a self-taught developer, and gained GIS internship experience.</p>
+                </div>
+            </div>
+            <div class="team-member team-member-featured">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/michelle-vonmaltitz.jpg" alt="Michelle von Maltitz" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>South Africa</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Michelle von Maltitz</h3>
+                    <span class="team-member-role">Team Lead Scrum Master</span>
+                    <p class="team-member-bio">Honours GIS degree. 10 years leading diverse multi-million-rand projects.</p>
+                </div>
+            </div>
+            <div class="team-member team-member-featured">
+                <div class="team-member-pin"></div>
+                <div class="team-member-image">
+                    <img src="/img/team/fawzy-aly.jpg" alt="Fawzy Aly" loading="lazy">
+                    <div class="team-member-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Egypt</span>
+                    </div>
+                </div>
+                <div class="team-member-content">
+                    <h3 class="team-member-name">Fawzy Aly</h3>
+                    <span class="team-member-role">Team Lead Scrum Master</span>
+                    <p class="team-member-bio">In IT since 2009, transitioned to project management in 2019. Managed projects across the Middle East and Africa.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="team-cta">
+    <div class="container">
+        <div class="team-cta-content">
+            <div class="team-cta-icon">
+                <i class="fas fa-rocket"></i>
+            </div>
+            <h2 class="team-cta-title">Join Our Global Team</h2>
+            <p class="team-cta-text">We're always looking for passionate geospatial enthusiasts to join us from anywhere in the world.</p>
+            <div class="team-cta-buttons">
+                <a class="button is-primary is-medium" href="{{ absURL "careers/" }}">
+                    <span class="icon"><i class="fas fa-briefcase"></i></span>
+                    <span>View Open Positions</span>
+                </a>
+                <a class="button is-light is-medium" href="{{ absURL "contact-us/" }}">
+                    <span class="icon"><i class="fas fa-envelope"></i></span>
+                    <span>Get in Touch</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{ partial "footer.html" . }}

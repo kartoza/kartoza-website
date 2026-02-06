@@ -1,0 +1,172 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+
+<!-- Blog Hero Section -->
+<section class="blog-hero">
+    <div class="blog-hero-bg">
+        {{ $thumbnail := .Params.thumbnail }}
+        {{ if or (not $thumbnail) (eq $thumbnail "/img/blog/placeholder.png") }}
+            {{ $thumbnail = "/img/banner-blog.png" }}
+        {{ end }}
+        <img src="{{ $thumbnail }}" alt="{{ .Title | replaceRE "^Kartoza - " "" }}" class="blog-hero-image">
+        <div class="blog-hero-overlay"></div>
+    </div>
+    <div class="container">
+        <a href="{{ absURL "blog/" }}" class="blog-hero-back">
+            <i class="fas fa-arrow-left"></i>
+            Back to Blog
+        </a>
+        <div class="blog-hero-content">
+            <div class="blog-hero-meta">
+                {{ if .Params.tags }}
+                <div class="blog-hero-tags">
+                    {{ range first 2 .Params.tags }}
+                    <span class="blog-hero-tag">{{ . }}</span>
+                    {{ end }}
+                </div>
+                {{ end }}
+                <span class="blog-hero-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    {{ .Date.Format "January 2, 2006" }}
+                </span>
+                {{ if .Params.author }}
+                <span class="blog-hero-author">
+                    <i class="fas fa-user"></i>
+                    {{ .Params.author }}
+                </span>
+                {{ end }}
+            </div>
+            <h1 class="blog-hero-title">{{ .Title | replaceRE "^Kartoza - " "" }}</h1>
+            {{ if .Description }}
+            <p class="blog-hero-subtitle">{{ .Description }}</p>
+            {{ end }}
+        </div>
+    </div>
+</section>
+
+<!-- Blog Content Section -->
+<article class="blog-article">
+    <div class="container">
+        <div class="blog-article-wrapper">
+            <!-- Main Content -->
+            <div class="blog-article-content">
+                {{ .Content }}
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="blog-article-sidebar">
+                <!-- Author Card -->
+                {{ if .Params.author }}
+                <div class="sidebar-card author-card">
+                    <div class="author-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="author-info">
+                        <span class="author-label">Written by</span>
+                        <span class="author-name">{{ .Params.author }}</span>
+                    </div>
+                </div>
+                {{ end }}
+
+                <!-- Tags -->
+                {{ if .Params.tags }}
+                <div class="sidebar-card tags-card">
+                    <h4 class="sidebar-card-title">Topics</h4>
+                    <div class="sidebar-tags">
+                        {{ range .Params.tags }}
+                        <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="sidebar-tag">{{ . }}</a>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
+
+                <!-- Share -->
+                <div class="sidebar-card share-card">
+                    <h4 class="sidebar-card-title">Share This</h4>
+                    <div class="share-buttons">
+                        <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}"
+                           target="_blank" rel="noopener" class="share-btn share-twitter" title="Share on Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ .Permalink }}&title={{ .Title }}"
+                           target="_blank" rel="noopener" class="share-btn share-linkedin" title="Share on LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="mailto:?subject={{ .Title }}&body={{ .Permalink }}"
+                           class="share-btn share-email" title="Share via Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Related Posts -->
+                {{ $related := .Site.RegularPages.Related . | first 3 }}
+                {{ with $related }}
+                <div class="sidebar-card related-card">
+                    <h4 class="sidebar-card-title">Related Articles</h4>
+                    <div class="related-posts">
+                        {{ range . }}
+                        <a href="{{ .Permalink }}" class="related-post">
+                            <span class="related-post-title">{{ .Title | replaceRE "^Kartoza - " "" | truncate 60 }}</span>
+                            <span class="related-post-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
+            </aside>
+        </div>
+    </div>
+</article>
+
+<!-- CTA Section -->
+<section class="section blog-cta-section">
+    <div class="container">
+        <div class="blog-cta-content">
+            <h2 class="blog-cta-title">Want to Learn More?</h2>
+            <p class="blog-cta-text">Explore our training courses or get in touch to discuss how we can help your organization.</p>
+            <div class="blog-cta-buttons">
+                <a class="button is-primary is-medium" href="{{ absURL "training-courses/" }}">
+                    <span class="icon"><i class="fas fa-graduation-cap"></i></span>
+                    <span>View Training Courses</span>
+                </a>
+                <a class="button is-light is-medium" href="{{ absURL "contact-us/" }}">
+                    <span class="icon"><i class="fas fa-envelope"></i></span>
+                    <span>Contact Us</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Navigation -->
+<nav class="blog-navigation">
+    <div class="container">
+        <div class="blog-nav-wrapper">
+            {{ with .PrevInSection }}
+            <a href="{{ .Permalink }}" class="blog-nav-link blog-nav-prev">
+                <span class="blog-nav-direction"><i class="fas fa-arrow-left"></i> Previous</span>
+                <span class="blog-nav-title">{{ .Title | replaceRE "^Kartoza - " "" | truncate 50 }}</span>
+            </a>
+            {{ else }}
+            <div class="blog-nav-link blog-nav-empty"></div>
+            {{ end }}
+
+            <a href="{{ absURL "blog/" }}" class="blog-nav-all">
+                <i class="fas fa-th-large"></i>
+                All Articles
+            </a>
+
+            {{ with .NextInSection }}
+            <a href="{{ .Permalink }}" class="blog-nav-link blog-nav-next">
+                <span class="blog-nav-direction">Next <i class="fas fa-arrow-right"></i></span>
+                <span class="blog-nav-title">{{ .Title | replaceRE "^Kartoza - " "" | truncate 50 }}</span>
+            </a>
+            {{ else }}
+            <div class="blog-nav-link blog-nav-empty"></div>
+            {{ end }}
+        </div>
+    </div>
+</nav>
+
+{{ partial "footer.html" . }}

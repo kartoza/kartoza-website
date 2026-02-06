@@ -1,10 +1,7 @@
 ---
-type: "page"
 title: "The Kartoza Geeks"
 subtitle: "Our team of geospatial experts"
-HasBanner: true
-HeroSize: "is-medium"
-HeroImage: "img/banner-team.png"
+layout: "single"
 ---
 
 {{< block

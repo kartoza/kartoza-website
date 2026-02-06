@@ -1,5 +1,4 @@
 ---
-type: "page"
 title: "Apps"
 subtitle: "Mobile and web applications by Kartoza"
 description: "Mobile and web applications built by Kartoza for environmental monitoring, water quality assessment, and field data collection."
