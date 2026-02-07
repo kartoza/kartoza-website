@@ -62,27 +62,51 @@
 
 .hero-company-name {
     color: var(--white) !important;
-    font-size: 5rem !important;
+    font-size: 5.5rem !important;
     font-weight: 800 !important;
-    letter-spacing: -2px;
-    margin-bottom: 0.5rem !important;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    letter-spacing: -3px;
+    margin-bottom: 0.25rem !important;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
     line-height: 1 !important;
+    background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 @media screen and (max-width: 768px) {
     .hero-company-name {
         font-size: 3.5rem !important;
+        letter-spacing: -2px;
     }
 }
 
 .hero-tagline {
-    color: var(--accent-light);
-    font-size: 1.1rem;
-    font-weight: 600;
+    color: var(--accent);
+    font-size: 1rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 1.5rem;
+    letter-spacing: 3px;
+    margin-bottom: 1.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.hero-tagline::before,
+.hero-tagline::after {
+    content: '';
+    width: 30px;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 1px;
+}
+
+@media screen and (max-width: 768px) {
+    .hero-tagline::before,
+    .hero-tagline::after {
+        width: 20px;
+    }
 }
 
 .hero-main-title {
@@ -96,27 +120,46 @@
 /* Vision Statement on Homepage */
 .hero-vision-statement {
     color: var(--white);
-    font-size: 1.75rem;
-    font-weight: 600;
-    line-height: 1.5;
-    margin-bottom: 1.25rem;
+    font-size: 1.65rem;
+    font-weight: 500;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    border: none;
+    padding: 0;
+    background: none;
+    position: relative;
+    padding-left: 0;
+}
+
+.hero-vision-statement .quote-mark {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    font-style: normal;
+    line-height: 0;
+    vertical-align: -0.3em;
+    margin: 0 0.1em;
 }
 
 .vision-word {
     color: var(--accent);
     font-weight: 700;
+    font-style: normal;
     position: relative;
+    display: inline-block;
 }
 
 .vision-word::after {
     content: '';
     position: absolute;
-    bottom: 2px;
+    bottom: 0;
     left: 0;
     right: 0;
-    height: 2px;
-    background: var(--accent);
-    border-radius: 1px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    border-radius: 2px;
+    opacity: 0.7;
 }
 
 @media screen and (max-width: 768px) {
@@ -161,16 +204,22 @@
     transition: all var(--transition-med);
 }
 
-.hero-ctas .cta-primary {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: var(--white);
+.hero-ctas .cta-primary,
+.hero-ctas .cta-primary.is-primary,
+.hero-ctas .button.cta-primary {
+    background: var(--accent) !important;
+    background-color: var(--accent) !important;
+    border-color: var(--accent) !important;
+    color: var(--white) !important;
     box-shadow: 0 4px 20px rgba(232, 163, 49, 0.4);
 }
 
-.hero-ctas .cta-primary:hover {
-    background: var(--accent-dark);
-    border-color: var(--accent-dark);
+.hero-ctas .cta-primary:hover,
+.hero-ctas .cta-primary.is-primary:hover,
+.hero-ctas .button.cta-primary:hover {
+    background: var(--accent-dark) !important;
+    background-color: var(--accent-dark) !important;
+    border-color: var(--accent-dark) !important;
     transform: translateY(-2px);
     box-shadow: 0 6px 28px rgba(232, 163, 49, 0.5);
 }
@@ -9141,7 +9190,26 @@ body:has(.blog-hero) .contextmenu {
 @media screen and (max-width: 480px) {
     /* Hero adjustments */
     .hero-company-name {
-        font-size: 2.5rem !important;
+        font-size: 2.75rem !important;
+        letter-spacing: -1px;
+    }
+
+    .hero-tagline {
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+    }
+
+    .hero-tagline::before,
+    .hero-tagline::after {
+        width: 15px;
+    }
+
+    .hero-vision-statement {
+        font-size: 1.25rem;
+    }
+
+    .hero-vision-statement .quote-mark {
+        font-size: 1.75rem;
     }
 
     .hero-main-title {
@@ -9228,7 +9296,32 @@ body:has(.blog-hero) .contextmenu {
 @media screen and (max-width: 375px) {
     /* Hero extreme compact */
     .hero-company-name {
-        font-size: 2rem !important;
+        font-size: 2.25rem !important;
+        letter-spacing: -1px;
+    }
+
+    .hero-tagline {
+        font-size: 0.7rem;
+        letter-spacing: 1.5px;
+        margin-bottom: 1.25rem;
+    }
+
+    .hero-tagline::before,
+    .hero-tagline::after {
+        width: 12px;
+    }
+
+    .hero-vision-statement {
+        font-size: 1.1rem;
+        line-height: 1.5;
+    }
+
+    .hero-vision-statement .quote-mark {
+        font-size: 1.5rem;
+    }
+
+    .vision-word::after {
+        height: 2px;
     }
 
     .hero-main-title {
