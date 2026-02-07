@@ -1,10 +1,7 @@
 ---
-type: "page"
 title: "About Kartoza"
 subtitle: "A Happy Life is a Mappy Life"
-HasBanner: true
-HeroSize: "is-medium"
-HeroImage: "img/banner-about.png"
+layout: "single"
 ---
 
 {{< block
