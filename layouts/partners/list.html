@@ -1,0 +1,164 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+{{ partial "banner.html" . }}
+
+<section class="section partners-section">
+    <div class="container">
+        <!-- Partners Introduction -->
+        {{ if .Content }}
+        <div class="partners-intro">
+            <div class="partners-intro-content">
+                {{ .Content }}
+            </div>
+        </div>
+        {{ end }}
+
+        <!-- Partners Grid - Beautiful Cards -->
+        <div class="partners-showcase">
+            {{ range .Pages }}
+            <article class="partner-showcase-card">
+                <!-- Logo Section -->
+                <div class="partner-showcase-logo">
+                    <div class="partner-showcase-logo-glow"></div>
+                    {{ if .Params.logo }}
+                    <img src="{{ .Params.logo }}" alt="{{ .Title }} logo">
+                    {{ else }}
+                    <div class="partner-logo-placeholder">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    {{ end }}
+                    <div class="partner-showcase-badge">
+                        <span class="icon"><i class="fas fa-certificate"></i></span>
+                        <span>Official Partner</span>
+                    </div>
+                </div>
+
+                <!-- Content Section -->
+                <div class="partner-showcase-content">
+                    <h2 class="partner-showcase-title">{{ .Title }}</h2>
+                    <p class="partner-showcase-tagline">{{ .Params.tagline }}</p>
+                    <p class="partner-showcase-description">
+                        {{ .Description | truncate 200 }}
+                    </p>
+
+                    <!-- Features List -->
+                    {{ if .Params.features }}
+                    <div class="partner-showcase-features">
+                        {{ range first 4 .Params.features }}
+                        <div class="partner-showcase-feature">
+                            <span class="partner-feature-dot"></span>
+                            <span>{{ .title }}</span>
+                        </div>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+
+                    <!-- Actions -->
+                    <div class="partner-showcase-actions">
+                        <a href="{{ .Permalink }}" class="button is-primary is-medium">
+                            <span>Explore {{ .Title }}</span>
+                            <span class="icon"><i class="fas fa-arrow-right"></i></span>
+                        </a>
+                        {{ if .Params.productUrl }}
+                        <a href="{{ .Params.productUrl }}" target="_blank" rel="noopener" class="button is-light is-medium">
+                            <span class="icon"><i class="fas fa-external-link-alt"></i></span>
+                            <span>Visit Website</span>
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+            </article>
+            {{ end }}
+        </div>
+    </div>
+</section>
+
+<!-- Why Partner With Us Section -->
+<section class="section partners-why-section">
+    <div class="container">
+        <h2 class="section-title has-text-centered">Why Work With a Certified Partner?</h2>
+        <p class="section-subtitle has-text-centered">
+            Get the most from your technology investment with expert guidance and local support
+        </p>
+        <div class="columns is-multiline mt-5">
+            <div class="column is-4">
+                <div class="partners-why-card">
+                    <div class="partners-why-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>Certified Expertise</h3>
+                    <p>Our team is trained and certified by our partner vendors, ensuring you get the highest quality implementation and support.</p>
+                </div>
+            </div>
+            <div class="column is-4">
+                <div class="partners-why-card">
+                    <div class="partners-why-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Local Support</h3>
+                    <p>Get responsive support in your timezone with a team that understands your regional context and requirements.</p>
+                </div>
+            </div>
+            <div class="column is-4">
+                <div class="partners-why-card">
+                    <div class="partners-why-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3>Custom Integration</h3>
+                    <p>We integrate partner solutions with your existing systems, workflows, and data infrastructure seamlessly.</p>
+                </div>
+            </div>
+            <div class="column is-4">
+                <div class="partners-why-card">
+                    <div class="partners-why-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Training Programs</h3>
+                    <p>Build internal capacity with customised training programs tailored to your team's skill levels and use cases.</p>
+                </div>
+            </div>
+            <div class="column is-4">
+                <div class="partners-why-card">
+                    <div class="partners-why-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Ongoing Support</h3>
+                    <p>From initial deployment to long-term maintenance, we're with you every step of the way.</p>
+                </div>
+            </div>
+            <div class="column is-4">
+                <div class="partners-why-card">
+                    <div class="partners-why-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Faster Results</h3>
+                    <p>Leverage our experience to avoid common pitfalls and accelerate your time to value.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section partners-cta-section">
+    <div class="container">
+        <div class="partners-cta-content">
+            <h2>Ready to Get Started?</h2>
+            <p>Contact us for a free consultation to discuss your requirements and find the right solution for your organisation.</p>
+            <div class="partners-cta-buttons">
+                <a href="{{ absURL "contact-us/" }}" class="button is-primary is-large">
+                    <span class="icon"><i class="fas fa-calendar-check"></i></span>
+                    <span>Schedule Consultation</span>
+                </a>
+                <a href="{{ absURL "solutions/" }}" class="button is-light is-large">
+                    <span class="icon"><i class="fas fa-cogs"></i></span>
+                    <span>View All Solutions</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{ partial "physics-scroll.html" . }}
+
+{{ partial "footer.html" . }}

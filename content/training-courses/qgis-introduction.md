@@ -1,28 +1,23 @@
 ---
 title: "Introduction to QGIS"
-description: "Master the fundamentals of desktop GIS using QGIS"
+description: "Master the fundamentals of desktop GIS using QGIS, the world's leading open source geographic information system."
 thumbnail: "/img/courses/qgis-introduction.svg"
+duration: "3 Days"
+level: "Beginner"
 tags:
   - QGIS
-  - GIS
   - Desktop GIS
   - Mapping
   - Open Source
+  - Beginner
 date: 2024-01-01
 ---
 
-{{< block
-    title="Introduction to QGIS"
-    subtitle="Your gateway to professional desktop GIS"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-Learn the fundamentals of geographic information systems using QGIS, the world's leading open source desktop GIS application.
-{{< /block >}}
+## Course Overview
 
-## Overview
+This comprehensive introductory course provides participants with a solid foundation in desktop GIS concepts and practices using QGIS. Participants will learn how to create, edit, analyze, and visualize spatial data through hands-on exercises and real-world examples.
 
-This comprehensive introductory course provides participants with a solid foundation in desktop GIS concepts and practices using QGIS. Participants will learn how to create, edit, analyze, and visualize spatial data through hands-on exercises and real-world examples. The course covers essential GIS workflows including data acquisition, layer management, coordinate reference systems, spatial analysis, and map production. By the end of the course, participants will be confident in using QGIS for their day-to-day mapping and spatial analysis needs.
+The course covers essential GIS workflows including data acquisition, layer management, coordinate reference systems, spatial analysis, and map production. By the end of the course, participants will be confident in using QGIS for their day-to-day mapping and spatial analysis needs.
 
 ## What You Will Learn
 
@@ -39,8 +34,29 @@ This comprehensive introductory course provides participants with a solid founda
 
 ## Who Should Attend
 
-This course is ideal for GIS beginners, professionals transitioning from proprietary GIS software, researchers, environmental consultants, urban planners, NGO staff, government employees, and anyone who needs to work with spatial data. No prior GIS experience is required, though basic computer literacy is expected.
+This course is ideal for:
 
-## Duration
+- GIS beginners with no prior experience
+- Professionals transitioning from proprietary GIS software
+- Researchers and academics working with spatial data
+- Environmental consultants and urban planners
+- NGO staff and government employees
+- Anyone who needs to work with geographic data
 
-3 days (on-site or remote)
+No prior GIS experience is required, though basic computer literacy is expected.
+
+## Prerequisites
+
+- Basic computer skills
+- Interest in working with maps and spatial data
+- Laptop with QGIS installed (we can help with installation)
+
+## Course Materials
+
+All participants receive:
+
+- Comprehensive course workbook
+- Sample datasets for exercises
+- Quick reference guides
+- Certificate of completion
+- 30-day post-course email support

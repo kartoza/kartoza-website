@@ -94,8 +94,10 @@
         {{ $overridescss := resources.Get "css/bulma-overrides.css" }}
         {{ $cookiecss := resources.Get "css/cookie.css" }}
         {{ $homepagecss := resources.Get "css/homepage.css" }}
+        {{ $searchcss := resources.Get "css/search.css" }}
+        {{ $engagementcss := resources.Get "css/engagement.css" }}
         {{/* must have the leading slash in css path or gh pages deploy will break */}}
-        {{ $css := slice $menucss $syntaxcss $customcss $animatecss $blockcss $highlightcss $overridescss $cookiecss $homepagecss | resources.Concat "/css/all.css" | resources.Minify | resources.Fingerprint }}
+        {{ $css := slice $menucss $syntaxcss $customcss $animatecss $blockcss $highlightcss $overridescss $cookiecss $homepagecss $searchcss $engagementcss | resources.Concat "/css/all.css" | resources.Minify | resources.Fingerprint }}
         <link href="{{ $css.RelPermalink }}" rel="stylesheet" />
 
         {{/* We can compile SASS too... */}}
@@ -159,11 +161,12 @@
         {{ $fusejs := resources.Get "js/fuse.js" }}
         {{ $markjs := resources.Get "js/mark.min.js" }}
         {{ $matomojs := resources.Get "js/matomo.js" }}
+        {{ $engagementjs := resources.Get "js/engagement.js" }}
         {{/* See https://www.youtube.com/watch?v=T33NN_pPeNI */}}
-        {{ $js := slice $animatejs $expandjs $navbarjs $qrcreatejs $fusejs $markjs $matomojs | resources.Concat "js/all.js" | resources.Minify | resources.Fingerprint }}
+        {{ $js := slice $animatejs $expandjs $navbarjs $qrcreatejs $fusejs $markjs $matomojs $engagementjs | resources.Concat "js/all.js" | resources.Minify | resources.Fingerprint }}
         {{ if (eq .Site.Params.cookiesstate true) }}
             {{ $cookiejs := resources.Get "js/cookie.js" }}
-            {{ $js = slice $animatejs $expandjs $navbarjs $qrcreatejs $fusejs $markjs $matomojs $cookiejs | resources.Concat "js/all.js" | resources.Minify | resources.Fingerprint }}
+            {{ $js = slice $animatejs $expandjs $navbarjs $qrcreatejs $fusejs $markjs $matomojs $engagementjs $cookiejs | resources.Concat "js/all.js" | resources.Minify | resources.Fingerprint }}
         {{ end }}   
         <script defer src="{{ $js.RelPermalink }}"></script> 
         {{/* Search needs to be rendered as a template to ensure urls are correct */}}

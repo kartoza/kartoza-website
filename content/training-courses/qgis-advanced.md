@@ -1,29 +1,23 @@
 ---
 title: "Advanced QGIS"
-description: "Take your QGIS skills to the next level with advanced techniques"
+description: "Take your QGIS skills to the next level with advanced techniques, automation, and PyQGIS scripting."
 thumbnail: "/img/courses/qgis-advanced.svg"
+duration: "3 Days"
+level: "Advanced"
 tags:
   - QGIS
-  - GIS
-  - Desktop GIS
+  - PyQGIS
+  - Automation
   - Advanced
-  - Spatial Analysis
   - Python
 date: 2024-01-01
 ---
 
-{{< block
-    title="Advanced QGIS"
-    subtitle="Master advanced GIS workflows and automation"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-Unlock the full potential of QGIS through advanced spatial analysis, automation, and customization techniques.
-{{< /block >}}
+## Course Overview
 
-## Overview
+This advanced course is designed for experienced QGIS users who want to deepen their expertise and learn professional-level workflows. Participants will explore advanced spatial analysis techniques, model building with the graphical modeler, PyQGIS scripting for automation, advanced cartography, working with databases, and creating custom plugins.
 
-This advanced course is designed for experienced QGIS users who want to deepen their expertise and learn professional-level workflows. Participants will explore advanced spatial analysis techniques, model building with the graphical modeler, PyQGIS scripting for automation, advanced cartography, working with databases, and creating custom plugins. The course emphasizes practical, real-world applications and includes extensive hands-on exercises that challenge participants to solve complex spatial problems efficiently.
+The course emphasizes practical, real-world applications and includes extensive hands-on exercises that challenge participants to solve complex spatial problems efficiently.
 
 ## What You Will Learn
 
@@ -42,8 +36,30 @@ This advanced course is designed for experienced QGIS users who want to deepen t
 
 ## Who Should Attend
 
-This course is designed for GIS professionals, analysts, and power users who already have a solid foundation in QGIS and want to advance their skills. Participants should be comfortable with basic GIS concepts, have completed the Introduction to QGIS course or equivalent, and have practical experience using QGIS for real-world projects. Basic Python knowledge is helpful but not required.
+This course is designed for:
 
-## Duration
+- GIS professionals seeking to advance their skills
+- Power users comfortable with basic QGIS operations
+- Analysts who need to automate repetitive workflows
+- Developers interested in extending QGIS functionality
+- Team leads responsible for GIS workflows
 
-3 days (on-site or remote)
+Participants should have completed the Introduction to QGIS course or have equivalent experience.
+
+## Prerequisites
+
+- Solid foundation in QGIS basics
+- Experience with real-world GIS projects
+- Basic understanding of spatial concepts
+- Basic Python knowledge is helpful but not required
+
+## Course Materials
+
+All participants receive:
+
+- Advanced course workbook with code samples
+- PyQGIS reference documentation
+- Sample datasets and exercise solutions
+- Processing model templates
+- Certificate of completion
+- 30-day post-course email support

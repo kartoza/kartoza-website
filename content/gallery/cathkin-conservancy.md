@@ -1,32 +1,31 @@
 ---
 title: "Cathkin Conservancy"
-description: "A QGIS-created map near the Drakensberg Mountains displaying farms and natural features."
+description: "QGIS-created conservation mapping near the Drakensberg Mountains, displaying farms, natural features, and conservation areas."
 thumbnail: "/img/gallery/cathkin-conservancy.png"
 tags:
   - Conservation
   - QGIS
+  - Drakensberg
   - South Africa
 date: 2018-01-01
 mapUrl: "https://maps.kartoza.com/CathkinConservancy/"
 ---
 
-{{< block
-    title="Cathkin Conservancy"
-    subtitle="Conservation mapping in the Drakensberg"
-    class="is-primary"
-    sub-block-side="bottom"
-    link="https://maps.kartoza.com/CathkinConservancy/"
-    link-text="View Live Map"
->}}
-Mapping farms and natural features near the Drakensberg Mountains.
-{{< /block >}}
-
 ## Overview
 
-A QGIS-created map of the Cathkin Conservancy near the Drakensberg Mountains, displaying farms and both natural and man-made features. The map supports conservation management by providing detailed spatial context for the conservancy area.
+The Cathkin Conservancy map was created in QGIS to support conservation management in this spectacular area near the Drakensberg Mountains in KwaZulu-Natal, South Africa. The map displays farm boundaries, natural features, and key conservation areas.
 
-![Cathkin Conservancy](/img/gallery/cathkin-conservancy.png)
+## Key Features
 
-## Links
+- **Farm boundaries** - Clear demarcation of properties within the conservancy
+- **Natural features** - Rivers, vegetation, and terrain visualisation
+- **Conservation zones** - Protected areas and management units
+- **Infrastructure** - Roads, fences, and facilities
 
-- [View Live Map](https://maps.kartoza.com/CathkinConservancy/)
+## Conservation Context
+
+The Cathkin Conservancy brings together private landowners committed to sustainable land management and biodiversity conservation in the Drakensberg foothills. This map supports their coordinated management efforts.
+
+## Technology
+
+Created using QGIS's powerful cartographic tools, the map demonstrates how open source GIS can support professional conservation mapping requirements.

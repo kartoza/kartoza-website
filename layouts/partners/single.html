@@ -1,0 +1,298 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+
+<!-- Partner Hero Section -->
+<section class="partner-hero">
+    <div class="partner-hero-bg">
+        {{ if .Params.heroImage }}
+        <img src="{{ .Params.heroImage }}" alt="{{ .Title }}">
+        {{ end }}
+        <div class="partner-hero-overlay"></div>
+    </div>
+    <div class="container">
+        <div class="partner-hero-content">
+            <div class="partner-hero-badge">
+                <span class="tag is-primary is-medium">
+                    <span class="icon"><i class="fas fa-certificate"></i></span>
+                    <span>Official Partner</span>
+                </span>
+            </div>
+            <div class="partner-hero-logo">
+                {{ if .Params.logo }}
+                <img src="{{ .Params.logo }}" alt="{{ .Title }} logo">
+                {{ end }}
+            </div>
+            <h1 class="partner-hero-title">{{ .Title }}</h1>
+            <p class="partner-hero-tagline">{{ .Params.tagline }}</p>
+            <p class="partner-hero-description">{{ .Description }}</p>
+            <div class="partner-hero-actions">
+                <a href="#get-started" class="button is-primary is-large">
+                    <span class="icon"><i class="fas fa-rocket"></i></span>
+                    <span>Get Started</span>
+                </a>
+                {{ if .Params.productUrl }}
+                <a href="{{ .Params.productUrl }}" target="_blank" rel="noopener" class="button is-light is-large">
+                    <span class="icon"><i class="fas fa-external-link-alt"></i></span>
+                    <span>Visit {{ .Params.productName | default .Title }}</span>
+                </a>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Value Proposition Bar -->
+<section class="partner-value-bar">
+    <div class="container">
+        <div class="partner-value-items">
+            {{ range .Params.valueProps }}
+            <div class="partner-value-item">
+                <span class="icon"><i class="fas fa-{{ .icon | default "check-circle" }}"></i></span>
+                <span>{{ .text }}</span>
+            </div>
+            {{ end }}
+            {{ if not .Params.valueProps }}
+            <div class="partner-value-item">
+                <span class="icon"><i class="fas fa-certificate"></i></span>
+                <span>Certified Partner</span>
+            </div>
+            <div class="partner-value-item">
+                <span class="icon"><i class="fas fa-headset"></i></span>
+                <span>Expert Support</span>
+            </div>
+            <div class="partner-value-item">
+                <span class="icon"><i class="fas fa-graduation-cap"></i></span>
+                <span>Professional Training</span>
+            </div>
+            <div class="partner-value-item">
+                <span class="icon"><i class="fas fa-tools"></i></span>
+                <span>Custom Integration</span>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</section>
+
+<!-- Key Features Section -->
+{{ if .Params.features }}
+<section class="section partner-features-section">
+    <div class="container">
+        <h2 class="section-title has-text-centered">Key Features</h2>
+        <div class="partner-features-grid">
+            {{ range .Params.features }}
+            <div class="partner-feature-card">
+                <div class="partner-feature-icon">
+                    <i class="fas fa-{{ .icon | default "star" }}"></i>
+                </div>
+                <h3>{{ .title }}</h3>
+                <p>{{ .description }}</p>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{ end }}
+
+<!-- Main Content with Sidebar -->
+<section class="section partner-content-section">
+    <div class="container">
+        <div class="columns is-variable is-8">
+            <!-- Main Content -->
+            <div class="column is-8">
+                <div class="partner-content">
+                    {{ .Content }}
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="column is-4">
+                <!-- Get Started Card -->
+                <div class="partner-sidebar-card partner-cta-card" id="get-started">
+                    <div class="partner-cta-icon">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                    <h3>Get Started Today</h3>
+                    <p>Ready to transform your workflows with {{ .Title }}? Let's discuss your requirements.</p>
+                    <a href="{{ absURL "contact-us/" }}?subject={{ .Title }}%20Enquiry" class="button is-primary is-fullwidth">
+                        <span class="icon"><i class="fas fa-envelope"></i></span>
+                        <span>Request Quote</span>
+                    </a>
+                    {{ if .Params.demoUrl }}
+                    <a href="{{ .Params.demoUrl }}" target="_blank" rel="noopener" class="button is-light is-fullwidth mt-3">
+                        <span class="icon"><i class="fas fa-play-circle"></i></span>
+                        <span>Request Demo</span>
+                    </a>
+                    {{ end }}
+                </div>
+
+                <!-- Services Card -->
+                <div class="partner-sidebar-card">
+                    <h3 class="partner-sidebar-card-title">
+                        <span class="icon"><i class="fas fa-concierge-bell"></i></span>
+                        Our Services
+                    </h3>
+                    <div class="partner-services-list">
+                        {{ range .Params.services }}
+                        <div class="partner-service-item">
+                            <span class="icon"><i class="fas fa-check-circle"></i></span>
+                            <span>{{ . }}</span>
+                        </div>
+                        {{ end }}
+                        {{ if not .Params.services }}
+                        <div class="partner-service-item">
+                            <span class="icon"><i class="fas fa-check-circle"></i></span>
+                            <span>Implementation & Setup</span>
+                        </div>
+                        <div class="partner-service-item">
+                            <span class="icon"><i class="fas fa-check-circle"></i></span>
+                            <span>Training & Workshops</span>
+                        </div>
+                        <div class="partner-service-item">
+                            <span class="icon"><i class="fas fa-check-circle"></i></span>
+                            <span>Technical Support</span>
+                        </div>
+                        <div class="partner-service-item">
+                            <span class="icon"><i class="fas fa-check-circle"></i></span>
+                            <span>Custom Development</span>
+                        </div>
+                        <div class="partner-service-item">
+                            <span class="icon"><i class="fas fa-check-circle"></i></span>
+                            <span>System Integration</span>
+                        </div>
+                        {{ end }}
+                    </div>
+                </div>
+
+                <!-- Quick Contact Card -->
+                <div class="partner-sidebar-card">
+                    <h3 class="partner-sidebar-card-title">
+                        <span class="icon"><i class="fas fa-phone-alt"></i></span>
+                        Quick Contact
+                    </h3>
+                    <div class="partner-contact-info">
+                        <a href="mailto:info@kartoza.com" class="partner-contact-item">
+                            <span class="icon"><i class="fas fa-envelope"></i></span>
+                            <span>info@kartoza.com</span>
+                        </a>
+                        <a href="tel:+27218800"; class="partner-contact-item">
+                            <span class="icon"><i class="fas fa-phone"></i></span>
+                            <span>+27 21 880 0"; </span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Related Partners -->
+                {{ $currentPage := . }}
+                {{ $related := where (where .Site.RegularPages "Section" "partners") ".Permalink" "!=" .Permalink | first 2 }}
+                {{ if $related }}
+                <div class="partner-sidebar-card">
+                    <h3 class="partner-sidebar-card-title">
+                        <span class="icon"><i class="fas fa-handshake"></i></span>
+                        Other Partners
+                    </h3>
+                    <div class="partner-related-list">
+                        {{ range $related }}
+                        <a href="{{ .Permalink }}" class="partner-related-item">
+                            {{ if .Params.logo }}
+                            <img src="{{ .Params.logo }}" alt="{{ .Title }}">
+                            {{ else }}
+                            <span class="partner-related-placeholder">
+                                <i class="fas fa-handshake"></i>
+                            </span>
+                            {{ end }}
+                            <div class="partner-related-info">
+                                <span class="partner-related-title">{{ .Title }}</span>
+                                <span class="partner-related-tagline">{{ .Params.tagline | truncate 40 }}</span>
+                            </div>
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works / Onboarding Section -->
+<section class="section partner-onboarding-section">
+    <div class="container">
+        <h2 class="section-title has-text-centered">Your Journey to Success</h2>
+        <p class="section-subtitle has-text-centered">
+            A simple, proven process to get you up and running
+        </p>
+        <div class="partner-onboarding-steps">
+            <div class="partner-onboarding-step">
+                <div class="partner-onboarding-number">1</div>
+                <div class="partner-onboarding-content">
+                    <h3>Discovery Call</h3>
+                    <p>We learn about your requirements, challenges, and goals to determine if {{ .Title }} is the right fit.</p>
+                </div>
+            </div>
+            <div class="partner-onboarding-connector"></div>
+            <div class="partner-onboarding-step">
+                <div class="partner-onboarding-number">2</div>
+                <div class="partner-onboarding-content">
+                    <h3>Solution Design</h3>
+                    <p>Our experts design a tailored implementation plan including configuration, integrations, and training.</p>
+                </div>
+            </div>
+            <div class="partner-onboarding-connector"></div>
+            <div class="partner-onboarding-step">
+                <div class="partner-onboarding-number">3</div>
+                <div class="partner-onboarding-content">
+                    <h3>Implementation</h3>
+                    <p>We deploy and configure {{ .Title }} for your organisation, with hands-on training for your team.</p>
+                </div>
+            </div>
+            <div class="partner-onboarding-connector"></div>
+            <div class="partner-onboarding-step">
+                <div class="partner-onboarding-number">4</div>
+                <div class="partner-onboarding-content">
+                    <h3>Ongoing Support</h3>
+                    <p>We provide continued support, updates, and optimisation to ensure long-term success.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonial Section -->
+{{ if .Params.testimonial }}
+<section class="section partner-testimonial-section">
+    <div class="container">
+        <div class="partner-testimonial">
+            <div class="partner-testimonial-quote">
+                <i class="fas fa-quote-left"></i>
+            </div>
+            <blockquote>{{ .Params.testimonial.quote }}</blockquote>
+            <div class="partner-testimonial-author">
+                <span class="partner-testimonial-name">{{ .Params.testimonial.author }}</span>
+                <span class="partner-testimonial-role">{{ .Params.testimonial.role }}</span>
+            </div>
+        </div>
+    </div>
+</section>
+{{ end }}
+
+<!-- Final CTA Section -->
+<section class="section partner-final-cta">
+    <div class="container">
+        <div class="partner-final-cta-content">
+            <h2>Ready to Transform Your Workflows?</h2>
+            <p>Join organisations already benefiting from {{ .Title }} with Kartoza's expert implementation and support.</p>
+            <div class="partner-final-cta-buttons">
+                <a href="{{ absURL "contact-us/" }}?subject={{ .Title }}%20Enquiry" class="button is-primary is-large">
+                    <span class="icon"><i class="fas fa-rocket"></i></span>
+                    <span>Start Your Journey</span>
+                </a>
+                <a href="{{ absURL "partners/" }}" class="button is-light is-large">
+                    <span class="icon"><i class="fas fa-handshake"></i></span>
+                    <span>View All Partners</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{ partial "footer.html" . }}

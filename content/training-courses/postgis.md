@@ -1,29 +1,23 @@
 ---
 title: "PostGIS and Spatial Databases"
-description: "Harness the power of spatial databases with PostGIS"
+description: "Harness the power of spatial databases with PostgreSQL and PostGIS for enterprise-grade data management."
 thumbnail: "/img/courses/postgis.svg"
+duration: "3 Days"
+level: "Intermediate"
 tags:
   - PostGIS
   - PostgreSQL
-  - Database
-  - Spatial Database
   - SQL
-  - GIS
+  - Database
+  - Spatial Analysis
 date: 2024-01-01
 ---
 
-{{< block
-    title="PostGIS and Spatial Databases"
-    subtitle="Professional spatial data management with PostgreSQL and PostGIS"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-Learn to design, build, and manage enterprise-grade spatial databases using PostgreSQL and PostGIS.
-{{< /block >}}
+## Course Overview
 
-## Overview
+This comprehensive course introduces participants to spatial database concepts and practices using PostgreSQL and PostGIS, the industry-leading open source spatial database solution. Participants will learn how to design efficient spatial database schemas, import and export spatial data, write complex spatial SQL queries, perform advanced spatial analysis, and optimize database performance.
 
-This comprehensive course introduces participants to spatial database concepts and practices using PostgreSQL and PostGIS, the industry-leading open source spatial database solution. Participants will learn how to design efficient spatial database schemas, import and export spatial data, write complex spatial SQL queries, perform advanced spatial analysis, and optimize database performance. The course combines theoretical concepts with extensive hands-on practice, ensuring participants can immediately apply their knowledge to real-world scenarios. Topics include spatial indexing, coordinate transformations, topology, raster data handling, and integration with desktop and web GIS applications.
+The course combines theoretical concepts with extensive hands-on practice, ensuring participants can immediately apply their knowledge to real-world scenarios.
 
 ## What You Will Learn
 
@@ -44,8 +38,30 @@ This comprehensive course introduces participants to spatial database concepts a
 
 ## Who Should Attend
 
-This course is ideal for GIS professionals, database administrators, developers, and IT staff who need to manage spatial data at scale. Participants should have basic knowledge of SQL and relational databases, as well as familiarity with GIS concepts. The course is suitable for those transitioning from file-based GIS workflows to enterprise database solutions, as well as developers building spatial applications.
+This course is ideal for:
 
-## Duration
+- GIS professionals moving to database-driven workflows
+- Database administrators managing spatial data
+- Developers building spatial applications
+- IT staff responsible for GIS infrastructure
+- Analysts working with large spatial datasets
 
-3 days (on-site or remote)
+Participants should have basic knowledge of SQL and relational databases.
+
+## Prerequisites
+
+- Basic SQL knowledge
+- Familiarity with GIS concepts
+- Experience with spatial data formats
+- Interest in data management
+
+## Course Materials
+
+All participants receive:
+
+- Comprehensive PostGIS reference guide
+- SQL cheat sheets and query templates
+- Sample databases for exercises
+- Performance tuning checklist
+- Certificate of completion
+- 30-day post-course email support

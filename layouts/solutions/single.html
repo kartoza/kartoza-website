@@ -1,0 +1,191 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+
+<!-- Solution Hero -->
+<section class="solution-hero">
+    <div class="solution-hero-bg">
+        <div class="solution-hero-pattern"></div>
+        <div class="solution-hero-overlay"></div>
+    </div>
+    <div class="container">
+        <div class="solution-hero-content">
+            <div class="solution-hero-info">
+                {{ with .Params.tags }}
+                <div class="solution-hero-tags">
+                    {{ range first 3 . }}
+                    <span class="solution-tag">{{ . }}</span>
+                    {{ end }}
+                </div>
+                {{ end }}
+                <h1 class="solution-hero-title">{{ .Title }}</h1>
+                <p class="solution-hero-description">{{ .Description }}</p>
+                <div class="solution-hero-cta">
+                    <a href="{{ absURL "contact-us/" }}?subject=Enquiry:%20{{ .Title | urlquery }}" class="button is-primary is-large">
+                        <span class="icon"><i class="fas fa-comments"></i></span>
+                        <span>Get Started</span>
+                    </a>
+                    <a href="#solution-details" class="button is-light is-large">
+                        <span class="icon"><i class="fas fa-info-circle"></i></span>
+                        <span>Learn More</span>
+                    </a>
+                </div>
+            </div>
+            <div class="solution-hero-image">
+                {{ $thumbnail := .Params.thumbnail | default "/img/banner-solutions.png" }}
+                <img src="{{ $thumbnail }}" alt="{{ .Title }}">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Bar -->
+<section class="solution-features-bar">
+    <div class="container">
+        <div class="features-bar-grid">
+            <div class="feature-bar-item">
+                <i class="fab fa-osi"></i>
+                <span>Open Source</span>
+            </div>
+            <div class="feature-bar-item">
+                <i class="fas fa-shield-alt"></i>
+                <span>Enterprise Ready</span>
+            </div>
+            <div class="feature-bar-item">
+                <i class="fas fa-headset"></i>
+                <span>Expert Support</span>
+            </div>
+            <div class="feature-bar-item">
+                <i class="fas fa-cogs"></i>
+                <span>Customizable</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Solution Content -->
+<section class="solution-section solution-content-section" id="solution-details">
+    <div class="container">
+        <div class="solution-layout">
+            <!-- Main Content -->
+            <div class="solution-main">
+                <div class="solution-content-card">
+                    {{ .Content }}
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="solution-sidebar">
+                <!-- Contact Card -->
+                <div class="sidebar-card contact-card">
+                    <div class="contact-card-header">
+                        <i class="fas fa-rocket"></i>
+                        <h3>Ready to Start?</h3>
+                    </div>
+                    <div class="contact-card-body">
+                        <p>Let's discuss how {{ .Title }} can help your organization achieve its goals.</p>
+                        <a href="{{ absURL "contact-us/" }}?subject=Enquiry:%20{{ .Title | urlquery }}" class="button is-primary is-fullwidth">
+                            <span class="icon"><i class="fas fa-envelope"></i></span>
+                            <span>Contact Us</span>
+                        </a>
+                        <div class="contact-options">
+                            <a href="mailto:info@kartoza.com"><i class="fas fa-envelope"></i> info@kartoza.com</a>
+                            <a href="tel:+27218138912"><i class="fas fa-phone"></i> +27 21 813 8912</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Benefits -->
+                <div class="sidebar-card benefits-card">
+                    <h4><i class="fas fa-check-circle"></i> Key Benefits</h4>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check"></i> No vendor lock-in</li>
+                        <li><i class="fas fa-check"></i> Full source code access</li>
+                        <li><i class="fas fa-check"></i> Community support</li>
+                        <li><i class="fas fa-check"></i> Cost effective</li>
+                        <li><i class="fas fa-check"></i> Scalable solutions</li>
+                    </ul>
+                </div>
+
+                <!-- Related Solutions -->
+                {{ $currentPage := . }}
+                {{ $related := where (where site.RegularPages "Section" "solutions") ".Permalink" "!=" .Permalink }}
+                {{ $related = $related | first 3 }}
+                {{ if $related }}
+                <div class="sidebar-card related-card">
+                    <h4><i class="fas fa-th-large"></i> Related Solutions</h4>
+                    <div class="related-list">
+                        {{ range $related }}
+                        <a href="{{ .Permalink }}" class="related-item">
+                            <span class="related-title">{{ .Title }}</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
+            </aside>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="solution-section solution-why-choose">
+    <div class="container">
+        <div class="section-header">
+            <h2>Why Choose Kartoza?</h2>
+            <p>Partner with the leading open source GIS experts in Africa</p>
+        </div>
+        <div class="why-choose-grid">
+            <div class="why-choose-card">
+                <div class="why-choose-icon">
+                    <i class="fas fa-medal"></i>
+                </div>
+                <h3>Proven Expertise</h3>
+                <p>Over a decade of experience delivering GIS solutions to organizations worldwide.</p>
+            </div>
+            <div class="why-choose-card">
+                <div class="why-choose-icon">
+                    <i class="fas fa-code-branch"></i>
+                </div>
+                <h3>Core Contributors</h3>
+                <p>Active contributors to QGIS, PostGIS, GeoServer, and other open source projects.</p>
+            </div>
+            <div class="why-choose-card">
+                <div class="why-choose-icon">
+                    <i class="fas fa-globe-africa"></i>
+                </div>
+                <h3>Local & Global</h3>
+                <p>Based in South Africa and Portugal, serving clients on every continent.</p>
+            </div>
+            <div class="why-choose-card">
+                <div class="why-choose-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>Long-term Partners</h3>
+                <p>We build relationships, not just software. Your success is our success.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="solution-cta">
+    <div class="container">
+        <div class="solution-cta-content">
+            <h2>Let's Build Something Amazing Together</h2>
+            <p>Whether you need a custom solution, expert support, or professional training, we're here to help you succeed with open source GIS.</p>
+            <div class="solution-cta-buttons">
+                <a href="{{ absURL "contact-us/" }}" class="button is-primary is-large">
+                    <span class="icon"><i class="fas fa-paper-plane"></i></span>
+                    <span>Start a Conversation</span>
+                </a>
+                <a href="{{ absURL "portfolio/" }}" class="button is-light is-large">
+                    <span class="icon"><i class="fas fa-briefcase"></i></span>
+                    <span>View Our Work</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{ partial "footer.html" . }}

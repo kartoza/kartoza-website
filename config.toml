@@ -150,7 +150,7 @@ matomoSiteId = ''
 [[menu.main]]
   parent = "About"
   name = "Partners"
-  url = "/merginmaps/"
+  url = "/partners/"
   weight = 30
 
 [[menu.main]]
@@ -301,5 +301,11 @@ matomoSiteId = ''
   url = "/blog/"
   weight = 30
 
+[outputFormats]
+  [outputFormats.SearchIndex]
+    baseName = "search-index"
+    mediaType = "application/json"
+    isPlainText = true
+
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+  home = ["HTML", "RSS", "JSON", "SearchIndex"]

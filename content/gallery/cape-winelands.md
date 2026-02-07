@@ -1,32 +1,34 @@
 ---
 title: "Cape Winelands District"
-description: "Integrates OpenStreetMap, CIESIN population data, and South African Demarcation Board boundaries."
+description: "Integrated spatial data platform combining OpenStreetMap, CIESIN population data, and South African Demarcation Board boundaries."
 thumbnail: "/img/gallery/cape-winelands.png"
 tags:
   - Regional
   - Demographics
+  - Integration
   - South Africa
 date: 2018-01-01
 mapUrl: "https://maps.kartoza.com/CapeWinelands/"
 ---
 
-{{< block
-    title="Cape Winelands District"
-    subtitle="Demographic and spatial data integration"
-    class="is-primary"
-    sub-block-side="bottom"
-    link="https://maps.kartoza.com/CapeWinelands/"
-    link-text="View Live Map"
->}}
-Combining population data with administrative boundaries for the Cape Winelands.
-{{< /block >}}
-
 ## Overview
 
-A web map integrating OpenStreetMap data, CIESIN population data, and South African Demarcation Board boundaries for the Cape Winelands District. The map provides a comprehensive spatial view combining demographic and administrative datasets.
+This web map demonstrates sophisticated spatial data integration for the Cape Winelands District Municipality in the Western Cape, South Africa. The map combines multiple authoritative data sources to provide comprehensive geographic context for regional planning and analysis.
 
-![Cape Winelands](/img/gallery/cape-winelands.png)
+## Data Sources
 
-## Links
+- **OpenStreetMap** - Detailed infrastructure and land use data
+- **CIESIN Population Data** - Gridded population distribution
+- **SA Demarcation Board** - Official municipal boundaries
 
-- [View Live Map](https://maps.kartoza.com/CapeWinelands/)
+## Use Cases
+
+This type of integrated mapping is valuable for:
+- Regional development planning
+- Service delivery optimisation
+- Demographic analysis
+- Infrastructure investment decisions
+
+## About the Cape Winelands
+
+The Cape Winelands is one of South Africa's premier wine-producing regions, encompassing historic towns like Stellenbosch, Paarl, and Franschhoek. The district combines agricultural excellence with significant urban development and tourism infrastructure.

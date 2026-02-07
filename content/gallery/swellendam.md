@@ -1,6 +1,6 @@
 ---
 title: "Swellendam"
-description: "A QGIS-published map using OpenStreetMap data showcasing the Swellendam area of South Africa."
+description: "A beautifully styled QGIS-published web map showcasing the historic Swellendam area using OpenStreetMap data and OSM Reporter."
 thumbnail: "/img/gallery/swellendam.png"
 tags:
   - QGIS
@@ -10,29 +10,20 @@ date: 2019-01-01
 mapUrl: "https://maps.kartoza.com/Swellendam/"
 ---
 
-{{< block
-    title="Swellendam"
-    subtitle="QGIS-published map of the Swellendam region"
-    class="is-primary"
-    sub-block-side="bottom"
-    link="https://maps.kartoza.com/Swellendam/"
-    link-text="View Live Map"
->}}
-A map created in QGIS and published to the web using OpenStreetMap data.
-{{< /block >}}
-
 ## Overview
 
-A QGIS-published map using OpenStreetMap data, showcasing the Swellendam area of the Western Cape, South Africa. Created using the OSM Reporter tool for data extraction and styled in QGIS for web publication.
+This web map showcases the historic town of Swellendam in the Western Cape, South Africa. Created entirely in QGIS and published to the web, it demonstrates how open source desktop GIS can produce beautiful, professional cartography suitable for web publication.
 
-![Swellendam](/img/gallery/swellendam.png)
+## Technology Stack
 
-## Technology
+- **QGIS** - Desktop GIS for styling and layout
+- **OpenStreetMap** - Community-contributed spatial data
+- **OSM Reporter** - Data extraction and processing tool
 
-- QGIS
-- OpenStreetMap
-- OSM Reporter
+## About Swellendam
 
-## Links
+Swellendam is one of the oldest towns in South Africa, nestled at the foot of the Langeberg mountains. The map highlights the town's layout, surrounding farmlands, and natural features that make this area a popular destination for tourists and outdoor enthusiasts.
 
-- [View Live Map](https://maps.kartoza.com/Swellendam/)
+## Cartographic Approach
+
+The styling was designed to balance readability with aesthetic appeal, using a colour palette that reflects the natural landscape of the region while maintaining clarity at different zoom levels.

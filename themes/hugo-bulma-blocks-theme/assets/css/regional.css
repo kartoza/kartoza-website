@@ -1,0 +1,383 @@
+/**
+ * Kartoza Regional Presence Styles
+ * Styling for regional offices, pricing, and location-aware content
+ */
+
+/* ========================================
+   REGIONAL OFFICES SECTION
+   ======================================== */
+
+.regional-presence-section {
+    background: linear-gradient(135deg, #f7f9fb 0%, #e8ecf0 100%);
+    padding: 4rem 0;
+}
+
+.regional-presence-section .section-header {
+    margin-bottom: 3rem;
+}
+
+.regional-presence-section .section-header .title {
+    color: #1B6B9B;
+}
+
+.regional-presence-section .section-header .subtitle {
+    color: #6B7B8D;
+}
+
+/* Office Cards */
+.office-cards {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.office-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 20px rgba(27, 107, 155, 0.08);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.office-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3B9DD9 0%, #1B6B9B 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.office-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(27, 107, 155, 0.15);
+    border-color: rgba(59, 157, 217, 0.2);
+}
+
+.office-card:hover::before {
+    opacity: 1;
+}
+
+.office-card.is-active {
+    border-color: #3B9DD9;
+    box-shadow: 0 8px 30px rgba(59, 157, 217, 0.2);
+}
+
+.office-card.is-active::before {
+    opacity: 1;
+}
+
+/* Your Location Badge */
+.office-card .your-location-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: linear-gradient(135deg, #E8A331 0%, #D4922A 100%);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    display: none;
+}
+
+.office-card.is-active .your-location-badge {
+    display: block;
+    animation: pulse-badge 2s ease-in-out infinite;
+}
+
+@keyframes pulse-badge {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.office-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.office-flag {
+    font-size: 2.5rem;
+    line-height: 1;
+}
+
+.office-card-title {
+    flex: 1;
+}
+
+.office-card-title h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1B6B9B;
+    margin: 0 0 0.25rem 0;
+}
+
+.office-card-title .office-entity {
+    font-size: 0.9rem;
+    color: #6B7B8D;
+    font-weight: 500;
+}
+
+.office-card-body p {
+    color: #4D6370;
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+}
+
+.office-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.office-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: #4D6370;
+}
+
+.office-detail .icon {
+    color: #3B9DD9;
+    width: 20px;
+    text-align: center;
+}
+
+.office-detail a {
+    color: #3B9DD9;
+    text-decoration: none;
+    transition: color 0.25s ease;
+}
+
+.office-detail a:hover {
+    color: #1B6B9B;
+}
+
+.office-card-cta {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.office-card-cta .button {
+    flex: 1;
+    justify-content: center;
+}
+
+/* Regional Pricing Display */
+.price-regional {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.price-amount {
+    font-weight: 700;
+    color: #1B6B9B;
+}
+
+.price-currency {
+    font-size: 0.85em;
+    color: #6B7B8D;
+}
+
+.price-period {
+    font-size: 0.85em;
+    color: #6B7B8D;
+}
+
+/* Regional price hint under CTAs */
+.price-hint {
+    display: block;
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: #6B7B8D;
+}
+
+.price-hint .price-alt {
+    display: none;
+}
+
+/* Show alternate price based on region */
+body.region-EU .price-hint .price-zar {
+    display: none;
+}
+body.region-EU .price-hint .price-eur {
+    display: inline;
+}
+
+body.region-INTL .price-hint .price-zar {
+    display: none;
+}
+body.region-INTL .price-hint .price-usd {
+    display: inline;
+}
+
+/* Region Selector */
+.region-selector-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.region-selector-wrapper .icon {
+    color: #3B9DD9;
+}
+
+.region-selector {
+    border: none;
+    background: transparent;
+    color: #1B6B9B;
+    font-weight: 500;
+    cursor: pointer;
+    padding-right: 1.5rem;
+}
+
+.region-selector:focus {
+    outline: none;
+}
+
+/* Region Toggle in Footer */
+.region-toggle {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.region-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-decoration: none;
+}
+
+.region-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.region-toggle-btn.is-active {
+    background: rgba(59, 157, 217, 0.3);
+    border-color: #3B9DD9;
+}
+
+/* Footer Regional Info */
+.footer-regional {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-offices {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.footer-office {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-office h5 {
+    color: #E8A331;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.footer-office p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.footer-office a {
+    color: rgba(255, 255, 255, 0.8);
+    transition: color 0.25s ease;
+}
+
+.footer-office a:hover {
+    color: #3B9DD9;
+}
+
+/* Mobile responsive */
+@media screen and (max-width: 768px) {
+    .office-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .office-card {
+        max-width: 100%;
+    }
+
+    .office-card-cta {
+        flex-direction: column;
+    }
+
+    .footer-offices {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .region-toggle {
+        justify-content: center;
+    }
+}
+
+/* ========================================
+   REGIONAL CONTENT VISIBILITY
+   ======================================== */
+
+/* Hide by default, show for specific regions */
+[data-show-region] {
+    display: none;
+}
+
+body.region-ZA [data-show-region*="ZA"] {
+    display: block;
+}
+
+body.region-EU [data-show-region*="EU"] {
+    display: block;
+}
+
+body.region-INTL [data-show-region*="INTL"] {
+    display: block;
+}
+
+/* Regional accents */
+body.region-EU .regional-accent {
+    color: #1B6B9B;
+}
+
+body.region-ZA .regional-accent {
+    color: #E8A331;
+}

@@ -1,0 +1,250 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+
+<!-- Course Hero -->
+<section class="course-hero">
+    <div class="course-hero-bg">
+        <div class="course-hero-pattern"></div>
+        <div class="course-hero-overlay"></div>
+    </div>
+    <div class="container">
+        <div class="course-hero-content">
+            <div class="course-hero-info">
+                <div class="course-hero-tags">
+                    {{ range first 3 .Params.tags }}
+                    <span class="course-tag">{{ . }}</span>
+                    {{ end }}
+                </div>
+                <h1 class="course-hero-title">{{ .Title }}</h1>
+                <p class="course-hero-description">{{ .Description }}</p>
+                <div class="course-hero-meta">
+                    {{ with .Params.duration }}
+                    <div class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        <span>{{ . }}</span>
+                    </div>
+                    {{ else }}
+                    <div class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        <span>3 Days</span>
+                    </div>
+                    {{ end }}
+                    <div class="meta-item">
+                        <i class="fas fa-laptop"></i>
+                        <span>On-site or Remote</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-certificate"></i>
+                        <span>Certificate Included</span>
+                    </div>
+                </div>
+                <div class="course-hero-cta">
+                    <a href="{{ absURL "contact-us/" }}?subject=Training%20Enquiry:%20{{ .Title | urlquery }}" class="button is-primary is-large">
+                        <span class="icon"><i class="fas fa-calendar-check"></i></span>
+                        <span>Book This Course</span>
+                    </a>
+                    <a href="#course-content" class="button is-light is-large">
+                        <span class="icon"><i class="fas fa-info-circle"></i></span>
+                        <span>Learn More</span>
+                    </a>
+                </div>
+            </div>
+            <div class="course-hero-image">
+                {{ $thumbnail := .Params.thumbnail | default "/img/courses/training.png" }}
+                <img src="{{ $thumbnail }}" alt="{{ .Title }}">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Benefits Bar -->
+<section class="course-benefits-bar">
+    <div class="container">
+        <div class="benefits-bar-grid">
+            <div class="benefit-bar-item">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <span>Expert Instructors</span>
+            </div>
+            <div class="benefit-bar-item">
+                <i class="fas fa-hands-helping"></i>
+                <span>Hands-on Learning</span>
+            </div>
+            <div class="benefit-bar-item">
+                <i class="fas fa-book"></i>
+                <span>Course Materials</span>
+            </div>
+            <div class="benefit-bar-item">
+                <i class="fas fa-headset"></i>
+                <span>Post-Course Support</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Course Content -->
+<section class="course-section course-content-section" id="course-content">
+    <div class="container">
+        <div class="course-layout">
+            <!-- Main Content -->
+            <div class="course-main">
+                <div class="course-content-card">
+                    {{ .Content }}
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="course-sidebar">
+                <!-- Enquiry Card -->
+                <div class="sidebar-card enquiry-card">
+                    <div class="enquiry-card-header">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Ready to Start?</h3>
+                    </div>
+                    <div class="enquiry-card-body">
+                        <p>Transform your GIS skills with expert-led training from Kartoza.</p>
+                        <ul class="enquiry-features">
+                            <li><i class="fas fa-check"></i> Customizable for your team</li>
+                            <li><i class="fas fa-check"></i> Flexible scheduling</li>
+                            <li><i class="fas fa-check"></i> Real-world projects</li>
+                            <li><i class="fas fa-check"></i> Ongoing support</li>
+                        </ul>
+                        <a href="{{ absURL "contact-us/" }}?subject=Training%20Enquiry:%20{{ .Title | urlquery }}" class="button is-primary is-fullwidth">
+                            <span class="icon"><i class="fas fa-envelope"></i></span>
+                            <span>Request Quote</span>
+                        </a>
+                        <div class="enquiry-contact">
+                            <p>Or contact us directly:</p>
+                            <a href="mailto:info@kartoza.com"><i class="fas fa-envelope"></i> info@kartoza.com</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Details Card -->
+                <div class="sidebar-card details-card">
+                    <h4><i class="fas fa-list-ul"></i> Course Details</h4>
+                    <div class="details-list">
+                        <div class="detail-item">
+                            <span class="detail-label">Duration</span>
+                            <span class="detail-value">{{ .Params.duration | default "3 Days" }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Format</span>
+                            <span class="detail-value">On-site / Remote</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Level</span>
+                            <span class="detail-value">{{ .Params.level | default "All Levels" }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Certificate</span>
+                            <span class="detail-value">Yes</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Language</span>
+                            <span class="detail-value">English</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related Courses -->
+                {{ $currentTags := .Params.tags }}
+                {{ $currentPage := . }}
+                {{ $related := where (where site.RegularPages "Section" "training-courses") ".Permalink" "!=" .Permalink }}
+                {{ $related = $related | first 3 }}
+                {{ if $related }}
+                <div class="sidebar-card related-card">
+                    <h4><i class="fas fa-book-open"></i> Related Courses</h4>
+                    <div class="related-list">
+                        {{ range $related }}
+                        <a href="{{ .Permalink }}" class="related-item">
+                            <span class="related-title">{{ .Title }}</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
+            </aside>
+        </div>
+    </div>
+</section>
+
+<!-- Why Train With Us -->
+<section class="course-section course-why-us">
+    <div class="container">
+        <div class="section-header">
+            <h2>Why Train With Kartoza?</h2>
+            <p>Join thousands of professionals who have advanced their careers with our training</p>
+        </div>
+        <div class="why-us-grid">
+            <div class="why-us-card">
+                <div class="why-us-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <h3>Industry Experts</h3>
+                <p>Learn from practitioners who contribute to open source projects and work with organizations worldwide.</p>
+            </div>
+            <div class="why-us-card">
+                <div class="why-us-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3>Practical Focus</h3>
+                <p>Our courses emphasize hands-on exercises and real-world scenarios you can apply immediately.</p>
+            </div>
+            <div class="why-us-card">
+                <div class="why-us-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Customized Training</h3>
+                <p>We tailor content to your team's specific needs, data, and workflows for maximum relevance.</p>
+            </div>
+            <div class="why-us-card">
+                <div class="why-us-icon">
+                    <i class="fab fa-osi"></i>
+                </div>
+                <h3>Open Source Leaders</h3>
+                <p>As major contributors to QGIS, PostGIS, and other projects, we teach from deep expertise.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonial -->
+<section class="course-section course-testimonial">
+    <div class="container">
+        <div class="testimonial-content">
+            <div class="testimonial-icon">
+                <i class="fas fa-quote-left"></i>
+            </div>
+            <blockquote>
+                "Kartoza's training transformed how our team approaches GIS. The hands-on approach and expert guidance gave us skills we use every day."
+            </blockquote>
+            <div class="testimonial-author">
+                <span class="author-name">Training Participant</span>
+                <span class="author-org">GIS Professional</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="course-cta">
+    <div class="container">
+        <div class="course-cta-content">
+            <h2>Ready to Advance Your GIS Skills?</h2>
+            <p>Contact us today to discuss your training needs. We offer flexible scheduling, group discounts, and customized content.</p>
+            <div class="course-cta-buttons">
+                <a href="{{ absURL "contact-us/" }}?subject=Training%20Enquiry:%20{{ .Title | urlquery }}" class="button is-primary is-large">
+                    <span class="icon"><i class="fas fa-calendar-check"></i></span>
+                    <span>Book Training</span>
+                </a>
+                <a href="{{ absURL "training-courses/" }}" class="button is-light is-large">
+                    <span class="icon"><i class="fas fa-book"></i></span>
+                    <span>View All Courses</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{ partial "footer.html" . }}

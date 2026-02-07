@@ -1,0 +1,207 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+
+<!-- Gallery Item Hero -->
+<section class="gallery-hero">
+    <div class="gallery-hero-background">
+        {{ $thumbnail := .Params.thumbnail | default "/img/banner-gallery.png" }}
+        <img src="{{ $thumbnail }}" alt="{{ .Title }}">
+        <div class="gallery-hero-overlay"></div>
+    </div>
+    <div class="container">
+        <div class="gallery-hero-content">
+            {{ if .Params.tags }}
+            <div class="gallery-hero-tags">
+                {{ range .Params.tags }}
+                <span class="tag is-primary is-medium">{{ . }}</span>
+                {{ end }}
+            </div>
+            {{ end }}
+            <h1 class="gallery-hero-title">{{ .Title }}</h1>
+            <p class="gallery-hero-description">{{ .Description }}</p>
+            <div class="gallery-hero-actions">
+                {{ if .Params.mapUrl }}
+                <a href="{{ .Params.mapUrl }}" target="_blank" rel="noopener" class="button is-primary is-large">
+                    <span class="icon"><i class="fas fa-external-link-alt"></i></span>
+                    <span>Open Full Map</span>
+                </a>
+                {{ end }}
+                <a href="{{ absURL "contact-us/" }}?subject=Custom%20Map%20Enquiry" class="button is-light is-large">
+                    <span class="icon"><i class="fas fa-envelope"></i></span>
+                    <span>Request Similar Map</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Map Embed Section -->
+{{ if .Params.mapUrl }}
+<section class="gallery-map-section">
+    <div class="container">
+        <div class="gallery-map-wrapper">
+            <div class="gallery-map-frame">
+                <iframe
+                    src="{{ .Params.mapUrl }}"
+                    title="{{ .Title }}"
+                    loading="lazy"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="gallery-map-controls">
+                <a href="{{ .Params.mapUrl }}" target="_blank" rel="noopener" class="button is-small is-primary is-outlined">
+                    <span class="icon"><i class="fas fa-expand"></i></span>
+                    <span>View Fullscreen</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{{ end }}
+
+<!-- Map Details Section -->
+<section class="section gallery-details-section">
+    <div class="container">
+        <div class="columns is-variable is-8">
+            <!-- Main Content -->
+            <div class="column is-8">
+                <div class="gallery-content">
+                    {{ .Content }}
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="column is-4">
+                <!-- Technologies Card -->
+                {{ if .Params.tags }}
+                <div class="gallery-sidebar-card">
+                    <h3 class="gallery-sidebar-card-title">
+                        <span class="icon"><i class="fas fa-layer-group"></i></span>
+                        Technologies Used
+                    </h3>
+                    <div class="gallery-tech-list">
+                        {{ range .Params.tags }}
+                        <div class="gallery-tech-item">
+                            <span class="icon"><i class="fas fa-check-circle"></i></span>
+                            <span>{{ . }}</span>
+                        </div>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
+
+                <!-- Map Info Card -->
+                <div class="gallery-sidebar-card">
+                    <h3 class="gallery-sidebar-card-title">
+                        <span class="icon"><i class="fas fa-info-circle"></i></span>
+                        Map Information
+                    </h3>
+                    <div class="gallery-info-list">
+                        {{ if .Date }}
+                        <div class="gallery-info-item">
+                            <span class="gallery-info-label">Created</span>
+                            <span class="gallery-info-value">{{ .Date.Format "January 2006" }}</span>
+                        </div>
+                        {{ end }}
+                        {{ if .Params.mapUrl }}
+                        <div class="gallery-info-item">
+                            <span class="gallery-info-label">Type</span>
+                            <span class="gallery-info-value">Interactive Web Map</span>
+                        </div>
+                        {{ end }}
+                        <div class="gallery-info-item">
+                            <span class="gallery-info-label">Status</span>
+                            <span class="gallery-info-value">
+                                <span class="tag is-success is-light">Live</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Card -->
+                <div class="gallery-sidebar-card gallery-cta-card">
+                    <div class="gallery-cta-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3 class="gallery-cta-title">Need a Custom Map?</h3>
+                    <p class="gallery-cta-text">
+                        We create beautiful, interactive web maps tailored to your data and requirements.
+                    </p>
+                    <a href="{{ absURL "contact-us/" }}?subject=Custom%20Map%20Enquiry" class="button is-primary is-fullwidth">
+                        <span class="icon"><i class="fas fa-envelope"></i></span>
+                        <span>Get in Touch</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related Maps Section -->
+{{ $currentPage := . }}
+{{ $related := where (where .Site.RegularPages "Section" "gallery") ".Permalink" "!=" .Permalink | first 3 }}
+{{ if $related }}
+<section class="section gallery-related-section">
+    <div class="container">
+        <h2 class="section-title has-text-centered">
+            <span class="icon"><i class="fas fa-globe"></i></span>
+            Explore More Maps
+        </h2>
+        <div class="columns is-multiline">
+            {{ range $related }}
+            <div class="column is-4">
+                <article class="gallery-related-card">
+                    <div class="gallery-related-image">
+                        <a href="{{ .Permalink }}">
+                            {{ $thumbnail := .Params.thumbnail | default "/img/banner-gallery.png" }}
+                            <img src="{{ $thumbnail }}" alt="{{ .Title }}" loading="lazy">
+                            <div class="gallery-related-overlay">
+                                <span class="icon"><i class="fas fa-map"></i></span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="gallery-related-content">
+                        <h4 class="gallery-related-title">
+                            <a href="{{ .Permalink }}">{{ .Title }}</a>
+                        </h4>
+                        <p class="gallery-related-description">
+                            {{ .Description | truncate 80 }}
+                        </p>
+                    </div>
+                </article>
+            </div>
+            {{ end }}
+        </div>
+        <div class="has-text-centered mt-5">
+            <a href="{{ absURL "gallery/" }}" class="button is-primary is-outlined is-medium">
+                <span class="icon"><i class="fas fa-th"></i></span>
+                <span>View All Maps</span>
+            </a>
+        </div>
+    </div>
+</section>
+{{ end }}
+
+<!-- Final CTA Section -->
+<section class="section gallery-final-cta">
+    <div class="container">
+        <div class="gallery-final-cta-content">
+            <h2 class="gallery-final-cta-title">Ready to Bring Your Data to Life?</h2>
+            <p class="gallery-final-cta-text">
+                From simple location maps to complex spatial analysis platforms, we build web maps that engage users and deliver insights.
+            </p>
+            <div class="gallery-final-cta-buttons">
+                <a href="{{ absURL "contact-us/" }}" class="button is-primary is-large">
+                    <span class="icon"><i class="fas fa-rocket"></i></span>
+                    <span>Start Your Project</span>
+                </a>
+                <a href="{{ absURL "solutions/software-development/" }}" class="button is-light is-large">
+                    <span class="icon"><i class="fas fa-code"></i></span>
+                    <span>Our Development Services</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{ partial "footer.html" . }}

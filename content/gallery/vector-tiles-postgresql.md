@@ -1,6 +1,6 @@
 ---
-title: "Vector Tiles Rendering from PostgreSQL"
-description: "Renders vector tiles from a PostgreSQL database using Martin with OpenLayers V6 styling and Docker OSM integration."
+title: "Vector Tiles from PostgreSQL"
+description: "High-performance vector tile rendering from PostgreSQL using Martin, styled with OpenLayers V6 and integrated with Docker OSM for live data."
 thumbnail: "/img/gallery/vector-tiles.png"
 tags:
   - Vector Tiles
@@ -11,30 +11,25 @@ date: 2020-01-01
 mapUrl: "https://maps.kartoza.com/MartinDemo/"
 ---
 
-{{< block
-    title="Vector Tiles from PostgreSQL"
-    subtitle="High-performance vector tile rendering with Martin and OpenLayers"
-    class="is-primary"
-    sub-block-side="bottom"
-    link="https://maps.kartoza.com/MartinDemo/"
-    link-text="View Live Map"
->}}
-Demonstrating vector tile rendering from a PostgreSQL database using Martin, styled with OpenLayers V6.
-{{< /block >}}
-
 ## Overview
 
-This demo renders vector tiles from a PostgreSQL database using [Martin](https://github.com/maplibre/martin), a PostGIS vector tile server. The map uses OpenLayers V6 for styling and rendering, with data sourced via Docker OSM integration for up-to-date OpenStreetMap data.
+This demonstration showcases modern vector tile rendering directly from a PostgreSQL database using Martin, a high-performance PostGIS vector tile server. The map leverages OpenLayers V6 for client-side styling and rendering, providing smooth, interactive performance.
 
-![Vector Tiles Demo](/img/gallery/vector-tiles.png)
+## Technology Stack
 
-## Technology
+- **Martin** - A blazing-fast PostGIS vector tile server written in Rust
+- **PostgreSQL/PostGIS** - Enterprise-grade spatial database
+- **OpenLayers V6** - Feature-rich web mapping library
+- **Docker OSM** - Automated OpenStreetMap data integration
 
-- **Martin** - PostGIS vector tile server
-- **PostgreSQL/PostGIS** - Spatial database
-- **OpenLayers V6** - Web mapping library
-- **Docker OSM** - OpenStreetMap data integration
+## Key Features
 
-## Links
+This approach enables dynamic vector tile generation without pre-rendering, allowing for real-time data updates and flexible styling. The combination of Martin and PostGIS delivers excellent performance even with large datasets.
 
-- [View Live Map](https://maps.kartoza.com/MartinDemo/)
+## Use Cases
+
+Vector tiles from PostgreSQL are ideal for:
+- Real-time data visualisation
+- Applications requiring frequent data updates
+- Custom styling without tile regeneration
+- Reducing storage requirements compared to raster tiles

@@ -1,0 +1,301 @@
+/**
+ * Kartoza Engagement Nudge Styles
+ * Delightful, non-intrusive prompts with map-themed aesthetics
+ */
+
+/* Nudge Container */
+.engagement-nudge {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9990;
+    width: 320px;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.engagement-nudge.is-visible {
+    pointer-events: auto;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Glow effect behind nudge */
+.nudge-glow {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background: radial-gradient(ellipse at center, rgba(59, 157, 217, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: glow-pulse 3s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes glow-pulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.engagement-nudge.accent-gold .nudge-glow {
+    background: radial-gradient(ellipse at center, rgba(232, 163, 49, 0.15) 0%, transparent 70%);
+}
+
+/* Main content container */
+.nudge-content {
+    position: relative;
+    background: linear-gradient(180deg, #ffffff 0%, #f7f9fb 100%);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow:
+        0 20px 60px rgba(27, 42, 58, 0.2),
+        0 8px 25px rgba(59, 157, 217, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    overflow: hidden;
+}
+
+/* Decorative rings in corner */
+.nudge-decoration {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 80px;
+    height: 80px;
+    opacity: 0.15;
+    animation: rings-rotate 20s linear infinite;
+}
+
+@keyframes rings-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.nudge-rings .ring {
+    fill: none;
+    stroke-width: 1;
+    stroke-dasharray: 4, 4;
+}
+
+.ring-outer { stroke: #3B9DD9; }
+.ring-middle { stroke: #1B6B9B; stroke-dasharray: 8, 4; }
+.ring-inner { stroke: #E8A331; }
+
+.engagement-nudge.accent-gold .ring-outer { stroke: #E8A331; }
+.engagement-nudge.accent-gold .ring-inner { stroke: #3B9DD9; }
+
+/* Close button */
+.nudge-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: rgba(107, 123, 141, 0.1);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6B7B8D;
+    transition: all 0.25s ease;
+    z-index: 2;
+}
+
+.nudge-close:hover {
+    background: rgba(229, 91, 60, 0.15);
+    color: #E55B3C;
+    transform: rotate(90deg);
+}
+
+/* Icon */
+.nudge-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, rgba(59, 157, 217, 0.15) 0%, rgba(27, 107, 155, 0.1) 100%);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    color: #3B9DD9;
+    font-size: 1.25rem;
+    transition: all 0.3s ease;
+    animation: icon-float 4s ease-in-out infinite;
+}
+
+@keyframes icon-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+.engagement-nudge.accent-gold .nudge-icon {
+    background: linear-gradient(135deg, rgba(232, 163, 49, 0.15) 0%, rgba(212, 146, 42, 0.1) 100%);
+    color: #E8A331;
+}
+
+/* Body content */
+.nudge-body {
+    margin-bottom: 1rem;
+}
+
+.nudge-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1B6B9B;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.3;
+}
+
+.engagement-nudge.accent-gold .nudge-title {
+    color: #D4922A;
+}
+
+.nudge-message {
+    font-size: 0.9rem;
+    color: #4D6370;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* CTA Button */
+.nudge-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    background: linear-gradient(135deg, #3B9DD9 0%, #1B6B9B 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(59, 157, 217, 0.3);
+}
+
+.nudge-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 157, 217, 0.4);
+    color: white;
+}
+
+.nudge-cta-arrow {
+    transition: transform 0.25s ease;
+}
+
+.nudge-cta:hover .nudge-cta-arrow {
+    transform: translateX(4px);
+}
+
+.engagement-nudge.accent-gold .nudge-cta {
+    background: linear-gradient(135deg, #E8A331 0%, #D4922A 100%);
+    box-shadow: 0 4px 14px rgba(232, 163, 49, 0.3);
+}
+
+.engagement-nudge.accent-gold .nudge-cta:hover {
+    box-shadow: 0 6px 20px rgba(232, 163, 49, 0.4);
+}
+
+/* Progress bar */
+.nudge-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: rgba(59, 157, 217, 0.1);
+    overflow: hidden;
+}
+
+.nudge-progress-bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #3B9DD9 0%, #1B6B9B 100%);
+    border-radius: 0 3px 3px 0;
+}
+
+.engagement-nudge.accent-gold .nudge-progress-bar {
+    background: linear-gradient(90deg, #E8A331 0%, #D4922A 100%);
+}
+
+/* Mobile responsive */
+@media screen and (max-width: 768px) {
+    .engagement-nudge {
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+        width: auto;
+    }
+
+    .nudge-content {
+        padding: 1.25rem;
+    }
+
+    .nudge-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 1.1rem;
+    }
+
+    .nudge-title {
+        font-size: 0.95rem;
+    }
+
+    .nudge-message {
+        font-size: 0.85rem;
+    }
+
+    .nudge-cta {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .engagement-nudge {
+        transition: opacity 0.3s ease;
+        transform: none;
+    }
+
+    .engagement-nudge.is-visible {
+        transform: none;
+    }
+
+    .nudge-glow,
+    .nudge-decoration,
+    .nudge-icon {
+        animation: none;
+    }
+
+    @keyframes glow-pulse {
+        0%, 100% { opacity: 0.6; }
+    }
+}
+
+/* Dark mode support (if added later) */
+@media (prefers-color-scheme: dark) {
+    .nudge-content {
+        background: linear-gradient(180deg, #2a3a4a 0%, #1a2a3a 100%);
+    }
+
+    .nudge-title {
+        color: #5BB5E8;
+    }
+
+    .nudge-message {
+        color: #d4dbe2;
+    }
+
+    .nudge-close {
+        color: #9E9E9E;
+    }
+
+    .nudge-close:hover {
+        background: rgba(229, 91, 60, 0.2);
+    }
+}

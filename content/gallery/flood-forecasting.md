@@ -1,38 +1,34 @@
 ---
-title: "Flood Forecasting Planning"
-description: "Flood vulnerability indicators extracted from OpenStreetMap rendered via GeoServer layers and PostgreSQL."
+title: "Flood Forecasting"
+description: "Flood vulnerability mapping system using OpenStreetMap data, GeoServer layers, and PostgreSQL for disaster preparedness planning."
 thumbnail: "/img/gallery/flood-forecasting.png"
 tags:
+  - Disaster Risk
   - Flood Forecasting
-  - OpenStreetMap
   - GeoServer
+  - OpenStreetMap
 date: 2019-01-01
 mapUrl: "https://maps.kartoza.com/Fbf/"
 ---
 
-{{< block
-    title="Flood Forecasting"
-    subtitle="Vulnerability mapping for flood preparedness"
-    class="is-primary"
-    sub-block-side="bottom"
-    link="https://maps.kartoza.com/Fbf/"
-    link-text="View Live Map"
->}}
-Flood vulnerability indicators derived from OpenStreetMap data.
-{{< /block >}}
-
 ## Overview
 
-Flood vulnerability indicators extracted from OpenStreetMap, rendered via GeoServer layers and PostgreSQL. The map supports flood forecasting and planning by visualising exposure and vulnerability data across flood-prone areas.
+This flood forecasting and vulnerability mapping system supports disaster preparedness planning by visualising exposure and vulnerability indicators across flood-prone areas. The map enables planners to identify at-risk populations and infrastructure before flood events occur.
 
-![Flood Forecasting](/img/gallery/flood-forecasting.png)
+## Key Features
 
-## Technology
+- **Vulnerability indicators** - Extracted from OpenStreetMap infrastructure data
+- **Flood exposure zones** - Areas at risk during different flood scenarios
+- **Population density** - Understanding who is at risk
+- **Critical infrastructure** - Schools, hospitals, and evacuation routes
 
-- GeoServer
-- PostgreSQL/PostGIS
-- OpenStreetMap
+## Technology Stack
 
-## Links
+- **GeoServer** - Web map service delivery and styling
+- **PostgreSQL/PostGIS** - Spatial data storage and analysis
+- **OpenStreetMap** - Base infrastructure data
+- **OpenLayers** - Web mapping interface
 
-- [View Live Map](https://maps.kartoza.com/Fbf/)
+## Disaster Risk Reduction
+
+Forecast-based action enables authorities to take preventative measures before floods occur, reducing loss of life and property damage through early warning and targeted interventions.

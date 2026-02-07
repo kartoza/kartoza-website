@@ -1,38 +1,36 @@
 ---
 title: "MapServer Demo"
-description: "Demonstrates MapServer capabilities serving dynamic data from a remote PostGIS database with real-time buffer updates."
+description: "Demonstration of MapServer capabilities serving dynamic spatial data from a remote PostGIS database with real-time buffer calculations."
 thumbnail: "/img/gallery/mapserver-demo.png"
 tags:
   - MapServer
   - PostGIS
-  - Dynamic
+  - Dynamic Rendering
 date: 2018-01-01
 mapUrl: "https://maps.kartoza.com/MapServer%20Demo/"
 ---
 
-{{< block
-    title="MapServer Demo"
-    subtitle="Dynamic spatial data serving from PostGIS"
-    class="is-primary"
-    sub-block-side="bottom"
-    link="https://maps.kartoza.com/MapServer%20Demo/"
-    link-text="View Live Map"
->}}
-Real-time dynamic data rendering with MapServer and PostGIS.
-{{< /block >}}
-
 ## Overview
 
-Demonstrates MapServer capabilities serving dynamic data from a remote PostGIS database with real-time buffer updates. The map showcases how MapServer can render spatial data on-the-fly from a PostgreSQL/PostGIS backend.
+This demonstration showcases MapServer's ability to serve dynamic spatial data directly from a PostGIS database. The map features real-time buffer calculations and on-the-fly rendering, demonstrating the power of server-side spatial processing.
 
-![MapServer Demo](/img/gallery/mapserver-demo.png)
+## Key Features
 
-## Technology
+- **Dynamic rendering** - Data is rendered on-demand from the database
+- **Real-time buffers** - Spatial calculations performed at request time
+- **PostGIS integration** - Leveraging PostgreSQL's spatial capabilities
+- **Performance** - Efficient handling of complex spatial operations
 
-- MapServer
-- PostGIS
-- PostgreSQL
+## Technology Stack
 
-## Links
+- **MapServer** - High-performance open source map server
+- **PostgreSQL/PostGIS** - Enterprise spatial database
+- **OpenLayers** - Web mapping client
 
-- [View Live Map](https://maps.kartoza.com/MapServer%20Demo/)
+## Use Cases
+
+This approach is ideal for applications where:
+- Data changes frequently and pre-rendering is impractical
+- Complex spatial operations are required at display time
+- Flexibility in styling and output formats is needed
+- Integration with existing PostgreSQL infrastructure is desired

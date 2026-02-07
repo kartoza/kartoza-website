@@ -1,29 +1,23 @@
 ---
 title: "GeoServer Administration"
-description: "Deploy and manage professional web mapping services"
+description: "Deploy and manage professional web mapping services with GeoServer, the leading open source map server."
 thumbnail: "/img/courses/geoserver.svg"
+duration: "3 Days"
+level: "Intermediate"
 tags:
   - GeoServer
   - Web GIS
   - OGC Standards
   - WMS
   - WFS
-  - Mapping
 date: 2024-01-01
 ---
 
-{{< block
-    title="GeoServer Administration"
-    subtitle="Master enterprise web mapping with GeoServer"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-Learn to deploy, configure, and maintain GeoServer for publishing spatial data as professional web mapping services.
-{{< /block >}}
+## Course Overview
 
-## Overview
+This hands-on course provides comprehensive training in GeoServer administration and configuration. Participants will learn how to install and configure GeoServer, publish vector and raster data as OGC-compliant web services, create beautiful styled maps, implement security and access controls, and optimize performance for production environments.
 
-This hands-on course provides comprehensive training in GeoServer administration and configuration. Participants will learn how to install and configure GeoServer, publish vector and raster data as OGC-compliant web services, create beautiful styled maps, implement security and access controls, and optimize performance for production environments. The course covers WMS, WFS, WCS, and WPS services, advanced styling with SLD and CSS, tile caching with GeoWebCache, and integration with various data sources including PostGIS, shapefiles, and GeoTIFF. Real-world scenarios and best practices ensure participants can confidently deploy and manage GeoServer in enterprise environments.
+The course covers WMS, WFS, WCS, and WPS services, advanced styling with SLD and CSS, tile caching with GeoWebCache, and integration with various data sources.
 
 ## What You Will Learn
 
@@ -44,8 +38,30 @@ This hands-on course provides comprehensive training in GeoServer administration
 
 ## Who Should Attend
 
-This course is designed for GIS professionals, system administrators, web developers, and IT staff responsible for deploying and managing spatial data infrastructure. Participants should have basic knowledge of GIS concepts, web technologies, and system administration. Familiarity with spatial data formats and databases is helpful. The course is ideal for organizations implementing web-based GIS solutions or migrating from proprietary map servers.
+This course is designed for:
 
-## Duration
+- GIS professionals deploying web mapping solutions
+- System administrators managing spatial infrastructure
+- Web developers building map-enabled applications
+- IT staff responsible for GIS services
+- Organizations implementing SDI solutions
 
-3 days (on-site or remote)
+Participants should have basic knowledge of GIS concepts and web technologies.
+
+## Prerequisites
+
+- Basic GIS knowledge
+- Familiarity with web technologies
+- Basic system administration skills
+- Experience with spatial data formats
+
+## Course Materials
+
+All participants receive:
+
+- GeoServer administration guide
+- SLD styling reference and templates
+- Configuration checklists
+- Performance tuning guide
+- Certificate of completion
+- 30-day post-course email support

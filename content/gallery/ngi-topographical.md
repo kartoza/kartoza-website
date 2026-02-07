@@ -1,32 +1,31 @@
 ---
-title: "NGI 1:50 000 Topographical Map"
-description: "A QGIS-styled map resembling SA-NGI topographical sheets at 1:50,000 scale."
+title: "NGI Topographical Map"
+description: "QGIS-styled web map recreating the classic South African NGI 1:50,000 topographical sheet appearance with modern web technology."
 thumbnail: "/img/gallery/ngi-topo.png"
 tags:
   - Topographical
   - NGI
+  - QGIS
   - South Africa
 date: 2018-01-01
 mapUrl: "https://maps.kartoza.com/Topostyle/"
 ---
 
-{{< block
-    title="NGI Topographical Map"
-    subtitle="Classic South African topographical styling in QGIS"
-    class="is-primary"
-    sub-block-side="bottom"
-    link="https://maps.kartoza.com/Topostyle/"
-    link-text="View Live Map"
->}}
-Recreating the iconic SA-NGI 1:50,000 topographical sheet style using QGIS.
-{{< /block >}}
-
 ## Overview
 
-A QGIS-styled web map that recreates the look and feel of South Africa's NGI (National Geo-spatial Information) topographical sheets at 1:50,000 scale. The map demonstrates QGIS's cartographic capabilities for producing professional topographical output.
+This web map recreates the iconic look and feel of South Africa's official NGI (National Geo-spatial Information) topographical sheets at 1:50,000 scale. Using QGIS's advanced cartographic capabilities, we've translated the classic paper map aesthetic into a modern, interactive web format.
 
-![NGI Topographical Map](/img/gallery/ngi-topo.png)
+## Key Features
 
-## Links
+- **Authentic styling** - Faithful reproduction of NGI colour schemes and symbology
+- **Multi-scale display** - Appropriate detail levels at different zoom scales
+- **Contour lines** - Terrain representation maintaining traditional topo map appearance
+- **Feature labelling** - Place names and geographic features in familiar presentation
 
-- [View Live Map](https://maps.kartoza.com/Topostyle/)
+## Cartographic Heritage
+
+South Africa's 1:50,000 topographical map series has served generations of users, from hikers and farmers to engineers and planners. This digital homage preserves that cartographic tradition while making it accessible via modern web technology.
+
+## Technology
+
+Created in QGIS and published as a web map, this demonstrates how desktop GIS styling can be accurately translated to web formats while maintaining cartographic quality.

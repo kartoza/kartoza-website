@@ -1,28 +1,23 @@
 ---
 title: "GeoNode for SDI"
-description: "Build and manage spatial data infrastructures with GeoNode"
+description: "Build and manage complete spatial data infrastructures with GeoNode, the open source geospatial CMS."
 thumbnail: "/img/courses/geonode.svg"
+duration: "3 Days"
+level: "Intermediate"
 tags:
   - GeoNode
   - SDI
+  - Data Portal
+  - Metadata
   - Web GIS
-  - Data Management
-  - Geospatial Portal
 date: 2024-01-01
 ---
 
-{{< block
-    title="GeoNode for SDI"
-    subtitle="Deploy complete spatial data infrastructure solutions"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-Learn to build, customize, and manage complete spatial data infrastructures using GeoNode, the open source geospatial content management system.
-{{< /block >}}
+## Course Overview
 
-## Overview
+This comprehensive course covers the deployment and management of GeoNode, a complete open source platform for spatial data infrastructure (SDI). Participants will learn how to install and configure GeoNode, manage spatial datasets and metadata, implement user access controls, customize the platform's appearance and functionality, and integrate GeoNode with existing GIS systems.
 
-This comprehensive course covers the deployment and management of GeoNode, a complete open source platform for spatial data infrastructure (SDI). Participants will learn how to install and configure GeoNode, manage spatial datasets and metadata, implement user access controls, customize the platform's appearance and functionality, and integrate GeoNode with existing GIS systems. The course emphasizes practical implementation of SDI principles including metadata standards, data sharing policies, and collaborative workflows. Through hands-on exercises, participants will build a functional geospatial data portal suitable for organizational or national SDI implementations.
+The course emphasizes practical implementation of SDI principles including metadata standards, data sharing policies, and collaborative workflows.
 
 ## What You Will Learn
 
@@ -43,8 +38,30 @@ This comprehensive course covers the deployment and management of GeoNode, a com
 
 ## Who Should Attend
 
-This course is ideal for GIS managers, SDI coordinators, government officials, NGO staff, and IT professionals responsible for implementing spatial data sharing platforms. Participants should have a good understanding of GIS concepts and web technologies. The course is particularly relevant for organizations implementing national, regional, or organizational SDI initiatives, as well as those seeking to improve spatial data discovery and sharing capabilities.
+This course is ideal for:
 
-## Duration
+- SDI coordinators and data managers
+- GIS managers implementing data sharing platforms
+- Government officials responsible for spatial data
+- NGO staff managing environmental data
+- IT professionals supporting spatial infrastructure
 
-3 days (on-site or remote)
+Participants should have a good understanding of GIS concepts.
+
+## Prerequisites
+
+- Understanding of GIS concepts
+- Basic web technology knowledge
+- Familiarity with spatial data management
+- Interest in data sharing and collaboration
+
+## Course Materials
+
+All participants receive:
+
+- GeoNode administration manual
+- SDI implementation checklist
+- Metadata templates and examples
+- Customization guide
+- Certificate of completion
+- 30-day post-course email support

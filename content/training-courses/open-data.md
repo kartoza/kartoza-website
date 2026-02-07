@@ -1,29 +1,23 @@
 ---
 title: "Open Data and Spatial Data Infrastructure"
-description: "Implement best practices for spatial data sharing and management"
+description: "Implement best practices for spatial data sharing, metadata management, and SDI governance."
 thumbnail: "/img/courses/open-data.svg"
+duration: "2 Days"
+level: "All Levels"
 tags:
   - Open Data
   - SDI
-  - Data Management
   - Metadata
   - Standards
-  - Policy
+  - Governance
 date: 2024-01-01
 ---
 
-{{< block
-    title="Open Data and Spatial Data Infrastructure"
-    subtitle="Building sustainable frameworks for spatial data sharing"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-Learn to implement comprehensive spatial data infrastructure and open data initiatives that enable effective data sharing and collaboration.
-{{< /block >}}
+## Course Overview
 
-## Overview
+This strategic course provides participants with the knowledge and tools to design, implement, and manage spatial data infrastructure (SDI) and open data initiatives. Participants will learn about SDI components, international standards and best practices, metadata creation and management, data quality assurance, licensing and legal frameworks, and organizational change management.
 
-This strategic course provides participants with the knowledge and tools to design, implement, and manage spatial data infrastructure (SDI) and open data initiatives. Participants will learn about SDI components, international standards and best practices, metadata creation and management, data quality assurance, licensing and legal frameworks, and organizational change management. The course combines policy, technical, and practical perspectives, ensuring participants understand both the "why" and "how" of successful SDI implementation. Through case studies and hands-on exercises, participants will develop actionable plans for implementing or improving spatial data infrastructure in their organizations.
+The course combines policy, technical, and practical perspectives, ensuring participants understand both the "why" and "how" of successful SDI implementation.
 
 ## What You Will Learn
 
@@ -44,8 +38,30 @@ This strategic course provides participants with the knowledge and tools to desi
 
 ## Who Should Attend
 
-This course is designed for SDI coordinators, GIS managers, data managers, government officials, policy makers, and senior GIS professionals involved in strategic spatial data management. Participants should have a good understanding of GIS concepts and organizational data management challenges. The course is particularly relevant for those leading or contributing to national, regional, or organizational SDI initiatives, open data programs, or data governance frameworks. No technical prerequisites are required, though GIS experience is beneficial.
+This course is designed for:
 
-## Duration
+- SDI coordinators and strategists
+- GIS managers and team leads
+- Data managers and governance officers
+- Government officials and policy makers
+- Senior GIS professionals
 
-2 days (on-site or remote)
+No technical prerequisites are required, though GIS experience is beneficial.
+
+## Prerequisites
+
+- Understanding of GIS concepts
+- Interest in data management and sharing
+- Organizational perspective on data challenges
+- Willingness to think strategically
+
+## Course Materials
+
+All participants receive:
+
+- SDI implementation guide
+- Metadata creation templates
+- Policy framework templates
+- ROI assessment tools
+- Certificate of completion
+- 30-day post-course email support
