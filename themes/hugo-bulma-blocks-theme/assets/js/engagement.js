@@ -17,8 +17,8 @@
         storageKey: 'kartoza_nudges'
     };
 
-    // Nudge content - rotating tips and CTAs
-    const NUDGES = [
+    // Nudge content - rotating tips and CTAs (with regional variants)
+    const NUDGES_BASE = [
         {
             type: 'tip',
             icon: 'fa-compass',
@@ -74,6 +74,46 @@
             accent: 'gold'
         }
     ];
+
+    // Regional-specific nudges
+    const NUDGES_REGIONAL = {
+        ZA: [
+            {
+                type: 'regional',
+                icon: 'fa-building',
+                title: 'Local support',
+                message: 'Our Cape Town team provides same-timezone support and ZAR billing.',
+                cta: 'Contact SA Office',
+                ctaUrl: '/contact-us/',
+                accent: 'gold'
+            }
+        ],
+        EU: [
+            {
+                type: 'regional',
+                icon: 'fa-euro-sign',
+                title: 'EU Operations',
+                message: 'Kartoza LDA offers GDPR-compliant services with Euro billing from Portugal.',
+                cta: 'Contact EU Office',
+                ctaUrl: '/contact-us/',
+                accent: 'gold'
+            }
+        ]
+    };
+
+    // Combined nudges based on region
+    function getNudges() {
+        let nudges = [...NUDGES_BASE];
+        if (window.KartozaRegion) {
+            const region = window.KartozaRegion.getRegion();
+            if (region && NUDGES_REGIONAL[region.code]) {
+                nudges = [...nudges, ...NUDGES_REGIONAL[region.code]];
+            }
+        }
+        return nudges;
+    }
+
+    const NUDGES = NUDGES_BASE; // Fallback, will use getNudges() dynamically
 
     // State
     let idleTimer = null;
@@ -238,8 +278,11 @@
     function showNudge() {
         if (isNudgeVisible || nudgesShown >= CONFIG.maxNudges) return;
 
+        // Get nudges (including regional ones if available)
+        const nudges = getNudges();
+
         // Get next nudge content
-        const nudge = NUDGES[currentNudgeIndex % NUDGES.length];
+        const nudge = nudges[currentNudgeIndex % nudges.length];
         currentNudgeIndex++;
         nudgesShown++;
         saveNudgeState();

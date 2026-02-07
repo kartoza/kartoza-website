@@ -27,27 +27,63 @@
                 </div>
             </div>
         </div>
-        <div class="columns is-desktop">
-            <div class="copyright column is-2-desktop has-text-white">
-                <p>&copy; {{ now.Year }} Kartoza (Pty) Ltd.</p>
+
+        <!-- Regional Offices -->
+        <div class="footer-regional">
+            <div class="footer-offices">
+                <div class="footer-office">
+                    <h5><i class="fas fa-building mr-2"></i>South Africa</h5>
+                    <p>
+                        <strong>Kartoza (Pty) Ltd.</strong><br>
+                        Cape Town, South Africa<br>
+                        <a href="tel:+27218138912">+27 21 813 8912</a><br>
+                        <a href="mailto:info@kartoza.com">info@kartoza.com</a>
+                    </p>
+                </div>
+                <div class="footer-office">
+                    <h5><i class="fas fa-building mr-2"></i>Europe</h5>
+                    <p>
+                        <strong>Kartoza LDA</strong><br>
+                        Lisbon, Portugal<br>
+                        <a href="mailto:europe@kartoza.com">europe@kartoza.com</a>
+                    </p>
+                </div>
+            </div>
+            <div class="region-toggle">
+                <a href="#" class="region-toggle-btn" data-region-switch="ZA">
+                    🇿🇦 <span>South Africa (ZAR)</span>
+                </a>
+                <a href="#" class="region-toggle-btn" data-region-switch="EU">
+                    🇵🇹 <span>Europe (EUR)</span>
+                </a>
+                <a href="#" class="region-toggle-btn" data-region-switch="INTL">
+                    🌍 <span>International (USD)</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="columns is-desktop mt-5">
+            <div class="copyright column is-4-desktop has-text-white">
+                <p>&copy; {{ now.Year }} Kartoza (Pty) Ltd. &amp; Kartoza LDA</p>
+                <p class="is-size-7 has-text-grey-light">Open Source Geospatial Experts</p>
             </div>
             <div class="column social-icons-links">
-                <a class="has-text-white" href="https://twitter.com/KartozaGeo" target="_blank">
+                <a class="has-text-white" href="https://twitter.com/KartozaGeo" target="_blank" aria-label="Twitter">
                     <i class="fa-brands fa-x-twitter"></i>
                 </a>
-                <a class="has-text-white" href="https://www.instagram.com/kartozageo/" target="_blank">
+                <a class="has-text-white" href="https://www.instagram.com/kartozageo/" target="_blank" aria-label="Instagram">
                     <i class="fa-brands fa-instagram"></i>
                 </a>
-                <a class="has-text-white" href="https://www.facebook.com/kartozaGIS" target="_blank">
+                <a class="has-text-white" href="https://www.facebook.com/kartozaGIS" target="_blank" aria-label="Facebook">
                     <i class="fa-brands fa-square-facebook"></i>
                 </a>
-                <a class="has-text-white" href="https://www.linkedin.com/company/kartoza-pty-ltd" target="_blank">
+                <a class="has-text-white" href="https://www.linkedin.com/company/kartoza-pty-ltd" target="_blank" aria-label="LinkedIn">
                     <i class="fa-brands fa-linkedin"></i>
                 </a>
-                <a class="has-text-white" href="https://www.github.com/orgs/kartoza" target="_blank">
+                <a class="has-text-white" href="https://www.github.com/orgs/kartoza" target="_blank" aria-label="GitHub">
                     <i class="fa-brands fa-square-github"></i>
                 </a>
-                <a class="has-text-white" href="https://www.youtube.com/user/kartozachannel/feed" target="_blank">
+                <a class="has-text-white" href="https://www.youtube.com/user/kartozachannel/feed" target="_blank" aria-label="YouTube">
                     <i class="fa-brands fa-youtube"></i>
                 </a>
             </div>
