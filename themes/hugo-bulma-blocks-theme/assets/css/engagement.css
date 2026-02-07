@@ -255,6 +255,106 @@
     }
 }
 
+/* Small phone (480px and below) */
+@media screen and (max-width: 480px) {
+    .engagement-nudge {
+        bottom: 0.75rem;
+        right: 0.75rem;
+        left: 0.75rem;
+    }
+
+    .nudge-content {
+        padding: 1rem;
+    }
+
+    .nudge-glow {
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+    }
+
+    .nudge-decoration {
+        width: 60px;
+        height: 60px;
+        top: -10px;
+        right: -10px;
+    }
+
+    .nudge-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .nudge-title {
+        font-size: 0.9rem;
+    }
+
+    .nudge-message {
+        font-size: 0.8rem;
+    }
+
+    .nudge-cta {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* iPhone SE (375px and below) */
+@media screen and (max-width: 375px) {
+    .engagement-nudge {
+        bottom: 0.5rem;
+        right: 0.5rem;
+        left: 0.5rem;
+    }
+
+    .nudge-content {
+        padding: 0.875rem;
+        border-radius: 12px;
+    }
+
+    .nudge-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 0.9rem;
+        border-radius: 10px;
+        margin-bottom: 0.5rem;
+    }
+
+    .nudge-close {
+        width: 24px;
+        height: 24px;
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+
+    .nudge-title {
+        font-size: 0.85rem;
+        margin-bottom: 0.35rem;
+    }
+
+    .nudge-message {
+        font-size: 0.75rem;
+        line-height: 1.4;
+    }
+
+    .nudge-body {
+        margin-bottom: 0.75rem;
+    }
+
+    .nudge-cta {
+        padding: 0.45rem 0.875rem;
+        font-size: 0.8rem;
+        border-radius: 8px;
+    }
+
+    .nudge-progress {
+        height: 2px;
+    }
+}
+
 /* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
     .engagement-nudge {

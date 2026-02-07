@@ -352,6 +352,137 @@ body.region-INTL .price-hint .price-usd {
     }
 }
 
+/* Small phone (480px and below) */
+@media screen and (max-width: 480px) {
+    .regional-presence-section {
+        padding: 2.5rem 0;
+    }
+
+    .office-cards {
+        gap: 1rem;
+    }
+
+    .office-card {
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+
+    .office-flag {
+        font-size: 2rem;
+    }
+
+    .office-card-title h4 {
+        font-size: 1.1rem;
+    }
+
+    .office-card-title .office-entity {
+        font-size: 0.8rem;
+    }
+
+    .office-card-body p {
+        font-size: 0.9rem;
+    }
+
+    .office-detail {
+        font-size: 0.85rem;
+    }
+
+    .footer-offices {
+        gap: 1rem;
+    }
+
+    .footer-office {
+        min-width: auto;
+    }
+
+    .footer-office h5 {
+        font-size: 0.85rem;
+    }
+
+    .footer-office p {
+        font-size: 0.8rem;
+    }
+
+    .region-toggle {
+        flex-wrap: wrap;
+        gap: 0.4rem;
+    }
+
+    .region-toggle-btn {
+        padding: 0.4rem 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    .region-toggle-btn span {
+        display: none;
+    }
+}
+
+/* iPhone SE (375px and below) */
+@media screen and (max-width: 375px) {
+    .regional-presence-section {
+        padding: 2rem 0;
+    }
+
+    .office-card {
+        padding: 1.25rem;
+    }
+
+    .office-card-header {
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .office-flag {
+        font-size: 1.75rem;
+    }
+
+    .office-card-title h4 {
+        font-size: 1rem;
+    }
+
+    .office-details {
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .office-detail {
+        font-size: 0.8rem;
+        gap: 0.5rem;
+    }
+
+    .office-card-cta .button {
+        font-size: 0.85rem;
+        padding: 0.6rem 1rem;
+    }
+
+    .your-location-badge {
+        font-size: 0.65rem;
+        padding: 0.2rem 0.5rem;
+        top: 0.75rem;
+        right: 0.75rem;
+    }
+
+    .footer-regional {
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+    }
+
+    .footer-offices {
+        gap: 0.75rem;
+    }
+
+    .region-toggle {
+        margin-top: 0.75rem;
+    }
+
+    .region-toggle-btn {
+        padding: 0.35rem 0.6rem;
+        font-size: 0.7rem;
+        border-radius: 6px;
+    }
+}
+
 /* ========================================
    REGIONAL CONTENT VISIBILITY
    ======================================== */

@@ -155,7 +155,7 @@
     font-weight: 700;
     padding: 1.1rem 2rem;
     font-size: 1rem;
-    min-width: 260px;
+    min-width: 200px;
     text-align: center;
     justify-content: center;
     transition: all var(--transition-med);
@@ -9131,4 +9131,211 @@ body:has(.blog-hero) .contextmenu {
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
+}
+
+/* ============================================
+   SMALL PHONE RESPONSIVE (iPhone SE, etc)
+   ============================================ */
+
+/* 480px and below - Small phones */
+@media screen and (max-width: 480px) {
+    /* Hero adjustments */
+    .hero-company-name {
+        font-size: 2.5rem !important;
+    }
+
+    .hero-main-title {
+        font-size: 1.5rem !important;
+    }
+
+    .hero-description {
+        font-size: 0.95rem;
+    }
+
+    .hero-ctas {
+        gap: 0.75rem;
+    }
+
+    .hero-ctas .cta-primary,
+    .hero-ctas .cta-secondary {
+        min-width: 100%;
+        padding: 0.9rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    /* Section padding */
+    .section {
+        padding: 2rem 0.75rem;
+    }
+
+    /* Typography scaling */
+    .title.is-1 {
+        font-size: 1.75rem !important;
+    }
+
+    .title.is-2 {
+        font-size: 1.5rem !important;
+    }
+
+    .title.is-3 {
+        font-size: 1.25rem !important;
+    }
+
+    /* Product cards */
+    .product-card {
+        padding: 1.25rem;
+    }
+
+    .product-card-small {
+        padding: 1.25rem;
+    }
+
+    /* Grid gaps */
+    .product-grid,
+    .services-grid,
+    .why-grid {
+        gap: 1rem;
+    }
+
+    /* Testimonials */
+    .testimonial-card {
+        padding: 1.5rem 1rem;
+    }
+
+    .testimonial-text {
+        font-size: 1rem;
+    }
+
+    /* CTA buttons general */
+    .careers-hero-cta .button,
+    .course-hero-cta .button,
+    .solution-hero-cta .button {
+        min-width: 100%;
+    }
+
+    /* Office/partner onboarding steps */
+    .partner-onboarding-step {
+        min-width: 150px;
+    }
+
+    /* Blog load more */
+    .blog-load-more .button {
+        min-width: 150px;
+    }
+}
+
+/* 375px and below - iPhone SE and very small phones */
+@media screen and (max-width: 375px) {
+    /* Hero extreme compact */
+    .hero-company-name {
+        font-size: 2rem !important;
+    }
+
+    .hero-main-title {
+        font-size: 1.35rem !important;
+    }
+
+    .hero-description {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    .hero-home .hero-body {
+        padding: 2rem 0.75rem;
+    }
+
+    /* Sections */
+    .section {
+        padding: 1.5rem 0.5rem;
+    }
+
+    /* Typography */
+    .title.is-1 {
+        font-size: 1.5rem !important;
+    }
+
+    .title.is-2 {
+        font-size: 1.35rem !important;
+    }
+
+    .title.is-3 {
+        font-size: 1.15rem !important;
+    }
+
+    body {
+        font-size: 0.9rem;
+    }
+
+    /* Cards compact */
+    .product-card,
+    .product-card-small,
+    .service-card {
+        padding: 1rem;
+    }
+
+    /* Grid gaps minimal */
+    .product-grid,
+    .services-grid,
+    .why-grid,
+    .team-grid,
+    .gallery-grid,
+    .portfolio-grid {
+        gap: 0.75rem;
+    }
+
+    /* Testimonial compact */
+    .testimonial-card {
+        padding: 1.25rem 0.75rem;
+    }
+
+    .testimonial-text {
+        font-size: 0.95rem;
+    }
+
+    .testimonial-author-name {
+        font-size: 0.9rem;
+    }
+
+    /* CTA sections */
+    .solution-cta,
+    .careers-cta-section {
+        padding: 3rem 0.75rem;
+    }
+
+    .solution-cta h2,
+    .careers-cta-title {
+        font-size: 1.75rem;
+    }
+
+    /* Sidebar sections */
+    .course-sidebar,
+    .solution-sidebar {
+        padding: 1rem;
+    }
+
+    /* Team cards */
+    .team-card {
+        padding: 0.75rem;
+    }
+
+    /* About stats */
+    .about-stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+    }
+
+    .about-stat-number {
+        font-size: 2rem;
+    }
+
+    /* Careers */
+    .careers-hero-title {
+        font-size: 2rem;
+    }
+
+    /* Gallery items */
+    .gallery-item,
+    .portfolio-item {
+        border-radius: 12px;
+    }
 }
