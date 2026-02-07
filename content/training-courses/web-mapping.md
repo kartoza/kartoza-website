@@ -1,7 +1,7 @@
 ---
 title: "Web Mapping and Cartography"
 description: "Create interactive web maps with modern open source tools"
-thumbnail: "/img/courses/training.png"
+thumbnail: "/img/courses/web-mapping.svg"
 tags:
   - Web Mapping
   - Cartography

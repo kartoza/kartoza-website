@@ -1,7 +1,7 @@
 ---
 title: "Python for GIS"
 description: "Automate geospatial workflows with Python programming"
-thumbnail: "/img/courses/training.png"
+thumbnail: "/img/courses/python-gis.svg"
 tags:
   - Python
   - GIS

@@ -1,7 +1,7 @@
 ---
 title: "GeoServer Administration"
 description: "Deploy and manage professional web mapping services"
-thumbnail: "/img/courses/training.png"
+thumbnail: "/img/courses/geoserver.svg"
 tags:
   - GeoServer
   - Web GIS

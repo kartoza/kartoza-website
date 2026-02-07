@@ -1,7 +1,7 @@
 ---
 title: "GeoNode for SDI"
 description: "Build and manage spatial data infrastructures with GeoNode"
-thumbnail: "/img/courses/training.png"
+thumbnail: "/img/courses/geonode.svg"
 tags:
   - GeoNode
   - SDI

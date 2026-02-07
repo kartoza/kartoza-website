@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgGradPython" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B6B9B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3B9DD9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradPython" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#E8A331;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F0B84D;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="pythonBlueGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3776ab;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2b5f8a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="pythonYellow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd43b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e6b82e;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bgGradPython)"/>
+
+  <!-- Code pattern -->
+  <g fill="#ffffff" opacity="0.06" font-family="Courier, monospace" font-size="9">
+    <text x="15" y="25">import geopandas as gpd</text>
+    <text x="15" y="40">from shapely.geometry import Point</text>
+    <text x="250" y="255">rasterio.open()</text>
+    <text x="250" y="270">fiona.collection()</text>
+  </g>
+
+  <!-- Central icon group -->
+  <g transform="translate(200, 100)">
+    <!-- Python logo stylized -->
+    <g transform="translate(0, 0)">
+      <!-- Blue snake half -->
+      <path d="M-5 -40 Q-35 -40 -35 -15 L-35 10 Q-35 25 -20 25 L5 25 L5 30 L-25 30 Q-45 30 -45 10 L-45 -20 Q-45 -50 -15 -50 L15 -50 Q35 -50 35 -30 L35 -5 Q35 10 20 10 L-5 10 L-5 -40 Z"
+            fill="url(#pythonBlueGrad)"/>
+      <circle cx="-22" cy="-32" r="5" fill="#ffffff"/>
+
+      <!-- Yellow snake half -->
+      <path d="M5 40 Q35 40 35 15 L35 -10 Q35 -25 20 -25 L-5 -25 L-5 -30 L25 -30 Q45 -30 45 -10 L45 20 Q45 50 15 50 L-15 50 Q-35 50 -35 30 L-35 5 Q-35 -10 -20 -10 L5 -10 L5 40 Z"
+            fill="url(#pythonYellow)"/>
+      <circle cx="22" cy="32" r="5" fill="#ffffff"/>
+    </g>
+
+    <!-- Map/GIS elements around -->
+    <!-- Map pin -->
+    <g transform="translate(-70, -25)">
+      <path d="M0 20 L0 5 Q0 -5 -8 -10 A12 12 0 1 1 8 -10 Q0 -5 0 5 Z"
+            fill="url(#accentGradPython)"/>
+      <circle cx="0" cy="-15" r="4" fill="#ffffff"/>
+    </g>
+
+    <!-- Polygon -->
+    <polygon points="60,-35 80,-20 75,5 50,0 55,-25" fill="url(#accentGradPython)" opacity="0.9"/>
+
+    <!-- Raster grid -->
+    <g transform="translate(55, 30)">
+      <rect x="0" y="0" width="10" height="10" fill="#ffffff" opacity="0.8"/>
+      <rect x="12" y="0" width="10" height="10" fill="#ffffff" opacity="0.6"/>
+      <rect x="0" y="12" width="10" height="10" fill="#ffffff" opacity="0.6"/>
+      <rect x="12" y="12" width="10" height="10" fill="#ffffff" opacity="0.8"/>
+    </g>
+
+    <!-- GeoPandas dataframe hint -->
+    <g transform="translate(-75, 25)">
+      <rect x="-20" y="-15" width="40" height="30" rx="3" fill="#ffffff" opacity="0.9"/>
+      <line x1="-15" y1="-5" x2="15" y2="-5" stroke="url(#pythonBlueGrad)" stroke-width="1"/>
+      <line x1="-15" y1="5" x2="15" y2="5" stroke="url(#pythonBlueGrad)" stroke-width="1"/>
+      <line x1="-5" y1="-12" x2="-5" y2="12" stroke="url(#pythonBlueGrad)" stroke-width="1"/>
+    </g>
+  </g>
+
+  <!-- Text -->
+  <text x="200" y="225" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">Python for GIS</text>
+  <text x="200" y="250" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-size="12" fill="#ffffff" opacity="0.8">Geospatial Automation</text>
+</svg>

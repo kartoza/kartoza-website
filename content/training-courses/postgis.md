@@ -1,7 +1,7 @@
 ---
 title: "PostGIS and Spatial Databases"
 description: "Harness the power of spatial databases with PostGIS"
-thumbnail: "/img/courses/training.png"
+thumbnail: "/img/courses/postgis.svg"
 tags:
   - PostGIS
   - PostgreSQL

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgGradPostgis" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B6B9B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3B9DD9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradPostgis" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#E8A331;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F0B84D;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="postgresBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#336791;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#264d6d;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bgGradPostgis)"/>
+
+  <!-- Table grid pattern -->
+  <g stroke="#ffffff" stroke-width="0.5" opacity="0.08">
+    <rect x="30" y="30" width="100" height="80" rx="3"/>
+    <line x1="30" y1="50" x2="130" y2="50"/>
+    <line x1="30" y1="70" x2="130" y2="70"/>
+    <line x1="30" y1="90" x2="130" y2="90"/>
+    <line x1="60" y1="30" x2="60" y2="110"/>
+    <line x1="100" y1="30" x2="100" y2="110"/>
+
+    <rect x="270" y="190" width="100" height="80" rx="3"/>
+    <line x1="270" y1="210" x2="370" y2="210"/>
+    <line x1="270" y1="230" x2="370" y2="230"/>
+    <line x1="270" y1="250" x2="370" y2="250"/>
+    <line x1="300" y1="190" x2="300" y2="270"/>
+    <line x1="340" y1="190" x2="340" y2="270"/>
+  </g>
+
+  <!-- Central icon group -->
+  <g transform="translate(200, 105)">
+    <!-- Database cylinder -->
+    <g fill="#ffffff">
+      <ellipse cx="0" cy="-35" rx="50" ry="15"/>
+      <rect x="-50" y="-35" width="100" height="70"/>
+      <ellipse cx="0" cy="35" rx="50" ry="15"/>
+    </g>
+
+    <!-- Database face -->
+    <ellipse cx="0" cy="-35" rx="50" ry="15" fill="url(#postgresBlue)"/>
+    <ellipse cx="0" cy="-10" rx="50" ry="15" fill="none" stroke="url(#postgresBlue)" stroke-width="2" opacity="0.5"/>
+    <ellipse cx="0" cy="15" rx="50" ry="15" fill="none" stroke="url(#postgresBlue)" stroke-width="2" opacity="0.5"/>
+
+    <!-- Spatial geometry icons inside -->
+    <g transform="translate(0, 5)">
+      <!-- Point -->
+      <circle cx="-25" cy="-15" r="6" fill="url(#accentGradPostgis)"/>
+      <!-- Polygon -->
+      <polygon points="15,-20 30,-10 25,5 5,0 10,-15" fill="url(#accentGradPostgis)" opacity="0.9"/>
+      <!-- Line -->
+      <path d="M-30 10 L-10 0 L10 15 L25 5" stroke="url(#accentGradPostgis)" stroke-width="4" fill="none" stroke-linecap="round"/>
+    </g>
+
+    <!-- SQL query hint -->
+    <g transform="translate(65, -20)">
+      <rect x="0" y="0" width="50" height="35" rx="4" fill="rgba(255,255,255,0.9)"/>
+      <text x="25" y="15" text-anchor="middle" font-family="Courier, monospace" font-size="8" fill="url(#postgresBlue)">SELECT</text>
+      <text x="25" y="27" text-anchor="middle" font-family="Courier, monospace" font-size="8" fill="url(#postgresBlue)">ST_*</text>
+    </g>
+  </g>
+
+  <!-- Connection lines -->
+  <g stroke="url(#accentGradPostgis)" stroke-width="2" opacity="0.5">
+    <path d="M100 80 Q150 100 150 105" fill="none"/>
+    <path d="M300 220 Q250 200 250 150" fill="none"/>
+  </g>
+
+  <!-- Text -->
+  <text x="200" y="225" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">PostGIS</text>
+  <text x="200" y="250" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-size="12" fill="#ffffff" opacity="0.8">Spatial Database Mastery</text>
+</svg>

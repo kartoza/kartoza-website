@@ -5297,7 +5297,8 @@ body:has(.blog-hero) .contextmenu {
     background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, var(--primary-light) 100%);
     position: relative;
     overflow: hidden;
-    min-height: 100vh;
+    min-height: auto;
+    padding-bottom: 6rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -5436,24 +5437,26 @@ body:has(.blog-hero) .contextmenu {
 }
 
 .careers-hero-scroll {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
     z-index: 10;
     text-align: center;
     color: var(--white);
     font-size: 0.95rem;
     animation: careers-bounce 2s ease-in-out infinite;
     background: rgba(0, 0, 0, 0.25);
-    padding: 1rem 2rem;
+    padding: 1rem 2.5rem;
     border-radius: 50px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     cursor: pointer;
     transition: all var(--transition-fast);
     text-decoration: none;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem auto 0;
+    width: fit-content;
 }
 
 .careers-hero-scroll:hover {
@@ -5463,21 +5466,32 @@ body:has(.blog-hero) .contextmenu {
 }
 
 .careers-hero-scroll span {
-    display: block;
-    margin-bottom: 0.5rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 .careers-hero-scroll i {
-    font-size: 1.5rem;
-    display: block;
+    font-size: 1.25rem;
+}
+
+.careers-hero-scroll i.arrow-left,
+.careers-hero-scroll i.arrow-right {
+    animation: arrow-bounce 1.5s ease-in-out infinite;
+}
+
+.careers-hero-scroll i.arrow-right {
+    animation-delay: 0.15s;
+}
+
+@keyframes arrow-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
 }
 
 @keyframes careers-bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(10px); }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
 }
 
 @media screen and (max-width: 768px) {

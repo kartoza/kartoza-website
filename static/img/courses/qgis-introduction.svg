@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgGradQgisIntro" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B6B9B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3B9DD9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradQgisIntro" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#E8A331;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F0B84D;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#589632;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3d6b23;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bgGradQgisIntro)"/>
+
+  <!-- Map grid pattern -->
+  <g stroke="#ffffff" stroke-width="0.5" opacity="0.1">
+    <line x1="0" y1="60" x2="400" y2="60"/>
+    <line x1="0" y1="120" x2="400" y2="120"/>
+    <line x1="0" y1="180" x2="400" y2="180"/>
+    <line x1="0" y1="240" x2="400" y2="240"/>
+    <line x1="80" y1="0" x2="80" y2="300"/>
+    <line x1="160" y1="0" x2="160" y2="300"/>
+    <line x1="240" y1="0" x2="240" y2="300"/>
+    <line x1="320" y1="0" x2="320" y2="300"/>
+  </g>
+
+  <!-- Central icon group -->
+  <g transform="translate(200, 105)">
+    <!-- QGIS-style logo representation -->
+    <circle cx="0" cy="0" r="55" fill="url(#greenGrad)"/>
+    <circle cx="0" cy="0" r="45" fill="none" stroke="#ffffff" stroke-width="3"/>
+
+    <!-- Q letter stylized -->
+    <circle cx="0" cy="-5" r="25" fill="none" stroke="#ffffff" stroke-width="6"/>
+    <line x1="10" y1="10" x2="25" y2="25" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+
+    <!-- Map layers around -->
+    <g opacity="0.9">
+      <!-- Layer icons -->
+      <rect x="-80" y="-30" width="20" height="15" rx="2" fill="#ffffff"/>
+      <rect x="-78" y="-25" width="16" height="8" fill="url(#accentGradQgisIntro)"/>
+
+      <rect x="60" y="-30" width="20" height="15" rx="2" fill="#ffffff"/>
+      <rect x="62" y="-25" width="16" height="8" fill="url(#accentGradQgisIntro)"/>
+
+      <rect x="-80" y="20" width="20" height="15" rx="2" fill="#ffffff"/>
+      <rect x="-78" y="25" width="16" height="8" fill="url(#greenGrad)"/>
+
+      <rect x="60" y="20" width="20" height="15" rx="2" fill="#ffffff"/>
+      <rect x="62" y="25" width="16" height="8" fill="url(#greenGrad)"/>
+    </g>
+
+    <!-- Graduation cap (training) -->
+    <g transform="translate(0, -70)">
+      <polygon points="0,-15 -25,0 0,8 25,0" fill="url(#accentGradQgisIntro)"/>
+      <rect x="-3" y="0" width="6" height="15" fill="url(#accentGradQgisIntro)"/>
+      <line x1="25" y1="0" x2="25" y2="12" stroke="url(#accentGradQgisIntro)" stroke-width="2"/>
+      <circle cx="25" cy="14" r="3" fill="url(#accentGradQgisIntro)"/>
+    </g>
+  </g>
+
+  <!-- Text -->
+  <text x="200" y="225" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">Introduction to QGIS</text>
+  <text x="200" y="250" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-size="12" fill="#ffffff" opacity="0.8">Desktop GIS Fundamentals</text>
+</svg>

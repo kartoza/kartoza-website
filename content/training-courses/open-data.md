@@ -1,7 +1,7 @@
 ---
 title: "Open Data and Spatial Data Infrastructure"
 description: "Implement best practices for spatial data sharing and management"
-thumbnail: "/img/courses/training.png"
+thumbnail: "/img/courses/open-data.svg"
 tags:
   - Open Data
   - SDI

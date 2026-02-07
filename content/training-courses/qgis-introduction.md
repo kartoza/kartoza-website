@@ -1,7 +1,7 @@
 ---
 title: "Introduction to QGIS"
 description: "Master the fundamentals of desktop GIS using QGIS"
-thumbnail: "/img/courses/training.png"
+thumbnail: "/img/courses/qgis-introduction.svg"
 tags:
   - QGIS
   - GIS

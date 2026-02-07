@@ -1,7 +1,7 @@
 ---
 title: "Advanced QGIS"
 description: "Take your QGIS skills to the next level with advanced techniques"
-thumbnail: "/img/courses/training.png"
+thumbnail: "/img/courses/qgis-advanced.svg"
 tags:
   - QGIS
   - GIS

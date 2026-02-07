@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgGradGeonode" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B6B9B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3B9DD9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradGeonode" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#E8A331;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F0B84D;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="geonodeOrange" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f4a024;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d4871c;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bgGradGeonode)"/>
+
+  <!-- SDI connection pattern -->
+  <g stroke="#ffffff" stroke-width="1" opacity="0.1">
+    <circle cx="200" cy="120" r="80"/>
+    <circle cx="200" cy="120" r="100"/>
+  </g>
+
+  <!-- Central icon group -->
+  <g transform="translate(200, 105)">
+    <!-- GeoNode logo representation - layered circles -->
+    <circle cx="0" cy="0" r="50" fill="url(#geonodeOrange)"/>
+    <circle cx="0" cy="0" r="38" fill="#ffffff" opacity="0.2"/>
+    <circle cx="0" cy="0" r="26" fill="#ffffff" opacity="0.3"/>
+
+    <!-- Globe inside -->
+    <circle cx="0" cy="0" r="30" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <ellipse cx="0" cy="0" rx="30" ry="12" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.7"/>
+    <ellipse cx="0" cy="0" rx="15" ry="30" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.7"/>
+
+    <!-- Connected nodes (SDI) -->
+    <g>
+      <!-- Node 1 - Data -->
+      <circle cx="-70" cy="-40" r="18" fill="#ffffff"/>
+      <rect x="-78" y="-48" width="16" height="16" rx="2" fill="url(#bgGradGeonode)"/>
+      <line x1="-50" y1="-30" x2="-35" y2="-20" stroke="#ffffff" stroke-width="2"/>
+
+      <!-- Node 2 - Map -->
+      <circle cx="70" cy="-40" r="18" fill="#ffffff"/>
+      <g transform="translate(70, -40)">
+        <rect x="-8" y="-8" width="16" height="16" rx="2" fill="url(#bgGradGeonode)"/>
+        <circle cx="0" cy="-2" r="3" fill="#ffffff"/>
+      </g>
+      <line x1="50" y1="-30" x2="35" y2="-20" stroke="#ffffff" stroke-width="2"/>
+
+      <!-- Node 3 - Users -->
+      <circle cx="-70" cy="40" r="18" fill="#ffffff"/>
+      <g transform="translate(-70, 40)">
+        <circle cx="0" cy="-4" r="5" fill="url(#bgGradGeonode)"/>
+        <path d="M-8 8 Q0 2 8 8" fill="url(#bgGradGeonode)"/>
+      </g>
+      <line x1="-50" y1="30" x2="-35" y2="20" stroke="#ffffff" stroke-width="2"/>
+
+      <!-- Node 4 - Metadata -->
+      <circle cx="70" cy="40" r="18" fill="#ffffff"/>
+      <g transform="translate(70, 40)">
+        <rect x="-7" y="-8" width="14" height="16" rx="2" fill="url(#bgGradGeonode)"/>
+        <line x1="-4" y1="-4" x2="4" y2="-4" stroke="#ffffff" stroke-width="1.5"/>
+        <line x1="-4" y1="0" x2="4" y2="0" stroke="#ffffff" stroke-width="1.5"/>
+        <line x1="-4" y1="4" x2="2" y2="4" stroke="#ffffff" stroke-width="1.5"/>
+      </g>
+      <line x1="50" y1="30" x2="35" y2="20" stroke="#ffffff" stroke-width="2"/>
+    </g>
+  </g>
+
+  <!-- SDI label -->
+  <g transform="translate(70, 40)">
+    <rect x="-25" y="-10" width="50" height="20" rx="4" fill="rgba(255,255,255,0.9)"/>
+    <text x="0" y="5" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-size="11" font-weight="700" fill="url(#bgGradGeonode)">SDI</text>
+  </g>
+
+  <!-- Text -->
+  <text x="200" y="225" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">GeoNode for SDI</text>
+  <text x="200" y="250" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-size="12" fill="#ffffff" opacity="0.8">Spatial Data Infrastructure</text>
+</svg>
