@@ -1,7 +1,7 @@
 ---
 title: "Software Development"
 description: "Custom geospatial software development services for web applications, mobile apps, QGIS plugins and enterprise GIS platforms."
-thumbnail: "/img/solutions/software-development.png"
+thumbnail: "/img/solutions/software-development.svg"
 tags:
   - Development
   - Custom Software

@@ -1,10 +1,8 @@
 ---
-type: "page"
+type: "careers"
 title: "Careers"
 subtitle: "Join our team of geospatial experts"
-HasBanner: true
-HeroSize: "is-medium"
-HeroImage: "img/banner-careers.png"
+layout: "single"
 ---
 
 {{< block

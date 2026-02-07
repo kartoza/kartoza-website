@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgGradDev" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B6B9B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3B9DD9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradDev" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#E8A331;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F0B84D;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="greenGradDev" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2E7D32;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bgGradDev)"/>
+
+  <!-- Code lines pattern -->
+  <g fill="#ffffff" opacity="0.08">
+    <rect x="30" y="30" width="80" height="6" rx="3"/>
+    <rect x="30" y="45" width="120" height="6" rx="3"/>
+    <rect x="30" y="60" width="60" height="6" rx="3"/>
+    <rect x="290" y="220" width="80" height="6" rx="3"/>
+    <rect x="250" y="235" width="120" height="6" rx="3"/>
+    <rect x="310" y="250" width="60" height="6" rx="3"/>
+  </g>
+
+  <!-- Central icon group -->
+  <g transform="translate(200, 105)">
+    <!-- Browser/App window -->
+    <g>
+      <rect x="-70" y="-50" width="140" height="100" rx="8" fill="#ffffff" opacity="0.95"/>
+      <!-- Window header -->
+      <rect x="-70" y="-50" width="140" height="25" rx="8" fill="url(#bgGradDev)"/>
+      <rect x="-70" y="-35" width="140" height="10" fill="url(#bgGradDev)"/>
+      <!-- Window buttons -->
+      <circle cx="-55" cy="-38" r="5" fill="#ff6b6b"/>
+      <circle cx="-40" cy="-38" r="5" fill="#feca57"/>
+      <circle cx="-25" cy="-38" r="5" fill="#48dbfb"/>
+    </g>
+
+    <!-- Code brackets -->
+    <g font-family="Courier, monospace" font-size="36" font-weight="bold">
+      <text x="-45" y="15" fill="url(#accentGradDev)">&lt;</text>
+      <text x="-15" y="15" fill="url(#accentGradDev)">/</text>
+      <text x="15" y="15" fill="url(#accentGradDev)">&gt;</text>
+    </g>
+
+    <!-- Map pin (GIS element) -->
+    <g transform="translate(50, -15)">
+      <path d="M0 35 L0 15 Q0 0 -12 -8 A15 15 0 1 1 12 -8 Q0 0 0 15 Z"
+            fill="url(#accentGradDev)"/>
+      <circle cx="0" cy="-15" r="6" fill="#ffffff"/>
+    </g>
+
+    <!-- Gear (development) -->
+    <g transform="translate(-55, 20)">
+      <circle cx="0" cy="0" r="15" fill="url(#greenGradDev)"/>
+      <circle cx="0" cy="0" r="6" fill="#ffffff"/>
+      <g fill="url(#greenGradDev)">
+        <rect x="-2" y="-18" width="4" height="6"/>
+        <rect x="-2" y="12" width="4" height="6"/>
+        <rect x="-18" y="-2" width="6" height="4"/>
+        <rect x="12" y="-2" width="6" height="4"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Connection dots -->
+  <g fill="url(#accentGradDev)">
+    <circle cx="80" cy="100" r="5"/>
+    <circle cx="320" cy="100" r="5"/>
+    <circle cx="100" cy="200" r="4"/>
+    <circle cx="300" cy="200" r="4"/>
+  </g>
+
+  <!-- Text -->
+  <text x="200" y="230" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">Software Development</text>
+  <text x="200" y="255" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-size="12" fill="#ffffff" opacity="0.8">Custom Geospatial Solutions</text>
+</svg>

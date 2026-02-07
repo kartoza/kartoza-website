@@ -1,7 +1,7 @@
 ---
 title: "GIS Consultancy"
 description: "Strategic GIS consulting services to help you plan, design and implement effective geospatial solutions for your organisation."
-thumbnail: "/img/solutions/consultancy.png"
+thumbnail: "/img/solutions/consultancy.svg"
 tags:
   - Consulting
   - Strategy

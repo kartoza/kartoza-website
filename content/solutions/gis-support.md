@@ -1,7 +1,7 @@
 ---
 title: "GIS Support"
 description: "Professional technical support for your GIS infrastructure with flexible service tiers to match your needs."
-thumbnail: "/img/solutions/gis-support.png"
+thumbnail: "/img/solutions/gis-support.svg"
 tags:
   - Support
   - Maintenance

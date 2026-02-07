@@ -1,7 +1,7 @@
 ---
 title: "Hosting & Maintenance"
 description: "Managed hosting and maintenance services for your GIS infrastructure with reliable performance and 24/7 monitoring."
-thumbnail: "/img/solutions/maintenance.png"
+thumbnail: "/img/solutions/maintenance.svg"
 tags:
   - Hosting
   - Cloud Services
