@@ -5223,6 +5223,19 @@ body:has(.blog-hero) .contextmenu {
     color: var(--white);
 }
 
+.osi-badge .badge-label {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--white);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+}
+
 .osi-badge i {
     font-size: 4rem;
     margin-bottom: 1.5rem;
