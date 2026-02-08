@@ -118,12 +118,29 @@
 }
 
 /* Vision Statement on Homepage */
+.hero-vision-container {
+    margin-bottom: 1.5rem;
+}
+
+.vision-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    background: rgba(232, 163, 49, 0.15);
+    padding: 0.35rem 0.85rem;
+    border-radius: 4px;
+    margin-bottom: 0.75rem;
+}
+
 .hero-vision-statement {
     color: var(--white);
     font-size: 1.65rem;
     font-weight: 500;
     line-height: 1.6;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
     font-style: italic;
     border: none;
     padding: 0;
@@ -9204,6 +9221,11 @@ body:has(.blog-hero) .contextmenu {
         width: 15px;
     }
 
+    .vision-label {
+        font-size: 0.65rem;
+        padding: 0.3rem 0.7rem;
+    }
+
     .hero-vision-statement {
         font-size: 1.25rem;
     }
@@ -9309,6 +9331,12 @@ body:has(.blog-hero) .contextmenu {
     .hero-tagline::before,
     .hero-tagline::after {
         width: 12px;
+    }
+
+    .vision-label {
+        font-size: 0.6rem;
+        padding: 0.25rem 0.6rem;
+        letter-spacing: 1.5px;
     }
 
     .hero-vision-statement {
