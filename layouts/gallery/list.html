@@ -19,7 +19,7 @@
                     <div class="gallery-card-image">
                         <a href="{{ .Permalink }}">
                             {{ $thumbnail := .Params.thumbnail | default "/img/banner-gallery.png" }}
-                            <img src="{{ $thumbnail }}" alt="{{ .Title }}" loading="lazy">
+                            <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" loading="lazy">
                             <div class="gallery-card-overlay">
                                 <span class="view-map">
                                     <i class="fas fa-map"></i>

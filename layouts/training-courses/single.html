@@ -51,7 +51,7 @@
             </div>
             <div class="course-hero-image">
                 {{ $thumbnail := .Params.thumbnail | default "/img/courses/training.png" }}
-                <img src="{{ $thumbnail }}" alt="{{ .Title }}">
+                <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}">
             </div>
         </div>
     </div>

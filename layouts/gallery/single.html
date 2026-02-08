@@ -5,7 +5,7 @@
 <section class="gallery-hero">
     <div class="gallery-hero-background">
         {{ $thumbnail := .Params.thumbnail | default "/img/banner-gallery.png" }}
-        <img src="{{ $thumbnail }}" alt="{{ .Title }}">
+        <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}">
         <div class="gallery-hero-overlay"></div>
     </div>
     <div class="container">
@@ -154,7 +154,7 @@
                     <div class="gallery-related-image">
                         <a href="{{ .Permalink }}">
                             {{ $thumbnail := .Params.thumbnail | default "/img/banner-gallery.png" }}
-                            <img src="{{ $thumbnail }}" alt="{{ .Title }}" loading="lazy">
+                            <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" loading="lazy">
                             <div class="gallery-related-overlay">
                                 <span class="icon"><i class="fas fa-map"></i></span>
                             </div>

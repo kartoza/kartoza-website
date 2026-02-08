@@ -72,7 +72,7 @@
         "date" (.Date.Format "Jan 2, 2006")
         "author" (.Params.author | default "")
         "excerpt" (.Description | default .Summary | truncate 120 | plainify)
-        "thumbnail" $thumbnail
+        "thumbnail" (absURL $thumbnail)
     -}}
     {{- $posts = $posts | append $post -}}
 {{- end -}}

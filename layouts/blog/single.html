@@ -8,7 +8,7 @@
         {{ if or (not $thumbnail) (eq $thumbnail "/img/blog/placeholder.png") }}
             {{ $thumbnail = "/img/banner-blog.png" }}
         {{ end }}
-        <img src="{{ $thumbnail }}" alt="{{ .Title | replaceRE "^Kartoza - " "" }}" class="blog-hero-image">
+        <img src="{{ absURL $thumbnail }}" alt="{{ .Title | replaceRE "^Kartoza - " "" }}" class="blog-hero-image">
         <div class="blog-hero-overlay"></div>
     </div>
     <div class="container">

@@ -19,7 +19,7 @@
                     <div class="training-card-image">
                         <a href="{{ .Permalink }}">
                             {{ $thumbnail := .Params.thumbnail | default "/img/banner-courses.png" }}
-                            <img src="{{ $thumbnail }}" alt="{{ .Title }}" loading="lazy">
+                            <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" loading="lazy">
                         </a>
                         {{ if .Params.level }}
                         <span class="training-card-badge">{{ .Params.level }}</span>

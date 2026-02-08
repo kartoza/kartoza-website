@@ -32,7 +32,7 @@
             </div>
             <div class="solution-hero-image">
                 {{ $thumbnail := .Params.thumbnail | default "/img/banner-solutions.png" }}
-                <img src="{{ $thumbnail }}" alt="{{ .Title }}">
+                <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}">
             </div>
         </div>
     </div>

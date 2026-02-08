@@ -8,7 +8,7 @@
         {{ if not $thumbnail }}
             {{ $thumbnail = "/img/banner-apps.png" }}
         {{ end }}
-        <img src="{{ $thumbnail }}" alt="{{ .Title }}" class="app-hero-image">
+        <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" class="app-hero-image">
         <div class="app-hero-overlay"></div>
     </div>
     <div class="container">

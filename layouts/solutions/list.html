@@ -19,7 +19,7 @@
                     <div class="solution-card-image">
                         <a href="{{ .Permalink }}">
                             {{ $thumbnail := .Params.thumbnail | default "/img/banner-solutions.png" }}
-                            <img src="{{ $thumbnail }}" alt="{{ .Title }}" loading="lazy">
+                            <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" loading="lazy">
                         </a>
                     </div>
                     <div class="solution-card-content">

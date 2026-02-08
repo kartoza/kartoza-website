@@ -19,7 +19,7 @@
                     <div class="portfolio-card-image">
                         <a href="{{ .Permalink }}">
                             {{ $thumbnail := .Params.thumbnail | default "/img/banner-portfolio.png" }}
-                            <img src="{{ $thumbnail }}" alt="{{ .Title }}" loading="lazy">
+                            <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" loading="lazy">
                             <div class="portfolio-card-overlay">
                                 <span class="view-project">
                                     <i class="fas fa-eye"></i>
