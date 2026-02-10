@@ -1,0 +1,48 @@
+# This workflow updates Docker image statistics from Docker Hub
+# It runs weekly and can also be triggered manually
+
+name: Update Docker Stats
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'  # Every Monday at 6am UTC
+  workflow_dispatch:     # Allows manual trigger from Actions tab
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'kartoza'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq curl
+
+      - name: Update Docker stats
+        run: |
+          chmod +x ./scripts/update-docker-stats.sh
+          ./scripts/update-docker-stats.sh
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet content/docker/; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.has_changes == 'true'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: Update Docker image statistics from Docker Hub'
+          file_pattern: 'content/docker/*.md'
+          commit_user_name: 'GitHub Actions'
+          commit_user_email: 'actions@github.com'

@@ -1,0 +1,227 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+
+<!-- Docker Image Hero Section -->
+<section class="blog-hero docker-hero">
+    <div class="blog-hero-bg">
+        {{ $thumbnail := .Params.thumbnail | default "/img/banner-docker.png" }}
+        <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" class="blog-hero-image">
+        <div class="blog-hero-overlay"></div>
+    </div>
+    <div class="container">
+        <a href="{{ absURL "docker/" }}" class="blog-hero-back">
+            <i class="fas fa-arrow-left"></i>
+            Back to Docker Images
+        </a>
+        <div class="blog-hero-content">
+            <div class="blog-hero-meta">
+                {{ if .Params.tags }}
+                <div class="blog-hero-tags">
+                    {{ range first 2 .Params.tags }}
+                    <span class="blog-hero-tag">{{ . }}</span>
+                    {{ end }}
+                </div>
+                {{ end }}
+                {{ if .Params.pulls }}
+                <span class="blog-hero-date">
+                    <i class="fas fa-download"></i>
+                    {{ .Params.pulls }} pulls
+                </span>
+                {{ end }}
+                {{ if .Params.stars }}
+                <span class="blog-hero-author">
+                    <i class="fas fa-star"></i>
+                    {{ .Params.stars }} stars
+                </span>
+                {{ end }}
+            </div>
+            <h1 class="blog-hero-title">kartoza/{{ .Title | lower | urlize }}</h1>
+            {{ if .Description }}
+            <p class="blog-hero-subtitle">{{ .Description }}</p>
+            {{ end }}
+        </div>
+    </div>
+</section>
+
+<!-- Docker Image Content Section -->
+<article class="blog-article">
+    <div class="container">
+        <div class="blog-article-wrapper">
+            <!-- Main Content -->
+            <div class="blog-article-content docker-content">
+                {{ .Content }}
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="blog-article-sidebar">
+                <!-- Quick Pull Card -->
+                <div class="sidebar-card docker-pull-card">
+                    <h4 class="sidebar-card-title">Quick Pull</h4>
+                    <div class="docker-pull-command">
+                        <code>docker pull kartoza/{{ .Title | lower | urlize }}</code>
+                        <button class="docker-copy-btn" onclick="copyToClipboard('docker pull kartoza/{{ .Title | lower | urlize }}')" title="Copy to clipboard">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Links Card -->
+                <div class="sidebar-card docker-links-card">
+                    <h4 class="sidebar-card-title">Resources</h4>
+                    <div class="docker-links">
+                        {{ if .Params.dockerhub }}
+                        <a href="{{ .Params.dockerhub }}" target="_blank" rel="noopener" class="docker-link">
+                            <span class="icon"><i class="fab fa-docker"></i></span>
+                            <span>Docker Hub</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        {{ end }}
+                        {{ if .Params.github }}
+                        <a href="{{ .Params.github }}" target="_blank" rel="noopener" class="docker-link">
+                            <span class="icon"><i class="fab fa-github"></i></span>
+                            <span>GitHub Repository</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        {{ end }}
+                        {{ if .Params.upstream }}
+                        <a href="{{ .Params.upstream.url }}" target="_blank" rel="noopener" class="docker-link">
+                            <span class="icon"><i class="fas fa-globe"></i></span>
+                            <span>{{ .Params.upstream.name }}</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+
+                <!-- Upstream Project Card -->
+                {{ if .Params.upstream }}
+                <div class="sidebar-card upstream-card">
+                    <h4 class="sidebar-card-title">Upstream Project</h4>
+                    <div class="upstream-info">
+                        <p class="upstream-name">{{ .Params.upstream.name }}</p>
+                        <p class="upstream-description">{{ .Params.upstream.description }}</p>
+                        <a href="{{ .Params.upstream.url }}" target="_blank" rel="noopener" class="upstream-link">
+                            Visit Project <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+                {{ end }}
+
+                <!-- Topics/Tags -->
+                {{ if .Params.tags }}
+                <div class="sidebar-card tags-card">
+                    <h4 class="sidebar-card-title">Topics</h4>
+                    <div class="sidebar-tags">
+                        {{ range .Params.tags }}
+                        <span class="sidebar-tag">{{ . }}</span>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
+
+                <!-- Share -->
+                <div class="sidebar-card share-card">
+                    <h4 class="sidebar-card-title">Share This</h4>
+                    <div class="share-buttons">
+                        <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text=Check out kartoza/{{ .Title | lower | urlize }} Docker image"
+                           target="_blank" rel="noopener" class="share-btn share-twitter" title="Share on Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ .Permalink }}&title={{ .Title }}"
+                           target="_blank" rel="noopener" class="share-btn share-linkedin" title="Share on LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="mailto:?subject=Docker Image: kartoza/{{ .Title | lower | urlize }}&body=Check out this Docker image: {{ .Permalink }}"
+                           class="share-btn share-email" title="Share via Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Other Docker Images -->
+                {{ $otherImages := where .Site.RegularPages "Section" "docker" | first 5 }}
+                {{ if gt (len $otherImages) 1 }}
+                <div class="sidebar-card related-card">
+                    <h4 class="sidebar-card-title">Other Images</h4>
+                    <div class="related-posts">
+                        {{ range $otherImages }}
+                        {{ if ne .Permalink $.Permalink }}
+                        <a href="{{ .Permalink }}" class="related-post">
+                            <span class="related-post-title">kartoza/{{ .Title | lower | urlize | truncate 25 }}</span>
+                            <span class="related-post-date">{{ .Params.pulls }}</span>
+                        </a>
+                        {{ end }}
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
+            </aside>
+        </div>
+    </div>
+</article>
+
+<!-- CTA Section -->
+<section class="section blog-cta-section">
+    <div class="container">
+        <div class="blog-cta-content">
+            <h2 class="blog-cta-title">Need Help with This Image?</h2>
+            <p class="blog-cta-text">We provide support, customization, and managed hosting for all our Docker images.</p>
+            <div class="blog-cta-buttons">
+                <a class="button is-primary is-medium" href="{{ absURL "contact-us/" }}?subject=Docker%20Support:%20{{ .Title | urlquery }}">
+                    <span class="icon"><i class="fas fa-life-ring"></i></span>
+                    <span>Get Support</span>
+                </a>
+                <a class="button is-light is-medium" href="https://geospatialhosting.com" target="_blank" rel="noopener">
+                    <span class="icon"><i class="fas fa-cloud"></i></span>
+                    <span>Managed Hosting</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Navigation -->
+<nav class="blog-navigation">
+    <div class="container">
+        <div class="blog-nav-wrapper">
+            {{ with .PrevInSection }}
+            <a href="{{ .Permalink }}" class="blog-nav-link blog-nav-prev">
+                <span class="blog-nav-direction"><i class="fas fa-arrow-left"></i> Previous</span>
+                <span class="blog-nav-title">kartoza/{{ .Title | lower | urlize | truncate 30 }}</span>
+            </a>
+            {{ else }}
+            <div class="blog-nav-link blog-nav-empty"></div>
+            {{ end }}
+
+            <a href="{{ absURL "docker/" }}" class="blog-nav-all">
+                <i class="fab fa-docker"></i>
+                All Images
+            </a>
+
+            {{ with .NextInSection }}
+            <a href="{{ .Permalink }}" class="blog-nav-link blog-nav-next">
+                <span class="blog-nav-direction">Next <i class="fas fa-arrow-right"></i></span>
+                <span class="blog-nav-title">kartoza/{{ .Title | lower | urlize | truncate 30 }}</span>
+            </a>
+            {{ else }}
+            <div class="blog-nav-link blog-nav-empty"></div>
+            {{ end }}
+        </div>
+    </div>
+</nav>
+
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        // Show feedback
+        const btn = event.target.closest('.docker-copy-btn');
+        const originalIcon = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i>';
+        setTimeout(() => {
+            btn.innerHTML = originalIcon;
+        }, 2000);
+    });
+}
+</script>
+
+{{ partial "footer.html" . }}

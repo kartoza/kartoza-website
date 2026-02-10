@@ -1,0 +1,117 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+{{ partial "banner.html" . }}
+
+<section class="section docker-section">
+    <div class="container">
+        <!-- Docker Introduction -->
+        {{ if .Content }}
+        <div class="section-list-intro">
+            {{ .Content }}
+        </div>
+        {{ end }}
+
+        <!-- Stats Bar -->
+        <div class="docker-stats-bar">
+            <div class="docker-stat">
+                <span class="docker-stat-icon"><i class="fab fa-docker"></i></span>
+                <span class="docker-stat-value">21M+</span>
+                <span class="docker-stat-label">Total Pulls</span>
+            </div>
+            <div class="docker-stat">
+                <span class="docker-stat-icon"><i class="fas fa-cube"></i></span>
+                <span class="docker-stat-value">{{ len .RegularPages }}</span>
+                <span class="docker-stat-label">Images</span>
+            </div>
+            <div class="docker-stat">
+                <span class="docker-stat-icon"><i class="fas fa-star"></i></span>
+                <span class="docker-stat-value">400+</span>
+                <span class="docker-stat-label">Stars</span>
+            </div>
+            <div class="docker-stat">
+                <span class="docker-stat-icon"><i class="fas fa-code-branch"></i></span>
+                <span class="docker-stat-value">Open</span>
+                <span class="docker-stat-label">Source</span>
+            </div>
+        </div>
+
+        <!-- Docker Images Grid -->
+        <div class="docker-grid columns is-multiline">
+            {{ range .RegularPages.ByWeight }}
+            <div class="column is-4-desktop is-6-tablet">
+                <article class="docker-card">
+                    <div class="docker-card-header">
+                        <div class="docker-card-icon">
+                            <i class="fab fa-docker"></i>
+                        </div>
+                        <div class="docker-card-badges">
+                            {{ if .Params.pulls }}
+                            <span class="docker-badge docker-pulls">
+                                <i class="fas fa-download"></i> {{ .Params.pulls }}
+                            </span>
+                            {{ end }}
+                            {{ if .Params.stars }}
+                            <span class="docker-badge docker-stars">
+                                <i class="fas fa-star"></i> {{ .Params.stars }}
+                            </span>
+                            {{ end }}
+                        </div>
+                    </div>
+                    <div class="docker-card-content">
+                        <h3 class="docker-card-title">
+                            <a href="{{ .Permalink }}">kartoza/{{ .Params.title | default .Title | lower | urlize }}</a>
+                        </h3>
+                        <p class="docker-card-description">
+                            {{ .Description | truncate 120 }}
+                        </p>
+                        {{ if .Params.tags }}
+                        <div class="docker-card-tags">
+                            {{ range first 3 .Params.tags }}
+                            <span class="docker-card-tag">{{ . }}</span>
+                            {{ end }}
+                        </div>
+                        {{ end }}
+                    </div>
+                    <div class="docker-card-footer">
+                        <a href="{{ .Permalink }}" class="docker-card-link">
+                            View Details <i class="fas fa-arrow-right"></i>
+                        </a>
+                        {{ if .Params.dockerhub }}
+                        <a href="{{ .Params.dockerhub }}" target="_blank" rel="noopener" class="docker-card-external" title="View on Docker Hub">
+                            <i class="fab fa-docker"></i>
+                        </a>
+                        {{ end }}
+                        {{ if .Params.github }}
+                        <a href="{{ .Params.github }}" target="_blank" rel="noopener" class="docker-card-external" title="View on GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        {{ end }}
+                    </div>
+                </article>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section section-cta">
+    <div class="container has-text-centered">
+        <h2 class="title is-3">Need Help with Docker Deployments?</h2>
+        <p class="subtitle is-5">We provide consulting, hosting, and support for geospatial infrastructure.</p>
+        <div class="section-cta-buttons">
+            <a class="button is-primary is-medium" href="{{ absURL "contact-us/" }}">
+                <span class="icon"><i class="fas fa-comments"></i></span>
+                <span>Get in Touch</span>
+            </a>
+            <a class="button is-light is-medium" href="https://geospatialhosting.com" target="_blank" rel="noopener">
+                <span class="icon"><i class="fas fa-cloud"></i></span>
+                <span>Managed Hosting</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+{{ partial "physics-scroll.html" . }}
+
+{{ partial "footer.html" . }}

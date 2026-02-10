@@ -1,6 +1,7 @@
 /**
  * Kartoza Logo Particle Effect
  * Creates GIS-themed particles when hovering over the Kartoza logo
+ * Includes smooth rotation with gradual deceleration on mouse leave
  */
 
 (function() {
@@ -20,79 +21,165 @@
 
     // Configuration
     const CONFIG = {
-        particlesPerBurst: 3,      // Particles per emission
+        particlesPerBurst: 3,       // Particles per emission
         burstInterval: 400,         // ms between bursts while hovering
         particleLifetime: 2000,     // ms before particle is removed
         maxParticles: 24,           // Max particles per logo
-        spreadRadius: 80            // How far particles spread
+        spreadRadius: 80,           // How far particles spread
+        rotationSpeed: 45,          // Degrees per second when spinning
+        decelerationTime: 2000,     // ms to slow down after mouse leave
+        accelerationTime: 800       // ms to reach full speed on hover
     };
 
-    // Track active logos and their intervals
-    const activeLogos = new Map();
+    // Track active logos and their state
+    const logoStates = new Map();
 
     // Initialize on DOM ready
     document.addEventListener('DOMContentLoaded', init);
 
     function init() {
+        // Check for reduced motion preference
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            return;
+        }
+
         // Find all logo wrappers
         const logoWrappers = document.querySelectorAll('.logo-wrapper');
 
         logoWrappers.forEach(wrapper => {
             const particlesContainer = wrapper.querySelector('.logo-particles');
-            if (!particlesContainer) return;
+            const logo = wrapper.querySelector('.kartoza-logo-animated');
+            if (!particlesContainer || !logo) return;
 
-            // Mouse enter - start emitting particles
+            // Initialize state for this logo
+            const state = {
+                rotation: 0,
+                velocity: 0,
+                targetVelocity: 0,
+                isHovered: false,
+                animationFrame: null,
+                particleInterval: null,
+                container: particlesContainer,
+                logo: logo,
+                wrapper: wrapper,
+                lastTime: null
+            };
+            logoStates.set(wrapper, state);
+
+            // Mouse enter - start spinning and emitting particles
             wrapper.addEventListener('mouseenter', () => {
-                startParticleEmission(wrapper, particlesContainer);
+                state.isHovered = true;
+                state.targetVelocity = CONFIG.rotationSpeed;
+                wrapper.classList.add('is-spinning');
+                wrapper.classList.remove('is-decelerating');
+                startAnimation(state);
+                startParticleEmission(state);
             });
 
-            // Mouse leave - stop emitting (existing particles will fade out)
+            // Mouse leave - gradually slow down
             wrapper.addEventListener('mouseleave', () => {
-                stopParticleEmission(wrapper);
+                state.isHovered = false;
+                state.targetVelocity = 0;
+                wrapper.classList.add('is-decelerating');
+                wrapper.classList.remove('is-spinning');
+                stopParticleEmission(state);
+                // Animation continues until fully stopped
             });
 
             // Touch support for mobile
             wrapper.addEventListener('touchstart', (e) => {
                 e.preventDefault();
                 wrapper.classList.add('active');
-                startParticleEmission(wrapper, particlesContainer);
+                state.isHovered = true;
+                state.targetVelocity = CONFIG.rotationSpeed;
+                wrapper.classList.add('is-spinning');
+                wrapper.classList.remove('is-decelerating');
+                startAnimation(state);
+                startParticleEmission(state);
             }, { passive: false });
 
             wrapper.addEventListener('touchend', () => {
                 wrapper.classList.remove('active');
-                stopParticleEmission(wrapper);
+                state.isHovered = false;
+                state.targetVelocity = 0;
+                wrapper.classList.add('is-decelerating');
+                wrapper.classList.remove('is-spinning');
+                stopParticleEmission(state);
             });
         });
     }
 
-    function startParticleEmission(wrapper, container) {
-        // Don't start if already active
-        if (activeLogos.has(wrapper)) return;
+    function startAnimation(state) {
+        // Don't start if already animating
+        if (state.animationFrame) return;
 
-        // Check for reduced motion preference
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            return;
-        }
-
-        // Emit initial burst
-        emitParticleBurst(container);
-
-        // Set up interval for continuous emission
-        const intervalId = setInterval(() => {
-            emitParticleBurst(container);
-        }, CONFIG.burstInterval);
-
-        activeLogos.set(wrapper, {
-            intervalId,
-            container
-        });
+        state.lastTime = performance.now();
+        animate(state);
     }
 
-    function stopParticleEmission(wrapper) {
-        const data = activeLogos.get(wrapper);
-        if (data) {
-            clearInterval(data.intervalId);
-            activeLogos.delete(wrapper);
+    function animate(state) {
+        const currentTime = performance.now();
+        const deltaTime = (currentTime - state.lastTime) / 1000; // Convert to seconds
+        state.lastTime = currentTime;
+
+        // Smooth velocity changes using easing
+        const accelerationRate = CONFIG.rotationSpeed / (CONFIG.accelerationTime / 1000);
+        const decelerationRate = CONFIG.rotationSpeed / (CONFIG.decelerationTime / 1000);
+
+        if (state.velocity < state.targetVelocity) {
+            // Accelerating
+            state.velocity = Math.min(
+                state.velocity + accelerationRate * deltaTime,
+                state.targetVelocity
+            );
+        } else if (state.velocity > state.targetVelocity) {
+            // Decelerating - use easing for smoother stop
+            const deceleration = decelerationRate * deltaTime * (state.velocity / CONFIG.rotationSpeed);
+            state.velocity = Math.max(
+                state.velocity - deceleration,
+                state.targetVelocity
+            );
+        }
+
+        // Update rotation
+        state.rotation += state.velocity * deltaTime;
+
+        // Keep rotation in reasonable bounds
+        if (state.rotation >= 360) {
+            state.rotation -= 360;
+        }
+
+        // Apply rotation via CSS custom property
+        state.wrapper.style.setProperty('--logo-rotation', `${state.rotation}deg`);
+
+        // Continue animation if still moving or hovered
+        if (state.velocity > 0.1 || state.isHovered) {
+            state.animationFrame = requestAnimationFrame(() => animate(state));
+        } else {
+            // Fully stopped
+            state.velocity = 0;
+            state.animationFrame = null;
+            state.wrapper.classList.remove('is-spinning', 'is-decelerating');
+        }
+    }
+
+    function startParticleEmission(state) {
+        // Don't start if already emitting
+        if (state.particleInterval) return;
+
+        // Emit initial burst
+        emitParticleBurst(state.container);
+
+        // Set up interval for continuous emission
+        state.particleInterval = setInterval(() => {
+            emitParticleBurst(state.container);
+        }, CONFIG.burstInterval);
+    }
+
+    function stopParticleEmission(state) {
+        if (state.particleInterval) {
+            clearInterval(state.particleInterval);
+            state.particleInterval = null;
         }
     }
 

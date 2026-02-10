@@ -183,6 +183,12 @@ matomoSiteId = ''
   url = "/apps/"
   weight = 30
 
+[[menu.main]]
+  parent = "Gallery"
+  name = "Docker Images"
+  url = "/docker/"
+  weight = 40
+
 # -- Courses --
 [[menu.main]]
   name = "Courses"
