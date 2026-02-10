@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Modernized Kartoza Logo - Thicker strokes, squared curves -->
+
+  <!-- Blue loop (top) -->
+  <path fill="none" stroke="#3B9DD9" stroke-width="12" stroke-linecap="square" stroke-linejoin="bevel"
+        d="M50 8 L50 25 C50 38 42 45 32 50 C22 55 18 62 18 72 C18 82 26 88 36 88 C46 88 50 80 50 72 L50 58"/>
+
+  <!-- Gold loop (bottom left) -->
+  <path fill="none" stroke="#E8A331" stroke-width="12" stroke-linecap="square" stroke-linejoin="bevel"
+        d="M36 88 C26 88 18 82 18 72 C18 62 10 55 10 45 C10 35 18 28 28 28 C38 28 45 35 50 42"/>
+
+  <!-- Grey loop (bottom right) -->
+  <path fill="none" stroke="#8C9AA8" stroke-width="12" stroke-linecap="square" stroke-linejoin="bevel"
+        d="M64 88 C74 88 82 82 82 72 C82 62 90 55 90 45 C90 35 82 28 72 28 C62 28 55 35 50 42"/>
+
+  <!-- Overlay to create interlocking effect - blue over gold -->
+  <path fill="none" stroke="#3B9DD9" stroke-width="12" stroke-linecap="square"
+        d="M32 50 C22 55 18 62 18 72"/>
+
+  <!-- Grey over blue connection -->
+  <path fill="none" stroke="#8C9AA8" stroke-width="12" stroke-linecap="square"
+        d="M68 50 C78 55 82 62 82 72 C82 82 74 88 64 88"/>
+
+</svg>

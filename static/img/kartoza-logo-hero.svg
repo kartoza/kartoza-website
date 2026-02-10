@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 95">
+  <!-- Kartoza Logo - Original shape with squared/angular tops -->
+  <!-- Trefoil knot: Blue top, Gold bottom-left, Grey bottom-right -->
+
+  <!-- Gold loop (bottom-left) - back section that goes UNDER blue -->
+  <path fill="none" stroke="#E8A331" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"
+        d="M22 82
+           C8 82 4 68 4 58
+           L4 48
+           L14 38
+           L28 38"/>
+
+  <!-- Grey loop (bottom-right) - back section that goes UNDER gold at bottom -->
+  <path fill="none" stroke="#8C9AA8" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"
+        d="M78 82
+           C92 82 96 68 96 58
+           L96 48
+           L86 38
+           L72 38"/>
+
+  <!-- Blue loop (top) - full shape, goes OVER gold on left side -->
+  <path fill="none" stroke="#3B9DD9" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"
+        d="M50 8
+           L60 8
+           L68 18
+           L68 32
+           C68 44 60 52 50 56
+           C40 60 34 68 34 78
+           C34 88 42 92 50 92
+           C58 92 62 86 62 78
+           C62 68 56 60 50 56
+           C40 52 32 44 32 32
+           L32 18
+           L40 8
+           L50 8"/>
+
+  <!-- Gold loop - front section that goes OVER grey and completes the loop -->
+  <path fill="none" stroke="#E8A331" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"
+        d="M28 38
+           C36 38 42 44 42 52
+           C42 62 36 70 28 76
+           C22 80 22 82 22 82"/>
+
+  <!-- Grey loop - front section that goes OVER blue on right -->
+  <path fill="none" stroke="#8C9AA8" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"
+        d="M72 38
+           C64 38 58 44 58 52
+           C58 62 64 70 72 76
+           C78 80 78 82 78 82"/>
+
+  <!-- Gold over grey at bottom center -->
+  <path fill="none" stroke="#E8A331" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"
+        d="M42 70 C50 78 58 70 58 70"/>
+
+</svg>

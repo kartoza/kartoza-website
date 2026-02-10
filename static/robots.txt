@@ -1,4 +1,4 @@
-# robots.txt for qgis.org
+# robots.txt for kartoza.com
 # Protecting against malicious bots, unwanted crawling, and AI bots
 
 User-agent: *
@@ -21,18 +21,19 @@ Disallow: /*.asp$
 Disallow: /*.aspx$
 Disallow: /*.jsp$
 
-# Disallow the downloads folder
-Disallow: /downloads/
-
 # Allow crawling of the main sections
 Allow: /$
-Allow: /docs/
 Allow: /about/
-Allow: /download/
-Allow: /support/
+Allow: /blog/
+Allow: /portfolio/
+Allow: /services/
+Allow: /solutions/
+Allow: /training-courses/
+Allow: /careers/
+Allow: /contact/
 
 # Specify the location of the sitemap
-Sitemap: https://qgis.org/sitemap.xml
+Sitemap: https://kartoza.com/sitemap.xml
 
 # Block known bad bots and AI bots
 User-agent: AhrefsBot

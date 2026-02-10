@@ -1,17 +1,25 @@
 {{ partial "header.html" . }}
 {{ partial "menu.html" . }}
-{{ partial "submenu.html" . }}
-{{ partial "contextmenu.html" . }}
-{{ partial "banner.html" . }}
 
-<section class="section ">
-    <div class="container content">
-        <div class="columns is-multiline is-centered">
-            {{ partial "sidebar" . }}
-            <div class="content column is-9"> 
-                <img src="{{ absURL "img/404.png" }}">
-                <h1 class="title">Whoops! Page not found</h1>
-                <h3 class="title">Go to Kartoza <a href="{{ "" | relURL }}">Homepage</a></h3>
+<section class="section" style="min-height: 70vh; display: flex; align-items: center;">
+    <div class="container">
+        <div class="columns is-centered is-vcentered">
+            <div class="column is-10 has-text-centered">
+                <img src="{{ absURL "img/404.svg" }}" alt="404 - Page not found" style="max-width: 600px; width: 100%; margin-bottom: 2rem;">
+                <div class="buttons is-centered" style="margin-top: 1rem;">
+                    <a href="{{ "" | relURL }}" class="button is-primary is-medium">
+                        <span class="icon">
+                            <i class="fas fa-home"></i>
+                        </span>
+                        <span>Back to Homepage</span>
+                    </a>
+                    <a href="{{ "contact" | relURL }}" class="button is-outlined is-medium">
+                        <span class="icon">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        <span>Contact Us</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

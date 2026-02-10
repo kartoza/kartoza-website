@@ -1,40 +1,166 @@
 {{/* Homepage Sales Funnel - Redesigned for conversion */}}
 
-<!-- Hero Section with Vision Statement -->
+<!-- Hero Section with Vision Statement and Rotating Showcase -->
 <section class="hero is-fullheight-with-navbar hero-home">
     <div class="hero-bg-pattern"></div>
     <div class="hero-body">
         <div class="container">
-            <div class="hero-content-centered">
-                <div class="hero-brand">
-                    <img src="{{ absURL "img/kartoza-logo.png" }}" alt="Kartoza Logo" class="hero-logo" />
-                    <h1 class="hero-company-name">Kartoza</h1>
+            <div class="columns is-vcentered hero-columns">
+                <!-- Left Column: Branding & Vision -->
+                <div class="column is-5 hero-left">
+                    <div class="hero-brand">
+                        <img src="{{ absURL "img/kartoza-logo.png" }}" alt="Kartoza Logo" class="hero-logo" />
+                        <h1 class="hero-company-name">Kartoza</h1>
+                    </div>
+                    <p class="hero-tagline">Open Source Geospatial Experts</p>
+                    <div class="hero-vision-container">
+                        <span class="vision-label">Our Vision</span>
+                        <blockquote class="hero-vision-statement">
+                            <span class="quote-mark">"</span>Enable a world where spatial decision making tools are
+                            <span class="vision-word">universal</span>,
+                            <span class="vision-word">accessible</span> and
+                            <span class="vision-word">affordable</span>
+                            for everyone.<span class="quote-mark">"</span>
+                        </blockquote>
+                    </div>
+                    <div class="hero-ctas">
+                        <a class="button is-primary is-medium cta-primary" href="https://geospatialhosting.com">
+                            <span class="icon"><i class="fas fa-server"></i></span>
+                            <span>Start with GeoSpatial Hosting</span>
+                        </a>
+                        <a class="button is-outlined is-medium cta-secondary" href="{{ absURL "contact-us/" }}">
+                            <span>Talk to an Expert</span>
+                            <span class="icon"><i class="fas fa-arrow-right"></i></span>
+                        </a>
+                    </div>
                 </div>
-                <p class="hero-tagline">Open Source Geospatial Experts</p>
-                <div class="hero-vision-container">
-                    <span class="vision-label">Our Vision</span>
-                    <blockquote class="hero-vision-statement">
-                        <span class="quote-mark">"</span>Enable a world where spatial decision making tools are
-                        <span class="vision-word">universal</span>,
-                        <span class="vision-word">accessible</span> and
-                        <span class="vision-word">affordable</span>
-                        for everyone.<span class="quote-mark">"</span>
-                    </blockquote>
+
+                <!-- Right Column: Rotating Showcase -->
+                <div class="column is-7 hero-right">
+                    <div class="showcase-container">
+                        <div class="showcase-wrapper">
+                            <!-- Products/Services Showcase Items -->
+                            <div class="showcase-item active" data-category="product">
+                                <div class="showcase-card">
+                                    <div class="showcase-badge product">Featured Service</div>
+                                    <div class="showcase-image">
+                                        <img src="{{ absURL "img/portfolio/fbis.png" }}" alt="GeoSpatial Hosting" />
+                                    </div>
+                                    <div class="showcase-content">
+                                        <h3 class="showcase-title">GeoSpatial Hosting</h3>
+                                        <p class="showcase-description">Deploy GeoServer, PostGIS, QGIS Server in minutes. Fully managed cloud infrastructure for your GIS needs.</p>
+                                        <a href="https://geospatialhosting.com" class="showcase-link">
+                                            Explore Plans <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="showcase-item" data-category="product">
+                                <div class="showcase-card">
+                                    <div class="showcase-badge product">Training</div>
+                                    <div class="showcase-image">
+                                        <img src="{{ absURL "img/courses/qgis-introduction.svg" }}" alt="QGIS Training" />
+                                    </div>
+                                    <div class="showcase-content">
+                                        <h3 class="showcase-title">QGIS Training Courses</h3>
+                                        <p class="showcase-description">From beginner to advanced. Learn GIS with our expert-led courses, available online or on-site.</p>
+                                        <a href="{{ absURL "training-courses/" }}" class="showcase-link">
+                                            View Courses <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="showcase-item" data-category="product">
+                                <div class="showcase-card">
+                                    <div class="showcase-badge product">Platform</div>
+                                    <div class="showcase-image">
+                                        <img src="{{ absURL "img/portfolio/my-civitas.png" }}" alt="MyCivitas" />
+                                    </div>
+                                    <div class="showcase-content">
+                                        <h3 class="showcase-title">MyCivitas</h3>
+                                        <p class="showcase-description">Municipal asset management built for local governments. Track infrastructure lifecycle from desktop to field.</p>
+                                        <a href="{{ absURL "solutions/mycivitas/" }}" class="showcase-link">
+                                            Learn More <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Portfolio Items -->
+                            {{ $portfolioItems := where .Site.RegularPages "Section" "portfolio" }}
+                            {{ range first 3 (shuffle $portfolioItems) }}
+                            <div class="showcase-item" data-category="portfolio">
+                                <div class="showcase-card">
+                                    <div class="showcase-badge portfolio">Portfolio</div>
+                                    <div class="showcase-image">
+                                        {{ if .Params.thumbnail }}
+                                        <img src="{{ .Params.thumbnail | absURL }}" alt="{{ .Title }}" />
+                                        {{ else }}
+                                        <div class="showcase-placeholder">
+                                            <i class="fas fa-map-marked-alt"></i>
+                                        </div>
+                                        {{ end }}
+                                    </div>
+                                    <div class="showcase-content">
+                                        <h3 class="showcase-title">{{ .Title }}</h3>
+                                        <p class="showcase-description">{{ .Params.description | truncate 120 }}</p>
+                                        <a href="{{ .RelPermalink }}" class="showcase-link">
+                                            View Project <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {{ end }}
+
+                            <!-- Blog Items -->
+                            {{ $blogPosts := where .Site.RegularPages "Section" "blog" }}
+                            {{ range first 3 $blogPosts }}
+                            <div class="showcase-item" data-category="blog">
+                                <div class="showcase-card">
+                                    <div class="showcase-badge blog">Latest Blog</div>
+                                    <div class="showcase-image">
+                                        {{ if .Params.thumbnail }}
+                                        <img src="{{ .Params.thumbnail | absURL }}" alt="{{ .Title }}" />
+                                        {{ else }}
+                                        <div class="showcase-placeholder blog">
+                                            <i class="fas fa-newspaper"></i>
+                                        </div>
+                                        {{ end }}
+                                    </div>
+                                    <div class="showcase-content">
+                                        <h3 class="showcase-title">{{ .Title | truncate 60 }}</h3>
+                                        <p class="showcase-description">{{ .Summary | plainify | truncate 100 }}</p>
+                                        <a href="{{ .RelPermalink }}" class="showcase-link">
+                                            Read Article <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {{ end }}
+                        </div>
+
+                        <!-- Showcase Navigation -->
+                        <div class="showcase-nav">
+                            <div class="showcase-dots"></div>
+                            <div class="showcase-progress">
+                                <div class="showcase-progress-bar"></div>
+                            </div>
+                            <div class="showcase-controls">
+                                <button class="showcase-control showcase-prev" aria-label="Previous">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="showcase-control showcase-pause" aria-label="Pause">
+                                    <i class="fas fa-pause"></i>
+                                </button>
+                                <button class="showcase-control showcase-next" aria-label="Next">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="hero-ctas-bottom">
-        <div class="container">
-            <div class="hero-ctas">
-                <a class="button is-primary is-medium cta-primary" href="https://geospatialhosting.com">
-                    <span class="icon"><i class="fas fa-server"></i></span>
-                    <span>Start with GeoSpatial Hosting</span>
-                </a>
-                <a class="button is-outlined is-medium cta-secondary" href="{{ absURL "contact-us/" }}">
-                    <span>Talk to an Expert</span>
-                    <span class="icon"><i class="fas fa-arrow-right"></i></span>
-                </a>
             </div>
         </div>
     </div>
@@ -469,7 +595,198 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // YouTube video loader
+    // ============================================
+    // HERO SHOWCASE CAROUSEL
+    // ============================================
+    const showcaseWrapper = document.querySelector('.showcase-wrapper');
+    const showcaseItems = document.querySelectorAll('.showcase-item');
+    const dotsContainer = document.querySelector('.showcase-dots');
+    const progressBar = document.querySelector('.showcase-progress-bar');
+    const prevBtn = document.querySelector('.showcase-prev');
+    const nextBtn = document.querySelector('.showcase-next');
+    const pauseBtn = document.querySelector('.showcase-pause');
+
+    if (showcaseWrapper && showcaseItems.length > 0) {
+        let currentIndex = 0;
+        let isPaused = false;
+        let intervalId = null;
+        let progressIntervalId = null;
+        const INTERVAL_DURATION = 8000; // 8 seconds per slide (changed from 30s for better UX)
+        const PROGRESS_UPDATE_INTERVAL = 50; // Update progress every 50ms
+        let progressValue = 0;
+
+        // Create dots for each item
+        showcaseItems.forEach((item, index) => {
+            const dot = document.createElement('button');
+            dot.className = 'showcase-dot' + (index === 0 ? ' active' : '');
+            dot.setAttribute('data-index', index);
+            dot.setAttribute('data-category', item.getAttribute('data-category'));
+            dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+            dot.addEventListener('click', () => goToSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.showcase-dot');
+
+        function goToSlide(index) {
+            // Remove active class from current item
+            showcaseItems[currentIndex].classList.remove('active');
+            showcaseItems[currentIndex].classList.add('prev');
+            dots[currentIndex].classList.remove('active');
+
+            // Update index
+            currentIndex = index;
+            if (currentIndex >= showcaseItems.length) currentIndex = 0;
+            if (currentIndex < 0) currentIndex = showcaseItems.length - 1;
+
+            // Remove prev class from all and add active to current
+            showcaseItems.forEach(item => item.classList.remove('prev'));
+            showcaseItems[currentIndex].classList.add('active');
+            dots[currentIndex].classList.add('active');
+
+            // Reset progress
+            resetProgress();
+        }
+
+        function nextSlide() {
+            goToSlide(currentIndex + 1);
+        }
+
+        function prevSlide() {
+            goToSlide(currentIndex - 1);
+        }
+
+        function resetProgress() {
+            progressValue = 0;
+            progressBar.style.width = '0%';
+        }
+
+        function updateProgress() {
+            if (!isPaused) {
+                progressValue += (PROGRESS_UPDATE_INTERVAL / INTERVAL_DURATION) * 100;
+                progressBar.style.width = Math.min(progressValue, 100) + '%';
+            }
+        }
+
+        function startAutoplay() {
+            stopAutoplay();
+            intervalId = setInterval(() => {
+                if (!isPaused) {
+                    nextSlide();
+                }
+            }, INTERVAL_DURATION);
+
+            progressIntervalId = setInterval(updateProgress, PROGRESS_UPDATE_INTERVAL);
+        }
+
+        function stopAutoplay() {
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
+            }
+            if (progressIntervalId) {
+                clearInterval(progressIntervalId);
+                progressIntervalId = null;
+            }
+        }
+
+        function togglePause() {
+            isPaused = !isPaused;
+            pauseBtn.classList.toggle('paused', isPaused);
+            const icon = pauseBtn.querySelector('i');
+            if (isPaused) {
+                icon.classList.remove('fa-pause');
+                icon.classList.add('fa-play');
+            } else {
+                icon.classList.remove('fa-play');
+                icon.classList.add('fa-pause');
+                // Restart progress from current position
+                startAutoplay();
+            }
+        }
+
+        // Event listeners
+        if (prevBtn) prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetProgress();
+        });
+
+        if (nextBtn) nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetProgress();
+        });
+
+        if (pauseBtn) pauseBtn.addEventListener('click', togglePause);
+
+        // Pause on hover
+        showcaseWrapper.addEventListener('mouseenter', () => {
+            if (!isPaused) {
+                clearInterval(intervalId);
+                clearInterval(progressIntervalId);
+            }
+        });
+
+        showcaseWrapper.addEventListener('mouseleave', () => {
+            if (!isPaused) {
+                startAutoplay();
+            }
+        });
+
+        // Touch support for mobile swipe
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        showcaseWrapper.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        showcaseWrapper.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            // Only if showcase is in viewport
+            const rect = showcaseWrapper.getBoundingClientRect();
+            const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+
+            if (isInViewport) {
+                if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                } else if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === ' ') {
+                    // Space to pause/play (only if showcase is focused area)
+                    const activeElement = document.activeElement;
+                    if (activeElement && activeElement.closest('.showcase-container')) {
+                        e.preventDefault();
+                        togglePause();
+                    }
+                }
+            }
+        });
+
+        // Start autoplay
+        startAutoplay();
+    }
+
+    // ============================================
+    // YOUTUBE VIDEO LOADER
+    // ============================================
     var youtubeElements = document.querySelectorAll('.youtube');
     youtubeElements.forEach(function(element) {
         var videoId = element.getAttribute('data-video-id');
@@ -502,7 +819,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Scroll animations with Intersection Observer
+    // ============================================
+    // SCROLL ANIMATIONS
+    // ============================================
     const animatedElements = document.querySelectorAll('.product-card, .product-card-small, .service-card, .why-item');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
