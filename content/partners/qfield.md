@@ -5,6 +5,11 @@ description: "Kartoza is an official QField partner, providing implementation, t
 logo: "/img/partners/qfield-logo.svg"
 productUrl: "https://qfield.org"
 productName: "QField"
+signupUrl: "https://app.qfield.cloud/accounts/signup/?fpr=tim39"
+signupText: "Sign Up for QFieldCloud"
+signupHeading: "Get QFieldCloud"
+signupDescription: "Sign up for QFieldCloud to sync your projects, collaborate with your team, and access your data from anywhere."
+signupButtonText: "Create Free Account"
 date: 2024-01-01
 features:
   - title: "Full QGIS Power"

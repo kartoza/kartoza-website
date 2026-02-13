@@ -26,6 +26,12 @@
             <p class="partner-hero-tagline">{{ .Params.tagline }}</p>
             <p class="partner-hero-description">{{ .Description }}</p>
             <div class="partner-hero-actions">
+                {{ if .Params.signupUrl }}
+                <a href="{{ .Params.signupUrl }}" target="_blank" rel="noopener" class="button is-warning is-large">
+                    <span class="icon"><i class="fas fa-user-plus"></i></span>
+                    <span>{{ .Params.signupText | default (printf "Sign Up for %s" .Title) }}</span>
+                </a>
+                {{ end }}
                 <a href="#get-started" class="button is-primary is-large">
                     <span class="icon"><i class="fas fa-rocket"></i></span>
                     <span>Get Started</span>
@@ -106,6 +112,21 @@
 
             <!-- Sidebar -->
             <div class="column is-4">
+                {{ if .Params.signupUrl }}
+                <!-- Signup Card -->
+                <div class="partner-sidebar-card partner-signup-card" style="background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%); color: white; border: none;">
+                    <div class="partner-cta-icon" style="background: rgba(255,255,255,0.2);">
+                        <i class="fas fa-cloud" style="color: white;"></i>
+                    </div>
+                    <h3 style="color: white;">{{ .Params.signupHeading | default (printf "Get %s Cloud" .Title) }}</h3>
+                    <p style="color: rgba(255,255,255,0.9);">{{ .Params.signupDescription | default (printf "Sign up for %s Cloud to sync your projects and collaborate with your team." .Title) }}</p>
+                    <a href="{{ .Params.signupUrl }}" target="_blank" rel="noopener" class="button is-white is-fullwidth" style="color: var(--accent-dark); font-weight: 600;">
+                        <span class="icon"><i class="fas fa-user-plus"></i></span>
+                        <span>{{ .Params.signupButtonText | default "Sign Up Now" }}</span>
+                    </a>
+                </div>
+                {{ end }}
+
                 <!-- Get Started Card -->
                 <div class="partner-sidebar-card partner-cta-card" id="get-started">
                     <div class="partner-cta-icon">
