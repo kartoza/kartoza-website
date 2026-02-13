@@ -164,12 +164,11 @@
         {{ $matomojs := resources.Get "js/matomo.js" }}
         {{ $engagementjs := resources.Get "js/engagement.js" }}
         {{ $regionaljs := resources.Get "js/regional.js" }}
-        {{ $logoparticlesjs := resources.Get "js/logo-particles.js" }}
         {{/* See https://www.youtube.com/watch?v=T33NN_pPeNI */}}
-        {{ $js := slice $animatejs $expandjs $navbarjs $qrcreatejs $fusejs $markjs $matomojs $engagementjs $regionaljs $logoparticlesjs | resources.Concat "js/all.js" | resources.Minify | resources.Fingerprint }}
+        {{ $js := slice $animatejs $expandjs $navbarjs $qrcreatejs $fusejs $markjs $matomojs $engagementjs $regionaljs | resources.Concat "js/all.js" | resources.Minify | resources.Fingerprint }}
         {{ if (eq .Site.Params.cookiesstate true) }}
             {{ $cookiejs := resources.Get "js/cookie.js" }}
-            {{ $js = slice $animatejs $expandjs $navbarjs $qrcreatejs $fusejs $markjs $matomojs $engagementjs $regionaljs $logoparticlesjs $cookiejs | resources.Concat "js/all.js" | resources.Minify | resources.Fingerprint }}
+            {{ $js = slice $animatejs $expandjs $navbarjs $qrcreatejs $fusejs $markjs $matomojs $engagementjs $regionaljs $cookiejs | resources.Concat "js/all.js" | resources.Minify | resources.Fingerprint }}
         {{ end }}   
         <script defer src="{{ $js.RelPermalink }}"></script> 
         {{/* Search needs to be rendered as a template to ensure urls are correct */}}
