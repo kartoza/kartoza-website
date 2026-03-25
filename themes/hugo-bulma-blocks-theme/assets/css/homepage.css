@@ -295,6 +295,37 @@
     border-color: var(--white);
 }
 
+/* Hero CTA Buttons - High contrast for hero background */
+.hero-ctas .button.is-primary:not(.is-outlined) {
+    background: var(--accent) !important;
+    background-color: var(--accent) !important;
+    border-color: var(--accent) !important;
+    color: var(--white) !important;
+    box-shadow: 0 4px 20px rgba(232, 163, 49, 0.4);
+    font-weight: 700;
+}
+
+.hero-ctas .button.is-primary:not(.is-outlined):hover {
+    background: var(--accent-dark) !important;
+    background-color: var(--accent-dark) !important;
+    border-color: var(--accent-dark) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(232, 163, 49, 0.5);
+}
+
+.hero-ctas .button.is-outlined.is-primary {
+    background: transparent !important;
+    border: 2px solid rgba(255, 255, 255, 0.9) !important;
+    color: var(--white) !important;
+    font-weight: 700;
+}
+
+.hero-ctas .button.is-outlined.is-primary:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: var(--white) !important;
+    color: var(--white) !important;
+}
+
 /* Hero Visual / Image */
 .hero-visual {
     display: flex;
