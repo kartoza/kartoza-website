@@ -1,7 +1,7 @@
 ---
 title: "Map Campaigner"
 description: "A web application for planning and monitoring OpenStreetMap field mapping campaigns."
-thumbnail: "/img/portfolio/map-campaigner.png"
+thumbnail: "/img/portfolio/hot-map-campaigner.png"
 tags:
   - OpenStreetMap
   - Humanitarian
@@ -10,6 +10,8 @@ client: "Humanitarian OpenStreetMap Team (HOT)"
 date: 2018-01-01
 services:
   - Development
+reviewedBy: "Jeff Osundwa"
+reviewedDate: "2026-03-28"
 ---
 
 {{< block
@@ -25,4 +27,4 @@ A tool for the Humanitarian OpenStreetMap Team to coordinate mapping campaigns.
 
 Map Campaigner is a web application for planning and monitoring OpenStreetMap field mapping campaigns. Developed for the Humanitarian OpenStreetMap Team (HOT), it enables campaign coordinators to define mapping areas, track progress, and monitor contributor activity across organised mapping efforts.
 
-![Map Campaigner](/img/portfolio/map-campaigner.png)
+![Map Campaigner Interface](/img/portfolio/hot-map-campaigner.png)

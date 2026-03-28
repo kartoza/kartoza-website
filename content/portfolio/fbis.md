@@ -19,6 +19,8 @@ related_plugins:
   - species-explorer
 related_apps:
   - bims
+reviewedBy: "Jeff Osundwa"
+reviewedDate: "2026-03-28"
 ---
 
 {{< block
@@ -35,6 +37,8 @@ A partnership with JRS Biodiversity Foundation, SANBI, and the Freshwater Resear
 The Freshwater Biodiversity Information System (FBIS) is a platform for hosting, visualising and sharing freshwater biodiversity information for South African rivers. The system manages data on species occurrence, abundance, and habitat parameters for freshwater algae, invertebrates, and fish.
 
 It provides spatial and temporal filtering capabilities for water resource managers, biodiversity planners, researchers, and consultants working with South Africa's freshwater ecosystems.
+
+The FBIS platform is funded by JRS Biodiversity and South African National Biodiversity Institute (SANBI) and implemented by the Freshwater Research Centre (FRC) and Kartoza.
 
 ![FBIS Platform](/img/portfolio/fbis.png)
 
