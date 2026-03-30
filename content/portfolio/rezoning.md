@@ -23,7 +23,7 @@ reviewedDate: "2026-03-25"
     subtitle="Renewable energy site suitability at a global scale"
     class="is-primary"
     sub-block-side="bottom"
-    link="https://rezoning.energydata.info/"
+    link="<https://rezoning.energydata.info/>"
     link-text="Visit REZoning"
 >}}
 <!-- markdownlint-enable MD034 -->

@@ -24,7 +24,7 @@ reviewedDate: "2026-03-28"
     subtitle="A global canonical source of healthcare facility locations"
     class="is-primary"
     sub-block-side="bottom"
-    link="https://healthsites.io"
+    link="<https://healthsites.io>"
     link-text="Visit Healthsites.io"
 >}}
 Partnered with the Red Cross and MSF to build the definitive open healthcare location database.

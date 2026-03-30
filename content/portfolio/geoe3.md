@@ -23,7 +23,7 @@ reviewedDate: "2026-03-28"
     subtitle="Geospatial Enabling Environments for Employment Spatial Tool"
     class="is-primary"
     sub-block-side="bottom"
-    link="https://github.com/worldbank/GeoE3/"
+    link="<https://github.com/worldbank/GeoE3/>"
     link-text="View on GitHub"
 >}}
 <!-- markdownlint-enable MD034 -->

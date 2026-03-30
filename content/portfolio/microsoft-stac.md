@@ -23,7 +23,7 @@ reviewedDate: "2026-03-25"
     subtitle="Exploring satellite imagery catalogues directly in QGIS"
     class="is-primary"
     sub-block-side="bottom"
-    link="https://github.com/stac-utils/qgis-stac-plugin"
+    link="<https://github.com/stac-utils/qgis-stac-plugin>"
     link-text="View on GitHub"
 >}}
 <!-- markdownlint-enable MD034 -->

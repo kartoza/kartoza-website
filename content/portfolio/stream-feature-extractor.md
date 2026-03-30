@@ -19,7 +19,7 @@ reviewedDate: "2026-03-25"
     subtitle="Automated hydrological stream network analysis"
     class="is-primary"
     sub-block-side="bottom"
-    link="https://github.com/kartoza/stream_feature_extractor"
+    link="<https://github.com/kartoza/stream_feature_extractor>"
     link-text="View on GitHub"
 >}}
 <!-- markdownlint-enable MD034 -->
