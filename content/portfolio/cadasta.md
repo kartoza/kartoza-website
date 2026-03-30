@@ -20,7 +20,7 @@ reviewedDate: "2026-03-28"
     subtitle="Land and resource rights documentation in QGIS"
     class="is-primary"
     sub-block-side="bottom"
-    link="https://cadasta.org"
+    link="<https://cadasta.org>"
     link-text="Visit Cadasta"
 >}}
 Connecting QGIS desktop to the Cadasta land rights platform.
