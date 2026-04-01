@@ -7,6 +7,7 @@
    BOOKING SECTION
    ============================================ */
 .booking-section {
+    display: none; /* Temporarily hidden - no content available */
     padding: 80px 0;
     background: linear-gradient(180deg, #f7f9fb 0%, #ffffff 100%);
 }
