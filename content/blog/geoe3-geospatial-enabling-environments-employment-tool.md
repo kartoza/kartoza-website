@@ -36,31 +36,31 @@ GEOE3 analyses **15 spatially varying factors** across three key dimensions, eac
 
 The Contextual Dimension refers to laws and policies that shape workplace gender discrimination, financial autonomy, and gender empowerment:
 
-- **Workplace Discrimination** - Laws addressing gender biases that hinder women's career advancement, using the WBL 2024 Workplace Index
-- **Regulatory Frameworks** - Laws protecting women's employment rights, childcare support, and parental leave (WBL Pay & Parenthood Index)
-- **Financial Inclusion** - Laws concerning women's access to financial resources for starting businesses (WBL Entrepreneurship Index)
+- **Workplace Discrimination**: Laws addressing gender biases that hinder women's career advancement, using the WBL 2024 Workplace Index.
+- **Regulatory Frameworks**: Laws protecting women's employment rights, childcare support, and parental leave (WBL Pay & Parenthood Index).
+- **Financial Inclusion**: Laws concerning women's access to financial resources for starting businesses (WBL Entrepreneurship Index).
 
 ### Accessibility Factors
 
 The Accessibility Dimension evaluates women's daily mobility and access to essential services using OpenStreetMap data:
 
-- **Women's Travel Patterns** - Access to everyday services (kindergartens, primary schools, groceries, pharmacies, green spaces) with 5 subfactors
-- **Access to Public Transport** - Proximity to bus stops, train stations, and other transport facilities
-- **Access to Health Facilities** - Distance to clinics, hospitals, and healthcare services
-- **Access to Education and Training Facilities** - Proximity to universities and technical training centres
-- **Access to Financial Facilities** - Distance to banks and financial institutions
+- **Women's Travel Patterns**: Access to everyday services (kindergartens, primary schools, groceries, pharmacies, green spaces) with 5 subfactors
+- **Access to Public Transport**: Proximity to bus stops, train stations, and other transport facilities
+- **Access to Health Facilities**: Distance to clinics, hospitals, and healthcare services
+- **Access to Education and Training Facilities**: Proximity to universities and technical training centres
+- **Access to Financial Facilities**: Distance to banks and financial institutions
 
 ### Place Characterisation
 
 The Place Characterisation Dimension refers to the social, environmental, and infrastructural attributes of locations:
 
-- **Active Transport** - Walkability and cycling infrastructure
-- **Safety** - Perceived public safety based on street lighting and nighttime illumination
-- **FCV (Fragility, Conflict & Violence)** - Analysis of conflict and political instability using ACLED data
-- **Education** - Proportion of women with higher education attainment
-- **Digital Inclusion** - Availability of digital infrastructure and internet access
-- **Environmental Hazards** - Vulnerability to natural disasters (floods, droughts, landslides, fires, tropical cyclones)
-- **Water Sanitation** - Access to clean water and sanitation facilities
+- **Active Transport**: Walkability and cycling infrastructure.
+- **Safety**: Perceived public safety based on street lighting and nighttime illumination.
+- **FCV (Fragility, Conflict & Violence)**: Analysis of conflict and political instability using ACLED data.
+- **Education**: Proportion of women with higher education attainment.
+- **Digital Inclusion**: Availability of digital infrastructure and internet access.
+- **Environmental Hazards**: Vulnerability to natural disasters (floods, droughts, landslides, fires, tropical cyclones).
+- **Water Sanitation**: Access to clean water and sanitation facilities.
 
 All factors can be weighted according to local context, and results can be exported for further analysis in QGIS or other GIS software.
 
@@ -68,11 +68,11 @@ All factors can be weighted according to local context, and results can be expor
 
 Installing GEOE3 in QGIS is straightforward:
 
-1. Open QGIS on your computer
-2. Navigate to **Plugins** → **Manage and Install Plugins**
-3. Search for "GEOE3" or "Geospatial Enabling Environments"
-4. Click **Install Plugin**
-5. Once installed, access GEOE3 from the **Plugins** menu or toolbar
+1. Open QGIS on your computer.
+2. Navigate to **Plugins** → **Manage and Install Plugins**.
+3. Search for "GEOE3" or "Geospatial Enabling Environments".
+4. Click **Install Plugin**.
+5. Once installed, access GEOE3 from the **Plugins** menu or toolbar.
 
 The plugin is also available on GitHub for manual installation or development purposes.
 
@@ -92,6 +92,6 @@ Researchers and policymakers can leverage GEOE3's analytical capabilities to inf
 
 ## Conclusion
 
-GEOE3 is a game-changer for gender-aware geospatial analysis. By making spatial data accessible and actionable, it empowers decision-makers to build more inclusive communities and workplaces.
+GEOE3 is a game-changer for gender-aware geospatial analysis. Making spatial data accessible and actionable empowers decision-makers to build more inclusive communities and workplaces.
 
-For more information, visit the [official documentation](https://worldbank.github.io/GEEST/) or contribute to the project on [GitHub](https://github.com/worldbank/GEEST).
+For more information, please visit the [official documentation](https://worldbank.github.io/GEEST/) or contribute to the project on [GitHub](https://github.com/worldbank/GEEST).
