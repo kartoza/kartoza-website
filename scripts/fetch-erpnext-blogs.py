@@ -33,6 +33,7 @@ from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
 from dateutil import parser as date_parser
 from tabulate import tabulate
 import json
+import html2text
 
 # Suppress XML parsing warning when using html.parser on content that looks like XML
 warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
@@ -408,24 +409,27 @@ def blog_to_hugo_frontmatter(blog: dict, mark_reviewed: bool = False) -> dict:
 
 
 def blog_to_hugo_content(blog: dict) -> str:
-    """Convert ERPNext blog content to Hugo markdown."""
+    """Convert ERPNext blog content to Hugo markdown using html2text."""
     content = blog.get('content') or blog.get('content_html') or ''
 
-    # Basic HTML to markdown conversion for simple cases
-    # For complex HTML, we preserve it as Hugo can handle it
-    content = re.sub(r'<br\s*/?>', '\n', content)
-    content = re.sub(r'<p>', '\n\n', content)
-    content = re.sub(r'</p>', '', content)
-    content = re.sub(r'<strong>([^<]+)</strong>', r'**\1**', content)
-    content = re.sub(r'<b>([^<]+)</b>', r'**\1**', content)
-    content = re.sub(r'<em>([^<]+)</em>', r'*\1*', content)
-    content = re.sub(r'<i>([^<]+)</i>', r'*\1*', content)
-    content = re.sub(r'<h1>([^<]+)</h1>', r'\n# \1\n', content)
-    content = re.sub(r'<h2>([^<]+)</h2>', r'\n## \1\n', content)
-    content = re.sub(r'<h3>([^<]+)</h3>', r'\n### \1\n', content)
-    content = re.sub(r'<a href="([^"]+)">([^<]+)</a>', r'[\2](\1)', content)
+    if not content:
+        return ''
 
-    return content.strip()
+    # Configure html2text for clean markdown output
+    h = html2text.HTML2Text()
+    h.body_width = 0  # Don't wrap lines
+    h.ignore_links = False
+    h.ignore_images = False
+    h.ignore_emphasis = False
+    h.skip_internal_links = False
+    h.inline_links = True
+    h.protect_links = True
+    h.unicode_snob = True  # Use unicode instead of ASCII
+
+    # Convert HTML to markdown
+    markdown = h.handle(content)
+
+    return markdown.strip()
 
 
 def create_hugo_file(blog: dict, content_dir: Path, dry_run: bool = False) -> tuple[str, str]:
