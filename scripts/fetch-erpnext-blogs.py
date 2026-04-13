@@ -600,7 +600,6 @@ def main():
 
     # Output results
     print_status_table(results, dry_run=args.dry_run)
-    output_json_summary(results)
 
     # Exit code based on errors
     if errors_occurred:
