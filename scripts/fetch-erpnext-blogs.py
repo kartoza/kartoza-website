@@ -41,11 +41,112 @@ warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
 
 # Configuration
 ERPNEXT_URL = os.environ.get('ERPNEXT_URL', 'https://erp.kartoza.com')
+KARTOZA_URL = 'https://kartoza.com'
+
+# Image storage path relative to Hugo static folder
+IMAGE_DIR = 'img/blog/erpnext'
 
 
 def get_auth_headers() -> dict:
     """Get authentication headers for ERPNext API (empty for public blogs)."""
     return {}
+
+
+def download_image(url: str, static_dir: Path, verbose: bool = False) -> str | None:
+    """
+    Download an image from ERPNext and save it locally.
+
+    Args:
+        url: The image URL (can be relative like /files/xxx or absolute)
+        static_dir: Path to Hugo's static directory
+
+    Returns:
+        Local path to use in markdown (e.g., /img/blog/erpnext/xxx.png) or None on failure
+    """
+    # Normalize the URL
+    if url.startswith('/files/'):
+        full_url = f"{KARTOZA_URL}{url}"
+        filename = url.split('/')[-1]
+    elif url.startswith('/'):
+        full_url = f"{KARTOZA_URL}{url}"
+        filename = url.split('/')[-1]
+    elif 'kartoza.com/files/' in url or 'erp.kartoza.com/files/' in url:
+        full_url = url
+        filename = url.split('/')[-1]
+    else:
+        # Not a Kartoza image, leave as-is
+        return None
+
+    # Create target directory
+    target_dir = static_dir / IMAGE_DIR
+    target_dir.mkdir(parents=True, exist_ok=True)
+
+    target_path = target_dir / filename
+    local_url = f"/{IMAGE_DIR}/{filename}"
+
+    # Skip if already downloaded
+    if target_path.exists():
+        return local_url
+
+    # Download the image
+    try:
+        if verbose:
+            print(f"  Downloading: {filename}", file=sys.stderr)
+        response = requests.get(full_url, timeout=30)
+        response.raise_for_status()
+        target_path.write_bytes(response.content)
+        return local_url
+    except requests.RequestException as e:
+        print(f"  Warning: Failed to download {full_url}: {e}", file=sys.stderr)
+        return None
+
+
+def process_images_in_content(content: str, static_dir: Path, verbose: bool = False) -> str:
+    """
+    Find all images in markdown content, download them, and rewrite URLs.
+
+    Args:
+        content: Markdown content with image references
+        static_dir: Path to Hugo's static directory
+
+    Returns:
+        Content with rewritten image URLs
+    """
+    # Pattern for markdown images: ![alt](/files/xxx) or ![alt](https://kartoza.com/files/xxx)
+    img_pattern = re.compile(r'!\[([^\]]*)\]\(([^)]+)\)')
+
+    def replace_image(match):
+        alt_text = match.group(1)
+        img_url = match.group(2)
+
+        # Try to download and get local path
+        local_path = download_image(img_url, static_dir, verbose=verbose)
+
+        if local_path:
+            return f'![{alt_text}]({local_path})'
+        else:
+            # Keep original URL if download failed or not a Kartoza image
+            return match.group(0)
+
+    return img_pattern.sub(replace_image, content)
+
+
+def process_thumbnail(thumbnail_url: str, static_dir: Path, verbose: bool = False) -> str:
+    """
+    Download thumbnail image and return local path.
+
+    Args:
+        thumbnail_url: The thumbnail URL
+        static_dir: Path to Hugo's static directory
+
+    Returns:
+        Local path or original URL if download failed
+    """
+    if not thumbnail_url:
+        return '/img/blog/placeholder.png'
+
+    local_path = download_image(thumbnail_url, static_dir, verbose=verbose)
+    return local_path if local_path else thumbnail_url
 
 
 def slugify(text: str) -> str:
@@ -155,7 +256,8 @@ def find_local_file(content_dir: Path, erpnext_id: str, title: str) -> Path | No
     return None
 
 
-def sync_blog(blog: dict, content_dir: Path, dry_run: bool = False, force: bool = False) -> dict:
+def sync_blog(blog: dict, content_dir: Path, static_dir: Path, dry_run: bool = False,
+               force: bool = False, skip_images: bool = False, verbose: bool = False) -> dict:
     """
     Sync a single blog article from ERPNext to Hugo.
 
@@ -164,8 +266,11 @@ def sync_blog(blog: dict, content_dir: Path, dry_run: bool = False, force: bool 
     Args:
         blog: Blog data from ERPNext
         content_dir: Path to Hugo content directory
+        static_dir: Path to Hugo static directory (for images)
         dry_run: If True, don't write files
         force: If True, overwrite all files regardless of fidelity
+        skip_images: If True, don't download images
+        verbose: If True, show detailed output
 
     Returns:
         Dict with 'status' and 'fidelity' keys
@@ -206,6 +311,15 @@ def sync_blog(blog: dict, content_dir: Path, dry_run: bool = False, force: bool 
     # Generate content
     front_matter = blog_to_hugo_frontmatter(blog, mark_reviewed=True)
     content = blog_to_hugo_content(blog)
+
+    # Process images (download and rewrite URLs)
+    if not skip_images and not dry_run:
+        content = process_images_in_content(content, static_dir, verbose=verbose)
+        # Also process thumbnail
+        if front_matter.get('thumbnail'):
+            front_matter['thumbnail'] = process_thumbnail(
+                front_matter['thumbnail'], static_dir, verbose=verbose
+            )
 
     # Build file content
     file_content = "---\n"
@@ -580,6 +694,7 @@ def main():
 
     script_dir = Path(__file__).parent
     content_dir = script_dir.parent / 'content' / 'blog'
+    static_dir = script_dir.parent / 'static'
 
     if not content_dir.exists():
         print(f"Error: Content directory not found: {content_dir}", file=sys.stderr)
@@ -633,7 +748,11 @@ def main():
             continue
 
         # Sync the blog
-        sync_result = sync_blog(blog_detail, content_dir, dry_run=args.dry_run, force=args.force)
+        sync_result = sync_blog(
+            blog_detail, content_dir, static_dir,
+            dry_run=args.dry_run, force=args.force,
+            skip_images=args.skip_images, verbose=args.verbose
+        )
 
         results.append({
             'title': blog.get('title', 'Untitled'),
