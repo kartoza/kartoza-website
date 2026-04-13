@@ -1,28 +1,21 @@
 ---
-title: "How to Load a QGIS Project in Python"
-description: "Loading a QGIS project in python requires surprisingly minimal code to create a standalone application that displays a project as a map in a window. The article demonstrates using the QGIS API to build mapping applications efficiently."
+author: Gavin Fleming
+date: '2015-01-21'
+description: Loading a QGIS project in python
+erpnext_id: /blog/qgis/how-to-load-a-qgis-project-in-python
+erpnext_modified: '2015-01-21'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - QGIS
-  - Python
-  - API
-date: 2015-01-21
-author: "Gavin Fleming"
-thumbnail: "/img/blog/placeholder.png"
+- Qgis
+thumbnail: /img/blog/erpnext/GC13lSo.png
+title: How to Load a QGIS Project in Python
 ---
 
-{{< block
-    title="How to Load a QGIS Project in Python"
-    subtitle="QGIS"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-Loading a QGIS project in python requires surprisingly minimal code to create a standalone application that displays a project as a map in a window.
-{{< /block >}}
+Today in a project we are working on we wanted to load a QGIS project. It takes surprisingly few lines of code to make a small standalone application that loads a project and then shows it as a map in a window like this:
 
-## Introduction
+![](/img/blog/erpnext/GC13lSo.png)
 
-Loading a QGIS project in python requires surprisingly minimal code to create a standalone application that displays a project as a map in a window. The article demonstrates using the QGIS API to build mapping applications efficiently.
+Here is the code I wrote to produce this:
 
-The post references using the `QgsLayerTreeMapCanvasBridge` class to create simple mapping applications with minimal coding effort. This enables developers to quickly create standalone map viewers from existing QGIS projects.
-
-This technique is particularly useful for creating custom applications that leverage existing QGIS project configurations without requiring users to learn the full QGIS interface.
+The main bit of magic is the QgsLayerTreeMapCanvasBridge class which will convert your project into a layer tree so that the layers appear in the canvas. If you ever need to make a standalone python application with a nice map in it, consider using the QGIS API to do it!

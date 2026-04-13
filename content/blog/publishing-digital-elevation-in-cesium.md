@@ -1,74 +1,211 @@
 ---
-title: "Publishing Digital Elevation in Cesium"
-description: "The piece explores visualizing terrain data using Cesium, noting that digital elevation data is now readily available from multiple sources."
+author: Admire Nyakudya
+date: '2020-11-06'
+description: Digital elevation data is now readily available from multiple sources.
+  There are several tools that can help to visualise elevation data, Ce
+erpnext_id: /blog/geoserver/publishing-digital-elevation-in-cesium
+erpnext_modified: '2020-11-06'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - GeoServer
-  - Cesium
-  - 3D
-date: 2020-11-06
-author: "Admire Nyakudya"
-thumbnail: "/img/blog/placeholder.png"
+- Geoserver
+thumbnail: /img/blog/erpnext/download-images.png
+title: Publishing Digital Elevation in Cesium
 ---
 
-{{< block
-    title="Publishing Digital Elevation in Cesium"
-    subtitle="GeoServer"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-The piece explores visualizing terrain data using Cesium, noting that digital elevation data is now readily available from multiple sources.
-{{< /block >}}
+Digital elevation data is now readily available from multiple sources. There are several tools that can help to visualise elevation data, [Cesium](<https://www.cesium.com/>) being one. Recently I have been researching how to visualise terrain data in cesium and I could not see a complete example that I could replicate on my own. This post will highlight the steps I took to visualise elevation data in cesium.
 
-## Introduction
+  1. Download elevation data. You can download the data from <https://dwtkns.com/srtm30m/> or using the [SRTM Downloader](<https://github.com/hdus/SRTM-Downloader>) plugin in QGIS. In this example, I am using a GeoTIFF from <https://github.com/kartoza/docker-mapproxy/blob/master/data/E020N40.tif>![](/img/blog/erpnext/download-images.png)
+  2. Modify your downloaded images to create a seamless layer. You can use [gdalbuildvrt](<https://gdal.org/programs/gdalbuildvrt.html>) or merge the individual tiles to a single image using [gdal_merge.py](<https://gdal.org/programs/gdal_merge.html>).
+  3. Spin up an instance of GeoServer. In this case, we will use the [kartoza/geoserver docker image](<https://hub.docker.com/r/kartoza/geoserver>). To render the terrain data, we also need to install a GeoServer BIL extension. We run the following command to spin up GeoServer with the correct extension. 
 
-The piece explores visualizing terrain data using Cesium, noting that "Digital elevation data is now readily available from multiple sources." The author addresses a gap in available tutorials by providing a complete walkthrough for replicating elevation data visualization.
 
-## Step-by-Step Process
+    
+    
+    docker run -d -p 8080:8080 --name geoserver -v `pwd`/data:/data -e COMMUNITY_EXTENSIONS=dds-plugin kartoza/geoserver:2.17.2
 
-### 1. Download Elevation Data
+  1. Open your GeoServer instance and publish your DEM. **NB:** Remember to define the BIL format settings for your raster layer when publishing the layer.![](/img/blog/erpnext/bil-settings.png)
+  2. Navigate to layer preview and test if you can preview your raster layer.
+  3. Proceed to download the cesium terrain workshop material <https://github.com/CesiumGS/cesium-workshop> **NB:** The cesium workshop shows a lot of information which is not necessary for our example. We need to modify index.html and Source/App.js to be minimalistic for our example.
+  4. Delete some lines from the index.html by running:
 
-Sources include the SRTM 30m database and QGIS's SRTM Downloader plugin. The example uses a GeoTIFF file from Kartoza's Docker MapProxy repository.
 
-### 2. Create Seamless Layers
+    
+    
+    sed -i.bak '24,54d;' cesium-workshop/index.html
 
-Tools like `gdalbuildvrt` or `gdal_merge.py` merge individual elevation tiles into unified imagery.
+  1. Add a minimalistic App.js to replace the current one in the folder cesium-workshop/Source.
 
-### 3. Deploy GeoServer
 
-The workflow uses the Kartoza GeoServer Docker image with the BIL extension installed via command-line deployment, enabling terrain rendering capabilities.
+    
+    
+    (function () {
+    
+        "use strict";
+    
+        var west = 7.1;
+    
+        var south = -11.2;
+    
+        var east = 72.9;
+    
+        var north = 41.2;
+    
+      
+    
+    
+        var rectangle = Cesium.Rectangle.fromDegrees(west, south, east, north);
+    
+      
+    
+    
+        Cesium.Camera.DEFAULT_VIEW_FACTOR = 0;
+    
+      
+    
+    
+        Cesium.Camera.DEFAULT_VIEW_RECTANGLE = rectangle;
+    
+        var viewer = new Cesium.Viewer('cesiumContainer', {
+    
+            scene3DOnly: true,
+    
+            selectionIndicator: false,
+    
+            baseLayerPicker: false
+    
+      
+    
+    
+        });
+    
+      
+    
+    
+        // Remove default base layer
+    
+        viewer.imageryLayers.remove(viewer.imageryLayers.get(0));
+    
+        viewer.imageryLayers.addImageryProvider(new Cesium.IonImageryProvider({assetId: 3954}));
+    
+        var terrainProvider = new Cesium.GeoserverTerrainProvider({
+    
+            url: "http://localhost:8080/geoserver/wms",
+    
+            layerName: "kartoza:E020N40",
+    
+            //styleName: "tradecraft:graytocolor",
+    
+            waterMask: true
+    
+        });
+    
+        viewer.terrainProvider = terrainProvider;
+    
+    }());
 
-### 4. Publish DEM Data
+  1. Add a declaration for using [Cesium-GeoserverTerrainProvider](<https://github.com/kaktus40/Cesium-GeoserverTerrainProvider>).
 
-Users configure BIL format settings when publishing raster layers within GeoServer's interface.
 
-### 5. Test Preview Layer
+    
+    
+    sed -i '/App.js/i <script src="Source/GeoserverTerrainProvider.js"></script>' cesium-workshop/index.html
 
-Layer preview functionality validates successful raster layer configuration.
+  1. Use a web server to render your HTML file. For my use case, I am using Nginx in docker.
 
-### 6. Configure Cesium Workshop
 
-Downloads the Cesium workshop materials and modifies HTML/JavaScript files for minimal, focused implementation.
+    
+    
+    version: '3.4'
+    
+    services:
+    
+      
+    
+    
+      ngnix:
+    
+        image: nginx
+    
+        volumes:
+    
+          - ./cesium-workshop:/web
+    
+          - ./sites-enabled:/etc/nginx/conf.d:ro
+    
+        logging:
+    
+          driver: json-file
+    
+          options:
+    
+            max-size: 200m
+    
+            max-file: '10'
+    
+        ports:
+    
+          - 8091:80
 
-### 7. Implement App.js
+  1. Where my nginx conf located in sites-enabled looks like
 
-A custom JavaScript file defines geographic boundaries and initialises a Cesium viewer with specific configuration options and terrain provider settings.
 
-### 8. Add Terrain Provider
+    
+    
+    server {
+    
+      
+    
+    
+        listen      80;
+    
+        # the domain name it will serve for
+    
+        server_name localhost;
+    
+      
+    
+    
+      
+    
+    
+        # max upload size, adjust to taste
+    
+        client_max_body_size 15M;
+    
+      
+    
+    
+        location / {
+    
+            add_header "Access-Control-Allow-Origin" "*";
+    
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, PUT, DELETE';
+    
+            add_header 'Access-Control-Allow-Headers' 'X-Requested-With,Accept,Content-Type, Origin';
+    
+            root /web/;
+    
+            index index.html index.htm;
+    
+        }
+    
+      
+    
+    
+        error_page 500 502 503 504 /50x.html;
+    
+        location = /50x.html {
+    
+            root /usr/share/nginx/html;
+    
+        }
+    
+      
+    
+    
+    }
 
-The Cesium-GeoserverTerrainProvider library enables integration between Cesium and GeoServer.
-
-### 9. Deploy Web Server
-
-Nginx Docker configuration serves the Cesium application with proper CORS headers and static file routing.
-
-### 10. Access Visualization
-
-Navigation to localhost:8091 displays interactive 3D terrain visualization.
-
-### 11. Production Considerations
-
-The author recommends replacing default Cesium Ion access tokens with production credentials.
-
-## Technical Configuration
-
-The article includes Docker Compose setup and Nginx configuration files demonstrating server deployment architecture and access control settings.
+  1. Navigate to <http://localhost:8091>
+  2. Rotate your map and you should be able to visualise the terrain as depicted below.![](/img/blog/erpnext/terains.png)
+  3. In the production environment remember to replace the cesium default ion access token with your own

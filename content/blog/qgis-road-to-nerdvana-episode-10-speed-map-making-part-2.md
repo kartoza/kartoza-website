@@ -1,29 +1,23 @@
 ---
-title: "QGIS Road To Nerdvana Episode 10: Speed Map Making (part 2)"
-description: "The article introduces a video demonstration where Tim Sutton attempts to create multiple maps rapidly."
+author: Seabilwe Tilodi
+date: '2020-12-09'
+description: Why make just one map in the quickest time possible? Make more! In this
+  video Tim Sutton will again try to go from Zero to a Nice Looking Ma
+erpnext_id: /blog/qgis/qgis-road-to-nerdvana-episode-10-speed-map-making-part-2
+erpnext_modified: '2020-12-09'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - QGIS
-  - Video
-date: 2020-12-09
-author: "Seabilwe Tilodi"
-thumbnail: "/img/blog/placeholder.png"
+- Qgis
+thumbnail: /img/blog/placeholder.png
+title: 'QGIS Road To Nerdvana Episode 10: Speed Map Making (part 2)'
 ---
 
-{{< block
-    title="QGIS Road To Nerdvana Episode 10: Speed Map Making (part 2)"
-    subtitle="QGIS"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-The article introduces a video demonstration where Tim Sutton attempts to create multiple maps rapidly.
-{{< /block >}}
+Why make just one map in the quickest time possible? Make more! In this video, Tim Sutton will again try to go from Zero to a Nice Looking Map as quick as he can.
 
-## Overview
+Enjoy
 
-The article introduces a video demonstration where Tim Sutton attempts to create multiple maps rapidly, continuing the theme from a previous episode.
+  
 
-"Why make just one map in the quickest time possible? Make more! In this video, Tim Sutton will again try to go from Zero to a Nice Looking Map as quick as he can."
 
-## Call to Action
-
-The piece is brief and concludes with an appeal to viewers: "Please subscribe to our channel if you want to see more videos like this! We are trying to get to 1000 subscribers, so we can be famous like MrBeast :-)"
+Please subscribe to our channel if you want to see more videos like this! We are trying to get to 1000 subscribers, so we can be famous like MrBeast :-)

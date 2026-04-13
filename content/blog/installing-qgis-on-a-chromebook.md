@@ -1,43 +1,43 @@
 ---
-title: "Installing QGIS on a Chromebook"
-description: "How St Johns College in Johannesburg successfully deployed QGIS on Chromebook devices for their geography department."
+author: Gavin Fleming
+date: '2022-05-24'
+description: Recently all the Geography Department notebooks at St Johns College (Johannesburg),
+  that had QGIS installed, were distributed to students du
+erpnext_id: /blog/qgis/installing-qgis-on-a-chromebook
+erpnext_modified: '2022-05-24'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - QGIS
-  - Education
-  - Chromebook
-  - Installation
-date: 2022-05-24
-author: "Gavin Fleming"
-thumbnail: "/img/blog/placeholder.png"
+- Qgis
+thumbnail: /img/blog/placeholder.png
+title: Installing QGIS on a Chromebook
 ---
 
-{{< block
-    title="Installing QGIS on a Chromebook"
-    subtitle="QGIS"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-How St Johns College in Johannesburg successfully deployed QGIS on Chromebook devices for their geography department.
-{{< /block >}}
+in 2021, all the Geography Department notebooks at St Johns College (Johannesburg), that had QGIS installed, were distributed to students during COVID lockdowns, so they were no longer available to the deparment. The school had stock of Chromebooks but these would only be useful to the department if QGIS could be installed, as QGIS is used intensively in most Geography lessons.
 
-## Introduction
+Since Chromebooks are intended as mainly client computers and don't have the resources to install and run all the usual desktop applications, there was doubt at first that this could work. However, the IT department Geography departments managed not only to install QGIS successfully, but it runs fast and without a hitch. Typically, data is shared as GeoPackages via Google Drive (the school has a Google Education account) so users can access data locally.
 
-The piece describes how St Johns College in Johannesburg successfully deployed QGIS on Chromebook devices. After geography department notebooks containing QGIS were distributed during COVID lockdowns, the school sought an alternative solution using their existing Chromebook inventory.
+This is how they did it:
 
-## Context
+  1. Click Developers and turn on Linux Development Environment (Beta)
+  2. When prompted to set up Linux, click next
+  3. Ensure that the username is correct and click install
+  4. Linux Terminal will open up
+  5. Run the following command to install Flatpak
 
-"In 2021, all the Geography Department notebooks at St Johns College (Johannesburg), that had QGIS installed, were distributed to students during COVID lockdowns, so they were no longer available to the department."
+    sudo apt install flatpak
 
-Despite initial skepticism about Chromebooks' limited resources, the IT and geography departments proved QGIS could run effectively on these devices. Data sharing occurs through GeoPackages via Google Drive, enabling local access for users.
+  1. Run the following commands to install QGIS:
 
-## Installation Steps
+    sudo curl -LO
 
-1. Enable Linux Development Environment (Beta) via Developers menu
-2. Complete Linux setup prompts with correct username
-3. Install Flatpak using: `sudo apt install flatpak`
-4. Execute the installation script from OnTheLink
-5. Follow menu prompts selecting Option 1 for updates and version selection
-6. Confirm installation continuation and await completion
-7. Close terminal upon completion
+    https://github.com/onthelink-nl/scripts/raw/master/OnTheLink_QGIS-MENU_EN
+    
+    .sh && bash "OnTheLink_QGIS-MENU_EN.sh"
 
-The solution demonstrates that resource-constrained devices can effectively support professional GIS applications when configured appropriately.
+  1. You will be prompted about an update, click Yes
+  2. On the Menu that pops up after update, Select option 1 and press Enter
+  3. One the Version Selector Menu, Select Option 1 and press Enter
+  4. The Installation process will start, please press enter when prompted at [ANY-KEY]
+  5. Enter on Yes to confirm that you want to continue and wait for installation to complete.
+  6. Once the installation is complete, type exit on terminal to close.

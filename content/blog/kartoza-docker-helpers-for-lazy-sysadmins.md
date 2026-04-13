@@ -1,32 +1,18 @@
 ---
-title: "Kartoza Docker-helpers for Lazy Sysadmins"
-description: "Docker offers powerful containerization capabilities, though the command-line interface can become repetitive."
+author: Gavin Fleming
+date: '2015-01-07'
+description: Docker is really awesome but typing out all those commands can get tedious.
+  I wanted to quickly share a small project I made on Github
+erpnext_id: /blog/docker/kartoza-docker-helpers-for-lazy-sysadmins
+erpnext_modified: '2015-01-07'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - Docker
-date: 2015-01-07
-author: "Gavin Fleming"
-thumbnail: "/img/blog/placeholder.png"
+- Docker
+thumbnail: /img/blog/placeholder.png
+title: Kartoza Docker-helpers for Lazy Sysadmins
 ---
 
-{{< block
-    title="Kartoza Docker-helpers for Lazy Sysadmins"
-    subtitle="Docker"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-Docker offers powerful containerization capabilities, though the command-line interface can become repetitive.
-{{< /block >}}
+Docker is really awesome but typing out all those commands can get tedious. I wanted to quickly share a small project on github I made some time back that tries to make your life easier when working with docker. The project is called [docker-helpers](<https://github.com/kartoza/docker-helpers>). It is a collection of bash scripts that give you short cuts to various 'every day' docker commands. Here is a quick listing of the different commands:
 
-## Overview
-
-Docker offers powerful containerization capabilities, though the command-line interface can become repetitive. The author introduces a GitHub project called docker-helpers that streamlines daily operations.
-
-"Docker is really awesome but typing out all those commands can get tedious."
-
-## Docker-helpers Initiative
-
-The docker-helpers initiative consists of bash scripts designed to create shortcuts for frequently-used Docker commands. Rather than memorizing lengthy command syntax, developers can leverage abbreviated alternatives through this utility collection.
-
-## Installation Instructions
-
-Users interested in adopting docker-helpers should visit the project's README on GitHub. The setup process involves checking out the repository and adding it to the bash PATH environment variable.
+To install docker helpers, pop over to the project README for brief instructions - basically just check out the repo and add it to your bash path.

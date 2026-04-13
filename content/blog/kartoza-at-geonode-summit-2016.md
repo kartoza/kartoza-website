@@ -1,33 +1,26 @@
 ---
-title: "Kartoza at GeoNode Summit 2016"
-description: "Four Kartoza team members participated in the GeoNode Summit held in Rome during November 2016 to discuss future directions for GeoNode."
+author: Tim Sutton
+date: '2016-11-30'
+description: Four of the Kartoza team (Tim, Etienne, Ismail and Rizky) attended the
+  GeoNode Summit in Rome held in November 2016.
+erpnext_id: /blog/geonode/kartoza-at-geonode-summit-2016
+erpnext_modified: '2016-11-30'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - GeoNode
-  - Conference
-  - Community
-date: 2016-11-30
-author: "Tim Sutton"
-thumbnail: "/img/blog/placeholder.png"
+- Geonode
+thumbnail: https://kartoza.erpnext.com/files/QJU9aFe.jpg
+title: Kartoza at GeoNode Summit 2016
 ---
 
-{{< block
-    title="Kartoza at GeoNode Summit 2016"
-    subtitle="GeoNode"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-Four Kartoza team members participated in the GeoNode Summit held in Rome during November 2016 to discuss future directions for GeoNode.
-{{< /block >}}
-
-## Main Content
-
-Four Kartoza team members—Tim, Etienne, Ismail, and Rizky—participated in the GeoNode Summit held in Rome during November 2016. The World Food Programme hosted the event, with funding provided by the WorldBank/GFDRR. The gathering served as an excellent platform for the team to "interact with the GeoNode community" and discuss future directions for both GeoNode and Kartoza's initiatives.
-
-## Event Details
-
-Approximately 40 attendees were present at the summit.
-
-## Presentations
-
-- Etienne Trimaille delivered a presentation on "QGIS Server integration into GeoNode"
-- Rizky Maulana presented on "integrating InaSAFE with GeoNode"
+Four of the Kartoza team (Tim, Etienne, Ismail and Rizky) attended the GeoNode Summit in Rome held in November 2016. The World Food Programme provided the venue for the event and our attendance was funded by the WorldBank/GFDRR. The event was a really great opportunity to interact with the GeoNode community. We used the opportunity to learn about the upcoming plans for GeoNode and discuss some of our own plans.
+  
+![](https://kartoza.erpnext.com/files/QJU9aFe.jpg)
+  
+Above: Around 40 attendees were at the GeoNode summit.
+  
+![](https://kartoza.erpnext.com/files/Ir2LyvG.png)
+  
+Etienne Trimaille gave a talk on QGIS Server integration into GeoNode here:
+  
+And Rizky Maulana gave a talk about integrating InaSAFE with GeoNode here:

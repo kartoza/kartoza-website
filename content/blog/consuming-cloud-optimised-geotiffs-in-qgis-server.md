@@ -1,52 +1,80 @@
 ---
-title: "Consuming Cloud Optimised GeoTIFFs in QGIS Server"
-description: "QGIS has been able to consume cloud optimised GeoTIFF (COG)s since v3.2, through the data source manager."
+author: Admire Nyakudya
+date: '2020-05-04'
+description: QGIS has been able to consume cloud optimised GeoTIFFs (COGs) since v3.2,
+  through the data source manager. 
+erpnext_id: /blog/qgis/consuming-cloud-optimised-geotiffs-in-qgis-server
+erpnext_modified: '2020-05-04'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - QGIS
-  - Cloud
-  - GeoTIFF
-date: 2020-05-04
-author: "Admire Nyakudya"
-thumbnail: "/img/blog/placeholder.png"
+- Qgis
+thumbnail: /img/blog/erpnext/raster-manager.png
+title: Consuming Cloud Optimised GeoTIFFs in QGIS Server
 ---
 
-{{< block
-    title="Consuming Cloud Optimised GeoTIFFs in QGIS Server"
-    subtitle="QGIS"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-QGIS has been able to consume cloud optimised GeoTIFF (COG)s since v3.2, through the data source manager.
-{{< /block >}}
+QGIS has been able to consume [cloud optimised GeoTIFF](<https://www.cogeo.org/>)s (COGs) since v3.2, through the data source manager. This article does not aim to explain what a COG is as various other articles have done so extensively.
 
-## Introduction
+Many organisations are choosing to use cloud based storage like [S3](<https://aws.amazon.com/s3/>) or [Google Cloud Storage](<https://cloud.google.com/storage/>). Traditional GIS file formats can easily sit in the cloud, but serving up web map tiles or doing on-the-fly processing of the data are difficult to do efficiently with those formats. They often have to be fully downloaded to another location and then translated to an optimised format or stored in memory.
 
-"QGIS has been able to consume cloud optimised GeoTIFF (COG)s since v3.2, through the data source manager." The piece does not explain what COGs are, directing readers to other resources for that context.
+In this article I will describe the process of publishing a QGIS project with COG (in local storage) using QGIS Server. In future articles I will describe how the COG layer can be processed using QGIS Server algorithms to generate new data in an efficient way.
 
-## Overview
+This is the docker-compose.yml file:
 
-The article addresses cloud-based storage adoption through platforms like S3 and Google Cloud Storage. Traditional GIS formats struggle with efficient web map tile serving and on-the-fly data processing in cloud environments, typically requiring full downloads or format conversion before use.
+    version: '2.1'  
+      
+    volumes:  
+       transfer-data:  
+       web-data:  
+       plugins:  
+      
+    services:    
+       transfer:  
+         image: dutchcoders/transfer.sh:latest  
+         volumes:  
+           - transfer-data:/data  
+         ports:  
+           - "8080:8080"  
+         restart: on-failure  
+         command: --provider local --basedir /data --temp-path /data  
+         healthcheck:  
+           test: "exit 0"  
+      
+       qgis_server:  
+         image: 3liz/qgis-map-server:3.8  
+         environment:  
+           - QGSRV_SERVER_WORKERS=10  
+           - QGSRV_LOGGING_LEVEL=DEBUG  
+           - QGSRV_CACHE_ROOTDIR=/projects  
+           - QGSRV_CACHE_SIZE=10  
+           - QGSRV_SERVER_PLUGINPATH=/plugins  
+           - QGIS_SERVER_PARALLEL_RENDERING=true  
+           - QGIS_SERVER_MAX_THREADS=10  
+         ports:  
+           - 8081:8080  
+         volumes:  
+           - web-data:/projects  
+           - plugins:/plugins  
+         depends_on:  
+           transfer:  
+             condition: service_healthy
 
-The author outlines a process for "publishing a QGIS project with COG (in local storage) using QGIS Server," with plans to discuss COG processing via QGIS Server algorithms in future articles.
+I downloaded a DEM layer and followed the procedure from [GDAL](<https://trac.osgeo.org/gdal/wiki/CloudOptimizedGeoTIFF>) on how to generate a COG. Using docker-compose I started my containers by running `docker-compose up -d`
 
-## Technical Implementation
+The container **transfer** allowed me to simulate a cloud storage server like [S3](<https://aws.amazon.com/s3/>) or [Google Cloud Storage](<https://cloud.google.com/storage/>).
 
-### Docker Configuration
+After uploading my raster layer through the **transfer** interface I could access it from the URL `http://localhost:8080/KifYI/swellies.tif`
 
-The setup uses a docker-compose file with two main services:
-- **Transfer service:** Simulates cloud storage (S3/Google Cloud Storage)
-- **QGIS Server service:** Version 3.8 with specific configurations for workers, logging, caching, and parallel rendering
+I then added this raster to QGIS using the datasource manager as depicted below.
 
-### Workflow Steps
+![raster](/img/blog/erpnext/raster-manager.png)
 
-1. Downloaded a DEM layer and generated a COG following GDAL procedures
-2. Uploaded the raster through the transfer interface
-3. Accessed the layer via URL: `http://localhost:8080/KifYI/swellies.tif`
-4. Added the raster using QGIS datasource manager
-5. Created and configured a QGIS project for QGIS Server publication
-6. Modified project URLs from localhost to the Docker service name (transfer)
-7. Connected via WMS using: `http://localhost:8081/ows/?MAP=cogo.gqs`
+I then proceeded to create a project in QGIS and configured it to be published by QGIS Server.
 
-## Technical Advantage
+I opened the QGIS project in a text editor to change the URL from `http://localhost:8080` to `http://transfer:8080`since the QGIS project is to be consumed by QGIS Server in Docker and the two containers are linked. I then copied the QGIS project into the qgis container and I could connect to WMS services from QGIS using the following URL `http://localhost:8081/ows/?MAP=cogo.gqs`
 
-The diagram illustrates "HTTP GET range request" functionality, enabling QGIS Server to access specific image portions without downloading entire files—a key efficiency advantage over traditional approaches like GeoTrellis.
+The image below gives an illustration of how QGIS Server is accessing the [HTTP GET range request](<https://tools.ietf.org/html/rfc7233>) .
+
+![](/img/blog/erpnext/chunks.png)
+
+In other set-ups like GeoTrellis they have built tools that allow users to process certain portions of the image and generate new data. This is very efficient as the whole tile is not loaded in memory or downloaded before processing is done.

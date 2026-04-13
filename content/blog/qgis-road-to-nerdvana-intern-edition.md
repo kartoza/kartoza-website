@@ -1,39 +1,18 @@
 ---
-title: "QGIS Road to Nerdvana Intern Edition"
-description: "Kartoza interns showcase their geospatial mapping abilities using QGIS software in a web series featuring four team members."
+author: Seabilwe Tilodi
+date: '2021-03-10'
+description: The interns toook over the Nerdvana space, showing off their skills is
+  QGIS
+erpnext_id: /blog/qgis/qgis-road-to-nerdvana-intern-edition
+erpnext_modified: '2021-03-10'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - QGIS
-  - Education
-  - Interns
-date: 2021-03-10
-author: "Seabilwe Tilodi"
-thumbnail: "/img/blog/placeholder.png"
+- Qgis
+thumbnail: /img/blog/placeholder.png
+title: QGIS Road to Nerdvana Intern Edition
 ---
 
-{{< block
-    title="QGIS Road to Nerdvana Intern Edition"
-    subtitle="QGIS"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-Kartoza interns showcase their geospatial mapping abilities using QGIS software in a web series called "QGIS Road to Nerdvana."
-{{< /block >}}
+The interns took over the Nerdvana space, showing off their mapping skills using QGIS
 
-## Content
-
-The piece describes an event where interns showcased their geospatial mapping abilities using QGIS software. The content highlights four intern contributors who each appeared in separate episodes of a web series called "QGIS Road to Nerdvana."
-
-### Featured Episodes
-
-The article references four episodes featuring different team members:
-
-- **Amy** featured in Episode 19
-- **Riley** featured in Episode 20
-- **Nic** featured in Episode 21
-- **Zinzi** featured in Episode 22
-
-Each episode is linked to its corresponding YouTube video URL, allowing readers to view the interns' demonstrations of their QGIS skills.
-
-## Engagement
-
-The page includes engagement features such as a like/heart button system and a comment section. One commenter, Rudolf Jacobs, left positive feedback stating "Awesome stuff" four years prior to the extraction date.
+Catch Amy in [Episode 19 of QGIS Road to Nerdvana](<https://youtu.be/wajSLoF0yK0>), Riley in [Episode 20 of QGIS Road to Nerdvana](<https://youtu.be/VRxIoSxA8kk>), Nic in [Episode 21 of QGIS Road to Nerdvana](<https://youtu.be/f7HPzHu0bKg>) and Zinzi in [Epidose 22 of QGIS Road to Nerdvana](<https://youtu.be/PjUf5NVnx_k>).

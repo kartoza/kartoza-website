@@ -1,57 +1,73 @@
 ---
-title: "Create a Custom Reference Grid in QGIS Composer (Part 2)"
-description: "This follow-up to the initial grid creation tutorial focuses on building dynamic grids that are aligned to the lat long graticule."
+author: Admire Nyakudya
+date: '2020-03-30'
+description: This is a follow-up post on https://kartoza.com/en/blog/create-a-custom-reference-grid-in-qgis-composer/
+erpnext_id: /blog/qgis/create-a-custom-reference-grid-in-qgis-composer-part-2
+erpnext_modified: '2020-03-30'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - QGIS
-  - Cartography
-date: 2020-03-30
-author: "Admire Nyakudya"
-thumbnail: "/img/blog/placeholder.png"
+- Qgis
+thumbnail: /img/blog/erpnext/lat-long.png
+title: Create a Custom Reference Grid in QGIS Composer (Part 2)
 ---
 
-{{< block
-    title="Create a Custom Reference Grid in QGIS Composer (Part 2)"
-    subtitle="QGIS"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-This follow-up to the initial grid creation tutorial focuses on building dynamic grids that are aligned to the lat long graticule.
-{{< /block >}}
+This is a follow-up post on <https://kartoza.com/en/blog/create-a-custom-reference-grid-in-qgis-composer/>.
 
-## Overview
+This post outlines how to make dynamic grids that are aligned to the lat long graticule.
 
-This follow-up to the initial grid creation tutorial focuses on building "dynamic grids that are aligned to the lat long graticule."
+![](/img/blog/erpnext/lat-long.png)
 
-## Process Steps
+Create one grid to show the lines with intervals in decimal degrees.
 
-### Step 1: Create Primary Grid
+![](/img/blog/erpnext/lat-long-map-grid.png)
 
-Establish the foundational grid displaying lines with decimal degree intervals.
+Create another grid to show the labels in the center of the visible grid cells. Note the offset is set to half the interval and we don't draw the lines.
 
-### Step 2: Create Secondary Grid
+![](/img/blog/erpnext/lat-long-labels.png)
 
-Build a second grid layer showing labels positioned at the center of visible grid cells. Configure the offset to half the interval value and disable line rendering.
+Navigate to the label setting for the second grid and choose the following.
 
-### Step 3: Configure Label Settings
+![](/img/blog/erpnext/custom-label-settings.png)
 
-Access label settings for the secondary grid and navigate to custom label configuration options.
+Click expression builder on custom.
 
-### Step 4: Expression Builder Setup
+![](/img/blog/erpnext/expression-builder.png)
 
-In the expression builder's function editor, create a new function using the code found at the referenced GitHub gist, then save the changes.
+Click on the function editor and create a new function. Populate the contents with following <https://gist.github.com/NyakudyaA/c2cf728e2906288e0448f82cb3c5a077> and save your changes.
 
-### Step 5: Enter Expression Formula
+Click on the expression and enter the following:
 
-Apply the provided CASE/WHEN expression that handles axis-specific labeling:
-- Y-axis: Uses alphabetic characters (A-T) derived from grid positioning
-- X-axis: Returns numeric values with decimal precision
+    CASE  
+     WHEN @GRID_AXIS = 'y' THEN SUBSTR('ABCDEFGHIJKLMNOPQRST',   
+     (  
+       @GRID_NUMBER - TO_INT(MAP_Y_MIN( 'A4 portrait', 'main') / 0.016666666667)*0.016666666667 + 0.008333333000  
+     )  
+     / 0.016666666667, 1)   
+     WHEN @GRID_AXIS = 'x' THEN ROUND(  
+     (  
+       @GRID_NUMBER - TO_INT( MAP_X_MIN( 'A4 portrait', 'main') / 0.016666666667)*0.016666666667 + 0.008333333000  
+     ) / 0.016666666667, 2)   
+    END
 
-## Key Parameters
+The parameters for the map labels are explained below:
 
-The expression references several configuration elements: the composer title, map item ID, grid interval measurements in latitude/longitude coordinates, offset calculations, and the custom Python function for coordinate transformation.
+![](/img/blog/erpnext/map-items-label.png)
 
-## Important Requirement
+- A = Composer title
 
-"The script for labelling assumes that your map CRS is 3857. So it will transform the bounding box from EPSG:3857 to EPSG:4326."
+- B = Item ID for the map
 
-Users must also assign an Item ID to map elements for proper functionality.
+- C = Grid Interval in lat long (calculated as (1/60) to get a minute grid)
+
+- D = Grid offset in lat long ( calculated as half of the Grid interval)
+
+- E = Custom python function ( Copied from <https://gist.github.com/NyakudyaA/c2cf728e2906288e0448f82cb3c5a077> )
+
+Your map will be labelled accordingly now.
+
+**NB:** The script for labelling assumes that your map CRS is 3857. So it will transform the bounding box from**EPSG:3857** to **EPSG:4326**. If your map is using another CRS you can change the following <https://gist.github.com/NyakudyaA/c2cf728e2906288e0448f82cb3c5a077#file-map_grids-py-L15>
+
+The script also assumes the map has an item id assigned. Many users do not know the significance of adding the **Item ID** for each map element.
+
+![](/img/blog/erpnext/item-id-map.png)

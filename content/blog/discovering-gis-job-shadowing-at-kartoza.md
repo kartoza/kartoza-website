@@ -1,23 +1,17 @@
 ---
-title: "Kartoza - Discovering GIS: Job Shadowing at Kartoza"
-description: "Job shadowing at Kartoza provides students with a unique opportunity to gain insight into what GIS and a real-world IT business entail."
+author: Lené van Jaarsveld
+date: '2024-08-29'
+description: Read about how Kartoza supports the next generation of GIS professionals
+  through immersive job shadowing experiences.
+erpnext_id: /blog/uncategorised/discovering-gis-job-shadowing-at-kartoza
+erpnext_modified: '2024-08-29'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - News
-  - Education
-  - GIS
-date: 2024-08-29
-author: "Lené van Jaarsveld"
-thumbnail: "/img/blog/placeholder.png"
+- Uncategorised
+thumbnail: /img/blog/erpnext/R5c05TL.png
+title: 'Discovering GIS: Job Shadowing at Kartoza'
 ---
-
-{{< block
-    title="Kartoza - Discovering GIS: Job Shadowing at Kartoza"
-    subtitle="News"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-Job shadowing at Kartoza provides students with a unique opportunity to gain insight into what GIS and a real-world IT business entail.
-{{< /block >}}
 
 ## Kartoza's Commitment to Education and the Future of GIS
 
@@ -37,40 +31,68 @@ Job shadowing at Kartoza provides students with a unique opportunity to gain ins
 
 The main functions of GIS are:
 
-1. **Data Management:** Storing, organising, and maintaining geographic data.
-2. **Mapping and Visualisation:** Creating maps and visual representations of spatial data.
-3. **Spatial Analysis:** Analysing spatial relationships and patterns to help with decision-making.
-4. **Modeling and Simulation:** Simulating real-world scenarios and predicting outcomes based on geographic data.
-5. **Data Integration:** Combining different types of data to analyse complex scenarios.
+  1. **Data Management:** Storing, orginising, and maintaining geographic data.
+  2. **Mapping and Visualisation:** Creating maps and visual representations of spatial data.
+  3. **Spatial Analysis:** Analysing spatial relationships and patterns to help with decision-making.
+  4. **Modeling and Simulation:** Simulating real-world scenarious and predicting outcomes based on geographic data.
+  5. **Data Integration:** Combining different types of data to analyse complex scenarios.
 
 ### The Importance of Early Exposure to GIS
 
 We firmly believe that introducing GIS and related technologies to students at an early stage is very important. Exposure to and education about GIS if integrated into school curriculums can inspire the next generation of GIS professionals. By doing so, we not only help students develop a clear understanding of GIS but also contribute to the growth of the field.
 
-Early introduction to GIS can ignite a passion for spatial analysis and problem-solving, skills that are increasingly valuable in our data-driven world. As students learn about the potential of GIS to address real-world challenges—from environmental conservation to urban planning—they become better equipped to contribute to a brighter and more sustainable future.
+Early introduction to GIS can ignite a passion for spatial analysis and problem-solving, skills that are increasingly valuable in our data-driven world. As students learn about the potential of GIS to address real-world challenges—from environmental conservation to urban planning—they become better equipped to contribute to a brighter and more sustainable future. During the last week of June 2024, Kartoza had the honour of hosting a Gr 11 student who spent four days job shadowing with us. As part of a school assignment, Shakira Sallie had to complete four days of job shadowing in a career field that interests her.
 
-During the last week of June 2024, Kartoza had the honour of hosting a Grade 11 student who spent four days job shadowing with the company. As part of a school assignment, Shakira Sallie had to complete four days of job shadowing in a career field that interests her.
+![](/img/blog/erpnext/R5c05TL.png)
 
-Shakira heard about the company online and contacted them, expressing her interest in gaining a better understanding of what a career in GIS would look like. Thiasha Vythilingam, a Kartoza Junior GIS Product Developer, was chosen to mentor Shakira during her time with the company.
+Shakira heard about us online and contacted us, expressing her interest in gaining a better understanding of what a career in GIS would look like. We jumped at the opportunity to help her complete her assignment requirements! Thiasha Vythilingam, a Kartoza Junior GIS Product Developer was chosen to mentor Shakira during her time with the company.
 
-During her four days of shadowing at Kartoza, Shakira was able to observe meetings and planning sessions and had one-on-one sessions with Thiasha. In these sessions, Shakira learned how to use QGIS, a free and open-source geographic information system software, to create maps. She was given small assignments that she completed during her time at Kartoza.
+During her four days of shadowing at Kartoza, Shakira was able to observe meetings and planning sessions and had one-on-one sessions with Thiasha. In these sessions with Thiasha, Shakira learned how to use QGIS, a free and open-source geographic information system software, to create maps, etc. She was given small assignments that she completed during her time at Kartoza. Here are some of the maps she created:
 
-### Student Testimonial
+![](/img/blog/erpnext/rLD0lUk.jpg)
 
-> Thank you for the opportunity awarded to job shadow at your company. I quickly learnt that working at Kartoza means teamwork. At Kartoza, they surely have a dream team setup. The Project Manager, Marina van der Merwe, drives the client requirements, and the team, Thiasha, Jeremy, Dorah, and Amy, to mention a few, makes it all come together effortlessly. Client briefings, developer meetings, deciphering technical jargon, coding, and mapping reflect each team member's strength within their field.
+![](/img/blog/erpnext/0jzlbsv.jpg)
+
+After her time with us, Shakira had this to say about her experience:
+
+> Dear Kartoza,
+
+> 
 >
+
+> Thank you for the opportunity awarded to job shadow at your company.
+
+> 
+>
+
+> I quickly learnt that working at Kartoza means teamwork. At Kartoza, they surely have a dream team setup. The Project Manager, Marina van der Merwe, drives the client requirements, and the team, Thiasha, Jeremy, Dorah, and Amy, to mention a few, makes it all come together effortlessly. Client briefings, developer meetings, deciphering technical jargon, coding, and mapping reflect each team member’s strength within their field.
+
+> 
+>
+
 > I enjoyed taking a deeper look into the world of GIS. Working with the team at Kartoza was easy and informative. The overall experience and knowledge of the systems, software, and GIS environment reassured me that my choice to further study within the GIS field would be well worth my time.
+
+> 
 >
+
 > Thiasha was a great source of guidance in helping me navigate, create and complete the tasks assigned to me. I enjoyed playing around with the presentation of maps and styling the different map layers. It has taught me to be appreciative of maps and instilled a refreshing level of respect for map creators, be it hard copy or virtual maps; it takes a lot of time and effort to make sure that the correct information is depicted; after all, guiding people in the right direction offers great rewards.
+
+> 
 >
+
 > I am thankful to the team at Kartoza for this opportunity and look forward to the doors further studies in this field will open in the near future.
+
+> 
 >
-> Kind regards, Shakira
+
+> Kind regards,
+
+> Shaikra
 
 ### From the Kartoza Team
 
-We are excited to see where Shakira's journey in GIS takes her and wish her all the best for the future.
+We are excited to see where Shakira’s journey in GIS takes her and wish her all the best for the future.
 
 We are dedicated to nurturing the next generation of GIS professionals. Whether through job shadowing for high school students or internships for undergraduates, we aim to provide valuable learning experiences that inspire and equip students for future success in the field of GIS. By fostering early exposure and education, we hope to contribute to a thriving GIS community and a better world for all.
 
-Are you a parent with a high schooler interested in the field of GIS? Or if you know a high school student interested in gaining job shadowing experience in the field, feel free to contact Kartoza via the Contact Us form on our website.
+Are you a parent with a high schooler interested in the field of GIS? Or if you know a high school student interested in gaining job shadowing experience in the field, feel free to contact Kartoza via the [Contact Us](<https://kartoza.com/contact-us/new>) form on our website.

@@ -1,60 +1,55 @@
 ---
-title: "Finding and Fixing Topology and Geometry Errors in QGIS"
-description: "The article demonstrates how to find and fix topology and geometry errors in QGIS, translating technical errors into understandable visual representations."
+author: Admire Nyakudya
+date: '2020-11-23'
+description: Google Maps, Google Earth, Uber are examples leading software/apps that
+  are driven by GIS. They have allowed the ordinary person inadvertent
+erpnext_id: /blog/qgis/finding-and-fixing-topology-and-geometry-errors-in-qgis
+erpnext_modified: '2020-11-23'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - QGIS
-  - Topology
-  - GIS
-date: 2020-11-23
-author: "Admire Nyakudya"
-thumbnail: "/img/blog/placeholder.png"
+- Qgis
+thumbnail: /img/blog/erpnext/feature-blending.png
+title: Finding and Fixing Topology and Geometry Errors in QGIS
 ---
 
-{{< block
-    title="Finding and Fixing Topology and Geometry Errors in QGIS"
-    subtitle="QGIS"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-The article demonstrates how to find and fix topology and geometry errors in QGIS, translating technical errors into understandable visual representations.
-{{< /block >}}
+Google Maps, Google Earth, Uber are examples leading software/apps that are driven by GIS. They have allowed the ordinary person inadvertently to use GIS and appreciate its power without needing an understanding of the basics of GIS. Many people have taken the leap to using GIS by using some of the GIS capabilities in Google Earth.
 
-## Introduction
+In a recent '[Introduction to QGIS](<https://kartoza.com/training-courses/>)' course, a client provided a dataset that had been generated in Google Earth, but each time they submitted their final layer to GIS experts they were told the layer was not correct. They just could not figure out what the error with their data was.
 
-The article opens by noting that "Google Maps, Google Earth, Uber are examples leading software/apps that are driven by GIS," demonstrating how geospatial technology has become ubiquitous. The author emphasizes that these platforms have made GIS accessible to non-experts, allowing people to appreciate its capabilities through Google Earth.
+I immediately thought that the dataset had some topology error and took it upon myself to debug and fix the errors with the layer. My main worry was how to explain topology basics to people who are not GIS experts. Terms like slivers, undershoots, overshoots are easy to understand for a GIS user or academic. In this post, I will walk through how I tried to explain and show the attendees the topology errors.
 
-## Problem Context
+The following are the steps I took to inspect the layer
 
-During an "Introduction to QGIS" course, a client submitted a dataset created in Google Earth. However, GIS experts repeatedly rejected the data, citing unspecified errors. The client struggled to understand what was wrong with their dataset.
+- Load the KML layer into QGIS. Since KML editing functionalities are limited I then converted the layer into another format ie Geopackage, spatialite, or shapefile.
+- Inspect the attributes of the layer.
+- Identify if there are duplicates for the layer. For this, I used layer styling options to visualise this.
 
-## Solution Methodology
+![](/img/blog/erpnext/feature-blending.png)
 
-The author identified topology errors and documented the debugging process in systematic steps:
+- Activate the Topology checker plugin and then configure the rules to report errors.
 
-### 1. Data Import & Conversion
+![](/img/blog/erpnext/topology-checker.png)
 
-Load KML into QGIS, then convert to Geopackage, spatialite, or shapefile due to limited KML editing capabilities
+- The topology checker could not run because they were some null geometries within the layer.
 
-### 2. Data Inspection
+![](/img/blog/erpnext/null-geom.png)
 
-Examine layer attributes and identify duplicates using layer styling visualization options
+- Since we cannot visualise null geometries I then used an expression to select the records and delete them from the layer.
 
-### 3. Topology Checker Activation
+![](/img/blog/erpnext/select-null-geom.png)
 
-Configure rules to report errors using the Topology Checker plugin
+![](/img/blog/erpnext/delete-records.png)
 
-### 4. Handle Null Geometries
+- After running the geometry checker I could see some errors showing on the screen. The errors depicted did not give a definitive explanation of what constitutes invalid geometry.
 
-Address null geometries preventing checker execution; use expressions to select and delete problematic records
+![](/img/blog/erpnext/invalid-geom.png)
 
-### 5. Identify Gaps
-
-Employ Minimum Bounding Geometry algorithm, run difference calculations, and symbolize results to visually highlight gaps
-
-### 6. Error Resolution
-
-Execute "Delete Duplicate Geometries" algorithm, activate snapping, manually correct errors, or apply the v.clean processing algorithm
-
-## Conclusion
-
-The author demonstrates a practical workflow for explaining topology concepts to non-GIS professionals, translating technical errors into understandable visual representations.
+- I could use the topology checker to identify the gaps but I wanted a more visual way to show them the errors. So what I did is the following  
+- Generate the bounding box of the layer using the Minimum bounding geometry algorithm.  
+- Run the difference algorithm between the layer and the bounding box.  
+- Symbolize the difference layer using outer fill to only highlight the areas where there are gaps.  
+![](/img/blog/erpnext/gaps-slivers.png)  
+![](/img/blog/erpnext/gaps-layers.png)  
+  
+  - Finally, to fix all these errors you would need to run the algorithm 'Delete duplicate geometries', activate snapping, and then correct the errors manually. Alternatively, you could run the processing algorithm v.clean provided you understand what the parameters mean.

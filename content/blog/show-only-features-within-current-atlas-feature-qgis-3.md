@@ -1,42 +1,35 @@
 ---
-title: "Show Only Features Within Current Atlas Feature - QGIS 3"
-description: "Kartoza conducted QGIS training at the Surveyor General Department in Swaziland, where the team explored filtering features within polygon extents."
+author: Admire Nyakudya
+date: '2019-05-15'
+description: In our endless endeavour to spread QGIS, I was invited to conduct QGIS
+  training at the Surveyor General Department in Swaziland.
+erpnext_id: /blog/qgis/show-only-features-within-current-atlas-feature-qgis-3
+erpnext_modified: '2019-05-15'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - QGIS
-  - Atlas
-date: 2019-05-15
-author: "Admire Nyakudya"
-thumbnail: "/img/blog/placeholder.png"
+- Qgis
+thumbnail: /img/blog/erpnext/intersects.png
+title: Show Only Features Within Current Atlas Feature - QGIS 3
 ---
 
-{{< block
-    title="Show Only Features Within Current Atlas Feature - QGIS 3"
-    subtitle="QGIS"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-Kartoza conducted QGIS training at the Surveyor General Department in Swaziland, where the team explored filtering features within polygon extents.
-{{< /block >}}
+In our endless endeavour to spread QGIS, I was invited to conduct QGIS training at the [Surveyor General Department](<http://www.gov.sz/index.php/ministries-departments/ministry-of-natural-resources/surveyor-general>) in Swaziland.
 
-## Overview
+Whilst teaching about map composer and atlas we wanted to show features that are within a polygon extent. A quick google search showed us that this had been answered by [Underdark](<https://gis.stackexchange.com/questions/260392/show-only-features-within-current-atlas-feature>) but her answer included showing intersecting features. In our case, we only wanted to show features that were within a polygon. 
 
-Kartoza conducted QGIS training at the Surveyor General Department in Swaziland, where the team explored filtering features within polygon extents during map composer and atlas work.
+I initially tried to use the solution that had been suggested by Underdark but the results were unsatisfactory. After trying the Underdark solution I could get the following result:
 
-The challenge involved displaying only features contained within a polygon boundary. An existing solution from Underdark showed intersecting features, but the training team needed a stricter filtering approach.
+![Layer Intersects](/img/blog/erpnext/intersects.png)
 
-Initial attempts using Underdark's method produced undesirable results showing intersections. Attempting geometry intersection proved problematic because "QGIS returns a geometry collection and apparently QGIS cannot handle it properly."
+Then I thought I could just do an intersection between the Atlas geometry and the feature geometry I wanted. This solution does not work because QGIS returns a geometry collection and apparently QGIS cannot handle it properly.
 
-## Final Solution
+The solution I finally came up with included the earlier solution from Underdark.
 
-The working formula combines conditional logic with spatial operators:
+`CASE`  
+` WHEN within( $geometry , @atlas_geometry ) = 1 THEN intersects( $geometry , @atlas_geometry )`  
+`ELSE NULL`  
+`END`
 
-```
-CASE
-   WHEN within( $geometry , @atlas_geometry ) = 1 THEN  intersects( $geometry , @atlas_geometry )
-ELSE NULL
-END
-```
+The result I get is satisfactory but I would still prefer if I could use an intersection so that I can get the part of the polygon that intersects the poly rather than excluding it.
 
-This approach successfully filtered features contained entirely within the atlas polygon. However, the author noted a preference for pure intersection methods to capture partial polygon overlap areas rather than complete exclusion.
-
-The solution produced satisfactory results, though the team acknowledged limitations in handling geometry collections that prevented more elegant alternatives.
+![Layer within](/img/blog/erpnext/within.png)

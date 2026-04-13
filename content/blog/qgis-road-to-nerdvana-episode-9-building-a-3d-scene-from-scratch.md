@@ -1,25 +1,17 @@
 ---
-title: "QGIS Road to Nerdvana Episode 9: Building a 3D Scene from Scratch"
-description: "In this episode Tim Sutton will show you how to make a simple 3D scene in QGIS. This brief instructional post introduces a video tutorial demonstrating 3D scene creation techniques within the QGIS platform."
+author: Seabilwe Tilodi
+date: '2020-12-09'
+description: In this episode Tim Sutton will show you how to make a simple 3D scene
+  in QGIS.
+erpnext_id: /blog/qgis/qgis-road-to-nerdvana-episode-9-building-a-3d-scene-from-scratch
+erpnext_modified: '2020-12-09'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - QGIS
-  - 3D
-  - Video Series
-date: 2020-12-09
-author: "Seabilwe Tilodi"
-thumbnail: "/img/blog/placeholder.png"
+- Qgis
+thumbnail: /img/blog/placeholder.png
+title: 'QGIS Road to Nerdvana Episode 9: Building a 3D Scene from Scratch'
 ---
-
-{{< block
-    title="QGIS Road to Nerdvana Episode 9: Building a 3D Scene from Scratch"
-    subtitle="QGIS"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-In this episode, Tim Sutton will show you how to make a simple 3D scene in QGIS.
-{{< /block >}}
-
-## Creating 3D Scenes in QGIS
 
 In this episode, Tim Sutton will show you how to make a simple 3D scene in QGIS.
 

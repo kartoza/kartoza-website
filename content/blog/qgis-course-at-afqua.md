@@ -1,29 +1,31 @@
 ---
-title: "QGIS Course at AfQUA"
-description: "Kartoza has just wrapped up a three-day Introduction to QGIS course that we gave pro bono at The African Quaternary conference in Cape Town. The training accommodated participants with differing experience levels and customized content based on attendee needs."
+author: Gavin Fleming
+date: '2015-02-08'
+description: Kartoza has just wrapped up a three-day Introduction to QGIS course that
+  we gave pro bono at The African Quaternary
+erpnext_id: /blog/education/qgis-course-at-afqua
+erpnext_modified: '2015-02-08'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - QGIS
-  - Education
-  - Training
-  - Africa
-date: 2015-02-08
-author: "Gavin Fleming"
-thumbnail: "/img/blog/placeholder.png"
+- Education
+thumbnail: /img/blog/erpnext/ZmBCcBE.jpg
+title: QGIS Course at AfQUA
 ---
 
-{{< block
-    title="QGIS Course at AfQUA"
-    subtitle="Education"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-Kartoza has just wrapped up a three-day Introduction to QGIS course that we gave pro bono at The African Quaternary conference in Cape Town.
-{{< /block >}}
+Kartoza has just wrapped up a three-day Introduction to QGIS course that we gave  _pro bono_ at The African Quaternary: Environments, Ecology and Humans conference in Cape Town ([AfQUA2015](<http://afqua2015.com/workshops/>)). Thank you to Kelly Kirsten from the local organising committee at the University of Cape Town for inviting us. Admire Nyakudya presented to about fifteen conference delegates from around the world. Attendees ran QGIS 2.6.1 on their own notebooks on the operating system of their choice. 
 
-## Training at The African Quaternary Conference
+  
 
-Kartoza recently concluded a three-day introductory QGIS training session offered at no cost during The African Quaternary: Environments, Ecology and Humans conference held in Cape Town. Kelly Kirsten from the University of Cape Town's organizing committee extended the invitation. Admire Nyakudya instructed approximately fifteen conference participants from various countries. Participants used QGIS 2.6.1 on personal laptops running their preferred operating systems.
 
-The attendee group had varied experience levels—some already utilized QGIS, others encountered it for the first time, and some wished to compare it with ArcGIS. The instruction drew primarily from the "QGIS training manual" but was customized according to "the requirements, interests and pace of the class."
+﻿Some already use QGIS, some were experiencing QGIS for the first time and some some wanted to compare it with ArcGIS. The course content was guided largely by the [QGIS training manual](<http://docs.qgis.org/2.6/en/docs/training_manual/>) but as we usually do, adapted for the requirements, interests and pace of the class.
 
-The post includes two photographs from the training event.
+  
+
+
+![](/img/blog/erpnext/ZmBCcBE.jpg)
+
+  
+
+
+![](/img/blog/erpnext/ab9aKIl.jpg)

@@ -1,28 +1,30 @@
 ---
-title: "QGIS Style Sharing Repository"
-description: "A new feature for sharing styles within QGIS has been developed, integrating into the QGIS plugin website."
+author: Seabilwe Tilodi
+date: '2021-01-25'
+description: Woohoo! A new way to share styles in QGIS!
+erpnext_id: /blog/qgis/qgis-style-sharing-repository
+erpnext_modified: '2021-01-25'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - QGIS
-  - Styles
-  - Plugin
-date: 2021-01-25
-author: "Seabilwe Tilodi"
-thumbnail: "/img/blog/placeholder.png"
+- Qgis
+thumbnail: /img/blog/placeholder.png
+title: QGIS Style Sharing Repository
 ---
 
-{{< block
-    title="QGIS Style Sharing Repository"
-    subtitle="QGIS"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-A new feature for sharing styles within QGIS has been developed, integrating into the QGIS plugin website.
-{{< /block >}}
+Woohoo! A new way to share styles in QGIS! Work sponsored by Kartoza.
 
-## Content
+  
 
-The piece announces a new feature for sharing styles within QGIS. According to the content, "Woohoo! A new way to share styles in QGIS!" represents the primary announcement.
 
-The article explains that developer Sumandari has been developing this functionality as part of work sponsored by Kartoza, integrating it into the QGIS plugin website.
+Sumandari (one of our developers) has been working on an exciting new functionality that she as been adding onto the QGIS plug-in website.
 
-A video demonstration is referenced, titled "QGIS Style Repository Demo," accessible via YouTube link, with an invitation for readers to leave comments and subscribe for additional content.
+  
+
+
+﻿Here is the link to the session [QGIS Style Repositiry Demo](<https://youtu.be/lQAMvTgDQl4>)
+
+  
+
+
+Don't forget to leave your comments and subscribe to get more content!

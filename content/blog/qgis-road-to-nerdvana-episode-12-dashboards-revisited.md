@@ -1,27 +1,26 @@
 ---
-title: "QGIS Road to Nerdvana Episode 12: Dashboards Revisited"
-description: "In this session, we will create a dashboard overlay in QGIS from scratch with no coding. The post presents a no-code approach to building QGIS dashboards while offering downloadable tutorial resources and encouraging audience participation through comments and subscriptions."
+author: Seabilwe Tilodi
+date: '2021-01-26'
+description: 'In case you missed out on Episode 12 of our QGIS Road to Nerdvana, click
+  on the link and enjoy the stream: QGIS Road to Nerdvana Episode 12'
+erpnext_id: /blog/qgis/qgis-road-to-nerdvana-episode-12-dashboards-revisited
+erpnext_modified: '2021-01-26'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - QGIS
-  - Dashboards
-  - No-Code
-  - Video Series
-date: 2021-01-26
-author: "Seabilwe Tilodi"
-thumbnail: "/img/blog/placeholder.png"
+- Qgis
+thumbnail: /img/blog/placeholder.png
+title: 'QGIS Road to Nerdvana Episode 12: Dashboards Revisited!'
 ---
 
-{{< block
-    title="QGIS Road to Nerdvana Episode 12: Dashboards Revisited"
-    subtitle="QGIS"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
+In case you missed out on Episode 12 of our QGIS Road to Nerdvana, click on the link and enjoy the stream:
+
+[QGIS Road to Nerdvana Episode 12](<https://youtu.be/lJTV90SvRAM>)
+
 In this session, we will create a dashboard overlay in QGIS from scratch with no coding!
-{{< /block >}}
 
-## No-Code Dashboard Creation
+Follow along as we explore creative new ways to use QGIS!
 
-The post introduces Episode 12 of the QGIS Road to Nerdvana series, directing readers to a YouTube video link. The content explains that this session focuses on creating dashboard overlays within QGIS without requiring any coding knowledge.
+You can download the GeoPackage we made in this tutorial here: <https://github.com/timlinux/QGIS/files/5651978/QGISDashboardWalkthrough-Badajoz.zip>
 
-The article encourages viewers to explore innovative QGIS applications and provides a downloadable GeoPackage file created during the tutorial, hosted on GitHub. The piece concludes with a call-to-action, inviting readers to engage by leaving comments and subscribing to the series.
+Don't forget to leave your comments and subscribe!

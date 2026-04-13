@@ -1,87 +1,100 @@
 ---
-title: "Adding Elevation to a Line from a DEM in PostGIS and Maintaining Accurate Measures"
-description: "This piece represents the second installment in a three-part series examining the geospatial infrastructure required for organizing the Cape Town Marathon."
+author: Gavin Fleming
+date: '2018-08-22'
+description: This is the second in a three part series on the behind-the-scenes GIS
+  work that can go into planning a complex event, in this case the Cape
+erpnext_id: /blog/postgis/adding-elevation-to-a-line-from-a-dem-in-postgis-and-maintaining-accurate-measures
+erpnext_modified: '2018-08-22'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - PostGIS
-  - GIS
-  - Raster
-date: 2018-08-22
-author: "Gavin Fleming"
-thumbnail: "/img/blog/placeholder.png"
+- Postgis
+thumbnail: /img/blog/erpnext/screenshot_2018-11-22_at_13.02.30.png
+title: Adding Elevation to a Line from a DEM in PostGIS and Maintaining Accurate Measures
 ---
 
-{{< block
-    title="Adding Elevation to a Line from a DEM in PostGIS"
-    subtitle="PostGIS"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-This piece represents the second installment in a three-part series examining the geospatial infrastructure required for organizing the Cape Town Marathon.
-{{< /block >}}
+This is the second in a three part series on the behind-the-scenes GIS work that can go into planning a complex event, in this case the Cape Town Marathon.
 
-## Overview
+Following on from [creating point markers along a line in PostGIS](<http://kartoza.com/en/blog/how-to-create-a-point-distance-marker-layer-along-a-line-in-postgis/>) this post delves into 4D coordinates, PostGIS functions and rasters in PostGIS.
 
-Building upon previous work in "creating point markers along a line in PostGIS," the article explores advanced PostGIS capabilities, including 4D coordinate handling, PostGIS functions, and raster processing.
+What I show here is about meeting two requirements of the marathon route planning team:
 
-## Primary Objectives
+- Automatically update the length of a route after each edit with the most accurate calculation possible
+- Enable a QGIS user to query the distance along a line at any point by clicking on it
 
-The marathon planning team required two key functionalities:
+For the first one, we want to calculate the length along the spheroid, which is easy enough, but we can make it even more accurate by taking into account elevation as the route goes up and down hills.
 
-1. **Route Length Calculation:** Automatically recalculate route length following edits with maximum precision, accounting for elevation changes across hills
-2. **Interactive Distance Querying:** Enable QGIS users to click points on a route and retrieve distance measurements along that path
+For the second one, we want to take advantage of the QGIS 3.4 identify tool function that shows the X, Y, Z and M coordinates of the nearest vertex as well as the interpolated M and Z values in the 'derived' section, like this:
 
-The implementation leverages QGIS 3.4's identify tool to display X, Y, Z, and M coordinates with derived values. The example cited shows "that point is 15.74km along the marathon route and 7.5m above sea level."
+![](/img/blog/erpnext/screenshot_2018-11-22_at_13.02.30.png)
 
-## Technical Implementation
+That point is 15.74km along the marathon route and 7.5m above sea level.
 
-### Data Source
+We are going to update the Z (elevation) and M (measure) values of every vertex every time the geometry is edited and saved.
 
-The City of Cape Town's open data portal provided a 10-meter Digital Elevation Model (DEM) in GeoTIFF format.
+For elevation we're going to use a raster DEM (digital elevation model) **within the database**. The City of Cape Town has an accessible, open data portal and I found a [10m DEM there](<https://web1.capetown.gov.za/web1/opendataportal/DocumentDetail?DocumentName=10m_Grid_GeoTiff.zip&DatasetDocument=http://cityapps.capetown.gov.za/sites/opendatacatalog/Documents/Digital%20elevation%20model/10m_Grid_GeoTiff.zip&DatasetName=Digital+elevation+model>). So I downloaded it and then loaded it into my PostGIS database:
 
-### Database Setup
+    raster2pgsql -C -I -M -F -Y -s 40019 -t 100x100 10m_BA.tif dem | psql -d mydb
 
-The DEM was loaded into PostGIS using:
+![QGIS 3D image of the Cape Town Marathon and 22km trail run](/img/blog/erpnext/ctm3d.png)
 
-```bash
-raster2pgsql -C -I -M -F -Y -s 40019 -t 100x100 10m_BA.tif dem | psql -d mydb
-```
+The marathon and long trail routes in QGIS 3D
 
-### Geometry Configuration
+Then I had to make sure that each route's geometry field catered for 4 dimensions:
 
-Route geometries were modified to support four dimensions:
+    ALTER TABLE marathon ALTER COLUMN geom TYPE geometry(LinestringZM,4326) USING ST_Force4D(geom);
 
-```sql
-ALTER TABLE marathon ALTER COLUMN geom TYPE geometry(LinestringZM,4326) USING ST_Force4D(geom);
-```
+Next I created this function:
 
-## The update_ZM() Function
+    --you need a DEM called 'dem' in SRID WGS19 loaded in the database for this to work  
+    --adapted from http://blog.mathieu-leplatre.info/drape-lines-on-a-dem-with-postgis.html  
+    CREATE OR REPLACE FUNCTION update_ZM()  
+      RETURNS trigger AS  
+    $BODY$  
+    BEGIN  
+     EXECUTE format('WITH line AS  
+        (SELECT ST_Transform($1.geom,40019) as geom),  
+      points2d AS  
+        (SELECT (ST_DumpPoints(geom)).geom AS geom FROM line),  
+      cells AS  
+        (SELECT p.geom AS geom, ST_Value(d.rast, 1, p.geom) AS val  
+         FROM %I.dem d, points2d p  
+         WHERE ST_Intersects(d.rast, p.geom)),  
+      points3d AS  
+        (SELECT ST_SetSRID(ST_MakePoint(ST_X(geom), ST_Y(geom), val), 40019) AS geom FROM cells),  
+      line3d AS  
+        (SELECT ST_MakeLine(ST_Transform(geom,4326)) AS geom FROM points3d),  
+      line4d AS  
+        (SELECT ST_AddMeasure(geom,0,st_length(geom::geography)/1000) AS geom FROM line3d)  
+      UPDATE %I.%I a  
+         SET geom = line4d.geom  
+         FROM line4d  
+         WHERE a.id = $1.id', TG_TABLE_SCHEMA, TG_TABLE_SCHEMA, TG_TABLE_NAME) USING NEW;                      
+     RETURN NEW;  
+    END;  
+    $BODY$  
+    LANGUAGE plpgsql;
 
-The core function performs these sequential operations:
+The `update_ZM()` function does the following:
 
-- Projects line geometry to local coordinate reference system
-- Extracts vertices as individual point features
-- Intersects points with DEM raster data
-- Appends elevation values to Z coordinates
-- Reconstructs geometry from enhanced points
-- Calculates 3D-aware measurements for M values
-- Persists updated geometry
+- projects the line to the local CRS
+- extracts all the vertices as points
+- intersects the points with the DEM
+- adds the elevation from the DEM to the Z value of the point coordinates
+- builds the points back into a line
+- adds accurate 3D distances to the M value of the coordinates as described in more detail in the [previous article](<http://kartoza.com/en/blog/how-to-create-a-point-distance-marker-layer-along-a-line-in-postgis/>)
+- replaces the previous version of the line with the one generated by the above process
 
-The function operates as a "dynamic trigger function, which means it will run when a trigger is fired and work on any table that has a line geometry."
+The function is a dynamic trigger function, which means it will run when a trigger is fired and work on any table that has a line geometry.
 
-## Trigger Implementation
+The last step is to add the trigger to any line table you want to run this function on:
 
-```sql
-DROP TRIGGER update_zm ON marathon;
-CREATE TRIGGER update_zm
-  AFTER INSERT OR UPDATE OF geom
-  ON marathon
-  FOR EACH ROW
-  WHEN (pg_trigger_depth() = 0)
-  EXECUTE PROCEDURE update_ZM();
-```
+    DROP TRIGGER update_zm ON marathon;  
+    CREATE TRIGGER update_zm  
+      AFTER INSERT OR UPDATE OF geom  
+      ON marathon  
+      FOR EACH ROW  
+      WHEN (pg_trigger_depth() = 0)  
+      EXECUTE PROCEDURE update_ZM();
 
-This trigger executes upon geometry edits, automatically recalculating elevation and measure values upon save operations within QGIS.
-
-## Visualization
-
-The article includes a 3D representation showing "the marathon and long trail routes in QGIS 3D."
+This trigger runs the `update_ZM()` function on each record that you add or edit. If you are editing in QGIS, this means as soon as you hit Save.
