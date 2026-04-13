@@ -97,6 +97,26 @@
                     </div>
                 </div>
 
+                <!-- CTA Card -->
+                <div class="sidebar-card cta-card">
+                    <h4 class="sidebar-card-title">Work With Us</h4>
+                    <p class="sidebar-cta-text">Need help with your GIS project?</p>
+                    <div class="sidebar-cta-buttons">
+                        <a href="{{ absURL "training-courses/" }}" class="sidebar-cta-btn">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Training</span>
+                        </a>
+                        <a href="{{ absURL "hosting/" }}" class="sidebar-cta-btn">
+                            <i class="fas fa-server"></i>
+                            <span>Hosting</span>
+                        </a>
+                        <a href="{{ absURL "contact-us/" }}" class="sidebar-cta-btn sidebar-cta-primary">
+                            <i class="fas fa-envelope"></i>
+                            <span>Contact Us</span>
+                        </a>
+                    </div>
+                </div>
+
                 <!-- Related Posts -->
                 {{ $related := .Site.RegularPages.Related . | first 3 }}
                 {{ with $related }}

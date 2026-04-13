@@ -5180,6 +5180,61 @@ body:has(.blog-hero) .contextmenu {
     transform: translateY(-2px);
 }
 
+/* CTA Card */
+.cta-card {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: var(--white);
+}
+
+.cta-card .sidebar-card-title {
+    color: var(--white);
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-cta-text {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    opacity: 0.95;
+}
+
+.sidebar-cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sidebar-cta-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--white);
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all var(--transition-fast);
+}
+
+.sidebar-cta-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateX(4px);
+    color: var(--white);
+}
+
+.sidebar-cta-btn i {
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar-cta-primary {
+    background: var(--accent);
+}
+
+.sidebar-cta-primary:hover {
+    background: var(--accent-dark);
+}
+
 /* Related Posts */
 .related-posts {
     display: flex;
