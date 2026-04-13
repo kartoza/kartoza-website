@@ -23,11 +23,67 @@ The course combines theoretical concepts with extensive hands-on practice, ensur
 
 ## Key Learning Outcomes
 
-- General database concepts, including what is a relational database?
-- SQL basics including syntax, structure, standards and conventions
-- Connecting to a database
-- Building queries including Commands, functions, operators, etc
-- Resources - documentation and tutorials
+<div class="outcomes-grid">
+  <div class="outcome-card">
+    <div class="outcome-icon">
+      <i class="fas fa-cog"></i>
+    </div>
+    <div>
+      <h4>PostGIS & PostgreSQL Setup</h4>
+      <p>Install and configure a geospatial RDBMS ready for production use.</p>
+    </div>
+  </div>
+  
+  <div class="outcome-card">
+    <div class="outcome-icon">
+      <i class="fas fa-exchange-alt"></i>
+    </div>
+    <div>
+      <h4>Spatial Data Manipulation</h4>
+      <p>Insert geometries, run spatial queries, and leverage PostGIS functions and operators.</p>
+    </div>
+  </div>
+  
+  <div class="outcome-card">
+    <div class="outcome-icon">
+      <i class="fas fa-database"></i>
+    </div>
+    <div>
+      <h4>SQL Fundamentals</h4>
+      <p>Build CRUD queries, understand tables, fields, and primary/foreign keys — no prior database experience needed.</p>
+    </div>
+  </div>
+  
+  <div class="outcome-card">
+    <div class="outcome-icon">
+      <i class="fas fa-map"></i>
+    </div>
+    <div>
+      <h4>QGIS Integration</h4>
+      <p>Use QGIS as a visualisation tool and SQL client via DB Manager to import/export and display results.</p>
+    </div>
+  </div>
+  
+  <div class="outcome-card">
+    <div class="outcome-icon">
+      <i class="fas fa-building"></i>
+    </div>
+    <div>
+      <h4>Enterprise GIS Workflows</h4>
+      <p>Explore how PostGIS serves as the backbone of a FOSS-based GIS stack in mixed IT environments.</p>
+    </div>
+  </div>
+  
+  <div class="outcome-card">
+    <div class="outcome-icon">
+      <i class="fas fa-clipboard-check"></i>
+    </div>
+    <div>
+      <h4>Practical Application</h4>
+      <p>Bring your own datasets for real-time exercises and continue practising on your own setup after the course.</p>
+    </div>
+  </div>
+</div>
 
 ## Course Modules
 
