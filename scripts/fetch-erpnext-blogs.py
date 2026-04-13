@@ -596,14 +596,29 @@ def main():
     results = []
     errors_occurred = False
 
-    for blog in blogs:
+    for i, blog in enumerate(blogs):
         blog_name = blog.get('name')
         if not blog_name:
             continue
 
-        # Blog data is already complete from fetch_blog_list
+        # Fetch full blog content by scraping the web page (has proper HTML formatting)
+        if args.verbose:
+            print(f"Fetching {i+1}/{len(blogs)}: {blog.get('title', 'Untitled')}", file=sys.stderr)
+        blog_detail = fetch_blog_detail(blog_name)
+        if not blog_detail:
+            results.append({
+                'title': blog.get('title', 'Untitled'),
+                'date': str(blog.get('published_on', ''))[:10],
+                'author': blog.get('blogger', 'Unknown'),
+                'status': 'error',
+                'fidelity': '-',
+                'file': ''
+            })
+            errors_occurred = True
+            continue
+
         # Sync the blog
-        sync_result = sync_blog(blog, content_dir, dry_run=args.dry_run, force=args.force)
+        sync_result = sync_blog(blog_detail, content_dir, dry_run=args.dry_run, force=args.force)
 
         results.append({
             'title': blog.get('title', 'Untitled'),
