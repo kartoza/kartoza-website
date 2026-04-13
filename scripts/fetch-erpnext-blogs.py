@@ -155,11 +155,17 @@ def find_local_file(content_dir: Path, erpnext_id: str, title: str) -> Path | No
     return None
 
 
-def sync_blog(blog: dict, content_dir: Path, dry_run: bool = False) -> dict:
+def sync_blog(blog: dict, content_dir: Path, dry_run: bool = False, force: bool = False) -> dict:
     """
     Sync a single blog article from ERPNext to Hugo.
 
     Performs fidelity checking and updates review fields.
+
+    Args:
+        blog: Blog data from ERPNext
+        content_dir: Path to Hugo content directory
+        dry_run: If True, don't write files
+        force: If True, overwrite all files regardless of fidelity
 
     Returns:
         Dict with 'status' and 'fidelity' keys
@@ -171,8 +177,8 @@ def sync_blog(blog: dict, content_dir: Path, dry_run: bool = False) -> dict:
     # Find existing local file
     local_file = find_local_file(content_dir, erpnext_id, title)
 
-    if local_file:
-        # File exists - check fidelity
+    if local_file and not force:
+        # File exists - check fidelity (skip if force mode)
         result = read_local_blog(local_file)
         if result:
             local_frontmatter, local_content = result
@@ -186,6 +192,10 @@ def sync_blog(blog: dict, content_dir: Path, dry_run: bool = False) -> dict:
 
         # Content differs - overwrite with ERPNext
         status = 'updated'
+        filepath = local_file
+    elif local_file and force:
+        # Force mode - overwrite existing file
+        status = 'forced'
         filepath = local_file
     else:
         # New file
@@ -543,6 +553,8 @@ def main():
     )
     parser.add_argument('--dry-run', '-n', action='store_true',
                         help='Show what would happen without writing files')
+    parser.add_argument('--force', '-f', action='store_true',
+                        help='Force overwrite all files, ignoring fidelity check')
     parser.add_argument('--list', '-l', action='store_true',
                         help='Only list available blogs, do not sync')
     parser.add_argument('--skip-images', action='store_true',
@@ -591,7 +603,7 @@ def main():
 
         # Blog data is already complete from fetch_blog_list
         # Sync the blog
-        sync_result = sync_blog(blog, content_dir, dry_run=args.dry_run)
+        sync_result = sync_blog(blog, content_dir, dry_run=args.dry_run, force=args.force)
 
         results.append({
             'title': blog.get('title', 'Untitled'),
