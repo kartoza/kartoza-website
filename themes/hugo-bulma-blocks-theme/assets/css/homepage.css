@@ -5213,13 +5213,12 @@ body:has(.blog-hero) .contextmenu {
 }
 
 /* Blog Sidebar CTA Card */
-.blog-article-sidebar .cta-card {
+.blog-cta-card {
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     color: var(--white);
-    text-align: left;
 }
 
-.blog-article-sidebar .cta-card .sidebar-card-title {
+.blog-cta-card .sidebar-card-title {
     color: var(--white);
     border-bottom-color: rgba(255, 255, 255, 0.2);
 }
