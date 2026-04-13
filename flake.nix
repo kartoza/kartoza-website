@@ -67,7 +67,13 @@
         system:
         let
           pkgs = nixpkgsFor.${system};
+          pkgsUnstable = nixpkgsUnstableFor.${system};
           inherit (nixpkgs) lib;
+
+          # Python environment for scripts
+          pythonEnv = pkgsUnstable.python3.withPackages (ps: with ps; [
+            requests pyyaml beautifulsoup4 python-dateutil tabulate
+          ]);
 
           wwwLauncher = pkgs.writeShellApplication {
             name = "website";
@@ -78,11 +84,50 @@
                 -d ${self.packages.${system}.website}/public_www/
             '';
           };
+
+          syncBlogs = pkgs.writeShellApplication {
+            name = "sync-blogs";
+            runtimeInputs = [ pythonEnv ];
+            text = ''
+              exec ${pythonEnv}/bin/python3 \
+                ${self}/scripts/fetch-erpnext-blogs.py "$@"
+            '';
+          };
+
+          syncBlogsDryRun = pkgs.writeShellApplication {
+            name = "sync-blogs-dry-run";
+            runtimeInputs = [ pythonEnv ];
+            text = ''
+              exec ${pythonEnv}/bin/python3 \
+                ${self}/scripts/fetch-erpnext-blogs.py --dry-run "$@"
+            '';
+          };
+
+          listBlogs = pkgs.writeShellApplication {
+            name = "list-blogs";
+            runtimeInputs = [ pythonEnv ];
+            text = ''
+              exec ${pythonEnv}/bin/python3 \
+                ${self}/scripts/fetch-erpnext-blogs.py --list "$@"
+            '';
+          };
         in
         rec {
           website = {
             type = "app";
             program = "${wwwLauncher}/bin/website";
+          };
+          sync-blogs = {
+            type = "app";
+            program = "${syncBlogs}/bin/sync-blogs";
+          };
+          sync-blogs-dry-run = {
+            type = "app";
+            program = "${syncBlogsDryRun}/bin/sync-blogs-dry-run";
+          };
+          list-blogs = {
+            type = "app";
+            program = "${listBlogs}/bin/list-blogs";
           };
           default = website;
         }
@@ -108,6 +153,7 @@
             html2text # HTML to markdown conversion
             python-dateutil # Date parsing
             tabulate # Nice table output
+            pytest # Testing framework
           ]);
         in
         {

@@ -98,16 +98,15 @@
 .hero-logo {
     width: 90px;
     height: auto;
-    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6)) drop-shadow(0 4px 20px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 0 8px rgb(255, 255, 255)) drop-shadow(0 4px 20px rgba(255, 255, 255, 0.2));
 }
 
 .hero-company-name {
-    color: var(--white) !important;
+    color: #ffffff !important;
     font-size: 5.5rem !important;
     font-weight: 800 !important;
-    letter-spacing: -3px;
+    letter-spacing: 2 px;
     margin-bottom: 0 !important;
-    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
     line-height: 1 !important;
     background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 100%);
     -webkit-background-clip: text;
@@ -131,7 +130,7 @@
 }
 
 .hero-tagline {
-    color: var(--accent);
+    color: #ffffff;
     font-size: 1rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -147,7 +146,7 @@
     content: '';
     width: 30px;
     height: 2px;
-    background: var(--accent);
+    background: #ffffff;
     border-radius: 1px;
 }
 
@@ -177,8 +176,8 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: var(--accent);
-    background: rgba(232, 163, 49, 0.15);
+    color: #ffffff;
+    background: #edb348;
     padding: 0.35rem 0.85rem;
     border-radius: 4px;
     margin-bottom: 0.75rem;
@@ -201,7 +200,7 @@
 .hero-vision-statement .quote-mark {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--accent);
+    color: #edb348;
     font-style: normal;
     line-height: 0;
     vertical-align: -0.3em;
@@ -298,7 +297,7 @@
 /* Hero CTA Buttons - High contrast for hero background */
 .hero-ctas .button.is-primary:not(.is-outlined) {
     background: var(--accent) !important;
-    background-color: var(--accent) !important;
+    background-color: #edb348 !important;
     border-color: var(--accent) !important;
     color: var(--white) !important;
     box-shadow: 0 4px 20px rgba(232, 163, 49, 0.4);
@@ -593,7 +592,7 @@
 
 .product-badge {
     display: inline-block;
-    background: var(--accent);
+    background: #edb348;
     color: var(--white);
     font-size: 0.75rem;
     font-weight: 700;
@@ -1236,6 +1235,8 @@
 .training-grid,
 .solutions-grid {
     display: grid !important;
+    margin-left: 30px;
+    margin-right: 30px;
     grid-template-columns: repeat(3, 1fr) !important;
     gap: 2rem !important;
 }
@@ -1761,7 +1762,7 @@
 }
 
 .section-cta-buttons .button.is-primary {
-    background: var(--accent);
+    background: #edb348;
     border-color: var(--accent);
     color: var(--white);
     font-weight: 700;
@@ -2931,11 +2932,14 @@ html {
 
 .gallery-hero .container {
     position: relative;
+    margin-bottom: 4rem;
     z-index: 1;
 }
 
 .gallery-hero-content {
     max-width: 800px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .gallery-hero-tags {
@@ -3279,6 +3283,8 @@ html {
 /* Related Maps Section */
 .gallery-related-section {
     background: white;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .gallery-related-section .section-title {
@@ -3286,11 +3292,14 @@ html {
     font-weight: 700;
     color: var(--gray-900);
     margin-bottom: 2.5rem;
+    padding-right: 30px;
 }
 
 .gallery-related-section .section-title .icon {
     color: var(--primary);
     margin-right: 0.5rem;
+    padding-right: 15px;
+    padding-left: 30px;
 }
 
 .gallery-related-card {
@@ -3374,25 +3383,28 @@ html {
 /* Final CTA Section */
 .gallery-final-cta {
     background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);
-    padding: 5rem 0;
 }
 
 .gallery-final-cta-content {
     text-align: center;
     max-width: 700px;
     margin: 0 auto;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .gallery-final-cta-title {
     font-size: 2.5rem;
     font-weight: 800;
-    color: white;
-    margin-bottom: 1rem;
+    color: #4e565c;
+    margin-bottom: 2.5em;
 }
 
 .gallery-final-cta-text {
     font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: #4e565c;
     margin-bottom: 2rem;
     line-height: 1.6;
 }
@@ -8539,7 +8551,7 @@ body:has(.blog-hero) .contextmenu {
 }
 
 .cta-note i {
-    color: var(--primary-light);
+    color: #53a2cc;
 }
 
 /* ============================================
@@ -10290,8 +10302,9 @@ body:has(.blog-hero) .contextmenu {
 .showcase-nav {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
     padding: 0 0.5rem;
 }
 
@@ -13846,6 +13859,8 @@ a.team-member-clickable:hover .team-member-view-profile i {
 .footer-cta-content {
     display: flex;
     justify-content: space-between;
+    padding-left: 30px;
+    padding-right: 30px;
     align-items: center;
     gap: 2rem;
     position: relative;
@@ -13884,7 +13899,7 @@ a.team-member-clickable:hover .team-member-view-profile i {
 }
 
 .footer-cta-primary {
-    background: var(--accent);
+    background: #edb348;
     color: var(--white);
 }
 
@@ -13924,6 +13939,8 @@ a.team-member-clickable:hover .team-member-view-profile i {
 /* Brand Column */
 .footer-brand {
     max-width: 320px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .footer-logo {
@@ -13948,7 +13965,9 @@ a.team-member-clickable:hover .team-member-view-profile i {
 
 .footer-description {
     color: rgba(255, 255, 255, 0.8);
+    text-align: justify;
     font-size: 0.95rem;
+    letter-spacing: -0.11px;
     line-height: 1.7;
     margin-bottom: 1.5rem;
 }
@@ -14046,6 +14065,8 @@ a.team-member-clickable:hover .team-member-view-profile i {
 .footer-offices-section {
     margin-top: 3rem;
     padding-top: 3rem;
+    padding-left: 30px;
+    padding-right: 30px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 

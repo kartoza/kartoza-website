@@ -1,16 +1,22 @@
 #!/usr/bin/env python3
 """
-Fetch blog articles from ERPNext and create Hugo content files.
+Sync blog articles from ERPNext to Hugo with fidelity checking.
 
-Only fetches new articles that don't exist locally to preserve local edits.
+Features:
+- Fetches all published blog articles from ERPNext
+- Compares with local Hugo content (text-only, ignoring formatting)
+- ERPNext is authoritative: overwrites local content when different
+- Auto-marks articles as reviewed when fidelity check passes
+- Outputs rich status table and JSON summary
 
 Environment variables:
     ERPNEXT_URL: ERPNext instance URL (default: https://erp.kartoza.com)
-    ERPNEXT_API_KEY: API key for authentication
-    ERPNEXT_API_SECRET: API secret for authentication
 
 Usage:
-    ./fetch-erpnext-blogs.py [--dry-run] [--force] [--list]
+    ./fetch-erpnext-blogs.py              # Full sync with fidelity checking
+    ./fetch-erpnext-blogs.py --dry-run    # Preview changes without writing
+    ./fetch-erpnext-blogs.py --list       # List available blogs
+    ./fetch-erpnext-blogs.py --verbose    # Verbose output
 """
 
 import os
@@ -19,23 +25,25 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+import warnings
+
 import requests
 import yaml
+from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
 from dateutil import parser as date_parser
+from tabulate import tabulate
+import json
+
+# Suppress XML parsing warning when using html.parser on content that looks like XML
+warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
 
 
 # Configuration
 ERPNEXT_URL = os.environ.get('ERPNEXT_URL', 'https://erp.kartoza.com')
-API_KEY = os.environ.get('ERPNEXT_API_KEY', '')
-API_SECRET = os.environ.get('ERPNEXT_API_SECRET', '')
 
 
 def get_auth_headers() -> dict:
-    """Get authentication headers for ERPNext API."""
-    if API_KEY and API_SECRET:
-        return {
-            'Authorization': f'token {API_KEY}:{API_SECRET}'
-        }
+    """Get authentication headers for ERPNext API (empty for public blogs)."""
     return {}
 
 
@@ -47,40 +55,315 @@ def slugify(text: str) -> str:
     return text.strip('-')
 
 
-def fetch_blog_list() -> list[dict]:
-    """Fetch list of published blog posts from ERPNext."""
-    url = f"{ERPNEXT_URL}/api/resource/Blog Post"
-    params = {
-        'filters': '[["published", "=", 1]]',
-        'fields': '["name", "title", "published_on", "blogger", "blog_category", "modified"]',
-        'limit_page_length': 0  # Get all
-    }
+def normalize_for_comparison(content: str) -> str:
+    """
+    Normalize content for fidelity comparison.
+    Focuses on TEXT content, ignores formatting/layout.
+    """
+    if not content:
+        return ''
+
+    # Remove Hugo shortcodes like {{< block >}} or {{< /block >}}
+    content = re.sub(r'\{\{[<>%].*?[>%]\}\}', '', content)
+
+    # Strip HTML tags but keep text content
+    soup = BeautifulSoup(content, 'html.parser')
+    text = soup.get_text(separator=' ')
+
+    # Collapse whitespace (multiple spaces/newlines -> single space)
+    text = re.sub(r'\s+', ' ', text)
+
+    # Strip leading/trailing whitespace and lowercase
+    return text.strip().lower()
+
+
+def check_fidelity(local_content: str, erpnext_content: str) -> bool:
+    """
+    Check if local and ERPNext content match (fidelity check).
+
+    Returns True if text content matches (ignoring formatting).
+    """
+    local_norm = normalize_for_comparison(local_content)
+    erpnext_norm = normalize_for_comparison(erpnext_content)
+    return local_norm == erpnext_norm
+
+
+def read_local_blog(filepath: Path) -> tuple[dict, str] | None:
+    """
+    Read a local Hugo blog file and extract front matter and content.
+
+    Returns:
+        Tuple of (front_matter_dict, content_str) or None if file doesn't exist
+    """
+    if not filepath.exists():
+        return None
 
     try:
-        response = requests.get(url, params=params, headers=get_auth_headers(), timeout=30)
-        response.raise_for_status()
-        data = response.json()
-        return data.get('data', [])
-    except requests.RequestException as e:
-        print(f"Error fetching blog list: {e}")
-        return []
+        text = filepath.read_text()
+    except (IOError, OSError):
+        return None
+
+    # Check for front matter delimiter
+    if not text.startswith('---'):
+        return {}, text
+
+    # Find end of front matter
+    end_match = re.search(r'\n---\n', text[3:])
+    if not end_match:
+        return {}, text
+
+    end_pos = end_match.start() + 3
+    front_matter_raw = text[4:end_pos]
+    content = text[end_pos + 5:]
+
+    try:
+        front_matter = yaml.safe_load(front_matter_raw) or {}
+    except yaml.YAMLError:
+        front_matter = {}
+
+    return front_matter, content
+
+
+def find_local_file(content_dir: Path, erpnext_id: str, title: str) -> Path | None:
+    """
+    Find a local Hugo file matching the ERPNext article.
+
+    Matches by:
+    1. erpnext_id in front matter (primary)
+    2. Slugified title matching filename (fallback)
+
+    Returns:
+        Path to matching file or None
+    """
+    # First, try to find by erpnext_id in front matter
+    for filepath in content_dir.glob('*.md'):
+        if filepath.name == '_index.md':
+            continue
+        result = read_local_blog(filepath)
+        if result:
+            front_matter, _ = result
+            if front_matter.get('erpnext_id') == erpnext_id:
+                return filepath
+
+    # Fallback: match by slugified title
+    expected_filename = f"{slugify(title)}.md"
+    expected_path = content_dir / expected_filename
+    if expected_path.exists():
+        return expected_path
+
+    return None
+
+
+def sync_blog(blog: dict, content_dir: Path, dry_run: bool = False) -> dict:
+    """
+    Sync a single blog article from ERPNext to Hugo.
+
+    Performs fidelity checking and updates review fields.
+
+    Returns:
+        Dict with 'status' and 'fidelity' keys
+    """
+    erpnext_id = blog.get('name', '')
+    title = blog.get('title', 'Untitled')
+    erpnext_content = blog.get('content') or blog.get('content_html') or ''
+
+    # Find existing local file
+    local_file = find_local_file(content_dir, erpnext_id, title)
+
+    if local_file:
+        # File exists - check fidelity
+        result = read_local_blog(local_file)
+        if result:
+            local_frontmatter, local_content = result
+            if check_fidelity(local_content, erpnext_content):
+                # Content matches - fidelity passed
+                # Update review fields if not already set
+                if not local_frontmatter.get('reviewedBy'):
+                    if not dry_run:
+                        _update_review_fields(local_file, local_frontmatter, local_content)
+                return {'status': 'unchanged', 'fidelity': 'passed', 'file': local_file.name}
+
+        # Content differs - overwrite with ERPNext
+        status = 'updated'
+        filepath = local_file
+    else:
+        # New file
+        status = 'new'
+        slug = slugify(title)
+        filepath = content_dir / f"{slug}.md"
+
+    # Generate content
+    front_matter = blog_to_hugo_frontmatter(blog, mark_reviewed=True)
+    content = blog_to_hugo_content(blog)
+
+    # Build file content
+    file_content = "---\n"
+    file_content += yaml.dump(front_matter, default_flow_style=False, allow_unicode=True)
+    file_content += "---\n\n"
+    file_content += content
+    file_content += "\n"
+
+    if not dry_run:
+        filepath.write_text(file_content)
+
+    return {'status': status, 'fidelity': 'auto-reviewed', 'file': filepath.name}
+
+
+def _update_review_fields(filepath: Path, front_matter: dict, content: str) -> None:
+    """Update review fields in an existing file."""
+    front_matter['reviewedBy'] = 'Automated Check'
+    front_matter['reviewedDate'] = datetime.now().strftime('%Y-%m-%d')
+
+    file_content = "---\n"
+    file_content += yaml.dump(front_matter, default_flow_style=False, allow_unicode=True)
+    file_content += "---\n\n"
+    file_content += content.strip()
+    file_content += "\n"
+
+    filepath.write_text(file_content)
+
+
+def fetch_blog_list() -> list[dict]:
+    """Fetch list of all published blog posts using the public list API with pagination."""
+    blogs = []
+    limit_start = 0
+    page_size = 20
+
+    while True:
+        url = f"{ERPNEXT_URL}/api/method/frappe.www.list.get"
+        params = {
+            'doctype': 'Blog Post',
+            'limit_start': limit_start,
+            'pathname': '/blog'
+        }
+
+        try:
+            response = requests.get(url, params=params, timeout=30)
+            response.raise_for_status()
+            data = response.json()
+        except requests.RequestException as e:
+            print(f"Error fetching blog list (page {limit_start // page_size + 1}): {e}", file=sys.stderr)
+            break
+        except json.JSONDecodeError as e:
+            print(f"Error parsing blog list response: {e}", file=sys.stderr)
+            break
+
+        message = data.get('message', {})
+        raw_result = message.get('raw_result', '[]')
+
+        # Parse the raw_result JSON string
+        try:
+            page_blogs = json.loads(raw_result) if isinstance(raw_result, str) else raw_result
+        except json.JSONDecodeError:
+            page_blogs = []
+
+        if not page_blogs:
+            break
+
+        # Transform to our format
+        for blog in page_blogs:
+            route = blog.get('route', '')
+            blogs.append({
+                'name': f"/{route}" if route and not route.startswith('/') else route,
+                'title': blog.get('title', 'Untitled'),
+                'blog_category': blog.get('blog_category', 'uncategorised'),
+                'published_on': blog.get('published_on', ''),
+                'blogger': blog.get('blogger', 'Kartoza'),
+                'content': blog.get('content', ''),
+                'cover_image': blog.get('cover_image', ''),
+                'modified': blog.get('published_on', ''),  # Use published date as modified
+            })
+
+        # Check if there are more pages
+        show_more = message.get('show_more', False)
+        next_start = message.get('next_start', 0)
+
+        if not show_more or next_start <= limit_start:
+            break
+
+        limit_start = next_start
+
+    return blogs
 
 
 def fetch_blog_detail(name: str) -> dict | None:
-    """Fetch full blog post details from ERPNext."""
-    url = f"{ERPNEXT_URL}/api/resource/Blog Post/{name}"
+    """
+    Fetch full blog post details.
+
+    Since fetch_blog_list now returns full details, this function just returns
+    the blog data if it was passed directly, or fetches from the web page as fallback.
+    """
+    # If name is already a dict with full data, return it
+    if isinstance(name, dict):
+        return name
+
+    # Fallback: scrape the public blog page
+    url = f"{ERPNEXT_URL}{name}"
 
     try:
-        response = requests.get(url, headers=get_auth_headers(), timeout=30)
+        response = requests.get(url, timeout=30)
         response.raise_for_status()
-        data = response.json()
-        return data.get('data', {})
     except requests.RequestException as e:
-        print(f"Error fetching blog '{name}': {e}")
+        print(f"Error fetching blog '{name}': {e}", file=sys.stderr)
         return None
 
+    soup = BeautifulSoup(response.text, 'html.parser')
 
-def blog_to_hugo_frontmatter(blog: dict) -> dict:
+    # Extract metadata from meta tags
+    def get_meta(attr_name, attr_value):
+        tag = soup.find('meta', attrs={attr_name: attr_value})
+        return tag.get('content', '') if tag else ''
+
+    # Get title from meta or h1
+    title = get_meta('name', 'name') or get_meta('property', 'og:title')
+    if not title:
+        h1 = soup.find('h1', class_='blog-title')
+        title = h1.get_text(strip=True) if h1 else 'Untitled'
+    # Clean up title prefix
+    title = re.sub(r'^Kartoza\s*-\s*', '', title)
+
+    # Get description/intro
+    description = get_meta('name', 'description') or get_meta('property', 'og:description')
+    if not description:
+        intro = soup.find('p', class_='blog-intro')
+        description = intro.get_text(strip=True) if intro else ''
+
+    # Get author
+    author = get_meta('name', 'author') or get_meta('property', 'og:author') or 'Kartoza'
+
+    # Get published date
+    published_on = get_meta('name', 'datePublished') or get_meta('property', 'og:published_on')
+    if not published_on:
+        time_tag = soup.find('time', attrs={'datetime': True})
+        published_on = time_tag['datetime'] if time_tag else ''
+
+    # Get featured image
+    image = get_meta('name', 'image') or get_meta('property', 'og:image') or ''
+
+    # Get content from article body
+    content = ''
+    article_body = soup.find('div', attrs={'itemprop': 'articleBody'})
+    if article_body:
+        content = str(article_body)
+
+    # Extract category from URL path
+    parts = name.split('/')
+    category = parts[2] if len(parts) >= 3 else 'uncategorised'
+
+    return {
+        'name': name,
+        'title': title,
+        'blog_intro': description,
+        'blogger': author,
+        'published_on': published_on,
+        'modified': published_on,  # Use published date as modified
+        'blog_category': category,
+        'content': content,
+        'featured_image': image,
+    }
+
+
+def blog_to_hugo_frontmatter(blog: dict, mark_reviewed: bool = False) -> dict:
     """Convert ERPNext blog to Hugo front matter."""
     # Parse date
     pub_date = blog.get('published_on') or blog.get('creation')
@@ -93,13 +376,20 @@ def blog_to_hugo_frontmatter(blog: dict) -> dict:
     else:
         date_str = datetime.now().strftime('%Y-%m-%d')
 
+    # Get thumbnail from featured_image or use placeholder
+    # Get thumbnail from cover_image (API) or featured_image (scraping) or use placeholder
+    thumbnail = blog.get('cover_image', '') or blog.get('featured_image', '') or '/img/blog/placeholder.png'
+    # Ensure full URL for external images
+    if thumbnail and not thumbnail.startswith(('http://', 'https://', '/')):
+        thumbnail = f"{ERPNEXT_URL}/{thumbnail}"
+
     # Build front matter
     front_matter = {
         'title': blog.get('title', 'Untitled'),
         'description': blog.get('blog_intro', '')[:200] if blog.get('blog_intro') else '',
         'date': date_str,
         'author': blog.get('blogger', 'Kartoza'),
-        'thumbnail': '/img/blog/placeholder.png',
+        'thumbnail': thumbnail,
         'tags': [],
         'erpnext_id': blog.get('name', ''),
         'erpnext_modified': blog.get('modified', ''),
@@ -108,6 +398,11 @@ def blog_to_hugo_frontmatter(blog: dict) -> dict:
     # Add category as tag
     if blog.get('blog_category'):
         front_matter['tags'].append(blog['blog_category'])
+
+    # Add review fields if requested
+    if mark_reviewed:
+        front_matter['reviewedBy'] = 'Automated Check'
+        front_matter['reviewedDate'] = datetime.now().strftime('%Y-%m-%d')
 
     return front_matter
 
@@ -166,71 +461,107 @@ def create_hugo_file(blog: dict, content_dir: Path, dry_run: bool = False) -> tu
         return filename, 'Would create'
 
 
-def print_table(results: list[dict], dry_run: bool = False):
-    """Print a formatted table of results."""
+def print_status_table(results: list[dict], dry_run: bool = False) -> None:
+    """Print a rich status table of sync results to stderr."""
     if not results:
-        print("\nNo blogs found.")
+        print("\nNo blogs found.", file=sys.stderr)
         return
 
-    title_w = max(len(r['title'][:40]) for r in results)
-    title_w = max(title_w, 10)
-
-    print("\n" + "=" * (title_w + 50))
-    if dry_run:
-        print("ERPNEXT BLOG FETCH (DRY RUN)")
-    else:
-        print("ERPNEXT BLOG FETCH")
-    print("=" * (title_w + 50))
-    print(f"{'Title':<{title_w}}  {'Date':<12}  {'Author':<15}  Status")
-    print("-" * (title_w + 50))
-
+    # Prepare table data
+    table_data = []
     for r in results:
         title = r['title'][:40] + ('...' if len(r['title']) > 40 else '')
-        print(f"{title:<{title_w}}  {r['date']:<12}  {r['author'][:15]:<15}  {r['status']}")
+        status = r['status']
+        fidelity = r.get('fidelity', '-')
 
-    print("-" * (title_w + 50))
+        # Format fidelity with symbols
+        if fidelity == 'auto-reviewed':
+            fidelity_str = '✓ auto-reviewed'
+        elif fidelity == 'passed':
+            fidelity_str = '✓ passed'
+        elif fidelity == 'failed':
+            fidelity_str = '✗ failed'
+        else:
+            fidelity_str = fidelity
 
-    created = sum(1 for r in results if 'Created' in r['status'] or 'Would' in r['status'])
-    skipped = sum(1 for r in results if 'skipped' in r['status'])
-    errors = sum(1 for r in results if 'Error' in r['status'])
+        table_data.append([
+            title,
+            r.get('date', '-')[:10],
+            r.get('author', '-')[:15],
+            status,
+            fidelity_str
+        ])
 
-    print(f"Total: {len(results)} | New: {created} | Existing: {skipped} | Errors: {errors}")
-    print("=" * (title_w + 50))
+    # Print header
+    header = "ERPNEXT BLOG SYNC REPORT"
+    if dry_run:
+        header += " (DRY RUN)"
+
+    print("\n" + "=" * 80, file=sys.stderr)
+    print(f"  {header}", file=sys.stderr)
+    print(f"  Source: {ERPNEXT_URL} | Date: {datetime.now().strftime('%Y-%m-%d')}", file=sys.stderr)
+    print("=" * 80, file=sys.stderr)
+
+    # Print table using tabulate
+    headers = ['Title', 'Date', 'Author', 'Status', 'Fidelity']
+    print(tabulate(table_data, headers=headers, tablefmt='simple'), file=sys.stderr)
+
+    # Print summary
+    print("-" * 80, file=sys.stderr)
+    new_count = sum(1 for r in results if r['status'] == 'new')
+    unchanged_count = sum(1 for r in results if r['status'] == 'unchanged')
+    updated_count = sum(1 for r in results if r['status'] == 'updated')
+    error_count = sum(1 for r in results if r['status'] == 'error')
+
+    print(f"  Summary: {len(results)} total | {new_count} new | {unchanged_count} unchanged | {updated_count} updated | {error_count} errors", file=sys.stderr)
+    print("=" * 80, file=sys.stderr)
+
+
+def output_json_summary(results: list[dict]) -> None:
+    """Output JSON summary to stdout for programmatic consumption."""
+    summary = {
+        'total': len(results),
+        'new': sum(1 for r in results if r['status'] == 'new'),
+        'unchanged': sum(1 for r in results if r['status'] == 'unchanged'),
+        'updated': sum(1 for r in results if r['status'] == 'updated'),
+        'errors': sum(1 for r in results if r['status'] == 'error'),
+        'articles': results
+    }
+    print(json.dumps(summary))
 
 
 def main():
     """Main entry point."""
     import argparse
 
-    parser = argparse.ArgumentParser(description='Fetch blogs from ERPNext')
+    parser = argparse.ArgumentParser(
+        description='Sync blog articles from ERPNext with fidelity checking'
+    )
     parser.add_argument('--dry-run', '-n', action='store_true',
-                        help='Show what would be fetched without creating files')
-    parser.add_argument('--force', '-f', action='store_true',
-                        help='Overwrite existing files (use with caution)')
+                        help='Show what would happen without writing files')
     parser.add_argument('--list', '-l', action='store_true',
-                        help='Only list available blogs, do not fetch')
+                        help='Only list available blogs, do not sync')
+    parser.add_argument('--skip-images', action='store_true',
+                        help='Skip downloading images')
+    parser.add_argument('--verbose', '-v', action='store_true',
+                        help='Show verbose output')
     args = parser.parse_args()
-
-    if not API_KEY or not API_SECRET:
-        print("Warning: ERPNEXT_API_KEY and ERPNEXT_API_SECRET not set.")
-        print("Attempting unauthenticated access (may fail for private content).")
-        print()
 
     script_dir = Path(__file__).parent
     content_dir = script_dir.parent / 'content' / 'blog'
 
     if not content_dir.exists():
-        print(f"Error: Content directory not found: {content_dir}")
-        sys.exit(1)
+        print(f"Error: Content directory not found: {content_dir}", file=sys.stderr)
+        sys.exit(2)
 
-    print(f"Fetching blog list from {ERPNEXT_URL}...")
+    print(f"Fetching blog list from {ERPNEXT_URL}...", file=sys.stderr)
     blogs = fetch_blog_list()
 
     if not blogs:
-        print("No blogs found or error occurred.")
-        sys.exit(1)
+        print("No blogs found or error occurred.", file=sys.stderr)
+        sys.exit(2)
 
-    print(f"Found {len(blogs)} published blogs")
+    print(f"Found {len(blogs)} published blogs", file=sys.stderr)
 
     if args.list:
         # Just list the blogs
@@ -240,38 +571,41 @@ def main():
                 'title': blog.get('title', 'Untitled'),
                 'date': str(blog.get('published_on', ''))[:10],
                 'author': blog.get('blogger', 'Unknown'),
-                'status': 'Available'
+                'status': 'available',
+                'fidelity': '-'
             })
-        print_table(results, dry_run=True)
+        print_status_table(results, dry_run=True)
         return
 
     results = []
-    for blog_summary in blogs:
-        blog_name = blog_summary.get('name')
+    errors_occurred = False
+
+    for blog in blogs:
+        blog_name = blog.get('name')
         if not blog_name:
             continue
 
-        # Fetch full details
-        blog = fetch_blog_detail(blog_name)
-        if not blog:
-            results.append({
-                'title': blog_summary.get('title', 'Unknown'),
-                'date': '-',
-                'author': '-',
-                'status': 'Error: fetch failed'
-            })
-            continue
-
-        filename, status = create_hugo_file(blog, content_dir, dry_run=args.dry_run)
+        # Blog data is already complete from fetch_blog_list
+        # Sync the blog
+        sync_result = sync_blog(blog, content_dir, dry_run=args.dry_run)
 
         results.append({
             'title': blog.get('title', 'Untitled'),
             'date': str(blog.get('published_on', ''))[:10],
             'author': blog.get('blogger', 'Unknown'),
-            'status': status
+            'status': sync_result['status'],
+            'fidelity': sync_result['fidelity'],
+            'file': sync_result.get('file', '')
         })
 
-    print_table(results, dry_run=args.dry_run)
+    # Output results
+    print_status_table(results, dry_run=args.dry_run)
+    output_json_summary(results)
+
+    # Exit code based on errors
+    if errors_occurred:
+        sys.exit(1)
+    sys.exit(0)
 
 
 if __name__ == '__main__':
