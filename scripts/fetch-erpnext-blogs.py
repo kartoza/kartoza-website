@@ -325,8 +325,8 @@ def fetch_blog_detail(name: str) -> dict | None:
         tag = soup.find('meta', attrs={attr_name: attr_value})
         return tag.get('content', '') if tag else ''
 
-    # Get title from meta or h1
-    title = get_meta('name', 'name') or get_meta('property', 'og:title')
+    # Get title from og:title (has proper capitalization) or meta name
+    title = get_meta('property', 'og:title') or get_meta('name', 'title') or get_meta('name', 'name')
     if not title:
         h1 = soup.find('h1', class_='blog-title')
         title = h1.get_text(strip=True) if h1 else 'Untitled'
@@ -339,8 +339,20 @@ def fetch_blog_detail(name: str) -> dict | None:
         intro = soup.find('p', class_='blog-intro')
         description = intro.get_text(strip=True) if intro else ''
 
-    # Get author
-    author = get_meta('name', 'author') or get_meta('property', 'og:author') or 'Kartoza'
+    # Get author - prefer full name from avatar/author link over meta tag username
+    author = None
+    # Try to get full name from avatar span
+    avatar_span = soup.find('span', class_='avatar', attrs={'title': True})
+    if avatar_span:
+        author = avatar_span.get('title')
+    # Or from author link
+    if not author:
+        author_link = soup.find('a', href=lambda h: h and '/blog?blogger=' in h)
+        if author_link:
+            author = author_link.get_text(strip=True)
+    # Fallback to meta tag
+    if not author:
+        author = get_meta('name', 'author') or get_meta('property', 'og:author') or 'Kartoza'
 
     # Get published date
     published_on = get_meta('name', 'datePublished') or get_meta('property', 'og:published_on')
@@ -406,9 +418,12 @@ def blog_to_hugo_frontmatter(blog: dict, mark_reviewed: bool = False) -> dict:
         'erpnext_modified': blog.get('modified', ''),
     }
 
-    # Add category as tag
+    # Add category as tag (capitalize first letter)
     if blog.get('blog_category'):
-        front_matter['tags'].append(blog['blog_category'])
+        category = blog['blog_category']
+        # Capitalize first letter of each word
+        category = category.replace('-', ' ').title()
+        front_matter['tags'].append(category)
 
     # Add review fields if requested
     if mark_reviewed:
