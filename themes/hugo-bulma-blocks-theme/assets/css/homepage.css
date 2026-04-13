@@ -5113,6 +5113,35 @@ body:has(.blog-hero) .contextmenu {
     font-weight: 700;
 }
 
+.author-role {
+    font-size: 0.8rem;
+    opacity: 0.85;
+    margin-top: 0.15rem;
+}
+
+/* Author Card with Image */
+.author-card-linked {
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+.author-card-linked:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.author-avatar-image {
+    background: none;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.author-avatar-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 /* Tags Card */
 .sidebar-tags {
     display: flex;
