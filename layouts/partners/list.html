@@ -4,15 +4,6 @@
 
 <section class="section partners-section">
     <div class="container">
-        <!-- Partners Introduction -->
-        {{ if .Content }}
-        <div class="partners-intro">
-            <div class="partners-intro-content">
-                {{ .Content }}
-            </div>
-        </div>
-        {{ end }}
-
         <!-- Partners Grid - Beautiful Cards -->
         <div class="partners-showcase">
             {{ range where .Pages ".Params.approved" true }}

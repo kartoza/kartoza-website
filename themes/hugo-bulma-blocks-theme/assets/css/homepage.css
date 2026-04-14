@@ -3644,24 +3644,20 @@ html {
 }
 
 .partner-showcase-logo {
-    background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);
-    padding: 3rem 2rem;
+    background: #ffffff;
+    padding: 2.5rem 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
-    min-height: 200px;
+    min-height: 180px;
+    border-bottom: 1px solid var(--gray-200);
 }
 
 .partner-showcase-logo-glow {
-    position: absolute;
-    width: 180px;
-    height: 180px;
-    background: radial-gradient(circle, rgba(52, 152, 219, 0.3) 0%, transparent 70%);
-    border-radius: 50%;
-    animation: partner-logo-pulse 3s ease-in-out infinite;
+    display: none;
 }
 
 @keyframes partner-logo-pulse {
@@ -3676,10 +3672,9 @@ html {
 }
 
 .partner-showcase-logo img {
-    max-width: 180px;
-    max-height: 80px;
+    max-width: 200px;
+    max-height: 100px;
     object-fit: contain;
-    filter: brightness(0) invert(1);
     position: relative;
     z-index: 1;
     transition: transform var(--transition);
