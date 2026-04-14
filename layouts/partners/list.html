@@ -10,7 +10,6 @@
             <article class="partner-showcase-card">
                 <!-- Logo Section -->
                 <div class="partner-showcase-logo">
-                    <div class="partner-showcase-logo-glow"></div>
                     {{ if .Params.logo }}
                     <img src="{{ .Params.logo }}" alt="{{ .Title }} logo">
                     {{ else }}
@@ -18,10 +17,6 @@
                         <i class="fas fa-handshake"></i>
                     </div>
                     {{ end }}
-                    <div class="partner-showcase-badge">
-                        <span class="icon"><i class="fas fa-certificate"></i></span>
-                        <span>Official Partner</span>
-                    </div>
                 </div>
 
                 <!-- Content Section -->
