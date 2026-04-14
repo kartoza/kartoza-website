@@ -11,6 +11,29 @@
         </div>
         {{ end }}
 
+        <!-- Collect all unique tags from reviewed pages -->
+        {{ $allTags := slice }}
+        {{ range .RegularPages }}
+            {{ if and .Params.reviewedBy .Params.reviewedDate }}
+                {{ range .Params.tags }}
+                    {{ $allTags = $allTags | append . }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+        {{ $uniqueTags := $allTags | uniq | sort }}
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs">
+            <button class="filter-tab is-active" data-filter="all">
+                <i class="fas fa-th-large"></i> All Articles
+            </button>
+            {{ range first 8 $uniqueTags }}
+            <button class="filter-tab" data-filter="{{ . | urlize }}">
+                {{ . }}
+            </button>
+            {{ end }}
+        </div>
+
         <!-- Blog Grid - Infinite Scroll Container -->
         <div class="blog-grid columns is-multiline" id="blog-grid">
             <!-- Initial posts will be loaded by JavaScript -->
@@ -30,6 +53,12 @@
                 <i class="fas fa-spinner fa-spin"></i>
             </div>
             <span>Loading more articles...</span>
+        </div>
+
+        <!-- No Results Message -->
+        <div class="filter-no-results" id="no-results" style="display: none;">
+            <i class="fas fa-search"></i>
+            <span>No articles found matching this filter.</span>
         </div>
 
         <!-- End of Posts Message -->
@@ -67,6 +96,10 @@
     {{- if or (not $thumbnail) (eq $thumbnail "/img/blog/placeholder.png") -}}
         {{- $thumbnail = "/img/banner-blog.png" -}}
     {{- end -}}
+    {{- $tagList := slice -}}
+    {{- range .Params.tags -}}
+        {{- $tagList = $tagList | append (. | urlize) -}}
+    {{- end -}}
     {{- $post := dict
         "title" (.Title | replaceRE "^Kartoza - " "")
         "url" .Permalink
@@ -74,6 +107,7 @@
         "author" (.Params.author | default "")
         "excerpt" (.Description | default .Summary | truncate 120 | plainify)
         "thumbnail" (absURL $thumbnail)
+        "tags" $tagList
     -}}
     {{- $posts = $posts | append $post -}}
     {{- end -}}
@@ -81,22 +115,26 @@
 {{ $posts | jsonify }}
 </script>
 
-<!-- Infinite Scroll Script -->
+<!-- Infinite Scroll Script with Filtering -->
 <script>
 (function() {
     'use strict';
 
     const POSTS_PER_LOAD = 9;
     let allPosts = [];
+    let filteredPosts = [];
     let currentIndex = 0;
     let isLoading = false;
     let allPostsLoaded = false;
+    let currentFilter = 'all';
 
     const blogGrid = document.getElementById('blog-grid');
     const loadingEl = document.getElementById('blog-loading');
     const endMessageEl = document.getElementById('blog-end');
     const loadMoreContainer = document.getElementById('blog-load-more');
     const loadMoreBtn = document.getElementById('load-more-btn');
+    const noResultsEl = document.getElementById('no-results');
+    const filterTabs = document.querySelectorAll('.filter-tab');
 
     // Parse blog data
     try {
@@ -107,6 +145,7 @@
             parsed = JSON.parse(parsed);
         }
         allPosts = parsed;
+        filteredPosts = allPosts;
     } catch (e) {
         console.error('Failed to parse blog data:', e);
         return;
@@ -114,8 +153,9 @@
 
     // Create a blog card HTML
     function createBlogCard(post) {
+        const tagsAttr = post.tags ? post.tags.join(' ') : '';
         return `
-            <div class="column is-4-desktop is-6-tablet">
+            <div class="column is-4-desktop is-6-tablet filter-item" data-tags="${tagsAttr}">
                 <article class="blog-card">
                     <div class="blog-card-image">
                         <a href="${post.url}">
@@ -143,6 +183,33 @@
         `;
     }
 
+    // Apply filter
+    function applyFilter(filter) {
+        currentFilter = filter;
+        currentIndex = 0;
+        allPostsLoaded = false;
+        blogGrid.innerHTML = '';
+
+        if (filter === 'all') {
+            filteredPosts = allPosts;
+        } else {
+            filteredPosts = allPosts.filter(post =>
+                post.tags && post.tags.includes(filter)
+            );
+        }
+
+        // Show/hide no results
+        if (filteredPosts.length === 0) {
+            noResultsEl.style.display = 'flex';
+            loadMoreContainer.style.display = 'none';
+            endMessageEl.style.display = 'none';
+        } else {
+            noResultsEl.style.display = 'none';
+            loadMoreContainer.style.display = 'block';
+            loadMorePosts();
+        }
+    }
+
     // Load more posts
     function loadMorePosts() {
         if (isLoading || allPostsLoaded) return;
@@ -152,7 +219,7 @@
 
         // Simulate a small delay for smooth UX
         setTimeout(() => {
-            const postsToLoad = allPosts.slice(currentIndex, currentIndex + POSTS_PER_LOAD);
+            const postsToLoad = filteredPosts.slice(currentIndex, currentIndex + POSTS_PER_LOAD);
 
             postsToLoad.forEach((post, index) => {
                 const cardHTML = createBlogCard(post);
@@ -178,12 +245,30 @@
             loadingEl.style.display = 'none';
 
             // Check if all posts loaded
-            if (currentIndex >= allPosts.length) {
+            if (currentIndex >= filteredPosts.length) {
                 allPostsLoaded = true;
                 loadMoreContainer.style.display = 'none';
-                endMessageEl.style.display = 'flex';
+                if (filteredPosts.length > 0) {
+                    endMessageEl.style.display = 'flex';
+                }
             }
         }, 300);
+    }
+
+    // Setup filter tabs
+    function setupFilterTabs() {
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const filter = this.dataset.filter;
+
+                // Update active tab
+                filterTabs.forEach(t => t.classList.remove('is-active'));
+                this.classList.add('is-active');
+
+                // Apply filter
+                applyFilter(filter);
+            });
+        });
     }
 
     // Intersection Observer for infinite scroll
@@ -210,6 +295,9 @@
             endMessageEl.style.display = 'flex';
             return;
         }
+
+        // Setup filter tabs
+        setupFilterTabs();
 
         // Load initial posts
         loadMorePosts();

@@ -11,80 +11,114 @@
         </div>
         {{ end }}
 
-        <!-- Portfolio Grid - only show pages with both reviewedBy and reviewedDate -->
-        <div class="portfolio-grid columns is-multiline">
-            {{ range .RegularPages }}
-            {{ if and .Params.reviewedBy .Params.reviewedDate }}
-            <div class="column is-6-desktop is-12-tablet">
-                <article class="portfolio-card">
-                    <div class="portfolio-card-image">
-                        <a href="{{ .Permalink }}">
-                            {{ $thumbnail := .Params.thumbnail | default "/img/banner-portfolio.png" }}
-                            <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" loading="lazy">
-                            <div class="portfolio-card-overlay">
-                                <span class="view-project">
-                                    <i class="fas fa-eye"></i>
-                                    View Project
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="portfolio-card-content">
-                        <h3 class="portfolio-card-title">
-                            <a href="{{ .Permalink }}">{{ .Title }}</a>
-                        </h3>
-                        {{ if .Params.client }}
-                        <p class="portfolio-card-client">
-                            <i class="fas fa-building"></i>
-                            {{ .Params.client }}
-                        </p>
-                        {{ end }}
-                        <p class="portfolio-card-description">
-                            {{ .Description | truncate 150 }}
-                        </p>
-                        {{ if .Params.tags }}
-                        <div class="portfolio-card-tags">
-                            {{ range first 3 .Params.tags }}
-                            <span class="tag">{{ . }}</span>
-                            {{ end }}
-                        </div>
-                        {{ end }}
-                        <a href="{{ .Permalink }}" class="portfolio-card-link">
-                            Learn More <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </article>
-            </div>
-            {{ end }}{{/* end if reviewedBy and reviewedDate */}}
-            {{ end }}{{/* end range */}}
-        </div>
-
-        <!-- Pagination -->
-        {{ if gt .Paginator.TotalPages 1 }}
-        <nav class="pagination is-centered portfolio-pagination" role="navigation" aria-label="pagination">
-            {{ if .Paginator.HasPrev }}
-            <a class="pagination-previous" href="{{ .Paginator.Prev.URL }}">
-                <i class="fas fa-chevron-left"></i> Previous
-            </a>
+        <!-- Collect all unique tags from reviewed pages -->
+        {{ $allTags := slice }}
+        {{ $reviewedPages := where .RegularPages "Params.reviewedBy" "!=" nil }}
+        {{ $reviewedPages = where $reviewedPages "Params.reviewedDate" "!=" nil }}
+        {{ range $reviewedPages }}
+            {{ range .Params.tags }}
+                {{ $allTags = $allTags | append . }}
             {{ end }}
-            {{ if .Paginator.HasNext }}
-            <a class="pagination-next" href="{{ .Paginator.Next.URL }}">
-                Next <i class="fas fa-chevron-right"></i>
-            </a>
-            {{ end }}
-            <ul class="pagination-list">
-                {{ range .Paginator.Pagers }}
-                <li>
-                    <a class="pagination-link {{ if eq . $.Paginator }}is-current{{ end }}"
-                       href="{{ .URL }}"
-                       aria-label="Page {{ .PageNumber }}">
-                        {{ .PageNumber }}
-                    </a>
-                </li>
-                {{ end }}
-            </ul>
-        </nav>
         {{ end }}
+        {{ $uniqueTags := $allTags | uniq | sort }}
+
+        <!-- Build tag counts -->
+        {{ $tagCounts := dict }}
+        {{ range $tag := $uniqueTags }}
+            {{ $count := 0 }}
+            {{ range $reviewedPages }}
+                {{ if in .Params.tags $tag }}
+                    {{ $count = add $count 1 }}
+                {{ end }}
+            {{ end }}
+            {{ $tagCounts = merge $tagCounts (dict $tag $count) }}
+        {{ end }}
+
+        <!-- Portfolio Layout with Sidebar -->
+        <div class="portfolio-layout">
+            <!-- Main Content -->
+            <div class="portfolio-main">
+                <!-- Portfolio Grid - load all reviewed pages -->
+                <div class="portfolio-grid columns is-multiline">
+                    {{ range $reviewedPages }}
+                    {{ $tagList := slice }}
+                    {{ range .Params.tags }}
+                        {{ $tagList = $tagList | append (. | urlize) }}
+                    {{ end }}
+                    <div class="column filter-item" data-tags="{{ delimit $tagList " " }}">
+                        <article class="portfolio-card">
+                            <div class="portfolio-card-image">
+                                <a href="{{ .Permalink }}">
+                                    {{ $thumbnail := .Params.thumbnail | default "/img/banner-portfolio.png" }}
+                                    <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" loading="lazy">
+                                    <div class="portfolio-card-overlay">
+                                        <span class="view-project">
+                                            <i class="fas fa-eye"></i>
+                                            View Project
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="portfolio-card-content">
+                                <h3 class="portfolio-card-title">
+                                    <a href="{{ .Permalink }}">{{ .Title }}</a>
+                                </h3>
+                                {{ if .Params.client }}
+                                <p class="portfolio-card-client">
+                                    <i class="fas fa-building"></i>
+                                    {{ .Params.client }}
+                                </p>
+                                {{ end }}
+                                <p class="portfolio-card-description">
+                                    {{ .Description | truncate 150 }}
+                                </p>
+                                {{ if .Params.tags }}
+                                <div class="portfolio-card-tags">
+                                    {{ range first 3 .Params.tags }}
+                                    <span class="tag">{{ . }}</span>
+                                    {{ end }}
+                                </div>
+                                {{ end }}
+                                <a href="{{ .Permalink }}" class="portfolio-card-link">
+                                    Learn More <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                    {{ end }}
+                </div>
+
+                <!-- No Results Message -->
+                <div class="filter-no-results" id="no-results" style="display: none;">
+                    <i class="fas fa-search"></i>
+                    <span>No projects found matching this filter.</span>
+                </div>
+            </div>
+
+            <!-- Filter Sidebar -->
+            <aside class="portfolio-filter-sidebar">
+                <div class="filter-sidebar-card">
+                    <h4 class="filter-sidebar-title">
+                        <i class="fas fa-filter"></i> Filter by Topic
+                    </h4>
+                    <div class="filter-sidebar-tabs">
+                        <button class="filter-sidebar-tab is-active" data-filter="all">
+                            <i class="fas fa-th-large"></i> All Projects
+                            <span class="filter-count">{{ len $reviewedPages }}</span>
+                        </button>
+                        {{ range $tag := $uniqueTags }}
+                        {{ $tagCount := index $tagCounts $tag }}
+                        {{ if gt $tagCount 1 }}
+                        <button class="filter-sidebar-tab" data-filter="{{ $tag | urlize }}">
+                            {{ $tag }}
+                            <span class="filter-count">{{ $tagCount }}</span>
+                        </button>
+                        {{ end }}
+                        {{ end }}
+                    </div>
+                </div>
+            </aside>
+        </div>
     </div>
 </section>
 
@@ -105,6 +139,39 @@
         </div>
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterTabs = document.querySelectorAll('.filter-sidebar-tab');
+    const filterItems = document.querySelectorAll('.filter-item');
+    const noResults = document.getElementById('no-results');
+
+    filterTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const filter = this.dataset.filter;
+
+            // Update active tab
+            filterTabs.forEach(t => t.classList.remove('is-active'));
+            this.classList.add('is-active');
+
+            // Filter items
+            let visibleCount = 0;
+            filterItems.forEach(item => {
+                const tags = item.dataset.tags.split(' ').filter(t => t.length > 0);
+                if (filter === 'all' || tags.includes(filter)) {
+                    item.style.display = '';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Show/hide no results message
+            noResults.style.display = visibleCount === 0 ? 'flex' : 'none';
+        });
+    });
+});
+</script>
 
 {{ partial "physics-scroll.html" . }}
 

@@ -1228,16 +1228,144 @@
     line-height: 1.7;
 }
 
-/* Shared responsive grid for all gallery pages */
+/* Portfolio Layout with Sidebar */
+.portfolio-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 2rem;
+    align-items: start;
+}
+
+.portfolio-main {
+    min-width: 0;
+}
+
+.portfolio-filter-sidebar {
+    position: sticky;
+    top: 2rem;
+}
+
+.filter-sidebar-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+}
+
+.filter-sidebar-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--gray-100);
+}
+
+.filter-sidebar-title i {
+    color: var(--primary);
+}
+
+.filter-sidebar-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter-sidebar-tab {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 0.75rem;
+    background: var(--light-bg);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-align: left;
+}
+
+.filter-sidebar-tab:hover {
+    background: var(--light-bg-alt);
+    color: var(--primary);
+}
+
+.filter-sidebar-tab.is-active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--white);
+}
+
+.filter-sidebar-tab.is-active .filter-count {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+}
+
+.filter-count {
+    background: var(--gray-200);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 10px;
+    min-width: 24px;
+    text-align: center;
+}
+
+/* Portfolio grid inside layout - no extra margins */
+.portfolio-layout .portfolio-grid {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* Portfolio Layout Responsive */
+@media screen and (max-width: 1024px) {
+    .portfolio-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-filter-sidebar {
+        position: static;
+        order: -1;
+        margin-bottom: 2rem;
+    }
+
+    .filter-sidebar-tabs {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .filter-sidebar-tab {
+        flex: 0 0 auto;
+    }
+}
+
+/* Shared responsive grid for all gallery pages (3 columns max) */
 .portfolio-grid,
 .gallery-grid,
 .blog-grid,
 .training-grid,
-.solutions-grid {
+.apps-grid,
+.plugins-grid {
     display: grid !important;
     margin-left: 30px;
     margin-right: 30px;
     grid-template-columns: repeat(3, 1fr) !important;
+    gap: 2rem !important;
+}
+
+/* Solutions grid - 2 columns max */
+.solutions-grid {
+    display: grid !important;
+    margin-left: 30px;
+    margin-right: 30px;
+    grid-template-columns: repeat(2, 1fr) !important;
     gap: 2rem !important;
 }
 
@@ -1246,19 +1374,22 @@
 .gallery-grid > .column,
 .blog-grid > .column,
 .training-grid > .column,
-.solutions-grid > .column {
+.solutions-grid > .column,
+.apps-grid > .column,
+.plugins-grid > .column {
     width: 100% !important;
     flex: none !important;
     padding: 0 !important;
 }
 
-/* Tablet: 2 columns */
+/* Tablet: 2 columns (solutions stays at 2) */
 @media screen and (max-width: 1024px) {
     .portfolio-grid,
     .gallery-grid,
     .blog-grid,
     .training-grid,
-    .solutions-grid {
+    .apps-grid,
+    .plugins-grid {
         grid-template-columns: repeat(2, 1fr) !important;
     }
 }
@@ -1269,43 +1400,14 @@
     .gallery-grid,
     .blog-grid,
     .training-grid,
-    .solutions-grid {
+    .solutions-grid,
+    .apps-grid,
+    .plugins-grid {
         grid-template-columns: 1fr !important;
     }
 }
 
-/* Large desktop: 4 columns */
-@media screen and (min-width: 1600px) {
-    .portfolio-grid,
-    .gallery-grid,
-    .blog-grid,
-    .training-grid,
-    .solutions-grid {
-        grid-template-columns: repeat(4, 1fr) !important;
-    }
-}
-
-/* Ultrawide: 5 columns */
-@media screen and (min-width: 2200px) {
-    .portfolio-grid,
-    .gallery-grid,
-    .blog-grid,
-    .training-grid,
-    .solutions-grid {
-        grid-template-columns: repeat(5, 1fr) !important;
-    }
-}
-
-/* Super ultrawide: 6 columns */
-@media screen and (min-width: 2800px) {
-    .portfolio-grid,
-    .gallery-grid,
-    .blog-grid,
-    .training-grid,
-    .solutions-grid {
-        grid-template-columns: repeat(6, 1fr) !important;
-    }
-}
+/* All gallery grids stay at max 3 columns on all screen sizes */
 
 /* Portfolio Card */
 .portfolio-card {
@@ -5507,6 +5609,42 @@ body:has(.blog-hero) .contextmenu {
 .apps-section {
     background: var(--light-bg);
     padding: 5rem 1.5rem;
+}
+
+/* Apps Layout with Sidebar */
+.apps-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 2rem;
+    align-items: start;
+}
+
+.apps-main {
+    min-width: 0;
+}
+
+.apps-filter-sidebar {
+    position: sticky;
+    top: 2rem;
+}
+
+/* Apps grid inside layout - no extra margins */
+.apps-layout .apps-grid {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* Apps Layout Responsive */
+@media screen and (max-width: 1024px) {
+    .apps-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .apps-filter-sidebar {
+        position: static;
+        order: -1;
+        margin-bottom: 2rem;
+    }
 }
 
 .apps-grid {
@@ -12692,8 +12830,15 @@ body:has(.blog-hero) .contextmenu {
     display: flex;
     align-items: center;
     gap: 1.25rem;
-    background: linear-gradient(135deg, var(--accent) 0%, #edb348  100%);
-    color: white;
+    background: linear-gradient(135deg, var(--accent) 0%, #edb348 100%) !important;
+    color: var(--white) !important;
+}
+
+.response-card h4,
+.response-card p,
+.response-card strong,
+.response-card .business-hours {
+    color: var(--white) !important;
 }
 
 .response-clock {
@@ -16056,39 +16201,74 @@ a.playlist-card:hover .playlist-card-link {
     letter-spacing: 0.5px;
 }
 
-/* Filter Tabs */
+/* Generic Filter Tabs - used across apps, portfolio, blog, etc. */
+.filter-tabs,
 .plugins-filter-tabs {
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
     margin-bottom: 3rem;
 }
 
+.filter-tab,
 .plugin-filter-tab {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
+    padding: 0.6rem 1.25rem;
     background: var(--light-bg);
     border: 2px solid transparent;
     border-radius: var(--radius-md);
     color: var(--text-muted);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     cursor: pointer;
     transition: all var(--transition-fast);
 }
 
+.filter-tab:hover,
 .plugin-filter-tab:hover {
     background: var(--light-bg-alt);
     color: var(--primary);
 }
 
+.filter-tab.is-active,
 .plugin-filter-tab.is-active {
     background: var(--white);
     border-color: var(--primary);
     color: var(--primary);
     box-shadow: var(--shadow-sm);
+}
+
+/* No Results Message */
+.filter-no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 3rem;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+.filter-no-results i {
+    font-size: 2.5rem;
+    opacity: 0.5;
+}
+
+@media screen and (max-width: 768px) {
+    .filter-tabs,
+    .plugins-filter-tabs {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-tab,
+    .plugin-filter-tab {
+        justify-content: center;
+    }
 }
 
 /* Plugin Categories */
@@ -16800,11 +16980,11 @@ a.playlist-card:hover .playlist-card-link {
 }
 
 .related-card.portfolio-related {
-    border-left-color: #9b59b6;
+    border-left-color: var(--primary);
 }
 
 .related-card.apps-related {
-    border-left-color: #27ae60;
+    border-left-color: var(--accent);
 }
 
 .related-items {
@@ -16844,12 +17024,24 @@ a.playlist-card:hover .playlist-card-link {
     flex-shrink: 0;
 }
 
+.related-icon i {
+    color: var(--white) !important;
+}
+
 .portfolio-related .related-icon {
-    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+}
+
+.portfolio-related .related-icon i {
+    color: var(--white) !important;
 }
 
 .apps-related .related-icon {
-    background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+}
+
+.apps-related .related-icon i {
+    color: var(--white) !important;
 }
 
 .related-info {
