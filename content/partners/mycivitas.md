@@ -5,6 +5,10 @@ description: "Kartoza is the developer and implementation partner for MyCivitas,
 logo: "/img/partners/mycivitas-logo.svg"
 productUrl: "https://civitas.kartoza.com"
 productName: "MyCivitas"
+approved: false
+approvedDate: ""
+reviewedBy: "Tim Sutton"
+reviewedDate: "2026-04-14"
 date: 2024-01-03
 features:
   - title: "Complete Inventory"

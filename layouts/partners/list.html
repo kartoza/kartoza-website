@@ -15,7 +15,7 @@
 
         <!-- Partners Grid - Beautiful Cards -->
         <div class="partners-showcase">
-            {{ range .Pages }}
+            {{ range where .Pages ".Params.approved" true }}
             <article class="partner-showcase-card">
                 <!-- Logo Section -->
                 <div class="partner-showcase-logo">

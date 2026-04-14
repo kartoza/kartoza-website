@@ -2,9 +2,13 @@
 title: "Mergin Maps"
 tagline: "Seamless Field Data Collection and Collaboration"
 description: "Kartoza is an official Mergin Maps partner, providing complete field data collection solutions with QGIS-based project design, cloud synchronisation, and team collaboration."
-logo: "/img/partners/merginmaps-logo.svg"
+logo: "/img/partners/mergin-maps-logo.svg"
 productUrl: "https://merginmaps.com"
 productName: "Mergin Maps"
+approved: true
+approvedDate: "2024-01-01"
+reviewedBy: "Tim Sutton"
+reviewedDate: "2026-04-14"
 date: 2024-01-02
 features:
   - title: "QGIS Integration"
