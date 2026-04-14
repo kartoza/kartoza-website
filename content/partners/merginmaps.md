@@ -8,7 +8,7 @@ productName: "Mergin Maps"
 approved: true
 approvedDate: "2024-01-01"
 reviewedBy: "Tim Sutton"
-reviewedDate: "2026-04-14"
+reviewedDate: "2026-04-15"
 date: 2024-01-02
 features:
   - title: "QGIS Integration"
@@ -36,10 +36,6 @@ services:
   - "Database integration (PostGIS)"
   - "Dashboard and reporting setup"
   - "Ongoing support and maintenance"
-testimonial:
-  quote: "The Mergin Maps deployment by Kartoza enabled our team of 30 field workers to collect over 50,000 data points in three months, all syncing seamlessly to our central database."
-  author: "Project Manager"
-  role: "International Development Organisation"
 ---
 
 ## Why Mergin Maps?
