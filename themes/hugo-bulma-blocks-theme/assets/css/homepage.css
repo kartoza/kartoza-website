@@ -15322,6 +15322,13 @@ a.playlist-card:hover .playlist-card-link {
     margin: 0 auto;
 }
 
+/* Single pathway - full width */
+.hosting-pathways-grid .hosting-pathway-card:only-child {
+    grid-column: 1 / -1;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
 @media screen and (max-width: 992px) {
     .hosting-pathways-grid {
         grid-template-columns: 1fr;
@@ -15349,16 +15356,6 @@ a.playlist-card:hover .playlist-card-link {
 
 .hosting-pathway-card.is-popular {
     border-top-color: var(--accent);
-}
-
-.hosting-pathway-card.is-popular::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-light));
 }
 
 /* Pathway Badge */
