@@ -122,7 +122,7 @@
                             </a>
                         {{ else }}
                             <p class="booking-quick-text">No scheduled sessions yet</p>
-                            <a href="{{ absURL "contact-us/" }}?subject=Training%20Enquiry:%20{{ .Title | urlquery }}" class="button is-primary is-medium">
+                            <a href="{{ absURL "contact-us/" }}?course={{ .Title | urlquery }}&subject=Training%20Enquiry" class="button is-primary is-medium">
                                 <span class="icon"><i class="fas fa-envelope"></i></span>
                                 <span>Request Custom Training</span>
                             </a>
@@ -317,7 +317,7 @@
                             <h4>Need Custom Training?</h4>
                             <p>We can bring this course to your location or schedule a private session for your team.</p>
                         </div>
-                        <a href="{{ absURL "contact-us/" }}?subject=Custom%20Training%20Enquiry:%20{{ .Title | urlquery }}" class="button is-light is-medium">
+                        <a href="{{ absURL "contact-us/" }}?course={{ .Title | urlquery }}&subject=Custom%20Training%20Enquiry" class="button is-light is-medium">
                             <span class="icon"><i class="fas fa-envelope"></i></span>
                             <span>Request Quote</span>
                         </a>
@@ -519,7 +519,7 @@
             <i class="fas fa-calendar-times"></i>
             <h3>No Scheduled Sessions Yet</h3>
             <p>We don't have any public sessions scheduled for this course at the moment, but we can arrange custom training for your team.</p>
-            <a href="{{ absURL "contact-us/" }}?subject=Custom%20Training%20Enquiry:%20{{ .Title | urlquery }}" class="button is-primary is-medium">
+            <a href="{{ absURL "contact-us/" }}?course={{ .Title | urlquery }}&subject=Custom%20Training%20Enquiry" class="button is-primary is-medium">
                 <span class="icon"><i class="fas fa-envelope"></i></span>
                 <span>Request Custom Training</span>
             </a>
