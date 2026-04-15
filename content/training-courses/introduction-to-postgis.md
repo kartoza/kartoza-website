@@ -1,6 +1,6 @@
 ---
 title: "Introduction to PostGIS"
-description: "Dive into the world of spatial databases with **Geospatial Data & Design with PostGIS**, a hands‑on, two‑day instructor‑led course that transforms PostgreSQL into a powerful geospatial engine. You’ll learn to store, query, analyse and visualise spatial data—all from a single, shared database—fueli"
+description: "Dive into the world of spatial databases with **Geospatial Data & Design with PostGIS**, a hands‑on, two‑day instructor‑led course that transforms PostgreSQL into a powerful geospatial engine. You’ll learn to store, query, analyse and visualise spatial data—all from a single, shared database—fueling everything from web maps to enterprise GIS."
 thumbnail: "/img/training/erpnext/postgis.png"
 shop_url: "https://erp.kartoza.com/training/introduction-to-postgis-7ihjm"
 tags:
@@ -16,7 +16,7 @@ reviewedDate: 2026-04-15
     class="is-primary"
     sub-block-side="bottom"
 >}}
-Dive into the world of spatial databases with **Geospatial Data & Design with PostGIS**, a hands‑on, two‑day instructor‑led course that transforms PostgreSQL into a powerful geospatial engine. You’ll learn to store, query, analyse and visualise spatial data—all from a single, shared database—fueli
+Dive into the world of spatial databases with **Geospatial Data & Design with PostGIS**, a hands‑on, two‑day instructor‑led course that transforms PostgreSQL into a powerful geospatial engine. You'll learn to store, query, analyse and visualise spatial data—all from a single, shared database—fueling everything from web maps to enterprise GIS.
 {{< /block >}}
 
 ## Overview
