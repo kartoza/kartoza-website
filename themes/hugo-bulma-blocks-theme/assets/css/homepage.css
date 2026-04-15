@@ -7468,7 +7468,7 @@ body:has(.blog-hero) .contextmenu {
 
 .careers-hero-title .title-highlight {
     display: block;
-    color: var(--accent);
+    color: var(--white);
     margin-top: 0.5rem;
 }
 
@@ -7605,11 +7605,6 @@ body:has(.blog-hero) .contextmenu {
 .careers-section {
     padding: 6rem 0;
     position: relative;
-}
-
-.careers-looking-for .container,
-.careers-apply .container {
-    margin: 0 30px;
 }
 
 .careers-section .section-label {
@@ -8374,8 +8369,8 @@ body:has(.blog-hero) .contextmenu {
 
 /* Application Section */
 .careers-apply {
-    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-    padding: 6rem 0;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .apply-steps {
@@ -18757,5 +18752,268 @@ a.playlist-card:hover .playlist-card-link {
 
     .plugin-nav-empty {
         display: none;
+    }
+}
+
+/* ============================================
+   SHADOWING SECTION (Job Shadowing)
+   ============================================ */
+.shadowing {
+    background: var(--white);
+    padding: 6rem 0;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--light-bg-alt);
+    border-bottom: 1px solid var(--light-bg-alt);
+}
+
+.shadowing::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(83,162,204,0.04)"/><circle cx="80" cy="40" r="3" fill="rgba(232,163,49,0.03)"/><circle cx="60" cy="80" r="2" fill="rgba(83,162,204,0.02)"/></svg>');
+    background-repeat: repeat;
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+.shadowing .container {
+    position: relative;
+    z-index: 1;
+}
+
+.shadowing-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.shadowing-text {
+    animation: fadeUp 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.shadowing-text.visible {
+    opacity: 100%;
+}
+
+.shadowing-visual {
+    background: var(--light-bg);
+    border: 1px solid var(--light-bg-alt);
+    border-radius: var(--radius-lg);
+    padding: 3rem;
+    animation: fadeUp 0.8s ease-out 0.15s forwards;
+    opacity: 0;
+}
+
+.shadowing-visual.visible {
+    opacity: 1;
+}
+
+.shadowing .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 1rem;
+}
+
+.shadowing .section-label i {
+    color: var(--accent-light);
+}
+
+.shadowing .section-title {
+    font-size: 2.75rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.shadowing-text > p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.shadowing-text p:last-of-type {
+    margin-bottom: 2rem;
+}
+
+.shadowing-text strong {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+/* Availability Notice */
+.avail-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: var(--light-bg);
+    border: 1px solid var(--light-bg-alt);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.avail-notice svg {
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.avail-notice p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Enquiry Button */
+.shadowing-text .button {
+    background: var(--accent);
+    color: var(--white);
+    border: 2px solid var(--accent);
+    border-radius: var(--radius-md);
+    padding: 0.75rem 2rem;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all var(--transition-med);
+}
+
+.shadowing-text .button:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(232, 163, 49, 0.3);
+}
+
+.shadowing-text .button i {
+    font-size: 1rem;
+}
+
+/* Right Column - Visual Info */
+.shad-pill {
+    display: inline-block;
+    background: var(--light-bg);
+    border: 1px solid var(--accent-light);
+    color: var(--accent-dark);
+    padding: 0.5rem 1.25rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    letter-spacing: 0.5px;
+}
+
+.shadowing-visual .shad-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    margin-top: 0;
+}
+
+.shadowing-visual p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.shadowing-visual p:last-child {
+    color: #999;
+    padding-top: 1rem;
+    margin-bottom: 0;
+}
+
+/* Animations */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 1024px) {
+    .shadowing-layout {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .shadowing-text {
+        animation-delay: 0s;
+    }
+    
+    .shadowing-visual {
+        animation-delay: 0.1s;
+        order: 2;
+    }
+    
+    .shadowing .section-title {
+        font-size: 2.25rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .shadowing {
+        padding: 3rem 0;
+    }
+    
+    .shadowing .container {
+        padding: 0 1.5rem;
+    }
+    
+    .shadowing .section-label {
+        font-size: 0.8rem;
+    }
+    
+    .shadowing .section-title {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+    }
+    
+    .shadowing-text > p {
+        font-size: 0.95rem;
+        margin-bottom: 1.25rem;
+    }
+    
+    .avail-notice {
+        gap: 0.75rem;
+        padding: 1rem;
+    }
+    
+    .avail-notice p {
+        font-size: 0.9rem;
+    }
+    
+    .shadowing-visual {
+        padding: 2rem;
+    }
+    
+    .shadowing-visual .shad-title {
+        font-size: 1.25rem;
+    }
+    
+    .shadowing-visual p {
+        font-size: 0.9rem;
     }
 }
