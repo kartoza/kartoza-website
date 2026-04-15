@@ -25,7 +25,7 @@ Dive into the world of spatial databases with **Geospatial Data & Design with Po
 
 **Format & Duration**
 
-**Delivery**: Online, instructor‑led. *On-site Training is available on request (must be 7+ people)*
+**Delivery**: Online, instructor‑led. _On-site Training is available on request (must be 7+ people)_
 
 **Length**: 2 full days
 
