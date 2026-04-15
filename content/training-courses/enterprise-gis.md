@@ -56,22 +56,22 @@ This course will give you the basic skills and knowledge to get going with estab
 
 Some software we will cover in depth, others we will just touch on or use or review. Where practical we will mention, review or work with alternatives. FOSS gives you freedom of choice!
 
-# Course outline
+## Course outline
 
-### Day 1:
+### Day 1
 
 - System setup and configuration, architecture, system administration.
 - Introduction to Linux and servers.
 - Have your own enterprise GIS up and running within minutes.
 - Overview of FOSS GIS software and components.
 
-### Days 2 and 3:
+### Days 2 and 3
 
 - Data management and processing.
 - Database setup, configuration, loading.
 - Working with a spatial database.
 
-### Days 4 and 5:
+### Days 4 and 5
 
 - Web servers and web map servers.
 - Publishing web services.
@@ -81,7 +81,7 @@ Some software we will cover in depth, others we will just touch on or use or rev
 
 ## Prerequisites
 
-This course is not for beginners. Neither is it a typical ‘learn GIS’ course. It is focused on systems, technologies, data and architecture. To attend this course you should be computer literate. you should be an experienced GIS user or system or database administrator or webmaster or developer or have been tasked with this sort of work by your employer. On the other hand it IS introductory. 
+This course is not for beginners. Neither is it a typical 'learn GIS' course. It is focused on systems, technologies, data and architecture. To attend this course you should be computer literate. you should be an experienced GIS user or system or database administrator or webmaster or developer or have been tasked with this sort of work by your employer. On the other hand it IS introductory.
 
 A week is enough to give you the grounding to get going on your own but is not enough time to go into too much in depth. Please bring your own laptop running Linux (preferably Ubuntu) or Windows. All the software is also supported on Macs but we don’t support that in the course.
 
