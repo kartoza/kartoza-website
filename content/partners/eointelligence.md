@@ -5,10 +5,10 @@ description: "Partnership with EO Intelligence for earth observation and geospat
 logo: "/img/partners/eointelligence-logo.png"
 productUrl: "https://www.eointelligence.ca/"
 productName: "EO Intelligence"
-approved: false
-approvedDate: ""
+approved: true
+approvedDate: "2026-04-14"
 reviewedBy: "Tim Sutton"
-reviewedDate: "2026-04-14"
+reviewedDate: 2026-04-15
 date: 2024-01-05
 features:
   - title: "Satellite Imagery"

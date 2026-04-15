@@ -8,9 +8,9 @@ productName: "Django BIMS"
 partnerUrl: "https://www.frcsa.org.za/"
 partnerName: "Freshwater Research Centre"
 approved: false
-approvedDate: ""
+approvedDate: "2026-04-14"
 reviewedBy: "Tim Sutton"
-reviewedDate: "2026-04-14"
+reviewedDate: 2026-04-15
 date: 2024-01-07
 features:
   - title: "Biodiversity Data"
