@@ -23,7 +23,7 @@ reviewedDate: 2026-04-15
 
 ### Course Overview
 
-**Welcome to the QGIS Training Course! **We are thrilled to have you on board for this immersive learning experience designed to enhance your Geographic Information Systems (GIS) skills. Our training agenda is based on the QGIS Training Manual, with custom examples tailored to provide comprehensive learning.
+**Welcome to the QGIS Training Course!** We are thrilled to have you on board for this immersive learning experience designed to enhance your Geographic Information Systems (GIS) skills. Our training agenda is based on the QGIS Training Manual, with custom examples tailored to provide comprehensive learning.
 
 The primary objectives of this course include:
 
@@ -52,7 +52,7 @@ Three days
 
 Available on request (must be 7+ people).
 
-*T&Cs apply.*
+_T&Cs apply._
 
 <!-- markdownlint-disable MD034 -->
 {{< button-bar "fas fa-shopping-cart:Book This Course:https://erp.kartoza.com/shop/product/introduction-to-qgis" "fas fa-envelope:Enquire:/contact-us/" >}}
