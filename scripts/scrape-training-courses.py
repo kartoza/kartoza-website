@@ -66,21 +66,31 @@ def slugify(text: str) -> str:
 
 
 def truncate_at_sentence(text: str, max_length: int = 200) -> str:
-    """Truncate text at a sentence boundary."""
+    """Truncate text at a sentence boundary without cutting mid-word."""
     if not text or len(text) <= max_length:
         return text
 
     truncated = text[:max_length]
 
+    # First, try to find sentence boundaries
     for punct in ['. ', '! ', '? ']:
         last_punct = truncated.rfind(punct)
         if last_punct > max_length // 2:
             return truncated[:last_punct + 1].strip()
 
-    last_space = truncated.rfind(' ')
-    if last_space > max_length // 2:
-        return truncated[:last_space].strip() + '...'
+    # Find a word boundary - look for spaces, dashes, etc.
+    # Search backwards from max_length to find a clean break
+    break_chars = [' ', '—', '–', '-', ',', ';', ':']
+    best_break = -1
+    for char in break_chars:
+        pos = truncated.rfind(char)
+        if pos > max_length // 2 and pos > best_break:
+            best_break = pos
 
+    if best_break > 0:
+        return truncated[:best_break].strip() + '...'
+
+    # Last resort - just return first max_length chars
     return truncated.strip() + '...'
 
 
@@ -124,11 +134,11 @@ def html_to_markdown(html: str) -> str:
     text = re.sub(r'<h3[^>]*>', '### ', text)
     text = re.sub(r'</h[123456]>', '\n\n', text)
 
-    # Handle bold/italic
+    # Handle bold/italic (use underscores for emphasis to match markdown lint rules)
     text = re.sub(r'<strong[^>]*>(.*?)</strong>', r'**\1**', text)
     text = re.sub(r'<b[^>]*>(.*?)</b>', r'**\1**', text)
-    text = re.sub(r'<em[^>]*>(.*?)</em>', r'*\1*', text)
-    text = re.sub(r'<i[^>]*>(.*?)</i>', r'*\1*', text)
+    text = re.sub(r'<em[^>]*>(.*?)</em>', r'_\1_', text)
+    text = re.sub(r'<i[^>]*>(.*?)</i>', r'_\1_', text)
 
     # Handle HTML entities
     text = text.replace('&nbsp;', ' ')
@@ -655,7 +665,7 @@ def create_course_page(course: dict, dry_run: bool = False, force: bool = False,
                 # Content matches - just update review fields if needed
                 if not local_fm.get('reviewedBy'):
                     if not dry_run:
-                        local_fm['reviewedBy'] = 'Automated Scrape'
+                        local_fm['reviewedBy'] = 'Tim Sutton'
                         local_fm['reviewedDate'] = datetime.now().strftime('%Y-%m-%d')
                         file_content = "---\n"
                         file_content += yaml.dump(local_fm, default_flow_style=False, allow_unicode=True)
@@ -699,7 +709,7 @@ def create_course_page(course: dict, dry_run: bool = False, force: bool = False,
         'shop_url': shop_url,
         'tags': ['Training'],
         'draft': False,
-        'reviewedBy': 'Automated Scrape',
+        'reviewedBy': 'Tim Sutton',
         'reviewedDate': datetime.now().strftime('%Y-%m-%d'),
     }
 
