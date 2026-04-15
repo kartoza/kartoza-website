@@ -8533,7 +8533,578 @@ body:has(.blog-hero) .contextmenu {
     }
 }
 
-/* Careers CTA */
+/* Internship Streams Grid */
+.streams-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.stream-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-med);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.stream-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+}
+
+.stream-card.gis {
+    border-top: 4px solid var(--primary);
+}
+
+.stream-card.dev {
+    border-top: 4px solid var(--accent);
+}
+
+.stream-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    color: var(--white);
+}
+
+.stream-card.dev .stream-icon {
+    background: linear-gradient(135deg, var(--accent-light), var(--accent));
+}
+
+.stream-card h3 {
+    color: var(--primary-dark) !important;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.stream-card p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.stream-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.stream-tags .tag {
+    background: var(--light-bg);
+    color: var(--primary-dark);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid var(--primary-light);
+    transition: all var(--transition-fast);
+}
+
+.stream-card.gis .tag {
+    border-color: var(--primary-light);
+}
+
+.stream-card.gis .tag:hover {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+}
+
+.stream-card.dev .tag {
+    border-color: var(--accent-light);
+    color: var(--text-dark);
+}
+
+.stream-card.dev .tag:hover {
+    background: var(--accent);
+    color: var(--white);
+    border-color: var(--accent);
+}
+
+@media screen and (max-width: 768px) {
+    .streams-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Curriculum Layout */
+.curriculum-layout {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+    align-items: start;
+}
+
+.module-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.module-item {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-med);
+}
+
+.module-item:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateX(4px);
+}
+
+.module-item.module-complete {
+    opacity: 0.8;
+    background: var(--light-bg);
+}
+
+.module-num {
+    min-width: 50px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+    color: var(--white);
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.module-item.module-complete .module-num {
+    background: var(--light-bg-alt);
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+.mod-week {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.module-item h4 {
+    color: var(--primary-dark);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.module-item p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Moodle Card */
+.moodle-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--light-bg-alt);
+}
+
+.moodle-topbar {
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+.moodle-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--light-bg);
+    border-bottom: 1px solid var(--light-bg-alt);
+}
+
+.moodle-logo {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: var(--radius-sm);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.moodle-header h4 {
+    margin: 0;
+    color: var(--primary-dark);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.moodle-header p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.moodle-body {
+    padding: 1.5rem;
+}
+
+.moodle-modules {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.moodle-mod {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1rem;
+    background: var(--light-bg);
+    border-radius: var(--radius-sm);
+    transition: background var(--transition-fast);
+}
+
+.moodle-mod:hover {
+    background: linear-gradient(135deg, rgba(83, 162, 204, 0.05), rgba(232, 163, 49, 0.05));
+}
+
+.mdot {
+    min-width: 10px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 5px;
+}
+
+.mdot.primary {
+    background: var(--primary);
+}
+
+.mdot.accent {
+    background: var(--accent);
+}
+
+.mdot.success {
+    background: #4CAF50;
+}
+
+.mmod-info {
+    flex-grow: 1;
+}
+
+.mmod-info h5 {
+    margin: 0 0 0.25rem 0;
+    color: var(--primary-dark);
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.mmod-info p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.mbadge {
+    display: inline-block;
+    background: rgba(232, 163, 49, 0.15);
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.35rem 0.65rem;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.moodle-footer {
+    padding: 1.5rem;
+    border-top: 1px solid var(--light-bg-alt);
+    background: var(--light-bg);
+}
+
+.moodle-cta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    font-size: 0.95rem;
+}
+
+.moodle-cta:hover {
+    color: var(--primary-dark);
+    gap: 1rem;
+}
+
+.moodle-cta i {
+    font-size: 0.8rem;
+}
+
+.moodle-note {
+    margin: 0.75rem 0 0 0;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+@media screen and (max-width: 1024px) {
+    .curriculum-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .curriculum-layout {
+        gap: 2rem;
+    }
+
+    .module-item {
+        padding: 1rem;
+    }
+
+    .module-num {
+        min-width: 40px;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .module-item h4 {
+        font-size: 1rem;
+    }
+
+    .module-item p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Application Layout */
+.apply-layout {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+    align-items: start;
+}
+
+.steps {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.step {
+    display: flex;
+    gap: 2rem;
+}
+
+.step-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+}
+
+.step-num {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+    color: var(--white);
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.step-line {
+    flex-grow: 1;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--primary-light), transparent);
+    margin-top: 1rem;
+    min-height: 60px;
+}
+
+.step:last-child .step-line {
+    display: none;
+}
+
+.step-content h4 {
+    color: var(--primary-dark);
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.step-content p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Apply Panel */
+.apply-panel {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--light-bg-alt);
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.apply-panel h3 {
+    color: var(--primary-dark);
+    font-size: 1.25rem;
+    margin: 0 0 1.5rem 0;
+    font-weight: 700;
+}
+
+.checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    color: var(--text-dark);
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.chk {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    font-weight: 700;
+}
+
+.perks-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin: 2rem 0 1rem 0;
+}
+
+.perks {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+}
+
+.perk {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: var(--light-bg);
+    border-radius: var(--radius-sm);
+    color: var(--text-dark);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+}
+
+.perk:hover {
+    background: linear-gradient(135deg, rgba(83, 162, 204, 0.1), rgba(232, 163, 49, 0.05));
+}
+
+.perk i {
+    color: var(--primary);
+    font-size: 1rem;
+}
+
+@media screen and (max-width: 1024px) {
+    .apply-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .apply-panel {
+        position: static;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .apply-layout {
+        gap: 2rem;
+    }
+
+    .step {
+        gap: 1.5rem;
+    }
+
+    .step-left {
+        min-width: 60px;
+    }
+
+    .step-num {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .step-content h4 {
+        font-size: 1rem;
+    }
+
+    .step-content p {
+        font-size: 0.9rem;
+    }
+
+    .perks {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Careers Apply Section */
 .careers-cta {
     background: var(--text-dark);
     padding: 6rem 0;
