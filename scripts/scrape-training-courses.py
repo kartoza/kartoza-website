@@ -65,6 +65,19 @@ def slugify(text: str) -> str:
     return text.strip('-')
 
 
+def determine_track(title: str) -> str:
+    """Determine the training track based on course title."""
+    title_lower = title.lower()
+    if 'qgis' in title_lower and 'server' not in title_lower:
+        return "Desktop GIS"
+    elif 'postgis' in title_lower or 'geoserver' in title_lower or 'enterprise' in title_lower:
+        return "Server & Infrastructure"
+    elif 'python' in title_lower or 'pyqgis' in title_lower or 'development' in title_lower:
+        return "Development"
+    else:
+        return "Foundational"
+
+
 def truncate_at_sentence(text: str, max_length: int = 200) -> str:
     """Truncate text at a sentence boundary without cutting mid-word."""
     if not text or len(text) <= max_length:
@@ -721,6 +734,7 @@ def create_course_page(course: dict, dry_run: bool = False, force: bool = False,
     # Build content
     description = course.get('description', 'Course overview coming soon.')
 
+    track = determine_track(title)
     content = f'''---
 title: "{title_escaped}"
 description: "{short_desc_escaped}"
@@ -728,6 +742,7 @@ thumbnail: "{thumbnail}"
 shop_url: "{shop_url}"
 tags:
   - Training
+track: "{track}"
 draft: false
 reviewedBy: "Tim Sutton"
 reviewedDate: {datetime.now().strftime('%Y-%m-%d')}

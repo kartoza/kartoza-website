@@ -5,9 +5,10 @@ thumbnail: "/img/training/erpnext/postgis.png"
 shop_url: "https://erp.kartoza.com/training/introduction-to-postgis-7ihjm"
 tags:
   - Training
+track: "Server & Infrastructure"
 draft: false
 reviewedBy: "Tim Sutton"
-reviewedDate: 2026-04-15
+reviewedDate: 2026-04-16
 ---
 
 {{< block

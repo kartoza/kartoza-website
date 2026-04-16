@@ -6,9 +6,10 @@ item_code: "GIS Fundamentals for Educators"
 shop_url: "https://erp.kartoza.com/shop/product/introduction-to-gis"
 tags:
   - Training
+track: "Foundational"
 draft: false
 reviewedBy: "Tim Sutton"
-reviewedDate: 2026-04-15
+reviewedDate: 2026-04-16
 ---
 
 {{< block

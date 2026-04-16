@@ -5,9 +5,10 @@ thumbnail: "/img/training/erpnext/qgis-icon_big300x300-0x300.png"
 shop_url: "https://erp.kartoza.com/training-courses/introduction-to-gis-with-qgis-self-paced-9ysfz"
 tags:
   - Training
+track: "Desktop GIS"
 draft: false
 reviewedBy: "Tim Sutton"
-reviewedDate: 2026-04-15
+reviewedDate: 2026-04-16
 ---
 
 {{< block

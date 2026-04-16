@@ -6,9 +6,10 @@ item_code: "GR 12 GIS Course"
 shop_url: "https://erp.kartoza.com/shop/product/gis-lessons-grade-12"
 tags:
   - Training
+track: "Foundational"
 draft: false
 reviewedBy: "Tim Sutton"
-reviewedDate: 2026-04-15
+reviewedDate: 2026-04-16
 ---
 
 {{< block
