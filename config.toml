@@ -243,6 +243,12 @@ matomoSiteId = ''
   url = "/blog/"
   weight = 60
 
+# -- Support --
+[[menu.main]]
+  name = "Support"
+  url = "https://erp.kartoza.com/issues/list"
+  weight = 65
+
 # -- Contact --
 [[menu.main]]
   name = "Contact"
