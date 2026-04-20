@@ -36,7 +36,7 @@ You will learn to use QGIS to create maps, work with spatial data, and digitise 
 
   <div class="material-card">
     <h4>Desktop Digitising</h4>
-    <p>Create your own spatial features by digitising from aerial images — a key skill for custom classroom resources and fieldwork preparation.s</p>
+    <p>Create your own spatial features by digitising from aerial images — a key skill for custom classroom resources and fieldwork preparation.</p>
   </div>
 
   <div class="material-card">
