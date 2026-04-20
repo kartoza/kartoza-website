@@ -322,7 +322,10 @@
         // window.location.href = '/api/v1/training/checkout';
 
         // Option 2: For now, redirect to contact form with pre-filled data
-        const contactUrl = `/contact-us/?booking=true&session=${bookingData.sessionId}&attendees=${bookingData.attendeeCount}&currency=${bookingData.currency}&total=${bookingData.total}`;
+        const courseName = document.querySelector('h1')?.textContent || window.currentCourse;
+        const dateDisplay = `${formatDate(bookingState.sessionData.startDate)} - ${formatDate(bookingState.sessionData.endDate)}`;
+        const location = bookingState.sessionData.venueName || 'Online';
+        const contactUrl = `/contact-us/?booking=true&course=${encodeURIComponent(courseName)}&date=${encodeURIComponent(dateDisplay)}&location=${encodeURIComponent(location)}&session=${bookingData.sessionId}&attendees=${bookingData.attendeeCount}&currency=${bookingData.currency}&total=${bookingData.total}`;
 
         // Show confirmation dialog
         if (confirm(`You're about to book ${bookingData.attendeeCount} seat(s) for ${bookingState.sessionData.venueName}. Total: ${window.trainingScheduleData.currencies[bookingData.currency].symbol}${bookingData.total.toLocaleString()}\n\nProceed to checkout?`)) {

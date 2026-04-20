@@ -6,9 +6,10 @@ item_code: "Grade 8 Map Skills: Provinces of South Africa"
 shop_url: "https://erp.kartoza.com/shop/product/learners-maps-and-atlas-course-grade-8"
 tags:
   - Training
+track: "Foundational"
 draft: false
 reviewedBy: "Tim Sutton"
-reviewedDate: 2026-03-24
+reviewedDate: 2026-04-16
 ---
 
 {{< block

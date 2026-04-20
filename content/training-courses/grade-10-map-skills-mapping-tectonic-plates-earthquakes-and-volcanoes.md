@@ -6,9 +6,10 @@ item_code: "Grade 10 Map Skills: Mapping Tectonic Plates, Earthquakes and Volcan
 shop_url: "https://erp.kartoza.com/shop/product/grade-10-map-skills-mapping-tectonic-plates-earthquakes-and-volcanoes"
 tags:
   - Training
+track: "Foundational"
 draft: false
 reviewedBy: "Tim Sutton"
-reviewedDate: 2026-03-24
+reviewedDate: 2026-04-16
 ---
 
 {{< block

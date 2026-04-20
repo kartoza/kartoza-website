@@ -72,6 +72,7 @@ Field workers capture data using the Mergin Maps mobile app. When they sync, the
 ### Intelligent Forms
 
 Build sophisticated data entry forms without coding:
+
 - Drop-down lists with cascading dependencies
 - Automatic calculations and defaults
 - Photo capture with compression options
