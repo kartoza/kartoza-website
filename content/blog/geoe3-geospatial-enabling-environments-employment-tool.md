@@ -94,4 +94,4 @@ Researchers and policymakers can leverage GEOE3's analytical capabilities to inf
 
 GEOE3 is a game-changer for gender-aware geospatial analysis. By making spatial data accessible and actionable, it empowers decision-makers to build more inclusive communities and workplaces.
 
-For more information, visit the [official documentation](https://worldbank.github.io/GEEST/) or contribute to the project on [GitHub](https://github.com/worldbank/GEEST).
+For more information, visit the [official documentation](https://worldbank.github.io/GEOE3/) or contribute to the project on [GitHub](https://github.com/worldbank/GEOE3).
