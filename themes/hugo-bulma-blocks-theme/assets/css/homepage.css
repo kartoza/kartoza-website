@@ -2769,9 +2769,22 @@
     box-shadow: var(--shadow-sm);
 }
 
+
+.navbar-logo-text {
+    margin-left: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
 .navbar-item {
-    font-weight: 500;
+    font-weight: 600;
     transition: color var(--transition-fast);
+    width: 160px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .navbar-item:hover {
@@ -2781,6 +2794,12 @@
 .navbar-item.is-active {
     color: var(--primary);
     font-weight: 600;
+}
+
+.search-label {
+    margin-right: 0.5rem;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 /* Alert/Notification Styling */
