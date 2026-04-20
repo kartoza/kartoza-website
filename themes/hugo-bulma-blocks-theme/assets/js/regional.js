@@ -37,7 +37,7 @@
             locale: 'en-EU',
             timezone: 'Europe/Lisbon',
             phone: '+351 XXX XXX XXX',
-            email: 'europe@kartoza.com',
+            email: 'info@kartoza.com',
             address: 'Lisbon, Portugal',
             flag: '🇵🇹',
             vatLabel: 'IVA',
