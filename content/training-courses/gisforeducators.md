@@ -60,27 +60,27 @@ You will learn to use QGIS to create maps, work with spatial data, and digitise 
 
 <div class="materials-grid">
   <div class="material-card">
-    <p>Geography teachers at secondary school level</p>
+    <p>✔ Geography teachers at secondary school level</p>
   </div>
 
   <div class="material-card">
-    <p>Natural Sciences and Life Sciences teachers wanting to introduce spatial thinking</p>
+    <p>✔ Natural Sciences and Life Sciences teachers wanting to introduce spatial thinking</p>
   </div>
 
   <div class="material-card">
-    <p>Postgraduate students and trainee teachers in education faculties</p>
+    <p>✔ Postgraduate students and trainee teachers in education faculties</p>
   </div>
 
   <div class="material-card">
-    <p>Curriculum advisors and subject heads for Geography</p>
+    <p>✔ Curriculum advisors and subject heads for Geography</p>
   </div>
 
   <div class="material-card">
-    <p>Educators with no prior GIS experience — beginners are welcome</p>
+   <p>✔ Educators with no prior GIS experience — beginners are welcome</p>
   </div>
 
   <div class="material-card">
-    <p>School district officials looking to introduce GIS into their schools</p>
+    <p>✔ School district officials looking to introduce GIS into their schools</p>
   </div>
 </div>
 
@@ -94,7 +94,7 @@ You will learn to use QGIS to create maps, work with spatial data, and digitise 
 
 <div class="materials-grid">
   <div class="material-card">
-    <p>Course workbook & materials</p>
+    <p>Geography teachers at secondary school level  </p>
   </div>
 
   <div class="material-card">
@@ -115,5 +115,29 @@ You will learn to use QGIS to create maps, work with spatial data, and digitise 
 
   <div class="material-card">
     <p>Access to the course community forum</p>
+  </div>
+</div>
+
+## Why Train with Kartoza?
+
+<div class="materials-grid">
+  <div class="material-card">
+    <h4>Education-Focused</h4>
+    <p>We have worked with SA schools, curriculum advisors, and education departments to align our GIS training to CAPS requirements.</p>
+  </div>
+
+  <div class="material-card">
+    <h4>Flexible Hybrid Format</h4>
+    <p>Self-paced modules fit around school terms and your timetable. Facilitated sessions are scheduled so educators can attend without taking leave.</p>
+  </div>
+
+  <div class="material-card">
+    <h4>Classroom-Ready Resources</h4>
+    <p>You leave with lesson materials you can use in the next term — not just GIS skills, but ready-to-go resources for your learners.</p>
+  </div>
+
+  <div class="material-card">
+    <h4>100% Open Source</h4>
+    <p>All software used in this course is free and open source — no licencing costs for your school or your learners, now or ever.</p>
   </div>
 </div>
