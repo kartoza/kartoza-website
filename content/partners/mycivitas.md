@@ -5,6 +5,10 @@ description: "Kartoza is the developer and implementation partner for MyCivitas,
 logo: "/img/partners/mycivitas-logo.svg"
 productUrl: "https://civitas.kartoza.com"
 productName: "MyCivitas"
+approved: false
+approvedDate: ""
+reviewedBy: "Tim Sutton"
+reviewedDate: "2026-04-15"
 date: 2024-01-03
 features:
   - title: "Complete Inventory"
@@ -32,10 +36,6 @@ services:
   - "Staff training and capacity building"
   - "Ongoing support and hosting"
   - "Custom development and integrations"
-testimonial:
-  quote: "MyCivitas gave us visibility into our infrastructure that we never had before. We can now make evidence-based decisions about where to invest our limited maintenance budget."
-  author: "Infrastructure Director"
-  role: "Municipal Government"
 ---
 
 ## Why MyCivitas?

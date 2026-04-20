@@ -1,28 +1,25 @@
 ---
-title: "Gary Sherman Wins the Sol Katz Award"
-description: "Gary Sherman received the Sol Katz Award for his leadership in the geospatial free and open source software community through his creation of QGIS."
+author: Gavin Fleming
+date: '2014-09-12'
+description: This year Gary Sherman won the annual Sol Katz award. To quote the
+erpnext_id: /blog/qgis/gary-sherman-wins-the-sol-katz-award
+erpnext_modified: '2014-09-12'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - QGIS
-  - Award
-  - Community
-date: 2014-09-12
-author: "Gavin Fleming"
-thumbnail: "/img/blog/placeholder.png"
+- Qgis
+thumbnail: /img/blog/placeholder.png
+title: Gary Sherman Wins the Sol Katz Award
 ---
 
-{{< block
-    title="Gary Sherman Wins the Sol Katz Award"
-    subtitle="QGIS"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-Gary Sherman received the Sol Katz Award for his leadership in the geospatial free and open source software community through his creation of QGIS.
-{{< /block >}}
+This year [Gary Sherman](<https://geoapt.net/> "GeoApt home page") won the annual [Sol Katz](<http://www.osgeo.org/solkatz> "Sol Katz Award page") award. To quote the OSGEO page about the award:
 
-## Content
+> The Sol Katz Award for Geospatial Free and Open Source Software (GFOSS) is awarded annually by OSGeo to individuals who have demonstrated leadership in the GFOSS community. Recipients of the award will have contributed significantly through their activities to advance open source ideals in the geospatial realm. The hope is that the award will both acknowledge the work of community members, and pay tribute to one of its founders, for years to come.
 
-This year Gary Sherman received the Sol Katz Award. According to OSGeo's description, this honor recognizes individuals who have demonstrated leadership in the geospatial free and open source software community. The award acknowledges those whose contributions have meaningfully advanced open source principles in geospatial fields.
+A couple of years ago I did an interview with Gary about the beginning of QGIS:
 
-The author previously conducted interviews with Sherman about QGIS's origins. Sherman's creation of QGIS and decision to open source the code has profoundly impacted countless people globally. The author notes receiving regular correspondence from users worldwide describing how QGIS improves their work and lives.
+and part2:
 
-The author expresses that this award represents overdue recognition for Sherman's role in establishing QGIS, which has become "the rally point for an incredible, diverse and friendly bunch of people." The software serves hundreds of thousands of daily users who may not know its founder's identity. The author concludes with enthusiastic praise for both QGIS and Sherman's contributions to the geospatial community.
+I am so pleased that the Sol Katz award committee has seen fit to present this award to Gary. The fact that Gary created QGIS and open sourced its code has had a profound effect on many people's lives - especially my own. Participating in QGIS for the last decade+ has immeasurably improved my own life and enabled me to eke out a comfortable living doing something I love. Hardly a day goes without me receiving an email in my inbox from someone in a far flung place telling me how they are using QGIS and how it is making their world a better place.
+
+Presenting this award to Gary is a long overdue recognition and 'thank you' to the person who started a project that has become the rally point for an incredible, diverse and friendly bunch of people, and a daily use tool for hundreds of thousands of users how there who may not even know who Gary is. QGIS rocks Gary, and so do you!

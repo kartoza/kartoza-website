@@ -1,36 +1,28 @@
 ---
-title: "WMS Legend Plugin for Leaflet"
-description: "A weekend project to incorporate WMS legends into Leaflet mapping interfaces using QGIS server."
+author: Gavin Fleming
+date: '2014-08-26'
+description: This weekend I was updating our map gallery at http://maps.kartoza.com
+  and I wanted to have WMS legends in my maps.
+erpnext_id: /blog/leaflet/wms-legend-plugin-for-leaflet
+erpnext_modified: '2014-08-26'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - Leaflet
-  - WMS
-  - Plugin
-  - JavaScript
-date: 2014-08-26
-author: "Gavin Fleming"
-thumbnail: "/img/blog/placeholder.png"
+- Leaflet
+thumbnail: /img/blog/erpnext/uB3CjmJ.png
+title: WMS Legend Plugin for Leaflet
 ---
 
-{{< block
-    title="WMS Legend Plugin for Leaflet"
-    subtitle="Leaflet"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-A weekend project to incorporate WMS legends into Leaflet mapping interfaces using QGIS server.
-{{< /block >}}
+This weekend I was updating our map gallery at <http://maps.kartoza.com> and I wanted to have WMS legends in my maps. The maps are mostly generated using QGIS server which also produces a nice looking graphic for its getLegendGraphic requests. Since Leaflet does not seem have a legend control out of the box, I wrote a small leaflet plugin to do it.
 
-## Content
+![](/img/blog/erpnext/uB3CjmJ.png)
 
-The piece describes a weekend project where the author updated Kartoza's map gallery and sought to incorporate WMS legends into their mapping interface. Since the team primarily uses QGIS server—which generates quality graphics through getLegendGraphic requests—and Leaflet lacked built-in legend functionality, Fleming created a plugin to address this gap.
+  
 
-## Key Points
 
-- The solution accepts a complete legend graphic URI as a parameter
-- Includes a visual demonstration showing the legend control in action
-- Future enhancements could automate fetching getLegendGraphics from all active WMS layers
-- The author notes that "Leaflet is a great web mapping client" with straightforward plugin extension capabilities
+In the future I may extend the control to automatically fetch getLegendGraphics from all loaded WMS layers, but for now it simply takes a complete legend graphic URI as parameter.
 
-## Conclusion
+  
 
-The author directs readers to the plugin repository for implementation details and usage instructions.
+
+Leaflet is a great web mapping client and extending it with little plugins is very easy to do. If you want to use the plugin I wrote, head over to the [plugin repository](<https://github.com/kartoza/leaflet-wms-legend>) and give it a try!

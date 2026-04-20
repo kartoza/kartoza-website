@@ -2,9 +2,13 @@
 title: "QField"
 tagline: "Professional Mobile GIS for Field Data Collection"
 description: "Kartoza is an official QField partner, providing implementation, training, and support for this powerful mobile GIS solution that brings the full power of QGIS to your field teams."
-logo: "/img/partners/qfield-logo.svg"
+logo: "/img/partners/qfield-logo.png"
 productUrl: "https://qfield.org"
 productName: "QField"
+approved: true
+approvedDate: "2024-01-01"
+reviewedBy: "Tim Sutton"
+reviewedDate: "2026-04-15"
 signupUrl: "https://app.qfield.cloud/accounts/signup/?fpr=tim39"
 signupText: "Sign Up for QFieldCloud"
 signupHeading: "Get QFieldCloud"
@@ -37,10 +41,6 @@ services:
   - "Team training and workshops"
   - "Ongoing technical support"
   - "Custom plugin development"
-testimonial:
-  quote: "QField transformed our field surveys. The ability to use our existing QGIS projects on mobile devices saved us weeks of work and significantly improved data quality."
-  author: "Field Survey Manager"
-  role: "Environmental Consultancy"
 ---
 
 ## Why QField?

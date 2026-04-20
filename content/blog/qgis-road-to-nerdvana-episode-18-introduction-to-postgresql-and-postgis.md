@@ -1,33 +1,26 @@
 ---
-title: "QGIS Road to Nerdvana Episode 18: Introduction to PostgreSQL and PostGIS"
-description: "This piece presents a walk-through showing how PostgreSQL and PostGIS can be used as a geospatial data store."
+author: Seabilwe Tilodi
+date: '2021-03-08'
+description: This is a walk-through showing how PostgreSQL and PostGIS can be used
+  as a geospatial data store and then the data in that store be consumed
+erpnext_id: /blog/postgis/qgis-road-to-nerdvana-episode-18-introduction-to-postgresql-and-postgis
+erpnext_modified: '2021-03-08'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - PostGIS
-  - PostgreSQL
-  - Video
-date: 2021-03-08
-author: "Seabilwe Tilodi"
-thumbnail: "/img/blog/placeholder.png"
+- Postgis
+thumbnail: /img/blog/placeholder.png
+title: 'QGIS Road to Nerdvana Episode 18: Introduction to PostgreSQL and PostGIS'
 ---
 
-{{< block
-    title="QGIS Road to Nerdvana Episode 18"
-    subtitle="PostGIS"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-This piece presents a walk-through showing how PostgreSQL and PostGIS can be used as a geospatial data store.
-{{< /block >}}
+This is a walk-through showing how PostgreSQL and PostGIS can be used as a geospatial data store and then the data in that store be consumed and created by geopandas.
 
-## Overview
+Enjoy watching Episode 18 of QGIS Road to Nerdvana
 
-This piece presents "a walk-through showing how PostgreSQL and PostGIS can be used as a geospatial data store" with subsequent consumption and creation of data through geopandas.
+  
 
-The article is brief and primarily serves as promotional material for Episode 18 of the QGIS Road to Nerdvana video series. The written content encourages viewers to watch the accompanying video tutorial, concluding with a standard call-to-action: "Don't forget to like, comment and subscribe!"
 
-## Technical Focus
+  
 
-The episode covers technical geospatial database concepts including:
-- PostgreSQL database fundamentals
-- PostGIS spatial extension capabilities
-- Geopandas integration for data manipulation
+
+Don't forget to like, comment and subscribe!

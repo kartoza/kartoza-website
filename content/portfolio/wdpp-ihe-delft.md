@@ -23,7 +23,7 @@ reviewedDate: "2026-03-25"
     subtitle="Research data platform for water and development"
     class="is-primary"
     sub-block-side="bottom"
-    link="https://wdpprepository.org/"
+    link="<https://wdpprepository.org/>"
     link-text="Visit Repository"
 >}}
 <!-- markdownlint-enable MD034 -->

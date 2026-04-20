@@ -1,59 +1,58 @@
 ---
-title: "Create a Custom Reference Grid in QGIS Composer"
-description: "If you need to create a reference grid like this for your map, here's a simple method. This tutorial demonstrates configuring dual grids with specific expressions to produce professional cartographic reference systems."
+author: Gavin Fleming
+date: '2017-10-05'
+description: If you need to create a reference grid like this for your map, here's
+  a simple method. Create one grid to show the lines wit
+erpnext_id: /blog/qgis/create-a-custom-reference-grid-in-qgis-composer
+erpnext_modified: '2017-10-05'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - QGIS
-  - Cartography
-  - Composer
-date: 2017-10-05
-author: "Gavin Fleming"
-thumbnail: "/img/blog/placeholder.png"
+- Qgis
+thumbnail: /img/blog/erpnext/j06Zzei.png
+title: Create a Custom Reference Grid in QGIS Composer
 ---
 
-{{< block
-    title="Create a Custom Reference Grid in QGIS Composer"
-    subtitle="QGIS"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-If you need to create a reference grid like this for your map, here's a simple method. This tutorial demonstrates configuring dual grids with specific expressions to produce professional cartographic reference systems.
-{{< /block >}}
+If you need to create a reference grid like this for your map, here's a simple method.
 
-## Introduction
+![](/img/blog/erpnext/j06Zzei.png)
 
-A straightforward approach enables creation of reference grids for maps, shown through step-by-step configuration.
+Create one grid to show the lines with intervals in cm. The CRS setting has no effect.
 
-## Step 1: Create Grid Lines
+![](/img/blog/erpnext/VQNoK9E.png)
 
-Generate one grid displaying lines with specific interval measurements in centimeters. The CRS setting remains without effect on this layer.
+Create another grid to show the labels in the centre of the visible grid cells. Again, the CRS setting has no effect. Note the offset is set to half the interval and we don't draw the lines.
 
-## Step 2: Add Grid Labels
+![](/img/blog/erpnext/RVECI7W.png)
 
-Establish a second grid to display labels centered within visible grid cells. The CRS setting similarly has no impact. Set the offset to half the interval value while disabling line drawing.
+Finally set up the label expression (Click the epsilon next to the custom format field)
 
-## Step 3: Label Expression
+    CASE 
+    
+    WHEN @grid_axis = 'y'
+    
+    THEN substr('ABCDEFGHIJKLMNOPQRST', (@grid_number + 2.5) / 5 , 1) 
+    
+    WHEN @grid_axis = 'x'
+    
+    THEN (@grid_number + 2.5) / 5
+    
+    END
 
-Apply this label expression via the epsilon button next to the custom format field:
+Replace the 5's with your interval value and the 2.5's with your offset value.
 
-```
-CASE
-WHEN @grid_axis = 'y'
-THEN substr('ABCDEFGHIJKLMNOPQRST', (@grid_number + 2.5) / 5 , 1)
-WHEN @grid_axis = 'x'
-THEN (@grid_number + 2.5) / 5
-END
-```
+To get full size cells across the whole map, ensure the map dimensions are multiples of the grid size (in this case 5cm):
 
-Replace the 5's with your interval value and 2.5's with your offset value.
+![](/img/blog/erpnext/xTvqtDG.png)
 
-## Map Dimensions
+You can still add any other graticules or effects you like; we've just stuck to the basics of setting up the regular grid and labels in this article.
 
-Ensure map dimensions are multiples of the grid size (e.g., 5cm) for full-size cells across the entire map.
+This should work from 2.14; my example's in 2.18.
 
-## Additional Notes
+Acknowledgments to <https://gis.stackexchange.com/questions/195293/how-to-create-a-custom-coordinate-grid-in-the-qgis-2-14-2/>
 
-Other graticules or effects remain compatible with this method. Compatible from version 2.14 forward; example uses 2.18.
+PS: this has already been taken to the next level with some custom functions:
 
-## Advanced Resources
+[QGIS grids and references autoupdate](<https://youtu.be/mEyC2lAVAHw>)
 
-References and custom functions available at linked GitHub repository.
+The functions referred to in the video are at <https://github.com/klakar/QGIS_resources/blob/master/collections/Geosupportsystem/processing/minMaxFromMap.py>

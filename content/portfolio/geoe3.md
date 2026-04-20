@@ -1,7 +1,7 @@
 ---
 title: "GEOE3 - Geospatial Enabling Environments for Employment Spatial Tool (formerly GEEST)"
 description: "A QGIS plugin leveraging geospatial data to identify and address barriers to women's employment, developed for the World Bank."
-thumbnail: "/img/portfolio/geest.png"
+thumbnail: "/img/portfolio/geoe3.png"
 tags:
   - QGIS Plugin
   - Gender Equality
@@ -12,9 +12,9 @@ endDate: 2025-01-31
 services:
   - Development
 related_plugins:
-  - geest
+  - geoe3
 reviewedBy: "Jeff Osundwa"
-reviewedDate: "2026-03-25"
+reviewedDate: "2026-03-28"
 ---
 
 <!-- markdownlint-disable MD034 -->
@@ -23,7 +23,7 @@ reviewedDate: "2026-03-25"
     subtitle="Geospatial Enabling Environments for Employment Spatial Tool"
     class="is-primary"
     sub-block-side="bottom"
-    link="https://github.com/worldbank/GEEST/"
+    link="<https://github.com/worldbank/GeoE3/>"
     link-text="View on GitHub"
 >}}
 <!-- markdownlint-enable MD034 -->
@@ -38,7 +38,7 @@ Developed as a QGIS plugin, GEOE3 generates spatial insights to highlight areas 
 
 The final phase of the project focuses on refining the tool by incorporating a more comprehensive set of socio-economic and demographic factors. This will ensure that GEOE3 delivers more accurate, actionable insights to support inclusive workforce development and address gender disparities.
 
-![GEOE3 Plugin](/img/portfolio/geest.png)
+![GEOE3 Plugin](/img/portfolio/geoe3.png)
 
 ![GEOE3 Dashboard](/img/portfolio/geoe3_1.gif)
 
@@ -55,6 +55,6 @@ The final phase of the project focuses on refining the tool by incorporating a m
 
 ## Links
 
-- [GitHub Repository](https://github.com/worldbank/GEEST/)
+- [GitHub Repository](https://github.com/worldbank/GeoE3/)
 - [QGIS Plugin Page](https://plugins.qgis.org/plugins/geest/)
-- [Project Website](https://worldbank.github.io/GEEST/README.html)
+- [Project Website](https://worldbank.github.io/GeoE3/README.html)

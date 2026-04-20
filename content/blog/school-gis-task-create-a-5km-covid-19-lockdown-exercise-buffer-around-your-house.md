@@ -1,48 +1,29 @@
 ---
-title: "School GIS Task: Create a 5km COVID-19 Lockdown Exercise Buffer Around Your House"
-description: "An educational resource for students to digitize their home locations and apply GIS buffer techniques to visualise a 5-kilometer exercise radius during pandemic restrictions."
+author: Gavin Fleming
+date: '2020-06-19'
+description: If you are doing some teaching in the classroom and some online and you
+  are finding "blended teaching" overwhelming, this task is designed f
+erpnext_id: /blog/education/school-gis-task-create-a-5km-covid-19-lockdown-exercise-buffer-around-your-house
+erpnext_modified: '2020-06-19'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - Education
-  - QGIS
-  - GIS
-  - COVID-19
-date: 2020-06-19
-author: "Gavin Fleming"
-thumbnail: "/img/blog/placeholder.png"
+- Education
+thumbnail: /img/blog/placeholder.png
+title: 'School GIS Task: Create a 5km COVID-19 Lockdown Exercise Buffer Around Your
+  House'
 ---
 
-{{< block
-    title="School GIS Task: Create a 5km COVID-19 Lockdown Exercise Buffer Around Your House"
-    subtitle="Education"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-An educational resource for students to digitize their home locations and apply GIS buffer techniques to visualise exercise boundaries during pandemic restrictions.
-{{< /block >}}
+If you are doing some teaching in the classroom and some online and you are finding "blended teaching" overwhelming, this task is designed for asynchronous self study.
 
-## Content
+This task was initially given to Grade 10, 11 and 12s in South Africa's Lockdown Level 4 so they could create a map of their 5km exercise buffer. The idea is that they digitse their home and local communities on OpenStreetMap (OSM), see the [cheat sheet](<http://gissa.org.za/education/school-gis/osm-cheat-sheet.pdf>) before they begin. Please feel free to watch these movies and make your own.
 
-This educational resource targets students facing blended learning environments. The content states: "This task was designed for asynchronous self study" during South Africa's pandemic restrictions.
+1\. Projections <https://youtu.be/Kda_U1Lta7M>  
+2\. How to bring in an OpenStreetMap (OSM) layer into GIS <https://youtu.be/R6V0XGaruBM>   
+3\. How to add a vector point layer <https://youtu.be/fax0S2qO_tc>  
+4\. Geoprocessing task: How to add a buffer to QGIS [https://youtu.be/f3gKgmHaV9A](<https://youtu.be/fax0S2qO_tc>)
 
-## Learning Objectives
+Students must download QGIS first, it's free and open and works on all devices except for iPads.   
+How to download QGIS, thank you Brandon Louw: <https://www.youtube.com/watch?v=VDDbZmqm-80> or go straight to <https://qgis.org>.
 
-The assignment asks Grade 10-12 students to digitize their home locations and neighbourhoods using OpenStreetMap (OSM), then apply GIS buffer techniques to visualise a 5-kilometer exercise radius.
-
-## Required Prerequisites
-
-Students must download QGIS, described as "free and open and works on all devices except for iPads."
-
-## Instructional Video Modules
-
-1. Projections fundamentals
-2. Importing OpenStreetMap layers into GIS
-3. Creating vector point layers
-4. Buffer geoprocessing techniques in QGIS
-
-## Supporting Resources
-
-The lesson references an OSM cheat sheet and installation guidance from contributor Brandon Louw. Students are directed to https://qgis.org for software access.
-
-## Credits
-
-The post acknowledges Bridget Fleming, described as "a senior high school Geography teacher," for contributing this pedagogical approach.
+Thanks for this post to associate and friend of Kartoza, Bridget Fleming, who is a senior high school Geography teacher.

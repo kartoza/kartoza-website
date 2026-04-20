@@ -24,53 +24,54 @@ pathways:
       - "Instant deployment"
       - "Enterprise-grade security"
 
-  - title: "Hosted MCPs"
-    tagline: "AI-Powered Geospatial Endpoints"
-    description: "Usage-based Model Context Protocol (MCP) endpoints for geospatial AI applications. Connect your AI assistants to powerful geospatial analysis capabilities."
-    icon: "fa-robot"
-    badge: "New"
-    badge_type: "new"
-    url: "/hosting/mcps/"
-    external: false
-    cta: "Learn More"
-    features:
-      - "Geocoding & reverse geocoding"
-      - "Spatial analysis endpoints"
-      - "Vector tile generation"
-      - "Route optimisation"
-      - "Usage-based billing"
-
-  - title: "Hosted Geospatial Datasets"
-    tagline: "Ready-to-Use Spatial Data"
-    description: "OVT-compliant vector tiles and geospatial datasets with API access. Pre-processed, optimised data ready for your applications."
-    icon: "fa-database"
-    badge: "Coming Soon"
-    badge_type: "coming"
-    url: "/hosting/datasets/"
-    external: false
-    cta: "Preview Datasets"
-    features:
-      - "OVT specification compliant"
-      - "Global coverage datasets"
-      - "Real-time updates"
-      - "API key access"
-      - "Multiple format exports"
-
-  - title: "Subscription Services"
-    tagline: "Business Management Tools"
-    description: "ERPNext-powered subscription services for timesheet tracking, resource planning, project management, and business operations."
-    icon: "fa-calendar-check"
-    badge: ""
-    badge_type: ""
-    url: "/hosting/subscriptions/"
-    external: false
-    cta: "Explore Plans"
-    features:
-      - "Timesheet tracking"
-      - "Resource planning"
-      - "Project management"
-      - "Invoice generation"
-      - "Team collaboration"
+# Disabled pathways - uncomment when ready
+#  - title: "Hosted MCPs"
+#    tagline: "AI-Powered Geospatial Endpoints"
+#    description: "Usage-based Model Context Protocol (MCP) endpoints for geospatial AI applications. Connect your AI assistants to powerful geospatial analysis capabilities."
+#    icon: "fa-robot"
+#    badge: "New"
+#    badge_type: "new"
+#    url: "/hosting/mcps/"
+#    external: false
+#    cta: "Learn More"
+#    features:
+#      - "Geocoding & reverse geocoding"
+#      - "Spatial analysis endpoints"
+#      - "Vector tile generation"
+#      - "Route optimisation"
+#      - "Usage-based billing"
+#
+#  - title: "Hosted Geospatial Datasets"
+#    tagline: "Ready-to-Use Spatial Data"
+#    description: "OVT-compliant vector tiles and geospatial datasets with API access. Pre-processed, optimised data ready for your applications."
+#    icon: "fa-database"
+#    badge: "Coming Soon"
+#    badge_type: "coming"
+#    url: "/hosting/datasets/"
+#    external: false
+#    cta: "Preview Datasets"
+#    features:
+#      - "OVT specification compliant"
+#      - "Global coverage datasets"
+#      - "Real-time updates"
+#      - "API key access"
+#      - "Multiple format exports"
+#
+#  - title: "Subscription Services"
+#    tagline: "Business Management Tools"
+#    description: "ERPNext-powered subscription services for timesheet tracking, resource planning, project management, and business operations."
+#    icon: "fa-calendar-check"
+#    badge: ""
+#    badge_type: ""
+#    url: "/hosting/subscriptions/"
+#    external: false
+#    cta: "Explore Plans"
+#    features:
+#      - "Timesheet tracking"
+#      - "Resource planning"
+#      - "Project management"
+#      - "Invoice generation"
+#      - "Team collaboration"
 
 # Why section benefits
 benefits:

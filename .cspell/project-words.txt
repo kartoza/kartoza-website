@@ -25,9 +25,20 @@ WDPP
 Osundwa
 
 # Technical terms specific to this project
+Afrispatial
+CMMS
+COGO
 GBIF
 Hochwasserschutz
+Kirchhoff
 Landesbetrieb
+Medecins
+Frontieres
+SANBI
 Terrestris
 Wasserwirtschaft
 fuer
+
+# Project/Organization names
+Civitas
+Ogun

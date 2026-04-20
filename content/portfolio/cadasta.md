@@ -11,6 +11,8 @@ services:
   - Development
 related_plugins:
   - cadasta
+reviewedBy: "Jeff Osundwa"
+reviewedDate: "2026-03-28"
 ---
 
 {{< block
@@ -18,7 +20,7 @@ related_plugins:
     subtitle="Land and resource rights documentation in QGIS"
     class="is-primary"
     sub-block-side="bottom"
-    link="https://cadasta.org"
+    link="<https://cadasta.org>"
     link-text="Visit Cadasta"
 >}}
 Connecting QGIS desktop to the Cadasta land rights platform.
@@ -31,5 +33,8 @@ Kartoza developed a QGIS Python plugin enabling clients to interact with the Cad
 ![Cadasta Plugin](/img/portfolio/cadasta.png)
 
 ## Links
+
+- [QGIS Plugin Repository](https://plugins.qgis.org/plugins/cadasta-qgis-plugin/)
+- [GitHub Repository](https://github.com/Cadasta/cadasta-qgis-plugin)
 
 - [Cadasta Foundation](https://cadasta.org)

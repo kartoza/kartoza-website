@@ -9,6 +9,8 @@ tags:
 date: 2019-01-01
 services:
   - Development
+reviewedBy: "Jeff Osundwa"
+reviewedDate: "2026-03-28"
 ---
 
 {{< block
@@ -25,3 +27,12 @@ Bringing geographic and IoT data together for precision agriculture.
 MyFarmWeb is an interactive, cloud-based platform for storing, visualising and comparing geographic and IoT agricultural data. The platform enables farmers and agricultural professionals to make data-driven decisions by combining spatial analysis with real-time sensor data.
 
 ![MyFarmWeb](/img/portfolio/myfarmweb.png)
+
+## Services Provided
+
+- System design and architecture
+- QGIS and web data processing workflows
+- PostGIS database management
+- Django application development
+- Front end development
+- Devops and sysadmin

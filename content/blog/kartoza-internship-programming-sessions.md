@@ -1,57 +1,81 @@
 ---
-title: "Kartoza Internship: Programming Sessions"
-description: "Insights from mentoring three intern batches in GIS and programming, covering curriculum development and teaching approaches."
+author: Zulfikar Akbar Muzakki
+date: '2024-03-13'
+description: The Kartoza Internship aims to prepare candidates for the workplace and
+  build their skills, knowledge, experience, and portfolio.
+erpnext_id: /blog/python/kartoza-internship-programming-sessions
+erpnext_modified: '2024-03-13'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - Python
-  - Education
-  - Internship
-  - Mentoring
-date: 2024-03-13
-author: "Zulfikar Akbar Muzakki"
-thumbnail: "/img/blog/placeholder.png"
+- Python
+thumbnail: /img/blog/placeholder.png
+title: 'Kartoza Internship: Programming Sessions'
 ---
 
-{{< block
-    title="Kartoza Internship: Programming Sessions"
-    subtitle="Python"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-Insights from mentoring three intern batches in GIS and programming, covering curriculum development and teaching approaches.
-{{< /block >}}
+The Kartoza Internship program is designed to provide aspiring candidates with a learning experience that prepares them for the workforce. Through this program, interns gain exposure to both GIS and programming areas, which helps them build their skills, knowledge, experience, and portfolio. This enables them to develop a strong foundation for their professional growth. I'll be sharing my experience of mentoring programming interns in this blog. Till now, I have mentored three batches of interns in programming. I will be discussing some of the things that I did during the internships which might be helpful for you to learn from. 
 
-## Introduction
+  
 
-The Kartoza Internship program prepares aspiring professionals for the workforce by building skills in GIS and programming. The author shares mentoring experiences from three intern batches, offering insights applicable to programming education.
 
-## Setting Goals
+**Setting Goals**
 
-The mentor observed experienced developers at Kartoza to establish performance benchmarks. Since most interns lack IT backgrounds, realistic minimum standards were set. Django emerged as a key technology, making it the target framework for interns to master basic web GIS development.
+I began by observing the daily work of Kartoza developers and their preferred technology stack. This helped me establish a benchmark for the interns to aspire to, though I understand that they won't reach that level in a short time. This allowed me to set minimum standards for the interns to achieve. For instance, I noted that Kartoza developers frequently use Django in their projects. Therefore, the goal of the programming session is for the interns to be able to create a basic web GIS using Django.
 
-## Creating a Learning Curriculum
+  
 
-Curriculum development requires understanding learners' perspectives. Initial plans covered Python syntax, classes, inheritance, and GIS data manipulation before Django modules. However, colleague Tim suggested incorporating computer science fundamentals and logical thinking first, recognizing that geography/geomatics-focused interns benefit from understanding binary systems and abstract problem-solving approaches.
 
-## Be Patient and Supportive
+**Creating a Learning Curriculum**
 
-Learning requires time and individual pacing. The author emphasizes patience when students struggle, noting concerns about discouraging questions. Multiple support channels—sessions, Slack, direct messaging, and weekly intern hangouts—ensure accessibility and continued progress.
+This step in my mentoring process is crucial but can also be challenging. However, don't worry, we only need to do it once unless you need to make changes in the future. During this process, I translated the interns' goals into sessions that will help them achieve their objectives. To do this effectively, it's essential to put ourselves in their shoes and approach the learning process as someone who is completely new to programming and Django. To create an effective plan, I draw from my own experience and think back to how I learned to make web GIS using Django. Starting with the basics, we would begin by learning Python syntax, then move on to Python classes and inheritance, and work on some geometry/GIS data with Python. Finally, we would move on to Django sessions.
 
-## Provide Guidance, Not Just Answers
+  
 
-Rather than solving problems directly, mentors should guide through questions about error messages and problem identification. While initially frustrating, this develops essential debugging skills that transfer beyond programming contexts.
 
-## Teach Problem-Solving Skills
+That was my initial, but Tim suggested that we start with the basics of computational and logical thinking, and maybe even include basic computer science. Our interns come from various backgrounds, with most of them having a geography or geomatics background rather than an IT background. Therefore, it's important to ensure they understand the underlying processes of computers, such as binary numbers. This will help them think programmatically when faced with problems and understand abstract problems better, allowing them to create a step-by-step approach to solving them.
 
-Encouraging independent research via Google search builds professional competency. When solutions aren't found independently, explanations follow without abandoning students. Problem-solving skills apply across many professional domains.
+  
 
-## Give Praise
 
-Recognition matters. Expressing encouragement—"Nice stuff," "Great work"—boosts morale and motivation throughout the learning journey.
+  
 
-## Seek Feedback
 
-Feedback forms revealed improvement areas, though the author suspects interns' politeness may limit honest responses. Truthful feedback enables better mentoring practices.
+**Be patient and supportive**
 
-## Conclusion
+It's important to understand that learning is a process that takes time, and everyone has their own pace. It is essential to be patient with our mentee, even when they struggle to grasp a concept. This is something I need to work on myself. Sometimes I worry when it seems like they don't understand something, but they haven't asked any questions. I worry that my tone might discourage them from asking for help. I know that some people are hesitant to ask questions, so I always remind them that they can ask during our sessions, in Slack channels, or via direct message. We also have a weekly intern hangout where they can show us their assignment progress and ask for feedback. This way, they can get the help they need and keep moving forward without any obstacles.
 
-Witnessing interns progress from "print('hello world!')" basics to creating functional Django-based web GIS applications rewards the mentoring effort.
+  
+
+
+**Provide guidance, not just answers**
+
+I believe in mentoring by asking questions rather than providing direct answers. When interns ask me about errors they encounter in programming, I guide them in understanding the error message, identifying the line where the error occurred, and other relevant questions that could help them solve the problem themselves. Although they may find this frustrating initially, I know that learning to deal with errors is an essential skill in programming. It can be overwhelming for those without an IT background or who are new to coding. However, by providing guidance on how to solve issues, they can develop their problem-solving skills and become more proficient programmers in the long run.
+
+  
+
+
+**Teach problem-solving skills**
+
+This is still related to “Provide guidance, not just answers”. Whenever someone seeks my help, I always ask if they have tried to search for a solution on Google. Being able to find answers on Google is an important skill for problem-solving. It is highly likely that someone else has encountered the same issue, and a solution already exists. If they respond that they have tried but do not understand the solution, I start explaining the problem to them. On the other hand, if they say that they cannot find an answer, I perform a search myself and send them the solution. I do not abandon them at this point. Instead, I want them to be independent and learn how to tackle problems on their own. I believe that after an internship a new set of skills, including problem-solving (which includes searching for solutions online), is important. These skills can be applied not just in programming but in many other areas as well. Therefore, teaching problem-solving skills is a must.
+
+  
+
+
+**Give praises**
+
+I make sure to say, “Nice stuff”, “Nicely done”, “Great”, and other praises to the interns after they show me something, or after they managed to overcome their issues. It encourages them boosts morale and motivates them.
+
+  
+
+
+**Seek feedback**
+
+We provided feedback forms to the interns to know what aspects needed improvement. I knew I needed to work on my English and communication skills as I often felt like I was rambling during programming sessions. However, the feedback forms did not reflect that. I am uncertain if the interns were being polite, but I always urge them to be truthful and honest when filling out the forms.
+
+  
+
+
+  
+
+
+In the end, being a learning buddy for the interns is fun. It’s good to see their progress from not even understanding how to write “print(‘hello world!’))” to being able to create simple web GIS with Django. I’m happy to be part of their journey to mastering programming.

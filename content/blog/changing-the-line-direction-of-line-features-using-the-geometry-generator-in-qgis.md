@@ -1,35 +1,49 @@
 ---
-title: "Changing the Line Direction of Line Features Using the Geometry Generator in QGIS"
-description: "I have been playing around with roads layers and wanted to change the line directions for some of my features. The author discovered a method using QGIS's geometry generator to reverse line directions non-destructively."
+author: Admire Nyakudya
+date: '2017-10-17'
+description: I have been playing around with roads layers and wanted to change the
+  line directions for some of my features. I looked around for solutions
+erpnext_id: /blog/qgis/changing-the-line-direction-of-line-features-using-the-geometry-generator-in-qgis
+erpnext_modified: '2017-10-17'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - QGIS
-  - Geometry Generator
-  - Styling
-date: 2017-10-17
-author: "Admire Nyakudya"
-thumbnail: "/img/blog/placeholder.png"
+- Qgis
+thumbnail: /img/blog/erpnext/roads.png
+title: Changing the Line Direction of Line Features Using the Geometry Generator in
+  QGIS
 ---
 
-{{< block
-    title="Changing the Line Direction of Line Features Using the Geometry Generator in QGIS"
-    subtitle="QGIS"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-I have been playing around with roads layers and wanted to change the line directions for some of my features. The author discovered a method using QGIS's geometry generator to reverse line directions non-destructively.
-{{< /block >}}
+I have been playing around with roads layers and wanted to change the line directions for some of my features. I looked around for solutions to do this in QGIS and saw that I could use the swap vector direction plugin in QGIS or ST_reverse in PostgreSQL. But I wanted to find a non destructive way to do this as I did not want to alter my data. I decided to try the geometry generator in QGIS.
 
-## Non-Destructive Line Reversal
+Normal road symbology showing direction.
 
-The author describes a non-destructive approach to reversing line directions in QGIS without altering underlying data. Rather than using the swap vector direction plugin or PostgreSQL's ST_reverse function, they demonstrate using the geometry generator feature.
+![](/img/blog/erpnext/roads.png)
 
-## Key Steps
+I then set out to reverse the line direction using QGIS Geometry generator.
 
-- Access the style tab within layer properties
-- Convert symbol layer type from Simple Line to Geometry Generator
-- Set geometry type to LineString/MultiLineString
-- Input the expression `reverse( $geometry )` to reverse feature geometry
-- Switch to Marker line symbology for customized visualization
-- Apply changes to display reversed lines on the map canvas
+- Activate the style tab in the layer properties.
 
-The post includes before-and-after visual comparisons showing original and reversed road layer directions.
+- Change symbol layer type from Simple Line to Geometry Generator.
+
+![](/img/blog/erpnext/geom_gen.png)
+
+- Change geometry type to LineString/MultiLineString.
+
+- In the expression write **reverse( $geometry )** to reverse the geometry of the features.
+
+- Change Simple Line to Marker line and symbolize the marker line according to your specifications.
+
+![](/img/blog/erpnext/simple.png)
+
+- Symbology should appear like the image below:
+
+![](/img/blog/erpnext/final_symbol.png)
+
+- You have your reversed lines showing in the map canvas as
+
+![](/img/blog/erpnext/reversed.png)
+
+- A side by side comparison of the roads layers
+
+![](/img/blog/erpnext/reversed_original.png)

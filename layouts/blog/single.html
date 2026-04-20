@@ -59,6 +59,26 @@
             <aside class="blog-article-sidebar">
                 <!-- Author Card -->
                 {{ if .Params.author }}
+                {{- $authorName := .Params.author -}}
+                {{- $teamMember := false -}}
+                {{- range where .Site.RegularPages "Section" "the_team" -}}
+                    {{- if eq (lower .Title) (lower $authorName) -}}
+                        {{- $teamMember = . -}}
+                    {{- end -}}
+                {{- end -}}
+
+                {{ if $teamMember }}
+                <a href="{{ $teamMember.Permalink }}" class="sidebar-card author-card author-card-linked">
+                    <div class="author-avatar author-avatar-image">
+                        <img src="{{ $teamMember.Params.image }}" alt="{{ $teamMember.Title }}">
+                    </div>
+                    <div class="author-info">
+                        <span class="author-label">Written by</span>
+                        <span class="author-name">{{ $teamMember.Title }}</span>
+                        <span class="author-role">{{ $teamMember.Params.role }}</span>
+                    </div>
+                </a>
+                {{ else }}
                 <div class="sidebar-card author-card">
                     <div class="author-avatar">
                         <i class="fas fa-user-circle"></i>
@@ -68,6 +88,7 @@
                         <span class="author-name">{{ .Params.author }}</span>
                     </div>
                 </div>
+                {{ end }}
                 {{ end }}
 
                 <!-- Tags -->
@@ -93,6 +114,26 @@
                         <a href="mailto:?subject={{ .Title }}&body={{ .Permalink }}"
                            class="share-btn share-email" title="Share via Email">
                             <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CTA Card -->
+                <div class="sidebar-card blog-cta-card">
+                    <h4 class="sidebar-card-title">Work With Us</h4>
+                    <p class="sidebar-cta-text">Need help with your GIS project?</p>
+                    <div class="sidebar-cta-buttons">
+                        <a href="{{ absURL "training-courses/" }}" class="sidebar-cta-btn">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Training</span>
+                        </a>
+                        <a href="{{ absURL "hosting/" }}" class="sidebar-cta-btn">
+                            <i class="fas fa-server"></i>
+                            <span>Hosting</span>
+                        </a>
+                        <a href="{{ absURL "contact-us/" }}" class="sidebar-cta-btn sidebar-cta-primary">
+                            <i class="fas fa-envelope"></i>
+                            <span>Contact Us</span>
                         </a>
                     </div>
                 </div>

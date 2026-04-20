@@ -1,28 +1,20 @@
 ---
-title: "QGIS Road to Nerdvana Episode 11: Aggregate Dashboards"
-description: "Tim Sutton decided to change things up a bit, he was joined by Charles and Seabilwe from Kartoza and the three made aggregate dashboards in QGIS. This piece chronicles a live-streamed session demonstrating foundational techniques for creating aggregate dashboards within the QGIS platform."
+author: Seabilwe Tilodi
+date: '2020-12-09'
+description: Tim Sutton decided to change things up a bit, he was joined by Charles
+  and Seabilwe from Kartoza and the three made aggregate dashboards in
+erpnext_id: /blog/qgis/qgis-road-to-nerdvana-episode-11-aggregate-dashboards
+erpnext_modified: '2020-12-09'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - QGIS
-  - Dashboards
-  - Video Series
-date: 2020-12-09
-author: "Seabilwe Tilodi"
-thumbnail: "/img/blog/placeholder.png"
+- Qgis
+thumbnail: /img/blog/placeholder.png
+title: 'QGIS Road to Nerdvana Episode 11: Aggregate Dashboards'
 ---
-
-{{< block
-    title="QGIS Road to Nerdvana Episode 11: Aggregate Dashboards"
-    subtitle="QGIS"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-Tim Sutton decided to change things up a bit, he was joined by Charles and Seabilwe from Kartoza and the three made aggregate dashboards in QGIS.
-{{< /block >}}
-
-## Aggregate Dashboards in QGIS
 
 Tim Sutton decided to change things up a bit, he was joined by Charles and Seabilwe from Kartoza and the three made aggregate dashboards in QGIS. It is just the first steps and a lot of bumbling around, but hey, maybe you will learn something!
 
-In case you missed the live stream, here is the link:
+In case you missed the live stream, here is the link:[ ](<https://youtu.be/YLsDjzDP8zM>)
 
-QGIS Road to Nerdvana Episode 11
+[QGIS Road to Nerdvana Episode 11](<https://youtu.be/YLsDjzDP8zM>)

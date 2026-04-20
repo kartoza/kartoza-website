@@ -1,54 +1,40 @@
 ---
-title: "Kartoza - Geospatial Hosting - Taking the pain out of hosting your GIS applications"
-description: "Kartoza recently celebrated its 10th anniversary and is expanding its business by developing a new geospatial hosting platform using open source infrastructure tools."
+author: Tim Sutton
+date: '2024-09-27'
+description: In this article we give a little look behind the scenes to show how we
+  are building our upcoming geospatial hosting platform
+erpnext_id: /blog/hosting/geospatial-hosting-taking-the-pain-out-of-hosting-your-gis-applications
+erpnext_modified: '2024-09-27'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - Hosting
-  - Cloud
-  - Infrastructure
-date: 2024-09-27
-author: "Tim Sutton"
-thumbnail: "/img/blog/placeholder.png"
+- Hosting
+thumbnail: /img/blog/erpnext/Wk5apyN.png
+title: Geospatial Hosting - Taking the pain out of hosting your GIS applications
 ---
 
-{{< block
-    title="Kartoza - Geospatial Hosting - Taking the pain out of hosting your GIS applications"
-    subtitle="Hosting"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-Kartoza recently celebrated its 10th anniversary and is expanding its business by developing a new geospatial hosting platform using open source infrastructure tools.
-{{< /block >}}
+![](/img/blog/erpnext/Wk5apyN.png)
 
-## Kartoza - Geospatial Hosting - Taking the pain out of hosting your GIS applications
+**Kartoza recently celebrated its 10th anniversary.** Over the past decade, we've built some fantastic solutions for our customers, focusing on training, consulting, software development, and sharing our expertise in GIS. However, over the last two years, we decided to expand by adding a new dimension to our business: developing our own hosting platform.
 
-**Kartoza recently celebrated its 10th anniversary.** Over the past decade, the company has built comprehensive solutions for customers, emphasizing training, consulting, software development, and GIS expertise. However, in the last two years, they decided to expand by developing their own hosting platform.
+In modern cloud development, most solutions rely on big providers like Azure, Amazon Web Services, or Google Cloud Services. Typically, when designing a solution for a client or product, you'll either manage individual servers, installing tools like Docker and Docker Compose for hand-managed services (the 'old way'), or you’ll work with services like Kubernetes and Helm Charts to build your architecture within a cloud provider’s ecosystem (the 'new' way).
 
-### Infrastructure Evolution
+Because our hosting services for customers pre-dated Kubernetes and even Docker, we built up a legacy of around 70 hand-managed servers at its peak. Hand managing servers offers fine-grained control over each host yet has a huge downside of being difficult to scale and manage large numbers of servers. In the last few years we have actively been moving our server workloads over to managed environments backed by an excellent team of DevOps engineers.
 
-In modern cloud development, most solutions rely on major providers like Azure, Amazon Web Services, or Google Cloud Services. Solutions typically use either hand-managed servers with Docker and Docker Compose, or Kubernetes and Helm Charts within cloud provider ecosystems.
+![](/img/blog/erpnext/Q29Ercv.png)
 
-Since Kartoza's hosting services predated Kubernetes and Docker, the company built approximately 70 hand-managed servers at peak capacity. Hand management provides fine-grained control but creates scaling and management difficulties. Recently, they have actively migrated workloads to managed environments supported by experienced DevOps engineers.
+**We wanted to take a different approach.** About two years ago, Leon, our DevOps team lead, and I sat down together to plan how we would migrate from hand-managed servers to managed infrastructure. At the time we had a mix of machines, some completely hand-managed, some managed using Rancher V1, and some managed with Kubernetes or Rancher V2. It was tempting to rely entirely on proprietary cloud services to build out our next generation infrastructure, but we come from an open source culture and wanted to build out our infrastructure using open source software as much as possible. This has all the same benefits that we promote to our desktop GIS users: it allows us to avoid vendor lock-in and gives us the flexibility of moving our architecture between cloud providers with minimal adjustments. This way, we remain masters of our own destiny while staying true to our commitment to open-source development as much as possible.
 
-### Strategic Approach
+And so we have built a platform composed of popular DevOps tools. These include ArgoCD, Keycloak, Terraform, Ansible, Prometheus and Grafana and some venerable, tried and tested favourites (like Jenkins and Sentry).
 
-About two years ago, Leon (DevOps team lead) and the leadership team planned migration from hand-managed servers to managed infrastructure. The company had mixed machines—some completely hand-managed, some using Rancher V1, and some using Kubernetes or Rancher V2.
+**A new platform?** Our vision is to provide a service where customers can select a service and service level, such as a large GeoNode hosting instance, put in their credit card details and have a private instance of that service available in short order thereafter. Our automation platform will then provision and deploy the services seamlessly. This approach allows us to focus on delivering excellent support and improvements to all our clients, rather than managing individual services manually. After two years of work, we’re approaching the launch of this new service!
 
-Rather than relying entirely on proprietary cloud services, Kartoza chose to build infrastructure using open source software. This reflects the company's open source culture and provides important benefits: "it allows us to avoid vendor lock-in and gives us the flexibility of moving our architecture between cloud providers with minimal adjustments."
+**We built a platform, not an single product.** To start, we’ll be offering popular open-source geospatial products, including GeoServer and GeoNode and some products that we have developed in-house with clients. With our platform we can rapidly add new geospatial offerings. If you need something hosted, talk to us!
 
-The platform comprises popular DevOps tools including ArgoCD, Keycloak, Terraform, Ansible, Prometheus, Grafana, Jenkins, and Sentry.
+**What comes next?** We have one eye on the present and one on the future. We will start with staple favourites of the Geospatial world, but soon we will be adding next-generation Cloud Native geospatial options to our portfolio.
 
-### Vision and Launch
+**We’d love to hear from you** if you’re looking to deploy cloud services but are overwhelmed by the technical requirements. Our platform can help you navigate the complex technological choices and eliminate the burden of managing services on your own.
 
-The company's vision is to provide a service where customers select a service and service level—such as a large GeoNode hosting instance—enter credit card details, and receive a private instance in short order. The automation platform provisions and deploys services seamlessly, allowing Kartoza to focus on excellent support rather than manual service management. After two years of development, they approach launch.
+AI Statement: This article was not written using AI. AI was used for proof reading.
 
-**We built a platform, not a single product.** Initially, they will offer popular open source geospatial products, including GeoServer and GeoNode, plus in-house developed products created with clients. The platform allows rapid addition of new geospatial offerings.
-
-### Future Direction
-
-The company maintains focus on both present and future needs. They begin with geospatial staple favourites but will soon add next-generation Cloud Native geospatial options.
-
-**We'd love to hear from you** if you're overwhelmed by technical requirements for deploying cloud services. Their platform helps navigate complex technological choices and eliminates self-management burdens.
-
----
-
-*Note: This article was not written using AI; AI was used for proofreading.*
+![](/img/blog/erpnext/YAVSed4.png)

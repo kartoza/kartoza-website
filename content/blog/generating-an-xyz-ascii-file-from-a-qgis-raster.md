@@ -1,44 +1,44 @@
 ---
-title: "Generating an XYZ ASCII File from a QGIS Raster"
-description: "Someone wrote to me asking if it would be possible to generate an XYZ ASCII file from a single band raster layer in QGIS. This tutorial demonstrates a functional method for converting raster data to point-based ASCII format, despite computational limitations."
+author: Gavin Fleming
+date: '2015-03-08'
+description: Someone wrote to me asking if it would be possible to generate an XYZ
+  ASCII file from a single band raster layer in QGIS.
+erpnext_id: /blog/fossgis/generating-an-xyz-ascii-file-from-a-qgis-raster
+erpnext_modified: '2015-03-08'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - QGIS
-  - Python
-  - Raster
-  - FOSSGIS
-date: 2015-03-08
-author: "Gavin Fleming"
-thumbnail: "/img/blog/placeholder.png"
+- Fossgis
+thumbnail: /img/blog/erpnext/qt4KtaM.png
+title: Generating an XYZ ASCII File from a QGIS Raster
 ---
 
-{{< block
-    title="Generating an XYZ ASCII File from a QGIS Raster"
-    subtitle="FOSSGIS"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-Someone wrote to me asking if it would be possible to generate an XYZ ASCII file from a single band raster layer in QGIS. This tutorial demonstrates a functional method for converting raster data to point-based ASCII format.
-{{< /block >}}
+Someone wrote to me asking if it would be possible to generate an[XYZ ASCII](<http://www.gdal.org/frmt_xyz.html>) file from a single band raster layer in QGIS. No doubt there are more efficient ways (this approach is pretty slow but it works), but I thought it would be fun to show how you can iterate over a raster, writing out the value of each cell into a text file (along with the centroid coordinates for that cell).
 
-## Introduction
+To use the script, you should save it to your local machine, then open the python console and load the script in the python editor. Next select a single band raster and then run the script in the editor. If your raster is quite large, it will take some time to run. I have spent zero time trying to optimise the script - if someone has an idea for doing it faster, send me a patch and I will update the example above.
 
-Someone inquired about creating an XYZ ASCII file from a single-band raster layer in QGIS. While not optimised for speed, this approach demonstrates iterating through raster cells and outputting each cell's value alongside its centroid coordinates to a text file.
+The generated output dataset will look something like this:
 
-## Instructions for Use
+    Longitude,Latitude,VI
+    
+    8.31259406548,7.86128343221,10
+    
+    8.31264849753,7.86128343221,16
+    
+    8.31270292958,7.86128343221,18
+    
+    8.31248520138,7.8613378416,15
+    
+    8.31253963343,7.8613378416,17
+    
+    8.31259406548,7.8613378416,24
+    
+    8.31264849753,7.8613378416,46
+    
+    8.31270292958,7.8613378416,47
+    
+    ...
 
-Save the script locally and open QGIS's Python console. Load the script into the editor, select a single-band raster, and execute it. Processing larger rasters requires patience as the method prioritizes functionality over performance.
+The resulting script can be used with programs like [gdal_grid](<http://www.gdal.org/gdal_grid.html>) or loaded back into QGIS as a vector layer using the Delimited Text provider:
 
-## Sample Output Format
-
-The resulting dataset displays longitude, latitude, and value columns:
-
-```
-Longitude,Latitude,VI
-8.31259406548,7.86128343221,10
-8.31264849753,7.86128343221,16
-8.31270292958,7.86128343221,18
-```
-
-## Usage
-
-The generated data integrates with tools like `gdal_grid` or can be reimported into QGIS as a vector layer using the Delimited Text provider.
+![](/img/blog/erpnext/qt4KtaM.png)

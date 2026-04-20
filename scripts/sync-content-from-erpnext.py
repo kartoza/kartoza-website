@@ -43,6 +43,7 @@ import yaml
 import requests
 import argparse
 import hashlib
+import subprocess
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Optional, Any
@@ -266,22 +267,38 @@ class ERPNextContentSync:
     # BLOG CONTENT SYNC
     # ============================================
 
-    def sync_blog_content(self, download_images: bool = True) -> List[Dict]:
-        """Sync blog articles from ERPNext"""
+    def sync_blog_content(self, download_images: bool = True) -> dict:
+        """Sync blog articles by calling fetch-erpnext-blogs.py"""
         print("→ Syncing blog articles...")
 
-        articles = self.fetch_blog_articles()
-        print(f"  ✓ Fetched {len(articles)} articles")
+        # Build command
+        cmd = [sys.executable, str(PROJECT_ROOT / "scripts" / "fetch-erpnext-blogs.py")]
+        if not download_images:
+            cmd.append("--skip-images")
 
-        processed_articles = []
-        for article in articles:
-            processed = self.transform_blog_article(article, download_images)
-            if processed:
-                processed_articles.append(processed)
-                self.write_blog_article(processed)
+        # Run and capture output
+        result = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            env=os.environ,
+            cwd=PROJECT_ROOT
+        )
 
-        print(f"  ✓ Processed {len(processed_articles)} articles")
-        return processed_articles
+        # Print stderr (the status table) to console
+        if result.stderr:
+            print(result.stderr)
+
+        # Parse JSON summary from stdout
+        if result.stdout.strip():
+            try:
+                summary = json.loads(result.stdout.strip().split('\n')[-1])
+                print(f"  ✓ Processed {summary['total']} articles: {summary['new']} new, {summary['unchanged']} unchanged, {summary['updated']} updated")
+                return summary
+            except (json.JSONDecodeError, KeyError, IndexError) as e:
+                print(f"  ✗ Error parsing sync output: {e}", file=sys.stderr)
+
+        return {'total': 0, 'new': 0, 'unchanged': 0, 'updated': 0, 'errors': 0}
 
     def fetch_blog_articles(self) -> List[Dict]:
         """Fetch blog articles from ERPNext"""

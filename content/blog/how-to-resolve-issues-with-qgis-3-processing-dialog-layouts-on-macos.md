@@ -1,39 +1,28 @@
 ---
-title: "How to Resolve Issues with QGIS 3 Processing Dialog Layouts on MacOS"
-description: "If you are using QGIS 3 master builds on MacOS and encounter issues with the display of processing dialog layouts, users experiencing layout problems can resolve them by renaming a specific file."
+author: Tim Sutton
+date: '2017-10-07'
+description: 'If you are using QGIS 3 master builds on MacOS and encounter issues
+  with the display of processing dialog layouts like this: <img alt="" sr'
+erpnext_id: /blog/qgis/how-to-resolve-issues-with-qgis-3-processing-dialog-layouts-on-macos
+erpnext_modified: '2017-10-07'
+reviewedBy: Automated Check
+reviewedDate: '2026-04-13'
 tags:
-  - QGIS
-  - MacOS
-  - Troubleshooting
-date: 2017-10-07
-author: "Tim Sutton"
-thumbnail: "/img/blog/placeholder.png"
+- Qgis
+thumbnail: /img/blog/erpnext/screen_shot_2017-10-06_at_23.49.39.png
+title: How to Resolve Issues with QGIS 3 Processing Dialog Layouts on MacOS
 ---
 
-{{< block
-    title="How to Resolve Issues with QGIS 3 Processing Dialog Layouts on MacOS"
-    subtitle="QGIS"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-If you are using QGIS 3 master builds on MacOS and encounter issues with the display of processing dialog layouts, here's how to fix it.
-{{< /block >}}
+If you are using QGIS 3 master builds on MacOS and encounter issues with the display of processing dialog layouts like this:
 
-## The Issue
+![](/img/blog/erpnext/screen_shot_2017-10-06_at_23.49.39.png)
 
-If you're running QGIS 3 master builds on MacOS and notice processing dialog layouts aren't displaying correctly, the issue stems from the custom designer widgets Python module for QGIS.
+The problem is caused by the custom designer widgets python module for QGIS. To fix it you should rename or remove this file
 
-## Solution
+`mv /usr/local/lib/python3.6/site-packages/PyQt5/uic/widget-plugins/qgis_customwidgets.py \`
 
-Rename or remove this file:
+`/usr/local/lib/python3.6/site-packages/PyQt5/uic/widget-plugins/qgis_customwidgets.py_`
 
-```bash
-mv /usr/local/lib/python3.6/site-packages/PyQt5/uic/widget-plugins/qgis_customwidgets.py \
-/usr/local/lib/python3.6/site-packages/PyQt5/uic/widget-plugins/qgis_customwidgets.py_
-```
+The actual location of this file may vary depending on your system. After removing the file, restart QGIS and you should see the dialog layout restored again:
 
-Note: The file location may differ based on your system configuration.
-
-## Next Steps
-
-After removing the file, restart QGIS. The dialog layout should display normally again.
+![](/img/blog/erpnext/S5Z9NeX.png)

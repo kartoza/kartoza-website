@@ -508,6 +508,10 @@ local function fetch_erpnext_blogs()
   vim.cmd("!python3 " .. scripts_dir .. "/fetch-erpnext-blogs.py")
 end
 
+local function fetch_erpnext_blogs_dry()
+  vim.cmd("!python3 " .. scripts_dir .. "/fetch-erpnext-blogs.py --dry-run")
+end
+
 local function fetch_erpnext_blogs_list()
   vim.cmd("!python3 " .. scripts_dir .. "/fetch-erpnext-blogs.py --list")
 end
@@ -703,7 +707,8 @@ wk.add({
 
   -- ERPNext (e = erpnext)
   { "<leader>pe", group = "ERPNext" },
-  { "<leader>peb", fetch_erpnext_blogs, desc = "Fetch blogs" },
+  { "<leader>peb", fetch_erpnext_blogs, desc = "Sync blogs" },
+  { "<leader>ped", fetch_erpnext_blogs_dry, desc = "Sync blogs (dry-run)" },
   { "<leader>peB", fetch_erpnext_blogs_list, desc = "List blogs" },
   { "<leader>pep", fetch_erpnext_portfolio, desc = "Fetch portfolio" },
   { "<leader>peP", fetch_erpnext_portfolio_list, desc = "List portfolio" },
