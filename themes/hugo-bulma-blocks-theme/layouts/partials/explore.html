@@ -162,20 +162,28 @@
     </div>
 </section>
 
-<!-- Trust Bar -->
-<section class="section trust-bar">
+<!-- Partners Section -->
+<section class="section partners-bar">
     <div class="container">
         <p class="trust-text has-text-centered">OUR PARTNERS</p>
-        <div class="trust-logos">
+        <div class="partners-grid">
             {{ $partners := where (where .Site.RegularPages "Section" "partners") ".Params.approved" true }}
             {{ range $partners }}
-            <a href="{{ .Params.productUrl }}" target="_blank" rel="noopener" class="trust-logo-item" title="{{ .Title }}">
-                <img src="{{ .Params.logo | absURL }}" alt="{{ .Title }}" />
+            <a href="{{ .Permalink }}" class="partner-block" title="{{ .Title }}">
+                <div class="partner-block-logo">
+                    <img src="{{ .Params.logo | absURL }}" alt="{{ .Title }}" />
+                </div>
+                <div class="partner-block-info">
+                    <h4 class="partner-block-name">{{ .Title }}</h4>
+                    {{ with .Params.tagline }}
+                    <p class="partner-block-tagline">{{ . }}</p>
+                    {{ end }}
+                </div>
             </a>
             {{ end }}
         </div>
         <p class="trust-cta has-text-centered">
-            <a href="{{ absURL "partners/" }}" class="trust-cta-link">
+            <a href="{{ relURL "partners/" }}" class="trust-cta-link">
                 <span>View all partners</span>
                 <span class="icon"><i class="fas fa-arrow-right"></i></span>
             </a>
