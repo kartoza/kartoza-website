@@ -1,4 +1,4 @@
----
+<!-- ---
 title: "Introduction to PostGIS"
 description: "Dive into the world of spatial databases with **Geospatial Data & Design with PostGIS**, a hands‑on, two‑day instructor‑led course that transforms PostgreSQL into a powerful geospatial engine. You’ll learn to store, query, analyse and visualise spatial data—all from a single, shared database—fueling everything from web maps to enterprise GIS."
 thumbnail: "/img/training/erpnext/postgis.png"
@@ -71,10 +71,10 @@ All‑inclusive fee covering VAT, software, course materials, datasets, and cert
 Equip yourself with the skills to design, manage, and analyze spatial data at scale—join **Geospatial Data & Design with PostGIS** and elevate your GIS capabilities!
 
 <!-- markdownlint-disable MD034 -->
-<p>
+<!-- <p>
   <a class="button is-primary is-medium" href="/contact-us/?course=Introduction%20to%20PostGIS&subject=Training%20Enquiry">
     <span class="icon"><i class="fas fa-envelope"></i></span>
     <span>Enquire</span>
   </a>
-</p>
+</p> -->
 <!-- markdownlint-enable MD034 -->
