@@ -9,7 +9,7 @@ reviewedBy: Automated Check
 reviewedDate: '2026-04-13'
 tags:
 - Gis
-thumbnail: https://lh7-rt.googleusercontent.com/docsz/AD_4nXfczgo9TDADAnmkoKrypMnBzBQd9WTbozumJTnKuh3wfU3_Z3K0dmLZhsbDSjgswh9WbPv9iRohi-KLCmTSSluNCn6RyGz8PnaumnhOClE38PJqIAmuUkQnBZgWyTVxd2eCfwTN?key=ijXtwaho_bJepKu9DjuBI9Ex
+thumbnail: /img/blog/placeholder.png
 title: 'Mapping My World: A Journey with OpenStreetMap'
 ---
 

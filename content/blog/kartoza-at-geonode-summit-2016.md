@@ -9,7 +9,7 @@ reviewedBy: Automated Check
 reviewedDate: '2026-04-13'
 tags:
 - Geonode
-thumbnail: https://kartoza.erpnext.com/files/QJU9aFe.jpg
+thumbnail: /img/blog/placeholder.png
 title: Kartoza at GeoNode Summit 2016
 ---
 

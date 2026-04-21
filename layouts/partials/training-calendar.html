@@ -61,7 +61,9 @@
                     <span class="icon"><i class="fas fa-info-circle"></i></span>
                     <span>Details</span>
                 </a>
-                <a href="{{ .registration_url | default "/contact-us/" }}" class="button is-small is-primary">
+                {{/* Build contact form URL with pre-fill parameters */}}
+                {{ $contactUrl := printf "/contact-us/?course=%s&date=%s&location=%s" (.title | urlquery) (.date_display | default .start | urlquery) (.location | default "Online" | urlquery) }}
+                <a href="{{ $contactUrl }}" class="button is-small is-primary">
                     <span class="icon"><i class="fas fa-user-plus"></i></span>
                     <span>Register</span>
                 </a>
