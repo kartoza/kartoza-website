@@ -24,6 +24,7 @@ WDPP
 # Technical acronyms and terms
 ECMWF
 GNSS
+scikit
 xarray
 
 # Team member names (add as needed)
