@@ -1,4 +1,4 @@
----
+<!-- ---
 title: "GIS Fundamentals for Educators"
 description: "A hybrid course for teachers and school-level educators. Build the confidence and practical skills to introduce geospatial thinking into your classroom — with ready-to-use lesson frameworks, QGIS exercises, and curriculum-aligned resources for Grades 8, 10, and 12."
 thumbnail: "/img/courses/qgis-introduction.svg"
@@ -140,4 +140,4 @@ You will learn to use QGIS to create maps, work with spatial data, and digitise 
     <h4>100% Open Source</h4>
     <p>All software used in this course is free and open source — no licencing costs for your school or your learners, now or ever.</p>
   </div>
-</div>
+</div> -->

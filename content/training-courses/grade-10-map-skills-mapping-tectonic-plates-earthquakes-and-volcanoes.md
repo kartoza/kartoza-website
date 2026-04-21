@@ -1,4 +1,4 @@
----
+<!-- ---
 title: "Grade 10 Map Skills: Mapping Tectonic Plates, Earthquakes and Volcanoes"
 description: "This lesson offers Grade 10 learners materials aligned with their curriculum, focusing on the introduction of GIS concepts. The tasks are designed to enhance understanding in key study areas."
 thumbnail: "/img/training/grade-10-map-skills-mapping-tectonic-plates-earthquakes-and-volcanoes.jpg"
@@ -33,5 +33,5 @@ This lesson offers Grade 10 learners materials aligned with their curriculum, fo
 **Delivery:** Asynchronous
 
 <!-- markdownlint-disable MD034 -->
-{{< button-bar "fas fa-shopping-cart:Book This Course:https://erp.kartoza.com/shop/product/grade-10-map-skills-mapping-tectonic-plates-earthquakes-and-volcanoes" "fas fa-envelope:Enquire:/contact-us/" >}}
-<!-- markdownlint-enable MD034 -->
+<!-- {{< button-bar "fas fa-shopping-cart:Book This Course:https://erp.kartoza.com/shop/product/grade-10-map-skills-mapping-tectonic-plates-earthquakes-and-volcanoes" "fas fa-envelope:Enquire:/contact-us/" >}}
+markdownlint-enable MD034 --> -->

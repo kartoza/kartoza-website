@@ -1,4 +1,4 @@
----
+<!-- ---
 title: "Introduction to PostGIS (Self-paced)"
 description: "This course is presented to transfer a working knowledge of SQL to the participants. During this course you will learn about 1. General database concepts, including what is a relational database? 2. SQL basics including syntax, structure, standards and conventions 3. Connecting to a database 4. B"
 thumbnail: "/img/training/erpnext/postgis.png"
@@ -46,5 +46,5 @@ At the end of the course participants will understand and be able to:
 **Delivery: self-paced/asynchronous**
 
 <!-- markdownlint-disable MD034 -->
-{{< button-bar "fas fa-shopping-cart:Book This Course:https://erp.kartoza.com/training-courses/introduction-to-postgis-self-paced-p5aci" "fas fa-envelope:Enquire:/contact-us/" >}}
-<!-- markdownlint-enable MD034 -->
+<!-- {{< button-bar "fas fa-shopping-cart:Book This Course:https://erp.kartoza.com/training-courses/introduction-to-postgis-self-paced-p5aci" "fas fa-envelope:Enquire:/contact-us/" >}}
+markdownlint-enable MD034 --> -->

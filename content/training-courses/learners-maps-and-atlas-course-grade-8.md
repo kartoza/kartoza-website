@@ -1,4 +1,4 @@
----
+<!-- ---
 title: "Grade 8 Map Skills: Provinces of South Africa"
 description: "This lesson provides Grade 8 learners with access to materials aligned with their current curriculum. The resources include a printable puzzle and a task designed using QGIS to introduce students to map creation."
 thumbnail: "/img/training/learners-maps-and-atlas-course-grade-8.jpg"
@@ -30,5 +30,5 @@ This lesson provides Grade 8 learners with access to materials aligned with thei
 **Delivery:** Asynchronous
 
 <!-- markdownlint-disable MD034 -->
-{{< button-bar "fas fa-shopping-cart:Book This Course:https://erp.kartoza.com/shop/product/learners-maps-and-atlas-course-grade-8" "fas fa-envelope:Enquire:/contact-us/" >}}
-<!-- markdownlint-enable MD034 -->
+<!-- {{< button-bar "fas fa-shopping-cart:Book This Course:https://erp.kartoza.com/shop/product/learners-maps-and-atlas-course-grade-8" "fas fa-envelope:Enquire:/contact-us/" >}}
+markdownlint-enable MD034 --> -->

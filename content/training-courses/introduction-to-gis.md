@@ -1,4 +1,4 @@
----
+<!-- ---
 title: "GIS Fundamentals for Educators"
 description: "The course is developed and delivered by experienced teachers and GIS specialists. Includes tried and tested grade 8, 10, and 12 GIS lessons."
 thumbnail: "/img/training/introduction-to-gis.jpg"
@@ -37,5 +37,5 @@ This hybrid course includes both asynchronous and online training components, de
 **Delivery:** Asynchronous and online training.
 
 <!-- markdownlint-disable MD034 -->
-{{< button-bar "fas fa-shopping-cart:Book This Course:https://erp.kartoza.com/shop/product/introduction-to-gis" "fas fa-envelope:Enquire:/contact-us/" >}}
-<!-- markdownlint-enable MD034 -->
+<!-- {{< button-bar "fas fa-shopping-cart:Book This Course:https://erp.kartoza.com/shop/product/introduction-to-gis" "fas fa-envelope:Enquire:/contact-us/" >}}
+markdownlint-enable MD034 --> -->

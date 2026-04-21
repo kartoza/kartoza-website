@@ -1,4 +1,4 @@
----
+<!-- ---
 title: "Enterprise GIS"
 description: "Enterprise GIS"
 thumbnail: "/img/training/erpnext/qgis-icon_big300x300-0x300.png"
@@ -111,5 +111,5 @@ Five days
 T&Cs apply.
 
 <!-- markdownlint-disable MD034 -->
-{{< button-bar "fas fa-shopping-cart:Book This Course:https://erp.kartoza.com/training/enterprise-gis-ypfsx" "fas fa-envelope:Enquire:/contact-us/" >}}
-<!-- markdownlint-enable MD034 -->
+<!-- {{< button-bar "fas fa-shopping-cart:Book This Course:https://erp.kartoza.com/training/enterprise-gis-ypfsx" "fas fa-envelope:Enquire:/contact-us/" >}}
+markdownlint-enable MD034 --> -->

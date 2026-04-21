@@ -1,4 +1,4 @@
----
+<!-- ---
 title: "Introduction to GIS with QGIS (Self-paced)"
 description: "A practical, beginner-friendly introduction to GIS using QGIS. Over ~18–20 hours you’ll learn how to create professional maps, work with vector and raster data, georeference scanned maps and imagery, and run basic spatial analyses using real-world case studies. The course is delivered online"
 thumbnail: "/img/training/erpnext/qgis-icon_big300x300-0x300.png"
@@ -33,5 +33,5 @@ It is ideal for complete GIS beginners, as well as users transitioning to open-s
 The course includes the official QGIS certification.
 
 <!-- markdownlint-disable MD034 -->
-{{< button-bar "fas fa-shopping-cart:Book This Course:https://erp.kartoza.com/training-courses/introduction-to-gis-with-qgis-self-paced-9ysfz" "fas fa-envelope:Enquire:/contact-us/" >}}
-<!-- markdownlint-enable MD034 -->
+<!-- {{< button-bar "fas fa-shopping-cart:Book This Course:https://erp.kartoza.com/training-courses/introduction-to-gis-with-qgis-self-paced-9ysfz" "fas fa-envelope:Enquire:/contact-us/" >}}
+markdownlint-enable MD034 --> -->
