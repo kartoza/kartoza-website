@@ -2771,9 +2771,22 @@
     box-shadow: var(--shadow-sm);
 }
 
+
+.navbar-logo-text {
+    margin-left: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
 .navbar-item {
-    font-weight: 500;
+    font-weight: 600;
     transition: color var(--transition-fast);
+    width: 160px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .navbar-item:hover {
@@ -2783,6 +2796,12 @@
 .navbar-item.is-active {
     color: var(--primary);
     font-weight: 600;
+}
+
+.search-label {
+    margin-right: 0.5rem;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 /* Alert/Notification Styling */
@@ -14703,6 +14722,7 @@ a.team-member-clickable:hover .team-member-view-profile i {
 
 /* CTA Section at Top of Footer */
 .footer-cta {
+    display: none;
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     padding: 3rem 0;
     position: relative;
@@ -14798,13 +14818,13 @@ a.team-member-clickable:hover .team-member-view-profile i {
 
 .footer-grid {
     display: grid;
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 420px 1fr;
     gap: 3rem;
 }
 
 /* Brand Column */
 .footer-brand {
-    max-width: 320px;
+    max-width: 460px;
     padding-left: 30px;
     padding-right: 30px;
 }
@@ -14869,8 +14889,9 @@ a.team-member-clickable:hover .team-member-view-profile i {
 .footer-nav {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
+    gap: 5rem;
     justify-items: start;
+    padding-right: 30px;
 }
 
 .footer-nav-column {
@@ -15145,6 +15166,13 @@ a.team-member-clickable:hover .team-member-view-profile i {
 }
 
 /* Footer Responsive */
+@media screen and (max-width: 1200px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+}
+
 @media screen and (max-width: 1024px) {
     .footer-grid {
         grid-template-columns: 1fr;
