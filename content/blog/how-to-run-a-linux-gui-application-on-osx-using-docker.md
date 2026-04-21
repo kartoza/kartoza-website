@@ -8,7 +8,7 @@ reviewedBy: Automated Check
 reviewedDate: '2026-04-13'
 tags:
 - Docker
-thumbnail: /img/blog/placeholder.png
+thumbnail: https://kartoza.erpnext.com/files/x11-preferences-500x336.png
 title: How to Run a Linux GUI Application on OSX Using Docker
 ---
 

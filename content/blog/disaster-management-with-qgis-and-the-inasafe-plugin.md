@@ -9,7 +9,7 @@ reviewedBy: Automated Check
 reviewedDate: '2026-04-13'
 tags:
 - Qgis
-thumbnail: /img/blog/placeholder.png
+thumbnail: https://lh7-rt.googleusercontent.com/docsz/AD_4nXfw16OrAYg4VjSan3KPsn9vBO-Ej79EY4CiHwDt4nw39g5UqrSQNnrJe19EmNnHNwpe-kYEeV_tsn82d7ILptj4vJ2-Jo2HWB1OqJbqvH1ykYCaLmxO-981ORBQULOEsmEuY9nXeOVkj_dxLnITyWZ5gPY?key=CPE94m5H-_7sNPtMTw_GQg
 title: Disaster Management with QGIS and the InaSafe Plugin
 ---
 
