@@ -21,8 +21,17 @@ STAC
 stac
 WDPP
 
+# Technical acronyms and terms
+ECMWF
+GNSS
+xarray
+
 # Team member names (add as needed)
 Osundwa
+
+# Web/tech terms
+signup
+wifi
 
 # Technical terms specific to this project
 Afrispatial

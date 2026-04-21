@@ -114,6 +114,30 @@
 
             <!-- Sidebar -->
             <div class="column is-4">
+                <!-- Partner Website Card -->
+                {{ if or .Params.partnerUrl .Params.productUrl }}
+                <div class="partner-sidebar-card">
+                    <h3 class="partner-sidebar-card-title">
+                        <span class="icon"><i class="fas fa-globe"></i></span>
+                        Visit {{ .Title }}
+                    </h3>
+                    <div class="partner-links-list">
+                        {{ with .Params.partnerUrl }}
+                        <a href="{{ . }}" target="_blank" rel="noopener" class="button is-primary is-fullwidth mb-3">
+                            <span class="icon"><i class="fas fa-external-link-alt"></i></span>
+                            <span>{{ $.Params.partnerName | default $.Title }} Website</span>
+                        </a>
+                        {{ end }}
+                        {{ with .Params.productUrl }}
+                        <a href="{{ . }}" target="_blank" rel="noopener" class="button is-link is-fullwidth{{ if $.Params.partnerUrl }} is-outlined{{ end }}">
+                            <span class="icon"><i class="fas fa-box-open"></i></span>
+                            <span>{{ $.Params.productName | default "Product" }} Platform</span>
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
+
                 {{ if .Params.signupUrl }}
                 <!-- Signup Card -->
                 <div class="partner-sidebar-card partner-signup-card" style="background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%); color: white; border: none;">
@@ -136,7 +160,7 @@
                     </div>
                     <h3>Get Started Today</h3>
                     <p>Ready to transform your workflows with {{ .Title }}? Let's discuss your requirements.</p>
-                    <a href="{{ absURL "contact-us/" }}?subject={{ .Title }}%20Enquiry" class="button is-primary is-fullwidth">
+                    <a href="{{ relURL "contact-us/" }}?subject={{ .Title }}%20Enquiry" class="button is-primary is-fullwidth">
                         <span class="icon"><i class="fas fa-envelope"></i></span>
                         <span>Request Quote</span>
                     </a>
@@ -302,11 +326,11 @@
             <h2>Ready to Transform Your Workflows?</h2>
             <p>Join organisations already benefiting from {{ .Title }} with Kartoza's expert implementation and support.</p>
             <div class="partner-final-cta-buttons">
-                <a href="{{ absURL "contact-us/" }}?subject={{ .Title }}%20Enquiry" class="button is-primary is-large">
+                <a href="{{ relURL "contact-us/" }}?subject={{ .Title }}%20Enquiry" class="button is-primary is-large">
                     <span class="icon"><i class="fas fa-rocket"></i></span>
                     <span>Start Your Journey</span>
                 </a>
-                <a href="{{ absURL "partners/" }}" class="button is-light is-large">
+                <a href="{{ relURL "partners/" }}" class="button is-light is-large">
                     <span class="icon"><i class="fas fa-handshake"></i></span>
                     <span>View All Partners</span>
                 </a>
