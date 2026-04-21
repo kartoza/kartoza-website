@@ -1,0 +1,121 @@
+{{/* Displays upcoming events filtered for the current course */}}
+{{ $courseTitle := .Title }}
+{{ $events := where site.Data.training.events "title" $courseTitle }}
+{{ $futureEvents := slice }}
+{{ $now := now }}
+{{ range $events }}
+  {{ if ge (time .start) $now }}
+    {{ $futureEvents = $futureEvents | append . }}
+  {{ end }}
+{{ end }}
+
+{{ if $futureEvents }}
+<div class="sidebar-card upcoming-events-card">
+  <h4><i class="fas fa-calendar-alt"></i> Upcoming Sessions</h4>
+  <div class="upcoming-events-list">
+    {{ range $futureEvents }}
+    <div class="upcoming-event-item">
+      <div class="event-date-badge">
+        {{ $d := time .start }}
+        <span class="month">{{ $d.Format "Jan" }}</span>
+        <span class="day">{{ $d.Format "02" }}</span>
+      </div>
+      <div class="event-info">
+        <span class="dates">{{ .date_display }}</span>
+        <span class="location"><i class="fas fa-map-marker-alt"></i> {{ .location }}</span>
+      </div>
+      {{ $contactUrl := printf "/contact-us/?course=%s&date=%s&location=%s" (.title | urlquery) (.date_display | urlquery) (.location | urlquery) }}
+      <a href="{{ $contactUrl }}" class="button is-small is-primary">Register</a>
+    </div>
+    {{ end }}
+  </div>
+</div>
+
+<style>
+.upcoming-events-card h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.upcoming-events-card h4 i {
+  color: #00b388;
+}
+
+.upcoming-events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.upcoming-event-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.upcoming-event-item:hover {
+  background: #e9ecef;
+}
+
+.event-date-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  padding: 0.5rem;
+  background: #00b388;
+  color: white;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.event-date-badge .month {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.event-date-badge .day {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.event-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.event-info .dates {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.event-info .location {
+  font-size: 0.75rem;
+  color: #6c757d;
+}
+
+.event-info .location i {
+  color: #00b388;
+  margin-right: 0.25rem;
+}
+
+.upcoming-event-item .button {
+  flex-shrink: 0;
+}
+</style>
+{{ end }}
