@@ -6,6 +6,7 @@ shop_url: "https://erp.kartoza.com/training/introduction-to-postgis-7ihjm"
 tags:
   - Training
 track: "Server & Infrastructure"
+allow_booking: false
 draft: false
 reviewedBy: "Tim Sutton"
 reviewedDate: 2026-04-16
@@ -70,5 +71,10 @@ All‑inclusive fee covering VAT, software, course materials, datasets, and cert
 Equip yourself with the skills to design, manage, and analyze spatial data at scale—join **Geospatial Data & Design with PostGIS** and elevate your GIS capabilities!
 
 <!-- markdownlint-disable MD034 -->
-<!-- {{< button-bar "fas fa-shopping-cart:Book This Course:https://erp.kartoza.com/training/introduction-to-postgis-7ihjm" "fas fa-envelope:Enquire:/contact-us/" >}}
-markdownlint-enable MD034 --> -->
+<!-- <p>
+  <a class="button is-primary is-medium" href="/contact-us/?course=Introduction%20to%20PostGIS&subject=Training%20Enquiry">
+    <span class="icon"><i class="fas fa-envelope"></i></span>
+    <span>Enquire</span>
+  </a>
+</p> -->
+<!-- markdownlint-enable MD034 -->
