@@ -8,7 +8,8 @@ services:
       dockerfile: deployment/docker/Dockerfile
     container_name: kartoza-website
     environment:
-      - ERPNEXT_API_URL=${ERPNEXT_API_URL}
+      - BASE_URL=${BASE_URL:-/}
+      - GATEWAY_ERPNEXT_API_URL=${GATEWAY_ERPNEXT_API_URL:-https://api.do.kartoza.com/erpnext/kartoza-website/api/resource/Lead}
       - ERPNEXT_API_KEY=${ERPNEXT_API_KEY}
       - ERPNEXT_API_SECRET=${ERPNEXT_API_SECRET}
     ports:

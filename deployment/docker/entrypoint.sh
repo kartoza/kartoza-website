@@ -34,7 +34,7 @@ mkdir -p /tmp/nginx/conf.d \
 # Prepare authentication - encode credentials as Base64 for Basic auth
 ERPNEXT_API_KEY="${ERPNEXT_API_KEY:-dummy_key}"
 ERPNEXT_API_SECRET="${ERPNEXT_API_SECRET:-dummy_secret}"
-GATEWAY_ERPNEXT_API_URL="${GATEWAY_ERPNEXT_API_URL:-https://api.do.kartoza.com/erpnext/kartoza-website/api/resource/Lead}"
+GATEWAY_ERPNEXT_API_URL="${GATEWAY_ERPNEXT_API_URL:-${ERPNEXT_API_URL:-https://api.do.kartoza.com/erpnext/kartoza-website/api/resource/Lead}}"
 
 export erpnext_api_auth_base64=$(echo -n "${ERPNEXT_API_KEY}:${ERPNEXT_API_SECRET}" | base64 -w 0)
 export gateway_erpnext_api_url="${GATEWAY_ERPNEXT_API_URL}"
