@@ -5,10 +5,13 @@ description: "Kartoza is an official Mergin Maps partner, providing complete fie
 logo: "/img/partners/mergin-maps-logo.svg"
 productUrl: "https://merginmaps.com"
 productName: "Mergin Maps"
+partnerUrl: "https://merginmaps.com"
+partnerName: "Mergin Maps"
+heroImage: "/img/partners/mergin-maps-logo.svg"
 approved: true
 approvedDate: "2024-01-01"
 reviewedBy: "Tim Sutton"
-reviewedDate: "2026-04-15"
+reviewedDate: "2026-04-21"
 date: 2024-01-02
 features:
   - title: "QGIS Integration"
@@ -72,6 +75,7 @@ Field workers capture data using the Mergin Maps mobile app. When they sync, the
 ### Intelligent Forms
 
 Build sophisticated data entry forms without coding:
+
 - Drop-down lists with cascading dependencies
 - Automatic calculations and defaults
 - Photo capture with compression options

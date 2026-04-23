@@ -1,4 +1,6 @@
 {{- $shouldRender := partial "review-check.html" . -}}
+{{- $allowBooking := .Params.allow_booking | default false -}}
+{{- $courseSlug := path.Base .File.Dir -}}
 {{- if $shouldRender -}}
 {{ partial "header.html" . }}
 {{ partial "menu.html" . }}
@@ -43,14 +45,16 @@
                     </div>
                 </div>
                 <div class="course-hero-cta">
+                    {{ if $allowBooking }}
                     <a href="#booking-section" class="button is-primary is-medium booking-scroll-btn">
                         <span class="icon"><i class="fas fa-calendar-check"></i></span>
                         <span>View Dates & Book</span>
                     </a>
-                    <a href="#course-content" class="button is-light is-medium">
+                    {{ end }}
+                    <!-- <a href="#course-content" class="button is-light is-medium">
                         <span class="icon"><i class="fas fa-info-circle"></i></span>
                         <span>Learn More</span>
-                    </a>
+                    </a> -->
                 </div>
             </div>
             <div class="course-hero-image">
@@ -99,13 +103,13 @@
             <!-- Sidebar -->
             <aside class="course-sidebar">
                 <!-- Quick Booking Card -->
+                {{ if $allowBooking }}
                 <div class="sidebar-card booking-quick-card">
                     <div class="booking-quick-header">
                         <i class="fas fa-calendar-check"></i>
                         <h3>Book Your Spot</h3>
                     </div>
                     <div class="booking-quick-body">
-                        {{ $courseSlug := path.Base .File.Dir }}
                         {{ $schedule := site.Data.training_schedule }}
                         {{ $courseSessions := slice }}
                         {{ range $schedule.sessions }}
@@ -122,7 +126,7 @@
                             </a>
                         {{ else }}
                             <p class="booking-quick-text">No scheduled sessions yet</p>
-                            <a href="{{ absURL "contact-us/" }}?subject=Training%20Enquiry:%20{{ .Title | urlquery }}" class="button is-primary is-medium">
+                            <a href="{{ absURL "contact-us/" }}?course={{ .Title | urlquery }}&subject=Training%20Enquiry" class="button is-primary is-medium">
                                 <span class="icon"><i class="fas fa-envelope"></i></span>
                                 <span>Request Custom Training</span>
                             </a>
@@ -144,6 +148,10 @@
                         </div>
                     </div>
                 </div>
+                {{ end }}
+
+                <!-- Upcoming Events from Harvested Data -->
+                {{ partial "course-upcoming-events.html" . }}
 
                 <!-- Course Details Card -->
                 <div class="sidebar-card details-card">
@@ -196,6 +204,7 @@
 </section>
 
 <!-- Booking Section -->
+{{ if $allowBooking }}
 <section class="booking-section" id="booking-section">
     <div class="container">
         <div class="booking-header">
@@ -203,7 +212,6 @@
             <p>Select a date, venue, and number of attendees below. We offer flexible options to suit your needs.</p>
         </div>
 
-        {{ $courseSlug := path.Base .File.Dir }}
         {{ $schedule := site.Data.training_schedule }}
         {{ $courseSessions := slice }}
         {{ range $schedule.sessions }}
@@ -317,7 +325,7 @@
                             <h4>Need Custom Training?</h4>
                             <p>We can bring this course to your location or schedule a private session for your team.</p>
                         </div>
-                        <a href="{{ absURL "contact-us/" }}?subject=Custom%20Training%20Enquiry:%20{{ .Title | urlquery }}" class="button is-light is-medium">
+                        <a href="{{ absURL "contact-us/" }}?course={{ .Title | urlquery }}&subject=Custom%20Training%20Enquiry" class="button is-light is-medium">
                             <span class="icon"><i class="fas fa-envelope"></i></span>
                             <span>Request Quote</span>
                         </a>
@@ -519,7 +527,7 @@
             <i class="fas fa-calendar-times"></i>
             <h3>No Scheduled Sessions Yet</h3>
             <p>We don't have any public sessions scheduled for this course at the moment, but we can arrange custom training for your team.</p>
-            <a href="{{ absURL "contact-us/" }}?subject=Custom%20Training%20Enquiry:%20{{ .Title | urlquery }}" class="button is-primary is-medium">
+            <a href="{{ absURL "contact-us/" }}?course={{ .Title | urlquery }}&subject=Custom%20Training%20Enquiry" class="button is-primary is-medium">
                 <span class="icon"><i class="fas fa-envelope"></i></span>
                 <span>Request Custom Training</span>
             </a>
@@ -533,9 +541,17 @@
         </script>
     </div>
 </section>
+{{ else }}
+<!-- Hidden placeholder to keep layout/JS stable when booking is disabled -->
+<section class="booking-section" id="booking-section" style="display:none;" aria-hidden="true"></section>
+<script>
+    window.trainingScheduleData = window.trainingScheduleData || {};
+    window.currentCourse = window.currentCourse || {{ $courseSlug | jsonify | safeJS }};
+</script>
+{{ end }}
 
 <!-- Why Train With Us -->
-<section class="course-section course-why-us">
+<!-- <section class="course-section course-why-us">
     <div class="container">
         <div class="section-header">
             <h2>Why Train With Kartoza?</h2>
@@ -572,7 +588,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <!-- Testimonial -->
 <section class="course-section course-testimonial">

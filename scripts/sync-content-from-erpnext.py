@@ -686,6 +686,8 @@ def main():
                         help=f'Cache TTL in hours (default: {DEFAULT_CACHE_TTL_HOURS})')
     parser.add_argument('--dry-run', action='store_true',
                         help='Fetch data but do not write files')
+    parser.add_argument('--enable-fallback', action='store_true',
+                        help='Enable using/writing training_schedule.yml as a fallback (disabled by default)')
     parser.add_argument('--only', type=str, choices=['training', 'blog', 'portfolio', 'all'],
                         default='all', help='Only sync specific content type')
     parser.add_argument('--skip-images', action='store_true',
@@ -711,7 +713,7 @@ def main():
         success = False
         if args.only in ['training', 'all']:
             cached = load_cache(CACHE_FILES['training'], args.cache_ttl)
-            if cached and not args.dry_run:
+            if cached and not args.dry_run and args.enable_fallback:
                 save_yaml(DATA_DIR / "training_schedule.yml", cached)
                 success = True
 
@@ -732,7 +734,7 @@ def main():
             if not args.force:
                 cached = load_cache(CACHE_FILES['training'], args.cache_ttl)
                 if cached:
-                    if not args.dry_run:
+                    if not args.dry_run and args.enable_fallback:
                         save_yaml(DATA_DIR / "training_schedule.yml", cached)
                 else:
                     training_data = sync.sync_training_content()
@@ -789,7 +791,7 @@ def main():
 
         if args.only in ['training', 'all']:
             cached = load_cache(CACHE_FILES['training'], 999999)
-            if cached and not args.dry_run:
+            if cached and not args.dry_run and args.enable_fallback:
                 save_yaml(DATA_DIR / "training_schedule.yml", cached)
                 fallback_success = True
 

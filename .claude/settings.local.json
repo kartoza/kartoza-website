@@ -26,7 +26,9 @@
       "Bash(ls:*)",
       "Bash(wc:*)",
       "WebFetch(domain:api.github.com)",
-      "WebFetch(domain:plugins.qgis.org)"
+      "WebFetch(domain:plugins.qgis.org)",
+      "Bash(head:*)",
+      "Bash(gh pr checks:*)"
     ],
     "deny": [],
     "ask": []

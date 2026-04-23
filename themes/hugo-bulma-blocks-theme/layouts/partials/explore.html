@@ -44,7 +44,9 @@
                                 <div class="showcase-card">
                                     <div class="showcase-badge product">Featured Service</div>
                                     <div class="showcase-image">
-                                        <img src="{{ absURL "img/portfolio/fbis.png" }}" alt="GeoSpatial Hosting" />
+                                        <a href="https://geohosting.com" target="Geospatial Hosting">
+                                        <img src="{{ absURL "img/gsh-carousel.png" }}" alt="Preview Geospatial Hosting">
+                                        </a>
                                     </div>
                                     <div class="showcase-content">
                                         <h3 class="showcase-title">GeoSpatial Hosting</h3>
@@ -160,20 +162,28 @@
     </div>
 </section>
 
-<!-- Trust Bar -->
-<section class="section trust-bar">
+<!-- Partners Section -->
+<section class="section partners-bar">
     <div class="container">
         <p class="trust-text has-text-centered">OUR PARTNERS</p>
-        <div class="trust-logos">
+        <div class="partners-grid">
             {{ $partners := where (where .Site.RegularPages "Section" "partners") ".Params.approved" true }}
             {{ range $partners }}
-            <a href="{{ .Params.productUrl }}" target="_blank" rel="noopener" class="trust-logo-item" title="{{ .Title }}">
-                <img src="{{ .Params.logo | absURL }}" alt="{{ .Title }}" />
+            <a href="{{ .Permalink }}" class="partner-block" title="{{ .Title }}">
+                <div class="partner-block-logo">
+                    <img src="{{ .Params.logo | absURL }}" alt="{{ .Title }}" />
+                </div>
+                <div class="partner-block-info">
+                    <h4 class="partner-block-name">{{ .Title }}</h4>
+                    {{ with .Params.tagline }}
+                    <p class="partner-block-tagline">{{ . }}</p>
+                    {{ end }}
+                </div>
             </a>
             {{ end }}
         </div>
         <p class="trust-cta has-text-centered">
-            <a href="{{ absURL "partners/" }}" class="trust-cta-link">
+            <a href="{{ relURL "partners/" }}" class="trust-cta-link">
                 <span>View all partners</span>
                 <span class="icon"><i class="fas fa-arrow-right"></i></span>
             </a>
@@ -224,7 +234,9 @@
                 </div>
                 <div class="column is-6 product-visual">
                     <div class="product-image-wrapper">
-                        <img src="{{ absURL "img/portfolio/fbis.png" }}" alt="GeoSpatial Hosting Dashboard" />
+                        <a href="https://geohosting.com" target="Geospatial Hosting">
+                        <img src="{{ absURL "img/gsh-carousel.png" }}" alt="Preview Geospatial Hosting">
+                        </a>
                     </div>
                 </div>
             </div>
@@ -390,10 +402,6 @@
                             <span>Cape Town, South Africa</span>
                         </div>
                         <div class="office-detail">
-                            <span class="icon"><i class="fas fa-phone"></i></span>
-                            <a href="tel:+27218138912">+27 21 813 8912</a>
-                        </div>
-                        <div class="office-detail">
                             <span class="icon"><i class="fas fa-envelope"></i></span>
                             <a href="mailto:info@kartoza.com">info@kartoza.com</a>
                         </div>
@@ -431,12 +439,8 @@
                             <span>Lisbon, Portugal</span>
                         </div>
                         <div class="office-detail">
-                            <span class="icon"><i class="fas fa-phone"></i></span>
-                            <a href="tel:+351000000000">Contact via form</a>
-                        </div>
-                        <div class="office-detail">
                             <span class="icon"><i class="fas fa-envelope"></i></span>
-                            <a href="mailto:europe@kartoza.com">europe@kartoza.com</a>
+                            <a href="mailto:europe@kartoza.com">info@kartoza.com</a>
                         </div>
                         <div class="office-detail">
                             <span class="icon"><i class="fas fa-clock"></i></span>

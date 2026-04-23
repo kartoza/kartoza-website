@@ -290,19 +290,7 @@
                                 <i class="fas fa-arrow-right"></i>
                             </div>
                         </div>
-                        <div class="contact-method-modern" onclick="window.location.href='tel:+27218138912'">
-                            <div class="method-icon pulse-glow">
-                                <i class="fas fa-phone-alt"></i>
-                            </div>
-                            <div class="method-info">
-                                <span class="method-label">Call Us (SA)</span>
-                                <span class="method-value">+27 (0) 71 774 9515</span>
-                                <span class="method-value">+27 (0) 87 809 2702 </span>
-                            </div>
-                            <div class="method-arrow">
-                                <i class="fas fa-arrow-right"></i>
-                            </div>
-                        </div>
+
                     </div>
 
                     <!-- Office Locations with Animation -->
@@ -466,6 +454,109 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // ============================================
+    // PRE-FILL FROM URL PARAMETERS & SESSION STORAGE
+    // ============================================
+    const urlParams = new URLSearchParams(window.location.search);
+    const messageInput = document.getElementById('message');
+    const interestInput = document.getElementById('interest');
+    const pills = document.querySelectorAll('.interest-pill');
+
+    // Check for training booking parameters
+    const course = urlParams.get('course');
+    const date = urlParams.get('date');
+    const session = urlParams.get('session');
+    const subject = urlParams.get('subject');
+    const isBooking = urlParams.get('booking') === 'true';
+    const attendees = urlParams.get('attendees');
+    const currency = urlParams.get('currency');
+    const total = urlParams.get('total');
+    const location = urlParams.get('location');
+
+    // Build pre-fill message for training enquiries
+    let prefillMessage = '';
+
+    if (course || session || subject || isBooking) {
+        // Auto-select "training" interest pill
+        pills.forEach(p => {
+            if (p.dataset.value === 'training') {
+                p.classList.add('active');
+                interestInput.value = 'training';
+            } else {
+                p.classList.remove('active');
+            }
+        });
+
+        // Build the pre-fill message
+        if (subject) {
+            prefillMessage = decodeURIComponent(subject) + '\n\n';
+        }
+
+        if (course) {
+            prefillMessage += `Course: ${decodeURIComponent(course)}\n`;
+        }
+
+        if (date) {
+            prefillMessage += `Preferred Date: ${decodeURIComponent(date)}\n`;
+        }
+
+        if (location) {
+            prefillMessage += `Location: ${decodeURIComponent(location)}\n`;
+        }
+
+        if (attendees) {
+            prefillMessage += `Number of Attendees: ${attendees}\n`;
+        }
+
+        if (currency && total) {
+            prefillMessage += `Estimated Total: ${currency} ${total}\n`;
+        }
+
+        if (session) {
+            prefillMessage += `Session ID: ${session}\n`;
+        }
+
+        if (prefillMessage) {
+            prefillMessage += '\n---\nPlease add any additional information below:\n\n';
+        }
+
+        // Also check sessionStorage for pending booking data
+        const pendingBooking = sessionStorage.getItem('pendingBooking');
+        if (pendingBooking && isBooking) {
+            try {
+                const bookingData = JSON.parse(pendingBooking);
+                if (!course && bookingData.course) {
+                    prefillMessage = `Course: ${bookingData.course}\n` + prefillMessage;
+                }
+                if (bookingData.sessionId && !session) {
+                    prefillMessage += `Session: ${bookingData.sessionId}\n`;
+                }
+                // Clear the sessionStorage after reading
+                sessionStorage.removeItem('pendingBooking');
+            } catch (e) {
+                console.warn('Could not parse pending booking data');
+            }
+        }
+
+        // Set the message
+        if (messageInput && prefillMessage) {
+            messageInput.value = prefillMessage;
+            // Update character counter
+            const charCount = document.getElementById('char-count');
+            if (charCount) {
+                charCount.textContent = messageInput.value.length;
+            }
+        }
+
+        // Scroll to form section for better UX
+        setTimeout(() => {
+            const formSection = document.querySelector('.contact-section');
+            if (formSection) {
+                formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }, 500);
+    }
+
+    // ============================================
     // FLOATING ICONS - PARALLAX MOUSE FOLLOW
     // ============================================
     const floatingIcons = document.querySelectorAll('.floating-icon');
@@ -500,8 +591,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================
     // INTEREST PILLS - INTERACTIVE SELECTION
     // ============================================
-    const pills = document.querySelectorAll('.interest-pill');
-    const interestInput = document.getElementById('interest');
+    // (pills and interestInput already declared above for pre-fill)
 
     pills.forEach(pill => {
         pill.addEventListener('click', function() {
@@ -523,16 +613,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================
     // CHARACTER COUNTER
     // ============================================
-    const messageInput = document.getElementById('message');
-    const charCount = document.getElementById('char-count');
+    // (messageInput already declared above for pre-fill)
+    const charCountElem = document.getElementById('char-count');
 
-    if (messageInput && charCount) {
+    if (messageInput && charCountElem) {
         messageInput.addEventListener('input', function() {
-            charCount.textContent = this.value.length;
+            charCountElem.textContent = this.value.length;
             if (this.value.length > 1800) {
-                charCount.parentElement.classList.add('warning');
+                charCountElem.parentElement.classList.add('warning');
             } else {
-                charCount.parentElement.classList.remove('warning');
+                charCountElem.parentElement.classList.remove('warning');
             }
         });
     }

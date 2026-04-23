@@ -21,8 +21,18 @@ STAC
 stac
 WDPP
 
+# Technical acronyms and terms
+ECMWF
+GNSS
+scikit
+xarray
+
 # Team member names (add as needed)
 Osundwa
+
+# Web/tech terms
+signup
+wifi
 
 # Technical terms specific to this project
 Afrispatial
@@ -41,4 +51,7 @@ fuer
 
 # Project/Organization names
 Civitas
+Mergin
 Ogun
+RDBMS
+USAID
