@@ -1,43 +1,28 @@
 ---
 title: "Privacy Policy"
-subtitle: "Your Privacy Matters to Us"
-layout: single
+subtitle: "How we collect, use and protect your personal information in compliance with the Protection of Personal Information (POPI) Act"
+type: document
+icon: "user-shield"
 reviewedBy: "Tim Sutton"
 reviewedDate: 2026-04-24
+related:
+  - name: "GDPR & Data Protection Policy"
+    url: "/complaints-policy/"
+  - name: "Child Protection Policy"
+    url: "/child-protection-policy/"
+  - name: "All Policies"
+    url: "/policies/"
 ---
-
-{{< block
-    title="Privacy Policy"
-    subtitle="How we collect, use and protect your personal information in compliance with the Protection of Personal Information (POPI) Act."
-    sub-block-side="bottom"
-    class="is-primary"
->}}
-As published in the Government Gazette Notice 37067 on 26 November 2013. This Privacy Policy describes our policies and procedures on the collection, use and disclosure of your information when you use the service and tells you about your privacy rights and how the law protects you as an individual.
-{{< /block >}}
-
-{{< block-section
-    backgroundColor="dark"
-    textColor="white"
-    subtitle="Overview"
->}}
 
 ## About This Policy
 
-We use your personal data to provide and improve the service. By using the service, you agree to the collection and use of information in accordance with this Privacy Policy.
+As published in the Government Gazette Notice 37067 on 26 November 2013. This Privacy Policy describes our policies and procedures on the collection, use and disclosure of your information when you use the service and tells you about your privacy rights and how the law protects you as an individual.
 
-----
+We use your personal data to provide and improve the service. By using the service, you agree to the collection and use of information in accordance with this Privacy Policy.
 
 ## Interpretation
 
 The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.
-
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="light"
-    textColor="dark"
-    subtitle="Definitions"
->}}
 
 ## Key Definitions
 
@@ -55,8 +40,6 @@ For the purposes of this Privacy Policy:
 - **Website** refers to Kartoza Home, accessible from [www.kartoza.com](https://www.kartoza.com)
 - **You** means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.
 
-----
-
 ## Types of Data Collected
 
 **Personal Data** - While using our service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you. Personally identifiable information may include, but is not limited to:
@@ -67,14 +50,6 @@ For the purposes of this Privacy Policy:
 - Address, State, Province, ZIP/Postal code, City
 - Usage Data
 
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="primary"
-    textColor="white"
-    subtitle="Data Collection"
->}}
-
 ## Usage Data
 
 Usage Data is collected automatically when using the Service.
@@ -84,8 +59,6 @@ Usage Data may include information such as your device's internet protocol addre
 When you access the Service by or through a mobile device, we may collect certain information automatically, including, but not limited to, the type of mobile device you use, your mobile device unique ID, the IP address of your mobile device, your mobile operating system, the type of mobile Internet browser you use, unique device identifiers and other diagnostic data.
 
 We may also collect information that your browser sends whenever you visit our service or when you access the service by or through a mobile device.
-
-----
 
 ## Information from Third-Party Social Media Services
 
@@ -100,14 +73,6 @@ If you decide to register through or otherwise grant us access to a Third-Party 
 
 You may also have the option of sharing additional information with the Company through your Third-Party Social Media Service's account. If you choose to provide such information and Personal Data, during registration or otherwise, you are giving the Company permission to use, share, and store it in a manner consistent with this Privacy Policy.
 
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="dark"
-    textColor="white"
-    subtitle="Tracking & Cookies"
->}}
-
 ## Tracking Technologies and Cookies
 
 We use Cookies and similar tracking technologies to track the activity on our service and store certain information. Tracking technologies used are beacons, tags, and scripts to collect and track information and to improve and analyse our service. The technologies we use may include:
@@ -116,8 +81,6 @@ We use Cookies and similar tracking technologies to track the activity on our se
 - **Web Beacons.** Certain sections of our Service and our emails may contain small electronic files known as web beacons (also referred to as clear gifs, pixel tags, and single-pixel gifs) that permit the company, for example, to count users who have visited those pages or opened an email and for other related website statistics (for example, recording the popularity of a certain section and verifying system and server integrity).
 
 Cookies can be "Persistent" or "Session" Cookies. Persistent Cookies remain on your personal computer or mobile device when you go offline, while Session Cookies are deleted as soon as you close your web browser. Learn more about cookies: [What Are Cookies?](https://www.privacypolicies.com/blog/cookies/)
-
-----
 
 ## Cookie Types We Use
 
@@ -128,14 +91,6 @@ Cookies can be "Persistent" or "Session" Cookies. Persistent Cookies remain on y
 **Functionality Cookies** - Type: Persistent Cookies - Administered by: Us - Purpose: These cookies allow us to remember choices you make when you use the Website, such as remembering your login details or language preference. The purpose of these cookies is to provide you with a more personal experience and to avoid you having to re-enter your preferences every time you use the website.
 
 For more information about the cookies we use and your choices regarding cookies, please visit our cookies policy or the cookies section of our privacy policy.
-
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="light"
-    textColor="dark"
-    subtitle="Data Usage"
->}}
 
 ## Use of Your Personal Data
 
@@ -150,8 +105,6 @@ The company may use personal data for the following purposes:
 - **For business transfers:** We may use your information to evaluate or conduct a merger, divestiture, restructuring, reorganization, dissolution, or other sale or transfer of some or all of our assets, whether as a going concern or as part of bankruptcy, liquidation, or similar proceeding, in which personal data held by us about our service users is among the assets transferred.
 - **For other purposes:** We may use your information for other purposes, such as data analysis, identifying usage trends, determining the effectiveness of our promotional campaigns and to evaluate and improve our service, products, services, marketing and your experience.
 
-----
-
 ## Sharing Your Personal Information
 
 We may share your personal information in the following situations:
@@ -160,21 +113,11 @@ We may share your personal information in the following situations:
 - **For business transfers:** We may share or transfer your personal information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.
 - **With Affiliates:** We may share your information with our affiliates, in which case we will require those affiliates to honour this Privacy Policy. Affiliates include our parent company and any other subsidiaries.
 
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="primary"
-    textColor="white"
-    subtitle="Data Protection"
->}}
-
 ## Retention of Your Personal Data
 
 The company will retain your personal data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use your personal data to the extent necessary to comply with our legal obligations (for example, if we are required to retain your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies.
 
 The company will also retain usage data for internal analysis purposes. Usage data is generally retained for a shorter period of time, except when this data is used to strengthen the security or to improve the functionality of our service, or we are legally obligated to retain this data for longer time periods.
-
-----
 
 ## Transfer of Your Personal Data
 
@@ -183,14 +126,6 @@ Your information, including personal data, is processed at the company's operati
 Your consent to this Privacy Policy followed by your submission of such information represents your agreement to that transfer.
 
 The company will take all steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy and no transfer of your personal data will take place to an organization or a country unless there are adequate controls in place including the security of your data and other personal information.
-
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="dark"
-    textColor="white"
-    subtitle="Disclosure"
->}}
 
 ## Disclosure of Your Personal Data
 
@@ -206,19 +141,9 @@ The company will take all steps reasonably necessary to ensure that your data is
 - Protect the personal safety of Users of the Service or the public
 - Protect against legal liability
 
-----
-
 ## Security of Your Personal Data
 
 The security of Your Personal Data is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your personal data, we cannot guarantee its absolute security.
-
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="light"
-    textColor="dark"
-    subtitle="Additional Information"
->}}
 
 ## Children's Privacy
 
@@ -226,21 +151,11 @@ Our service does not address anyone under the age of 18. We do not knowingly col
 
 If we need to rely on consent as a legal basis for processing your information and your country requires consent from a parent, we may require your parent's consent before we collect and use that information.
 
-----
-
 ## Links to Other Websites
 
 Our service may contain links to other websites that are not operated by us. If you click on a third party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit.
 
 We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.
-
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="primary"
-    textColor="white"
-    subtitle="Changes & Updates"
->}}
 
 ## Changes to this Privacy Policy
 
@@ -250,8 +165,6 @@ We will let you know via email and/or a prominent notice on our service, prior t
 
 You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
 
-----
-
 ## Contact Us
 
 If you have any questions about this Privacy Policy, you can contact us:
@@ -259,7 +172,3 @@ If you have any questions about this Privacy Policy, you can contact us:
 - By email: <info@kartoza.com>
 - By visiting our website: [https://kartoza.com/contact-us/](https://kartoza.com/contact-us/)
 - By phone number: +27 (0)73 768 8108
-
-{{< button class="is-primary is-medium mt-4" link="/contact-us/" text="Contact Us" >}}
-
-{{< /block-section >}}

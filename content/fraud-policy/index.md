@@ -1,25 +1,22 @@
 ---
-title: "Policies - Fraud Prevention and Response"
-subtitle: "Integrity, Transparency, Accountability"
-layout: "single"
+title: "Fraud Prevention and Response Policy"
+subtitle: "Integrity, transparency, and accountability in all business activities"
+type: document
+icon: "exclamation-triangle"
 reviewedBy: "Tim Sutton"
 reviewedDate: 2026-04-24
+related:
+  - name: "Anti-Bribery and Corruption Policy"
+    url: "/anti-bribery-and-corruption-policy/"
+  - name: "Conflict of Interest Policy"
+    url: "/conflict-of-interest-policy/"
+  - name: "All Policies"
+    url: "/policies/"
 ---
 
-{{< block
-    title="Fraud Prevention and Response Policy"
-    subtitle="Kartoza is committed to conducting all business activities with the highest standards of integrity, transparency, and accountability. We have a zero tolerance for fraud, corruption, theft, or any form of financial misconduct."
-    sub-block-side="bottom"
-    class="is-primary"
->}}
-This policy sets out our approach to detecting, preventing, and responding to fraud and outlines the procedures for reporting, investigating, and resolving fraud-related matters.
-{{< /block >}}
+## Overview
 
-{{< block-section
-    backgroundColor="light"
-    textColor="dark"
-    subtitle="Policy Statement"
->}}
+Kartoza is committed to conducting all business activities with the highest standards of integrity, transparency, and accountability. We have a zero tolerance for fraud, corruption, theft, or any form of financial misconduct. This policy sets out our approach to detecting, preventing, and responding to fraud and outlines the procedures for reporting, investigating, and resolving fraud-related matters.
 
 ## Our Commitments
 
@@ -34,8 +31,6 @@ We commit to:
 
 **Note**: This policy is developed in accordance with South African and international standards.
 
-----
-
 ## Purpose of This Policy
 
 The purpose of this policy is to provide:
@@ -46,22 +41,12 @@ The purpose of this policy is to provide:
 - An outline of disciplinary, civil, or criminal actions to be taken
 - A basis for preventing recurrence through internal control improvements
 
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="primary"
-    textColor="white"
-    subtitle="Definitions and Scope"
->}}
-
 ## Key Definitions
 
 - **Fraud**: The use of deception to obtain an unauthorised benefit, including theft, embezzlement, forgery, falsification of records, or misrepresentation.
 - **Corruption**: Abuse of entrusted power for private gain.
 - **Misconduct**: Any wrongful, improper, or unlawful behaviour related to official duties.
 - **Whistleblower**: Any individual who reports suspected wrongdoing in good faith.
-
-----
 
 ## Scope
 
@@ -71,20 +56,10 @@ This policy applies to:
 - All operations, projects, and activities under Kartoza's control
 - Third-party partners, including subcontractors, suppliers, and grant recipients
 
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="dark"
-    textColor="white"
-    subtitle="Risk Management"
->}}
-
 ## Fraud Risk Management
 
 - Segregation of duties in financial and operational processes
 - Whistleblowing channels for confidential reporting
-
-----
 
 ## Fraud Detection and Reporting
 
@@ -100,14 +75,6 @@ All employees are required to report any suspicion of fraud immediately to the:
 
 - Managing Director
 - Human Resources or Legal Department
-
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="light"
-    textColor="dark"
-    subtitle="Response Procedures"
->}}
 
 ## Fraud Response Plan
 
@@ -133,8 +100,6 @@ If the matter involves internal/private resources:
 - The case will be reported to the South African Police Service (SAPS).
 - Kartoza's Legal Team will manage internal investigations.
 
-----
-
 ## Preventing Further Loss
 
 Where fraud is suspected and confirmed:
@@ -145,14 +110,6 @@ Where fraud is suspected and confirmed:
 - Keys, access cards, and company property will be surrendered
 - Systems access will be locked to prevent data alteration or destruction
 
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="primary"
-    textColor="white"
-    subtitle="Investigation and Evidence"
->}}
-
 ## Securing Evidence
 
 Evidence will be:
@@ -161,8 +118,6 @@ Evidence will be:
 - Secured immediately to prevent tampering
 - Stored in a controlled and confidential manner
 - Managed according to legal chain-of-custody protocols to ensure admissibility
-
-----
 
 ## Investigation Procedures
 
@@ -174,14 +129,6 @@ Investigations will be:
 
 The rights of all parties will be respected throughout the process.
 
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="dark"
-    textColor="white"
-    subtitle="Actions and Recovery"
->}}
-
 ## Disciplinary and Legal Action
 
 Where fraud is proven:
@@ -191,8 +138,6 @@ Where fraud is proven:
 - Any disciplinary action will align with the Labour Relations Act and relevant policies
 - Offenders may be reported to professional bodies, funders, or regulators
 
-----
-
 ## Recovery of Losses
 
 Kartoza will:
@@ -200,14 +145,6 @@ Kartoza will:
 - Pursue recovery of defrauded funds through civil litigation where applicable
 - Involve insurers to recover losses where covered by fraud insurance
 - Seek recovery from the perpetrators or their assets via legal action
-
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="light"
-    textColor="dark"
-    subtitle="Communication and Protection"
->}}
 
 ## Communication Protocol
 
@@ -222,8 +159,6 @@ Kartoza ensures that:
 - Anonymous reporting is permitted
 - Any retaliation will result in disciplinary action
 
-----
-
 ## Communication and Awareness
 
 - Communication of this policy to all staff and third parties.
@@ -233,36 +168,19 @@ Kartoza ensures that:
 - This policy and response plan will be reviewed annually or after any significant fraud incident.
 - Changes will be made by the Managers with approval from executive leadership.
 
-{{< /block-section >}}
+## Roles and Responsibilities
 
-{{< block
-    title="Roles and Responsibilities"
-    subtitle="Everyone at Kartoza plays a part in preventing and detecting fraud."
-    sub-block-side="bottom"
-    class="is-info"
->}}
+Everyone at Kartoza plays a part in preventing and detecting fraud.
 
 - **All Employees**: Report fraud, protect assets, follow this policy.
 - **Managers**: Ensure compliance, detect and report fraud. Manage fraud risks, lead investigations, and report to the executive.
 - **Legal and HR Teams**: Advise on disciplinary actions, ensure legal compliance.
 - **Executive Leadership**: Enforce policy, authorise disciplinary/legal responses.
 
-{{< /block >}}
-
-{{< block-section
-    backgroundColor="dark"
-    textColor="white"
-    subtitle="Questions about this policy?"
->}}
-
 ## Contact Us
 
 If you have any questions about this policy or need to report a concern, please reach out to the Kartoza management team.
 
-{{< button class="is-primary is-medium mt-4" link="/contact-us/" text="Get in Touch" >}}
-
-----
-
 This policy reflects Kartoza's unwavering commitment to ethical business conduct and zero tolerance for fraud in any form.
 
-{{< /block-section >}}
+**[Get in Touch](/contact-us/)**

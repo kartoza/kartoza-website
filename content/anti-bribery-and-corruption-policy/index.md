@@ -1,25 +1,22 @@
 ---
 title: "Anti-Bribery and Corruption Policy"
-subtitle: "Zero Tolerance for Bribery, Kickbacks, and Corrupt Activities"
-layout: "single"
+subtitle: "Zero tolerance for bribery, kickbacks, and corrupt activities"
+type: document
+icon: "gavel"
 reviewedBy: "Tim Sutton"
 reviewedDate: 2026-04-24
+related:
+  - name: "Fraud Policy"
+    url: "/fraud-policy/"
+  - name: "Conflict of Interest Policy"
+    url: "/conflict-of-interest-policy/"
+  - name: "All Policies"
+    url: "/policies/"
 ---
 
-{{< block
-    title="Anti-Bribery and Corruption Policy"
-    subtitle="Kartoza is committed to operating in an ethical and honest manner and enforcing systems that ensure bribery is prevented."
-    sub-block-side="bottom"
-    class="is-primary"
->}}
-This policy sets out the responsibilities of Kartoza and its employees, contractors, and upholds our zero-tolerance stance on bribery, kickbacks, and corrupt activities. The purpose of this policy is to ensure that everyone connected with Kartoza understands and complies with our legal and ethical obligations regarding bribery and corruption, and to prevent any form of unethical behaviour in our operations.
-{{< /block >}}
+## Overview
 
-{{< block-section
-    backgroundColor="light"
-    textColor="dark"
-    subtitle="Policy Statement"
->}}
+Kartoza is committed to operating in an ethical and honest manner and enforcing systems that ensure bribery is prevented. This policy sets out the responsibilities of Kartoza and its employees, contractors, and upholds our zero-tolerance stance on bribery, kickbacks, and corrupt activities. The purpose of this policy is to ensure that everyone connected with Kartoza understands and complies with our legal and ethical obligations regarding bribery and corruption, and to prevent any form of unethical behaviour in our operations.
 
 ## Our Commitment
 
@@ -27,8 +24,6 @@ This policy sets out the responsibilities of Kartoza and its employees, contract
 - We maintain a zero-tolerance approach to bribery, kickbacks, and facilitation payments -- whether offered or accepted directly or indirectly.
 - We comply with all anti-bribery and corruption laws applicable in South Africa, Australia, and in every country where we operate.
 - Bribery and corruption are criminal offences that can result in imprisonment, fines, and severe reputational damage. Kartoza takes its legal and ethical responsibilities seriously.
-
-----
 
 ## Scope
 
@@ -41,14 +36,6 @@ This policy applies to:
 
 Third parties include all individuals and organisations that Kartoza interacts with: clients, vendors, service providers, government officials, and regulators. All third-party contracts must include provisions requiring compliance with anti-bribery standards.
 
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="primary"
-    textColor="white"
-    subtitle="Key Definitions"
->}}
-
 ## Definitions
 
 **Bribery** -- The offering, promising, giving, accepting, or soliciting of an undue advantage (financial or otherwise) to influence a decision or gain improper advantage. Bribes may include:
@@ -59,19 +46,9 @@ Third parties include all individuals and organisations that Kartoza interacts w
 - Personal favours
 - Donations with hidden agendas
 
-----
-
 **Kickbacks** -- A form of bribery where a payment or advantage is returned (or "kicked back") in exchange for preferential treatment in business dealings.
 
 **Facilitation Payments** -- Small, unofficial payments to expedite routine actions by public officials (e.g. issuing permits or releasing goods). These are strictly prohibited by Kartoza.
-
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="dark"
-    textColor="white"
-    subtitle="Guidelines"
->}}
 
 ## Gifts and Hospitality
 
@@ -93,8 +70,6 @@ Acceptable gifts or hospitality must:
 
 **Note**: All gifts must be reported to the compliance manager.
 
-----
-
 ## Facilitation Payments and Kickbacks
 
 - Kartoza prohibits all facilitation payments regardless of the amount or country.
@@ -108,14 +83,6 @@ Acceptable gifts or hospitality must:
 - Contributions must not be used to bypass anti-bribery rules or to secure business advantage.
 - All donations require approval from the compliance manager.
 
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="light"
-    textColor="dark"
-    subtitle="Responsibilities & Reporting"
->}}
-
 ## Responsibilities
 
 All employees and representatives must:
@@ -127,8 +94,6 @@ All employees and representatives must:
 
 Breaches of this policy may result in disciplinary action, dismissal for gross misconduct and/or legal consequences under local and international law.
 
-----
-
 ## Reporting Concerns and Protection
 
 **Raising a Concern** -- Report concerns early to your Line Manager, Compliance Manager, Director, or Head of Governance and Legal.
@@ -137,14 +102,6 @@ Breaches of this policy may result in disciplinary action, dismissal for gross m
 
 **Protection** -- Kartoza supports anyone reporting concerns in good faith. No employee will suffer retaliation, discrimination, or adverse treatment for refusing a bribe or raising a concern.
 
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="primary"
-    textColor="white"
-    subtitle="Governance"
->}}
-
 ## Record Keeping
 
 Kartoza will:
@@ -152,8 +109,6 @@ Kartoza will:
 - Maintain accurate financial records.
 - Keep a register of all gifts and hospitality.
 - Ensure controls are in place to detect improper payments.
-
-----
 
 ## Monitoring and Review
 
@@ -169,18 +124,8 @@ Employees are encouraged to provide feedback to improve this policy. This policy
 
 Kartoza is fully committed to acting with integrity, fairness, and professionalism. Bribery and corruption are not tolerated in any form. This policy is an essential part of ensuring that we maintain our ethical standards and legal compliance in all areas of operation.
 
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="dark"
-    textColor="white"
-    subtitle="Questions?"
->}}
-
 ## Get in Touch
 
 If you have any questions about this policy or need to report a concern, please do not hesitate to reach out.
 
-{{< button class="is-primary is-medium mt-4" link="/contact-us/" text="Contact Us" >}}
-
-{{< /block-section >}}
+**[Contact Us](/contact-us/)**

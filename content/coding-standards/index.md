@@ -1,25 +1,22 @@
 ---
-title: "Policies - Coding Standards"
-subtitle: "Writing Clean, Consistent, and Quality Code"
-layout: "single"
+title: "Coding Standards"
+subtitle: "Guidelines for writing high-quality, maintainable code across all Kartoza projects"
+type: document
+icon: "code"
 reviewedBy: "Tim Sutton"
 reviewedDate: 2026-04-24
+related:
+  - name: "Code of Conduct"
+    url: "/code-of-conduct/"
+  - name: "QGIS Resources"
+    url: "/qgis-resources/"
+  - name: "All Policies"
+    url: "/policies/"
 ---
 
-{{< block
-    title="Coding Standards"
-    subtitle="Our guidelines for writing high-quality, maintainable code across all Kartoza projects."
-    sub-block-side="bottom"
-    class="is-primary"
->}}
-These standards ensure consistency, readability, and quality across our codebase. They are heavily based on the InaSAFE Coding Standards and Human Interface Guidelines.
-{{< /block >}}
+## Overview
 
-{{< block-section
-    backgroundColor="light"
-    textColor="dark"
-    subtitle="General Principles"
->}}
+These standards ensure consistency, readability, and quality across our codebase. They are heavily based on the InaSAFE Coding Standards and Human Interface Guidelines.
 
 ## Core Development Practices
 
@@ -30,8 +27,6 @@ These standards ensure consistency, readability, and quality across our codebase
 - If a method or function is longer than a single screen, it is probably a candidate for refactoring into smaller methods / functions. Writing smaller methods makes your code easier to read and to test.
 - If you use a few lines of code in more than one place, refactor them into their own function.
 
-----
-
 ## Platform Support
 
 Currently the following platforms should be supported:
@@ -39,14 +34,6 @@ Currently the following platforms should be supported:
 - OSX - latest release
 - Linux - Ubuntu current LTS
 - Windows
-
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="primary"
-    textColor="white"
-    subtitle="Code Quality"
->}}
 
 ## Compliance
 
@@ -67,8 +54,6 @@ print 'hello'
 print 'goodbye'
 # pylint: enable=unused-imports
 ```
-
-----
 
 Note: The use of messages codes (e.g. `disable=W1234`) should be considered deprecated. Any new exceptions should be added using the keyword format (e.g. `disable=unused-exceptions`).
 
@@ -94,14 +79,6 @@ The following pylint messages have been globally excluded from the check. For a 
 The following pylint check has been removed from Jenkins due to a bug in astroid: E1002 (Use of super on an old style class).
 
 It is of course possible to run all pylint checks on any part of the code if desired: e.g. `pylint safe/storage/raster.py`
-
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="dark"
-    textColor="white"
-    subtitle="Naming and Formatting"
->}}
 
 ## Naming Conventions
 
@@ -138,23 +115,13 @@ title_dialog = self.tr('Save Scenario')
 dialog_title = self.tr('Save Scenario')
 ```
 
-----
-
-## Naming Convention Summary
+### Naming Convention Summary
 
 - **Package dir name**: concise (preferably single word) lower case, underscore separated e.g. `utilities`.
 - **Module file name**: concise (preferably single word) lower case, underscore separated e.g. `utilities.py`.
 - **Class name**: Concise singular camel case phrase e.g. `PrintDialog`.
 - **Method and function name**: Concise lower case underscore separated name e.g. `remove_entry`. Avoid java style _get_ suffixes as it adds no useful meaning to a symbol name.
 - **Variable naming**: Concise, unabbreviated, lower case, underscore separated e.g. `population_count`.
-
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="light"
-    textColor="dark"
-    subtitle="Code Formatting"
->}}
 
 ## Pull Left Policy
 
@@ -186,17 +153,7 @@ clipped_exposure = clip_layer(
     hard_clip_flag=self.clip_hard)
 ```
 
-----
-
 We do this because the 80 character line limit in PEP8 can cause visual clutter in your code as you manage line breaks as you run up to the 80 column limit. By always pulling code left as much as possible, we reduce the amount of line continuation management we have to do.
-
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="primary"
-    textColor="white"
-    subtitle="Imports"
->}}
 
 ## Ordering of Imports
 
@@ -215,21 +172,11 @@ from PyQt4 import QtGui
 progress = QtGui.QProgressDialog()
 ```
 
-----
-
 Imports should be made in the following order:
 
 1. Core Python imports (e.g. `import os`)
 2. Third party imports (e.g. `from PyQt4 import QtGui`)
 3. Application imports (e.g. `from foo import bar`)
-
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="dark"
-    textColor="white"
-    subtitle="Documentation"
->}}
 
 ## Doc Strings and Comments
 
@@ -246,9 +193,7 @@ We follow these specific guidelines for our code:
 - Comments should be complete sentences ending with a full stop / period.
 - If a comment is a phrase or sentence, its first word should be capitalized, unless it is an identifier that begins with a lower case letter (never alter the case of identifiers!).
 
-----
-
-## Docstring Style
+### Docstring Style
 
 We use the following style for documenting functions and class methods:
 
@@ -290,15 +235,7 @@ def add_layers(scenario_dir, paths):
     """
 ```
 
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="light"
-    textColor="dark"
-    subtitle="Docstring Rules"
->}}
-
-## Docstring Guidelines
+### Docstring Guidelines
 
 - The first line of a docstring should be a precis of the class/method/function expressed in less than 80 chars, terminated with a full stop and exclude redundant phrases such as 'Class to do x' or 'This method does...'.
 - There should be an empty line following the first docstring line.
@@ -315,9 +252,7 @@ def add_layers(scenario_dir, paths):
 
 Please also see the API documentation how-to section for more information on how to document your code properly.
 
-----
-
-## Annotating API Changes and Additions
+### Annotating API Changes and Additions
 
 Whenever you add or change a module, class, function or method, you should annotate it accordingly. The method for doing this is described on the Sphinx paragraph markup page.
 
@@ -363,14 +298,6 @@ def show_static_message(self, message, foo):
         message=message)
 ```
 
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="primary"
-    textColor="white"
-    subtitle="Strings"
->}}
-
 ## Strings and Internationalisation
 
 - Simple strings in source code should be quoted with `'`
@@ -387,8 +314,6 @@ And this is **good**:
 world = 'World'
 food = 'Hello %s' % world
 ```
-
-----
 
 - Use parenthesis for long strings. For example this is **bad**:
 
@@ -410,14 +335,6 @@ Note: The good example above follows the 'pull left' principle.
 - All strings should be internationalisation enabled.
 - When using gettext, alias the ugettext as tr, and do not use the common convention of `_('foo')` as the underscore trips up some tools like pylint, sphinx. Also using `tr` makes it easy to migrate code to and from Qt's translation system and gettext. Note: gettext use is deprecated in InaSAFE.
 - If you use a literal string or expression in more than one place, refactor it into a function or variable.
-
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="dark"
-    textColor="white"
-    subtitle="File Structure"
->}}
 
 ## Standard Headers
 
@@ -441,17 +358,7 @@ __email__ = "info@inasafe.org"
 __revision__ = '$Format:%H$'
 ```
 
-----
-
 Note: Please see the developer FAQ for details on how the revision tag is replaced with the SHA1 for the file when the release packages are made.
-
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="light"
-    textColor="dark"
-    subtitle="Qt Development"
->}}
 
 ## Qt Guidelines
 
@@ -486,8 +393,6 @@ Use new style connectors:
 ```python
 self.help_button.clicked.connect(self.show_help)
 ```
-
-----
 
 Use multi-inheritance for designer based classes so that we can use autoconnect slots:
 
@@ -532,14 +437,6 @@ Qt's naming convention causes a bit of a clash when using with 'normal' Python u
 - In your concrete implementations you should be able to then use mostly underscore separated names except in cases where using autoconnect slots
 - In Designer you should call the form a name ending in Base e.g. `FooDialogBase`. By convention the concrete implementation is called the same sans the Base suffix e.g. `FooDialog`.
 
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="primary"
-    textColor="white"
-    subtitle="User Interface"
->}}
-
 ## Human Interface Guidelines
 
 For consistency of user experience, the user interfaces should adhere to the QGIS Human Interface Guidelines (HIG):
@@ -548,9 +445,6 @@ For consistency of user experience, the user interfaces should adhere to the QGI
 - **Capitalise first letter only in labels**: Labels (and group box labels) should be written as a phrase with leading capital letter, and all remaining words written with lower case first letters.
 - **Do not end labels for widgets or group boxes with a colon**: Adding a colon causes visual noise and does not impart additional meaning, so don't use them. An exception to this rule is when you have two labels next to each other e.g.: Label1 [Plugin Path:] Label2 [/path/to/plugins]
 - **Keep harmful actions away from harmless ones**: If you have actions for 'delete', 'remove' etc, try to impose adequate space between the harmful action and innocuous actions so that the user is less likely to inadvertently click on the harmful action.
-
-----
-
 - **Always use a QButtonBox for 'OK', 'Cancel' etc buttons**: Using a button box will ensure that the order of 'OK' and 'Cancel' etc, buttons is consistent with the operating system / locale / desktop environment that the user is using.
 - **Tabs should not be nested**: If you use tabs, follow the style of the tabs used in QgsVectorLayerProperties / QgsProjectProperties etc. i.e. tabs at top with icons at 22x22. Widget stacks should be avoided if at all possible.
 - **Tabs should always be more than one**: If your UI has a single tab, it is superfluous, get rid of it.
@@ -562,14 +456,9 @@ For consistency of user experience, the user interfaces should adhere to the QGI
 - **Don't add options for the sake of having lots of options**: Strive to keep the user interface minimalistic and use sensible defaults.
 - **Use ellipsis**: If clicking a button will spawn a new dialog, an ellipsis (...) should be suffixed to the button text.
 
-{{< /block-section >}}
+## Working with Git
 
-{{< block
-    title="Working with Git"
-    subtitle="Version control best practices for all Kartoza projects."
-    sub-block-side="bottom"
-    class="is-info"
->}}
+Version control best practices for all Kartoza projects:
 
 - Additions to the develop branch should be made via the GitHub pull request mechanism.
 - Pull requests should preferably be squashed into a single commit before applying (see [squashing guide](http://eli.thegreenplace.net/2014/02/19/squashing-github-pull-requests-into-a-single-commit)).
@@ -577,22 +466,10 @@ For consistency of user experience, the user interfaces should adhere to the QGI
 
 This document is heavily based on the [InaSAFE Coding Standards](https://github.com/inasafe/inasafe/wiki/Coding-Standards) and [HIG](https://github.com/inasafe/inasafe/wiki/human-interface-guidelines).
 
-{{< /block >}}
-
-{{< block-section
-    backgroundColor="dark"
-    textColor="white"
-    subtitle="Want to contribute?"
->}}
-
 ## Get Involved
 
 If you'd like to contribute to Kartoza projects, we'd love to hear from you. Reach out to discuss how you can get involved.
 
-{{< button class="is-primary is-medium mt-4" link="/contact-us/" text="Contact Us" >}}
-
-----
-
 Following these standards helps us maintain a high-quality, consistent codebase across all Kartoza projects and contributions.
 
-{{< /block-section >}}
+**[Contact Us](/contact-us/)**

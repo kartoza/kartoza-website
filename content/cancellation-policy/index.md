@@ -1,25 +1,24 @@
 ---
 title: "Cancellation Policy"
-subtitle: "Fair and Transparent Cancellations"
-layout: single
+subtitle: "Fair and transparent cancellation processes for products and training services"
+type: document
+icon: "times-circle"
 reviewedBy: "Tim Sutton"
 reviewedDate: 2026-04-24
+related:
+  - name: "Privacy Policy"
+    url: "/privacy-policy/"
+  - name: "Code of Conduct"
+    url: "/code-of-conduct/"
+  - name: "All Policies"
+    url: "/policies/"
 ---
 
-{{< block
-    title="Cancellation Policy"
-    subtitle="At Kartoza, we strive to deliver high-quality products and training services. We understand that circumstances may change, and we aim to offer a fair and transparent cancellation process."
-    sub-block-side="bottom"
-    class="is-primary"
->}}
-This policy covers cancellations for both product purchases and training course registrations.
-{{< /block >}}
+## Overview
 
-{{< block-section
-    backgroundColor="dark"
-    textColor="white"
-    subtitle="Training Courses"
->}}
+At Kartoza, we strive to deliver high-quality products and training services. We understand that circumstances may change, and we aim to offer a fair and transparent cancellation process.
+
+This policy covers cancellations for both product purchases and training course registrations.
 
 ## Training Course Cancellation Policy
 
@@ -33,8 +32,6 @@ If you are unable to attend a training course you've registered for:
 
 **Note:** All cancellation requests must be submitted in writing to <seabilwe@kartoza.com>.
 
-----
-
 ### B. Cancellation by Kartoza
 
 In the event that Kartoza must cancel or reschedule a training course due to low enrolment, instructor availability, or unforeseen circumstances:
@@ -44,15 +41,7 @@ In the event that Kartoza must cancel or reschedule a training course due to low
 
 **Note:** Kartoza will not be held liable for any travel, accommodation, or other expenses incurred due to a course cancellation.
 
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="primary"
-    textColor="white"
-    subtitle="Products"
->}}
-
-## Product Cancellation & Refund Policy
+## Product Cancellation and Refund Policy
 
 ### A. Digital Products (e.g. Software, Plugins, Downloads)
 
@@ -62,8 +51,6 @@ Due to the nature of digital products:
 - **No refunds** will be issued once a product has been downloaded, accessed, or a license key has been generated and delivered.
 - Please ensure that the product meets your requirements before completing the purchase.
 - If you experience technical issues, please contact us at <info@kartoza.com> so we can assist.
-
-----
 
 ### B. Custom Software Development and Product Services
 
@@ -75,14 +62,6 @@ For custom-developed digital products or solutions (e.g. bespoke plugins, softwa
 - If cancellation occurs before any development work has started, a cancellation fee may be applicable or agreed upon.
 - A detailed timesheet or work report will be provided upon cancellation to support invoicing for time spent.
 - We encourage clear communication and planning during project initiation to avoid misunderstandings around cancellations or scope changes.
-
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="light"
-    textColor="dark"
-    subtitle="How To Cancel"
->}}
 
 ## How to Request a Cancellation or Refund
 
@@ -97,12 +76,8 @@ Please include:
 - Reason for the request
 - For a refund, we need a confirmation of the bank account
 
-----
-
 ## Policy Updates
 
 This policy may be updated from time to time. The most current version will always be available on our website.
 
-{{< button class="is-primary is-medium mt-4" link="/contact-us/" text="Contact Us" >}}
-
-{{< /block-section >}}
+**[Contact Us](/contact-us/)**

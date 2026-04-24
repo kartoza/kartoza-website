@@ -1,27 +1,24 @@
 ---
 title: "Child Protection Policy"
-subtitle: "Upholding the Rights, Dignity and Safety of Children"
-layout: "single"
+subtitle: "Upholding the rights, dignity and safety of children in all aspects of our work"
+type: document
+icon: "child"
 reviewedBy: "Tim Sutton"
 reviewedDate: 2026-04-24
+related:
+  - name: "Code of Conduct"
+    url: "/code-of-conduct/"
+  - name: "Complaints Policy"
+    url: "/complaints-policy/"
+  - name: "All Policies"
+    url: "/policies/"
 ---
 
-{{< block
-    title="Child Protection Policy"
-    subtitle="At Kartoza, we are committed to upholding the rights, dignity, and safety of children in all aspects of our work."
-    sub-block-side="bottom"
-    class="is-primary"
->}}
-We believe that child protection is a fundamental responsibility and must be embedded in the way we do business, deliver services, and interact with society. This policy outlines our commitment to safeguarding children and sets out the behavioural standards expected of anyone associated with Kartoza, including staff, consultants, contractors, partners, and volunteers.
+## Overview
+
+At Kartoza, we are committed to upholding the rights, dignity, and safety of children in all aspects of our work. We believe that child protection is a fundamental responsibility and must be embedded in the way we do business, deliver services, and interact with society. This policy outlines our commitment to safeguarding children and sets out the behavioural standards expected of anyone associated with Kartoza, including staff, consultants, contractors, partners, and volunteers.
 
 **This policy is aligned with the Australian Government's Department of Foreign Affairs and Trade (DFAT) Child Protection Policy.**
-{{< /block >}}
-
-{{< block-section
-    backgroundColor="light"
-    textColor="dark"
-    subtitle="Guiding Principles"
->}}
 
 ## Our Core Principles
 
@@ -32,14 +29,6 @@ We are guided by the following principles:
 - **Shared responsibility** -- Everyone who represents or works with Kartoza has a role to play in protecting children.
 - **Best interests of the child** -- In all decisions concerning children, their best interests are our primary consideration.
 
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="primary"
-    textColor="white"
-    subtitle="Standards of Conduct"
->}}
-
 ## Code of Conduct
 
 All individuals associated with Kartoza must:
@@ -49,9 +38,6 @@ All individuals associated with Kartoza must:
 - Not engage in any form of sexual activity with children (under 18 years), including paying for sexual services or acts.
 - Avoid being alone with a child whenever possible. Ensure another adult is present when working near children.
 - Never invite unaccompanied children into your home unless the child is at immediate risk of injury or in physical danger.
-
-----
-
 - Never sleep close to unsupervised children unless absolutely necessary, in which case supervisor approval must be obtained, and another adult should be present where possible.
 - Use computers, phones, cameras, video equipment, and social media responsibly. Never use these tools to exploit, harass, or access child exploitation material.
 - Do not use physical punishment or any form of degrading treatment on children.
@@ -59,14 +45,6 @@ All individuals associated with Kartoza must:
 - Comply with all local laws, including labour laws, relating to the employment and protection of children.
 - Immediately report any concerns or allegations of child abuse, exploitation, or non-compliance with this policy.
 - Disclose any prior or current criminal charges, convictions, or investigations related to child exploitation or abuse.
-
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="dark"
-    textColor="white"
-    subtitle="Media Guidelines"
->}}
 
 ## Use of Images and Media
 
@@ -78,14 +56,6 @@ When photographing, filming, or using images of children for work-related purpos
 - Represent the context and facts truthfully in any media or publications.
 - Avoid using identifying information (such as names or location metadata) when storing or publishing images of children.
 
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="light"
-    textColor="dark"
-    subtitle="Reporting & Responsibility"
->}}
-
 ## Reporting and Disclosure Obligations
 
 All Kartoza representatives are required to:
@@ -94,8 +64,6 @@ All Kartoza representatives are required to:
 - **Disclose** any past or current criminal offences related to child protection.
 
 Failure to comply with this policy may result in disciplinary action, including termination of employment or contract, and legal reporting where required.
-
-----
 
 ## Personal Responsibility
 
@@ -108,18 +76,8 @@ It is the personal responsibility of each individual associated with Kartoza to:
 
 This policy will be reviewed periodically to ensure continued alignment with legal and ethical standards, as well as operational realities.
 
-{{< /block-section >}}
-
-{{< block-section
-    backgroundColor="primary"
-    textColor="white"
-    subtitle="Questions?"
->}}
-
 ## Get in Touch
 
 If you have any questions or concerns related to this policy, please do not hesitate to reach out.
 
-{{< button class="is-primary is-medium mt-4" link="/contact-us/" text="Contact Us" >}}
-
-{{< /block-section >}}
+**[Contact Us](/contact-us/)**
