@@ -70,7 +70,7 @@ Failure to comply with this policy may result in disciplinary action, including 
 It is the personal responsibility of each individual associated with Kartoza to:
 
 - Act in accordance with this policy at all times.
-- Exercise sound judgment and common sense to prevent any behaviour that could be interpreted as child exploitation or abuse.
+- Exercise sound judgement and common sense to prevent any behaviour that could be interpreted as child exploitation or abuse.
 
 ## Policy Review
 

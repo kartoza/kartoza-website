@@ -68,7 +68,7 @@ During meetings, projects, or decisions where a potential conflict arises, the i
 
 Once a conflict has been declared, one of the following actions will apply:
 
-- **Option 1 (Discretionary)**: The individual may be asked to leave the room for the discussion and may not participate in the decision, depending on the judgment of the other staff members present.
+- **Option 1 (Discretionary)**: The individual may be asked to leave the room for the discussion and may not participate in the decision, depending on the judgement of the other staff members present.
 - **Option 2 (Mandatory)**: The individual will be required to leave the room for the discussion and will not participate in the decision.
 
 The action taken must be recorded in meeting minutes or official documentation.
@@ -80,7 +80,7 @@ The action taken must be recorded in meeting minutes or official documentation.
 
 ## Guiding Principle
 
-This policy is intended to supplement, not replace, good judgment. All individuals acting on behalf of Kartoza are expected to adhere to both the spirit and letter of this policy.
+This policy is intended to supplement, not replace, good judgement. All individuals acting on behalf of Kartoza are expected to adhere to both the spirit and letter of this policy.
 
 ## Get in Touch
 
