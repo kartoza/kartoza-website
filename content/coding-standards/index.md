@@ -1,21 +1,38 @@
 ---
-description: ''
-erpnext_path: /coding-standards
-layout: single
-reviewedBy: Tim Sutton
-reviewedDate: '2026-04-24'
-title: Policies - Coding Standards
-type: page
+title: "Policies - Coding Standards"
+subtitle: "Writing Clean, Consistent, and Quality Code"
+layout: "single"
+reviewedBy: "Tim Sutton"
+reviewedDate: 2026-04-24
 ---
 
-- Use github for revision control, issue tracking and management. And use the [the recommended workflow](<https://github.com/inasafe/inasafe/wiki/Contribute-new-features-workflow>) whenever possible.
-  - Adherence to regression/unit testing wherever possible (`make test`) with a minimum code coverage of 80%.
-  - Simple deployment procedure - all dependencies must be delivered with the plugin installer for QGIS or exist in standard QGIS installs.
-  - Develop in the spirit of XP/Agile, i.e. frequent releases, continuous integration and iterative development. The master branch should always be assumed to represent a working demo with all tests passing.
-  - If a method or function is longer than a single screen, it is probably a candidate for refactoring into smaller methods / functions. Writing smaller methods makes your code easier to read and to test.
-  - If you use a few lines of code in more than one place, refactor them into their own function.
+{{< block
+    title="Coding Standards"
+    subtitle="Our guidelines for writing high-quality, maintainable code across all Kartoza projects."
+    sub-block-side="bottom"
+    class="is-primary"
+>}}
+These standards ensure consistency, readability, and quality across our codebase. They are heavily based on the InaSAFE Coding Standards and Human Interface Guidelines.
+{{< /block >}}
 
-# Platform support
+{{< block-section
+    backgroundColor="light"
+    textColor="dark"
+    subtitle="General Principles"
+>}}
+
+## Core Development Practices
+
+- Use GitHub for revision control, issue tracking and management. And use the [recommended workflow](https://github.com/inasafe/inasafe/wiki/Contribute-new-features-workflow) whenever possible.
+- Adherence to regression/unit testing wherever possible (`make test`) with a minimum code coverage of 80%.
+- Simple deployment procedure - all dependencies must be delivered with the plugin installer for QGIS or exist in standard QGIS installs.
+- Develop in the spirit of XP/Agile, i.e. frequent releases, continuous integration and iterative development. The master branch should always be assumed to represent a working demo with all tests passing.
+- If a method or function is longer than a single screen, it is probably a candidate for refactoring into smaller methods / functions. Writing smaller methods makes your code easier to read and to test.
+- If you use a few lines of code in more than one place, refactor them into their own function.
+
+----
+
+## Platform Support
 
 Currently the following platforms should be supported:
 
@@ -23,33 +40,47 @@ Currently the following platforms should be supported:
 - Linux - Ubuntu current LTS
 - Windows
 
-# Compliance
+{{< /block-section >}}
 
-- Coding must follow a style guide. In case of Python it is [PEP8](<http://www.python.org/dev/peps/pep-0008>) and using the command line tool pep8 (or `make pep8`) to enforce this. The pep8 checks E121-E128 have been disabled until pep8 version 1.3 becomes widely available.
-- [Python documentation guide](<http://www.python.org/dev/peps/pep-0257>)
-- Code must pass a [pylint validation](<http://www.logilab.org/card/pylint_manual#what-is-pylint>). You can test this using the make target `make pylint`. In some cases you may wish to override a line or group of lines so that they are not validated by pylint. You can do this by adding either:
+{{< block-section
+    backgroundColor="primary"
+    textColor="white"
+    subtitle="Code Quality"
+>}}
 
-         import foo  # pylint: disable=unused-imports
+## Compliance
+
+- Coding must follow a style guide. In case of Python it is [PEP8](http://www.python.org/dev/peps/pep-0008) and using the command line tool pep8 (or `make pep8`) to enforce this. The pep8 checks E121-E128 have been disabled until pep8 version 1.3 becomes widely available.
+- [Python documentation guide](http://www.python.org/dev/peps/pep-0257)
+- Code must pass a [pylint validation](http://www.logilab.org/card/pylint_manual#what-is-pylint). You can test this using the make target `make pylint`. In some cases you may wish to override a line or group of lines so that they are not validated by pylint. You can do this by adding either:
+
+```
+import foo  # pylint: disable=unused-imports
+```
 
 or:
 
-         # pylint: disable=unused-imports
-         import foo
-         print 'hello'
-         print 'goodbye'
-         # pylint: enable=unused-imports
+```
+# pylint: disable=unused-imports
+import foo
+print 'hello'
+print 'goodbye'
+# pylint: enable=unused-imports
+```
+
+----
 
 Note: The use of messages codes (e.g. `disable=W1234`) should be considered deprecated. Any new exceptions should be added using the keyword format (e.g. `disable=unused-exceptions`).
 
-.. note:: You can globally ignore messages by adding them to :file:`pylintrc` in the :samp:`[MESSAGES CONTROL]` section.
+You can globally ignore messages by adding them to `pylintrc` in the `[MESSAGES CONTROL]` section.
 
-The following pylint messages have been thus globally excluded from the check. For a discussion of these see also github issue [#245](<https://github.com/AIFDR/inasafe/issues/245>).
+The following pylint messages have been globally excluded from the check. For a discussion of these see also GitHub issue [#245](https://github.com/AIFDR/inasafe/issues/245).
 
 - All type R: Refactor suggestions such as limiting the number of local variables. We may bring some back later.
 - All type I: Information only
-- W0142: Allow the Python feature F(*args, **kwargs)
+- W0142: Allow the Python feature F(\*args, \*\*kwargs)
 - W0201: Allow definition of class attributes outside the constructor.
-- W0212: Allow access to protected members (e.g. _show_system_info)
+- W0212: Allow access to protected members (e.g. \_show\_system\_info)
 - W0231: Allow classes without constructors.
 - W0232: Un-instantiated classes is a feature used in this project.
 - W0403: Relative imports are OK for modules that live in the same dir
@@ -60,104 +91,149 @@ The following pylint messages have been thus globally excluded from the check. F
 - C0111: Allow missing docstrings in some cases
 - C0302: No restriction on the number of lines per module
 
-The following pylint check has been removed from Jenkins due to a bug in astroid.
+The following pylint check has been removed from Jenkins due to a bug in astroid: E1002 (Use of super on an old style class).
 
-- E1002: Use of super on an old style class.
+It is of course possible to run all pylint checks on any part of the code if desired: e.g. `pylint safe/storage/raster.py`
 
-It is of course possible to run all pylint checks on any part of the code if desired: E.g pylint safe/storage/raster.py
+{{< /block-section >}}
 
-# Naming conventions
+{{< block-section
+    backgroundColor="dark"
+    textColor="white"
+    subtitle="Naming and Formatting"
+>}}
 
-Variable names should as far as possible follow python naming conventions (see Qt Notes below for exceptions to this rule).
+## Naming Conventions
 
-We reject the idea the code should be obfuscated with hard to understand symbol names. For this reason all classes, methods, functions, variable names should be written in full. At the same time overly verbose names should be avoided. Here is an example of what we mean by this:
+Variable names should as far as possible follow Python naming conventions (see Qt Notes below for exceptions to this rule).
 
-Bad:
+We reject the idea that code should be obfuscated with hard to understand symbol names. For this reason all classes, methods, functions, variable names should be written in full. At the same time overly verbose names should be avoided. Here is an example of what we mean by this:
 
-        cur_dpth = 0  # obscure
-        currentDepth = 0  # camel case is not python standard
-        content_of_page = 'foo'  # overly verbose
+**Bad:**
 
-Good
+```
+cur_dpth = 0  # obscure
+currentDepth = 0  # camel case is not python standard
+content_of_page = 'foo'  # overly verbose
+```
 
-        current_depth = 0
-        page_content = 'foo'
+**Good:**
+
+```
+current_depth = 0
+page_content = 'foo'
+```
 
 Avoid 'yoda speak' in variable names.
 
-Bad:
+**Bad:**
 
-        title_dialog = self.tr('Save Scenario')
+```
+title_dialog = self.tr('Save Scenario')
+```
 
-Good:
+**Good:**
 
-        dialog_title = self.tr('Save Scenario')
+```
+dialog_title = self.tr('Save Scenario')
+```
 
-This is a summary of the naming conventions you should use:
+----
 
-- package dir name: concise (preferably single word) lower case, underscore separated e.g. `utilities`.
-- module file name: concise (preferably single word) lower case, underscore separated e.g. `utilities.py`.
-- class name: Concise singular camel case phrase e.g. `PrintDialog`.
-- method and function name: Concise lower case underscore separated name .e.g. `remove_entry`. Avoid java style  _get_ suffixes as it adds no useful meaning to a symbol name.
-- variable naming: Concise, unabbreviated, lower case, underscore separated e.g. `population_count`.
+## Naming Convention Summary
 
-# Code formatting
+- **Package dir name**: concise (preferably single word) lower case, underscore separated e.g. `utilities`.
+- **Module file name**: concise (preferably single word) lower case, underscore separated e.g. `utilities.py`.
+- **Class name**: Concise singular camel case phrase e.g. `PrintDialog`.
+- **Method and function name**: Concise lower case underscore separated name e.g. `remove_entry`. Avoid java style _get_ suffixes as it adds no useful meaning to a symbol name.
+- **Variable naming**: Concise, unabbreviated, lower case, underscore separated e.g. `population_count`.
 
-The guidelines above still leave substantial room for your own approach to code style so the following provide some more explicit guidelines.
+{{< /block-section >}}
 
-We follow a 'pull left' policy in our code. This means that instead of e.g.::
+{{< block-section
+    backgroundColor="light"
+    textColor="dark"
+    subtitle="Code Formatting"
+>}}
 
-        def polygonize_thresholds(raster_file_name,
-                              threshold_min=0.0,
-                              threshold_max=float('inf')):
+## Pull Left Policy
+
+We follow a 'pull left' policy in our code. Instead of:
+
+```
+def polygonize_thresholds(raster_file_name,
+                          threshold_min=0.0,
+                          threshold_max=float('inf')):
+```
 
 You should rather do this:
 
-        def polygonize_thresholds(
-            raster_file_name,
-            threshold_min=0.0,
-            threshold_max=float('inf')):
+```
+def polygonize_thresholds(
+    raster_file_name,
+    threshold_min=0.0,
+    threshold_max=float('inf')):
+```
 
 The same applies in all other contexts. For example, calling a function:
 
-        clipped_exposure = clip_layer(
-            layer=exposure_layer,
-            extent=geo_extent,
-            cell_size=cell_size,
-            extra_keywords=extra_exposure_keywords,
-            hard_clip_flag=self.clip_hard)
+```
+clipped_exposure = clip_layer(
+    layer=exposure_layer,
+    extent=geo_extent,
+    cell_size=cell_size,
+    extra_keywords=extra_exposure_keywords,
+    hard_clip_flag=self.clip_hard)
+```
+
+----
 
 We do this because the 80 character line limit in PEP8 can cause visual clutter in your code as you manage line breaks as you run up to the 80 column limit. By always pulling code left as much as possible, we reduce the amount of line continuation management we have to do.
 
-# Ordering of imports
+{{< /block-section >}}
 
-When importing please adhere to the following rules:
+{{< block-section
+    backgroundColor="primary"
+    textColor="white"
+    subtitle="Imports"
+>}}
 
-Do not do `*` imports e.g.
+## Ordering of Imports
 
-    from PyQt4.QtGui import *
+Do not do `*` imports e.g. `from PyQt4.QtGui import *` is bad.
 
-is bad.
+Either import the individual modules you need:
 
-Either import the individual modules you need e.g.
+```
+from PyQt4.QtGui import QProgressDialog
+```
 
-    from PyQt4.QtGui import QProgressDialog
+or import the whole package and use the namespace to reference a module:
 
-or import the whole package and use the namespace to reference a module e.g.:
+```
+from PyQt4 import QtGui
+progress = QtGui.QProgressDialog()
+```
 
-        from PyQt4 import QtGui
-    
-        progress = QtGui.QProgressDialog()
+----
 
 Imports should be made in the following order:
 
-- core python imports (e.g. `import os`)
-- third party imports (e.g. `from PyQt4 import QtGui`)
-- application imports (e.g. `from foo import bar`)
+1. Core Python imports (e.g. `import os`)
+2. Third party imports (e.g. `from PyQt4 import QtGui`)
+3. Application imports (e.g. `from foo import bar`)
 
-## Doc strings and comments
+{{< /block-section >}}
 
-All code should be self documenting. Please take special note and follow these PEP guidelines and sphinx documents:
+{{< block-section
+    backgroundColor="dark"
+    textColor="white"
+    subtitle="Documentation"
+>}}
+
+## Doc Strings and Comments
+
+All code should be self documenting. Please take special note and follow these PEP guidelines and Sphinx documents:
 
 - <http://www.python.org/dev/peps/pep-0287/>
 - <http://sphinx-doc.org/markup/desc.html#info-field-lists>
@@ -165,49 +241,64 @@ All code should be self documenting. Please take special note and follow these P
 
 We follow these specific guidelines for our code:
 
-- Docstrings must triple quoted with `"""`
+- Docstrings must be triple quoted with `"""`
 - Inline comments should start with a # and a single space.
 - Comments should be complete sentences ending with a full stop / period.
 - If a comment is a phrase or sentence, its first word should be capitalized, unless it is an identifier that begins with a lower case letter (never alter the case of identifiers!).
 
+----
+
+## Docstring Style
+
 We use the following style for documenting functions and class methods:
 
-        def set_keyword_db_path(self, path):
-            """Set the path for the keyword database (sqlite).
-    
-            The file will be used to search for keywords for non local datasets.
-    
-            :param path: A valid path to a sqlite database. The database does
-                not need to exist already, but the user should be able to write
-                to the path provided.
-            :type path: str
-    
-            :returns: Flag indicating if the path was set successfully.
-            :rtype: boolean
-            """
-            self.keyword_db_path = str(path)
+```python
+def set_keyword_db_path(self, path):
+    """Set the path for the keyword database (sqlite).
+
+    The file will be used to search for keywords for non local datasets.
+
+    :param path: A valid path to a sqlite database. The database does
+        not need to exist already, but the user should be able to write
+        to the path provided.
+    :type path: str
+
+    :returns: Flag indicating if the path was set successfully.
+    :rtype: boolean
+    """
+    self.keyword_db_path = str(path)
+```
 
 Another example:
 
-        def add_layers(scenario_dir, paths):
-            """Add the layers described in a scenario file to QGIS.
-    
-            :param scenario_dir: Base directory to find path.
-            :type scenario_dir: str
-    
-            :param paths: Path of scenario file (or a list of paths).
-            :type paths: str, list
-    
-            :raises: Exception, TypeError, FileNotFoundError
-    
-            .. note::
-                * Exception - occurs when paths have illegal extension
-                * TypeError - occurs when paths is not string or list
-                * FileNotFoundError - occurs when file not found
-        """
-    
+```python
+def add_layers(scenario_dir, paths):
+    """Add the layers described in a scenario file to QGIS.
 
-Note the following in the above examples:
+    :param scenario_dir: Base directory to find path.
+    :type scenario_dir: str
+
+    :param paths: Path of scenario file (or a list of paths).
+    :type paths: str, list
+
+    :raises: Exception, TypeError, FileNotFoundError
+
+    .. note::
+        * Exception - occurs when paths have illegal extension
+        * TypeError - occurs when paths is not string or list
+        * FileNotFoundError - occurs when file not found
+    """
+```
+
+{{< /block-section >}}
+
+{{< block-section
+    backgroundColor="light"
+    textColor="dark"
+    subtitle="Docstring Rules"
+>}}
+
+## Docstring Guidelines
 
 - The first line of a docstring should be a precis of the class/method/function expressed in less than 80 chars, terminated with a full stop and exclude redundant phrases such as 'Class to do x' or 'This method does...'.
 - There should be an empty line following the first docstring line.
@@ -220,218 +311,288 @@ Note the following in the above examples:
 - If a function or method returns nothing, no returns section is used.
 - If a function or method does not raise anything explicitly, no raises section is used.
 - If a function or method is extremely obvious there is no need to have anything more than a single line docstring.
-- If a function or method returns a tuple it should be be documented as `:rtype: (<type>, <type>, ..)` e.g. `:rtype: (int, int)`.
+- If a function or method returns a tuple it should be documented as `:rtype: (<type>, <type>, ..)` e.g. `:rtype: (int, int)`.
 
-Please also see the api documentation how-to section for more information on how to document your code properly.
+Please also see the API documentation how-to section for more information on how to document your code properly.
 
-# Annotating API changes and additions
+----
 
-Whenever you add or change a module, class, function or method, you should annotate it accordingly. The method for doing this is described on the `Sphinx paragraph markup page <http://sphinx-doc.org/markup/para.html>`_. Here are a couple of examples:
+## Annotating API Changes and Additions
+
+Whenever you add or change a module, class, function or method, you should annotate it accordingly. The method for doing this is described on the Sphinx paragraph markup page.
 
 Adding a new module:
 
-        """Impact function utilities.
-    
-        .. versionadded:: 2.1
-        ""'
+```python
+"""Impact function utilities.
+
+.. versionadded:: 2.1
+"""
+```
 
 Adding a new method to a class:
 
-        """Computes the number of affected people.
-    
-        .. versionadded:: 2.1
-        """
-    
+```python
+"""Computes the number of affected people.
+
+.. versionadded:: 2.1
+"""
+```
 
 Changing an existing method API:
 
-        def show_static_message(self, message, foo):
-        """Send a static message to the message viewer.
-    
-        .. versionchanged:: 2.1
-            Added foo parameter.
-    
-        Static messages cause any previous content in the MessageViewer to be
-        replaced with new content.
-    
-        :param message: An instance of our rich message class.
-        :type message: Message
-    
-        :param foo: Some new parameter.
-        :type foo: str
-    
-        """
-        dispatcher.send(
-            signal=STATIC_MESSAGE_SIGNAL,
-            sender=self,
-            message=message)
-    
+```python
+def show_static_message(self, message, foo):
+    """Send a static message to the message viewer.
 
-# Strings and internationalisation
+    .. versionchanged:: 2.1
+        Added foo parameter.
+
+    Static messages cause any previous content in the MessageViewer to be
+    replaced with new content.
+
+    :param message: An instance of our rich message class.
+    :type message: Message
+
+    :param foo: Some new parameter.
+    :type foo: str
+    """
+    dispatcher.send(
+        signal=STATIC_MESSAGE_SIGNAL,
+        sender=self,
+        message=message)
+```
+
+{{< /block-section >}}
+
+{{< block-section
+    backgroundColor="primary"
+    textColor="white"
+    subtitle="Strings"
+>}}
+
+## Strings and Internationalisation
 
 - Simple strings in source code should be quoted with `'`
-- Favour interpolation over concatenation. For example this is bad:
+- Favour interpolation over concatenation. For example this is **bad**:
 
-        world = 'World'
-        foo = 'Hello ' + world
+```python
+world = 'World'
+foo = 'Hello ' + world
+```
 
-And this is good:
+And this is **good**:
 
-        world = 'World'
-        food = 'Hello %s' % world
-    
+```python
+world = 'World'
+food = 'Hello %s' % world
+```
 
-- Use parenthesis for long strings. For example this is bad:
+----
 
-        foo = 'The quick brown fox jumps over the lazy dog. ' +
-              'The slow fat rat runs around the mouldy cheese.'
+- Use parenthesis for long strings. For example this is **bad**:
 
-And this is good:
+```python
+foo = 'The quick brown fox jumps over the lazy dog. ' +
+      'The slow fat rat runs around the mouldy cheese.'
+```
 
-        bar = (
-            'The quick brown fox jumps over the lazy dog. '
-            'The slow fat rat runs around the mouldy cheese.')
+And this is **good**:
+
+```python
+bar = (
+    'The quick brown fox jumps over the lazy dog. '
+    'The slow fat rat runs around the mouldy cheese.')
+```
 
 Note: The good example above follows the 'pull left' principle.
 
-- All strings should be internationalisation enabled. Please see [i18n] for details.
-- When using gettext, alias the uggettext as tr, and do not use the common convention of `_('foo')` as the underscore trips up some tools like pylint, sphinx. Also using `tr` makes it easy to migrate code to and from Qt's translation system and gettext. Note: gettext use is deprecated in InaSAFE.
-
+- All strings should be internationalisation enabled.
+- When using gettext, alias the ugettext as tr, and do not use the common convention of `_('foo')` as the underscore trips up some tools like pylint, sphinx. Also using `tr` makes it easy to migrate code to and from Qt's translation system and gettext. Note: gettext use is deprecated in InaSAFE.
 - If you use a literal string or expression in more than one place, refactor it into a function or variable.
 
-# Standard headers
+{{< /block-section >}}
 
-Each source file should include a standard header containing copyright, authorship and version metadata as shown in the exampled below.
+{{< block-section
+    backgroundColor="dark"
+    textColor="white"
+    subtitle="File Structure"
+>}}
 
-Example standard header
+## Standard Headers
 
-    # -*- coding: utf-8 -*-
-    """**One line description.**
-    
-    .. tip::
-       Detailed multi-paragraph description...
-    """
-    
-    import os  # python core imports first
-    import qgis.core  # then external imports
-    import safe.utils.gis  # then project imports (always using full path)
-    
-    __copyright__ = "Copyright 2016, The InaSAFE Project"
-    __license__ = "GPL version 3"
-    __email__ = "info@inasafe.org"
-    __revision__ = '$Format:%H$'
-    
-    
+Each source file should include a standard header containing copyright, authorship and version metadata as shown in the example below.
 
-Note:: Please see [faq_developer] for details on how the revision tag is replaced with the SHA1 for the file when the release packages are made.
+```python
+# -*- coding: utf-8 -*-
+"""**One line description.**
 
-# Qt Guidelines
+.. tip::
+   Detailed multi-paragraph description...
+"""
 
-Compile UI files at run time. There is no need to precompile UI files using pyuic4. Rather you can dynamically compile them using this technique (see [technical docs here](<http://pyqt.sourceforge.net/Docs/PyQt4/designer.html#the-uic-module>):
+import os  # python core imports first
+import qgis.core  # then external imports
+import safe.utils.gis  # then project imports (always using full path)
 
-        import os
-        from PyQt4 import QtGui, uic
-    
-        BASE_CLASS = uic.loadUiType(os.path.join(
-            os.path.dirname(__file__), 'foo_dialog_base.ui'))[0]
-    
-    
-        class FooDialog(QtGui.QDialog, BASE_CLASS):
-            """Dialog for defining the plugin properties.
-    
-            """
-            def __init__(self, parent=None):
-                """Constructor."""
-                super(FooDialog, self).__init__(parent)
-                # Set up the user interface from Designer.
-                self.setupUi(self)
+__copyright__ = "Copyright 2016, The InaSAFE Project"
+__license__ = "GPL version 3"
+__email__ = "info@inasafe.org"
+__revision__ = '$Format:%H$'
+```
+
+----
+
+Note: Please see the developer FAQ for details on how the revision tag is replaced with the SHA1 for the file when the release packages are made.
+
+{{< /block-section >}}
+
+{{< block-section
+    backgroundColor="light"
+    textColor="dark"
+    subtitle="Qt Development"
+>}}
+
+## Qt Guidelines
+
+Compile UI files at run time. There is no need to precompile UI files using pyuic4. Rather you can dynamically compile them using this technique (see [technical docs here](http://pyqt.sourceforge.net/Docs/PyQt4/designer.html#the-uic-module)):
+
+```python
+import os
+from PyQt4 import QtGui, uic
+
+BASE_CLASS = uic.loadUiType(os.path.join(
+    os.path.dirname(__file__), 'foo_dialog_base.ui'))[0]
+
+
+class FooDialog(QtGui.QDialog, BASE_CLASS):
+    """Dialog for defining the plugin properties."""
+
+    def __init__(self, parent=None):
+        """Constructor."""
+        super(FooDialog, self).__init__(parent)
+        self.setupUi(self)
+```
 
 Don't use old style signal/slot connectors:
 
-        QtCore.QObject.connect(
-            self.help_button, QtCore.SIGNAL('clicked()'), self.show_help)
+```python
+QtCore.QObject.connect(
+    self.help_button, QtCore.SIGNAL('clicked()'), self.show_help)
+```
 
-Use new style connectors::
+Use new style connectors:
 
-        self.help_button.clicked.connect(self.show_help)
-    
+```python
+self.help_button.clicked.connect(self.show_help)
+```
 
-Use multi-inheritance for designer based classes so that we can use autoconnect slots.:
+----
 
-        class FooDialog(QtGui.QDialog, Ui_FooBase):
-            """Dialog to prompt for widget names."""
-    
-            def __init__(self, parent=None):
-                """Constructor for the dialog.
-    
-                This dialog will allow the user to select foo names from  a list.
-    
-                :param parent: Optional widget to use as parent
-                :type parent: QWidget
-                """
-                QtGui.QDialog.__init__(self, parent)
-                # Set up the user interface from Designer.
-                self.setupUi(self)
-                # ... further implementation here ...
+Use multi-inheritance for designer based classes so that we can use autoconnect slots:
+
+```python
+class FooDialog(QtGui.QDialog, Ui_FooBase):
+    """Dialog to prompt for widget names."""
+
+    def __init__(self, parent=None):
+        """Constructor for the dialog."""
+        QtGui.QDialog.__init__(self, parent)
+        self.setupUi(self)
+```
 
 Then we can do this to listen for a click on button bar:
 
-        def on_bar_clicked(self):
-            """Auto slot to listen for button click."""
-            pass
+```python
+def on_bar_clicked(self):
+    """Auto slot to listen for button click."""
+    pass
+```
 
 The callback above is called when the button is clicked simply by virtue of the fact that it uses the naming convention `on_<object>_clicked`.
 
 Note that in some cases you need to explicitly specify which signature is being listened for by using the pyqtSignature decorator:
 
-        @pyqtSignature('int')
-        def on_polygon_layers_combo_currentIndexChanged(self, theIndex=None):
-            """Automatic slot executed when the layer is changed to update fields.
-    
-            :param theIndex: Passed by the signal that triggers this slot.
-            :type theIndex: int
-            """
-            layerId = self.polygon_layers_combo.itemData(
-                theIndex, QtCore.Qt.UserRole)
-            return layer_id
-    
+```python
+@pyqtSignature('int')
+def on_polygon_layers_combo_currentIndexChanged(self, theIndex=None):
+    """Automatic slot executed when the layer is changed to update fields."""
+    layerId = self.polygon_layers_combo.itemData(
+        theIndex, QtCore.Qt.UserRole)
+    return layer_id
+```
 
 Failure to do this may result in the slot being called multiple times per event which is usually undesirable.
 
-Also in some cases using the Qt API will lead you into conflict with our PEP8 naming conventions for methods and variables. This is unavoidable but should be used only in these specific instances e.g.:
+Also in some cases using the Qt API will lead you into conflict with our PEP8 naming conventions for methods and variables. This is unavoidable but should be used only in these specific instances.
 
-        def on_foo_indexChanged():
-            pass
+Qt's naming convention causes a bit of a clash when using with 'normal' Python underscore names. For this reason we adopt the following strategy:
 
-Qt's naming convention causes a bit of a clash when using with 'normal' python underscore names. For this reason we adopt the following strategy:
+- In Designer use underscore based naming for objects
+- In your concrete implementations you should be able to then use mostly underscore separated names except in cases where using autoconnect slots
+- In Designer you should call the form a name ending in Base e.g. `FooDialogBase`. By convention the concrete implementation is called the same sans the Base suffix e.g. `FooDialog`.
 
-- in designer use underscore based naming for objects
-- in your concrete implementations you should be able to then use mostly underscore separated names except in cases where using autoconnect slots.
-- in designer you should call the form a name ending in Base e.g. `FooDialogBase`. By convention the concrete implementation is called the same sans the Base suffix e.g. `FooDialog`.
+{{< /block-section >}}
 
-# Human Interface Guidelines
+{{< block-section
+    backgroundColor="primary"
+    textColor="white"
+    subtitle="User Interface"
+>}}
 
-For consistency of user experience, the user interfaces should adhere to the QGIS Human Interface Guidelines (HIG) which are listed here for your convenience:
+## Human Interface Guidelines
 
-- **Group related elements using group boxes** : Try to identify elements that can be grouped together and then use group boxes with a label to identify the topic of that group. Avoid using group boxes with only a single widget / item inside.
-- **Capitalise first letter only in labels:** Labels (and group box labels) should be written as a phrase with leading capital letter, and all remaining words written with lower case first letters
-- **Do not end labels for widgets or group boxes with a colon:** Adding a colon causes visual noise and does not impart additional meaning, so don’t use them. An exception to this rule is when you have two labels next to each other e.g.: Label1 [Plugin Path:] Label2 [/path/to/plugins]
-- **Keep harmful actions away from harmless ones:** If you have actions for ‘delete’, ‘remove’ etc, try to impose adequate space between the harmful action and innocuous actions so that the users is less likely to inadvertently click on the harmful action.
-- **Always use a QButtonBox for ‘OK’, ‘Cancel’ etc buttons:** Using a button box will ensure that the order of ‘OK’ and ‘Cancel’ etc, buttons is consistent with the operating system / locale / desktop environment that the user is using.
-- **Tabs should not be nested****:** If you use tabs, follow the style of the tabs used in QgsVectorLayerProperties / QgsProjectProperties etc. i.e. tabs at top with icons at 22x22. Widget stacks should be avoided if at all possible. They cause problems with layouts and inexplicable (to the user) resizing of dialogs to accommodate widgets that are not visible.
-- **Tabs should always be more than one.** If your UI has a single tab, it is superflous, get rid of it.
-- **Try to avoid technical terms** and rather use a laymans equivalent e.g. use the word ‘Transparency’ rather than ‘Alpha Channel’ (contrived example), ‘Text’ instead of ‘String’ and so on.
-- **Use consistent iconography:**. If you need an icon or icon elements, please contact Robert Szczepanek on the mailing list for assistance.
-- **Place long lists of widgets into scroll boxes.** No dialog should exceed 580 pixels in height and 1000 pixels in width.
-- **Separate advanced options from basic ones.** Novice users should be able to quickly access the items needed for basic activities without needing to concern themselves with complexity of advanced features.
+For consistency of user experience, the user interfaces should adhere to the QGIS Human Interface Guidelines (HIG):
+
+- **Group related elements using group boxes**: Try to identify elements that can be grouped together and then use group boxes with a label to identify the topic of that group. Avoid using group boxes with only a single widget / item inside.
+- **Capitalise first letter only in labels**: Labels (and group box labels) should be written as a phrase with leading capital letter, and all remaining words written with lower case first letters.
+- **Do not end labels for widgets or group boxes with a colon**: Adding a colon causes visual noise and does not impart additional meaning, so don't use them. An exception to this rule is when you have two labels next to each other e.g.: Label1 [Plugin Path:] Label2 [/path/to/plugins]
+- **Keep harmful actions away from harmless ones**: If you have actions for 'delete', 'remove' etc, try to impose adequate space between the harmful action and innocuous actions so that the user is less likely to inadvertently click on the harmful action.
+
+----
+
+- **Always use a QButtonBox for 'OK', 'Cancel' etc buttons**: Using a button box will ensure that the order of 'OK' and 'Cancel' etc, buttons is consistent with the operating system / locale / desktop environment that the user is using.
+- **Tabs should not be nested**: If you use tabs, follow the style of the tabs used in QgsVectorLayerProperties / QgsProjectProperties etc. i.e. tabs at top with icons at 22x22. Widget stacks should be avoided if at all possible.
+- **Tabs should always be more than one**: If your UI has a single tab, it is superfluous, get rid of it.
+- **Try to avoid technical terms** and rather use a layman's equivalent e.g. use the word 'Transparency' rather than 'Alpha Channel', 'Text' instead of 'String' and so on.
+- **Use consistent iconography**: If you need an icon or icon elements, please contact Robert Szczepanek on the mailing list for assistance.
+- **Place long lists of widgets into scroll boxes**: No dialog should exceed 580 pixels in height and 1000 pixels in width.
+- **Separate advanced options from basic ones**: Novice users should be able to quickly access the items needed for basic activities without needing to concern themselves with complexity of advanced features.
 - **Advanced features** should either be located below a dividing line, or placed onto a separate tab.
-- **Don’t add options for the sake of having lots of options**. Strive to keep the user interface minimalistic and use sensible defaults.
-- **Use ellipsis:** If clicking a button will spawn a new dialog, an ellipsis (...) should be suffixed to the button text.
+- **Don't add options for the sake of having lots of options**: Strive to keep the user interface minimalistic and use sensible defaults.
+- **Use ellipsis**: If clicking a button will spawn a new dialog, an ellipsis (...) should be suffixed to the button text.
 
-# Working with GIT
+{{< /block-section >}}
 
-- Additions to the develop branch should be made via the GitHub pull request mechanism
-- Pull requests should preferably be squashed into a single commit before applying (see <http://eli.thegreenplace.net/2014/02/19/squashing-github-pull-requests-into-a-single-commit>)
-- Commits and pull requests should reference the issue number they close or contribute to
+{{< block
+    title="Working with Git"
+    subtitle="Version control best practices for all Kartoza projects."
+    sub-block-side="bottom"
+    class="is-info"
+>}}
 
-This document is heavily based on the [InaSAFE Coding Standards](<https://github.com/inasafe/inasafe/wiki/Coding-Standards>) and [HIG](<https://github.com/inasafe/inasafe/wiki/human-interface-guidelines>)
+- Additions to the develop branch should be made via the GitHub pull request mechanism.
+- Pull requests should preferably be squashed into a single commit before applying (see [squashing guide](http://eli.thegreenplace.net/2014/02/19/squashing-github-pull-requests-into-a-single-commit)).
+- Commits and pull requests should reference the issue number they close or contribute to.
+
+This document is heavily based on the [InaSAFE Coding Standards](https://github.com/inasafe/inasafe/wiki/Coding-Standards) and [HIG](https://github.com/inasafe/inasafe/wiki/human-interface-guidelines).
+
+{{< /block >}}
+
+{{< block-section
+    backgroundColor="dark"
+    textColor="white"
+    subtitle="Want to contribute?"
+>}}
+
+## Get Involved
+
+If you'd like to contribute to Kartoza projects, we'd love to hear from you. Reach out to discuss how you can get involved.
+
+{{< button class="is-primary is-medium mt-4" link="/contact-us/" text="Contact Us" >}}
+
+----
+
+Following these standards helps us maintain a high-quality, consistent codebase across all Kartoza projects and contributions.
+
+{{< /block-section >}}

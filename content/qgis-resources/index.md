@@ -1,21 +1,54 @@
 ---
-description: ''
-erpnext_path: /qgis-resources
-layout: single
-reviewedBy: Tim Sutton
-reviewedDate: '2026-04-24'
-title: QGIS - Resources
-type: page
+title: "QGIS - Resources"
+subtitle: "Tools and References for QGIS Users"
+layout: "single"
+reviewedBy: "Tim Sutton"
+reviewedDate: 2026-04-24
 ---
 
-# QGIS Resources
+{{< block
+    title="QGIS Resources"
+    subtitle="Useful resources, cheat sheets, and reference materials to help you get the most out of QGIS."
+    sub-block-side="bottom"
+    class="is-primary"
+>}}
+Kartoza is a leading contributor to the QGIS ecosystem. We provide training, development, and freely available resources to help the community.
+{{< /block >}}
+
+{{< block-section
+    backgroundColor="light"
+    textColor="dark"
+    subtitle="Cartography Reference"
+>}}
 
 ## QGIS Renderers Cheat Sheet
 
 QGIS offers a wide range of layer styling renderers for vector data (points, lines and polygons) and raster data (images) for creating effective, efficient and beautiful cartography.
 
-![QGIS Renderers Cheat Sheet](data:image/png;base64,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)
+[Download QGIS Renderers Cheat Sheet (PDF)](https://www.dropbox.com/s/1xr5dz5x9fw27f1/QGIS%20Renderers%20Cheat%20Sheet.pdf?dl=0)
 
-[Download QGIS Renderers Cheat Sheet](<https://www.dropbox.com/s/1xr5dz5x9fw27f1/QGIS%20Renderers%20Cheat%20Sheet.pdf?dl=0>)
+[Download QGIS Renderers Project (ZIP)](https://www.dropbox.com/s/d82f8emsyk1htoi/QGIS%20Renderers%20Cheat%20Sheet.zip?dl=0)
 
-[DOWNLOAD QGIS Renderers Project](<https://www.dropbox.com/s/d82f8emsyk1htoi/QGIS%20Renderers%20Cheat%20Sheet.zip?dl=0>)
+----
+
+These resources are provided free of charge to support the QGIS community. If you find them useful, consider supporting open source geospatial development.
+
+{{< /block-section >}}
+
+{{< block-section
+    backgroundColor="dark"
+    textColor="white"
+    subtitle="Need more help with QGIS?"
+>}}
+
+## Training and Support
+
+Kartoza offers professional QGIS training courses and support services for individuals, teams, and organisations.
+
+{{< button class="is-primary is-medium mt-4" link="/contact-us/" text="Request Training or Support" >}}
+
+----
+
+We are committed to helping you succeed with open source geospatial technology.
+
+{{< /block-section >}}
