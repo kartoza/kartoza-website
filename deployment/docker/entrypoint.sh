@@ -42,6 +42,9 @@ export gateway_erpnext_api_url="${GATEWAY_ERPNEXT_API_URL}"
 # Create temporary config with substituted variables in writable location
 envsubst '${erpnext_api_auth_base64} ${gateway_erpnext_api_url}' < /etc/nginx/templates/default.conf.template > /tmp/nginx/conf.d/default.conf
 
+# Copy redirect rules (no envsubst needed - static config)
+cp /etc/nginx/templates/redirects.conf /tmp/nginx/conf.d/redirects.conf
+
 echo "Starting nginx..."
 
 # Start nginx

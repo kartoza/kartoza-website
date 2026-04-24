@@ -1,8 +1,42 @@
+# ============================================================================
 # robots.txt for kartoza.com
-# Protecting against malicious bots, unwanted crawling, and AI bots
+# Kartoza - Open Source Geospatial Solutions
+# https://kartoza.com
+# ============================================================================
 
+# ----------------------------------------------------------------------------
+# Default policy: welcome legitimate crawlers
+# ----------------------------------------------------------------------------
 User-agent: *
-# Disallow crawling of sensitive sections
+Crawl-delay: 1
+
+# Allow all public content sections
+Allow: /
+Allow: /about/
+Allow: /blog/
+Allow: /portfolio/
+Allow: /solutions/
+Allow: /training-courses/
+Allow: /careers/
+Allow: /internships/
+Allow: /contact-us/
+Allow: /the_team/
+Allow: /partners/
+Allow: /gallery/
+Allow: /apps/
+Allow: /plugins/
+Allow: /docker/
+Allow: /hosting/
+Allow: /youtube/
+Allow: /policies/
+Allow: /privacy-policy/
+Allow: /cancellation-policy/
+Allow: /code-of-conduct/
+Allow: /coding-standards/
+Allow: /crowdfunding/
+Allow: /qgis-resources/
+
+# Block paths that don't exist on Hugo but bots might probe
 Disallow: /cgi-bin/
 Disallow: /tmp/
 Disallow: /private/
@@ -11,31 +45,53 @@ Disallow: /login/
 Disallow: /register/
 Disallow: /cart/
 Disallow: /wp-admin/
-Disallow: /xmlrpc.php
 Disallow: /wp-login.php
+Disallow: /xmlrpc.php
+Disallow: /wp-content/
+Disallow: /wp-includes/
+Disallow: /.env
+Disallow: /.git/
+Disallow: /api/
+Disallow: /app/
 
-# Disallow specific file types
+# Block crawling of file types that aren't content
 Disallow: /*.php$
 Disallow: /*.cgi$
 Disallow: /*.asp$
 Disallow: /*.aspx$
 Disallow: /*.jsp$
 
-# Allow crawling of the main sections
-Allow: /$
-Allow: /about/
-Allow: /blog/
-Allow: /portfolio/
-Allow: /services/
-Allow: /solutions/
-Allow: /training-courses/
-Allow: /careers/
-Allow: /contact/
+# Block search results page (infinite crawl trap)
+Disallow: /search?
+Disallow: /search/
 
-# Specify the location of the sitemap
-Sitemap: https://kartoza.com/sitemap.xml
+# ----------------------------------------------------------------------------
+# Preferred search engines: full access, no crawl delay
+# ----------------------------------------------------------------------------
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
 
-# Block known bad bots and AI bots
+User-agent: Googlebot-Image
+Allow: /img/
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# ----------------------------------------------------------------------------
+# SEO tool bots: blocked (aggressive crawlers, no user value)
+# ----------------------------------------------------------------------------
 User-agent: AhrefsBot
 Disallow: /
 
@@ -51,29 +107,122 @@ Disallow: /
 User-agent: BLEXBot
 Disallow: /
 
-User-agent: YandexBot
+User-agent: PetalBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: MegaIndex.ru
 Disallow: /
 
 User-agent: Sogou
 Disallow: /
 
-# Block AI bots and data scrapers
-User-agent: ChatGPT-User
-Disallow: /
-
-User-agent: GPTBot
-Disallow: /
-
-User-agent: OpenAI-User
-Disallow: /
-
-User-agent: CCBot
+User-agent: YandexBot
 Disallow: /
 
 User-agent: DataForSeoBot
 Disallow: /
 
-# Block specific user agents (examples)
+User-agent: SEOkicks
+Disallow: /
+
+User-agent: serpstatbot
+Disallow: /
+
+User-agent: Rogerbot
+Disallow: /
+
+User-agent: Exabot
+Disallow: /
+
+User-agent: BacklinkCrawler
+Disallow: /
+
+User-agent: Screaming Frog SEO Spider
+Disallow: /
+
+User-agent: Seekport
+Disallow: /
+
+User-agent: ZoominfoBot
+Disallow: /
+
+User-agent: Linguee
+Disallow: /
+
+# ----------------------------------------------------------------------------
+# AI training bots: blocked
+# We support open source, not having our content scraped for AI training
+# without consent. If you'd like to use our content, contact info@kartoza.com.
+# ----------------------------------------------------------------------------
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: Timpibot
+Disallow: /
+
+User-agent: Velenpublicwebcrawler
+Disallow: /
+
+User-agent: Webzio-Extended
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: img2dataset
+Disallow: /
+
+# ----------------------------------------------------------------------------
+# Scraper and spam bots: blocked
+# ----------------------------------------------------------------------------
 User-agent: BadBot
 Disallow: /
 
@@ -83,10 +232,25 @@ Disallow: /
 User-agent: NastyBot
 Disallow: /
 
-# Allow specific user agents (examples)
-User-agent: Googlebot
-Allow: /
+User-agent: Nutch
+Disallow: /
 
-User-agent: Bingbot
-Allow: /
+User-agent: Wget
+Disallow: /
 
+User-agent: HTTrack
+Disallow: /
+
+User-agent: Offline Explorer
+Disallow: /
+
+User-agent: WebCopier
+Disallow: /
+
+User-agent: TurnitinBot
+Disallow: /
+
+# ----------------------------------------------------------------------------
+# Sitemap
+# ----------------------------------------------------------------------------
+Sitemap: https://kartoza.com/sitemap.xml
