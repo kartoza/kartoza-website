@@ -55,3 +55,31 @@ Mergin
 Ogun
 RDBMS
 USAID
+
+# Qt/UI terms
+dialog
+dialogs
+Dialog
+
+# Policy and coding standards terms
+cancelation
+DFAT
+ersonal
+POPIA
+POPI
+frowny
+gitter
+astroid
+dpth
+kwargs
+numpy
+pylint
+pyqt
+pyuic
+rtype
+superflous
+uggettext
+laymans
+Szczepanek
+reconciliations
+behavior

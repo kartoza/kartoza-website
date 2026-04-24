@@ -688,7 +688,7 @@ def main():
                         help='Fetch data but do not write files')
     parser.add_argument('--enable-fallback', action='store_true',
                         help='Enable using/writing training_schedule.yml as a fallback (disabled by default)')
-    parser.add_argument('--only', type=str, choices=['training', 'blog', 'portfolio', 'all'],
+    parser.add_argument('--only', type=str, choices=['training', 'blog', 'portfolio', 'pages', 'all'],
                         default='all', help='Only sync specific content type')
     parser.add_argument('--skip-images', action='store_true',
                         help='Skip downloading images')
@@ -774,6 +774,27 @@ def main():
             else:
                 portfolio_data = sync.sync_portfolio_content(download_images=not args.skip_images)
                 save_cache(CACHE_FILES['portfolio'], portfolio_data)
+
+        # Sync Standalone Pages (policies, resources, etc.)
+        # These don't need API auth - they use web scraping
+        if args.only in ['pages', 'all']:
+            print()
+            print("→ Syncing standalone pages...")
+            cmd = [sys.executable, str(PROJECT_ROOT / "scripts" / "fetch-erpnext-pages.py")]
+            if args.force:
+                cmd.append("--force")
+            if args.dry_run:
+                cmd.append("--dry-run")
+
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                env=os.environ,
+                cwd=PROJECT_ROOT
+            )
+            if result.stderr:
+                print(result.stderr)
 
         print()
         print("=" * 60)
