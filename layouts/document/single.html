@@ -152,15 +152,24 @@
     font-size: 0.9em;
 }
 .document-body pre {
-    background: #1a2a3a;
+    background: #1a2a3a !important;
     border-radius: 8px;
     padding: 1.25rem;
     overflow-x: auto;
 }
 .document-body pre code {
-    background: transparent;
-    color: #e8ecf0;
+    background: transparent !important;
+    color: #e8ecf0 !important;
     padding: 0;
+}
+.document-body .highlight pre {
+    background: #1a2a3a !important;
+}
+.document-body .highlight code,
+.document-body .highlight pre code,
+.document-body .highlight span {
+    color: #e8ecf0 !important;
+    background: transparent !important;
 }
 
 /* Sidebar */
