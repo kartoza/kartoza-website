@@ -4,7 +4,7 @@
   </a>
 </p>
 
-<h1 align="center">Kartoza Website</h1>
+<h1 align="center">Kartoza Website v3.0.1</h1>
 
 <p align="center">
   <strong>A Happy Life is a Mappy Life</strong>
