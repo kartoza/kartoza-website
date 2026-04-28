@@ -4,7 +4,7 @@
   </a>
 </p>
 
-<h1 align="center">Kartoza Website v3.0.1</h1>
+<h1 align="center">Kartoza Website</h1>
 
 <p align="center">
   <strong>A Happy Life is a Mappy Life</strong>
@@ -611,4 +611,6 @@ This project was originally derived from the [QGIS Hugo Website Theme](https://g
 
 <p align="center">
   <sub>🌍 Empowering the world with Open Source Geospatial Solutions since 2008.</sub>
+  <br>
+  <sub>v3.0.1</sub>
 </p>
