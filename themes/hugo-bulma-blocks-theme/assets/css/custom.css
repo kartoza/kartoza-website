@@ -236,3 +236,11 @@ section.is-fluid > .container.is-fluid {
 .page-under-review .subtitle {
     color: #4a5568;
 }
+
+.navbar-dropdown{
+    padding-right: 15px;
+}
+
+.icon.is-small{
+    padding-right: 10px;
+}

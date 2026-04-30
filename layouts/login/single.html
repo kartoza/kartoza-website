@@ -460,10 +460,16 @@
                 </div>
                 <div class="auth-user-name" id="logged-in-name"></div>
                 <div class="auth-user-email" id="logged-in-email"></div>
-                <button class="auth-logout-btn" id="page-logout-btn">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>Sign Out</span>
-                </button>
+                <div style="display:flex; flex-direction:column; gap:0.75rem; align-items:center; width:100%">
+                    <a href="/support-ticket/" class="auth-logout-btn" style="border-color: var(--primary2, #3488b8); color: #fff; background: linear-gradient(135deg, var(--primary2, #3488b8), var(--primary1, #53a2cc)); text-decoration: none; justify-content: center; width: 100%; max-width: 260px;">
+                        <i class="fas fa-headset"></i>
+                        <span>Log Support Ticket</span>
+                    </a>
+                    <button class="auth-logout-btn" id="page-logout-btn" style="width:100%; max-width:260px; justify-content:center;">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Sign Out</span>
+                    </button>
+                </div>
             </div>
         </div>
 
