@@ -436,6 +436,54 @@
     background: var(--primary2, #3488b8);
     color: #fff;
 }
+
+.auth-user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.auth-user-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.auth-user-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.82rem;
+    color: var(--dark1, #6B7B8D);
+    background: var(--light1, #f7f9fb);
+    border: 1px solid var(--light2, #e8ecf0);
+    border-radius: 20px;
+    padding: 0.25rem 0.75rem;
+}
+
+.auth-user-meta-item i {
+    color: var(--primary2, #3488b8);
+    font-size: 0.8em;
+}
+
+#logged-in-meta-loading {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    color: var(--dark1, #6B7B8D);
+    padding: 0.25rem 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.auth-user-last-active {
+    font-size: 0.78rem;
+    color: var(--dark1, #6B7B8D);
+    margin-bottom: 1.5rem;
+}
 </style>
 
 <!-- Auth Hero -->
@@ -454,12 +502,27 @@
 
         <!-- Logged-in state (hidden by default, shown by JS) -->
         <div class="auth-card" id="auth-logged-in-card" style="display:none">
-            <div class="auth-logged-in is-visible">
-                <div class="auth-user-avatar">
+            <div class="auth-logged-in is-visible" id="logged-in-content">
+                <div class="auth-user-avatar" id="logged-in-avatar">
                     <i class="fas fa-user"></i>
                 </div>
                 <div class="auth-user-name" id="logged-in-name"></div>
                 <div class="auth-user-email" id="logged-in-email"></div>
+                <div id="logged-in-meta-loading">
+                    <i class="fas fa-circle-notch fa-spin"></i> Loading profile...
+                </div>
+                <div class="auth-user-meta">
+                    <span class="auth-user-meta-item" id="logged-in-username" style="display:none">
+                        <i class="fas fa-at"></i><span></span>
+                    </span>
+                    <span class="auth-user-meta-item" id="logged-in-location" style="display:none">
+                        <i class="fas fa-map-marker-alt"></i><span></span>
+                    </span>
+                    <span class="auth-user-meta-item" id="logged-in-timezone" style="display:none">
+                        <i class="fas fa-clock"></i><span></span>
+                    </span>
+                </div>
+                <div class="auth-user-last-active" id="logged-in-last-active"></div>
                 <button class="auth-logout-btn" id="page-logout-btn">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Sign Out</span>
@@ -691,10 +754,16 @@
 
     const auth = getAuth();
     if (auth && auth.loggedIn) {
+        const name = auth.fullName || auth.email
         document.getElementById('auth-forms-card').style.display = 'none';
         document.getElementById('auth-logged-in-card').style.display = '';
-        document.getElementById('logged-in-name').textContent = auth.fullName || auth.email;
+        document.getElementById('logged-in-name').textContent = name;
         document.getElementById('logged-in-email').textContent = auth.email;
+        // Avatar — initials
+        const avatarEl = document.getElementById('logged-in-avatar');
+        if (avatarEl && name) {
+            avatarEl.textContent = name.trim().split(/\s+/).map(function(n) { return n[0]; }).slice(0, 2).join('').toUpperCase();
+        }
     }
 
     // ============================================
@@ -962,6 +1031,45 @@
         });
     }
 
+    // =============================================
+    // Get profile data
+    // =============================================
+    function setMeta(id, value) {
+        const el = document.getElementById(id);
+        if (!el || !value) return;
+        el.querySelector('span').textContent = value;
+        el.style.display = '';
+    }
+
+    async function profile () {
+        try {
+            const session = await checkSession();
+            if (!session) return;
+            const res = await fetch(
+                "/api/resource/User/" + session.message,
+                { credentials: "include", cache: "no-store" }
+            );
+            const json = await res.json();
+            const u = json.data || json;
+
+            // Meta badges
+            document.getElementById('logged-in-meta-loading').style.display = 'none';
+            setMeta('logged-in-username', u.username);
+            setMeta('logged-in-location', u.location);
+            setMeta('logged-in-timezone', u.time_zone);
+
+            // Last active
+            if (u.last_active) {
+                const lastActiveEl = document.getElementById('logged-in-last-active');
+                lastActiveEl.textContent = 'Last active: ' + new Date(u.last_active).toLocaleString();
+            }
+
+        } catch (err) {
+            console.error('Profile error:', err.message);
+            setTimeout(function() { window.location.href = '/'; }, 2000);
+        }
+    }
+    profile();
 })();
 </script>
 

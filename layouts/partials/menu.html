@@ -264,9 +264,9 @@
         setTimeout(dismiss, 4000);
     }
 
-    async function checkSession() {
+    window.checkSession = async function() {
         var auth = getAuth();
-        if (!auth) return;
+        if (!auth) return null;
         const res = await fetch(
             "/api/method/frappe.auth.get_logged_user",
             {
@@ -279,8 +279,11 @@
             clearAuth();
             updateAuthNav();
             showToast('Session expired. You have been logged out.', 'warning');
+            throw new Error('Session expired');
         }
-    }
+
+        return await res.json();
+    };
     checkSession()
 
     // Logout handler
