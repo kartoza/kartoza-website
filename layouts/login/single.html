@@ -760,7 +760,7 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ usr: email, pwd: password }),
-                credentials: 'omit'
+                credentials: 'include'
             });
 
             const data = await response.json().catch(() => ({}));
@@ -880,7 +880,7 @@
                     redirect_to: '',
                     roles: [{ doctype: 'Has Role', role: 'Customer' }]
                 }),
-                credentials: 'omit'
+                credentials: 'include'
             });
 
             const rawText = await response.text().catch(() => '');
@@ -955,7 +955,7 @@
     if (pageLogoutBtn) {
         pageLogoutBtn.addEventListener('click', async function() {
             try {
-                await fetch(apiUrl('logout'), { method: 'POST', credentials: 'omit' });
+                await fetch(apiUrl('logout'), { method: 'POST', credentials: 'include' });
             } catch (e) {}
             clearAuth();
             window.location.reload();

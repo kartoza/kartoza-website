@@ -17,6 +17,47 @@
       align-items: center;
       gap: 0.5rem;
     }
+    @keyframes kartoza-toast-in {
+      from { transform: translateX(calc(100% + 1.5rem)); opacity: 0; }
+      to   { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes kartoza-toast-out {
+      from { transform: translateX(0); opacity: 1; }
+      to   { transform: translateX(calc(100% + 1.5rem)); opacity: 0; }
+    }
+    .kartoza-toast {
+      position: fixed;
+      top: 0.5rem;
+      right: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem 0.75rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      color: #fff;
+      z-index: 9999;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      animation: kartoza-toast-in 0.3s ease forwards;
+    }
+    .kartoza-toast.is-hiding {
+      animation: kartoza-toast-out 0.3s ease forwards;
+    }
+    .kartoza-toast-close {
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      opacity: 0.8;
+      padding: 0;
+      flex-shrink: 0;
+    }
+    .kartoza-toast-close:hover { opacity: 1; }
+    .kartoza-toast.is-warning { background: #e67e22; }
+    .kartoza-toast.is-danger  { background: #e74c3c; }
+    .kartoza-toast.is-success { background: #27ae60; }
 </style>
 <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="container">
@@ -167,10 +208,8 @@
 // Auth nav state — runs on every page
 (function() {
     var AUTH_KEY = 'kartoza_auth';
-    var ERP_BASE = '{{ .Site.Params.erpnextBaseUrl | default "" }}';
-    var IS_LOCAL = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
     function authLogoutUrl() {
-        return (IS_LOCAL && ERP_BASE) ? ERP_BASE + '/api/method/logout' : '/api/auth/logout';
+        return '/api/auth/logout'
     }
 
     function getAuth() {
@@ -200,6 +239,49 @@
 
     // Run on page load
     updateAuthNav();
+
+    function showToast(message, type) {
+        const toast = document.createElement('div');
+        toast.className = 'kartoza-toast is-' + (type || 'danger');
+
+        const text = document.createElement('span');
+        text.textContent = message;
+
+        const btn = document.createElement('button');
+        btn.className = 'kartoza-toast-close';
+        btn.innerHTML = '&#x2715;';
+        btn.setAttribute('aria-label', 'Close');
+
+        function dismiss() {
+            toast.classList.add('is-hiding');
+            setTimeout(function() { toast.remove(); }, 300);
+        }
+
+        btn.addEventListener('click', dismiss);
+        toast.appendChild(text);
+        toast.appendChild(btn);
+        document.body.appendChild(toast);
+        setTimeout(dismiss, 4000);
+    }
+
+    async function checkSession() {
+        var auth = getAuth();
+        if (!auth) return;
+        const res = await fetch(
+            "/api/method/frappe.auth.get_logged_user",
+            {
+                credentials: "include",
+                cache: "no-store"
+            }
+        );
+
+        if (!res.ok) {
+            clearAuth();
+            updateAuthNav();
+            showToast('Session expired. You have been logged out.', 'warning');
+        }
+    }
+    checkSession()
 
     // Logout handler
     document.addEventListener('click', function(e) {
