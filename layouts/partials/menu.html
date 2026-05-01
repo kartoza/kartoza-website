@@ -1,7 +1,27 @@
+<style>
+    #kartoza-navbar > .navbar-item {
+      width: fit-content;
+    }
+    #kartoza-navbar > .navbar-item:hover {
+      color: var(--primary);
+    }
+    #kartoza-navbar .navbar-link:not(.is-arrowless)::after {
+      right: 1rem;
+    }
+    #kartoza-navbar .has-dropdown .navbar-link {
+      padding-right: 2.5rem;
+      padding-left: 1rem;
+    }
+    #kartoza-navbar .navbar-item-with-icon {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+</style>
 <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item logo-container" href="{{ "/" | absURL }}">
+            <a class="navbar-item logo-container" style="width: fit-content; margin-right: 1rem" href="{{ "/" | absURL }}" >
                 <img src="{{ absURL "img/kartoza-logo.png" }}" alt="Kartoza" height="28">
                 <span class="navbar-logo-text">Kartoza</span>
             </a>
@@ -12,60 +32,62 @@
             </a>
         </div>
         <div id="kartoza-navbar" class="navbar-menu">
-            <div class="navbar-end">
-                {{- range site.Menus.main }}
-                    {{- if .HasChildren }}
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link" href="{{ .URL }}">
-                                {{ .Name }}
-                            </a>
-                            <div class="navbar-dropdown">
-                                {{- range .Children }}
-                                    <a class="navbar-item" href="{{ .URL }}">
-                                        {{ .Name }}
-                                    </a>
-                                {{- end }}
-                            </div>
-                        </div>
-                    {{- else }}
-                        <a class="navbar-item" href="{{ .URL }}">
+            {{- range site.Menus.main }}
+                {{- if .HasChildren }}
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link" href="{{ .URL }}">
                             {{ .Name }}
                         </a>
-                    {{- end }}
-                {{- end }}
-
-                <!-- Auth nav - state managed by JS based on localStorage -->
-                <div id="auth-nav-login" class="navbar-item" style="display:none">
-                    <a href="{{ "/login/" | absURL }}" class="button is-small"
-                        style="border: 1.5px solid rgba(255,255,255,0.5); color: inherit; background: rgba(255,255,255,0.08); border-radius: 8px; font-weight: 600; gap: 0.4rem;">
-                        <span class="icon is-small"><i class="fas fa-sign-in-alt"></i></span>
-                        <span>Login</span>
-                    </a>
-                </div>
-
-                <div id="auth-nav-user" class="navbar-item has-dropdown is-hoverable" style="display:none">
-                    <a class="navbar-link" id="auth-nav-username" style="font-weight: 600;">
-                        <span class="icon is-small" style="margin-right: 0.3rem;"><i class="fas fa-user-circle"></i></span>
-                    </a>
-                    <div class="navbar-dropdown is-right">
-                        <a class="navbar-item" href="{{ "/login/" | absURL }}">
-                            <span class="icon is-small"><i class="fas fa-user"></i></span>
-                            <span>My Account</span>
-                        </a>
-                        <hr class="navbar-divider">
-                        <a class="navbar-item" href="#" id="auth-nav-logout">
-                            <span class="icon is-small"><i class="fas fa-sign-out-alt"></i></span>
-                            <span>Sign Out</span>
-                        </a>
+                        <div class="navbar-dropdown">
+                            {{- range .Children }}
+                                <a class="navbar-item" href="{{ .URL }}">
+                                    {{ .Name }}
+                                </a>
+                            {{- end }}
+                        </div>
                     </div>
-                </div>
+                {{- end }}
+            {{- end }}
+            <div class="separator" style="flex-grow: 1"></div>
+            {{- range site.Menus.main }}
+                {{- if .HasChildren }}
+                {{- else }}
+                    <a class="navbar-item" href="{{ .URL }}">
+                        {{ .Name }}
+                    </a>
+                {{- end }}
+            {{- end }}
 
-                <a class="navbar-item search-toggle" id="navbar-search-toggle" aria-label="Search" title="Search">
-                    <span class="search-label">Search</span>
-                    <span class="icon">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </span>
+            <a class="navbar-item search-toggle" id="navbar-search-toggle" aria-label="Search" title="Search">
+                <span class="search-label">Search</span>
+                <span class="icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </span>
+            </a>
+
+            <!-- Auth nav - state managed by JS based on localStorage -->
+            <div id="auth-nav-login" class="navbar-item" style="display:none">
+                <a href="{{ "/login/" | absURL }}" style="color: inherit; ">
+                    <span class="icon is-small"><i class="fas fa-sign-in-alt"></i></span>
+                    <span>Login</span>
                 </a>
+            </div>
+
+            <div id="auth-nav-user" class="navbar-item has-dropdown is-hoverable" style="display:none">
+                <a class="navbar-link" id="auth-nav-username" style="font-weight: 600;">
+                    <span class="icon is-small" style="margin-right: 0.3rem;"><i class="fas fa-user-circle"></i></span>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    <a class="navbar-item navbar-item-with-icon" href="{{ "/login/" | absURL }}">
+                        <span class="icon is-small"><i class="fas fa-user"></i></span>
+                        <span>My Account</span>
+                    </a>
+                    <hr class="navbar-divider">
+                    <a class="navbar-item navbar-item-with-icon" href="#" id="auth-nav-logout">
+                        <span class="icon is-small"><i class="fas fa-sign-out-alt"></i></span>
+                        <span>Sign Out</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

@@ -654,23 +654,7 @@
     // On localhost (no nginx): call ERP directly using the URL from Hugo params.
     // On the real domain: use nginx-proxied /api/auth/* paths regardless of _erpBase.
     // NOTE: register always goes through /api/auth/register — nginx injects admin credentials.
-    const ERP = window._erpBase || '';
-    const IS_LOCAL = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
     function apiUrl(endpoint) {
-        // Map logical endpoints to ERPNext method paths
-        const paths = {
-            login:  '/api/method/login',
-            logout: '/api/method/logout',
-            // Direct ERPNext sign_up method (matches server.routes in config.dev.toml)
-            register: '/api/method/kartoza_custom.api.sign_up'
-        };
-
-        // When developing locally and an `erpnextBaseUrl` is provided by Hugo,
-        // call the ERPNext instance directly (useful for testing without nginx).
-        if (IS_LOCAL && ERP) {
-            return ERP + (paths[endpoint] || ('/api/method/' + endpoint));
-        }
-
         // In production (or when no ERP URL is configured), use the nginx-proxied
         // `/api/auth/*` endpoints which inject necessary admin credentials.
         return '/api/auth/' + endpoint;
@@ -796,7 +780,14 @@
                 errorText.textContent = 'ERPNext login endpoint not found (' + apiUrl('login') + '). Check erpnextBaseUrl in config.toml.';
                 errorEl.classList.add('is-visible');
             } else {
-                const msg = (data.message || data.exc_type || '');
+                let msg = (data.message || data.exc_type || '');
+                if (data._server_messages) {
+                    try {
+                        msg = JSON.parse(JSON.parse(data._server_messages)[0]).message;
+                    } catch (err) {
+                        msg = data._server_messages;
+                    }
+                }
                 errorText.textContent = (msg.toLowerCase().includes('incorrect') || msg.toLowerCase().includes('invalid') || response.status === 401)
                     ? 'Incorrect email or password. Please try again.'
                     : (msg || 'Sign in failed. Please try again.');
