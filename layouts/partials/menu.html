@@ -1,7 +1,68 @@
+<style>
+    #kartoza-navbar > .navbar-item {
+      width: fit-content;
+    }
+    #kartoza-navbar > .navbar-item:hover {
+      color: var(--primary);
+    }
+    #kartoza-navbar .navbar-link:not(.is-arrowless)::after {
+      right: 1rem;
+    }
+    #kartoza-navbar .has-dropdown .navbar-link {
+      padding-right: 2.5rem;
+      padding-left: 1rem;
+    }
+    #kartoza-navbar .navbar-item-with-icon {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    @keyframes kartoza-toast-in {
+      from { transform: translateX(calc(100% + 1.5rem)); opacity: 0; }
+      to   { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes kartoza-toast-out {
+      from { transform: translateX(0); opacity: 1; }
+      to   { transform: translateX(calc(100% + 1.5rem)); opacity: 0; }
+    }
+    .kartoza-toast {
+      position: fixed;
+      top: 0.5rem;
+      right: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem 0.75rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      color: #fff;
+      z-index: 9999;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      animation: kartoza-toast-in 0.3s ease forwards;
+    }
+    .kartoza-toast.is-hiding {
+      animation: kartoza-toast-out 0.3s ease forwards;
+    }
+    .kartoza-toast-close {
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      opacity: 0.8;
+      padding: 0;
+      flex-shrink: 0;
+    }
+    .kartoza-toast-close:hover { opacity: 1; }
+    .kartoza-toast.is-warning { background: #e67e22; }
+    .kartoza-toast.is-danger  { background: #e74c3c; }
+    .kartoza-toast.is-success { background: #27ae60; }
+</style>
 <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item logo-container" href="{{ "/" | absURL }}">
+            <a class="navbar-item logo-container" style="width: fit-content; margin-right: 1rem" href="{{ "/" | absURL }}" >
                 <img src="{{ absURL "img/kartoza-logo.png" }}" alt="Kartoza" height="28">
                 <span class="navbar-logo-text">Kartoza</span>
             </a>
@@ -12,64 +73,66 @@
             </a>
         </div>
         <div id="kartoza-navbar" class="navbar-menu">
-            <div class="navbar-end">
-                {{- range site.Menus.main }}
-                    {{- if .HasChildren }}
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link" href="{{ .URL }}">
-                                {{ .Name }}
-                            </a>
-                            <div class="navbar-dropdown">
-                                {{- range .Children }}
-                                    <a class="navbar-item" href="{{ .URL }}">
-                                        {{ .Name }}
-                                    </a>
-                                {{- end }}
-                            </div>
-                        </div>
-                    {{- else }}
-                        <a class="navbar-item" href="{{ .URL }}">
+            {{- range site.Menus.main }}
+                {{- if .HasChildren }}
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link" href="{{ .URL }}">
                             {{ .Name }}
                         </a>
-                    {{- end }}
+                        <div class="navbar-dropdown">
+                            {{- range .Children }}
+                                <a class="navbar-item" href="{{ .URL }}">
+                                    {{ .Name }}
+                                </a>
+                            {{- end }}
+                        </div>
+                    </div>
                 {{- end }}
-
-                <!-- Auth nav - state managed by JS based on localStorage -->
-                <div id="auth-nav-login" class="navbar-item" style="display:none">
-                    <a href="{{ "/login/" | absURL }}" class="button is-small"
-                        style="border: 1.5px solid rgba(255,255,255,0.5); color: inherit; background: rgba(255,255,255,0.08); border-radius: 8px; font-weight: 600; gap: 0.4rem;">
-                        <span class="icon is-small"><i class="fas fa-sign-in-alt"></i></span>
-                        <span>Login</span>
+            {{- end }}
+            <div class="separator" style="flex-grow: 1"></div>
+            {{- range site.Menus.main }}
+                {{- if .HasChildren }}
+                {{- else }}
+                    <a class="navbar-item" href="{{ .URL }}">
+                        {{ .Name }}
                     </a>
-                </div>
+                {{- end }}
+            {{- end }}
 
-                <div id="auth-nav-user" class="navbar-item has-dropdown is-hoverable" style="display:none">
-                    <a class="navbar-link" id="auth-nav-username" style="font-weight: 600;">
-                        <span class="icon is-small" style="margin-right: 0.3rem;"><i class="fas fa-user-circle"></i></span>
+            <a class="navbar-item search-toggle" id="navbar-search-toggle" aria-label="Search" title="Search">
+                <span class="search-label">Search</span>
+                <span class="icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </span>
+            </a>
+
+            <!-- Auth nav - state managed by JS based on localStorage -->
+            <div id="auth-nav-login" class="navbar-item" style="display:none">
+                <a href="{{ "/login/" | absURL }}" style="color: inherit; ">
+                    <span class="icon is-small"><i class="fas fa-sign-in-alt"></i></span>
+                    <span>Login</span>
+                </a>
+            </div>
+
+            <div id="auth-nav-user" class="navbar-item has-dropdown is-hoverable" style="display:none">
+                <a class="navbar-link" id="auth-nav-username" style="font-weight: 600;">
+                    <span class="icon is-small" style="margin-right: 0.3rem;"><i class="fas fa-user-circle"></i></span>
+                </a>
+                <div class="navbar-dropdown is-right" style="white-space: nowrap; min-width: max-content;">
+                    <a class="navbar-item navbar-item-with-icon" href="{{ "/login/" | absURL }}">
+                        <span class="icon is-small"><i class="fas fa-user"></i></span>
+                        <span>My Account</span>
                     </a>
-                    <div class="navbar-dropdown is-right" style="white-space: nowrap; min-width: max-content;">
-                        <a class="navbar-item" href="{{ "/login/" | absURL }}">
-                            <span class="icon is-small"><i class="fas fa-user"></i></span>
-                            <span>My Account</span>
-                        </a>
                         <a class="navbar-item" href="{{ "/support-ticket/" | absURL }}">
                             <span class="icon is-small"><i class="fas fa-headset"></i></span>
                             <span>Log Support Ticket</span>
                         </a>
-                        <hr class="navbar-divider">
-                        <a class="navbar-item" href="#" id="auth-nav-logout">
-                            <span class="icon is-small"><i class="fas fa-sign-out-alt"></i></span>
-                            <span>Sign Out</span>
-                        </a>
-                    </div>
+                    <hr class="navbar-divider">
+                    <a class="navbar-item navbar-item-with-icon" href="#" id="auth-nav-logout">
+                        <span class="icon is-small"><i class="fas fa-sign-out-alt"></i></span>
+                        <span>Sign Out</span>
+                    </a>
                 </div>
-
-                <a class="navbar-item search-toggle" id="navbar-search-toggle" aria-label="Search" title="Search">
-                    <span class="search-label">Search</span>
-                    <span class="icon">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </span>
-                </a>
             </div>
         </div>
     </div>
@@ -149,10 +212,8 @@
 // Auth nav state — runs on every page
 (function() {
     var AUTH_KEY = 'kartoza_auth';
-    var ERP_BASE = '{{ .Site.Params.erpnextBaseUrl | default "" }}';
-    var IS_LOCAL = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
     function authLogoutUrl() {
-        return (IS_LOCAL && ERP_BASE) ? ERP_BASE + '/api/method/logout' : '/api/auth/logout';
+        return '/api/auth/logout'
     }
 
     function getAuth() {
@@ -182,6 +243,52 @@
 
     // Run on page load
     updateAuthNav();
+
+    function showToast(message, type) {
+        const toast = document.createElement('div');
+        toast.className = 'kartoza-toast is-' + (type || 'danger');
+
+        const text = document.createElement('span');
+        text.textContent = message;
+
+        const btn = document.createElement('button');
+        btn.className = 'kartoza-toast-close';
+        btn.innerHTML = '&#x2715;';
+        btn.setAttribute('aria-label', 'Close');
+
+        function dismiss() {
+            toast.classList.add('is-hiding');
+            setTimeout(function() { toast.remove(); }, 300);
+        }
+
+        btn.addEventListener('click', dismiss);
+        toast.appendChild(text);
+        toast.appendChild(btn);
+        document.body.appendChild(toast);
+        setTimeout(dismiss, 4000);
+    }
+
+    window.checkSession = async function() {
+        var auth = getAuth();
+        if (!auth) return null;
+        const res = await fetch(
+            "/api/method/frappe.auth.get_logged_user",
+            {
+                credentials: "include",
+                cache: "no-store"
+            }
+        );
+
+        if (!res.ok) {
+            clearAuth();
+            updateAuthNav();
+            showToast('Session expired. You have been logged out.', 'warning');
+            throw new Error('Session expired');
+        }
+
+        return await res.json();
+    };
+    checkSession()
 
     // Logout handler
     document.addEventListener('click', function(e) {

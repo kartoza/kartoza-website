@@ -6,10 +6,11 @@ services:
     build:
       context: ..
       dockerfile: deployment/docker/Dockerfile
+    image: kartoza-website:base
     container_name: kartoza-website
     environment:
       - BASE_URL=${BASE_URL:-/}
-      - GATEWAY_ERPNEXT_API_URL=${GATEWAY_ERPNEXT_API_URL:-https://api.do.kartoza.com/erpnext/kartoza-website/api/resource/Lead}
+      - GATEWAY_ERPNEXT_API_URL=${GATEWAY_ERPNEXT_API_URL:-https://api.do.kartoza.com/erpnext/kartoza-website/api}
       - GATEWAY_ERPNEXT_ISSUE_API_URL=${GATEWAY_ERPNEXT_ISSUE_API_URL:-https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.create_support_ticket}
       - ERPNEXT_API_KEY=${ERPNEXT_API_KEY}
       - ERPNEXT_API_SECRET=${ERPNEXT_API_SECRET}
