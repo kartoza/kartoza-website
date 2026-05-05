@@ -1,2 +1,22 @@
 baseURL = 'http://localhost:8000/'
 publishDir = "public_dev"
+
+[params]
+  # Direct ERPNext URL for hugo server dev — bypasses the nginx proxy.
+  # Requires allow_cors in ERPNext site_config.json (see README).
+  erpnextBaseUrl = "https://api.do.kartoza.com/erpnext/kartoza-website"
+
+[[server.routes]]
+  pattern = "/api/auth/login"
+  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/login"
+  status = 200
+
+[[server.routes]]
+  pattern = "/api/auth/logout"
+  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/logout"
+  status = 200
+
+[[server.routes]]
+  pattern = "/api/auth/register"
+  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.sign_up"
+  status = 200

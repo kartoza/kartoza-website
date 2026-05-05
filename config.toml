@@ -39,6 +39,11 @@ enableRobotsTXT = true
   submenu = 'submenus'
 
 [params]
+# ERPNext base URL used when running hugo server locally (no nginx proxy).
+# The JS only uses this URL on localhost — on the real domain nginx proxy is used instead.
+# Uses the same public gateway as production; requires allow_cors in ERPNext site_config.json.
+erpnextBaseUrl = "https://erp.kartoza.com"
+
 # Min hugo version
 minHugoVersion = "0.139.0"
 description = "Kartoza - Open Source Geospatial Solutions"
@@ -333,3 +338,22 @@ matomoSiteId = ''
 
 [outputs]
   home = ["HTML", "RSS", "JSON", "SearchIndex"]
+
+# Hugo dev-server reverse proxy for auth endpoints.
+# Only active when running `hugo server` — nginx handles this in production.
+# Routes /api/auth/* directly to the ERPNext instance so login/logout/register
+# work without needing Docker or nginx running locally.
+[[server.routes]]
+  pattern = "/api/auth/login"
+  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/login"
+  status = 200
+
+[[server.routes]]
+  pattern = "/api/auth/logout"
+  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/logout"
+  status = 200
+
+[[server.routes]]
+  pattern = "/api/auth/register"
+  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.sign_up"
+  status = 200

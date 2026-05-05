@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  hugo-serve:
+    image: kartoza-website:base
+    container_name: kartoza-hugo-serve
+    user: root
+    volumes:
+      - ..:/src
+    working_dir: /src
+    entrypoint: []
+    command: >
+      hugo server
+        --bind 0.0.0.0
+        --port 8000
+        --config config.toml,config/config.dev.toml
+        --baseURL http://localhost:${DEV_PORT:-8080}
+        --appendPort=false
+        --liveReloadPort=${DEV_PORT:-8080}
+
+  hugo-nginx:
+    build:
+      context: ..
+      dockerfile: deployment/docker-dev/Dockerfile
+    container_name: kartoza-hugo-nginx
+    entrypoint: ["/bin/bash", "-c", "/entrypoint.sh && /entrypoint.dev.sh"]
+    environment:
+      - DEV_PORT=${DEV_PORT:-8080}
+      - BASE_URL=${BASE_URL:-/}
+      - GATEWAY_ERPNEXT_API_URL=${GATEWAY_ERPNEXT_API_URL:-https://api.do.kartoza.com/erpnext/kartoza-website/api}
+      - ERPNEXT_API_KEY=${ERPNEXT_API_KEY}
+      - ERPNEXT_API_SECRET=${ERPNEXT_API_SECRET}
+    volumes:
+      - ./nginx/sites-enabled-dev:/etc/nginx/sites-enabled-dev:ro
+    ports:
+      - "${DEV_PORT:-8080}:8080"
+    depends_on:
+      - hugo-serve
+    user: root
