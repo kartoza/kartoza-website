@@ -6,11 +6,11 @@ tags:
   - Plugin
   - Gender
   - Spatial Analysis
-date: 2024-03-23
+date: 2026-05-06
 author: "Jeff Osundwa"
 thumbnail: "/blog/img/geoe3-banner.png"
 reviewedBy: "Jeff Osundwa"
-reviewedDate: "2026-03-23"
+reviewedDate: "2026-04-23"
 ---
 
 {{< block
