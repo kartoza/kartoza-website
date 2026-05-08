@@ -32,15 +32,23 @@ mkdir -p /tmp/nginx/conf.d \
          /tmp/nginx/scgi
 
 # Prepare authentication - encode credentials as Base64 for Basic auth
-ERPNEXT_API_KEY="${ERPNEXT_API_KEY:-dummy_key}"
-ERPNEXT_API_SECRET="${ERPNEXT_API_SECRET:-dummy_secret}"
-GATEWAY_ERPNEXT_API_URL="${GATEWAY_ERPNEXT_API_URL:-${ERPNEXT_API_URL:-https://api.do.kartoza.com/erpnext/kartoza-website/api}}"
+# For gateway
+GATEWAY_ERPNEXT_API_KEY="${GATEWAY_ERPNEXT_API_KEY:-dummy_key}"
+GATEWAY_ERPNEXT_API_SECRET="${GATEWAY_ERPNEXT_API_SECRET:-dummy_secret}"
+GATEWAY_ERPNEXT_API_URL="${GATEWAY_ERPNEXT_API_URL:-https://api.do.kartoza.com/erpnext/kartoza-website/api}"
 
-export erpnext_api_auth_base64=$(echo -n "${ERPNEXT_API_KEY}:${ERPNEXT_API_SECRET}" | base64 -w 0)
+export gateway_erpnext_api_auth_base64=$(echo -n "${GATEWAY_ERPNEXT_API_KEY}:${GATEWAY_ERPNEXT_API_SECRET}" | base64 -w 0)
 export gateway_erpnext_api_url="${GATEWAY_ERPNEXT_API_URL}"
+export gateway_erpnext_api_host=$(echo "${GATEWAY_ERPNEXT_API_URL}" | awk -F/ '{print $3}')
+
+# Prepare authentication - encode credentials as Base64 for Basic auth
+# For erp api
+ERPNEXT_API_URL="${ERPNEXT_API_URL:-https://erp.kartoza.com/api}"
+export erpnext_api_url="${ERPNEXT_API_URL}"
+export erpnext_api_host=$(echo "${ERPNEXT_API_URL}" | awk -F/ '{print $3}')
 
 # Create temporary config with substituted variables in writable location
-envsubst '${erpnext_api_auth_base64} ${gateway_erpnext_api_url}' < /etc/nginx/templates/default.conf.template > /tmp/nginx/conf.d/default.conf
+envsubst '${gateway_erpnext_api_auth_base64} ${gateway_erpnext_api_url} ${gateway_erpnext_api_host} ${erpnext_api_url} ${erpnext_api_host}' < /etc/nginx/templates/default.conf.template > /tmp/nginx/conf.d/default.conf
 
 # Copy redirect rules (no envsubst needed - static config)
 cp /etc/nginx/templates/redirects.conf /tmp/nginx/redirects.conf
