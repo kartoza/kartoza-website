@@ -843,7 +843,8 @@
                 successEl.classList.add('is-visible');
 
                 // Redirect to home or previous page after brief delay
-                const redirectTo =  '/';
+                const next = new URLSearchParams(window.location.search).get('next');
+                const redirectTo = next || '/';
                 setTimeout(() => { window.location.href = redirectTo; }, 1200);
             } else if (response.status === 404) {
                 errorText.textContent = 'ERPNext login endpoint not found (' + apiUrl('login') + '). Check erpnextBaseUrl in config.toml.';

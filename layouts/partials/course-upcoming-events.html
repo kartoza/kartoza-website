@@ -25,11 +25,41 @@
         <span class="location"><i class="fas fa-map-marker-alt"></i> {{ .location }}</span>
       </div>
       {{ $contactUrl := printf "/contact-us/?course=%s&date=%s&location=%s" (.title | urlquery) (.date_display | urlquery) (.location | urlquery) }}
-      <a href="{{ $contactUrl }}" class="button is-small is-primary">Register</a>
+      <div style="display: flex; gap: 0.5rem; flex-direction: column">
+        {{ if .item_code }}
+        <a href="/login/?next={{ $.RelPermalink }}" data-item-code="{{ .item_code }}" class="login-buy button is-small is-primary">Login</a>
+        {{ end }}
+        <a href="{{ $contactUrl }}" class="button is-small">Enquiry</a>
+      </div>
     </div>
     {{ end }}
   </div>
 </div>
+<script>
+  const auth = getAuth()
+  if (auth) {
+    document.querySelectorAll('.login-buy').forEach(el => {
+      const cart = document.createElement('a')
+      cart.id = 'add-cart'
+      cart.className = el.className
+      cart.dataset.itemCode = el.dataset.itemCode
+      cart.textContent = 'Add to cart'
+      cart.addEventListener('click', async function(e) {
+        e.preventDefault()
+        const itemCode = cart.dataset.itemCode
+        cart.classList.add('is-loading')
+        cart.style.pointerEvents = 'none'
+        try {
+          await addCart(itemCode)
+        } finally {
+          cart.classList.remove('is-loading')
+          cart.style.pointerEvents = ''
+        }
+      })
+      el.replaceWith(cart)
+    })
+  }
+</script>
 
 <style>
 .upcoming-events-card h4 {
