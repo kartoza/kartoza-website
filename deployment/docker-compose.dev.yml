@@ -27,9 +27,10 @@ services:
     environment:
       - DEV_PORT=${DEV_PORT:-8080}
       - BASE_URL=${BASE_URL:-/}
+      - ERPNEXT_API_URL=${ERPNEXT_API_URL:-https://erp.kartoza.com/api}
       - GATEWAY_ERPNEXT_API_URL=${GATEWAY_ERPNEXT_API_URL:-https://api.do.kartoza.com/erpnext/kartoza-website/api}
-      - ERPNEXT_API_KEY=${ERPNEXT_API_KEY}
-      - ERPNEXT_API_SECRET=${ERPNEXT_API_SECRET}
+      - GATEWAY_ERPNEXT_API_KEY=${GATEWAY_ERPNEXT_API_KEY}
+      - GATEWAY_ERPNEXT_API_SECRET=${GATEWAY_ERPNEXT_API_SECRET}
     volumes:
       - ./nginx/sites-enabled-dev:/etc/nginx/sites-enabled-dev:ro
     ports:
