@@ -232,8 +232,8 @@ a.navbar-item,
   padding-bottom: 0.5rem
   padding-top: 0.5rem
   .navbar-item
-    padding-left: 1.5rem
-    padding-right: 1.5rem
+    padding-left: 1.5rem!important
+    padding-right: 1.5rem!important
     font-weight: 400 !important
 
 .navbar-divider
@@ -260,6 +260,8 @@ a.navbar-item,
     padding: 0.5rem 0
     &.is-active
       display: block
+    .navbar-item
+      width: 100% !important
   // Fixed navbar
   .navbar
     &.is-fixed-bottom-touch,
@@ -283,6 +285,20 @@ a.navbar-item,
       padding-top: $navbar-height
     &.has-navbar-fixed-bottom-touch
       padding-bottom: $navbar-height
+  #auth-nav-user
+    border-top: 1px solid $border
+  #auth-nav-username
+    display: none
+  .navbar-item
+    padding-left: 1.5rem !important
+    padding-right: 1.5rem !important
+  .navbar-dropdown
+    .navbar-item
+      padding-left: 3rem !important
+  #auth-nav-user
+    padding: 0 !important
+    .navbar-item
+      padding-left: 1.5rem !important
 
 +from($navbar-breakpoint)
   .navbar,
