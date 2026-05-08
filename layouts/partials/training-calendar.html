@@ -63,9 +63,11 @@
                 </a>
                 {{/* Build contact form URL with pre-fill parameters */}}
                 {{ $contactUrl := printf "/contact-us/?course=%s&date=%s&location=%s" (.title | urlquery) (.date_display | default .start | urlquery) (.location | default "Online" | urlquery) }}
-                <a href="{{ $contactUrl }}" class="button is-small is-primary">
-                    <span class="icon"><i class="fas fa-user-plus"></i></span>
-                    <span>Register</span>
+                {{ if .item_code }}
+                <a href="/login/?next={{ $.RelPermalink }}" data-item-code="{{ .item_code }}" class="login-buy button is-small is-primary">Login</a>
+                {{ end }}
+                <a href="{{ $contactUrl }}" class="button is-small">
+                    <span>Enquiry</span>
                 </a>
             </div>
         </div>
@@ -86,6 +88,31 @@
     </div>
     {{ end }}
 </div>
+<script>
+  const auth = getAuth()
+  if (auth) {
+    document.querySelectorAll('.login-buy').forEach(el => {
+      const cart = document.createElement('a')
+      cart.id = 'add-cart'
+      cart.className = el.className
+      cart.dataset.itemCode = el.dataset.itemCode
+      cart.textContent = 'Add to cart'
+      cart.addEventListener('click', async function(e) {
+        e.preventDefault()
+        const itemCode = cart.dataset.itemCode
+        cart.classList.add('is-loading')
+        cart.style.pointerEvents = 'none'
+        try {
+          await addCart(itemCode)
+        } finally {
+          cart.classList.remove('is-loading')
+          cart.style.pointerEvents = ''
+        }
+      })
+      el.replaceWith(cart)
+    })
+  }
+</script>
 
 <style>
 .training-calendar {

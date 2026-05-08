@@ -386,6 +386,7 @@ def save_calendar_data(sessions: list, dry_run: bool = False):
     calendar_events = []
     for session in sessions:
         calendar_events.append({
+            "item_code": session.get("item_code", ""),
             "title": session.get("course_name", "Training"),
             "start": session.get("start_date", ""),
             "end": session.get("end_date", ""),

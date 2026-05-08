@@ -130,6 +130,13 @@
                 </a>
             </div>
 
+            <a id="cart-nav-user" href="/erp/cart" class="navbar-item"  title="Cart" style="display:flex; align-items:center; padding: 0 0.5rem; color: #0a0a0a">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
+            </a>
             <div id="auth-nav-user" class="navbar-item has-dropdown is-hoverable" style="display:none">
                 <a class="navbar-link" id="auth-nav-username" style="font-weight: 600;">
                     <span class="icon is-small" style="margin-right: 0.3rem;"><i class="fas fa-user-circle"></i></span>
@@ -243,6 +250,7 @@
         var auth = getAuth();
         var loginEl = document.getElementById('auth-nav-login');
         var userEl = document.getElementById('auth-nav-user');
+        var cartEl = document.getElementById('cart-nav-user');
         var nameEl = document.getElementById('auth-nav-name-text');
 
         if (!loginEl || !userEl) return;
@@ -250,10 +258,12 @@
         if (auth && auth.loggedIn) {
             loginEl.style.display = 'none';
             userEl.style.display = '';
+            cartEl.style.display = '';
             if (nameEl) nameEl.textContent = auth.fullName || auth.email || 'Account';
         } else {
             loginEl.style.display = '';
             userEl.style.display = 'none';
+            cartEl.style.display = 'none';
         }
     };
 
@@ -317,5 +327,33 @@
         window.location.href = '/';
     });
 
+    window.addCart = async function(itemCode) {
+        let data
+        try {
+            const response = await fetch('/api/method/webshop.webshop.shopping_cart.cart.update_cart', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    item_code: itemCode,
+                    qty: 1,
+                    with_items: 0
+                })
+            })
+            if (!response.ok) {
+                throw new Error('Failed to add to cart')
+            }
+            data = await response.json()
+        } catch (err) {
+            showToast('Failed to add to cart. Please try again.', 'danger')
+            throw err
+        }
+        if (data.exc || data.exception) {
+            showToast(data.message || 'Failed to add to cart.', 'danger')
+            throw new Error(data.exc || data.exception)
+        }
+        showToast('Added to cart!', 'success')
+        return data
+    }
 })();
 </script>
