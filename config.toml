@@ -282,6 +282,12 @@ matomoSiteId = ''
   url = "/portfolio/"
   weight = 30
 
+[[menu.footer]]
+  parent = "Navigate"
+  name = "Policies"
+  url = "/policies/"
+  weight = 40
+
 # -- Services column --
 [[menu.footer]]
   name = "Services"
