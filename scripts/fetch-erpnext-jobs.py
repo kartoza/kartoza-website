@@ -24,6 +24,7 @@ Usage:
     ./fetch-erpnext-jobs.py --verbose    # Verbose output
 """
 
+import json
 import os
 import re
 import sys
@@ -157,8 +158,8 @@ def fetch_job_openings() -> list:
 
     url = f"{ERPNEXT_URL}/api/resource/Job Opening"
     params = {
-        'fields': str(fields),
-        'filters': str(filters),
+        'fields': json.dumps(fields),
+        'filters': json.dumps(filters),
         'limit_page_length': 100,
         'order_by': 'creation desc',
     }
