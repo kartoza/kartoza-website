@@ -4,7 +4,7 @@ description: "A hands-on course covering spatial database concepts and practices
 thumbnail: "/img/courses/postgis.svg"
 duration: "2 Days"
 level: "Intermediate"
-track: "Desktop GIS"
+track: "Spatial Databases"
 trackOrder: 2
 weight: 3
 tags:
