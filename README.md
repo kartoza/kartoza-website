@@ -611,4 +611,6 @@ This project was originally derived from the [QGIS Hugo Website Theme](https://g
 
 <p align="center">
   <sub>🌍 Empowering the world with Open Source Geospatial Solutions since 2008.</sub>
+  <br>
+  <sub>v3.0.1</sub>
 </p>

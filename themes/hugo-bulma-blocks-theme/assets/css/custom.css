@@ -26,16 +26,7 @@ button.button {
 }
 
 a.heading-anchor {
-  visibility: hidden;
-}
-
-h1:hover > a.heading-anchor,
-h2:hover > a.heading-anchor,
-h3:hover > a.heading-anchor,
-h4:hover > a.heading-anchor,
-h5:hover > a.heading-anchor,
-h6:hover > a.heading-anchor {
-  visibility: visible;
+  display: none;
 }
 
 /**
@@ -244,4 +235,12 @@ section.is-fluid > .container.is-fluid {
 
 .page-under-review .subtitle {
     color: #4a5568;
+}
+
+.navbar-dropdown{
+    padding-right: 15px;
+}
+
+.icon.is-small{
+    padding-right: 10px;
 }

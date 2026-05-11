@@ -84,7 +84,13 @@ function populateResults(results) {
     // Pull template from Hugo template definition
     var templateDefinition = document.getElementById("search-result-template").innerHTML;
 
+    // Deduplicate results by permalink
+    var seenLinks = new Set();
     results.forEach(function (value, key) {
+        if (seenLinks.has(value.item.permalink)) {
+            return;
+        }
+        seenLinks.add(value.item.permalink);
         var contents = value.item.contents;
         var snippet = "";
         var snippetHighlights = [];

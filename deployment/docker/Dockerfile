@@ -16,6 +16,7 @@ COPY . /src
 
 COPY deployment/nginx/sites-enabled/nginx.conf /etc/nginx/nginx.conf
 COPY deployment/nginx/sites-enabled/default.conf /etc/nginx/templates/default.conf.template
+COPY deployment/nginx/sites-enabled/redirects.conf /etc/nginx/templates/redirects.conf
 
 # Create entrypoint script
 COPY deployment/docker/entrypoint.sh /entrypoint.sh
