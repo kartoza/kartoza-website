@@ -30,9 +30,9 @@
       "Bash(head:*)",
       "Bash(gh pr checks:*)",
       "Bash(chmod:*)",
-      "Bash(python3 -c \"import py_compile; py_compile.compile\\(''scripts/fetch-erpnext-jobs.py'', doraise=True\\)\")",
-      "Bash(python3 -c \"import py_compile; py_compile.compile\\(''scripts/fetch-erpnext-portfolio.py'', doraise=True\\)\")",
-      "Bash(python3 -c \"import py_compile; py_compile.compile\\(''scripts/sync-erpnext-content.py'', doraise=True\\)\")",
+      "Bash(python3 -c \"import py_compile; py_compile.compile\\('scripts/fetch-erpnext-jobs.py', doraise=True\\)\")",
+      "Bash(python3 -c \"import py_compile; py_compile.compile\\('scripts/fetch-erpnext-portfolio.py', doraise=True\\)\")",
+      "Bash(python3 -c \"import py_compile; py_compile.compile\\('scripts/sync-erpnext-content.py', doraise=True\\)\")",
       "Bash(make help:*)"
     ],
     "deny": [],
