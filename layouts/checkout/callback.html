@@ -1,0 +1,162 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+
+<style>
+.callback-section {
+    padding: 6rem 1.5rem;
+    background: #f7f9fb;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+}
+.callback-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    padding: 3rem 2rem;
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto;
+    width: 100%;
+}
+.callback-icon {
+    font-size: 4rem;
+    margin-bottom: 1.25rem;
+}
+.callback-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1a2a3a;
+    margin-bottom: 0.5rem;
+}
+.callback-text {
+    color: #4d6370;
+    margin-bottom: 1.75rem;
+}
+.callback-ref {
+    background: #f0f8ff;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    display: inline-block;
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: #1a2a3a;
+    margin-bottom: 1.5rem;
+}
+.callback-icon.success { color: #27ae60; }
+.callback-icon.error   { color: #E55B3C; }
+.callback-icon.loading { color: #3B9DD9; }
+</style>
+
+<section class="callback-section">
+    <div class="container">
+        <div class="callback-card">
+            <div class="callback-icon loading" id="cb-icon"><i class="fas fa-spinner fa-spin"></i></div>
+            <div class="callback-title" id="cb-title">Processing your payment&hellip;</div>
+            <p class="callback-text" id="cb-text">Please wait while we confirm your order.</p>
+            <div id="cb-ref" class="callback-ref" style="display:none"></div>
+            <div id="cb-actions" style="display:none; gap:1rem; justify-content:center; flex-wrap:wrap;"></div>
+        </div>
+    </div>
+</section>
+
+<script>
+(function () {
+    function setIcon(type, iconClass) {
+        var el = document.getElementById('cb-icon');
+        if (!el) return;
+        el.className = 'callback-icon ' + type;
+        el.innerHTML = '<i class="' + iconClass + '"></i>';
+    }
+
+    function showSuccess(salesOrder, salesInvoice) {
+        setIcon('success', 'fas fa-check-circle');
+        document.getElementById('cb-title').textContent = 'Payment successful!';
+        document.getElementById('cb-text').textContent = 'Your order has been confirmed. A confirmation email will be sent shortly.';
+
+        var refEl = document.getElementById('cb-ref');
+        if (refEl) {
+            var lines = [];
+            if (salesOrder) lines.push('Order: ' + salesOrder);
+            if (salesInvoice) lines.push('Invoice: ' + salesInvoice);
+            if (lines.length) { refEl.textContent = lines.join('  |  '); refEl.style.display = ''; }
+        }
+
+        try { localStorage.setItem('kartoza_cart_count', '0'); } catch (e) {}
+        if (typeof updateCartBadge === 'function') updateCartBadge(0);
+
+        var actions = document.getElementById('cb-actions');
+        if (actions) {
+            actions.innerHTML =
+                '<a href="/training-courses/" class="button is-primary is-medium">' +
+                    '<span class="icon"><i class="fas fa-graduation-cap"></i></span>' +
+                    '<span>Browse More Courses</span>' +
+                '</a>' +
+                '<a href="/contact-us/" class="button is-medium">Contact Us</a>';
+            actions.style.display = 'flex';
+        }
+    }
+
+    function showError(message, reference) {
+        setIcon('error', 'fas fa-exclamation-circle');
+        document.getElementById('cb-title').textContent = 'Something went wrong';
+        document.getElementById('cb-text').textContent = message || 'Your payment could not be confirmed. Please contact support.';
+
+        var refEl = document.getElementById('cb-ref');
+        if (refEl && reference) {
+            refEl.textContent = 'Payment reference: ' + reference;
+            refEl.style.display = '';
+        }
+
+        var actions = document.getElementById('cb-actions');
+        if (actions) {
+            actions.innerHTML =
+                '<button class="button is-primary" onclick="window.location.href=\'/checkout/\'">' +
+                    '<span class="icon"><i class="fas fa-redo"></i></span><span>Try Again</span>' +
+                '</button>' +
+                '<a href="/contact-us/?subject=Payment+Issue&ref=' + encodeURIComponent(reference || '') + '" class="button">Contact Support</a>';
+            actions.style.display = 'flex';
+        }
+    }
+
+    async function processCallback() {
+        var params = new URLSearchParams(window.location.search);
+        // Paystack sends both `reference` and `trxref` (they are the same value).
+        var reference = params.get('reference') || params.get('trxref');
+
+        if (!reference) {
+            showError('No payment reference found in the callback URL.', '');
+            return;
+        }
+
+        try {
+            var r = await fetch('/api/method/kartoza_custom.api.complete_checkout', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ paystack_reference: reference }),
+            });
+
+            var data = await r.json();
+
+            if (!r.ok || data.exc || data.exception) {
+                var msg = (data.message && typeof data.message === 'string')
+                    ? data.message
+                    : 'Your payment was received but the order could not be confirmed automatically.';
+                showError(msg, reference);
+                return;
+            }
+
+            var result = data.message || {};
+            showSuccess(result.sales_order, result.sales_invoice);
+
+        } catch (e) {
+            showError('An unexpected error occurred while confirming your order.', reference);
+        }
+    }
+
+    processCallback();
+})();
+</script>
+
+{{ partial "footer.html" . }}

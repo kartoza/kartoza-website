@@ -1,0 +1,479 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+
+<style>
+.callback-section {
+    padding: 5rem 1.5rem 6rem;
+    background: #f7f9fb;
+    min-height: 70vh;
+}
+.callback-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    padding: 3rem 2rem;
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto;
+    width: 100%;
+}
+.callback-card + .callback-card {
+    margin-top: 1.5rem;
+}
+.callback-icon {
+    font-size: 4rem;
+    margin-bottom: 1.25rem;
+}
+.callback-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1a2a3a;
+    margin-bottom: 0.5rem;
+}
+.callback-text {
+    color: #4d6370;
+    margin-bottom: 1.75rem;
+}
+.callback-ref {
+    background: #f0f8ff;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    display: inline-block;
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: #1a2a3a;
+    margin-bottom: 1.5rem;
+}
+.callback-icon.success { color: #27ae60; }
+.callback-icon.error   { color: #E55B3C; }
+.callback-icon.loading { color: #3B9DD9; }
+
+/* Moodle registration form */
+.moodle-course-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #eaf4fd;
+    color: #1a6fa0;
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+.moodle-field {
+    margin-bottom: 0.75rem;
+    text-align: left;
+}
+.moodle-field label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #4d6370;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.3rem;
+}
+.moodle-field input {
+    width: 100%;
+    padding: 0.6rem 0.85rem;
+    border: 1.5px solid #d4dbe2;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    color: #1a2a3a;
+    background: #fff;
+    box-sizing: border-box;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+.moodle-field input:focus {
+    outline: none;
+    border-color: #3B9DD9;
+    box-shadow: 0 0 0 3px rgba(59,157,217,0.12);
+}
+.moodle-field input[readonly] {
+    background: #f5f7f9;
+    color: #6b7b8d;
+    cursor: default;
+}
+.moodle-field-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+@media (max-width: 480px) { .moodle-field-grid { grid-template-columns: 1fr; } }
+
+.moodle-result-ok {
+    background: #f0fff4;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    color: #1a4d2e;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+.moodle-result-err {
+    background: #fff8f0;
+    border: 1px solid #ffd09b;
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    color: #7a3d00;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+.moodle-course-section {
+    border: 1px solid #e8ecf0;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+.moodle-section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+}
+.moodle-qty-badge {
+    background: #e8f4fd;
+    color: #1a6fa0;
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+.moodle-person-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #4d6370;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.4rem;
+}
+.moodle-enrollee {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.moodle-enrollee:first-child { padding-top: 0; }
+.moodle-enrollee:last-child { border-bottom: none; padding-bottom: 0; }
+</style>
+
+<section class="callback-section">
+    <div class="container">
+
+        <!-- Payment result card -->
+        <div class="callback-card">
+            <div class="callback-icon loading" id="cb-icon"><i class="fas fa-spinner fa-spin"></i></div>
+            <div class="callback-title" id="cb-title">Processing your payment&hellip;</div>
+            <p class="callback-text" id="cb-text">Please wait while we confirm your order.</p>
+            <div id="cb-ref" class="callback-ref" style="display:none"></div>
+            <div id="cb-actions" style="display:none; gap:1rem; justify-content:center; flex-wrap:wrap;"></div>
+        </div>
+
+        <!-- Moodle registration card — populated dynamically by showMoodleCard() -->
+        <div class="callback-card" id="moodle-card" style="display:none; padding:0;"></div>
+
+    </div>
+</section>
+
+<script>
+(function () {
+    var _salesOrder = null;
+
+    /* ── Payment result card ──────────────────────────────────────────── */
+
+    function setIcon(type, iconClass) {
+        var el = document.getElementById('cb-icon');
+        if (!el) return;
+        el.className = 'callback-icon ' + type;
+        el.innerHTML = '<i class="' + iconClass + '"></i>';
+    }
+
+    function showSuccess(result) {
+        _salesOrder = result.sales_order || null;
+
+        setIcon('success', 'fas fa-check-circle');
+        document.getElementById('cb-title').textContent = 'Payment successful!';
+        document.getElementById('cb-text').textContent =
+            'Your order has been confirmed. A confirmation email will be sent shortly.';
+
+        var refEl = document.getElementById('cb-ref');
+        if (refEl) {
+            var lines = [];
+            if (result.sales_order) lines.push('Order: ' + result.sales_order);
+            if (result.sales_invoice) lines.push('Invoice: ' + result.sales_invoice);
+            if (lines.length) { refEl.textContent = lines.join('  |  '); refEl.style.display = ''; }
+        }
+
+        try { localStorage.setItem('kartoza_cart_count', '0'); } catch (e) {}
+        if (typeof updateCartBadge === 'function') updateCartBadge(0);
+
+        var actions = document.getElementById('cb-actions');
+        if (actions) {
+            actions.innerHTML =
+                '<a href="/my-orders/" class="button is-primary is-medium">' +
+                    '<span class="icon"><i class="fas fa-receipt"></i></span>' +
+                    '<span>View My Orders</span>' +
+                '</a>' +
+                '<a href="/training-courses/" class="button is-medium">' +
+                    '<span class="icon"><i class="fas fa-graduation-cap"></i></span>' +
+                    '<span>Browse More Courses</span>' +
+                '</a>';
+            actions.style.display = 'flex';
+        }
+
+        // Show Moodle registration card if there are auto-enroll courses
+        if (result.moodle_courses && result.moodle_courses.length > 0) {
+            showMoodleCard(result.moodle_courses, result.customer_first_name,
+                           result.customer_last_name, result.customer_email);
+        }
+    }
+
+    function showError(message, reference) {
+        setIcon('error', 'fas fa-exclamation-circle');
+        document.getElementById('cb-title').textContent = 'Something went wrong';
+        document.getElementById('cb-text').textContent =
+            message || 'Your payment could not be confirmed. Please contact support.';
+
+        var refEl = document.getElementById('cb-ref');
+        if (refEl && reference) {
+            refEl.textContent = 'Payment reference: ' + reference;
+            refEl.style.display = '';
+        }
+
+        var actions = document.getElementById('cb-actions');
+        if (actions) {
+            actions.innerHTML =
+                '<button class="button is-primary" onclick="window.location.href=\'/checkout/\'">' +
+                    '<span class="icon"><i class="fas fa-redo"></i></span><span>Try Again</span>' +
+                '</button>' +
+                '<a href="/contact-us/?subject=Payment+Issue&ref=' +
+                encodeURIComponent(reference || '') + '" class="button">Contact Support</a>';
+            actions.style.display = 'flex';
+        }
+    }
+
+    /* ── Moodle registration card ─────────────────────────────────────── */
+
+    function escHtml(str) {
+        var d = document.createElement('div');
+        d.appendChild(document.createTextNode(String(str || '')));
+        return d.innerHTML;
+    }
+
+    function showMoodleCard(courses, firstName, lastName, email) {
+        var card = document.getElementById('moodle-card');
+        if (!card) return;
+
+        var totalPlaces = courses.reduce(function(s, c) { return s + (c.qty || 1); }, 0);
+
+        function buildEnrollee(itemCode, fnVal, lnVal, emVal, emReadonly, personLabel) {
+            return (
+                '<div class="moodle-enrollee" data-item-code="' + escHtml(itemCode) + '">' +
+                    (personLabel ? '<div class="moodle-person-label">' + escHtml(personLabel) + '</div>' : '') +
+                    '<div class="moodle-field-grid" style="margin-bottom:0.75rem;">' +
+                        '<div class="moodle-field" style="margin-bottom:0;">' +
+                            '<label>First Name <span style="color:#E55B3C;">*</span></label>' +
+                            '<input type="text" class="moodle-firstname" value="' + escHtml(fnVal) + '" placeholder="First name">' +
+                        '</div>' +
+                        '<div class="moodle-field" style="margin-bottom:0;">' +
+                            '<label>Last Name</label>' +
+                            '<input type="text" class="moodle-lastname" value="' + escHtml(lnVal) + '" placeholder="Last name">' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="moodle-field">' +
+                        '<label>Email <span style="color:#E55B3C;">*</span></label>' +
+                        '<input type="email" class="moodle-email" value="' + escHtml(emVal) + '"' +
+                            (emReadonly ? ' readonly' : '') + ' placeholder="Email address">' +
+                    '</div>' +
+                '</div>'
+            );
+        }
+
+        var sectionsHtml = courses.map(function(c, ci) {
+            var qty = c.qty || 1;
+            var rows = '';
+            for (var i = 0; i < qty; i++) {
+                var isFirst = (ci === 0 && i === 0);
+                var label = qty > 1 ? ('Person ' + (i + 1) + (isFirst ? ' (you)' : '')) : '';
+                rows += buildEnrollee(
+                    c.item_code,
+                    isFirst ? (firstName || '') : '',
+                    isFirst ? (lastName || '') : '',
+                    isFirst ? (email || '') : '',
+                    isFirst,
+                    label
+                );
+            }
+            return (
+                '<div class="moodle-course-section">' +
+                    '<div class="moodle-section-header">' +
+                        '<span class="moodle-course-chip"><i class="fas fa-book-open"></i> ' + escHtml(c.item_name) + '</span>' +
+                        (qty > 1 ? '<span class="moodle-qty-badge">' + qty + ' places</span>' : '') +
+                    '</div>' +
+                    rows +
+                '</div>'
+            );
+        }).join('');
+
+        card.innerHTML = (
+            '<div style="padding:2rem;">' +
+                '<div style="color:#3B9DD9; font-size:3rem; margin-bottom:1rem; text-align:center;">' +
+                    '<i class="fas fa-graduation-cap"></i>' +
+                '</div>' +
+                '<div class="callback-title" style="font-size:1.25rem; text-align:center; margin-bottom:0.5rem;">' +
+                    'Register for Your Course' + (courses.length > 1 || totalPlaces > 1 ? 's' : '') +
+                '</div>' +
+                '<p class="callback-text" style="text-align:center; margin-bottom:1.5rem;">' +
+                    'Confirm details to create Moodle accounts and get access at ' +
+                    '<a href="https://training.kartoza.com" target="_blank" rel="noopener">training.kartoza.com</a>.' +
+                '</p>' +
+                sectionsHtml +
+                '<button id="moodle-submit-btn" class="button is-primary is-fullwidth" type="button"' +
+                    ' style="font-weight:700; margin-top:1.25rem; padding:0.85rem;">' +
+                    '<span class="icon"><i class="fas fa-user-graduate"></i></span>' +
+                    '<span>Register &amp; Enrol' + (totalPlaces > 1 ? ' All' : '') + '</span>' +
+                '</button>' +
+                '<div id="moodle-processing" style="display:none; text-align:center; padding:0.75rem; color:#6b7b8d; font-size:0.88rem;">' +
+                    '<i class="fas fa-spinner fa-spin"></i> Registering accounts&hellip;' +
+                '</div>' +
+                '<div id="moodle-result" style="display:none; margin-top:1rem;"></div>' +
+            '</div>'
+        );
+
+        document.getElementById('moodle-submit-btn').addEventListener('click', submitMoodleRegistration);
+        card.style.display = '';
+        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    async function submitMoodleRegistration() {
+        if (!_salesOrder) return;
+
+        var enrollees = [];
+        var valid = true;
+        var firstInvalid = null;
+
+        document.querySelectorAll('.moodle-enrollee').forEach(function(row) {
+            var fnInput = row.querySelector('.moodle-firstname');
+            var lnInput = row.querySelector('.moodle-lastname');
+            var emInput = row.querySelector('.moodle-email');
+            var fn = (fnInput ? fnInput.value : '').trim();
+            var ln = (lnInput ? lnInput.value : '').trim();
+            var em = (emInput ? emInput.value : '').trim();
+
+            if (!fn || !em) {
+                valid = false;
+                if (!firstInvalid) firstInvalid = !fn ? fnInput : emInput;
+            }
+
+            enrollees.push({ item_code: row.dataset.itemCode, first_name: fn, last_name: ln, email: em });
+        });
+
+        if (!valid) {
+            if (firstInvalid) firstInvalid.focus();
+            return;
+        }
+
+        var btn = document.getElementById('moodle-submit-btn');
+        var proc = document.getElementById('moodle-processing');
+        var resultEl = document.getElementById('moodle-result');
+        if (btn) btn.style.display = 'none';
+        if (proc) proc.style.display = '';
+        if (resultEl) resultEl.style.display = 'none';
+
+        try {
+            var r = await fetch('/api/method/kartoza_custom.api.enrol_in_moodle', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ sales_order: _salesOrder, enrollees: enrollees }),
+            });
+
+            var data = await r.json();
+            if (proc) proc.style.display = 'none';
+
+            if (!r.ok || data.exc || data.exception) {
+                var errMsg = (data.message && typeof data.message === 'string')
+                    ? data.message : 'Enrollment failed. Please contact support.';
+                if (resultEl) {
+                    resultEl.innerHTML = '<div class="moodle-result-err"><strong><i class="fas fa-exclamation-triangle"></i> Enrollment failed</strong><br>' + escHtml(errMsg) + '</div>';
+                    resultEl.style.display = '';
+                }
+                if (btn) btn.style.display = '';
+                return;
+            }
+
+            var res = data.message || {};
+
+            if (res.all_successful) {
+                if (resultEl) {
+                    resultEl.innerHTML =
+                        '<div class="moodle-result-ok"><strong><i class="fas fa-check-circle"></i> All enrolled!</strong><br>' +
+                        'Check the registered email address(es) for login credentials to ' +
+                        '<a href="https://training.kartoza.com" target="_blank" rel="noopener">training.kartoza.com</a>.</div>';
+                    resultEl.style.display = '';
+                }
+            } else {
+                if (resultEl) {
+                    resultEl.innerHTML =
+                        '<div class="moodle-result-err"><strong><i class="fas fa-exclamation-triangle"></i> Some enrollments failed</strong><br>' +
+                        'Please <a href="/contact-us/?subject=Moodle+Enrollment&ref=' + encodeURIComponent(_salesOrder) + '">contact support</a> with your order reference.</div>';
+                    resultEl.style.display = '';
+                }
+                if (btn) {
+                    btn.style.display = '';
+                    var s = btn.querySelector('span:last-child');
+                    if (s) s.textContent = 'Try Again';
+                }
+            }
+
+        } catch (e) {
+            if (proc) proc.style.display = 'none';
+            if (btn) btn.style.display = '';
+            if (resultEl) {
+                resultEl.innerHTML = '<div class="moodle-result-err">An unexpected error occurred. Please try again.</div>';
+                resultEl.style.display = '';
+            }
+        }
+    }
+
+    /* ── Payment callback ─────────────────────────────────────────────── */
+
+    async function processCallback() {
+        var params = new URLSearchParams(window.location.search);
+        var reference = params.get('reference') || params.get('trxref');
+
+        if (!reference) {
+            showError('No payment reference found in the callback URL.', '');
+            return;
+        }
+
+        try {
+            var r = await fetch('/api/method/kartoza_custom.api.complete_checkout', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ paystack_reference: reference }),
+            });
+
+            var data = await r.json();
+
+            if (!r.ok || data.exc || data.exception) {
+                var msg = (data.message && typeof data.message === 'string')
+                    ? data.message
+                    : 'Your payment was received but the order could not be confirmed automatically.';
+                showError(msg, reference);
+                return;
+            }
+
+            showSuccess(data.message || {});
+
+        } catch (e) {
+            showError('An unexpected error occurred while confirming your order.', reference);
+        }
+    }
+
+    processCallback();
+})();
+</script>
+
+{{ partial "footer.html" . }}
