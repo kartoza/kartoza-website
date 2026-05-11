@@ -130,12 +130,13 @@
                 </a>
             </div>
 
-            <a id="cart-nav-user" href="/erp/cart" class="navbar-item"  title="Cart" style="display:flex; align-items:center; padding: 0 0.5rem; color: #0a0a0a">
+            <a id="cart-nav-user" href="/cart/" class="navbar-item" title="Cart" style="display:flex; align-items:center; padding: 0 0.5rem; color: #0a0a0a; position: relative;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
                     <line x1="3" y1="6" x2="21" y2="6"/>
                     <path d="M16 10a4 4 0 0 1-8 0"/>
                 </svg>
+                <span id="cart-count-badge" style="display:none; position:absolute; top:4px; right:2px; background:#E55B3C; color:#fff; font-size:0.6rem; font-weight:700; border-radius:50%; width:16px; height:16px; line-height:16px; text-align:center; pointer-events:none;"></span>
             </a>
             <div id="auth-nav-user" class="navbar-item has-dropdown is-hoverable" style="display:none">
                 <a class="navbar-link" id="auth-nav-username" style="font-weight: 600;">
@@ -245,6 +246,18 @@
 
     function clearAuth() { localStorage.removeItem(AUTH_KEY); }
 
+    window.updateCartBadge = function(count) {
+        var badge = document.getElementById('cart-count-badge');
+        if (!badge) return;
+        var n = parseInt(count, 10) || 0;
+        if (n > 0) {
+            badge.textContent = n > 9 ? '9+' : String(n);
+            badge.style.display = '';
+        } else {
+            badge.style.display = 'none';
+        }
+    };
+
     // Expose updateAuthNav so login page can call it immediately after login
     window.updateAuthNav = function() {
         var auth = getAuth();
@@ -260,6 +273,10 @@
             userEl.style.display = '';
             cartEl.style.display = '';
             if (nameEl) nameEl.textContent = auth.fullName || auth.email || 'Account';
+            try {
+                var stored = localStorage.getItem('kartoza_cart_count');
+                if (stored) updateCartBadge(stored);
+            } catch (e) {}
         } else {
             loginEl.style.display = '';
             userEl.style.display = 'none';
@@ -327,7 +344,8 @@
         window.location.href = '/';
     });
 
-    window.addCart = async function(itemCode) {
+    window.addCart = async function(itemCode, qty) {
+        qty = (qty && qty > 0) ? Math.round(qty) : 1;
         let data
         try {
             const response = await fetch('/api/method/webshop.webshop.shopping_cart.cart.update_cart', {
@@ -336,7 +354,7 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     item_code: itemCode,
-                    qty: 1,
+                    qty: qty,
                     with_items: 0
                 })
             })
@@ -353,6 +371,12 @@
             throw new Error(data.exc || data.exception)
         }
         showToast('Added to cart!', 'success')
+        try {
+            var prev = parseInt(localStorage.getItem('kartoza_cart_count'), 10) || 0;
+            var next = prev + qty;
+            localStorage.setItem('kartoza_cart_count', String(next));
+            updateCartBadge(next);
+        } catch (e) {}
         return data
     }
 })();

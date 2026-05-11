@@ -344,6 +344,31 @@ matomoSiteId = ''
 # Routes /api/auth/* directly to the ERPNext instance so login/logout/register
 # work without needing Docker or nginx running locally.
 [[server.routes]]
+  pattern = "/api/method/kartoza_custom.api.get_cart_items"
+  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.get_cart_items"
+  status = 200
+
+[[server.routes]]
+  pattern = "/api/method/kartoza_custom.api.get_checkout_config"
+  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.get_checkout_config"
+  status = 200
+
+[[server.routes]]
+  pattern = "/api/method/kartoza_custom.api.initialize_paystack_payment"
+  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.initialize_paystack_payment"
+  status = 200
+
+[[server.routes]]
+  pattern = "/api/method/kartoza_custom.api.complete_checkout"
+  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.complete_checkout"
+  status = 200
+
+[[server.routes]]
+  pattern = "/api/method/webshop.webshop.shopping_cart.cart.update_cart"
+  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/webshop.webshop.shopping_cart.cart.update_cart"
+  status = 200
+
+[[server.routes]]
   pattern = "/api/auth/login"
   to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/login"
   status = 200
@@ -361,4 +386,29 @@ matomoSiteId = ''
 [[server.routes]]
   pattern = "/api/support-ticket"
   to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.create_support_ticket"
+  status = 200
+
+[[server.routes]]
+  pattern = "/api/method/kartoza_custom.api.get_my_orders"
+  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.get_my_orders"
+  status = 200
+
+[[server.routes]]
+  pattern = "/api/method/kartoza_custom.api.save_billing_address"
+  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.save_billing_address"
+  status = 200
+
+[[server.routes]]
+  pattern = "/api/method/kartoza_custom.api.enrol_in_moodle"
+  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.enrol_in_moodle"
+  status = 200
+
+[[server.routes]]
+  pattern = "/api/method/kartoza_custom.api.change_email"
+  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.change_email"
+  status = 200
+
+[[server.routes]]
+  pattern = "/api/method/kartoza_custom.api.get_invoice_pdf"
+  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.get_invoice_pdf"
   status = 200
