@@ -384,7 +384,8 @@ def main():
             })
             continue
 
-        filename, status = create_hugo_file(item, content_dir, dry_run=args.dry_run)
+        filename, status = create_hugo_file(item, content_dir, dry_run=args.dry_run,
+                                            force=args.force)
 
         results.append({
             'title': item.get('project_name') or item.get('name', 'Untitled'),
