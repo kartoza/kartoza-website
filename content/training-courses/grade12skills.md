@@ -4,7 +4,7 @@ description: "Four stand-alone, self-paced GIS extension lessons covering the co
 thumbnail: "/img/courses/qgis-introduction.svg"
 duration: "Asynchronous"
 level: "Beginner"
-track: "Education & Schools"
+track: "Foundational"
 trackOrder: 1
 weight: 1
 tags:

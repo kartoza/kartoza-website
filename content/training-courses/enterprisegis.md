@@ -4,7 +4,7 @@ description: "A comprehensive 5-day course covering everything you need to plan,
 thumbnail: "/img/courses/qgis-introduction.svg"
 duration: "5 days"
 level: "Intermediate"
-track: "Custom & Enterprise"
+track: "Development"
 trackOrder: 1
 weight: 1
 tags:

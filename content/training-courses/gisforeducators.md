@@ -4,7 +4,7 @@ description: "A hybrid course for teachers and school-level educators. Build the
 thumbnail: "/img/courses/qgis-introduction.svg"
 duration: "3 Days"
 level: "Beginner"
-track: "Education & Schools"
+track: "Foundational"
 trackOrder: 1
 weight: 1
 tags:
