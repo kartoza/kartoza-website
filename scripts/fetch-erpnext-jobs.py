@@ -2,7 +2,7 @@
 """
 Sync job opportunities from ERPNext to Hugo with fidelity checking.
 
-Fetches published Job Opening records from ERPNext and creates/updates
+Fetches Job Opening records from ERPNext and creates/updates
 Hugo content pages in content/careers/.
 
 Features:
@@ -285,7 +285,9 @@ def sync_job(job: dict, content_dir: Path, dry_run: bool = False,
         result = read_local_file(local_file)
         if result:
             local_frontmatter, local_content = result
-            if check_fidelity(local_content, erpnext_content):
+            # Convert ERPNext HTML to markdown for fair comparison
+            erpnext_markdown = html_to_markdown(erpnext_content)
+            if check_fidelity(local_content, erpnext_markdown):
                 # Content matches - fidelity passed
                 if not local_frontmatter.get('reviewedBy'):
                     if not dry_run:
