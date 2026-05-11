@@ -141,11 +141,15 @@
                 <a class="navbar-link" id="auth-nav-username" style="font-weight: 600;">
                     <span class="icon is-small" style="margin-right: 0.3rem;"><i class="fas fa-user-circle"></i></span>
                 </a>
-                <div class="navbar-dropdown is-right">
+                <div class="navbar-dropdown is-right" style="white-space: nowrap; min-width: max-content;">
                     <a class="navbar-item navbar-item-with-icon" href="{{ "/login/" | absURL }}">
                         <span class="icon is-small"><i class="fas fa-user"></i></span>
                         <span>My Account</span>
                     </a>
+                        <a class="navbar-item" href="{{ "/support-ticket/" | absURL }}">
+                            <span class="icon is-small"><i class="fas fa-headset"></i></span>
+                            <span>Log Support Ticket</span>
+                        </a>
                     <hr class="navbar-divider">
                     <a class="navbar-item navbar-item-with-icon" href="#" id="auth-nav-logout">
                         <span class="icon is-small"><i class="fas fa-sign-out-alt"></i></span>
