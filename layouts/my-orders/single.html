@@ -244,39 +244,6 @@
         }
     }
 
-    async function downloadInvoice(invoiceName, btn) {
-        btn.classList.add('is-loading');
-        btn.disabled = true;
-        try {
-            var r = await fetch(
-                '/api/method/kartoza_custom.api.get_invoice_pdf?invoice_name=' + encodeURIComponent(invoiceName),
-                { credentials: 'include' }
-            );
-            if (!r.ok) throw new Error('fetch failed');
-            var data = await r.json();
-            var res = data.message || {};
-            if (!res.pdf) throw new Error('no pdf');
-
-            var binary = atob(res.pdf);
-            var bytes = new Uint8Array(binary.length);
-            for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-            var blob = new Blob([bytes], { type: 'application/pdf' });
-            var url = URL.createObjectURL(blob);
-            var a = document.createElement('a');
-            a.href = url;
-            a.download = res.filename || (invoiceName + '.pdf');
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        } catch (e) {
-            if (typeof showToast === 'function') showToast('Could not download invoice. Please try again.', 'danger');
-        } finally {
-            btn.classList.remove('is-loading');
-            btn.disabled = false;
-        }
-    }
-
     function renderOrders(orders) {
         var list = document.getElementById('ord-list');
         if (!list) return;
@@ -297,13 +264,19 @@
                 );
             }).join('');
 
+            var pdfHref = '/api/method/frappe.utils.print_format.download_pdf' +
+                '?doctype=Sales+Invoice' +
+                '&name=' + encodeURIComponent(order.invoice || '') +
+                '&format=Kartoza+Without+Timesheet' +
+                '&no_letterhead=0';
+
             var invoiceFooterHtml = order.invoice
                 ? '<div style="display:flex; align-items:center; gap:0.6rem;">' +
                       '<span class="order-invoice-ref">Invoice: ' + escHtml(order.invoice) + '</span>' +
-                      '<button class="button is-small" data-invoice="' + escHtml(order.invoice) + '" title="Download PDF">' +
+                      '<a class="button is-small" href="' + escHtml(pdfHref) + '" target="_blank" rel="noopener" title="Download PDF">' +
                           '<span class="icon is-small"><i class="fas fa-download"></i></span>' +
                           '<span>PDF</span>' +
-                      '</button>' +
+                      '</a>' +
                   '</div>'
                 : '<span></span>';
 
@@ -324,12 +297,6 @@
                 '</div>'
             );
         }).join('');
-
-        list.querySelectorAll('[data-invoice]').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                downloadInvoice(btn.dataset.invoice, btn);
-            });
-        });
 
         showState('ord-state-content');
     }

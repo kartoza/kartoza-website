@@ -407,3 +407,8 @@ matomoSiteId = ''
   pattern = "/api/method/kartoza_custom.api.get_invoice_pdf"
   to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.get_invoice_pdf"
   status = 200
+
+[[server.routes]]
+  pattern = "/api/method/frappe.utils.print_format.download_pdf"
+  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/frappe.utils.print_format.download_pdf"
+  status = 200
