@@ -58,7 +58,7 @@ Kartoza serves as a key technology partner for TomorrowNow, providing software d
 
 ### Platform Development
 
-Kartoza contributes to the architecture and development of the GAP platform, building the backend data pipelines that ingest, process, and serve climate data from sources such as ECMWF, NASA, and national meteorological services. We build the geospatial APIs that power the platform's map-based interfaces and data delivery endpoints.
+Kartoza contributes to the architecture and development of the GAP platform, building the backend data pipelines that ingest, process, and serve climate data from sources such as Google, Salient and national meteorological services. We build the geospatial APIs that power the platform’s map-based interfaces and data delivery endpoints.
 
 ### Data Engineering
 
