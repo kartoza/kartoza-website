@@ -1,0 +1,152 @@
+<footer class="footer-new">
+    <!-- Newsletter & CTA Section -->
+    <div class="footer-cta">
+        <div class="container">
+            <div class="footer-cta-content">
+                <div class="footer-cta-text">
+                    <h3>Ready to Map Your Future?</h3>
+                    <p>Join thousands of organisations using open source geospatial technology to solve real-world problems.</p>
+                </div>
+                <div class="footer-cta-buttons">
+                    <a href="{{ absURL "contact-us/" }}" class="footer-cta-btn footer-cta-primary">
+                        <i class="fas fa-envelope"></i>
+                        Get in Touch
+                    </a>
+                    <a href="{{ absURL "solutions/" }}" class="footer-cta-btn footer-cta-secondary">
+                        <i class="fas fa-th-large"></i>
+                        Our Solutions
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Footer Content -->
+    <div class="footer-main">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Brand Column -->
+                <div class="footer-brand">
+                    <a href="{{ absURL "/" }}" class="footer-logo">
+                        <img src="{{ absURL "img/kartoza-logo.png" }}" alt="Kartoza Logo">
+                    </a>
+                    <p class="footer-tagline">Open Source Geospatial Experts</p>
+                    <p class="footer-description">We are a Free and Open Source GIS service provider with registered offices in South Africa and Portugal. We develop and maintain geographic information systems and train teams to use geospatial software to its full potential.</p>
+
+                    <!-- Social Links -->
+                    <div class="footer-social">
+                        <a href="https://fosstodon.org/@kartoza" target="_blank" rel="me" aria-label="Mastodon" class="social-link">
+                            <i class="fa-brands fa-mastodon"></i>
+                        </a>
+                        <a href="https://bsky.app/profile/kartoza.com" target="_blank" aria-label="Bluesky" class="social-link">
+                            <i class="fa-brands fa-bluesky"></i>
+                        </a>
+                        <a href="https://www.instagram.com/kartozageo/" target="_blank" aria-label="Instagram" class="social-link">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://www.facebook.com/kartozaGIS" target="_blank" aria-label="Facebook" class="social-link">
+                            <i class="fa-brands fa-square-facebook"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/kartoza-pty-ltd" target="_blank" aria-label="LinkedIn" class="social-link">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+                        <a href="https://www.github.com/orgs/kartoza" target="_blank" aria-label="GitHub" class="social-link">
+                            <i class="fa-brands fa-square-github"></i>
+                        </a>
+                        <a href="https://www.youtube.com/user/kartozachannel/feed" target="_blank" aria-label="YouTube" class="social-link">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navigation Columns -->
+                <div class="footer-nav">
+                    {{- range site.Menus.footer }}
+                    <div class="footer-nav-column">
+                        <h4 class="footer-nav-title">{{ .Name }}</h4>
+                        <ul class="footer-nav-list">
+                            {{- range .Children }}
+                            <li>
+                                <a href="{{ .URL }}">{{ .Name }}</a>
+                            </li>
+                            {{- end }}
+                        </ul>
+                    </div>
+                    {{- end }}
+                </div>
+            </div>
+
+            <!-- Regional Offices -->
+            <div class="footer-offices-section">
+                <div class="footer-offices-grid">
+                    <div class="footer-office-card">
+                        <div class="office-flag">
+                            <span class="flag-icon">🇿🇦</span>
+                        </div>
+                        <div class="office-info">
+                            <h5 class="office-region">South Africa</h5>
+                            <p class="office-entity">Kartoza (Pty) Ltd.</p>
+                            <p class="office-location">Cape Town, South Africa</p>
+                            <div class="office-contact">
+                                <a href="mailto:info@kartoza.com">
+                                    <i class="fas fa-envelope"></i>
+                                    info@kartoza.com
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="footer-office-card">
+                        <div class="office-flag">
+                            <span class="flag-icon">🇵🇹</span>
+                        </div>
+                        <div class="office-info">
+                            <h5 class="office-region">Europe</h5>
+                            <p class="office-entity">Kartoza Lda</p>
+                            <p class="office-location">Lisbon, Portugal</p>
+                            <div class="office-contact">
+                                <a href="mailto:info@kartoza.com">
+                                    <i class="fas fa-envelope"></i>
+                                    info@kartoza.com
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="footer-bottom-content">
+                <div class="footer-copyright">
+                    <p>&copy; {{ now.Year }} Kartoza (Pty) Ltd. &amp; Kartoza Lda</p>
+                    <p class="footer-legal-tagline">Mapping a better world with open source</p>
+                </div>
+                <div class="footer-legal-links">
+                    <a href="{{ absURL "contact-us/" }}">Contact</a>
+                    <span class="divider"></span>
+                    <a href="{{ absURL "careers/" }}">Careers</a>
+                    <span class="divider"></span>
+                    <a href="{{ absURL "about/" }}">About</a>
+                </div>
+            </div>
+            {{- $version := site.Params.gitversion -}}
+            {{- $commit := site.Params.gitcommit -}}
+            {{- if or $version $commit }}
+            <div class="footer-build-info" style="text-align: center; padding-top: 0.75rem; margin-top: 0.75rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p style="margin: 0; color: rgba(255,255,255,0.4); font-size: 0.75rem; font-family: monospace;">
+                    {{- with $version }}{{ . }}{{ end -}}
+                    {{- if and $version $commit }} &middot; {{ end -}}
+                    {{- with $commit }}{{ . }}{{ end -}}
+                </p>
+            </div>
+            {{- end }}
+        </div>
+    </div>
+
+    <!-- Decorative Map Pattern -->
+    <div class="footer-map-pattern"></div>
+</footer>

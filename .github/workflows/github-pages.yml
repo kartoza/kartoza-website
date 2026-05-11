@@ -49,6 +49,8 @@ jobs:
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
         run: |
+          HUGO_PARAMS_GITCOMMIT=$(git rev-parse --short HEAD) \
+          HUGO_PARAMS_GITVERSION=$(git describe --tags --always) \
           hugo \
             --config config.toml,config/config.gh-pages.toml \
             --baseURL "${{ steps.pages.outputs.base_url }}/"

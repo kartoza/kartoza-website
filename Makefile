@@ -59,9 +59,13 @@ help:
 
 # Hugo targets
 serve:
+	HUGO_PARAMS_GITCOMMIT=$$(git rev-parse --short HEAD) \
+	HUGO_PARAMS_GITVERSION=$$(git describe --tags --always) \
 	hugo server
 
 build:
+	HUGO_PARAMS_GITCOMMIT=$$(git rev-parse --short HEAD) \
+	HUGO_PARAMS_GITVERSION=$$(git describe --tags --always) \
 	hugo
 
 clean:

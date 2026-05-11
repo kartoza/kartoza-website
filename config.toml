@@ -31,6 +31,7 @@ staticDir = ['static']
 
 # See https://gohugo.io/templates/robots/
 enableRobotsTXT = true
+enableGitInfo = true
 
 [taxonomies]
   category = 'categories'
