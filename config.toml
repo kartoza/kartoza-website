@@ -384,31 +384,6 @@ matomoSiteId = ''
   status = 200
 
 [[server.routes]]
-  pattern = "/api/method/kartoza_custom.api.get_my_orders"
-  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.get_my_orders"
-  status = 200
-
-[[server.routes]]
-  pattern = "/api/method/kartoza_custom.api.save_billing_address"
-  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.save_billing_address"
-  status = 200
-
-[[server.routes]]
-  pattern = "/api/method/kartoza_custom.api.enrol_in_moodle"
-  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.enrol_in_moodle"
-  status = 200
-
-[[server.routes]]
-  pattern = "/api/method/kartoza_custom.api.change_email"
-  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.change_email"
-  status = 200
-
-[[server.routes]]
-  pattern = "/api/method/kartoza_custom.api.get_invoice_pdf"
-  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.get_invoice_pdf"
-  status = 200
-
-[[server.routes]]
-  pattern = "/api/method/frappe.utils.print_format.download_pdf"
-  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/frappe.utils.print_format.download_pdf"
+  pattern = "/api/support-ticket"
+  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.create_support_ticket"
   status = 200
