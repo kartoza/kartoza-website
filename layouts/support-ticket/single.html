@@ -684,16 +684,13 @@
     'use strict';
 
     var AUTH_KEY = 'kartoza_auth';
-    var ERP = window._erpBase || '';
-    var IS_LOCAL = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
     var MAX_FILES = 5;
     var MAX_BYTES = 10 * 1024 * 1024; // 10 MB per file
     var selectedFiles = [];
 
     function ticketApiUrl() {
-        if (IS_LOCAL && ERP) {
-            return ERP + '/api/method/kartoza_custom.api.create_support_ticket';
-        }
+        // Always use same-origin proxy route (Hugo server in dev, nginx in deployment)
+        // to avoid cross-origin request failures from direct ERP calls.
         return '/api/support-ticket';
     }
 
@@ -884,6 +881,7 @@
             var response = await fetch(ticketApiUrl(), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
                 body: JSON.stringify({
                     subject: subject,
                     description: description,
