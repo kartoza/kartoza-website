@@ -10,6 +10,7 @@
 {{ end }}
 
 {{ if $futureEvents }}
+{{/* Scheduled sessions exist — show per-event cart buttons */}}
 <div class="sidebar-card upcoming-events-card">
   <h4><i class="fas fa-calendar-alt"></i> Upcoming Sessions</h4>
   <div class="upcoming-events-list">
@@ -25,11 +26,41 @@
         <span class="location"><i class="fas fa-map-marker-alt"></i> {{ .location }}</span>
       </div>
       {{ $contactUrl := printf "/contact-us/?course=%s&date=%s&location=%s" (.title | urlquery) (.date_display | urlquery) (.location | urlquery) }}
-      <a href="{{ $contactUrl }}" class="button is-small is-primary">Register</a>
+      <div style="display: flex; gap: 0.5rem; flex-direction: column">
+        {{ if .item_code }}
+        <a href="/login/?next={{ $.RelPermalink }}" data-item-code="{{ .item_code }}" class="login-buy button is-small is-primary">Login</a>
+        {{ end }}
+        <a href="{{ $contactUrl }}" class="button is-small">Enquiry</a>
+      </div>
     </div>
     {{ end }}
   </div>
 </div>
+<script>
+  const auth = getAuth()
+  if (auth) {
+    document.querySelectorAll('.login-buy').forEach(el => {
+      const cart = document.createElement('a')
+      cart.id = 'add-cart'
+      cart.className = el.className
+      cart.dataset.itemCode = el.dataset.itemCode
+      cart.textContent = 'Add to cart'
+      cart.addEventListener('click', async function(e) {
+        e.preventDefault()
+        const itemCode = cart.dataset.itemCode
+        cart.classList.add('is-loading')
+        cart.style.pointerEvents = 'none'
+        try {
+          await addCart(itemCode)
+        } finally {
+          cart.classList.remove('is-loading')
+          cart.style.pointerEvents = ''
+        }
+      })
+      el.replaceWith(cart)
+    })
+  }
+</script>
 
 <style>
 .upcoming-events-card h4 {
@@ -118,4 +149,39 @@
   flex-shrink: 0;
 }
 </style>
+{{ else if .Params.item_code }}
+{{/* No scheduled events but course has an item_code — self-paced / async purchase */}}
+<div class="sidebar-card upcoming-events-card">
+  <h4><i class="fas fa-infinity"></i> Self-Paced Course</h4>
+  <p style="font-size: 0.875rem; color: #4d6370; margin-bottom: 1rem;">
+    Start any time — work through the material at your own pace.
+  </p>
+  <div style="display: flex; gap: 0.5rem; flex-direction: column">
+    <a href="/login/?next={{ .RelPermalink }}" data-item-code="{{ .Params.item_code }}" class="login-buy button is-primary">Login to Buy</a>
+    <a href="{{ printf "/contact-us/?course=%s&subject=Course%%20Enquiry" (.Title | urlquery) }}" class="button">Enquiry</a>
+  </div>
+</div>
+<script>
+  (function() {
+    const auth = getAuth()
+    if (!auth) return
+    document.querySelectorAll('.login-buy').forEach(function(el) {
+      const btn = document.createElement('button')
+      btn.className = el.className
+      btn.dataset.itemCode = el.dataset.itemCode
+      btn.textContent = 'Add to Cart'
+      btn.addEventListener('click', async function() {
+        btn.classList.add('is-loading')
+        btn.disabled = true
+        try {
+          await addCart(btn.dataset.itemCode)
+        } finally {
+          btn.classList.remove('is-loading')
+          btn.disabled = false
+        }
+      })
+      el.replaceWith(btn)
+    })
+  })()
+</script>
 {{ end }}

@@ -58,6 +58,22 @@
     .kartoza-toast.is-warning { background: #e67e22; }
     .kartoza-toast.is-danger  { background: #e74c3c; }
     .kartoza-toast.is-success { background: #27ae60; }
+
+    #auth-nav-username {
+      padding: 0 !important;
+    }
+    #auth-nav-username::after {
+        display: none;
+    }
+    #auth-nav-username .icon {
+        height: 3rem;
+        width: 3rem;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+    #auth-nav-username i {
+        font-size: 1.5rem;
+    }
 </style>
 <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="container">
@@ -108,12 +124,20 @@
 
             <!-- Auth nav - state managed by JS based on localStorage -->
             <div id="auth-nav-login" class="navbar-item" style="display:none">
-                <a href="{{ "/login/" | absURL }}" style="color: inherit; ">
+                <a href="{{ "/login/" | absURL }}?next={{ .RelPermalink }}" style="color: inherit; ">
                     <span class="icon is-small"><i class="fas fa-sign-in-alt"></i></span>
                     <span>Login</span>
                 </a>
             </div>
 
+            <a id="cart-nav-user" href="/cart/" class="navbar-item" title="Cart" style="display:flex; align-items:center; padding: 0 0.5rem; color: #0a0a0a; position: relative;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
+                <span id="cart-count-badge" style="display:none; position:absolute; top:4px; right:2px; background:#E55B3C; color:#fff; font-size:0.6rem; font-weight:700; border-radius:50%; width:16px; height:16px; line-height:16px; text-align:center; pointer-events:none;"></span>
+            </a>
             <div id="auth-nav-user" class="navbar-item has-dropdown is-hoverable" style="display:none">
                 <a class="navbar-link" id="auth-nav-username" style="font-weight: 600;">
                     <span class="icon is-small" style="margin-right: 0.3rem;"><i class="fas fa-user-circle"></i></span>
@@ -216,17 +240,30 @@
         return '/api/auth/logout'
     }
 
-    function getAuth() {
+    window.getAuth = function () {
         try { return JSON.parse(localStorage.getItem(AUTH_KEY)); } catch(e) { return null; }
     }
 
     function clearAuth() { localStorage.removeItem(AUTH_KEY); }
+
+    window.updateCartBadge = function(count) {
+        var badge = document.getElementById('cart-count-badge');
+        if (!badge) return;
+        var n = parseInt(count, 10) || 0;
+        if (n > 0) {
+            badge.textContent = n > 9 ? '9+' : String(n);
+            badge.style.display = '';
+        } else {
+            badge.style.display = 'none';
+        }
+    };
 
     // Expose updateAuthNav so login page can call it immediately after login
     window.updateAuthNav = function() {
         var auth = getAuth();
         var loginEl = document.getElementById('auth-nav-login');
         var userEl = document.getElementById('auth-nav-user');
+        var cartEl = document.getElementById('cart-nav-user');
         var nameEl = document.getElementById('auth-nav-name-text');
 
         if (!loginEl || !userEl) return;
@@ -234,17 +271,23 @@
         if (auth && auth.loggedIn) {
             loginEl.style.display = 'none';
             userEl.style.display = '';
+            cartEl.style.display = '';
             if (nameEl) nameEl.textContent = auth.fullName || auth.email || 'Account';
+            try {
+                var stored = localStorage.getItem('kartoza_cart_count');
+                if (stored) updateCartBadge(stored);
+            } catch (e) {}
         } else {
             loginEl.style.display = '';
             userEl.style.display = 'none';
+            cartEl.style.display = 'none';
         }
     };
 
     // Run on page load
     updateAuthNav();
 
-    function showToast(message, type) {
+    window.showToast = function (message, type) {
         const toast = document.createElement('div');
         toast.className = 'kartoza-toast is-' + (type || 'danger');
 
@@ -300,5 +343,41 @@
         updateAuthNav();
         window.location.href = '/';
     });
+
+    window.addCart = async function(itemCode, qty) {
+        qty = (qty && qty > 0) ? Math.round(qty) : 1;
+        let data
+        try {
+            const response = await fetch('/api/method/webshop.webshop.shopping_cart.cart.update_cart', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    item_code: itemCode,
+                    qty: qty,
+                    with_items: 0
+                })
+            })
+            if (!response.ok) {
+                throw new Error('Failed to add to cart')
+            }
+            data = await response.json()
+        } catch (err) {
+            showToast('Failed to add to cart. Please try again.', 'danger')
+            throw err
+        }
+        if (data.exc || data.exception) {
+            showToast(data.message || 'Failed to add to cart.', 'danger')
+            throw new Error(data.exc || data.exception)
+        }
+        showToast('Added to cart!', 'success')
+        try {
+            var prev = parseInt(localStorage.getItem('kartoza_cart_count'), 10) || 0;
+            var next = prev + qty;
+            localStorage.setItem('kartoza_cart_count', String(next));
+            updateCartBadge(next);
+        } catch (e) {}
+        return data
+    }
 })();
 </script>
