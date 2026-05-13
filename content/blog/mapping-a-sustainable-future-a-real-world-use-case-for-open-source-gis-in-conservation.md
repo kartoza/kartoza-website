@@ -8,7 +8,7 @@ reviewedBy: Automated Check
 reviewedDate: '2026-04-27'
 tags:
 - GIS
-thumbnail: "/blog/img/your-image-name.png"
+thumbnail: "/blog/img/cplusscreen.png"
 title: 'Mapping a Sustainable Future: A Real-World Use Case for Open-Source GIS in Conservation'
 ---
 
