@@ -4,8 +4,8 @@ date: '2026-05-12'
 description: Explore real-world use cases of open-source GIS in conservation. Learn how Kartoza builds custom FOSS tools to help organisations manage spatial data.
 erpnext_id: /blog/gis/mapping-a-sustainable-future-a-real-world-use-case-for-open-source-gis-in-conservation
 erpnext_modified: '2026-05-13'
-reviewedBy: Automated Check
-reviewedDate: '2026-04-27'
+reviewedBy: "Lené van Jaarsveld"
+reviewedDate: '2026-05-14'
 tags:
 - GIS
 thumbnail: "/blog/img/cplusscreen.png"
@@ -25,6 +25,7 @@ The challenge? Nature is complex, dynamic, and spans massive geographic scales. 
 For many NGOs and environmental agencies operating on tight budgets, traditional proprietary GIS software presents a massive roadblock. Expensive licensing fees eat into funds that should be spent on actual conservation efforts on the ground. Conservation efforts should not be hindered by vendor lock-in.
 
 ## The Spatial Challenges in Conservation
+
 When we consult with environmental organisations, they typically face a unique set of geospatial hurdles:
 
 - **Complex Multi-Criteria Analysis**: Deciding which plot of land to protect requires weighing dozens of variables, including carbon sequestration potential, species richness, water catchment impact, and economic opportunity costs.
@@ -32,10 +33,13 @@ When we consult with environmental organisations, they typically face a unique s
 - **Budget Constraints**: Scaling up a proprietary GIS infrastructure to accommodate hundreds of users across a global NGO often becomes financially unviable.
 
 ## The Kartoza Solution: FOSS GIS for the Planet
+
 By utilising enterprise-grade open-source tools, Kartoza builds robust Spatial Data Infrastructures (SDIs) that give conservationists the analytical power they need without the recurring licensing traps. A typical conservation SDI architecture includes PostGIS for heavy database management, GeoServer for secure web publishing, and QGIS as the primary desktop analytical tool.
 
 ## Real-World Impact: Kartoza’s Conservation Portfolio
+
 We build custom solutions tailored to specific environmental needs. Here are a few examples of how we have partnered with global NGOs to build bespoke, open-source conservation tools:
+
 - **The CPLUS QGIS Plugin**: Developed in collaboration with Conservation International, the Climate Positive Land Use Strategy (CPLUS) tool helps planners identify the most critical areas for conservation investment. It aggregates complex environmental, social, and economic datasets to highlight exactly where land protection will yield the highest climate and biodiversity returns.
 
 ![View of the CPLUS QGIS Plugin](/blog/img/cplusscreen.png)
@@ -53,6 +57,7 @@ We build custom solutions tailored to specific environmental needs. Here are a f
 ![View of BIMS instance for the Freshwater Biodiversity Information Management System](/blog/img/bimstools.png)
 
 ## Expert Support for Mission-Critical Work
+
 When you are tracking poachers, monitoring wildfires, or presenting data to policymakers, your infrastructure cannot fail.
 
 Kartoza provides comprehensive commercial support packages for QGIS, PostGIS, GeoServer, and more, offering the safety net that enterprise organisations require. We handle the heavy lifting, from cloud hosting and server maintenance to custom Python development and team training, so conservationists can focus on their mission.
