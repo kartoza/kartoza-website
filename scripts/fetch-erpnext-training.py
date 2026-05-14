@@ -195,7 +195,7 @@ def fetch_website_item_details(item_name: str) -> dict:
 def fetch_item_variants(item_code: str) -> dict:
     """Fetch variant attributes (dates/venues) for an item."""
     try:
-        url = f"{ERPNEXT_URL}/api/method/webshop.webshop.variant_selector.utils.get_attributes_and_values"
+        url = f"{ERPNEXT_URL}/api/method/kartoza_custom.api.get_attributes_and_values"
         params = {"item_code": item_code}
         response = requests.get(url, params=params, timeout=30)
         if response.status_code == 200:
@@ -261,39 +261,31 @@ def fetch_all_scheduled_sessions() -> list:
         if not variants:
             continue
 
-        # Extract dates and venues from variants
-        dates = []
-        venues = []
-
         for attr in variants:
-            attr_name = attr.get("attribute", "").lower()
-            values = attr.get("values", [])
+            display_date = attr.get("display_date", "")
+            variant_code = attr.get("name", "")
+            venue = attr.get("venue", "Online")
+            if not display_date or not venue:
+                continue
 
-            if "date" in attr_name:
-                dates = values
-            elif "venue" in attr_name or "location" in attr_name:
-                venues = values
+            start_date, end_date = parse_date_range(display_date)
+            if not start_date:
+                continue
 
-        # Default venue if none specified
-        if not venues:
-            venues = ["Online"]
+            if start_date <= datetime.today().strftime("%Y-%m-%d"):
+                continue
 
-        # Create session entries for each date
-        for date_str in dates:
-            start_date, end_date = parse_date_range(date_str)
-            if start_date:
-                for venue in venues:
-                    all_sessions.append({
-                        "course_name": course.get("name", ""),
-                        "course_slug": course.get("slug", ""),
-                        "item_code": item_code,
-                        "date_display": date_str,
-                        "start_date": start_date,
-                        "end_date": end_date,
-                        "location": venue.title() if venue else "Online",
-                        "shop_url": f"{ERPNEXT_URL}/shop/product/{course.get('raw_slug', course.get('slug', ''))}"
-                    })
-
+            all_sessions.append({
+                "course_name": course.get("name", ""),
+                "course_slug": course.get("slug", ""),
+                "item_code": variant_code,
+                "date_display": display_date,
+                "start_date": start_date,
+                "end_date": end_date,
+                "location": venue.title() if venue else "Online",
+                "shop_url": f"{ERPNEXT_URL}/shop/product/{course.get('raw_slug', course.get('slug', ''))}"
+            })
+    all_sessions.sort(key=lambda s: s["start_date"])
     return all_sessions
 
 

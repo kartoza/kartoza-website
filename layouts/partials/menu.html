@@ -58,6 +58,22 @@
     .kartoza-toast.is-warning { background: #e67e22; }
     .kartoza-toast.is-danger  { background: #e74c3c; }
     .kartoza-toast.is-success { background: #27ae60; }
+
+    #auth-nav-username {
+      padding: 0 !important;
+    }
+    #auth-nav-username::after {
+        display: none;
+    }
+    #auth-nav-username .icon {
+        height: 3rem;
+        width: 3rem;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+    #auth-nav-username i {
+        font-size: 1.5rem;
+    }
 </style>
 <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="container">
@@ -108,7 +124,7 @@
 
             <!-- Auth nav - state managed by JS based on localStorage -->
             <div id="auth-nav-login" class="navbar-item" style="display:none">
-                <a href="{{ "/login/" | absURL }}" style="color: inherit; ">
+                <a href="{{ "/login/" | absURL }}?next={{ .RelPermalink }}" style="color: inherit; ">
                     <span class="icon is-small"><i class="fas fa-sign-in-alt"></i></span>
                     <span>Login</span>
                 </a>
@@ -216,7 +232,7 @@
         return '/api/auth/logout'
     }
 
-    function getAuth() {
+    window.getAuth = function () {
         try { return JSON.parse(localStorage.getItem(AUTH_KEY)); } catch(e) { return null; }
     }
 
@@ -244,7 +260,7 @@
     // Run on page load
     updateAuthNav();
 
-    function showToast(message, type) {
+    window.showToast = function (message, type) {
         const toast = document.createElement('div');
         toast.className = 'kartoza-toast is-' + (type || 'danger');
 
@@ -300,5 +316,6 @@
         updateAuthNav();
         window.location.href = '/';
     });
+
 })();
 </script>

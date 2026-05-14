@@ -1,5 +1,6 @@
 ---
 title: "Grade 12 GIS SKills - Geography"
+item_code: "GR 12 GIS Course"
 description: "Four stand-alone, self-paced GIS extension lessons covering the complete Grade 12 Geography curriculum. Each lesson includes an instructional video, notes, GIS data, and a marking guide — ready for SBA task submissions and exam preparation."
 thumbnail: "/img/courses/qgis-introduction.svg"
 duration: "Asynchronous"
@@ -12,6 +13,8 @@ tags:
   - Geography
   - Curriculum
 date: 2024-01-01
+reviewedBy: "Lené van Jaarsveld"
+reviewedDate: '2026-05-14'
 ---
 
 ## Course Overview
@@ -69,7 +72,6 @@ Each lesson comes with an instructional video, written notes, GIS data, and a ma
 - Beginner friendly — no prior GIS experience required
 - Basic computer literacy (learner or teacher)
 - QGIS installed on your computer (free — installation guidance included)
-
 
 ## What You Receive
 
