@@ -344,31 +344,6 @@ matomoSiteId = ''
 # Routes /api/auth/* directly to the ERPNext instance so login/logout/register
 # work without needing Docker or nginx running locally.
 [[server.routes]]
-  pattern = "/api/method/kartoza_custom.api.get_cart_items"
-  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.get_cart_items"
-  status = 200
-
-[[server.routes]]
-  pattern = "/api/method/kartoza_custom.api.get_checkout_config"
-  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.get_checkout_config"
-  status = 200
-
-[[server.routes]]
-  pattern = "/api/method/kartoza_custom.api.initialize_paystack_payment"
-  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.initialize_paystack_payment"
-  status = 200
-
-[[server.routes]]
-  pattern = "/api/method/kartoza_custom.api.complete_checkout"
-  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.complete_checkout"
-  status = 200
-
-[[server.routes]]
-  pattern = "/api/method/webshop.webshop.shopping_cart.cart.update_cart"
-  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/webshop.webshop.shopping_cart.cart.update_cart"
-  status = 200
-
-[[server.routes]]
   pattern = "/api/auth/login"
   to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/login"
   status = 200
