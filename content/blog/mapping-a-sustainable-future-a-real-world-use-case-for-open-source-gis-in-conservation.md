@@ -1,7 +1,7 @@
 ---
 author: Jeremy Prior
 date: '2026-05-12'
-description: ADD DESCRIPTION
+description: Explore real-world use cases of open-source GIS in conservation. Learn how Kartoza builds custom FOSS tools to help organisations manage spatial data.
 erpnext_id: /blog/gis/mapping-a-sustainable-future-a-real-world-use-case-for-open-source-gis-in-conservation
 erpnext_modified: '2026-05-13'
 reviewedBy: Automated Check
