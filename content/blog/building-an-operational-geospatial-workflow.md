@@ -8,7 +8,7 @@ reviewedBy: Seabilwe Tilodi
 reviewedDate: '2026-05-07'
 tags:
 - GIS
-thumbnail: "/blog/img/cplusscreen.png"
+thumbnail: "/blog/img/africa-10grid system.png"
 title: 'Building an Operational Geospatial Workflow'
 ---
 
