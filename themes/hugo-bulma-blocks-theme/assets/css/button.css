@@ -1,0 +1,24 @@
+.button.is-primary {
+  background: #edb348;
+  border-color: var(--accent);
+  color: var(--white);
+  font-weight: 700;
+}
+
+.button.is-primary:hover {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+.button.is-light {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  color: var(--white);
+  font-weight: 600;
+}
+
+.button.is-light:hover {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.25);
+  border-color: var(--white);
+}

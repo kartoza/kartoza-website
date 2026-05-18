@@ -7738,43 +7738,9 @@ body:has(.blog-hero) .contextmenu {
     gap: 1rem;
 }
 
-.careers-hero-cta .button.is-primary {
-    background: var(--accent) !important;
-    background-color: var(--accent) !important;
-    border-color: var(--accent) !important;
-    color: var(--white) !important;
-    box-shadow: 0 4px 20px rgba(232, 163, 49, 0.4);
-    font-weight: 600;
-    transition: all var(--transition-med);
-}
-
-.careers-hero-cta .button.is-primary:hover {
-    background: var(--accent-dark) !important;
-    background-color: var(--accent-dark) !important;
-    border-color: var(--accent-dark) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 28px rgba(232, 163, 49, 0.5);
-}
-
-.careers-hero-cta .button.is-light {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: var(--white);
-    font-weight: 600;
-    transition: all var(--transition-fast);
-}
-
-.careers-hero-cta .button.is-light:hover {
-    background: var(--white) !important;
-    border-color: var(--white) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.15);
-}
-
-.careers-hero-cta .button.is-primary.is-medium {
-    padding: 0.75rem 2rem;
-    font-size: 1rem;
-    height: 3em;
+.careers-hero-cta a {
+    flex: 1;
+    text-align: center;
 }
 
 .careers-hero-scroll {
@@ -12677,6 +12643,7 @@ body:has(.blog-hero) .contextmenu {
     color: var(--accent);
     position: relative;
     display: inline-block;
+    padding-bottom: 1.5rem;
 }
 
 .title-highlight::after {

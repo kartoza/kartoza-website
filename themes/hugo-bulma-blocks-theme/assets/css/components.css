@@ -86,30 +86,6 @@
   flex-wrap: wrap;
 }
 
-.section-cta-buttons .button.is-primary {
-  background: #edb348;
-  border-color: var(--accent);
-  color: var(--white);
-  font-weight: 700;
-}
-
-.section-cta-buttons .button.is-primary:hover {
-  background: var(--accent-dark);
-  border-color: var(--accent-dark);
-}
-
-.section-cta-buttons .button.is-light {
-  background: rgba(255, 255, 255, 0.15);
-  border: 2px solid rgba(255, 255, 255, 0.8);
-  color: var(--white);
-  font-weight: 600;
-}
-
-.section-cta-buttons .button.is-light:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: var(--white);
-}
-
 .section-cta-top-icon {
   width: 90px;
   height: 90px;
