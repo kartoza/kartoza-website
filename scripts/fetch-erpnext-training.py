@@ -325,9 +325,12 @@ def fetch_all_scheduled_sessions() -> list:
             continue
 
         for attr in variants:
-            display_date = attr.get("display_date", "")
-            variant_code = attr.get("name", "")
-            venue = attr.get("venue", "Online")
+            if not attr.get("variants", {}):
+                continue
+
+            display_date = attr['variants']['Date']
+            variant_code = attr['item_code']
+            venue = attr['variants']['Venue']
             if not display_date or not venue:
                 continue
 
@@ -465,6 +468,7 @@ def save_calendar_data(sessions: list, dry_run: bool = False):
     calendar_events = []
     for session in sessions:
         calendar_events.append({
+            "item_code": session["item_code"],
             "title": session.get("course_name", "Training"),
             "start": session.get("start_date", ""),
             "end": session.get("end_date", ""),
