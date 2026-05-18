@@ -112,12 +112,12 @@
                 {{ $related := where (where site.RegularPages "Section" "solutions") ".Permalink" "!=" .Permalink }}
                 {{ $related = $related | first 3 }}
                 {{ if $related }}
-                <div class="sidebar-card related-card">
+                <div class="sidebar-card blue-left-border-4">
                     <h4><i class="fas fa-th-large"></i> Related Solutions</h4>
-                    <div class="related-list">
+                    <div class="sidebar-list">
                         {{ range $related }}
-                        <a href="{{ .Permalink }}" class="related-item">
-                            <span class="related-title">{{ .Title }}</span>
+                        <a href="{{ .Permalink }}" class="sidebar-item">
+                            <span class="sidebar-title">{{ .Title }}</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>
                         {{ end }}

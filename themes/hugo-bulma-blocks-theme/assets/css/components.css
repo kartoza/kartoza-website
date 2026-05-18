@@ -1,4 +1,67 @@
 /* ----------------------------------------- */
+/* -------------- SIDEBAR CARD ------------- */
+/* Related Card */
+.sidebar-card h4 {
+  color: var(--text-dark);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar-card h4 i {
+  color: var(--primary);
+}
+
+.sidebar-card .sidebar-list {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.sidebar-card .sidebar-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: .75rem;
+  background: var(--gray-50);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  border: 1px solid transparent;
+}
+
+.sidebar-card .sidebar-item:hover {
+  background: var(--primary);
+  transform: translateX(5px);
+}
+
+.sidebar-card .sidebar-item .sidebar-title {
+  color: var(--text-dark);
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.sidebar-card .sidebar-item:hover .sidebar-title {
+  color: var(--white);
+}
+
+.sidebar-card .sidebar-item i {
+  color: var(--primary);
+  font-size: 0.8rem;
+  transition: all var(--transition-fast);
+}
+
+.sidebar-card .sidebar-item:hover i {
+  color: var(--white);
+  transform: translateX(3px);
+}
+
+/* ----------------------------------------- */
 /* -------------- Section CTA -------------- */
 .section-cta {
   background: linear-gradient(135deg, var(--primary-dark), var(--primary));
@@ -30,10 +93,6 @@
   font-weight: 700;
 }
 
-.section-cta-buttons .button.is-primary.border-width-2 {
-  border-width: 2px
-}
-
 .section-cta-buttons .button.is-primary:hover {
   background: var(--accent-dark);
   border-color: var(--accent-dark);
@@ -52,20 +111,20 @@
 }
 
 .section-cta-top-icon {
-    width: 90px;
-    height: 90px;
-    margin: 0 auto 2rem;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(10px);
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 2rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
 }
 
 .section-cta-top-icon i {
-    font-size: 2.5rem;
-    color: var(--white);
+  font-size: 2.5rem;
+  color: var(--white);
 }
 
 

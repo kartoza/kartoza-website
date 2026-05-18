@@ -1,0 +1,7 @@
+.blue-left-border-4 {
+  border-left: 4px solid var(--primary);
+}
+
+.border-width-2 {
+  border-width: 2px
+}
