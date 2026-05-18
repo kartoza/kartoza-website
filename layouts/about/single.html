@@ -242,25 +242,16 @@
     </div>
 </section>
 
-<!-- CTA -->
-<section class="about-cta">
-    <div class="container">
-        <div class="about-cta-content">
-            <h2>Ready to Partner with Kartoza?</h2>
-            <p>Whether you need custom GIS software development, professional training, or managed hosting and support, our team of geospatial experts is ready to help.</p>
-            <div class="about-cta-buttons">
-                <a class="button is-primary is-medium" href="{{ absURL "contact-us/" }}">
-                    <span class="icon"><i class="fas fa-envelope"></i></span>
-                    <span>Request a Consultation</span>
-                </a>
-                <a class="button is-light is-medium" href="{{ absURL "the_team/" }}">
-                    <span class="icon"><i class="fas fa-users"></i></span>
-                    <span>Meet Our Team</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+{{ partial "section-cta.html" (dict
+    "title"          "Ready to Partner with Kartoza?"
+    "subtitle"       "Whether you need custom GIS software development, professional training, or managed hosting and support, our team of geospatial experts is ready to help."
+    "primaryUrl"     (absURL "contact-us/")
+    "primaryIcon"    "fas fa-envelope"
+    "primaryLabel"   "Request a Consultation"
+    "secondaryUrl"   (absURL "the_team/")
+    "secondaryIcon"  "fas fa-users"
+    "secondaryLabel" "Meet Our Team"
+) }}
 
 {{ partial "page-reviewer.html" . }}
 {{ partial "footer.html" . }}

@@ -1,0 +1,42 @@
+{{/*
+  Reusable CTA banner. Pass a dict with:
+    title          - heading text (required)
+    subtitle       - subtitle text (required)
+    primaryUrl     - href for primary button (required)
+    primaryIcon    - Font Awesome class, e.g. "fas fa-comments" (required)
+    primaryLabel   - primary button text (required)
+    secondaryUrl   - href for secondary button (required)
+    secondaryIcon  - Font Awesome class (required)
+    secondaryLabel - secondary button text (required)
+    topIcon        - Font Awesome class shown as a large icon above the title (optional)
+
+  Usage:
+    {{ partial "section-cta.html" (dict
+        "title"          "Need a Custom Solution?"
+        "subtitle"       "Let's talk."
+        "primaryUrl"     (absURL "contact-us/")
+        "primaryIcon"    "fas fa-comments"
+        "primaryLabel"   "Start a Conversation"
+        "secondaryUrl"   (absURL "portfolio/")
+        "secondaryIcon"  "fas fa-briefcase"
+        "secondaryLabel" "See Our Portfolio"
+        "topIcon"        "fas fa-rocket"
+    ) }}
+*/}}
+<section class="section section-cta">
+    <div class="container has-text-centered">
+        {{ with .topIcon }}<div class="section-cta-top-icon"><i class="{{ . }}"></i></div>{{ end }}
+        <h2 class="title is-3">{{ .title }}</h2>
+        <p class="subtitle is-5">{{ .subtitle }}</p>
+        <div class="section-cta-buttons">
+            <a class="button is-primary is-medium border-width-2" href="{{ .primaryUrl }}">
+                <span class="icon"><i class="{{ .primaryIcon }}"></i></span>
+                <span>{{ .primaryLabel }}</span>
+            </a>
+            <a class="button is-light is-medium" href="{{ .secondaryUrl }}">
+                <span class="icon"><i class="{{ .secondaryIcon }}"></i></span>
+                <span>{{ .secondaryLabel }}</span>
+            </a>
+        </div>
+    </div>
+</section>

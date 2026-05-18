@@ -94,23 +94,16 @@
     </div>
 </section>
 
-<!-- CTA Section -->
-<section class="section section-cta">
-    <div class="container has-text-centered">
-        <h2 class="title is-3">Need Help with Docker Deployments?</h2>
-        <p class="subtitle is-5">We provide consulting, hosting, and support for geospatial infrastructure.</p>
-        <div class="section-cta-buttons">
-            <a class="button is-primary is-medium" href="{{ absURL "contact-us/" }}">
-                <span class="icon"><i class="fas fa-comments"></i></span>
-                <span>Get in Touch</span>
-            </a>
-            <a class="button is-light is-medium" href="{{ absURL "hosting/" }}">
-                <span class="icon"><i class="fas fa-cloud"></i></span>
-                <span>Managed Hosting</span>
-            </a>
-        </div>
-    </div>
-</section>
+{{ partial "section-cta.html" (dict
+    "title"          "Need Help with Docker Deployments?"
+    "subtitle"       "We provide consulting, hosting, and support for geospatial infrastructure."
+    "primaryUrl"     (absURL "contact-us/")
+    "primaryIcon"    "fas fa-comments"
+    "primaryLabel"   "Get in Touch"
+    "secondaryUrl"   (absURL "hosting/")
+    "secondaryIcon"  "fas fa-cloud"
+    "secondaryLabel" "Managed Hosting"
+) }}
 
 {{ partial "physics-scroll.html" . }}
 

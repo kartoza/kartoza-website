@@ -235,28 +235,17 @@
     </div>
 </nav>
 
-<!-- CTA Section -->
-<section class="team-cta">
-    <div class="container">
-        <div class="team-cta-content">
-            <div class="team-cta-icon">
-                <i class="fas fa-rocket"></i>
-            </div>
-            <h2 class="team-cta-title">Join Our Global Team</h2>
-            <p class="team-cta-text">We're always looking for passionate geospatial enthusiasts to join us from anywhere in the world.</p>
-            <div class="team-cta-buttons">
-                <a class="button is-primary is-medium" href="{{ absURL "careers/" }}">
-                    <span class="icon"><i class="fas fa-briefcase"></i></span>
-                    <span>View Open Positions</span>
-                </a>
-                <a class="button is-light is-medium" href="{{ absURL "contact-us/" }}">
-                    <span class="icon"><i class="fas fa-envelope"></i></span>
-                    <span>Get in Touch</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+{{ partial "section-cta.html" (dict
+    "topIcon"        "fas fa-rocket"
+    "title"          "Join Our Global Team"
+    "subtitle"       "We're always looking for passionate geospatial enthusiasts to join us from anywhere in the world."
+    "primaryUrl"     (absURL "careers/")
+    "primaryIcon"    "fas fa-briefcase"
+    "primaryLabel"   "View Open Positions"
+    "secondaryUrl"   (absURL "contact-us/")
+    "secondaryIcon"  "fas fa-envelope"
+    "secondaryLabel" "Get in Touch"
+) }}
 
 {{ partial "page-reviewer.html" . }}
 {{ partial "footer.html" . }}

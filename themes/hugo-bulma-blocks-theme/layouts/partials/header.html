@@ -106,8 +106,12 @@
         {{ $engagementcss := resources.Get "css/engagement.css" }}
         {{ $regionalcss := resources.Get "css/regional.css" }}
         {{ $trainingbookingcss := resources.Get "css/training-booking.css" }}
+
+        <!-- Components -->
+        {{ $components := resources.Get "css/components.css" }}
+
         {{/* must have the leading slash in css path or gh pages deploy will break */}}
-        {{ $css := slice $menucss $syntaxcss $customcss $animatecss $blockcss $highlightcss $overridescss $cookiecss $homepagecss $searchcss $engagementcss $regionalcss $trainingbookingcss | resources.Concat "/css/all.css" | resources.Minify | resources.Fingerprint }}
+        {{ $css := slice $menucss $syntaxcss $customcss $animatecss $blockcss $highlightcss $overridescss $cookiecss $homepagecss $searchcss $engagementcss $regionalcss $trainingbookingcss $components | resources.Concat "/css/all.css" | resources.Minify | resources.Fingerprint }}
         <link href="{{ $css.RelPermalink }}" rel="stylesheet" />
 
         {{/* We can compile SASS too... */}}

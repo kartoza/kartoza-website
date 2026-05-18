@@ -169,25 +169,16 @@
     </div>
 </section>
 
-<!-- CTA Section -->
-<section class="solution-cta">
-    <div class="container">
-        <div class="solution-cta-content">
-            <h2>Let's Build Something Amazing Together</h2>
-            <p>Whether you need a custom solution, expert support, or professional training, we're here to help you succeed with open source GIS.</p>
-            <div class="solution-cta-buttons">
-                <a href="{{ absURL "contact-us/" }}" class="button is-primary is-medium">
-                    <span class="icon"><i class="fas fa-paper-plane"></i></span>
-                    <span>Start a Conversation</span>
-                </a>
-                <a href="{{ absURL "portfolio/" }}" class="button is-light is-medium">
-                    <span class="icon"><i class="fas fa-briefcase"></i></span>
-                    <span>View Our Work</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+{{ partial "section-cta.html" (dict
+    "title"          "Let's Build Something Amazing Together"
+    "subtitle"       "Whether you need a custom solution, expert support, or professional training, we're here to help you succeed with open source GIS."
+    "primaryUrl"     (absURL "contact-us/")
+    "primaryIcon"    "fas fa-comments"
+    "primaryLabel"   "Start a Conversation"
+    "secondaryUrl"   (absURL "portfolio/")
+    "secondaryIcon"  "fas fa-briefcase"
+    "secondaryLabel" "See Our Portfolio"
+) }}
 
 {{ partial "page-reviewer.html" . }}
 {{ partial "footer.html" . }}
