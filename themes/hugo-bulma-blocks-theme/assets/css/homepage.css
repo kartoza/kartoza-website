@@ -7686,6 +7686,20 @@ body:has(.blog-hero) .contextmenu {
     padding: 4rem 1.5rem;
 }
 
+.careers-no-positions-notice {
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.5rem 1.25rem;
+    border-radius: 2rem;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(6px);
+}
+
 .careers-hero-tagline {
     display: inline-flex;
     align-items: center;

@@ -1,3 +1,9 @@
+.notice-yellow {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
 .blue-left-border-4 {
   border-left: 4px solid var(--primary);
 }
