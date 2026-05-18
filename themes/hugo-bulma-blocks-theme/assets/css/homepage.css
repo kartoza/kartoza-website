@@ -14853,14 +14853,13 @@ a.team-member-clickable:hover .team-member-view-profile i {
 }
 
 .footer-grid {
-    display: grid;
-    grid-template-columns: 420px 1fr;
-    gap: 3rem;
+    display: flex;
+    justify-content: space-between;
 }
 
 /* Brand Column */
 .footer-brand {
-    max-width: 460px;
+    width: 600px;
     padding-left: 30px;
     padding-right: 30px;
 }
@@ -14925,7 +14924,7 @@ a.team-member-clickable:hover .team-member-view-profile i {
 .footer-nav {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 5rem;
+    gap: 2rem;
     justify-items: start;
     padding-right: 30px;
 }
@@ -15202,22 +15201,28 @@ a.team-member-clickable:hover .team-member-view-profile i {
 }
 
 /* Footer Responsive */
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1300px) {
     .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 3rem;
+        gap: 2rem;
+    }
+    .footer-brand {
+        padding-left: 0;
+    }
+    .footer-nav {
+        gap: 1rem;
+        padding-right: 0;
     }
 }
 
 @media screen and (max-width: 1024px) {
     .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 3rem;
+        display: block;
     }
 
     .footer-brand {
-        max-width: 100%;
+        width: 100%;
         text-align: center;
+        margin-bottom: 6rem;
     }
 
     .footer-social {
