@@ -364,3 +364,8 @@ matomoSiteId = ''
   pattern = "/api/auth/register"
   to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.sign_up"
   status = 200
+
+[[server.routes]]
+  pattern = "/api/support-ticket"
+  to = "https://api.do.kartoza.com/erpnext/kartoza-website/api/method/kartoza_custom.api.create_support_ticket"
+  status = 200
