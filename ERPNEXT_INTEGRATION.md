@@ -5,9 +5,9 @@ This document explains how the training schedule integrates with ERPNext.
 ## ✅ What's Installed
 
 The nix shell now includes:
-- `python3` - Python interpreter
-- `python3Packages.requests` - For ERPNext API calls
-- `python3Packages.pyyaml` - For YAML file generation
+- `python3` - Python interpreter.
+- `python3Packages.requests` - For ERPNext API calls.
+- `python3Packages.pyyaml` - For YAML file generation.
 
 ## 🔧 Setup Instructions
 
