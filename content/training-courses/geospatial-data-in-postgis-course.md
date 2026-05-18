@@ -36,7 +36,7 @@ QGIS is used extensively throughout the course to visualise results, as a SQL cl
 
 We encourage students to bring their own data so that if they have the time and capability during the course, they can implement on their own data the skills they learn in the course and even go back to the office with a ready-to-use spatial database.
 
-This course is based to a large extent on the open BoundlessGeo course at http://workshops.boundlessgeo.com/postgis-intro/, with modifications and extensions by Kartoza.
+This course is based to a large extent on the open BoundlessGeo course at <http://workshops.boundlessgeo.com/postgis-intro/>, with modifications and extensions by Kartoza.
 
 ## Prerequisites
 

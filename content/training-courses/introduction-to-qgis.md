@@ -12,6 +12,8 @@ tags:
   - Desktop GIS
   - Mapping
 date: 2024-01-01
+reviewedBy: "Irwan Fathurrahman"
+reviewedDate: 2026-05-18
 ---
 
 ## Course Overview
@@ -66,7 +68,7 @@ The course covers essential GIS workflows including data acquisition, layer mana
 
 ## Who Should Attend
 
-### This course is ideal for:
+### This course is ideal for
 
 <div class="materials-grid">
   <div class="material-card">
@@ -97,6 +99,7 @@ The course covers essential GIS workflows including data acquisition, layer mana
 No prior GIS experience is required, though basic computer literacy is expected.
 
 ## Prerequisites
+
 - Basic computer skills
 - Interest in working with maps and spatial data
 - Laptop with QGIS installed (we can help with installation)

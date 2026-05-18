@@ -13,6 +13,8 @@ tags:
   - Curriculum
   - Beginner
 date: 2024-01-01
+reviewedBy: "Irwan Fathurrahman"
+reviewedDate: 2026-05-18
 ---
 
 ## Course Overview
@@ -54,7 +56,6 @@ You will learn to use QGIS to create maps, work with spatial data, and digitise 
     <p>Receive ready-made, curriculum-aligned GIS lesson frameworks for Grades 8, 10, and 12 Geography that you can adapt and use immediately.</p>
   </div>
 </div>
-
 
 ## Who Should Attend
 

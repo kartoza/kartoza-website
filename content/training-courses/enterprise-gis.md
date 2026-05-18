@@ -12,6 +12,8 @@ tags:
   - GeoServer
   - GeoNode
 date: 2024-01-01
+reviewedBy: "Irwan Fathurrahman"
+reviewedDate: 2026-05-18
 ---
 
 ## Course Overview
@@ -140,6 +142,3 @@ The course moves from foundational concepts through to hands-on system administr
     <p>Beyond the course, Kartoza offers ongoing support contracts, hosting, and development services as you grow your system.</p>
   </div>
 </div>
-
-
-

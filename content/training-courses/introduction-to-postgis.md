@@ -12,6 +12,8 @@ tags:
   - PostgreSQL
   - SQL
 date: 2024-01-01
+reviewedBy: "Irwan Fathurrahman"
+reviewedDate: 2026-05-18
 ---
 
 ## Course Overview
