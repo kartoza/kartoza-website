@@ -244,3 +244,7 @@ section.is-fluid > .container.is-fluid {
 .icon.is-small{
     padding-right: 10px;
 }
+
+.application-checklist {
+    color: #1B6B9B !important;
+}

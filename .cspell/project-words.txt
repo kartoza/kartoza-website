@@ -20,6 +20,8 @@ KFWIS
 STAC
 stac
 WDPP
+EBIT
+EPAL
 
 # Technical acronyms and terms
 ECMWF
