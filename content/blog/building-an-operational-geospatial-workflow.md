@@ -1,6 +1,6 @@
 ---
 author: Victoria Neema
-date: '2026-05-15'
+date: '2026-05-20'
 description: The following blog article covers the main parts expected in a scalable and resource-efficient workflow, which you can use as a template to get you started.
 erpnext_id: blog/data-science/building-an-operational-geospatial-workflow
 erpnext_modified: '2026-05-13'
@@ -30,16 +30,29 @@ The goal of the generate tasks step is to create a list or other collection of a
 ## Tiling
 The first step in the workflow is tiling of the area of interest. This is essentially breaking up the area of interest into manageable chunks. The resultant tiles can be overlapping tiles or adjacent tiles.
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-  <img src="/blog/img/adjacenttiles.png" alt="Alt 1">
-  <img src="/blog/img/overlappingtiles.png" alt="Alt 2">
+  <figure style="margin: 0; display: flex; flex-direction: column;">
+    <img src="/blog/img/adjacenttiles.png" alt="Adjacent Tiles" style="margin: 0;">
+    <figcaption style="margin: 0; padding-top: 20px; font-size: 0.9em; text-align: center;">Adjacent Tiles</figcaption>
+  </figure>
+  <figure style="margin: 0; display: flex; flex-direction: column;">
+    <img src="/blog/img/overlappingtiles.png" alt="Overlapping Tiles" style="margin: 0;">
+    <figcaption style="margin: 0; padding-top: 20px; font-size: 0.9em; text-align: center;">Overlapping Tiles</figcaption>
+  </figure>
 </div>
+
+<br>
 
 Tiles are defined within a [grid index system](https://academy.carto.com/working-with-geospatial-data/introduction-to-spatial-indexes). There are a number of existing grid systems one can choose from; this includes remote sensing capture grids like the Landsat [Worldwide Reference System-2 (WRS-2)](https://science.nasa.gov/mission/landsat/worldwide-reference-system/), [Sentinel-2 MGRS](https://catalogue.eatlas.org.au/geonetwork/srv/api/records/f7468d15-12be-4e3f-a246-b2882a324f59), [HLS Tiling System](https://hls.gsfc.nasa.gov/products-description/tiling-system/) etc. or discrete global grid systems like [Uber’s Hexagonal Hierarchical Spatial Index](https://www.uber.com/us/en/blog/h3/) or [Google’s S2Geometry](https://s2geometry.io) etc. The only mandatory requirement when selecting a grid system or defining your own is that each tile must have a unique identifier in the grid system. My recommendation would be to select a grid system with equal-sized shapes.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-  <img src="/blog/img/ubersspatialindex.png" alt="Alt 1">
-  
-  <img src="/blog/img/africa-10grid system.png" alt="Alt 2">
+  <figure style="margin: 0; display: flex; flex-direction: column;">
+    <img src="/blog/img/ubersspatialindex.png" alt="Uber's Spatial Index" style="margin: 0;">
+    <figcaption style="margin: 0; padding-top: 20px; font-size: 0.9em; text-align: center;">H3: Uber's Hexagonal Hierarchical Spatial Index</figcaption>
+  </figure>
+  <figure style="margin: 0; display: flex; flex-direction: column;">
+    <img src="/blog/img/africa-10grid system.png" alt="Africa-10 Grid System" style="margin: 0;">
+    <figcaption style="margin: 0; padding-top: 20px; font-size: 0.9em; text-align: center;">"africa-10" grid system from odc-dscache used in Digital Earth Africa's Water Quality Annual Variables product</figcaption>
+  </figure>
 </div>
 
 ## Tasks
