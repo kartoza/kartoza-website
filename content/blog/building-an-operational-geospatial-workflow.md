@@ -1,6 +1,6 @@
 ---
 author: Victoria Neema
-date: '2026-05-13'
+date: '2026-05-15'
 description: The following blog article covers the main parts expected in a scalable and resource-efficient workflow, which you can use as a template to get you started.
 erpnext_id: blog/data-science/building-an-operational-geospatial-workflow
 erpnext_modified: '2026-05-13'
