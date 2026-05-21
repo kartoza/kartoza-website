@@ -177,12 +177,6 @@ matomoSiteId = ''
   url = "/careers/"
   weight = 40
 
-[[menu.main]]
-  parent = "About"
-  name = "Internships"
-  url = "/internships/"
-  weight = 50
-
 # -- Our Work (dropdown) --
 [[menu.main]]
   name = "Our Work"
