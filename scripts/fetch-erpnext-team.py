@@ -16,8 +16,10 @@ import sys
 import re
 import argparse
 import requests
+import yaml
 from pathlib import Path
 from datetime import datetime
+from bs4 import BeautifulSoup
 
 # ERPNext configuration
 ERPNEXT_URL = os.environ.get("ERPNEXT_URL", "https://erp.kartoza.com")
@@ -30,6 +32,67 @@ def slugify(text: str) -> str:
     text = re.sub(r'[^\w\s-]', '', text)
     text = re.sub(r'[\s_-]+', '-', text)
     return text
+
+
+def normalize_for_comparison(content: str) -> str:
+    """
+    Normalize content for fidelity comparison.
+    Focuses on TEXT content, ignores formatting/layout.
+    """
+    if not content:
+        return ''
+
+    # Remove Hugo shortcodes
+    content = re.sub(r'\{\{[<>%].*?[>%]\}\}', '', content)
+
+    # Strip HTML tags but keep text content
+    soup = BeautifulSoup(content, 'html.parser')
+    text = soup.get_text(separator=' ')
+
+    # Collapse whitespace
+    text = re.sub(r'\s+', ' ', text)
+
+    return text.strip().lower()
+
+
+def check_fidelity(local_content: str, erpnext_content: str) -> bool:
+    """
+    Check if local and ERPNext content match (fidelity check).
+
+    Returns True if text content matches (ignoring formatting).
+    """
+    local_norm = normalize_for_comparison(local_content)
+    erpnext_norm = normalize_for_comparison(erpnext_content)
+    return local_norm == erpnext_norm
+
+
+def read_local_file(filepath: Path) -> tuple[dict, str] | None:
+    """Read a local Hugo file and extract front matter and content."""
+    if not filepath.exists():
+        return None
+
+    try:
+        text = filepath.read_text()
+    except (IOError, OSError):
+        return None
+
+    if not text.startswith('---'):
+        return {}, text
+
+    end_match = re.search(r'\n---\n', text[3:])
+    if not end_match:
+        return {}, text
+
+    end_pos = end_match.start() + 3
+    front_matter_raw = text[4:end_pos]
+    content = text[end_pos + 5:]
+
+    try:
+        front_matter = yaml.safe_load(front_matter_raw) or {}
+    except yaml.YAMLError:
+        front_matter = {}
+
+    return front_matter, content
 
 
 def fetch_team_from_erpnext() -> list:
@@ -89,10 +152,53 @@ def get_existing_team_members() -> dict:
     return team_members
 
 
+def generate_team_content(member: dict, slug: str) -> str:
+    """Generate the content section for a team member page."""
+    name = member.get('full_name', member.get('name', 'Team Member'))
+    designation = member.get('designation', 'Team Member')
+    bio = member.get('bio', 'Bio coming soon.')
+
+    return f"""{{{{< block
+    title="{name}"
+    subtitle="{designation}"
+    class="is-primary"
+    sub-block-side="bottom"
+>}}}}
+{bio}
+{{{{< /block >}}}}
+
+## About
+
+{bio}
+"""
+
+
 def create_team_member_page(member: dict, dry_run: bool = False) -> Path:
-    """Create a new team member page."""
+    """Create or update a team member page with fidelity checking."""
     slug = slugify(member.get("full_name", member.get("name", "unknown")))
     filepath = TEAM_CONTENT_DIR / f"{slug}.md"
+
+    erpnext_content = generate_team_content(member, slug)
+
+    # Check fidelity if file already exists
+    if filepath.exists():
+        result = read_local_file(filepath)
+        if result:
+            local_frontmatter, local_content = result
+            if check_fidelity(local_content, erpnext_content):
+                # Content matches - fidelity passed
+                if not local_frontmatter.get('reviewedBy'):
+                    if not dry_run:
+                        local_frontmatter['reviewedBy'] = 'Automated Check'
+                        local_frontmatter['reviewedDate'] = datetime.now().strftime('%Y-%m-%d')
+                        file_content = "---\n"
+                        file_content += yaml.dump(local_frontmatter, default_flow_style=False, allow_unicode=True)
+                        file_content += "---\n\n"
+                        file_content += local_content.strip()
+                        file_content += "\n"
+                        filepath.write_text(file_content)
+                print(f"Unchanged (fidelity passed): {filepath.name}")
+                return filepath
 
     # Default template
     content = f'''---
@@ -106,21 +212,11 @@ linkedin: ""
 twitter: ""
 weight: 100
 draft: false
+reviewedBy: "Automated Check"
+reviewedDate: {datetime.now().strftime('%Y-%m-%d')}
 ---
 
-{{{{< block
-    title="{member.get('full_name', member.get('name', 'Team Member'))}"
-    subtitle="{member.get('designation', 'Team Member')}"
-    class="is-primary"
-    sub-block-side="bottom"
->}}}}
-{member.get('bio', 'Bio coming soon.')}
-{{{{< /block >}}}}
-
-## About
-
-{member.get('bio', 'Bio coming soon.')}
-'''
+{erpnext_content}'''
 
     if dry_run:
         print(f"Would create: {filepath}")

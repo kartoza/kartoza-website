@@ -21,6 +21,7 @@ from pathlib import Path
 
 import requests
 import yaml
+from bs4 import BeautifulSoup
 from dateutil import parser as date_parser
 
 
@@ -48,6 +49,67 @@ def slugify(text: str) -> str:
     text = re.sub(r'[^a-z0-9]+', '-', text)
     text = re.sub(r'-+', '-', text)
     return text.strip('-')
+
+
+def normalize_for_comparison(content: str) -> str:
+    """
+    Normalize content for fidelity comparison.
+    Focuses on TEXT content, ignores formatting/layout.
+    """
+    if not content:
+        return ''
+
+    # Remove Hugo shortcodes like {{< block >}} or {{< /block >}}
+    content = re.sub(r'\{\{[<>%].*?[>%]\}\}', '', content)
+
+    # Strip HTML tags but keep text content
+    soup = BeautifulSoup(content, 'html.parser')
+    text = soup.get_text(separator=' ')
+
+    # Collapse whitespace
+    text = re.sub(r'\s+', ' ', text)
+
+    return text.strip().lower()
+
+
+def check_fidelity(local_content: str, erpnext_content: str) -> bool:
+    """
+    Check if local and ERPNext content match (fidelity check).
+
+    Returns True if text content matches (ignoring formatting).
+    """
+    local_norm = normalize_for_comparison(local_content)
+    erpnext_norm = normalize_for_comparison(erpnext_content)
+    return local_norm == erpnext_norm
+
+
+def read_local_file(filepath: Path) -> tuple[dict, str] | None:
+    """Read a local Hugo file and extract front matter and content."""
+    if not filepath.exists():
+        return None
+
+    try:
+        text = filepath.read_text()
+    except (IOError, OSError):
+        return None
+
+    if not text.startswith('---'):
+        return {}, text
+
+    end_match = re.search(r'\n---\n', text[3:])
+    if not end_match:
+        return {}, text
+
+    end_pos = end_match.start() + 3
+    front_matter_raw = text[4:end_pos]
+    content = text[end_pos + 5:]
+
+    try:
+        front_matter = yaml.safe_load(front_matter_raw) or {}
+    except yaml.YAMLError:
+        front_matter = {}
+
+    return front_matter, content
 
 
 def fetch_portfolio_list() -> list[dict]:
@@ -149,37 +211,77 @@ def portfolio_to_hugo_content(item: dict) -> str:
     return content.strip()
 
 
-def create_hugo_file(item: dict, content_dir: Path, dry_run: bool = False) -> tuple[str, str]:
+def create_hugo_file(item: dict, content_dir: Path, dry_run: bool = False,
+                     force: bool = False) -> tuple[str, str]:
     """
-    Create Hugo markdown file from ERPNext portfolio item.
+    Create or update Hugo markdown file from ERPNext portfolio item.
+
+    Performs fidelity checking: compares text content ignoring formatting.
 
     Returns:
         Tuple of (filename, status)
     """
     title = item.get('project_name') or item.get('name', 'Untitled')
+    erpnext_id = item.get('name', '')
     slug = slugify(title)
     filename = f"{slug}.md"
     filepath = content_dir / filename
 
+    # Also search by erpnext_id in existing files
+    for fp in content_dir.glob('*.md'):
+        if fp.name in ('_index.md', 'index.md'):
+            continue
+        result = read_local_file(fp)
+        if result and result[0].get('erpnext_id') == erpnext_id:
+            filepath = fp
+            filename = fp.name
+            break
+
+    erpnext_content = portfolio_to_hugo_content(item)
+
     # Check if file already exists
-    if filepath.exists():
-        return filename, 'Exists (skipped)'
+    if filepath.exists() and not force:
+        result = read_local_file(filepath)
+        if result:
+            local_frontmatter, local_content = result
+            if check_fidelity(local_content, erpnext_content):
+                # Content matches - fidelity passed
+                if not local_frontmatter.get('reviewedBy'):
+                    if not dry_run:
+                        local_frontmatter['reviewedBy'] = 'Automated Check'
+                        local_frontmatter['reviewedDate'] = datetime.now().strftime('%Y-%m-%d')
+                        file_content = "---\n"
+                        file_content += yaml.dump(local_frontmatter, default_flow_style=False, allow_unicode=True)
+                        file_content += "---\n\n"
+                        file_content += local_content.strip()
+                        file_content += "\n"
+                        filepath.write_text(file_content)
+                return filename, 'Unchanged (fidelity passed)'
+            else:
+                # Content differs - will overwrite
+                pass
+        status_label = 'Updated'
+    elif filepath.exists() and force:
+        status_label = 'Forced'
+    else:
+        status_label = 'Created'
 
     front_matter = portfolio_to_hugo_frontmatter(item)
-    content = portfolio_to_hugo_content(item)
+    front_matter['reviewedBy'] = 'Automated Check'
+    front_matter['reviewedDate'] = datetime.now().strftime('%Y-%m-%d')
 
     # Build the file content
     file_content = "---\n"
     file_content += yaml.dump(front_matter, default_flow_style=False, allow_unicode=True)
     file_content += "---\n\n"
-    file_content += content
+    file_content += erpnext_content
     file_content += "\n"
 
     if not dry_run:
         filepath.write_text(file_content)
-        return filename, 'Created'
+        return filename, status_label
     else:
-        return filename, 'Would create'
+        return filename, f'Would {status_label.lower()}'
 
 
 def print_table(results: list[dict], dry_run: bool = False):
@@ -230,8 +332,9 @@ def main():
                         help=f'ERPNext doctype to fetch (default: {PORTFOLIO_DOCTYPE})')
     args = parser.parse_args()
 
-    global PORTFOLIO_DOCTYPE
-    PORTFOLIO_DOCTYPE = args.doctype
+    # Update module-level doctype if overridden via CLI
+    if args.doctype != PORTFOLIO_DOCTYPE:
+        globals()['PORTFOLIO_DOCTYPE'] = args.doctype
 
     if not API_KEY or not API_SECRET:
         print("Warning: ERPNEXT_API_KEY and ERPNEXT_API_SECRET not set.")
@@ -281,7 +384,8 @@ def main():
             })
             continue
 
-        filename, status = create_hugo_file(item, content_dir, dry_run=args.dry_run)
+        filename, status = create_hugo_file(item, content_dir, dry_run=args.dry_run,
+                                            force=args.force)
 
         results.append({
             'title': item.get('project_name') or item.get('name', 'Untitled'),

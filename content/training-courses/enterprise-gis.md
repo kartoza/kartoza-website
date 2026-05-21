@@ -1,115 +1,144 @@
-<!-- ---
+---
 title: "Enterprise GIS"
-description: "Enterprise GIS"
-thumbnail: "/img/training/erpnext/qgis-icon_big300x300-0x300.png"
-shop_url: "https://erp.kartoza.com/training/enterprise-gis-ypfsx"
+description: "A comprehensive 5-day course covering everything you need to plan, deploy, and manage a production-grade open source GIS stack — PostGIS, GeoServer, QGIS Server, and GeoNode — within your organisation's IT environment."
+thumbnail: "/img/courses/qgis-introduction.svg"
+duration: "5 days"
+level: "Intermediate"
+track: "Development"
+trackOrder: 1
+weight: 1
 tags:
-  - Training
-track: "Server & Infrastructure"
-draft: false
-reviewedBy: "Tim Sutton"
-reviewedDate: 2026-04-16
+  - PostGIS
+  - GeoServer
+  - GeoNode
+date: 2024-01-01
+reviewedBy: "Irwan Fathurrahman"
+reviewedDate: 2026-05-18
 ---
 
-{{< block
-    title="Enterprise GIS"
-    subtitle="Professional GIS Training"
-    class="is-primary"
-    sub-block-side="bottom"
->}}
-Enterprise GIS
-{{< /block >}}
+## Course Overview
 
-## Overview
+This intensive 5-day course gives participants the skills and knowledge to plan, establish, and manage a production-grade open source GIS stack. Using FOSS tools — PostgreSQL/PostGIS, GeoServer, QGIS Server, and GeoNode — you will learn how to build an enterprise spatial data infrastructure that is world-class, cost-effective, and fully supported by active open source communities.
 
-Enterprise GIS (Geographic Information Systems) is all about doing GIS on a larger scale than just your PC with local files. Is this course for you? Here are some aspects of Enterprise GIS to help you decide:
+The course moves from foundational concepts through to hands-on system administration. Participants leave with a working understanding of how all components connect, practical configuration experience, and the ability to troubleshoot and maintain the system after the course.
 
-- you need to supply GIS to a whole department or organisation or enterprise
-- multiple users, with different roles
-- integration with other systems, technologies and data
-- supplying standards-based services
-- managing large quantities of data, many different themes
-- powering websites and desktops
-- 24/7/365 availability, scalable, flexible
+## What You Will Learn
 
-## Aims of the course
+<div class="materials-grid">
+  <div class="material-card">
+    <h4>Spatial Database Setup</h4>
+    <p>Install, configure, and populate a PostgreSQL/PostGIS spatial database. Design schemas for enterprise data.</p>
+  </div>
 
-This course will give you the basic skills and knowledge to get going with establishing an enterprise GIS or transforming or improving your current system. We will use FOSS (Free and Open Source) tools because they are world-class! Experience how a full, professional Enterprise GIS can be achieved with FOSS. These are some core objectives:
+  <div class="material-card">
+  <h4>Web Map Composition</h4>
+    <p>Compose and serve web maps. View and search spatial data from both desktop (QGIS) and web clients.</p>
+  </div>
 
-- Create and populate a spatial database.
-- Install a web map server.
-- Publish OGC map services.
-- Compose a web map; view and search it in a desktop and a web client.
-- Understand some architectural guidelines for a corporate environment.
-- Administer and troubleshoot the system.
+  <div class="material-card">
+    <h4>System Administration</h4>
+    <p>Administer, monitor, back up, and troubleshoot the full FOSS GIS stack in a production environment.</p>
+  </div>
 
-## Software
+  <div class="material-card">
+    <h4>GeoServer Administration</h4>
+    <p>Install a web map server and publish OGC-compliant services — WMS, WFS, and WCS — with styling and security.</p>
+  </div>
 
-- Ubuntu Linux server; any OS for clients
-- Apache and Tomcat
-- OpenGeo Enterprise Suite
-- PostgreSQL RDBMS with PostGIS
-- GeoServer
-- GeoWebCache
-- GeoExt, OpenLayers
-- QGIS (desktop and server)
-- various others
+  <div class="material-card">
+    <h4>Enterprise Architecture</h4>
+    <p>Understand architectural guidelines for a corporate environment, including security, user management, and network topology.</p>
+  </div>
 
-Some software we will cover in depth, others we will just touch on or use or review. Where practical we will mention, review or work with alternatives. FOSS gives you freedom of choice!
+  <div class="material-card">
+    <h4>FOSS Stack Integration</h4>>
+    <p>Connect PostGIS, GeoServer, QGIS, and GeoNode into a coherent, maintainable enterprise GIS stack.</p>
+  </div>
+</div>
 
-## Course outline
+## Who Should Attend
 
-### Day 1
+<div class="materials-grid">
+  <div class="material-card">
+    <p>✔ GIS managers planning an open source infrastructure migration</p>
+  </div>
 
-- System setup and configuration, architecture, system administration.
-- Introduction to Linux and servers.
-- Have your own enterprise GIS up and running within minutes.
-- Overview of FOSS GIS software and components.
+  <div class="material-card">
+    <p>✔ Webmasters or developers building spatial web services</p>
+  </div>
 
-### Days 2 and 3
+  <div class="material-card">
+    <p>✔ IT staff in organisations transitioning from ArcGIS Server or similar</p>
+  </div>
 
-- Data management and processing.
-- Database setup, configuration, loading.
-- Working with a spatial database.
+  <div class="material-card">
+    <p>✔ System or database administrators managing GIS infrastructure</p>
+  </div>
 
-### Days 4 and 5
+  <div class="material-card">
+   <p>✔ Experienced GIS users ready to move to a server-based stack</p>
+  </div>
 
-- Web servers and web map servers.
-- Publishing web services.
-- Styling, tiling, caching.
-- Using web services.
-- This is a very broad outline and is subject to change. We are open to suggestions if there is something you would like us to cover.
+  <div class="material-card">
+    <p>✔ Government, NGO, and enterprise teams building spatial infrastructure</p>
+  </div>
+</div>
 
-## Prerequisites
+### Prerequisites
 
-This course is not for beginners. Neither is it a typical 'learn GIS' course. It is focused on systems, technologies, data and architecture. To attend this course you should be computer literate. you should be an experienced GIS user or system or database administrator or webmaster or developer or have been tasked with this sort of work by your employer. On the other hand it IS introductory.
+- Experienced GIS user — this course is not suitable for beginners
+- System administration or IT background helpful (Linux or Windows server experience)
+- Basic familiarity with databases and/or web technologies is an advantage
+- Laptop running Ubuntu Linux or Windows (Ubuntu strongly preferred)
 
-A week is enough to give you the grounding to get going on your own but is not enough time to go into too much in depth. Please bring your own laptop running Linux (preferably Ubuntu) or Windows. All the software is also supported on Macs but we don’t support that in the course.
+## What You Receive
 
-## Trainer(s)
+<div class="materials-grid">
+  <div class="material-card">
+    <p>Comprehensive course workbook</p>
+  </div>
 
-One or more of the following:
+  <div class="material-card">
+    <p>Sample spatial datasets</p>
+  </div>
 
-Gavin Fleming
+  <div class="material-card">
+    <p>30-day post-course email support</p>
+  </div>
 
-## CPD
+  <div class="material-card">
+    <p>Configuration scripts & setup guides</p>
+  </div>
 
-Pending
+  <div class="material-card">
+    <p>Certificate of completion</p>
+  </div>
 
-## Price
+  <div class="material-card">
+    <p>On-site delivery included in course fee</p>
+  </div>
+</div>
 
-The price includes software, data and course materials.
+## Why Train with Kartoza?
 
-## On-Site Training
+<div class="materials-grid">
+  <div class="material-card">
+    <h4>We Build These Systems</h4>
+    <p>Kartoza doesn't just train on FOSS GIS — we build and maintain PostGIS, GeoServer, and GeoNode deployments for clients across Africa and Europe daily.</p>
+  </div>
 
-Available on request.
+  <div class="material-card">
+    <h4>Custom for Your Organisation</h4>
+    <p>We can tailor the course to your existing IT environment, data, and specific migration or upgrade goals.</p>
+  </div>
 
-## Duration
+  <div class="material-card">
+    <h4>Practical Throughout</h4>
+    <p>Every day is built around configuration exercises using real infrastructure. You're working with live systems, not simulations.</p>
+  </div>
 
-Five days
-
-T&Cs apply.
-
-<!-- markdownlint-disable MD034 -->
-<!-- {{< button-bar "fas fa-shopping-cart:Book This Course:https://erp.kartoza.com/training/enterprise-gis-ypfsx" "fas fa-envelope:Enquire:/contact-us/" >}}
-markdownlint-enable MD034 --> -->
+  <div class="material-card">
+    <h4>Continued Support</h4>
+    <p>Beyond the course, Kartoza offers ongoing support contracts, hosting, and development services as you grow your system.</p>
+  </div>
+</div>

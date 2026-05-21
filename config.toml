@@ -31,6 +31,7 @@ staticDir = ['static']
 
 # See https://gohugo.io/templates/robots/
 enableRobotsTXT = true
+enableGitInfo = true
 
 [taxonomies]
   category = 'categories'
@@ -275,6 +276,12 @@ matomoSiteId = ''
   name = "Portfolio"
   url = "/portfolio/"
   weight = 30
+
+[[menu.footer]]
+  parent = "Navigate"
+  name = "Policies"
+  url = "/policies/"
+  weight = 40
 
 # -- Services column --
 [[menu.footer]]
