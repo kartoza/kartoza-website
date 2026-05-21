@@ -682,15 +682,6 @@
     margin: 0 0 2rem 0;
 }
 
-.product-features li {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.5rem 0;
-    color: var(--text-dark);
-    font-weight: 500;
-}
-
 .product-features li i {
     color: #4CAF50;
     font-size: 0.9rem;
@@ -713,37 +704,13 @@
     border-color: var(--primary-dark);
 }
 
-.price-hint {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-}
-
 .product-visual {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.product-image-wrapper {
-    position: relative;
-}
-
-.product-image-wrapper img {
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
-    max-width: 100%;
-    transition: transform var(--transition-med);
-}
-
-.product-card:hover .product-image-wrapper img {
-    transform: scale(1.02);
-}
-
 /* Product Grid Cards (MyCivitas, BIMS, Training) */
-.product-grid {
-    margin-top: 2rem;
-}
-
 .product-card-small {
     background: var(--white);
     border-radius: var(--radius-lg);
@@ -1065,16 +1032,6 @@
     margin-bottom: 1.5rem;
 }
 
-.final-cta-buttons .button.is-primary {
-    background: var(--primary);
-    border-color: var(--primary);
-}
-
-.final-cta-buttons .button.is-primary:hover {
-    background: var(--primary-dark);
-    border-color: var(--primary-dark);
-}
-
 .cta-note {
     color: var(--text-muted);
     font-size: 0.95rem;
@@ -1235,14 +1192,6 @@
 }
 
 /* Animation delays for staggered effect */
-.product-grid .column:nth-child(1) .product-card-small { transition-delay: 0.1s; }
-.product-grid .column:nth-child(2) .product-card-small { transition-delay: 0.2s; }
-.product-grid .column:nth-child(3) .product-card-small { transition-delay: 0.3s; }
-
-.services-grid .column:nth-child(1) .service-card { transition-delay: 0.1s; }
-.services-grid .column:nth-child(2) .service-card { transition-delay: 0.2s; }
-.services-grid .column:nth-child(3) .service-card { transition-delay: 0.3s; }
-
 .why-grid .column:nth-child(1) .why-item { transition-delay: 0.1s; }
 .why-grid .column:nth-child(2) .why-item { transition-delay: 0.2s; }
 .why-grid .column:nth-child(3) .why-item { transition-delay: 0.3s; }
@@ -2560,31 +2509,6 @@
 
 .content a:not(.button):not(.tag):not(.pagination-link):hover {
     color: var(--primary-dark);
-}
-
-/* Global Button Enhancements */
-.button.is-primary {
-    background: var(--primary);
-    border-color: var(--primary);
-    font-weight: 600;
-    transition: all var(--transition-fast);
-}
-
-.button.is-primary:hover {
-    background: var(--primary-dark);
-    border-color: var(--primary-dark);
-    transform: translateY(-1px);
-}
-
-.button.is-primary.is-outlined {
-    background: transparent;
-    border-color: var(--primary);
-    color: var(--primary);
-}
-
-.button.is-primary.is-outlined:hover {
-    background: var(--primary);
-    color: var(--white);
 }
 
 /* Global Title Styling */

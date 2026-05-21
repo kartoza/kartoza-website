@@ -11,3 +11,19 @@
 .border-width-2 {
   border-width: 2px
 }
+
+.fa-check::before {
+  color: #4caf50;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.margin-top-1-rem {
+  margin-top: 1rem;
+}
+
+.has-text-centered {
+  text-align: center;
+}
