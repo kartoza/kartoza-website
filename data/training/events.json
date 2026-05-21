@@ -1,22 +1,12 @@
 [
   {
-    "item_code": "Introduction to QGIS Course-12 - 14 May 2026-ONLINE",
-    "title": "Introduction to QGIS",
-    "start": "2026-05-12",
-    "end": "2026-05-14",
-    "date_display": "12 - 14 May 2026",
-    "location": "Online",
-    "url": "/training-courses/qgis-introduction/",
-    "registration_url": "https://erp.kartoza.com/shop/product/introduction-to-qgis"
-  },
-  {
     "item_code": "GIS Fundamentals for Educators-29 June to 10 July 2026-Asynchronous & Online",
     "title": "GIS Fundamentals for Educators",
     "start": "2026-06-29",
     "end": "2026-07-10",
     "date_display": "29 June 2026 to 10 July 2026",
     "location": "Asynchronous & Online",
-    "url": "/training-courses/gisforeducators/",
+    "url": "/training-courses/introduction-to-gis/",
     "registration_url": "https://erp.kartoza.com/shop/product/training/introduction-to-gis-1w3sk"
   },
   {
@@ -26,7 +16,7 @@
     "end": "2026-08-13",
     "date_display": "11 - 13 August 2026",
     "location": "Online",
-    "url": "/training-courses/qgis-introduction/",
+    "url": "/training-courses/introduction-to-qgis/",
     "registration_url": "https://erp.kartoza.com/shop/product/introduction-to-qgis"
   },
   {
@@ -36,7 +26,7 @@
     "end": "2026-10-09",
     "date_display": "5 - 9 October 2026",
     "location": "Asynchronous & Online",
-    "url": "/training-courses/gisforeducators/",
+    "url": "/training-courses/introduction-to-gis/",
     "registration_url": "https://erp.kartoza.com/shop/product/training/introduction-to-gis-1w3sk"
   },
   {
@@ -46,7 +36,7 @@
     "end": "2026-10-07",
     "date_display": "6 - 7 October 2026",
     "location": "Online",
-    "url": "/training-courses/postgis/",
+    "url": "/training-courses/introduction-to-postgis/",
     "registration_url": "https://erp.kartoza.com/shop/product/training/introduction-to-postgis-7ihjm"
   },
   {
@@ -56,7 +46,7 @@
     "end": "2026-10-22",
     "date_display": "20 - 22 October 2026",
     "location": "Online",
-    "url": "/training-courses/qgis-introduction/",
+    "url": "/training-courses/introduction-to-qgis/",
     "registration_url": "https://erp.kartoza.com/shop/product/introduction-to-qgis"
   },
   {
@@ -66,7 +56,7 @@
     "end": "2026-10-30",
     "date_display": "26 - 30 October 2026",
     "location": "On Site",
-    "url": "/training-courses/enterprisegis/",
+    "url": "/training-courses/enterprise-gis/",
     "registration_url": "https://erp.kartoza.com/shop/product/training/enterprise-gis-ypfsx"
   }
 ]
