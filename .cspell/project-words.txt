@@ -26,10 +26,12 @@ EPAL
 # Technical acronyms and terms
 ECMWF
 GNSS
+dscache
 scikit
 xarray
 
 # Team member names (add as needed)
+Neema
 Osundwa
 
 # Web/tech terms

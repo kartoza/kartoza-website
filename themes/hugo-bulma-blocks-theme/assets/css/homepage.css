@@ -5101,7 +5101,6 @@ body:has(.blog-hero) .contextmenu {
 
 /* Sidebar */
 .blog-article-sidebar {
-    position: sticky;
     top: 2rem;
 }
 
