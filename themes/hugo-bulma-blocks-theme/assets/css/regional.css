@@ -199,13 +199,6 @@
 }
 
 /* Regional price hint under CTAs */
-.price-hint {
-    display: block;
-    margin-top: 0.75rem;
-    font-size: 0.85rem;
-    color: #6B7B8D;
-}
-
 .price-hint .price-alt {
     display: none;
 }

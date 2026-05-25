@@ -200,31 +200,31 @@
         </div>
 
         <!-- Priority 1: GeoSpatial Hosting -->
-        <div class="product-card product-featured">
+        <div class="main-card featured">
             <div class="columns is-vcentered">
-                <div class="column is-6 product-info">
-                    <span class="product-badge">Most Popular</span>
+                <div class="column is-6">
+                    <span class="card-badge">Most Popular</span>
                     <h3 class="title is-3">
-                        <i class="fas fa-server product-icon"></i>
+                        <i class="fas fa-server"></i>
                         GeoSpatial Hosting
                     </h3>
-                    <p class="product-description">
+                    <p class="description">
                         Fully managed cloud hosting for your GIS infrastructure. Deploy GeoServer,
                         PostGIS, QGIS Server, GeoNode, and more — with automatic backups,
                         SSL, and 24/7 monitoring.
                     </p>
-                    <ul class="product-features">
+                    <ul class="no-style">
                         <li><i class="fas fa-check"></i> Instant deployment of GIS servers</li>
                         <li><i class="fas fa-check"></i> Automatic scaling and load balancing</li>
                         <li><i class="fas fa-check"></i> Enterprise-grade security and DDoS protection</li>
                         <li><i class="fas fa-check"></i> Expert GIS support included</li>
                     </ul>
-                    <div class="product-cta">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-top: 2rem;">
                         <a class="button is-primary is-medium" href="{{ absURL "hosting/" }}">
                             <span>View Hosting Options</span>
                             <span class="icon"><i class="fas fa-arrow-right"></i></span>
                         </a>
-                        <span class="price-hint">
+                        <span class="hint price-hint">
                             Starting from
                             <span class="price-zar">R2,500/month</span>
                             <span class="price-eur price-alt">€125/month</span>
@@ -233,7 +233,7 @@
                     </div>
                 </div>
                 <div class="column is-6 product-visual">
-                    <div class="product-image-wrapper">
+                    <div class="main-image">
                         <a href="https://geohosting.com" target="Geospatial Hosting">
                         <img src="{{ absURL "img/gsh-carousel.png" }}" alt="Preview Geospatial Hosting">
                         </a>
@@ -243,26 +243,26 @@
         </div>
 
         <!-- Products Grid - Priorities 2-4 -->
-        <div class="columns is-multiline product-grid">
+        <div class="columns is-multiline" style="margin-top: 2rem;">
             <!-- Priority 2: MyCivitas -->
             <div class="column is-4">
-                <div class="product-card-small">
-                    <div class="product-card-icon">
+                <div class="main-card animate-hover">
+                    <div class="card-badge-icon">
                         <i class="fas fa-city"></i>
                     </div>
                     <h4 class="title is-4">MyCivitas</h4>
-                    <p class="product-card-subtitle">Municipal Asset Management</p>
-                    <p class="product-card-desc">
+                    <p class="subtitle">Municipal Asset Management</p>
+                    <p class="description">
                         Complete lifecycle management for municipal infrastructure. Track assets,
                         schedule maintenance, and optimise budgets with spatial intelligence.
                     </p>
-                    <ul class="product-card-features">
+                    <ul>
                         <li>Asset inventory & mapping</li>
                         <li>Condition assessments</li>
                         <li>Maintenance scheduling</li>
                         <li>Budget forecasting</li>
                     </ul>
-                    <a class="button is-outlined is-primary is-medium" href="{{ absURL "apps/mycivitas/" }}">
+                    <a class="button is-outlined is-primary is-medium full-width mt-4" href="{{ absURL "apps/mycivitas/" }}">
                         Learn More <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -270,23 +270,23 @@
 
             <!-- Priority 3: BIMS -->
             <div class="column is-4">
-                <div class="product-card-small">
-                    <div class="product-card-icon">
+                <div class="main-card animate-hover">
+                    <div class="card-badge-icon">
                         <i class="fas fa-leaf"></i>
                     </div>
                     <h4 class="title is-4">BIMS</h4>
-                    <p class="product-card-subtitle">Biodiversity Information Management</p>
-                    <p class="product-card-desc">
+                    <p class="subtitle">Biodiversity Information Management</p>
+                    <p class="description">
                         Comprehensive biodiversity data platform for conservation organisations.
                         Collect, manage, and analyse species occurrence data.
                     </p>
-                    <ul class="product-card-features">
+                    <ul>
                         <li>Species occurrence tracking</li>
                         <li>Habitat mapping</li>
                         <li>Conservation analytics</li>
                         <li>Citizen science integration</li>
                     </ul>
-                    <a class="button is-outlined is-primary is-medium" href="{{ absURL "apps/bims/" }}">
+                    <a class="button is-outlined is-primary is-medium full-width mt-4" href="{{ absURL "apps/bims/" }}">
                         Learn More <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -294,23 +294,23 @@
 
             <!-- Priority 4: Training -->
             <div class="column is-4">
-                <div class="product-card-small">
-                    <div class="product-card-icon">
+                <div class="main-card animate-hover">
+                    <div class="card-badge-icon">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
                     <h4 class="title is-4">Training Courses</h4>
-                    <p class="product-card-subtitle">Professional GIS Education</p>
-                    <p class="product-card-desc">
+                    <p class="subtitle">Professional GIS Education</p>
+                    <p class="description">
                         Expert-led courses for teams and individuals. Master QGIS, PostGIS,
                         GeoServer, and more with hands-on practical training.
                     </p>
-                    <ul class="product-card-features">
+                    <ul>
                         <li>QGIS fundamentals to advanced</li>
                         <li>Spatial database design</li>
                         <li>Web mapping & GeoServer</li>
                         <li>Custom corporate training</li>
                     </ul>
-                    <a class="button is-outlined is-primary is-medium" href="{{ absURL "training-courses/" }}">
+                    <a class="button is-outlined is-primary is-medium full-width mt-4" href="{{ absURL "training-courses/" }}">
                         View Courses <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -327,45 +327,45 @@
             <p class="subtitle is-5">Expert consulting, development, and specialized tools</p>
         </div>
 
-        <div class="columns is-multiline services-grid">
+        <div class="columns is-multiline">
             <!-- Priority 5: SAGTA Map Exporter -->
             <div class="column is-4">
-                <div class="service-card">
-                    <div class="service-icon">
+                <div class="main-card animate-hover has-text-centered">
+                    <div class="card-badge-icon">
                         <i class="fas fa-file-export"></i>
                     </div>
                     <h5 class="title is-5">SAGTA Map Exporter</h5>
                     <p>Export compliant maps for South African surveying and cadastral requirements.</p>
-                    <a href="{{ absURL "apps/sagta/" }}" class="service-link">
-                        Learn more <i class="fas fa-arrow-right"></i>
+                    <a class="button is-outlined is-primary is-medium full-width mt-4" href="{{ absURL "apps/sagta/" }}">
+                        Learn more <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
             </div>
 
             <!-- Priority 6: Consulting -->
             <div class="column is-4">
-                <div class="service-card">
-                    <div class="service-icon">
+                <div class="main-card animate-hover has-text-centered">
+                    <div class="card-badge-icon">
                         <i class="fas fa-lightbulb"></i>
                     </div>
                     <h5 class="title is-5">Consulting Services</h5>
                     <p>Strategic GIS consulting for architecture, data strategy, and technology selection.</p>
-                    <a href="{{ absURL "solutions/consultancy/" }}" class="service-link">
-                        Learn more <i class="fas fa-arrow-right"></i>
+                    <a class="button is-outlined is-primary is-medium full-width mt-4" href="{{ absURL "solutions/consultancy/" }}">
+                        Learn more <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
             </div>
 
             <!-- Priority 7: Project Management -->
             <div class="column is-4">
-                <div class="service-card">
-                    <div class="service-icon">
+                <div class="main-card animate-hover has-text-centered">
+                    <div class="card-badge-icon">
                         <i class="fas fa-tasks"></i>
                     </div>
                     <h5 class="title is-5">GeoSpatial Project Management</h5>
                     <p>End-to-end project management for complex GIS implementations and deployments.</p>
-                    <a href="{{ absURL "solutions/consultancy/" }}" class="service-link">
-                        Learn more <i class="fas fa-arrow-right"></i>
+                    <a class="button is-outlined is-primary is-medium full-width mt-4" href="{{ absURL "solutions/consultancy/" }}">
+                        Learn more <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
             </div>
@@ -789,7 +789,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================
     // SCROLL ANIMATIONS
     // ============================================
-    const animatedElements = document.querySelectorAll('.product-card, .product-card-small, .service-card, .why-item');
+    const animatedElements = document.querySelectorAll('.main-card, .product-card, .product-card-small, .service-card, .why-item');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {

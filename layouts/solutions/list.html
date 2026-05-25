@@ -70,23 +70,16 @@
     </div>
 </section>
 
-<!-- CTA Section -->
-<section class="section section-cta">
-    <div class="container has-text-centered">
-        <h2 class="title is-3">Need a Custom Geospatial Solution?</h2>
-        <p class="subtitle is-5">Let's discuss how we can help you achieve your mapping and data goals.</p>
-        <div class="section-cta-buttons">
-            <a class="button is-primary is-medium" href="{{ absURL "contact-us/" }}">
-                <span class="icon"><i class="fas fa-comments"></i></span>
-                <span>Start a Conversation</span>
-            </a>
-            <a class="button is-light is-medium" href="{{ absURL "portfolio/" }}">
-                <span class="icon"><i class="fas fa-briefcase"></i></span>
-                <span>See Our Portfolio</span>
-            </a>
-        </div>
-    </div>
-</section>
+{{ partial "section-cta.html" (dict
+    "title"          "Need a Custom Geospatial Solution?"
+    "subtitle"       "Let's discuss how we can help you achieve your mapping and data goals."
+    "primaryUrl"     (absURL "contact-us/")
+    "primaryIcon"    "fas fa-comments"
+    "primaryLabel"   "Start a Conversation"
+    "secondaryUrl"   (absURL "portfolio/")
+    "secondaryIcon"  "fas fa-briefcase"
+    "secondaryLabel" "See Our Portfolio"
+) }}
 
 {{ partial "physics-scroll.html" . }}
 
