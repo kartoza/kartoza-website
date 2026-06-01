@@ -34,6 +34,8 @@ from pathlib import Path
 import warnings
 
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 import yaml
 from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
 from tabulate import tabulate
@@ -43,8 +45,112 @@ import html2text
 warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
 
 # Configuration
-ERPNEXT_URL = os.environ.get('ERPNEXT_URL', 'https://erp.kartoza.com')
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
+
+def _load_env_file(path: Path) -> bool:
+    """Load KEY=VALUE entries from a dotenv-like file into os.environ."""
+    if not path.exists():
+        return False
+
+    try:
+        lines = path.read_text().splitlines()
+    except (IOError, OSError):
+        return False
+
+    for raw_line in lines:
+        line = raw_line.strip()
+        if not line or line.startswith('#') or '=' not in line:
+            continue
+
+        key, value = line.split('=', 1)
+        key = key.strip()
+        value = value.strip()
+
+        if key.startswith('export '):
+            key = key[len('export '):].strip()
+
+        if ((value.startswith('"') and value.endswith('"'))
+                or (value.startswith("'") and value.endswith("'"))):
+            value = value[1:-1]
+
+        # Keep shell-exported values authoritative.
+        if key and key not in os.environ:
+            os.environ[key] = value
+
+    return True
+
+
+def _load_default_env_files() -> list[Path]:
+    """Load common environment files used by this repository."""
+    loaded_files: list[Path] = []
+    candidates = [
+        PROJECT_ROOT / '.env',
+        PROJECT_ROOT / 'deployment' / '.env',
+    ]
+    for path in candidates:
+        if _load_env_file(path):
+            loaded_files.append(path)
+    return loaded_files
+
+
+LOADED_ENV_FILES = _load_default_env_files()
+
+
+def _normalize_erpnext_base_url(url: str) -> str:
+    """Normalize ERPNext URL to a base URL without trailing /api."""
+    normalized = url.strip().rstrip('/')
+    if normalized.endswith('/api'):
+        return normalized[:-4]
+    return normalized
+
+
+def _get_erpnext_config() -> tuple[str, str, str]:
+    """
+    Resolve ERPNext URL and credentials from environment.
+
+    Supports legacy and gateway-prefixed variable names.
+    """
+    raw_url = 'https://erp.kartoza.com'
+    api_key = os.environ.get('ERPNEXT_API_KEY') or os.environ.get('GATEWAY_ERPNEXT_API_KEY') or ''
+    api_secret = os.environ.get('ERPNEXT_API_SECRET') or os.environ.get('GATEWAY_ERPNEXT_API_SECRET') or ''
+    return _normalize_erpnext_base_url(raw_url), api_key, api_secret
+
+
+ERPNEXT_URL, API_KEY, API_SECRET = _get_erpnext_config()
 CONTENT_DIR = Path(__file__).parent.parent / 'content' / 'careers'
+
+
+def _build_http_session() -> requests.Session:
+    """Create an HTTP session with retries for transient network/server failures."""
+    session = requests.Session()
+
+    retry = Retry(
+        total=5,
+        connect=5,
+        read=5,
+        status=5,
+        backoff_factor=1,
+        status_forcelist=(429, 500, 502, 503, 504),
+        allowed_methods=frozenset(['GET']),
+        raise_on_status=False,
+    )
+    adapter = HTTPAdapter(max_retries=retry)
+    session.mount('https://', adapter)
+    session.mount('http://', adapter)
+
+    session.headers.update({
+        'Accept': 'application/json',
+        'User-Agent': 'kartoza-website-sync/1.0',
+    })
+
+    if API_KEY and API_SECRET:
+        session.headers.update({'Authorization': f'token {API_KEY}:{API_SECRET}'})
+
+    return session
+
+
+HTTP_SESSION = _build_http_session()
 
 
 def slugify(text: str) -> str:
@@ -165,12 +271,28 @@ def fetch_job_openings() -> list:
     }
 
     try:
-        response = requests.get(url, params=params, timeout=30)
+        response = HTTP_SESSION.get(url, params=params, timeout=30)
         response.raise_for_status()
         data = response.json()
         return data.get('data', [])
+    except requests.HTTPError as e:
+        status_code = e.response.status_code if e.response is not None else None
+        if status_code in (401, 403):
+            print(
+                "Authentication/permission error while fetching job openings "
+                f"(HTTP {status_code}). "
+                "Set ERPNEXT_API_KEY/ERPNEXT_API_SECRET (or GATEWAY_* variants)."
+            )
+            return []
+        print(f"Error fetching job openings (HTTP {status_code}): {e}")
+        return []
     except requests.RequestException as e:
         print(f"Error fetching job openings: {e}")
+        if 'Connection reset by peer' in str(e):
+            print(
+                "The remote side closed the connection. "
+                "This can be transient; retries were attempted automatically."
+            )
         return []
 
 
@@ -178,7 +300,7 @@ def fetch_job_detail(job_name: str) -> dict | None:
     """Fetch full job opening details from ERPNext API."""
     url = f"{ERPNEXT_URL}/api/resource/Job Opening/{job_name}"
     try:
-        response = requests.get(url, timeout=30)
+        response = HTTP_SESSION.get(url, timeout=30)
         response.raise_for_status()
         data = response.json()
         return data.get('data', {})
@@ -213,13 +335,12 @@ def job_to_hugo_frontmatter(job: dict, mark_reviewed: bool = False) -> dict:
         'title': job.get('job_title', 'Untitled Position'),
         'erpnext_id': job.get('name', ''),
         'type': 'careers',
-        'layout': 'single',
+        'layout': 'job',
     }
 
-    # Status / draft
+    # Status / draft — only hide truly Closed positions; Open jobs appear regardless of publish flag
     status = job.get('status', 'Open')
-    published = job.get('publish', 0)
-    if status == 'Closed' or not published:
+    if status == 'Closed':
         front_matter['draft'] = True
 
     # Date fields
@@ -398,6 +519,17 @@ def main():
                         help='Show detailed output')
 
     args = parser.parse_args()
+
+    if not API_KEY or not API_SECRET:
+        print(
+            "Warning: API credentials not set; attempting unauthenticated access. "
+            "Private ERPNext endpoints may return HTTP 401/403."
+        )
+        print(
+            "Looked in current shell plus .env files at "
+            f"{PROJECT_ROOT / '.env'} and {PROJECT_ROOT / 'deployment' / '.env'}."
+        )
+        print()
 
     print(f"Fetching job openings from {ERPNEXT_URL}...")
     jobs = fetch_job_openings()
