@@ -4,9 +4,9 @@ department: Production - K
 designation: GIS & Software Sales Consultant
 draft: false
 erpnext_id: HR-OPN-2026-0005
-job_status: Closed
+job_status: Open
 lastmod: '2026-06-01T08:21:01+00:00'
-layout: single
+layout: job
 location: Remote
 reviewedBy: Automated Check
 reviewedDate: '2026-06-01'

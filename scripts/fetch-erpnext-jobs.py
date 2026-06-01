@@ -335,7 +335,7 @@ def job_to_hugo_frontmatter(job: dict, mark_reviewed: bool = False) -> dict:
         'title': job.get('job_title', 'Untitled Position'),
         'erpnext_id': job.get('name', ''),
         'type': 'careers',
-        'layout': 'single',
+        'layout': 'job',
     }
 
     # Status / draft — only hide truly Closed positions; Open jobs appear regardless of publish flag

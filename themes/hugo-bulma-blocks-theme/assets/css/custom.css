@@ -248,3 +248,77 @@ section.is-fluid > .container.is-fluid {
 .application-checklist {
     color: #1B6B9B !important;
 }
+
+/* Job detail page */
+.careers-job-hero {
+    min-height: 40vh !important;
+    padding: 4rem 0 2rem;
+}
+
+.careers-job-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    transition: color 0.2s;
+}
+
+.careers-job-back:hover {
+    color: #ffffff;
+}
+
+.careers-job-dept {
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.careers-job-meta {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.careers-job-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+}
+
+.careers-job-meta-item i {
+    color: #E8A331;
+    font-size: 0.8rem;
+}
+
+.careers-job-apply {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: #f7f9fb;
+    border-radius: 12px;
+    border-left: 4px solid #3B9DD9;
+}
+
+.careers-job-apply h3 {
+    color: #1B6B9B;
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.careers-job-apply p {
+    color: #4a5568;
+    margin-bottom: 1.5rem;
+}
+
+.careers-job-apply-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
