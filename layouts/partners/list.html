@@ -125,25 +125,16 @@
     </div>
 </section>
 
-<!-- CTA Section -->
-<section class="section partners-cta-section">
-    <div class="container">
-        <div class="partners-cta-content">
-            <h2>Ready to Get Started?</h2>
-            <p>Contact us for a free consultation to discuss your requirements and find the right solution for your organisation.</p>
-            <div class="partners-cta-buttons">
-                <a href="{{ absURL "contact-us/" }}" class="button is-primary is-large">
-                    <span class="icon"><i class="fas fa-calendar-check"></i></span>
-                    <span>Schedule Consultation</span>
-                </a>
-                <a href="{{ absURL "solutions/" }}" class="button is-light is-large">
-                    <span class="icon"><i class="fas fa-cogs"></i></span>
-                    <span>View All Solutions</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+{{ partial "section-cta.html" (dict
+    "title"          "Ready to Get Started?"
+    "subtitle"       "Contact us for a free consultation to discuss your requirements and find the right solution for your organisation."
+    "primaryUrl"     (absURL "contact-us/")
+    "primaryIcon"    "fas fa-calendar-check"
+    "primaryLabel"   "Schedule Consultation"
+    "secondaryUrl"   (absURL "solutions/")
+    "secondaryIcon"  "fas fa-cogs"
+    "secondaryLabel" "View All Solutions"
+) }}
 
 {{ partial "physics-scroll.html" . }}
 

@@ -81,7 +81,7 @@
             text = ''
               exec ${lib.getExe pkgs.python3} \
                 -m http.server 8000 \
-                -d ${self.packages.${system}.website}/public_www/
+                -d ${self.packages.${system}.website}/public/
             '';
           };
 

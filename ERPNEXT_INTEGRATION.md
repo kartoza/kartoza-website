@@ -5,9 +5,10 @@ This document explains how the training schedule integrates with ERPNext.
 ## ✅ What's Installed
 
 The nix shell now includes:
-- `python3` - Python interpreter
-- `python3Packages.requests` - For ERPNext API calls
-- `python3Packages.pyyaml` - For YAML file generation
+
+- `python3` - Python interpreter.
+- `python3Packages.requests` - For ERPNext API calls.
+- `python3Packages.pyyaml` - For YAML file generation.
 
 ## 🔧 Setup Instructions
 
@@ -20,6 +21,7 @@ In your ERPNext instance:
 3. **Copy the API Key and API Secret**
 
 Or use the API endpoint:
+
 ```bash
 curl -X POST "https://erp.kartoza.com/api/method/frappe.core.doctype.user.user.generate_keys" \
   -H "Content-Type: application/json" \
@@ -37,6 +39,7 @@ nano .env
 ```
 
 Add:
+
 ```bash
 ERPNEXT_API_URL=https://erp.kartoza.com
 ERPNEXT_API_KEY=your_api_key_here
@@ -50,6 +53,7 @@ Edit `scripts/sync-training-from-erpnext.py` to match your ERPNext setup:
 **A. Update DocType Names**
 
 In `fetch_training_courses()`:
+
 ```python
 # Change "Item" to your training course DocType
 response = self.session.get(
@@ -66,6 +70,7 @@ response = self.session.get(
 **B. Update Session Fetching**
 
 In `fetch_training_sessions()`:
+
 ```python
 # Change "Event" to how you track training sessions
 # Could be: Event, Project, Custom DocType
@@ -78,6 +83,7 @@ response = self.session.get(
 **C. Update Field Mappings**
 
 In `_extract_course_slug()`, add your course mappings:
+
 ```python
 course_map = {
     'your course name in erpnext': 'hugo-slug',
@@ -169,11 +175,13 @@ nix develop --command ./scripts/pre-build.sh
 ### Caching Strategy
 
 **Development Mode** (HUGO_ENV != production):
+
 - Cache TTL: 6 hours
 - Reduces API calls during frequent rebuilds
 - Allows offline development
 
 **Production Mode** (HUGO_ENV=production):
+
 - Cache TTL: 1 hour
 - Fresher data for production builds
 - Still provides fallback if API is down
@@ -181,6 +189,7 @@ nix develop --command ./scripts/pre-build.sh
 **Cache Location**: `.cache/training_schedule_cache.json`
 
 **Fallback Behaviour**:
+
 1. Try to fetch from ERPNext
 2. If fails, use cache (any age)
 3. If no cache, keep existing YAML file
@@ -199,6 +208,7 @@ nix develop --command ./scripts/dev-server.sh
 ### Test With Mock Data
 
 Create a test script:
+
 ```bash
 # Create test credentials
 export ERPNEXT_API_URL=https://erp.kartoza.com
@@ -257,6 +267,7 @@ export ERPNEXT_API_SECRET=test_secret
 ### "No module named 'yaml'"
 
 The nix shell has been updated, but you need to reload:
+
 ```bash
 exit  # Exit current shell
 nix develop  # Enter fresh shell
@@ -267,6 +278,7 @@ nix develop  # Enter fresh shell
 1. Check `.env` file exists
 2. Verify credentials are correct
 3. Load environment variables:
+
    ```bash
    set -a; source .env; set +a
    ```
@@ -274,12 +286,14 @@ nix develop  # Enter fresh shell
 ### API Connection Fails
 
 Test the connection:
+
 ```bash
 curl -X GET "https://erp.kartoza.com/api/resource/Item" \
   -H "Authorization: token YOUR_KEY:YOUR_SECRET"
 ```
 
 Check:
+
 - API user has correct permissions
 - IP whitelisting (if enabled)
 - ERPNext instance is accessible
@@ -287,12 +301,14 @@ Check:
 ### Sync Fails During Build
 
 The build won't fail! It will:
+
 1. Warn about sync failure
 2. Use cached data
 3. Fall back to existing YAML
 4. Continue building
 
 To debug:
+
 ```bash
 # Run sync manually to see errors
 ./scripts/sync-training-from-erpnext.py --force
@@ -301,6 +317,7 @@ To debug:
 ### Cache Issues
 
 Clear cache and force refresh:
+
 ```bash
 rm -rf .cache/
 ./scripts/sync-training-from-erpnext.py --force

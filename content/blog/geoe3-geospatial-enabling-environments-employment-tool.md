@@ -6,11 +6,11 @@ tags:
   - Plugin
   - Gender
   - Spatial Analysis
-date: 2024-03-23
+date: 2026-05-11
 author: "Jeff Osundwa"
 thumbnail: "/blog/img/geoe3-banner.png"
 reviewedBy: "Jeff Osundwa"
-reviewedDate: "2026-03-23"
+reviewedDate: "2026-04-23"
 ---
 
 {{< block
@@ -94,4 +94,4 @@ Researchers and policymakers can leverage GEOE3's analytical capabilities to inf
 
 GEOE3 is a game-changer for gender-aware geospatial analysis. By making spatial data accessible and actionable, it empowers decision-makers to build more inclusive communities and workplaces.
 
-For more information, visit the [official documentation](https://worldbank.github.io/GEEST/) or contribute to the project on [GitHub](https://github.com/worldbank/GEEST).
+For more information, visit the [official documentation](https://worldbank.github.io/GeoE3/) or contribute to the project on [GitHub](https://github.com/worldbank/GEOE3).

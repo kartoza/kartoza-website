@@ -69,23 +69,16 @@
     </div>
 </section>
 
-<!-- CTA Section -->
-<section class="section section-cta">
-    <div class="container has-text-centered">
-        <h2 class="title is-3">Stay Updated on Open Source GIS</h2>
-        <p class="subtitle is-5">Follow us for the latest news, tutorials, and insights from the geospatial world.</p>
-        <div class="section-cta-buttons">
-            <a class="button is-primary is-medium" href="{{ absURL "contact-us/" }}">
-                <span class="icon"><i class="fas fa-envelope"></i></span>
-                <span>Get in Touch</span>
-            </a>
-            <a class="button is-light is-medium" href="{{ absURL "training-courses/" }}">
-                <span class="icon"><i class="fas fa-graduation-cap"></i></span>
-                <span>Explore Training</span>
-            </a>
-        </div>
-    </div>
-</section>
+{{ partial "section-cta.html" (dict
+    "title"          "Stay Updated on Open Source GIS"
+    "subtitle"       "Follow us for the latest news, tutorials, and insights from the geospatial world."
+    "primaryUrl"     (absURL "contact-us/")
+    "primaryIcon"    "fas fa-envelope"
+    "primaryLabel"   "Get in Touch"
+    "secondaryUrl"   (absURL "training-courses/")
+    "secondaryIcon"  "fas fa-graduation-cap"
+    "secondaryLabel" "Explore Training"
+) }}
 
 <!-- Blog Posts Data - only pages with both reviewedBy and reviewedDate -->
 <script id="blog-data" type="application/json">

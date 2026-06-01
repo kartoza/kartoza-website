@@ -1,0 +1,940 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+
+<script>window._erpBase = '{{ .Site.Params.erpnextBaseUrl | default "" }}';</script>
+
+<style>
+/* ============================================
+   SUPPORT TICKET PAGE STYLES
+   ============================================ */
+
+.ticket-hero {
+    background: linear-gradient(135deg, var(--dark2, #1a2a3a) 0%, var(--primary2, #3488b8) 100%);
+    padding: 5rem 1.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.ticket-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(59,157,217,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(232,163,49,0.1) 0%, transparent 50%);
+}
+
+.ticket-hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: #fff;
+}
+
+.ticket-hero-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+}
+
+.ticket-hero-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+/* ============================================
+   TICKET SECTION
+   ============================================ */
+
+.ticket-section {
+    background: var(--light1, #f7f9fb);
+    min-height: 70vh;
+    padding: 3rem 1.5rem 5rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.ticket-card-wrapper {
+    width: 100%;
+    max-width: 600px;
+    margin: -2rem auto 0;
+}
+
+.ticket-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 40px rgba(26,42,58,0.12);
+    overflow: hidden;
+    position: relative;
+    padding: 2rem;
+}
+
+.ticket-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary2, #3488b8), var(--accent, #E8A331));
+}
+
+/* ============================================
+   CARD HEADER
+   ============================================ */
+
+.ticket-card-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.ticket-card-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary3, #b2d5e8), var(--primary2, #3488b8));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.4rem;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(52,136,184,0.3);
+}
+
+.ticket-card-header h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--dark2, #1a2a3a);
+    margin-bottom: 0.3rem;
+}
+
+.ticket-card-header p {
+    font-size: 0.9rem;
+    color: var(--dark1, #6B7B8D);
+}
+
+/* ============================================
+   FORM FIELDS
+   ============================================ */
+
+.ticket-field {
+    margin-bottom: 1.25rem;
+}
+
+.ticket-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary2, #4D6370);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.ticket-label i {
+    color: var(--primary2, #3488b8);
+    font-size: 0.9em;
+}
+
+.ticket-input,
+.ticket-textarea,
+.ticket-select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--light2, #e8ecf0);
+    border-radius: 10px;
+    font-size: 1rem;
+    color: var(--dark2, #1a2a3a);
+    background: var(--light1, #f7f9fb);
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    outline: none;
+    font-family: inherit;
+}
+
+.ticket-input:focus,
+.ticket-textarea:focus,
+.ticket-select:focus {
+    border-color: var(--primary2, #3488b8);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(52,136,184,0.12);
+}
+
+.ticket-input.has-error,
+.ticket-textarea.has-error,
+.ticket-select.has-error {
+    border-color: #e74c3c;
+    box-shadow: 0 0 0 3px rgba(231,76,60,0.1);
+}
+
+.ticket-textarea {
+    resize: vertical;
+    min-height: 140px;
+}
+
+.ticket-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7B8D' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.875rem center;
+    padding-right: 2.5rem;
+    cursor: pointer;
+}
+
+.ticket-input[readonly] {
+    opacity: 0.7;
+    cursor: default;
+}
+
+/* ============================================
+   SUBMIT BUTTON
+   ============================================ */
+
+.ticket-submit {
+    width: 100%;
+    padding: 0.875rem;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--primary2, #3488b8), var(--primary1, #53a2cc));
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.02em;
+    font-family: inherit;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.ticket-submit:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(52,136,184,0.35);
+}
+
+.ticket-submit:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.ticket-submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.ticket-submit .btn-text,
+.ticket-submit .btn-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.ticket-submit .btn-loading {
+    display: none;
+}
+
+.ticket-submit.is-loading .btn-text {
+    display: none;
+}
+
+.ticket-submit.is-loading .btn-loading {
+    display: flex;
+}
+
+/* ============================================
+   MESSAGES
+   ============================================ */
+
+.ticket-message {
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-top: 1.25rem;
+    display: none;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.ticket-message.is-visible {
+    display: flex;
+}
+
+.ticket-message.is-error {
+    background: rgba(231,76,60,0.08);
+    border: 1px solid rgba(231,76,60,0.2);
+    color: #c0392b;
+}
+
+.ticket-message.is-success {
+    background: rgba(39,174,96,0.08);
+    border: 1px solid rgba(39,174,96,0.2);
+    color: #1e8449;
+}
+
+.ticket-message i {
+    margin-top: 0.1rem;
+    flex-shrink: 0;
+    font-size: 1rem;
+}
+
+/* ============================================
+   NOT LOGGED IN STATE
+   ============================================ */
+
+.ticket-auth-required {
+    text-align: center;
+    padding: 1rem 0 0.5rem;
+}
+
+.ticket-auth-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e8a331, #f0b84d);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+    font-size: 1.6rem;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(232,163,49,0.3);
+}
+
+.ticket-auth-required h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--dark2, #1a2a3a);
+    margin-bottom: 0.5rem;
+}
+
+.ticket-auth-required p {
+    font-size: 0.95rem;
+    color: var(--dark1, #6B7B8D);
+    margin-bottom: 1.5rem;
+}
+
+.ticket-login-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--primary2, #3488b8), var(--primary1, #53a2cc));
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ticket-login-link:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(52,136,184,0.35);
+    color: #fff;
+    text-decoration: none;
+}
+
+/* ============================================
+   SUCCESS STATE
+   ============================================ */
+
+.ticket-success-state {
+    display: none;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.ticket-success-state.is-visible {
+    display: block;
+}
+
+.ticket-success-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+    font-size: 2rem;
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(39,174,96,0.3);
+}
+
+.ticket-success-state h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--dark2, #1a2a3a);
+    margin-bottom: 0.5rem;
+}
+
+.ticket-success-state p {
+    font-size: 0.95rem;
+    color: var(--dark1, #6B7B8D);
+    margin-bottom: 0.5rem;
+}
+
+.ticket-ref {
+    display: inline-block;
+    background: var(--light2, #e8ecf0);
+    border-radius: 8px;
+    padding: 0.4rem 1rem;
+    font-family: monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--dark2, #1a2a3a);
+    margin: 0.5rem 0 1.5rem;
+}
+
+.ticket-new-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.5rem;
+    border: 2px solid var(--primary2, #3488b8);
+    border-radius: 8px;
+    color: var(--primary2, #3488b8);
+    background: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s, color 0.2s;
+    text-decoration: none;
+}
+
+.ticket-new-btn:hover {
+    background: var(--primary2, #3488b8);
+    color: #fff;
+    text-decoration: none;
+}
+
+/* ============================================
+   FILE ATTACHMENTS
+   ============================================ */
+
+.ticket-dropzone {
+    border: 2px dashed var(--light2, #e8ecf0);
+    border-radius: 10px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    background: var(--light1, #f7f9fb);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    user-select: none;
+}
+
+.ticket-dropzone:hover,
+.ticket-dropzone.drag-over {
+    border-color: var(--primary2, #3488b8);
+    background: rgba(52,136,184,0.04);
+}
+
+.ticket-dropzone-icon {
+    font-size: 1.75rem;
+    color: var(--primary3, #b2d5e8);
+    margin-bottom: 0.4rem;
+}
+
+.ticket-dropzone p {
+    font-size: 0.9rem;
+    color: var(--dark1, #6B7B8D);
+    margin: 0;
+}
+
+.ticket-dropzone-hint {
+    font-size: 0.78rem !important;
+    margin-top: 0.2rem !important;
+    opacity: 0.8;
+}
+
+.ticket-browse-btn {
+    background: none;
+    border: none;
+    color: var(--primary2, #3488b8);
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0;
+    text-decoration: underline;
+}
+
+.ticket-browse-btn:hover {
+    color: var(--primary1, #53a2cc);
+}
+
+.ticket-file-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.ticket-file-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--light1, #f7f9fb);
+    border: 1px solid var(--light2, #e8ecf0);
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+.ticket-file-thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.ticket-file-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    background: rgba(52,136,184,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary2, #3488b8);
+    flex-shrink: 0;
+    font-size: 1.1rem;
+}
+
+.ticket-file-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.ticket-file-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--dark2, #1a2a3a);
+    font-weight: 600;
+}
+
+.ticket-file-size {
+    color: var(--dark1, #6B7B8D);
+    font-size: 0.78rem;
+    margin-top: 0.1rem;
+}
+
+.ticket-file-remove {
+    background: none;
+    border: none;
+    color: var(--dark1, #6B7B8D);
+    cursor: pointer;
+    padding: 0.25rem;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    border-radius: 4px;
+    transition: color 0.2s, background 0.2s;
+    line-height: 1;
+}
+
+.ticket-file-remove:hover {
+    color: #e74c3c;
+    background: rgba(231,76,60,0.08);
+}
+</style>
+
+<!-- Hero -->
+<section class="ticket-hero">
+    <div class="container">
+        <div class="ticket-hero-content">
+            <h1 class="ticket-hero-title">Log Support Ticket</h1>
+            <p class="ticket-hero-subtitle">Get help from the Kartoza support team</p>
+        </div>
+    </div>
+</section>
+
+<!-- Ticket Section -->
+<section class="ticket-section">
+    <div class="ticket-card-wrapper">
+        <div class="ticket-card" id="ticket-card">
+
+            <!-- Not logged in state (shown by JS if not authenticated) -->
+            <div id="ticket-auth-required" style="display:none">
+                <div class="ticket-auth-required">
+                    <div class="ticket-auth-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Sign In Required</h3>
+                    <p>You need to be signed in to log a support ticket. Please sign in to your Kartoza account to continue.</p>
+                    <a href="/login/?redirect=/support-ticket/" class="ticket-login-link">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Sign In to Continue
+                    </a>
+                </div>
+            </div>
+
+            <!-- Form (shown when logged in) -->
+            <div id="ticket-form-wrapper" style="display:none">
+                <div class="ticket-card-header">
+                    <div class="ticket-card-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h2>New Support Ticket</h2>
+                    <p>Describe your issue and we'll get back to you as soon as possible.</p>
+                </div>
+
+                <form id="ticket-form" novalidate>
+                    <div class="ticket-field">
+                        <label class="ticket-label" for="ticket-email">
+                            <i class="fas fa-envelope"></i> Your Email
+                        </label>
+                        <input class="ticket-input" type="email" id="ticket-email"
+                            name="email" readonly aria-label="Logged in email address">
+                    </div>
+
+                    <div class="ticket-field">
+                        <label class="ticket-label" for="ticket-subject">
+                            <i class="fas fa-tag"></i> Subject <span style="color:#e74c3c">*</span>
+                        </label>
+                        <input class="ticket-input" type="text" id="ticket-subject"
+                            name="subject" placeholder="Brief description of your issue"
+                            maxlength="140" required>
+                    </div>
+
+                    <div class="ticket-field">
+                        <label class="ticket-label" for="ticket-priority">
+                            <i class="fas fa-signal"></i> Priority
+                        </label>
+                        <select class="ticket-select" id="ticket-priority" name="priority">
+                            <option value="Low">Low — general question or minor issue</option>
+                            <option value="Medium" selected>Medium — impacts work but has a workaround</option>
+                            <option value="High">High — critical issue blocking work</option>
+                        </select>
+                    </div>
+
+                    <div class="ticket-field">
+                        <label class="ticket-label" for="ticket-description">
+                            <i class="fas fa-align-left"></i> Description <span style="color:#e74c3c">*</span>
+                        </label>
+                        <textarea class="ticket-textarea" id="ticket-description"
+                            name="description"
+                            placeholder="Please describe the issue in detail — include steps to reproduce, expected behaviour, and any error messages."
+                            maxlength="4000" required></textarea>
+                    </div>
+
+                    <div class="ticket-field">
+                        <label class="ticket-label">
+                            <i class="fas fa-paperclip"></i> Attachments
+                            <span style="color:var(--dark1);font-weight:400;text-transform:none;font-size:0.8em;">(images &amp; videos, max 10 MB each)</span>
+                        </label>
+                        <input type="file" id="ticket-files" multiple accept="image/*,video/*" style="display:none">
+                        <div class="ticket-dropzone" id="ticket-dropzone">
+                            <div class="ticket-dropzone-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                            <p>Drag &amp; drop files here or <button type="button" class="ticket-browse-btn" id="ticket-browse-btn">browse</button></p>
+                            <p class="ticket-dropzone-hint">Images and videos &mdash; up to 5 files, 10 MB each</p>
+                        </div>
+                        <div class="ticket-file-list" id="ticket-file-list"></div>
+                    </div>
+
+                    <button type="submit" class="ticket-submit" id="ticket-submit">
+                        <span class="btn-text">
+                            <i class="fas fa-paper-plane"></i> Submit Ticket
+                        </span>
+                        <span class="btn-loading">
+                            <i class="fas fa-circle-notch fa-spin"></i> Submitting...
+                        </span>
+                    </button>
+
+                    <div class="ticket-message is-error" id="ticket-error" role="alert">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="ticket-error-text">Failed to submit ticket. Please try again.</span>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Success state (shown after successful submission) -->
+            <div class="ticket-success-state" id="ticket-success-state">
+                <div class="ticket-success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h3>Ticket Submitted!</h3>
+                <p>Your support ticket has been logged. Your reference number is:</p>
+                <div class="ticket-ref" id="ticket-ref-number"></div>
+                <p>The Kartoza support team will be in touch shortly.</p>
+                <a href="#" class="ticket-new-btn" id="ticket-new-btn">
+                    <i class="fas fa-plus"></i> Log Another Ticket
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+(function() {
+    'use strict';
+
+    var AUTH_KEY = 'kartoza_auth';
+    var MAX_FILES = 5;
+    var MAX_BYTES = 10 * 1024 * 1024; // 10 MB per file
+    var selectedFiles = [];
+
+    function ticketApiUrl() {
+        // Always use same-origin proxy route (Hugo server in dev, nginx in deployment)
+        // to avoid cross-origin request failures from direct ERP calls.
+        return '/api/support-ticket';
+    }
+
+    function getAuth() {
+        try { return JSON.parse(localStorage.getItem(AUTH_KEY)); } catch (e) { return null; }
+    }
+
+    // ============================================
+    // AUTH GATE
+    // ============================================
+
+    var auth = getAuth();
+
+    if (!auth || !auth.loggedIn) {
+        document.getElementById('ticket-auth-required').style.display = '';
+        return;
+    }
+
+    document.getElementById('ticket-form-wrapper').style.display = '';
+    document.getElementById('ticket-email').value = auth.email || '';
+
+    // ============================================
+    // FILE ATTACHMENTS
+    // ============================================
+
+    var dropzone  = document.getElementById('ticket-dropzone');
+    var fileInput = document.getElementById('ticket-files');
+    var fileList  = document.getElementById('ticket-file-list');
+    var errorEl   = document.getElementById('ticket-error');
+    var errorText = document.getElementById('ticket-error-text');
+
+    function showError(msg) {
+        errorText.textContent = msg;
+        errorEl.classList.add('is-visible');
+    }
+
+    function clearError() {
+        errorEl.classList.remove('is-visible');
+    }
+
+    function formatBytes(n) {
+        if (n < 1024) return n + ' B';
+        if (n < 1024 * 1024) return (n / 1024).toFixed(1) + ' KB';
+        return (n / (1024 * 1024)).toFixed(1) + ' MB';
+    }
+
+    function renderFileList() {
+        fileList.innerHTML = '';
+        selectedFiles.forEach(function(file, idx) {
+            var item = document.createElement('div');
+            item.className = 'ticket-file-item';
+
+            var preview;
+            if (file.type.startsWith('image/')) {
+                var img = document.createElement('img');
+                img.className = 'ticket-file-thumb';
+                img.alt = '';
+                img.src = URL.createObjectURL(file);
+                preview = img.outerHTML;
+            } else {
+                preview = '<div class="ticket-file-icon"><i class="fas fa-film"></i></div>';
+            }
+
+            item.innerHTML = preview +
+                '<div class="ticket-file-info">' +
+                    '<div class="ticket-file-name">' + file.name.replace(/</g, '&lt;') + '</div>' +
+                    '<div class="ticket-file-size">' + formatBytes(file.size) + '</div>' +
+                '</div>' +
+                '<button type="button" class="ticket-file-remove" data-idx="' + idx + '" title="Remove file" aria-label="Remove ' + file.name.replace(/"/g, '') + '">' +
+                    '<i class="fas fa-times"></i>' +
+                '</button>';
+
+            fileList.appendChild(item);
+        });
+    }
+
+    fileList.addEventListener('click', function(e) {
+        var btn = e.target.closest('.ticket-file-remove');
+        if (!btn) return;
+        var idx = parseInt(btn.dataset.idx, 10);
+        selectedFiles.splice(idx, 1);
+        renderFileList();
+    });
+
+    function addFiles(files) {
+        clearError();
+        for (var i = 0; i < files.length; i++) {
+            var f = files[i];
+            if (selectedFiles.length >= MAX_FILES) {
+                showError('Maximum ' + MAX_FILES + ' files allowed.');
+                break;
+            }
+            if (!f.type.startsWith('image/') && !f.type.startsWith('video/')) {
+                showError('"' + f.name + '" is not an image or video — only images and videos are accepted.');
+                continue;
+            }
+            if (f.size > MAX_BYTES) {
+                showError('"' + f.name + '" is ' + formatBytes(f.size) + ' — files must be 10 MB or smaller.');
+                continue;
+            }
+            var already = selectedFiles.some(function(s) { return s.name === f.name && s.size === f.size; });
+            if (!already) selectedFiles.push(f);
+        }
+        renderFileList();
+    }
+
+    document.getElementById('ticket-browse-btn').addEventListener('click', function(e) {
+        e.stopPropagation();
+        fileInput.click();
+    });
+
+    dropzone.addEventListener('click', function() { fileInput.click(); });
+
+    dropzone.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        dropzone.classList.add('drag-over');
+    });
+
+    dropzone.addEventListener('dragleave', function(e) {
+        if (!dropzone.contains(e.relatedTarget)) dropzone.classList.remove('drag-over');
+    });
+
+    dropzone.addEventListener('drop', function(e) {
+        e.preventDefault();
+        dropzone.classList.remove('drag-over');
+        addFiles(Array.from(e.dataTransfer.files));
+    });
+
+    fileInput.addEventListener('change', function() {
+        addFiles(Array.from(fileInput.files));
+        fileInput.value = '';
+    });
+
+    function readFilesAsBase64() {
+        return Promise.all(selectedFiles.map(function(file) {
+            return new Promise(function(resolve, reject) {
+                var reader = new FileReader();
+                reader.onload = function() {
+                    resolve({
+                        name: file.name,
+                        content_type: file.type,
+                        content: reader.result.split(',')[1]
+                    });
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }));
+    }
+
+    // ============================================
+    // FORM SUBMISSION
+    // ============================================
+
+    document.getElementById('ticket-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        var subject     = document.getElementById('ticket-subject').value.trim();
+        var priority    = document.getElementById('ticket-priority').value;
+        var description = document.getElementById('ticket-description').value.trim();
+        var email       = auth.email || '';
+        var submitBtn   = document.getElementById('ticket-submit');
+
+        clearError();
+        document.getElementById('ticket-subject').classList.remove('has-error');
+        document.getElementById('ticket-description').classList.remove('has-error');
+
+        if (!subject) {
+            showError('Please enter a subject for your ticket.');
+            document.getElementById('ticket-subject').classList.add('has-error');
+            document.getElementById('ticket-subject').focus();
+            return;
+        }
+
+        if (!description) {
+            showError('Please provide a description of the issue.');
+            document.getElementById('ticket-description').classList.add('has-error');
+            document.getElementById('ticket-description').focus();
+            return;
+        }
+
+        submitBtn.classList.add('is-loading');
+        submitBtn.disabled = true;
+
+        try {
+            var attachments = selectedFiles.length ? await readFilesAsBase64() : [];
+
+            var response = await fetch(ticketApiUrl(), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({
+                    subject: subject,
+                    description: description,
+                    priority: priority,
+                    raised_by: email,
+                    attachments: attachments
+                })
+            });
+
+            var data = await response.json().catch(function() { return {}; });
+
+            if (response.ok && (data.message || data.data)) {
+                var ticketName = (data.message && data.message.name) || (data.data && data.data.name) || data.name || '';
+                document.getElementById('ticket-ref-number').textContent = ticketName || 'Submitted';
+                document.getElementById('ticket-form-wrapper').style.display = 'none';
+                document.getElementById('ticket-success-state').classList.add('is-visible');
+            } else {
+                var msg = '';
+                if (data._server_messages) {
+                    try {
+                        var outer = JSON.parse(data._server_messages);
+                        var inner = JSON.parse(outer[0]);
+                        msg = inner.message || '';
+                    } catch (ex) { msg = String(data._server_messages); }
+                }
+                msg = msg || data.message || data.exc_type || ('Submission failed (HTTP ' + response.status + ')');
+                if (typeof msg !== 'string') msg = String(msg);
+                showError(msg.replace(/<[^>]*>/g, '').trim() || 'Failed to submit ticket. Please try again.');
+            }
+        } catch (err) {
+            showError('Unable to connect. Please check your internet connection and try again.');
+        } finally {
+            submitBtn.classList.remove('is-loading');
+            submitBtn.disabled = false;
+        }
+    });
+
+    // ============================================
+    // LOG ANOTHER TICKET
+    // ============================================
+
+    document.getElementById('ticket-new-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('ticket-form').reset();
+        document.getElementById('ticket-email').value = auth.email || '';
+        document.getElementById('ticket-priority').value = 'Medium';
+        selectedFiles = [];
+        renderFileList();
+        document.getElementById('ticket-success-state').classList.remove('is-visible');
+        document.getElementById('ticket-form-wrapper').style.display = '';
+    });
+
+})();
+</script>
+
+{{ partial "footer.html" . }}

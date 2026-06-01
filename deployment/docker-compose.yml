@@ -6,17 +6,19 @@ services:
     build:
       context: ..
       dockerfile: deployment/docker/Dockerfile
+    image: kartoza-website:base
     container_name: kartoza-website
     environment:
       - BASE_URL=${BASE_URL:-/}
-      - GATEWAY_ERPNEXT_API_URL=${GATEWAY_ERPNEXT_API_URL:-https://api.do.kartoza.com/erpnext/kartoza-website/api/resource/Lead}
-      - ERPNEXT_API_KEY=${ERPNEXT_API_KEY}
-      - ERPNEXT_API_SECRET=${ERPNEXT_API_SECRET}
+      - ERPNEXT_API_URL=${ERPNEXT_API_URL:-https://erp.kartoza.com/api}
+      - GATEWAY_ERPNEXT_API_URL=${GATEWAY_ERPNEXT_API_URL:-https://api.do.kartoza.com/erpnext/kartoza-website/api}
+      - GATEWAY_ERPNEXT_API_KEY=${GATEWAY_ERPNEXT_API_KEY}
+      - GATEWAY_ERPNEXT_API_SECRET=${GATEWAY_ERPNEXT_API_SECRET}
     ports:
       - "${PORT}:8080"
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/health"]
+      test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/health" ]
       interval: 30s
       timeout: 10s
       retries: 3

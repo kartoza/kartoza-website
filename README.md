@@ -23,7 +23,7 @@
 ---
 
 <p align="center">
-  <img src="img/home-page.png" alt="Kartoza Website Screenshot" width="800">
+  <img src="img/home-page-2.png" alt="Kartoza Website Screenshot" width="800">
 </p>
 
 ---

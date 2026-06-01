@@ -5,7 +5,7 @@
 }:
 
 stdenv.mkDerivation {
-  name = "qgis-website";
+  name = "kartoza-website";
 
   src = lib.cleanSourceWith {
     src = ../.;
@@ -25,16 +25,16 @@ stdenv.mkDerivation {
   buildInputs = [ hugo ];
 
   buildPhase = ''
-    hugo --config config.toml,config/config.prod.toml
-    hugo --config config.toml,config/config.www.toml
+    hugo --config config.toml --enableGitInfo=false
   '';
 
   installPhase = ''
     mkdir -p $out
-    cp -r public_www public_prod $out/
+    cp -r public $out/
   '';
+
   meta = with lib; {
-    description = "A QGIS website";
+    description = "Kartoza website";
     license = licenses.mit;
   };
 }

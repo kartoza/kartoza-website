@@ -17,23 +17,23 @@
         <div class="training-paths-nav">
             <a href="#track-desktop-gis" class="training-path-link">
                 <i class="fas fa-desktop"></i>
-                Desktop GIS
+                Desktop GIS & Cartography
             </a>
             <a href="#track-server-infrastructure" class="training-path-link">
                 <i class="fas fa-server"></i>
-                Server & Infrastructure
+                Spatial Databases
             </a>
             <a href="#track-development" class="training-path-link">
                 <i class="fas fa-code"></i>
-                Development
+                Custom & Enterprise
             </a>
             <a href="#track-foundational" class="training-path-link">
                 <i class="fas fa-book"></i>
-                Foundational
+                Education & Schools
             </a>
         </div>
 
-        <!-- Desktop GIS Track -->
+        <!-- Desktop GIS & Cartography -->
         {{ $desktopCourses := where .RegularPages "Params.track" "Desktop GIS" }}
         {{ if $desktopCourses }}
         <div class="training-track" id="track-desktop-gis">
@@ -42,7 +42,7 @@
                     <i class="fas fa-desktop"></i>
                 </div>
                 <div class="training-track-info">
-                    <h2>Desktop GIS Track</h2>
+                    <h2>Desktop GIS & Cartography</h2>
                     <p>Master QGIS from beginner to advanced level. Learn to create maps, analyse spatial data, and automate workflows.</p>
                 </div>
             </div>
@@ -83,7 +83,7 @@
         </div>
         {{ end }}
 
-        <!-- Server & Infrastructure Track -->
+        <!-- Spatial Databases -->
         {{ $serverCourses := where .RegularPages "Params.track" "Server & Infrastructure" }}
         {{ if $serverCourses }}
         <div class="training-track" id="track-server-infrastructure">
@@ -92,7 +92,7 @@
                     <i class="fas fa-server"></i>
                 </div>
                 <div class="training-track-info">
-                    <h2>Server & Infrastructure Track</h2>
+                    <h2>Spatial Databases</h2>
                     <p>Build enterprise-grade spatial data infrastructure with PostGIS, GeoServer, and GeoNode.</p>
                 </div>
             </div>
@@ -133,7 +133,7 @@
         </div>
         {{ end }}
 
-        <!-- Development Track -->
+        <!-- Custom & Enterprise -->
         {{ $devCourses := where .RegularPages "Params.track" "Development" }}
         {{ if $devCourses }}
         <div class="training-track" id="track-development">
@@ -142,8 +142,8 @@
                     <i class="fas fa-code"></i>
                 </div>
                 <div class="training-track-info">
-                    <h2>Development Track</h2>
-                    <p>Learn to build custom GIS applications with Python and JavaScript web mapping libraries.</p>
+                    <h2>Custom & Enterprise</h2>
+                    <p>For organisations deploying open source GIS at scale. Learn to plan, build, and manage enterprise-grade FOSS spatial infrastructure.</p>
                 </div>
             </div>
             <div class="training-track-sequence">
@@ -183,7 +183,7 @@
         </div>
         {{ end }}
 
-        <!-- Foundational Track -->
+        <!-- Education & Schools -->
         {{ $foundCourses := where .RegularPages "Params.track" "Foundational" }}
         {{ if $foundCourses }}
         <div class="training-track" id="track-foundational">
@@ -192,8 +192,8 @@
                     <i class="fas fa-book"></i>
                 </div>
                 <div class="training-track-info">
-                    <h2>Foundational</h2>
-                    <p>Essential knowledge for understanding open data principles and spatial data infrastructure.</p>
+                    <h2>Education & Schools</h2>
+                    <p>Build confidence in teaching geospatial concepts across grade levels, from classroom fundamentals to curriculum-aligned resources for learners.</p>
                 </div>
             </div>
             <div class="training-track-sequence">
@@ -243,23 +243,16 @@
     </div>
 </section>
 
-<!-- CTA Section -->
-<section class="section section-cta">
-    <div class="container has-text-centered">
-        <h2 class="title is-3">Ready to Expand Your GIS Skills?</h2>
-        <p class="subtitle is-5">Contact us for custom training programs tailored to your organisation's needs.</p>
-        <div class="section-cta-buttons">
-            <a class="button is-primary is-medium" href="{{ absURL "contact-us/" }}">
-                <span class="icon"><i class="fas fa-envelope"></i></span>
-                <span>Request Training</span>
-            </a>
-            <a class="button is-light is-medium" href="{{ absURL "solutions/" }}">
-                <span class="icon"><i class="fas fa-cogs"></i></span>
-                <span>View Our Solutions</span>
-            </a>
-        </div>
-    </div>
-</section>
+{{ partial "section-cta.html" (dict
+    "title"          "Ready to Expand Your GIS Skills?"
+    "subtitle"       "Contact us for custom training programs tailored to your organisation's needs."
+    "primaryUrl"     (absURL "contact-us/")
+    "primaryIcon"    "fas fa-envelope"
+    "primaryLabel"   "Request Training"
+    "secondaryUrl"   (absURL "solutions/")
+    "secondaryIcon"  "fas fa-cogs"
+    "secondaryLabel" "View Our Solutions"
+) }}
 
 {{ partial "physics-scroll.html" . }}
 

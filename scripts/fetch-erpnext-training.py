@@ -23,8 +23,10 @@ import re
 import json
 import argparse
 import requests
+import yaml
 from pathlib import Path
 from datetime import datetime
+from bs4 import BeautifulSoup
 
 # ERPNext configuration
 ERPNEXT_URL = os.environ.get("ERPNEXT_URL", "https://erp.kartoza.com")
@@ -38,6 +40,67 @@ def slugify(text: str) -> str:
     text = re.sub(r'[^\w\s-]', '', text)
     text = re.sub(r'[\s_-]+', '-', text)
     return text
+
+
+def normalize_for_comparison(content: str) -> str:
+    """
+    Normalize content for fidelity comparison.
+    Focuses on TEXT content, ignores formatting/layout.
+    """
+    if not content:
+        return ''
+
+    # Remove Hugo shortcodes
+    content = re.sub(r'\{\{[<>%].*?[>%]\}\}', '', content)
+
+    # Strip HTML tags but keep text content
+    soup = BeautifulSoup(content, 'html.parser')
+    text = soup.get_text(separator=' ')
+
+    # Collapse whitespace
+    text = re.sub(r'\s+', ' ', text)
+
+    return text.strip().lower()
+
+
+def check_fidelity(local_content: str, erpnext_content: str) -> bool:
+    """
+    Check if local and ERPNext content match (fidelity check).
+
+    Returns True if text content matches (ignoring formatting).
+    """
+    local_norm = normalize_for_comparison(local_content)
+    erpnext_norm = normalize_for_comparison(erpnext_content)
+    return local_norm == erpnext_norm
+
+
+def read_local_file(filepath: Path) -> tuple[dict, str] | None:
+    """Read a local Hugo file and extract front matter and content."""
+    if not filepath.exists():
+        return None
+
+    try:
+        text = filepath.read_text()
+    except (IOError, OSError):
+        return None
+
+    if not text.startswith('---'):
+        return {}, text
+
+    end_match = re.search(r'\n---\n', text[3:])
+    if not end_match:
+        return {}, text
+
+    end_pos = end_match.start() + 3
+    front_matter_raw = text[4:end_pos]
+    content = text[end_pos + 5:]
+
+    try:
+        front_matter = yaml.safe_load(front_matter_raw) or {}
+    except yaml.YAMLError:
+        front_matter = {}
+
+    return front_matter, content
 
 
 def truncate_at_sentence(text: str, max_length: int = 200) -> str:
@@ -195,7 +258,7 @@ def fetch_website_item_details(item_name: str) -> dict:
 def fetch_item_variants(item_code: str) -> dict:
     """Fetch variant attributes (dates/venues) for an item."""
     try:
-        url = f"{ERPNEXT_URL}/api/method/webshop.webshop.variant_selector.utils.get_attributes_and_values"
+        url = f"{ERPNEXT_URL}/api/method/kartoza_custom.api.get_attributes_and_values"
         params = {"item_code": item_code}
         response = requests.get(url, params=params, timeout=30)
         if response.status_code == 200:
@@ -261,39 +324,34 @@ def fetch_all_scheduled_sessions() -> list:
         if not variants:
             continue
 
-        # Extract dates and venues from variants
-        dates = []
-        venues = []
-
         for attr in variants:
-            attr_name = attr.get("attribute", "").lower()
-            values = attr.get("values", [])
+            if not attr.get("variants", {}):
+                continue
 
-            if "date" in attr_name:
-                dates = values
-            elif "venue" in attr_name or "location" in attr_name:
-                venues = values
+            display_date = attr['variants']['Date']
+            variant_code = attr['item_code']
+            venue = attr['variants']['Venue']
+            if not display_date or not venue:
+                continue
 
-        # Default venue if none specified
-        if not venues:
-            venues = ["Online"]
+            start_date, end_date = parse_date_range(display_date)
+            if not start_date:
+                continue
 
-        # Create session entries for each date
-        for date_str in dates:
-            start_date, end_date = parse_date_range(date_str)
-            if start_date:
-                for venue in venues:
-                    all_sessions.append({
-                        "course_name": course.get("name", ""),
-                        "course_slug": course.get("slug", ""),
-                        "item_code": item_code,
-                        "date_display": date_str,
-                        "start_date": start_date,
-                        "end_date": end_date,
-                        "location": venue.title() if venue else "Online",
-                        "shop_url": f"{ERPNEXT_URL}/shop/product/{course.get('raw_slug', course.get('slug', ''))}"
-                    })
+            if start_date <= datetime.today().strftime("%Y-%m-%d"):
+                continue
 
+            all_sessions.append({
+                "course_name": course.get("name", ""),
+                "course_slug": course.get("slug", ""),
+                "item_code": variant_code,
+                "date_display": display_date,
+                "start_date": start_date,
+                "end_date": end_date,
+                "location": venue.title() if venue else "Online",
+                "shop_url": f"{ERPNEXT_URL}/shop/product/{course.get('raw_slug', course.get('slug', ''))}"
+            })
+    all_sessions.sort(key=lambda s: s["start_date"])
     return all_sessions
 
 
@@ -312,7 +370,7 @@ def get_existing_courses() -> dict:
 
 
 def create_course_page(course: dict, dry_run: bool = False) -> Path:
-    """Create a new training course page."""
+    """Create or update a training course page with fidelity checking."""
     slug = course.get("slug") or slugify(course.get("name", "unknown"))
     # Remove any path prefixes from slug
     slug = slug.replace("shop/product/", "").replace("training/", "").replace("training-courses/", "")
@@ -324,15 +382,31 @@ def create_course_page(course: dict, dry_run: bool = False) -> Path:
             slug = slug_parts[0]
     filepath = TRAINING_CONTENT_DIR / f"{slug}.md"
 
-    if filepath.exists():
-        print(f"  Skipping (exists): {slug}")
-        return filepath
-
     shop_url = f"{ERPNEXT_URL}/shop/product/{slug}"
 
     # Get full description and convert HTML to clean text
     full_description = course.get("description") or course.get("short_description") or ""
     full_description = clean_html_to_markdown(full_description)
+
+    # Fidelity check if file exists
+    if filepath.exists():
+        result = read_local_file(filepath)
+        if result:
+            local_frontmatter, local_content = result
+            # Compare the description text content
+            if check_fidelity(local_content, full_description):
+                if not local_frontmatter.get('reviewedBy'):
+                    if not dry_run:
+                        local_frontmatter['reviewedBy'] = 'Automated Check'
+                        local_frontmatter['reviewedDate'] = datetime.now().strftime('%Y-%m-%d')
+                        file_content = "---\n"
+                        file_content += yaml.dump(local_frontmatter, default_flow_style=False, allow_unicode=True)
+                        file_content += "---\n\n"
+                        file_content += local_content.strip()
+                        file_content += "\n"
+                        filepath.write_text(file_content)
+                print(f"  Unchanged (fidelity passed): {slug}")
+                return filepath
 
     # For frontmatter description (SEO), truncate intelligently at sentence boundary
     short_desc_raw = course.get('short_description') or full_description or ''
@@ -394,6 +468,7 @@ def save_calendar_data(sessions: list, dry_run: bool = False):
     calendar_events = []
     for session in sessions:
         calendar_events.append({
+            "item_code": session["item_code"],
             "title": session.get("course_name", "Training"),
             "start": session.get("start_date", ""),
             "end": session.get("end_date", ""),
