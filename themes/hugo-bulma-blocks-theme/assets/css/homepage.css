@@ -5397,7 +5397,7 @@ body:has(.blog-hero) .contextmenu {
 }
 
 .blog-cta-card .sidebar-card-title {
-    color: var(--white);
+    color: var(--accent-dark);
     border-bottom-color: rgba(255, 255, 255, 0.2);
 }
 
