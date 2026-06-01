@@ -34,3 +34,4 @@ services:
 Kartoza partners with BGEO to deliver Giswater solutions for water utilities and municipalities managing water supply and urban drainage networks.
 
 Giswater is an open source solution that integrates with QGIS and PostgreSQL/PostGIS for comprehensive network management.
+
