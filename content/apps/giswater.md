@@ -28,16 +28,17 @@ Integral management of water infrastructure and the water cycle, linking GIS wit
 
 - **Network topology health tools**: Quality checks and connectivity.
 - **INP import and export**: EPANET,SWMM, or any hydraulic models.
-- **Asset catalog and inventory tools**: Nodes, pipes, and materials in a structured PostGIS database.
+- **Asset catalogue and inventory tools**: Nodes, pipes, and materials in a structured PostGIS database.
 - **Zones and operational area**: DMA and drainage zones.
 - **Scenario simulation tools**: Configure and compare models.
 - **Disruption and intervention planning**: Analyse shutdowns, failures, and planned works.
 - **Multi platform access**: Desktop, web, and mobile.
 
 ## Benefits
+
 - Works for utilities of any size.
 - Unifies field and office workflows.
-- Import & organise water network dara
+- Import & organise water network data
 - Edit, maintain and update network assets
 - Run EPANET and SWMM simulations in QGIS
 - Visualise hydraulic results, maps and performance indicators
