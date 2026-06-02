@@ -2,6 +2,11 @@
 CGIS
 # One word per line
 
+#GISWater app terms
+GISWater
+SWMM
+BGEO
+
 # Technical terms specific to this project
 ACLED
 GEOE3
