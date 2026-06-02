@@ -10,9 +10,11 @@ date: 2025-01-01
 ---
 
 ## Overview
+
 Integral management of water infrastructure and the water cycle, linking GIS with hydraulic modelling tools. For councils and water utilities, it streamlines network asset management, maintenance and flood risk evaluation.
 
 ## Key Benefits
+
 - Open source: ZERO LICENSE COST
 - Built on PostgreSQL and PostGIS
 - Scalable for small and large utilities
@@ -21,6 +23,7 @@ Integral management of water infrastructure and the water cycle, linking GIS wit
 - Digital twin ready with 1D/2D integration
 
 ## Technical Highlights
+
 - **Network topology health tools**: Quality checks and connectivity.
 - **INP import and export**: EPANET,SWMM, or any hydraulic models.
 - **Asset catalog and inventory tools**: Nodes, pipes, and materials in a structured PostGIS database.
@@ -30,9 +33,11 @@ Integral management of water infrastructure and the water cycle, linking GIS wit
 - **Multi platform access**: Desktop, web, and mobile.
 
 ## Benefits
+
 - Works for utilities of any size.
 - Unifies field and office workflows.
 - Import & organise water network dara
 - Edit, maintain and update network assets
 - Run EPANET and SWMM simulations in QGIS
 - Visualise hydraulic results, maps and performance indicators
+- 
