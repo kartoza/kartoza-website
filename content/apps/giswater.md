@@ -35,7 +35,6 @@ Integral management of water infrastructure and the water cycle, linking GIS wit
 - **Multi platform access**: Desktop, web, and mobile.
 
 ## Benefits
-
 - Works for utilities of any size.
 - Unifies field and office workflows.
 - Import & organise water network dara
