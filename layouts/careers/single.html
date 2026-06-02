@@ -3,12 +3,9 @@
 {{ partial "header.html" . }}
 {{ partial "menu.html" . }}
 
-{{- $openJobs := slice -}}
-{{- range .Resources.ByType "page" -}}
-    {{- if not .Draft -}}
-        {{- $openJobs = $openJobs | append . -}}
-    {{- end -}}
-{{- end -}}
+{{- $careerPages := where site.RegularPages "Type" "careers" -}}
+{{- $allJobs := where $careerPages "Params.erpnext_id" "ne" nil -}}
+{{- $openJobs := where $allJobs "Draft" false -}}
 {{- $hasOpenJobs := gt (len $openJobs) 0 -}}
 
 <!-- Careers Hero - Inspirational -->
@@ -233,12 +230,12 @@
                     {{ end }}
                 </div>
                 <div class="opening-card-body">
-                    {{ .Content }}
+                    <p>{{ .Plain | truncate 250 "..." }}</p>
                 </div>
                 <div class="opening-card-footer">
-                    <a href="mailto:jobs@kartoza.com?subject={{ .Title | urlquery }}" class="button is-primary">
-                        <span class="icon"><i class="fas fa-paper-plane"></i></span>
-                        <span>Apply Now</span>
+                    <a href="{{ .Permalink }}" class="button is-primary">
+                        <span class="icon"><i class="fas fa-arrow-right"></i></span>
+                        <span>View Position</span>
                     </a>
                 </div>
             </div>
