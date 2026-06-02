@@ -42,4 +42,3 @@ Integral management of water infrastructure and the water cycle, linking GIS wit
 - Edit, maintain and update network assets
 - Run EPANET and SWMM simulations in QGIS
 - Visualise hydraulic results, maps and performance indicators
-- 
