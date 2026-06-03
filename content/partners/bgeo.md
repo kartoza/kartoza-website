@@ -7,10 +7,10 @@ productUrl: "https://www.bgeo.es/en/giswater/"
 productName: "Giswater"
 partnerUrl: "https://www.bgeo.es/en/"
 partnerName: "BGEO"
-approved: false
+approved: true
 approvedDate: ""
-reviewedBy: "Tim Sutton"
-reviewedDate: "2026-04-14"
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: "2026-06-03"
 date: 2024-01-06
 features:
   - title: "Water Networks"
