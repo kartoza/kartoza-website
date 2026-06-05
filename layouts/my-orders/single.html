@@ -148,6 +148,126 @@
     color: #6b7b8d;
     font-family: monospace;
 }
+
+/* Moodle section */
+.moodle-section {
+    border-top: 2px solid #f0f7ff;
+    padding: 1.1rem 1.5rem;
+    background: #f8fbff;
+}
+.moodle-section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1a2a3a;
+    margin-bottom: 0.9rem;
+}
+.moodle-section-header i {
+    color: #3B9DD9;
+}
+
+/* Enrollment status rows */
+.moodle-enroll-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid #eef2f7;
+    font-size: 0.875rem;
+    flex-wrap: wrap;
+}
+.moodle-enroll-row:last-child { border-bottom: none; }
+.moodle-enroll-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+.moodle-enroll-icon.success { color: #27ae60; }
+.moodle-enroll-icon.failed  { color: #E55B3C; }
+.moodle-enroll-info {
+    flex: 1;
+    min-width: 0;
+}
+.moodle-enroll-name {
+    font-weight: 600;
+    color: #1a2a3a;
+    display: block;
+}
+.moodle-enroll-email {
+    font-size: 0.78rem;
+    color: #6b7b8d;
+}
+.moodle-enroll-course {
+    font-size: 0.78rem;
+    color: #4d6370;
+    flex-shrink: 0;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.moodle-enroll-badge {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    flex-shrink: 0;
+}
+.moodle-enroll-badge.is-success { background: #e8f5e9; color: #2e7d32; }
+.moodle-enroll-badge.is-danger  { background: #fde8e4; color: #c62828; }
+
+/* Registration form */
+.moodle-form-intro {
+    font-size: 0.85rem;
+    color: #4d6370;
+    margin-bottom: 0.9rem;
+}
+.moodle-form-seat {
+    margin-bottom: 0.9rem;
+    padding: 0.75rem;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e4ecf4;
+}
+.moodle-seat-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #3B9DD9;
+    margin-bottom: 0.55rem;
+}
+.moodle-seat-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+}
+@media (max-width: 640px) {
+    .moodle-seat-fields { grid-template-columns: 1fr; }
+}
+.moodle-seat-fields input {
+    width: 100%;
+    padding: 0.45rem 0.65rem;
+    border: 1.5px solid #d4dbe2;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #1a2a3a;
+    background: #fff;
+    box-sizing: border-box;
+}
+.moodle-seat-fields input:focus {
+    outline: none;
+    border-color: #3B9DD9;
+    box-shadow: 0 0 0 3px rgba(59,157,217,0.12);
+}
+.moodle-seat-fields input.is-danger {
+    border-color: #E55B3C;
+}
+.moodle-failure-note {
+    font-size: 0.82rem;
+    color: #b45309;
+    margin-top: 0.6rem;
+}
+.moodle-failure-note i { margin-right: 0.3rem; }
 </style>
 
 <section class="orders-hero">
@@ -244,6 +364,114 @@
         }
     }
 
+    /* ── Moodle enrollment row HTML ──────────────────────────────────── */
+
+    function buildEnrollmentRow(name1, email, courseName, ok) {
+        return (
+            '<div class="moodle-enroll-row">' +
+                '<span class="moodle-enroll-icon ' + (ok ? 'success' : 'failed') + '">' +
+                    '<i class="fas ' + (ok ? 'fa-check-circle' : 'fa-times-circle') + '"></i>' +
+                '</span>' +
+                '<div class="moodle-enroll-info">' +
+                    '<span class="moodle-enroll-name">' + escHtml(name1 || '—') + '</span>' +
+                    '<span class="moodle-enroll-email">' + escHtml(email || '—') + '</span>' +
+                '</div>' +
+                '<span class="moodle-enroll-course" title="' + escHtml(courseName) + '">' + escHtml(courseName) + '</span>' +
+                '<span class="moodle-enroll-badge ' + (ok ? 'is-success' : 'is-danger') + '">' +
+                    (ok ? 'Enrolled' : 'Failed') +
+                '</span>' +
+            '</div>'
+        );
+    }
+
+    function buildEnrollmentTable(details, courseMap) {
+        var rows = details.map(function(d) {
+            var courseName = courseMap[d.course_id] || d.course_id || 'Course';
+            return buildEnrollmentRow(d.name1, d.email, courseName, d.enrollment_succesful);
+        }).join('');
+        var hasFailures = details.some(function(d) { return !d.enrollment_succesful; });
+        var failureNote = hasFailures
+            ? '<p class="moodle-failure-note"><i class="fas fa-exclamation-triangle"></i>' +
+              ' Some registrations failed. Please <a href="/contact-us/?subject=Moodle+Registration+Failed">contact us</a> for assistance.</p>'
+            : '';
+        return '<div class="moodle-enrolled-list">' + rows + '</div>' + failureNote;
+    }
+
+    /* ── Moodle registration form HTML ───────────────────────────────── */
+
+    function buildRegistrationForm(order) {
+        var seats = [];
+        (order.moodle_items || []).forEach(function(item) {
+            for (var i = 0; i < item.qty; i++) {
+                seats.push({
+                    item_code: item.item_code,
+                    item_name: item.item_name,
+                    seat: i + 1,
+                    total: item.qty,
+                });
+            }
+        });
+
+        var seatsHtml = seats.map(function(seat) {
+            var label = seat.total > 1
+                ? escHtml(seat.item_name) + ' &mdash; Seat ' + seat.seat
+                : escHtml(seat.item_name);
+            return (
+                '<div class="moodle-form-seat" data-item-code="' + escHtml(seat.item_code) + '">' +
+                    '<div class="moodle-seat-label">' + label + '</div>' +
+                    '<div class="moodle-seat-fields">' +
+                        '<input type="text" placeholder="First name *" data-field="first_name">' +
+                        '<input type="text" placeholder="Last name">' +
+                        '<input type="email" placeholder="Email address *" data-field="email">' +
+                    '</div>' +
+                '</div>'
+            );
+        }).join('');
+
+        return (
+            '<p class="moodle-form-intro">Register participants to get Moodle access for their course(s).</p>' +
+            '<div class="moodle-seats-container" id="moodle-seats-' + escHtml(order.name) + '">' +
+                seatsHtml +
+            '</div>' +
+            '<button class="button is-link is-small moodle-submit-btn" style="margin-top:0.5rem;" data-order="' + escHtml(order.name) + '">' +
+                '<span class="icon is-small"><i class="fas fa-user-plus"></i></span>' +
+                '<span>Register for Moodle</span>' +
+            '</button>' +
+            '<div class="moodle-result-msg" id="moodle-msg-' + escHtml(order.name) + '" style="margin-top:0.5rem;"></div>'
+        );
+    }
+
+    /* ── Full moodle section ─────────────────────────────────────────── */
+
+    function buildMoodleSection(order) {
+        if (!order.moodle_items || !order.moodle_items.length) return '';
+
+        var courseMap = {};
+        (order.moodle_items || []).forEach(function(item) {
+            if (item.course_id) courseMap[item.course_id] = item.item_name;
+        });
+
+        var bodyHtml;
+        if (order.enrollment_details && order.enrollment_details.length) {
+            bodyHtml = buildEnrollmentTable(order.enrollment_details, courseMap);
+        } else {
+            bodyHtml = buildRegistrationForm(order);
+        }
+
+        return (
+            '<div class="moodle-section" id="moodle-section-' + escHtml(order.name) + '" ' +
+                 'data-course-map="' + escHtml(JSON.stringify(courseMap)) + '">' +
+                '<div class="moodle-section-header">' +
+                    '<i class="fas fa-graduation-cap"></i>' +
+                    'Moodle Course Registration' +
+                '</div>' +
+                '<div class="moodle-body">' + bodyHtml + '</div>' +
+            '</div>'
+        );
+    }
+
+    /* ── Render orders ───────────────────────────────────────────────── */
+
     function renderOrders(orders) {
         var list = document.getElementById('ord-list');
         if (!list) return;
@@ -290,6 +518,7 @@
                         '<span class="order-status ' + statusClass + '">' + escHtml(statusLabel) + '</span>' +
                     '</div>' +
                     itemsHtml +
+                    buildMoodleSection(order) +
                     '<div class="order-card-footer">' +
                         invoiceFooterHtml +
                         '<span class="order-total">Total: ' + fmt(order.grand_total, order.currency) + '</span>' +
@@ -298,8 +527,103 @@
             );
         }).join('');
 
+        // Event delegation for Moodle submit buttons
+        list.addEventListener('click', function(e) {
+            var btn = e.target.closest('.moodle-submit-btn');
+            if (btn) handleMoodleSubmit(btn);
+        });
+
         showState('ord-state-content');
     }
+
+    /* ── Moodle form submission ───────────────────────────────────────── */
+
+    async function handleMoodleSubmit(btn) {
+        var orderName = btn.dataset.order;
+        var container = document.getElementById('moodle-seats-' + orderName);
+        if (!container) return;
+
+        var enrollees = [];
+        var valid = true;
+
+        container.querySelectorAll('.moodle-form-seat').forEach(function(seat) {
+            var itemCode = seat.dataset.itemCode;
+            var fnInput = seat.querySelector('[data-field="first_name"]');
+            var lnInput = seat.querySelector('input[type="text"]:not([data-field])');
+            var emInput = seat.querySelector('[data-field="email"]');
+            var fn = fnInput ? fnInput.value.trim() : '';
+            var ln = lnInput ? lnInput.value.trim() : '';
+            var em = emInput ? emInput.value.trim() : '';
+
+            if (!fn) { valid = false; if (fnInput) fnInput.classList.add('is-danger'); }
+            else if (fnInput) fnInput.classList.remove('is-danger');
+            if (!em) { valid = false; if (emInput) emInput.classList.add('is-danger'); }
+            else if (emInput) emInput.classList.remove('is-danger');
+
+            enrollees.push({ item_code: itemCode, first_name: fn, last_name: ln, email: em });
+        });
+
+        var msgEl = document.getElementById('moodle-msg-' + orderName);
+        function showMsg(html) { if (msgEl) msgEl.innerHTML = html; }
+
+        if (!valid) {
+            showMsg('<p class="help is-danger">Please fill in first name and email for all participants.</p>');
+            return;
+        }
+
+        btn.disabled = true;
+        btn.classList.add('is-loading');
+        showMsg('');
+
+        try {
+            var r = await fetch('/api/method/kartoza_custom.api.enrol_in_moodle', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ sales_order: orderName, enrollees: enrollees }),
+            });
+            var data = await r.json();
+
+            if (!r.ok || data.exc || data.exception) {
+                var errMsg = 'Registration failed. Please try again.';
+                try { errMsg = JSON.parse(JSON.parse(data._server_messages)[0]).message || errMsg; } catch(_) {}
+                showMsg('<p class="help is-danger">' + escHtml(errMsg) + '</p>');
+                return;
+            }
+
+            var result = data.message || {};
+            var results = result.results || [];
+
+            // Get the courseMap from the section's data attribute
+            var section = document.getElementById('moodle-section-' + orderName);
+            var courseMap = {};
+            try { courseMap = JSON.parse(section.dataset.courseMap || '{}'); } catch(_) {}
+
+            // Build result rows using returned item_name
+            var rowsHtml = results.map(function(res) {
+                var courseName = res.item_name || courseMap[res.course_id] || res.item_code || 'Course';
+                var fullName = [res.first_name, res.last_name].filter(Boolean).join(' ');
+                return buildEnrollmentRow(fullName, res.email, courseName, res.enrolled);
+            }).join('');
+
+            var failureNote = result.all_successful ? '' :
+                '<p class="moodle-failure-note"><i class="fas fa-exclamation-triangle"></i>' +
+                ' Some registrations failed. Please <a href="/contact-us/?subject=Moodle+Registration+Failed">contact us</a> for assistance.</p>';
+
+            // Replace form body with results
+            var body = section ? section.querySelector('.moodle-body') : null;
+            if (body) {
+                body.innerHTML = '<div class="moodle-enrolled-list">' + rowsHtml + '</div>' + failureNote;
+            }
+
+        } catch(e) {
+            showMsg('<p class="help is-danger">Something went wrong. Please try again.</p>');
+            btn.disabled = false;
+            btn.classList.remove('is-loading');
+        }
+    }
+
+    /* ── Load orders ─────────────────────────────────────────────────── */
 
     async function loadOrders() {
         try {

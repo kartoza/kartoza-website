@@ -46,7 +46,9 @@
                 {{ if .price }}
                 <p class="event-price">
                     <i class="fas fa-tag"></i>
-                    {{ .price }}
+                    {{- $symbol := "R" -}}
+                    {{- if and .price_currency (ne .price_currency "ZAR") }}{{ $symbol = .price_currency }}{{ end -}}
+                    {{ $symbol }} {{ lang.FormatNumber 0 .price }} <span style="font-size:0.7em; opacity:0.75;">excl. VAT</span>
                 </p>
                 {{ end }}
                 {{ if .spots_available }}
@@ -63,7 +65,7 @@
                 </a>
                 {{/* Build contact form URL with pre-fill parameters */}}
                 {{ $contactUrl := printf "/contact-us/?course=%s&date=%s&location=%s" (.title | urlquery) (.date_display | default .start | urlquery) (.location | default "Online" | urlquery) }}
-                {{ if .item_code }}
+                {{ if and .item_code .price }}
                 <a href="/login/?next={{ $.RelPermalink }}" data-item-code="{{ .item_code }}" class="login-buy button is-small is-primary">Login</a>
                 {{ end }}
                 <a href="{{ $contactUrl }}" class="button is-small">

@@ -1,0 +1,319 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+
+<style>
+.auth-hero {
+    background: linear-gradient(135deg, var(--dark2, #1a2a3a) 0%, var(--primary2, #3488b8) 100%);
+    padding: 5rem 1.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+}
+.auth-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(59,157,217,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(232,163,49,0.1) 0%, transparent 50%);
+}
+.auth-hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: #fff;
+}
+.auth-hero-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
+.auth-hero-subtitle { font-size: 1.1rem; opacity: 0.8; }
+
+.auth-section {
+    background: var(--light1, #f7f9fb);
+    min-height: 70vh;
+    padding: 3rem 1.5rem 5rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+.auth-card-wrapper { width: 100%; max-width: 480px; margin: -2rem auto 0; }
+.auth-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 40px rgba(26,42,58,0.12);
+    overflow: hidden;
+    position: relative;
+}
+.auth-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary2, #3488b8), var(--accent, #E8A331));
+}
+.auth-form-panel { padding: 2rem; }
+.auth-form-header { margin-bottom: 1.75rem; text-align: center; }
+.auth-form-icon {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary3, #b2d5e8), var(--primary2, #3488b8));
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.4rem; color: #fff;
+    box-shadow: 0 4px 15px rgba(52,136,184,0.3);
+}
+.auth-form-header h2 { font-size: 1.4rem; font-weight: 700; color: var(--dark2, #1a2a3a); margin-bottom: 0.3rem; }
+.auth-form-header p  { font-size: 0.9rem; color: var(--dark1, #6B7B8D); }
+
+.auth-field { margin-bottom: 1.25rem; }
+.auth-label {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.85rem; font-weight: 600;
+    color: var(--text-primary2, #4D6370);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em; text-transform: uppercase;
+}
+.auth-label i { color: var(--primary2, #3488b8); font-size: 0.9em; }
+.auth-input-wrapper { position: relative; }
+.auth-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--light2, #e8ecf0);
+    border-radius: 10px;
+    font-size: 1rem; color: var(--dark2, #1a2a3a);
+    background: var(--light1, #f7f9fb);
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    outline: none; font-family: inherit;
+}
+.auth-input:focus {
+    border-color: var(--primary2, #3488b8);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(52,136,184,0.12);
+}
+.auth-input[type="password"] { padding-right: 2.75rem; }
+.auth-input-toggle {
+    position: absolute; right: 0.875rem; top: 50%; transform: translateY(-50%);
+    background: none; border: none; cursor: pointer;
+    color: var(--dark1, #6B7B8D); font-size: 0.9rem; padding: 0.25rem;
+}
+.auth-input-toggle:hover { color: var(--primary2, #3488b8); }
+
+.auth-field-hint { font-size: 0.78rem; color: var(--dark1, #6B7B8D); margin-top: 0.35rem; }
+
+.auth-submit {
+    width: 100%; padding: 0.875rem; border: none; border-radius: 10px;
+    background: linear-gradient(135deg, var(--primary2, #3488b8), var(--primary1, #53a2cc));
+    color: #fff; font-size: 1rem; font-weight: 700; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.02em; font-family: inherit; margin-top: 0.5rem;
+}
+.auth-submit:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(52,136,184,0.35); }
+.auth-submit:disabled { opacity: 0.7; cursor: not-allowed; }
+.auth-submit .btn-text, .auth-submit .btn-loading { display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+.auth-submit .btn-loading { display: none; }
+.auth-submit.is-loading .btn-text   { display: none; }
+.auth-submit.is-loading .btn-loading { display: flex; }
+
+.auth-message {
+    border-radius: 10px; padding: 1rem 1.25rem; margin-top: 1.25rem;
+    display: none; align-items: flex-start; gap: 0.75rem;
+    font-size: 0.9rem; line-height: 1.5;
+}
+.auth-message.is-visible { display: flex; }
+.auth-message.is-error   { background: rgba(231,76,60,0.08); border: 1px solid rgba(231,76,60,0.2); color: #c0392b; }
+.auth-message.is-success { background: rgba(39,174,96,0.08); border: 1px solid rgba(39,174,96,0.2); color: #1e8449; }
+.auth-message i { margin-top: 0.1rem; flex-shrink: 0; }
+
+.auth-card-footer {
+    padding: 1.25rem 2rem; border-top: 1px solid var(--light2, #e8ecf0);
+    text-align: center; font-size: 0.875rem; color: var(--dark1, #6B7B8D);
+}
+.auth-card-footer a { color: var(--primary2, #3488b8); font-weight: 600; text-decoration: none; }
+.auth-card-footer a:hover { text-decoration: underline; }
+</style>
+
+<section class="auth-hero">
+    <div class="container">
+        <div class="auth-hero-content">
+            <h1 class="auth-hero-title">Reset Password</h1>
+            <p class="auth-hero-subtitle">Choose a new password for your Kartoza account</p>
+        </div>
+    </div>
+</section>
+
+<section class="auth-section">
+    <div class="auth-card-wrapper">
+        <div class="auth-card">
+
+            <!-- Invalid / missing key -->
+            <div class="auth-form-panel" id="panel-invalid" style="display:none;">
+                <div class="auth-form-header">
+                    <div class="auth-form-icon" style="background:linear-gradient(135deg,#e74c3c,#c0392b);">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h2>Invalid Link</h2>
+                    <p>This reset link is invalid or has expired.</p>
+                </div>
+                <a href="/login/" class="auth-submit" style="display:flex; align-items:center; justify-content:center; gap:0.5rem; text-decoration:none;">
+                    <i class="fas fa-arrow-left"></i> Back to Sign In
+                </a>
+            </div>
+
+            <!-- New password form -->
+            <div class="auth-form-panel" id="panel-form">
+                <div class="auth-form-header">
+                    <div class="auth-form-icon">
+                        <i class="fas fa-lock-open"></i>
+                    </div>
+                    <h2>Choose New Password</h2>
+                    <p>Enter a new password for your account</p>
+                </div>
+
+                <form id="reset-form" novalidate>
+                    <div class="auth-field">
+                        <label class="auth-label" for="new-password">
+                            <i class="fas fa-key"></i> New Password
+                        </label>
+                        <div class="auth-input-wrapper">
+                            <input class="auth-input" type="password" id="new-password"
+                                placeholder="At least 8 characters" autocomplete="new-password" required>
+                            <button type="button" class="auth-input-toggle"
+                                onclick="togglePwd('new-password', this)" aria-label="Toggle visibility">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <p class="auth-field-hint">Minimum 8 characters</p>
+                    </div>
+
+                    <div class="auth-field">
+                        <label class="auth-label" for="confirm-password">
+                            <i class="fas fa-check-double"></i> Confirm Password
+                        </label>
+                        <div class="auth-input-wrapper">
+                            <input class="auth-input" type="password" id="confirm-password"
+                                placeholder="Repeat your new password" autocomplete="new-password" required>
+                            <button type="button" class="auth-input-toggle"
+                                onclick="togglePwd('confirm-password', this)" aria-label="Toggle visibility">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="auth-submit" id="reset-submit">
+                        <span class="btn-text">
+                            <i class="fas fa-save"></i> Set New Password
+                        </span>
+                        <span class="btn-loading">
+                            <i class="fas fa-circle-notch fa-spin"></i> Saving...
+                        </span>
+                    </button>
+
+                    <div class="auth-message is-error" id="reset-error" role="alert">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="reset-error-text"></span>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Success state -->
+            <div class="auth-form-panel" id="panel-success" style="display:none;">
+                <div class="auth-form-header">
+                    <div class="auth-form-icon" style="background:linear-gradient(135deg,#27ae60,#1e8449);">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h2>Password Updated</h2>
+                    <p>Your password has been changed successfully.</p>
+                </div>
+                <a href="/login/" class="auth-submit" style="display:flex; align-items:center; justify-content:center; gap:0.5rem; text-decoration:none;">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
+                </a>
+            </div>
+
+            <div class="auth-card-footer">
+                <a href="/login/">Back to sign in</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+(function () {
+    var key = new URLSearchParams(window.location.search).get('key') || '';
+
+    window.togglePwd = function(id, btn) {
+        var input = document.getElementById(id);
+        var icon = btn.querySelector('i');
+        if (input.type === 'password') {
+            input.type = 'text'; icon.className = 'fas fa-eye-slash';
+        } else {
+            input.type = 'password'; icon.className = 'fas fa-eye';
+        }
+    };
+
+    if (!key) {
+        document.getElementById('panel-form').style.display = 'none';
+        document.getElementById('panel-invalid').style.display = '';
+        return;
+    }
+
+    document.getElementById('reset-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        var pwd     = document.getElementById('new-password').value;
+        var confirm = document.getElementById('confirm-password').value;
+        var btn     = document.getElementById('reset-submit');
+        var errorEl = document.getElementById('reset-error');
+        var errorTx = document.getElementById('reset-error-text');
+
+        errorEl.classList.remove('is-visible');
+
+        if (pwd.length < 8) {
+            errorTx.textContent = 'Password must be at least 8 characters.';
+            errorEl.classList.add('is-visible');
+            return;
+        }
+        if (pwd !== confirm) {
+            errorTx.textContent = 'Passwords do not match.';
+            errorEl.classList.add('is-visible');
+            return;
+        }
+
+        btn.classList.add('is-loading');
+        btn.disabled = true;
+
+        try {
+            var r = await fetch('/api/method/kartoza_custom.api.confirm_password_reset', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ key: key, new_password: pwd }),
+            });
+            var data = await r.json();
+
+            if (!r.ok || data.exc || data.exception) {
+                var msg = '';
+                if (data._server_messages) {
+                    try { msg = JSON.parse(JSON.parse(data._server_messages)[0]).message; } catch(_) {}
+                }
+                msg = msg || (data.message && typeof data.message === 'string' ? data.message : '') || 'Something went wrong. Please try again.';
+                // If key is invalid/expired, show the invalid panel
+                if (msg.toLowerCase().includes('invalid') || msg.toLowerCase().includes('expired')) {
+                    document.getElementById('panel-form').style.display = 'none';
+                    document.getElementById('panel-invalid').style.display = '';
+                } else {
+                    errorTx.textContent = msg;
+                    errorEl.classList.add('is-visible');
+                }
+            } else {
+                document.getElementById('panel-form').style.display = 'none';
+                document.getElementById('panel-success').style.display = '';
+            }
+        } catch(err) {
+            errorTx.textContent = 'Unable to connect. Please check your internet connection.';
+            errorEl.classList.add('is-visible');
+        } finally {
+            btn.classList.remove('is-loading');
+            btn.disabled = false;
+        }
+    });
+})();
+</script>
+
+{{ partial "footer.html" . }}

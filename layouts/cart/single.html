@@ -388,11 +388,11 @@
         btn.classList.add('is-loading');
         btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
         try {
-            var r = await fetch('/api/method/webshop.webshop.shopping_cart.cart.update_cart', {
+            var r = await fetch('/api/method/kartoza_custom.api.remove_from_cart', {
                 method: 'POST',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ item_code: itemCode, qty: 0 })
+                body: JSON.stringify({ item_code: itemCode })
             });
             if (!r.ok) throw new Error('remove failed');
             var data = await r.json();

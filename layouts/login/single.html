@@ -648,6 +648,13 @@
                         </div>
                     </div>
 
+                    <div style="text-align:right; margin-bottom:0.75rem;">
+                        <a href="#" onclick="switchTab('forgot'); return false;"
+                           style="font-size:0.82rem; color:var(--primary2,#3488b8);">
+                            Forgot password?
+                        </a>
+                    </div>
+
                     <button type="submit" class="auth-submit" id="login-submit">
                         <span class="btn-text">
                             <i class="fas fa-sign-in-alt"></i> Sign In
@@ -665,6 +672,48 @@
                     <div class="auth-message is-success" id="login-success" role="status">
                         <i class="fas fa-check-circle"></i>
                         <span>Signed in successfully! Redirecting...</span>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Forgot Password Panel -->
+            <div class="auth-form-panel" id="panel-forgot" role="tabpanel">
+                <div class="auth-form-header">
+                    <div class="auth-form-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <h2>Reset Password</h2>
+                    <p>Enter your email and we'll send you a reset link</p>
+                </div>
+
+                <form id="forgot-form" novalidate>
+                    <div class="auth-field">
+                        <label class="auth-label" for="forgot-email">
+                            <i class="fas fa-envelope"></i> Email Address
+                        </label>
+                        <div class="auth-input-wrapper">
+                            <input class="auth-input" type="email" id="forgot-email"
+                                placeholder="you@example.com" autocomplete="email" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="auth-submit" id="forgot-submit">
+                        <span class="btn-text">
+                            <i class="fas fa-paper-plane"></i> Send Reset Link
+                        </span>
+                        <span class="btn-loading">
+                            <i class="fas fa-circle-notch fa-spin"></i> Sending...
+                        </span>
+                    </button>
+
+                    <div class="auth-message is-error" id="forgot-error" role="alert">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="forgot-error-text"></span>
+                    </div>
+
+                    <div class="auth-message is-success" id="forgot-success" role="status">
+                        <i class="fas fa-check-circle"></i>
+                        <span id="forgot-success-text"></span>
                     </div>
                 </form>
             </div>
@@ -766,6 +815,10 @@
                     Already have an account?
                     <a href="#" onclick="switchTab('login'); return false;">Sign in</a>
                 </span>
+                <span id="footer-forgot-hint" style="display:none">
+                    Remembered it?
+                    <a href="#" onclick="switchTab('login'); return false;">Back to sign in</a>
+                </span>
             </div>
         </div>
 
@@ -842,8 +895,9 @@
         document.querySelectorAll('.auth-form-panel').forEach(p => {
             p.classList.toggle('active', p.id === 'panel-' + tab);
         });
-        document.getElementById('footer-login-hint').style.display = tab === 'login' ? '' : 'none';
+        document.getElementById('footer-login-hint').style.display    = tab === 'login'    ? '' : 'none';
         document.getElementById('footer-register-hint').style.display = tab === 'register' ? '' : 'none';
+        document.getElementById('footer-forgot-hint').style.display   = tab === 'forgot'   ? '' : 'none';
     };
 
     // ============================================
@@ -932,6 +986,62 @@
             }
         } catch (err) {
             errorText.textContent = 'Unable to connect. Please check your internet connection and try again.';
+            errorEl.classList.add('is-visible');
+        } finally {
+            submitBtn.classList.remove('is-loading');
+            submitBtn.disabled = false;
+        }
+    });
+
+    // ============================================
+    // FORGOT PASSWORD FORM
+    // ============================================
+
+    document.getElementById('forgot-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const email     = document.getElementById('forgot-email').value.trim();
+        const submitBtn = document.getElementById('forgot-submit');
+        const errorEl   = document.getElementById('forgot-error');
+        const errorText = document.getElementById('forgot-error-text');
+        const successEl = document.getElementById('forgot-success');
+        const successText = document.getElementById('forgot-success-text');
+
+        errorEl.classList.remove('is-visible');
+        successEl.classList.remove('is-visible');
+
+        if (!email) {
+            errorText.textContent = 'Please enter your email address.';
+            errorEl.classList.add('is-visible');
+            return;
+        }
+
+        submitBtn.classList.add('is-loading');
+        submitBtn.disabled = true;
+
+        try {
+            const r = await fetch('/api/method/kartoza_custom.api.request_password_reset', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email }),
+            });
+            const data = await r.json();
+
+            if (!r.ok || data.exc || data.exception) {
+                let msg = '';
+                if (data._server_messages) {
+                    try { msg = JSON.parse(JSON.parse(data._server_messages)[0]).message; } catch(_) {}
+                }
+                errorText.textContent = msg || 'Something went wrong. Please try again.';
+                errorEl.classList.add('is-visible');
+            } else {
+                successText.textContent = data.message || 'If an account exists for this email, a reset link has been sent.';
+                successEl.classList.add('is-visible');
+                document.getElementById('forgot-email').value = '';
+            }
+        } catch(err) {
+            errorText.textContent = 'Unable to connect. Please check your internet connection.';
             errorEl.classList.add('is-visible');
         } finally {
             submitBtn.classList.remove('is-loading');

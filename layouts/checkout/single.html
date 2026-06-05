@@ -254,7 +254,8 @@
     text-transform: uppercase;
     letter-spacing: 0.03em;
 }
-.addr-field input {
+.addr-field input,
+.addr-field select {
     width: 100%;
     padding: 0.55rem 0.75rem;
     border: 1.5px solid #d4dbe2;
@@ -264,8 +265,14 @@
     background: #fff;
     transition: border-color 0.15s, box-shadow 0.15s;
     box-sizing: border-box;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%239aaab8' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    padding-right: 2rem;
 }
-.addr-field input:focus {
+.addr-field input:focus,
+.addr-field select:focus {
     outline: none;
     border-color: #3B9DD9;
     box-shadow: 0 0 0 3px rgba(59,157,217,0.12);
@@ -448,7 +455,9 @@
                             </div>
                             <div class="addr-field">
                                 <label>Country <span style="color:#E55B3C;">*</span></label>
-                                <input type="text" id="co-addr-country" placeholder="Country" oninput="coValidateAddr()">
+                                <select id="co-addr-country" onchange="coValidateAddr(); coRefreshTotalsFromForm();">
+                                    <option value="">Select country…</option>
+                                </select>
                             </div>
                             <div class="addr-field">
                                 <label>State / Province</label>
@@ -481,7 +490,7 @@
                             <span id="co-subtotal">—</span>
                         </div>
                         <div class="summary-row" id="co-tax-row" style="display:none">
-                            <span>Tax</span>
+                            <span>VAT (15%)</span>
                             <span id="co-tax">—</span>
                         </div>
                         <div class="summary-total">
@@ -548,6 +557,59 @@
         if (proc) proc.style.display = on ? 'flex' : 'none';
     }
 
+    /* ── Totals helpers ──────────────────────────────────────────────── */
+
+    function updateSummaryTotals(updatedTotals) {
+        var currency = updatedTotals.currency || (_config && _config.currency) || 'ZAR';
+        var subtotalEl = document.getElementById('co-subtotal');
+        if (subtotalEl && updatedTotals.total != null) subtotalEl.textContent = fmt(updatedTotals.total, currency);
+        var taxRow = document.getElementById('co-tax-row');
+        var taxEl = document.getElementById('co-tax');
+        if (taxRow && taxEl) {
+            if (updatedTotals.tax_amount) {
+                taxRow.style.display = '';
+                taxEl.textContent = fmt(updatedTotals.tax_amount, currency);
+            } else {
+                taxRow.style.display = 'none';
+            }
+        }
+        var totalEl = document.getElementById('co-total');
+        if (totalEl) totalEl.textContent = fmt(updatedTotals.grand_total, currency);
+        var label = document.getElementById('co-pay-label');
+        if (label) label.textContent = 'Pay ' + fmt(updatedTotals.grand_total, currency) + ' with Paystack';
+        if (_config) {
+            _config.tax_amount = updatedTotals.tax_amount;
+            _config.grand_total = updatedTotals.grand_total;
+            _config.total = updatedTotals.total;
+        }
+    }
+
+    var _refreshController = null;
+
+    async function refreshTotalsForAddress(addrPayload) {
+        // Cancel any previous in-flight request so the last selection always wins
+        if (_refreshController) _refreshController.abort();
+        _refreshController = new AbortController();
+        var signal = _refreshController.signal;
+        try {
+            var r = await fetch('/api/method/kartoza_custom.api.save_billing_address', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(addrPayload),
+                signal: signal,
+            });
+            var data = await r.json();
+            if (!r.ok || data.exc || data.exception) return;
+            var totals = data.message || {};
+            if (totals.grand_total != null) updateSummaryTotals(totals);
+        } catch (e) {
+            // AbortError is expected when a newer selection cancels this request
+        } finally {
+            _refreshController = null;
+        }
+    }
+
     /* ── Address helpers (global so onclick="" can reach them) ────────── */
 
     window.coSelectAddressCard = function (el) {
@@ -558,6 +620,17 @@
         _currentAddress = _existingAddresses.find(function (a) { return a.name === name; }) || null;
         _showingForm = false;
         coUpdatePayBtn();
+        if (_currentAddress) {
+            refreshTotalsForAddress({
+                address_name: _currentAddress.name,
+                address_line1: _currentAddress.address_line1 || '',
+                address_line2: _currentAddress.address_line2 || '',
+                city: _currentAddress.city || '',
+                country: _currentAddress.country || '',
+                state: _currentAddress.state || '',
+                pincode: _currentAddress.pincode || '',
+            });
+        }
     };
 
     window.coShowAddressForm = function () {
@@ -594,6 +667,19 @@
     };
 
     window.coValidateAddr = function () { coUpdatePayBtn(); };
+
+    window.coRefreshTotalsFromForm = function () {
+        if (!coAddrFormValid()) return;
+        var v = function (id) { return ((document.getElementById(id) || {}).value || '').trim(); };
+        refreshTotalsForAddress({
+            address_line1: v('co-addr-line1'),
+            address_line2: v('co-addr-line2'),
+            city: v('co-addr-city'),
+            country: v('co-addr-country'),
+            state: v('co-addr-state'),
+            pincode: v('co-addr-pincode'),
+        });
+    };
 
     function coAddrFormValid() {
         var v = function (id) { return (document.getElementById(id) || {}).value || ''; };
@@ -757,7 +843,7 @@
                 };
             }
 
-            // Save / link billing address to quotation
+            // Save / link billing address to quotation (also applies/removes VAT)
             var addrResp = await fetch('/api/method/kartoza_custom.api.save_billing_address', {
                 method: 'POST',
                 credentials: 'include',
@@ -770,6 +856,9 @@
                     ? addrData.message : 'Could not save billing address. Please try again.';
                 throw new Error(addrMsg);
             }
+            // Refresh payment summary with updated totals (VAT may have been applied/removed)
+            var updatedTotals = addrData.message || {};
+            if (updatedTotals.grand_total != null) updateSummaryTotals(updatedTotals);
 
             // Initialize Paystack payment
             var callbackUrl = window.location.origin + '/payment-complete/';
@@ -811,10 +900,30 @@
         }
     });
 
+    function populateCountries() {
+        fetch('/api/method/kartoza_custom.api.get_countries', {
+            credentials: 'include',
+            cache: 'force-cache',
+        })
+            .then(function (r) { return r.json(); })
+            .then(function (data) {
+                var sel = document.getElementById('co-addr-country');
+                if (!sel) return;
+                (data.message || []).forEach(function (c) {
+                    var opt = document.createElement('option');
+                    opt.value = c.country_name;
+                    opt.textContent = c.country_name;
+                    sel.appendChild(opt);
+                });
+            })
+            .catch(function () {});
+    }
+
     var auth = (typeof getAuth === 'function') ? getAuth() : null;
     if (!auth || !auth.loggedIn) {
         showState('co-state-auth');
     } else {
+        populateCountries();
         loadCheckout();
     }
 })();
