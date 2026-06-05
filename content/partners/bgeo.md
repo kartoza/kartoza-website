@@ -81,7 +81,7 @@ Your team manages the network through the QGIS desktop or browser client. Kartoz
 
 ## Real-world Impact
 
-BGEO's Giswater platform is active in over 140 countries, serving water utilities from small villages of 2,000 inhabitants to regional operators managing hundreds ofthousands of connections. In Costa Rica, the Instituto Costarricense de Acueductos y Alcantarillado deployed Giswater as their standard national GIS platform, the first country-level rollout of its kind, replacing fragmented tools with a unified open source environment for network inventory, hydraulic modelling, and asset management.
+BGEO's Giswater platform is active in over 140 countries, serving water utilities from small villages of 2,000 inhabitants to regional operators managing hundreds of  thousands of connections. In Costa Rica, the Instituto Costarricense de Acueductos y Alcantarillado deployed Giswater as their standard national GIS platform, the first country-level rollout of its kind, replacing fragmented tools with a unified open source environment for network inventory, hydraulic modelling, and asset management.
 
 In Brazil, Saneago, one of the country's largest sanitation companies, modernised itssewerage management using Giswater, integrating network GIS with operational workflows and improving data quality across thousands of kilometres of infrastructure.
 
