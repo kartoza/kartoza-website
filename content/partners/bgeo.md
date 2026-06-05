@@ -65,7 +65,6 @@ Kartoza provides your Giswater environment on Geospatial Hosting in your preferr
 
 Your team manages the network through the QGIS desktop or browser client. Kartoza handles infrastructure and first-line support; BGEO provides application and domain expertise. As your needs grow, extend the platform with hydraulic modelling, IoT, or advanced analytics.
 
-
 ## In the Field Use Cases
 
 - **Water Supply Utilities** — Network inventory, pressure zone management, and demand modelling for drinking water systems.
