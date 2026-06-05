@@ -1,8 +1,8 @@
 ---
-title: "Giswater"
-tagline: "Open Source Water Network Management"
-description: "Partnership with BGEO for Giswater, an open source solution for water supply and urban drainage network management."
-logo: "/img/partners/giswater-logo.png"
+title: "BGEO"
+tagline: "Open GIS & Water Solutions"
+description: "Through its partnership with BGEO, creators of Giswater, Kartoza helps utilities adopt enterprise-ready open-source solutions for water network management, integrating GIS,hydraulic modelling, asset management, and operational workflows in a single platform."
+logo: "/img/partners/bgeologo.png"
 productUrl: "https://www.bgeo.es/en/giswater/"
 productName: "Giswater"
 partnerUrl: "https://www.bgeo.es/en/"
