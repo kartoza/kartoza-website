@@ -80,23 +80,16 @@
     </div>
 </section>
 
-<!-- CTA Section -->
-<section class="section section-cta">
-    <div class="container has-text-centered">
-        <h2 class="title is-3">Need a Custom Web Map?</h2>
-        <p class="subtitle is-5">We create beautiful, interactive maps tailored to your data and requirements.</p>
-        <div class="section-cta-buttons">
-            <a class="button is-primary is-medium" href="{{ absURL "contact-us/" }}">
-                <span class="icon"><i class="fas fa-envelope"></i></span>
-                <span>Get in Touch</span>
-            </a>
-            <a class="button is-light is-medium" href="{{ absURL "portfolio/" }}">
-                <span class="icon"><i class="fas fa-briefcase"></i></span>
-                <span>View Our Portfolio</span>
-            </a>
-        </div>
-    </div>
-</section>
+{{ partial "section-cta.html" (dict
+    "title"          "Need a Custom Web Map?"
+    "subtitle"       "We create beautiful, interactive maps tailored to your data and requirements."
+    "primaryUrl"     (absURL "contact-us/")
+    "primaryIcon"    "fas fa-envelope"
+    "primaryLabel"   "Get in Touch"
+    "secondaryUrl"   (absURL "portfolio/")
+    "secondaryIcon"  "fas fa-briefcase"
+    "secondaryLabel" "View Our Portfolio"
+) }}
 
 {{ partial "physics-scroll.html" . }}
 

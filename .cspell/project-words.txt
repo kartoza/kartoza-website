@@ -2,14 +2,24 @@
 CGIS
 # One word per line
 
+#GISWater app terms
+GISWater
+SWMM
+BGEO
+
 # Technical terms specific to this project
 ACLED
 GEOE3
 GEOE
 
 # Place names
+Brak
+firenze
+Firenze
+Gqeberha
 Kafue
 Sachsen
+Wolwedans
 
 # Project-specific words for cspell
 Derilinx
@@ -25,12 +35,49 @@ EPAL
 
 # Technical acronyms and terms
 ECMWF
+FOSSGIS
+fossgis
+Fossgis
 GNSS
+dscache
+isready
+kartozas
+ndvi
+NDVI
+ogrinfo
+pgrouting
+pgsql
+rast
 scikit
+Spatialite
+spatialite
+SSAG
+ssag
+varchar
+vsicurl
 xarray
 
 # Team member names (add as needed)
+Ciputra
+Graser
+Hing
+Kamstra
+Maltitz
+Muzakki
+Mwakisambwe
+Neema
+Nyall
+Nyakudya
 Osundwa
+Samweli
+Seabilwe
+Sutton
+Szczepanek
+Ternent
+Tilodi
+Xakayi
+Zinzi
+Zulfikar
 
 # Web/tech terms
 signup

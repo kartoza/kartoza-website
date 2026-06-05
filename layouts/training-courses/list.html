@@ -243,23 +243,16 @@
     </div>
 </section>
 
-<!-- CTA Section -->
-<section class="section section-cta">
-    <div class="container has-text-centered">
-        <h2 class="title is-3">Ready to Expand Your GIS Skills?</h2>
-        <p class="subtitle is-5">Contact us for custom training programs tailored to your organisation's needs.</p>
-        <div class="section-cta-buttons">
-            <a class="button is-primary is-medium" href="{{ absURL "contact-us/" }}">
-                <span class="icon"><i class="fas fa-envelope"></i></span>
-                <span>Request Training</span>
-            </a>
-            <a class="button is-light is-medium" href="{{ absURL "solutions/" }}">
-                <span class="icon"><i class="fas fa-cogs"></i></span>
-                <span>View Our Solutions</span>
-            </a>
-        </div>
-    </div>
-</section>
+{{ partial "section-cta.html" (dict
+    "title"          "Ready to Expand Your GIS Skills?"
+    "subtitle"       "Contact us for custom training programs tailored to your organisation's needs."
+    "primaryUrl"     (absURL "contact-us/")
+    "primaryIcon"    "fas fa-envelope"
+    "primaryLabel"   "Request Training"
+    "secondaryUrl"   (absURL "solutions/")
+    "secondaryIcon"  "fas fa-cogs"
+    "secondaryLabel" "View Our Solutions"
+) }}
 
 {{ partial "physics-scroll.html" . }}
 

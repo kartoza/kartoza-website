@@ -3,6 +3,11 @@
 {{ partial "header.html" . }}
 {{ partial "menu.html" . }}
 
+{{- $careerPages := where site.RegularPages "Type" "careers" -}}
+{{- $allJobs := where $careerPages "Params.erpnext_id" "ne" nil -}}
+{{- $openJobs := where $allJobs "Draft" false -}}
+{{- $hasOpenJobs := gt (len $openJobs) 0 -}}
+
 <!-- Careers Hero - Inspirational -->
 <section class="careers-hero">
     <div class="careers-hero-bg">
@@ -20,6 +25,12 @@
     </div>
     <div class="container">
         <div class="careers-hero-content">
+            {{ if not $hasOpenJobs }}
+            <div class="careers-no-positions-notice notice-yellow">
+                <i class="fas fa-info-circle"></i>
+                We currently don't have any open positions
+            </div>
+            {{ end }}
             <span class="careers-hero-tagline">
                 <i class="fas fa-rocket"></i>
                 Join Our Mission
@@ -197,7 +208,8 @@
 </section>
 
 <!-- Current Openings -->
-<!-- <section class="careers-section careers-openings" id="open-positions">
+{{ if $hasOpenJobs }}
+<section class="careers-section careers-openings" id="open-positions">
     <div class="container">
         <div class="section-header">
             <span class="section-label"><i class="fas fa-briefcase"></i> Now Hiring</span>
@@ -205,11 +217,33 @@
             <p>Join our team today</p>
         </div>
         <div class="openings-grid">
-            
+            {{ range $openJobs }}
+            <div class="opening-card">
+                <div class="opening-card-header">
+                    {{ with .Params.department }}<span class="opening-ref">{{ . }}</span>{{ end }}
+                    <h3><i class="fas fa-briefcase"></i> {{ .Title }}</h3>
+                    {{ with .Params.location }}
+                    <div class="opening-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>{{ . }}</span>
+                    </div>
+                    {{ end }}
+                </div>
+                <div class="opening-card-body">
+                    <p>{{ .Plain | truncate 250 "..." }}</p>
+                </div>
+                <div class="opening-card-footer">
+                    <a href="{{ .Permalink }}" class="button is-primary">
+                        <span class="icon"><i class="fas fa-arrow-right"></i></span>
+                        <span>View Position</span>
+                    </a>
+                </div>
             </div>
+            {{ end }}
         </div>
     </div>
-</section> -->
+</section>
+{{ end }}
 
 <!-- Areas of Expertise -->
 <section class="careers-section careers-areas">
@@ -335,7 +369,7 @@
             </div>
         </div>
         <div class="apply-checklist">
-            <h3><i class="fas fa-clipboard-check"></i> Application Checklist</h3>
+            <h3><i class="fas fa-clipboard-check"></i> <span class="application-checklist">Application Checklist</span></h3>
             <div class="checklist-grid">
                 <div class="checklist-section">
                     <h4>Required</h4>

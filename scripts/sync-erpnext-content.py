@@ -39,6 +39,16 @@ FETCHERS = [
         "script": "fetch-erpnext-training.py",
         "description": "Fetches training courses and scheduled events"
     },
+    {
+        "name": "Standalone Pages",
+        "script": "fetch-erpnext-pages.py",
+        "description": "Fetches standalone pages (policies, resources, etc.)"
+    },
+    {
+        "name": "Job Opportunities",
+        "script": "fetch-erpnext-jobs.py",
+        "description": "Fetches job openings with publish/unpublish support"
+    },
 ]
 
 

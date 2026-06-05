@@ -109,23 +109,16 @@
     </div>
 </section>
 
-<!-- CTA Section -->
-<section class="section section-cta">
-    <div class="container has-text-centered">
-        <h2 class="title is-3">Need a Custom App Solution?</h2>
-        <p class="subtitle is-5">We build mobile and web applications that bring geospatial capabilities to the field.</p>
-        <div class="section-cta-buttons">
-            <a class="button is-primary is-medium" href="{{ absURL "contact-us/" }}">
-                <span class="icon"><i class="fas fa-mobile-alt"></i></span>
-                <span>Discuss Your App Idea</span>
-            </a>
-            <a class="button is-light is-medium" href="{{ absURL "solutions/" }}">
-                <span class="icon"><i class="fas fa-cogs"></i></span>
-                <span>View All Solutions</span>
-            </a>
-        </div>
-    </div>
-</section>
+{{ partial "section-cta.html" (dict
+    "title"          "Need a Custom App Solution?"
+    "subtitle"       "We build mobile and web applications that bring geospatial capabilities to the field."
+    "primaryUrl"     (absURL "contact-us/")
+    "primaryIcon"    "fas fa-mobile-alt"
+    "primaryLabel"   "Discuss Your App Idea"
+    "secondaryUrl"   (absURL "solutions/")
+    "secondaryIcon"  "fas fa-cogs"
+    "secondaryLabel" "View All Solutions"
+) }}
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
