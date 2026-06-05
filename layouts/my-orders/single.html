@@ -315,9 +315,9 @@
                     <input type="text" id="ord-search" placeholder="Search by order or course name…" oninput="ordFilter()">
                 </div>
                 <span class="orders-toolbar-date-label">From</span>
-                <input type="date" id="ord-date-from" style="padding-left:0.75rem;" onchange="ordFilter()">
+                <input type="date" id="ord-date-from" style="padding-left:0.75rem;" onchange="ordFilter()" oninput="ordFilter()">
                 <span class="orders-toolbar-date-label">To</span>
-                <input type="date" id="ord-date-to"   style="padding-left:0.75rem;" onchange="ordFilter()">
+                <input type="date" id="ord-date-to"   style="padding-left:0.75rem;" onchange="ordFilter()" oninput="ordFilter()">
                 <button class="orders-clear-btn" onclick="ordClearFilters()">
                     <i class="fas fa-times" style="margin-right:0.3rem;"></i>Clear
                 </button>
