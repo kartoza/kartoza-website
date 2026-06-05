@@ -50,13 +50,13 @@ records into the Giswater schema — cleaning,validating, and structuring data f
 
 ## From Data to Decision in Three Steps
 
-# 1. Migrate & Model
+### 1. Migrate & Model
 We migrate your existing network data into a structured PostGIS database with BGEO's validated schema , complete with asset catalogues, topology rules, and hydraulic model linkage. Your network is clean, connected, and analysis-ready from day one.
 
-# 2. Deploy on Geospatial Hosting
+### 2. Deploy on Geospatial Hosting
 Kartoza provides your Giswater environment on Geospatial Hosting in your preferred region. Within days you have a fully configured cloud instance, QGIS desktop sessions, a web client, PostGIS backend, and Moodle training portal, all in one place.
 
-# 3. Operate & Grow
+### 3. Operate & Grow
 Your team manages the network through the QGIS desktop or browser client. Kartoza handles infrastructure and first-line support; BGEO provides application and domain expertise. As your needs grow, extend the platform with hydraulic modelling, IoT, or advanced analytics.
 
 
@@ -76,16 +76,16 @@ In Brazil, Saneago, one of the country's largest sanitation companies, modernise
 ## Your Journey to Success
 A simple, proven process to get your water utility onto Giswater.
 
-# 1. Discovery Call
+### 1. Discovery Call
 We learn about your network, data situation, and operational goals to design the right solution.
 
-# 2. Solution Design
+### 2. Solution Design
 We scope the migration, configuration, and hosting plan, with a clear timeline and cost estimate.
 
-# 3. Deployment
+### 3. Deployment
 Kartoza provisions your cloud environment; BGEO migrates data and configures the application.
 
-# 4. Ongoing Support
+### 4. Ongoing Support
 Continued hosting, application support, and platform growth as your needs evolve.
 
 ## Ready to Transform Your Water Operations?
