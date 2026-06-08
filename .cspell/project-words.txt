@@ -57,6 +57,14 @@ varchar
 vsicurl
 xarray
 
+# GeoAI blog technical terms
+ConvLSTM
+polygonisation
+polygonising
+rioxarray
+RMSE
+SWIR
+
 # Team member names (add as needed)
 Ciputra
 Graser
