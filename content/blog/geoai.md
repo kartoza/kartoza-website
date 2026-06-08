@@ -101,4 +101,4 @@ Instead of treating 5,000 hectares equally, they focus on the 600 hectares that 
 GeoAI is powerful because it connects intelligence to place.
 Not just "What might happen?" but "What might happen, where exactly, and what should we do next?"
 
-Further reading: https://opengeoai.org/
+Further reading: [opengeoai.org](https://opengeoai.org/)
