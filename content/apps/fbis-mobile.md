@@ -1,7 +1,7 @@
 ---
 title: "FBIS for Mobile"
 description: "Mobile app supporting data entry for fish, invertebrates, algae, anurans, and plants in rivers and wetlands."
-thumbnail: "/img/apps/fbis-mobile.png"
+thumbnail: "/img/apps/fbismobi.png"
 tags:
   - Mobile
   - Biodiversity
