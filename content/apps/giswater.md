@@ -1,7 +1,7 @@
 ---
 title: "GISWater"
 description: "Integral management of water infrastructure and the water cycle, linking GIS with hydraulic modelling tools."
-thumbnail: "/img/apps/"
+thumbnail: "/img/apps/network_objects_form.png"
 tags:
   - Water Infrastructure
   - Hydraulic Modelling
