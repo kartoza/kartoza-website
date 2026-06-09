@@ -12,7 +12,8 @@ reviewedDate: 2026-06-08
 
 ## What is GeoAI?
 
-It is 2:07 AM, heavy rain is pounding the city, and emergency teams need to know one thing fast: **which neighbourhoods will flood first**.
+It is 2:07 AM, heavy rain is pounding the city, and emergency teams need to know one thing fast: **Which neighbourhoods will flood first?**.
+
 This is where GeoAI shines.
 
 **GeoAI (Geospatial Artificial Intelligence)** is the combination of AI and geospatial science to understand patterns in data tied to place and time. In simple terms, GeoAI does not just answer _what_ might happen, it answers _what, where, and when_.
@@ -27,7 +28,7 @@ That shift, from broad insight to location-specific action, is why GeoAI is beco
 
 Before GeoAI had a name, people were already wrestling with the same problem: too much map data, too little time to interpret it.
 
-At first, GIS experts did the heavy lifting manually: layering roads, rainfall, elevation, and land use to understand patterns. It worked, but it was slow. Then satellite imagery exploded, sensors multiplied, and updates started arriving faster than teams could analyse them.
+At first, GIS experts did the heavy lifting manually: Layering roads, rainfall, elevation, and land use to understand patterns. It worked, but it was slow. Then satellite imagery exploded, sensors multiplied, and updates started arriving faster than teams could analyse them.
 
 That pressure changed everything.
 
