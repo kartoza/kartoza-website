@@ -1,7 +1,7 @@
 ---
 title: "MyCivitas"
 description: "Municipal Asset Lifecycle Management System - Track, maintain, and optimise your infrastructure with spatial intelligence."
-thumbnail: "/img/solutions/mycivitas.svg"
+thumbnail: "/img/apps/mycivitas.png"
 tags:
   - Asset Management
   - Municipal

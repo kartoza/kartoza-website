@@ -1,7 +1,7 @@
 ---
 title: "BIMS"
 description: "Biodiversity Information Management System - Collect, manage, and analyse species occurrence data for conservation."
-thumbnail: "/img/solutions/bims.svg"
+thumbnail: "/img/apps/bimstools.png"
 tags:
   - Biodiversity
   - Conservation
