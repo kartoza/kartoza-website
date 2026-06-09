@@ -349,9 +349,10 @@
 (function () {
     var PAGE_SIZE = 5;
 
-    var _allOrders      = [];
-    var _filteredOrders = [];
-    var _currentPage    = 1;
+    var _currentPage  = 1;
+    var _total        = 0;
+    var _fetchTimer   = null;
+    var _firstLoad    = true;
 
     /* ── Helpers ──────────────────────────────────────────────────────── */
 
@@ -459,41 +460,34 @@
 
     /* ── Render a page of orders ──────────────────────────────────────── */
 
-    function renderPage() {
+    function renderOrders(orders, total, page) {
         var list       = document.getElementById('ord-list');
         var noResults  = document.getElementById('ord-no-results');
         var metaCount  = document.getElementById('ord-meta-count');
         var metaPage   = document.getElementById('ord-meta-page');
         var pagination = document.getElementById('ord-pagination');
 
-        var total = _filteredOrders.length;
+        _total       = total;
+        _currentPage = page;
         var totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
-        if (_currentPage > totalPages) _currentPage = totalPages;
-
-        var start = (_currentPage - 1) * PAGE_SIZE;
+        var start = (page - 1) * PAGE_SIZE;
         var end   = Math.min(start + PAGE_SIZE, total);
-        var pageOrders = _filteredOrders.slice(start, end);
 
         // Results summary
         if (total === 0) {
             metaCount.innerHTML = '';
             metaPage.textContent = '';
-        } else {
-            metaCount.innerHTML = 'Showing <strong>' + (start + 1) + '&ndash;' + end + '</strong> of <strong>' + total + '</strong> order' + (total !== 1 ? 's' : '');
-            metaPage.textContent = totalPages > 1 ? 'Page ' + _currentPage + ' of ' + totalPages : '';
-        }
-
-        // No results
-        if (total === 0) {
             list.innerHTML = '';
             noResults.style.display = '';
             pagination.innerHTML = '';
             return;
         }
         noResults.style.display = 'none';
+        metaCount.innerHTML = 'Showing <strong>' + (start + 1) + '&ndash;' + end + '</strong> of <strong>' + total + '</strong> order' + (total !== 1 ? 's' : '');
+        metaPage.textContent = totalPages > 1 ? 'Page ' + page + ' of ' + totalPages : '';
 
         // Order cards
-        list.innerHTML = pageOrders.map(function(order) {
+        list.innerHTML = orders.map(function(order) {
             var statusClass = (order.status === 'Closed' || order.status === 'Completed') ? '' : 'pending';
             var itemsHtml = (order.items || []).map(function(item) {
                 return (
@@ -540,34 +534,27 @@
         }).join('');
 
         // Pagination
-        renderPagination(totalPages);
+        renderPagination(page, totalPages);
     }
 
-    function renderPagination(totalPages) {
+    function renderPagination(current, totalPages) {
         var pagination = document.getElementById('ord-pagination');
         if (totalPages <= 1) { pagination.innerHTML = ''; return; }
 
         var html = '';
+        html += '<button class="ord-page-btn" onclick="ordGoPage(' + (current - 1) + ')"' +
+            (current === 1 ? ' disabled' : '') + '><i class="fas fa-chevron-left"></i></button>';
 
-        // Prev button
-        html += '<button class="ord-page-btn" onclick="ordGoPage(' + (_currentPage - 1) + ')"' +
-            (_currentPage === 1 ? ' disabled' : '') + '>' +
-            '<i class="fas fa-chevron-left"></i></button>';
-
-        // Page number buttons with ellipsis
-        var pages = buildPageRange(_currentPage, totalPages);
-        pages.forEach(function(p) {
+        buildPageRange(current, totalPages).forEach(function(p) {
             if (p === '…') {
                 html += '<span class="ord-page-ellipsis">…</span>';
             } else {
-                html += '<button class="ord-page-btn' + (p === _currentPage ? ' is-active' : '') + '" onclick="ordGoPage(' + p + ')">' + p + '</button>';
+                html += '<button class="ord-page-btn' + (p === current ? ' is-active' : '') + '" onclick="ordGoPage(' + p + ')">' + p + '</button>';
             }
         });
 
-        // Next button
-        html += '<button class="ord-page-btn" onclick="ordGoPage(' + (_currentPage + 1) + ')"' +
-            (_currentPage === totalPages ? ' disabled' : '') + '>' +
-            '<i class="fas fa-chevron-right"></i></button>';
+        html += '<button class="ord-page-btn" onclick="ordGoPage(' + (current + 1) + ')"' +
+            (current === totalPages ? ' disabled' : '') + '><i class="fas fa-chevron-right"></i></button>';
 
         pagination.innerHTML = html;
     }
@@ -586,51 +573,82 @@
         return pages;
     }
 
-    /* ── Filter logic ─────────────────────────────────────────────────── */
+    /* ── Fetch from server ────────────────────────────────────────────── */
 
-    window.ordFilter = function() {
-        var q        = (document.getElementById('ord-search').value || '').trim().toLowerCase();
-        var dateFrom = document.getElementById('ord-date-from').value || '';
-        var dateTo   = document.getElementById('ord-date-to').value   || '';
+    async function fetchOrders(page) {
+        var search   = (document.getElementById('ord-search').value   || '').trim();
+        var dateFrom = (document.getElementById('ord-date-from').value || '').trim();
+        var dateTo   = (document.getElementById('ord-date-to').value   || '').trim();
 
-        _filteredOrders = _allOrders.filter(function(order) {
-            // Text search: order name or any item name/code
-            if (q) {
-                var haystack = order.name.toLowerCase();
-                (order.items || []).forEach(function(item) {
-                    haystack += ' ' + (item.item_name || '').toLowerCase() + ' ' + (item.item_code || '').toLowerCase();
-                });
-                if (haystack.indexOf(q) === -1) return false;
-            }
-            // Date from
-            if (dateFrom && order.transaction_date) {
-                if (order.transaction_date.slice(0, 10) < dateFrom) return false;
-            }
-            // Date to
-            if (dateTo && order.transaction_date) {
-                if (order.transaction_date.slice(0, 10) > dateTo) return false;
-            }
-            return true;
+        var params = new URLSearchParams({
+            page:      page,
+            page_size: PAGE_SIZE,
+            search:    search,
+            date_from: dateFrom,
+            date_to:   dateTo,
         });
 
-        _currentPage = 1;
-        renderPage();
+        // Show spinner in the list area while loading (but keep toolbar visible after first load)
+        var list = document.getElementById('ord-list');
+        if (!_firstLoad) {
+            list.style.opacity = '0.4';
+            list.style.pointerEvents = 'none';
+        }
+
+        try {
+            var r = await fetch('/api/method/kartoza_custom.api.get_my_orders?' + params.toString(), {
+                credentials: 'include',
+                cache: 'no-store',
+            });
+
+            if (r.status === 401 || r.status === 403) { showState('ord-state-auth'); return; }
+            if (!r.ok) throw new Error('fetch failed');
+
+            var data = await r.json();
+            var msg  = data.message || {};
+            var orders = msg.orders || [];
+            var total  = msg.total  || 0;
+
+            if (_firstLoad && total === 0 && !search && !dateFrom && !dateTo) {
+                showState('ord-state-empty');
+                return;
+            }
+
+            _firstLoad = false;
+            showState('ord-state-content');
+            list.style.opacity = '';
+            list.style.pointerEvents = '';
+            renderOrders(orders, total, page);
+        } catch (e) {
+            if (_firstLoad) {
+                showState('ord-state-error');
+            } else {
+                list.style.opacity = '';
+                list.style.pointerEvents = '';
+                document.getElementById('ord-meta-count').textContent = 'Failed to load. Please try again.';
+            }
+        }
+    }
+
+    /* ── Filter / pagination controls ────────────────────────────────── */
+
+    window.ordFilter = function() {
+        // Debounce so rapid typing doesn't fire many requests
+        clearTimeout(_fetchTimer);
+        _fetchTimer = setTimeout(function() { fetchOrders(1); }, 300);
     };
 
     window.ordClearFilters = function() {
         document.getElementById('ord-search').value    = '';
         document.getElementById('ord-date-from').value = '';
         document.getElementById('ord-date-to').value   = '';
-        _filteredOrders = _allOrders.slice();
-        _currentPage = 1;
-        renderPage();
+        fetchOrders(1);
     };
 
     window.ordGoPage = function(page) {
-        var totalPages = Math.ceil(_filteredOrders.length / PAGE_SIZE);
+        var totalPages = Math.ceil(_total / PAGE_SIZE);
         if (page < 1 || page > totalPages) return;
-        _currentPage = page;
-        renderPage();
+        fetchOrders(page);
         document.getElementById('ord-state-content').scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 
@@ -710,36 +728,13 @@
         }
     }
 
-    /* ── Load orders ─────────────────────────────────────────────────── */
-
-    async function loadOrders() {
-        try {
-            var r = await fetch('/api/method/kartoza_custom.api.get_my_orders', {
-                credentials: 'include',
-                cache: 'no-store',
-            });
-            if (r.status === 401 || r.status === 403) { showState('ord-state-auth'); return; }
-            if (!r.ok) throw new Error('fetch failed');
-            var data   = await r.json();
-            var orders = data.message || [];
-            if (!orders.length) { showState('ord-state-empty'); return; }
-
-            _allOrders      = orders;
-            _filteredOrders = orders.slice();
-            showState('ord-state-content');
-            renderPage();
-        } catch (e) {
-            showState('ord-state-error');
-            var errEl = document.getElementById('ord-error-text');
-            if (errEl) errEl.textContent = 'Could not load your order history. Please try again.';
-        }
-    }
+    /* ── Initial load ─────────────────────────────────────────────────── */
 
     var auth = (typeof getAuth === 'function') ? getAuth() : null;
     if (!auth || !auth.loggedIn) {
         showState('ord-state-auth');
     } else {
-        loadOrders();
+        fetchOrders(1);
     }
 })();
 </script>

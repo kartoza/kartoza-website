@@ -14,6 +14,8 @@ tags:
   - Curriculum
   - QGIS
 date: 2024-01-01
+reviewedBy: "Juanique Voogt"
+reviewedDate: 2026-06-09
 ---
 
 ## Course Overview
