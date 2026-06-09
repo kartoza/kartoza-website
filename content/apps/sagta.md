@@ -1,7 +1,7 @@
 ---
 title: "SAGTA Map Exporter"
 description: "QGIS plugin for exporting compliant cadastral and surveying maps according to South African standards."
-thumbnail: "/img/solutions/sagta-exporter.svg"
+thumbnail: "/img/apps/sagtamapdownloader.png"
 tags:
   - QGIS
   - Surveying
