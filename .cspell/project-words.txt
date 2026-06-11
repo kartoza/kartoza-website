@@ -56,6 +56,7 @@ ssag
 varchar
 vsicurl
 xarray
+Cyano
 
 # Team member names (add as needed)
 Ciputra
@@ -104,6 +105,8 @@ Mergin
 Ogun
 RDBMS
 USAID
+IGRAC
+GGMN
 
 # Qt/UI terms
 dialog

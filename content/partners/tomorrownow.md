@@ -3,15 +3,15 @@ title: "TomorrowNow"
 tagline: "Climate Intelligence for Decision Making"
 description: "Partnership with TomorrowNow for climate intelligence and environmental decision support systems."
 logo: "/img/partners/tomorrownow-logo.jpg"
-heroImage: "/img/partners/tomorrownow-logo.jpg"
+heroImage: "/img/partners/tomorrownowimg.png"
 productUrl: "https://gap.tomorrownow.org/"
 productName: "GAP"
 partnerUrl: "https://tomorrownow.org/"
 partnerName: "TomorrowNow"
 approved: true
 approvedDate: "2026-04-21"
-reviewedBy: "Tim Sutton"
-reviewedDate: "2026-04-21"
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-11
 date: 2024-01-08
 features:
   - title: "Climate Data"
