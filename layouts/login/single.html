@@ -528,6 +528,69 @@
                     <span>Sign Out</span>
                 </button>
 
+                <!-- Account links & settings -->
+                <div style="margin-top:1.75rem; padding-top:1.5rem; border-top:1px solid var(--light2,#e8ecf0); width:100%; text-align:left;">
+                    <a href="/my-orders/"
+                        style="display:flex; align-items:center; gap:0.5rem; width:100%; background:none; border:none; cursor:pointer; font-size:0.9rem; font-weight:600; color:var(--primary2,#3488b8); padding:0.4rem 0; text-decoration:none; border-bottom:1px solid var(--light2,#e8ecf0); margin-bottom:0.5rem; padding-bottom:0.75rem;">
+                        <i class="fas fa-receipt" style="width:1em;"></i>
+                        <span>My Orders</span>
+                        <i class="fas fa-chevron-right" style="margin-left:auto; font-size:0.75rem;"></i>
+                    </a>
+                    <button id="toggle-email-btn" onclick="toggleEmailForm()"
+                        style="display:flex; align-items:center; gap:0.5rem; width:100%; background:none; border:none; cursor:pointer; font-size:0.9rem; font-weight:600; color:var(--primary2,#3488b8); padding:0.4rem 0; font-family:inherit;">
+                        <i class="fas fa-envelope" style="width:1em;"></i>
+                        <span>Change Email Address</span>
+                        <i class="fas fa-chevron-down" id="toggle-email-icon" style="margin-left:auto; font-size:0.75rem; transition:transform 0.2s;"></i>
+                    </button>
+
+                    <div id="change-email-panel" style="display:none; margin-top:1rem;">
+                        <form id="change-email-form" novalidate>
+                            <div class="auth-field">
+                                <label class="auth-label" for="new-email">
+                                    <i class="fas fa-at"></i> New Email Address
+                                </label>
+                                <div class="auth-input-wrapper">
+                                    <input class="auth-input" type="email" id="new-email"
+                                        placeholder="new@example.com" autocomplete="email">
+                                </div>
+                            </div>
+
+                            <div class="auth-field">
+                                <label class="auth-label" for="change-email-password">
+                                    <i class="fas fa-key"></i> Current Password
+                                </label>
+                                <div class="auth-input-wrapper">
+                                    <input class="auth-input" type="password" id="change-email-password"
+                                        placeholder="Confirm your identity" autocomplete="current-password">
+                                    <button type="button" class="auth-input-toggle"
+                                        onclick="togglePassword('change-email-password', this)"
+                                        aria-label="Toggle password visibility">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="auth-submit" id="change-email-submit">
+                                <span class="btn-text">
+                                    <i class="fas fa-save"></i> Update Email
+                                </span>
+                                <span class="btn-loading">
+                                    <i class="fas fa-circle-notch fa-spin"></i> Updating&hellip;
+                                </span>
+                            </button>
+
+                            <div class="auth-message is-error" id="change-email-error" role="alert">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <span id="change-email-error-text"></span>
+                            </div>
+
+                            <div class="auth-message is-success" id="change-email-success" role="status">
+                                <i class="fas fa-check-circle"></i>
+                                <span id="change-email-success-text"></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -585,6 +648,13 @@
                         </div>
                     </div>
 
+                    <div style="text-align:right; margin-bottom:0.75rem;">
+                        <a href="#" onclick="switchTab('forgot'); return false;"
+                           style="font-size:0.82rem; color:var(--primary2,#3488b8);">
+                            Forgot password?
+                        </a>
+                    </div>
+
                     <button type="submit" class="auth-submit" id="login-submit">
                         <span class="btn-text">
                             <i class="fas fa-sign-in-alt"></i> Sign In
@@ -602,6 +672,48 @@
                     <div class="auth-message is-success" id="login-success" role="status">
                         <i class="fas fa-check-circle"></i>
                         <span>Signed in successfully! Redirecting...</span>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Forgot Password Panel -->
+            <div class="auth-form-panel" id="panel-forgot" role="tabpanel">
+                <div class="auth-form-header">
+                    <div class="auth-form-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <h2>Reset Password</h2>
+                    <p>Enter your email and we'll send you a reset link</p>
+                </div>
+
+                <form id="forgot-form" novalidate>
+                    <div class="auth-field">
+                        <label class="auth-label" for="forgot-email">
+                            <i class="fas fa-envelope"></i> Email Address
+                        </label>
+                        <div class="auth-input-wrapper">
+                            <input class="auth-input" type="email" id="forgot-email"
+                                placeholder="you@example.com" autocomplete="email" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="auth-submit" id="forgot-submit">
+                        <span class="btn-text">
+                            <i class="fas fa-paper-plane"></i> Send Reset Link
+                        </span>
+                        <span class="btn-loading">
+                            <i class="fas fa-circle-notch fa-spin"></i> Sending...
+                        </span>
+                    </button>
+
+                    <div class="auth-message is-error" id="forgot-error" role="alert">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="forgot-error-text"></span>
+                    </div>
+
+                    <div class="auth-message is-success" id="forgot-success" role="status">
+                        <i class="fas fa-check-circle"></i>
+                        <span id="forgot-success-text"></span>
                     </div>
                 </form>
             </div>
@@ -703,6 +815,10 @@
                     Already have an account?
                     <a href="#" onclick="switchTab('login'); return false;">Sign in</a>
                 </span>
+                <span id="footer-forgot-hint" style="display:none">
+                    Remembered it?
+                    <a href="#" onclick="switchTab('login'); return false;">Back to sign in</a>
+                </span>
             </div>
         </div>
 
@@ -779,8 +895,9 @@
         document.querySelectorAll('.auth-form-panel').forEach(p => {
             p.classList.toggle('active', p.id === 'panel-' + tab);
         });
-        document.getElementById('footer-login-hint').style.display = tab === 'login' ? '' : 'none';
+        document.getElementById('footer-login-hint').style.display    = tab === 'login'    ? '' : 'none';
         document.getElementById('footer-register-hint').style.display = tab === 'register' ? '' : 'none';
+        document.getElementById('footer-forgot-hint').style.display   = tab === 'forgot'   ? '' : 'none';
     };
 
     // ============================================
@@ -869,6 +986,62 @@
             }
         } catch (err) {
             errorText.textContent = 'Unable to connect. Please check your internet connection and try again.';
+            errorEl.classList.add('is-visible');
+        } finally {
+            submitBtn.classList.remove('is-loading');
+            submitBtn.disabled = false;
+        }
+    });
+
+    // ============================================
+    // FORGOT PASSWORD FORM
+    // ============================================
+
+    document.getElementById('forgot-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const email     = document.getElementById('forgot-email').value.trim();
+        const submitBtn = document.getElementById('forgot-submit');
+        const errorEl   = document.getElementById('forgot-error');
+        const errorText = document.getElementById('forgot-error-text');
+        const successEl = document.getElementById('forgot-success');
+        const successText = document.getElementById('forgot-success-text');
+
+        errorEl.classList.remove('is-visible');
+        successEl.classList.remove('is-visible');
+
+        if (!email) {
+            errorText.textContent = 'Please enter your email address.';
+            errorEl.classList.add('is-visible');
+            return;
+        }
+
+        submitBtn.classList.add('is-loading');
+        submitBtn.disabled = true;
+
+        try {
+            const r = await fetch('/api/method/kartoza_custom.api.request_password_reset', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email }),
+            });
+            const data = await r.json();
+
+            if (!r.ok || data.exc || data.exception) {
+                let msg = '';
+                if (data._server_messages) {
+                    try { msg = JSON.parse(JSON.parse(data._server_messages)[0]).message; } catch(_) {}
+                }
+                errorText.textContent = msg || 'Something went wrong. Please try again.';
+                errorEl.classList.add('is-visible');
+            } else {
+                successText.textContent = data.message || 'If an account exists for this email, a reset link has been sent.';
+                successEl.classList.add('is-visible');
+                document.getElementById('forgot-email').value = '';
+            }
+        } catch(err) {
+            errorText.textContent = 'Unable to connect. Please check your internet connection.';
             errorEl.classList.add('is-visible');
         } finally {
             submitBtn.classList.remove('is-loading');
@@ -1073,6 +1246,95 @@
     }
     profile();
 
+    // ============================================
+    // CHANGE EMAIL
+    // ============================================
+
+    window.toggleEmailForm = function() {
+        const panel = document.getElementById('change-email-panel');
+        const icon  = document.getElementById('toggle-email-icon');
+        const open  = panel.style.display === 'none';
+        panel.style.display = open ? '' : 'none';
+        if (icon) icon.style.transform = open ? 'rotate(180deg)' : '';
+    };
+
+    const changeEmailForm = document.getElementById('change-email-form');
+    if (changeEmailForm) {
+        changeEmailForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const newEmail   = (document.getElementById('new-email').value || '').trim();
+            const password   = document.getElementById('change-email-password').value;
+            const submitBtn  = document.getElementById('change-email-submit');
+            const errorEl    = document.getElementById('change-email-error');
+            const errorText  = document.getElementById('change-email-error-text');
+            const successEl  = document.getElementById('change-email-success');
+            const successText = document.getElementById('change-email-success-text');
+
+            errorEl.classList.remove('is-visible');
+            successEl.classList.remove('is-visible');
+
+            if (!newEmail) {
+                errorText.textContent = 'Please enter a new email address.';
+                errorEl.classList.add('is-visible');
+                return;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)) {
+                errorText.textContent = 'Please enter a valid email address.';
+                errorEl.classList.add('is-visible');
+                return;
+            }
+            if (!password) {
+                errorText.textContent = 'Please enter your current password to confirm.';
+                errorEl.classList.add('is-visible');
+                return;
+            }
+
+            submitBtn.classList.add('is-loading');
+            submitBtn.disabled = true;
+
+            try {
+                const r = await fetch('/api/method/kartoza_custom.api.change_email', {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ new_email: newEmail, current_password: password }),
+                });
+
+                const data = await r.json();
+
+                if (!r.ok || data.exc || data.exception) {
+                    let msg = '';
+                    if (data._server_messages) {
+                        try { msg = JSON.parse(JSON.parse(data._server_messages)[0]).message; } catch (err) {}
+                    }
+                    msg = msg || (data.message && typeof data.message === 'string' ? data.message : '') || 'Could not update email. Please try again.';
+                    errorText.textContent = msg;
+                    errorEl.classList.add('is-visible');
+                    return;
+                }
+
+                // Success — session is invalidated server-side; clear local auth and redirect
+                clearAuth();
+                if (typeof updateAuthNav === 'function') updateAuthNav();
+
+                successText.textContent = 'Email updated to ' + newEmail + '. Please sign in with your new address.';
+                successEl.classList.add('is-visible');
+                changeEmailForm.reset();
+
+                setTimeout(function() {
+                    window.location.href = '/login/?message=email-changed';
+                }, 2500);
+
+            } catch (err) {
+                errorText.textContent = 'Unable to connect. Please check your internet connection.';
+                errorEl.classList.add('is-visible');
+            } finally {
+                submitBtn.classList.remove('is-loading');
+                submitBtn.disabled = false;
+            }
+        });
+    }
 })();
 </script>
 

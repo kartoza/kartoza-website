@@ -10,8 +10,8 @@ partnerName: "QField"
 heroImage: "/img/partners/qfield-logo.png"
 approved: true
 approvedDate: "2024-01-01"
-reviewedBy: "Tim Sutton"
-reviewedDate: "2026-04-21"
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-11
 signupUrl: "https://app.qfield.cloud/accounts/signup/?fpr=tim39"
 signupText: "Sign Up for QFieldCloud"
 signupHeading: "Get QFieldCloud"

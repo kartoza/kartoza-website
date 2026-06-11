@@ -3,6 +3,7 @@ title: "BGEO"
 tagline: "Open GIS & Water Solutions"
 description: "Through its partnership with BGEO, creators of Giswater, Kartoza helps utilities adopt enterprise-ready open-source solutions for water network management, integrating GIS,hydraulic modelling, asset management, and operational workflows in a single platform."
 logo: "/img/partners/bgeologo.png"
+heroImage: "/img/partners/giswaterimg.png"
 productUrl: "https://www.giswater.org"
 productName: "Giswater"
 partnerUrl: "https://www.bgeo.es/en/"
@@ -10,7 +11,7 @@ partnerName: "BGEO"
 approved: true
 approvedDate: "2026-06-04"
 reviewedBy: "Lene van Jaarsveld"
-reviewedDate: "2026-06-04"
+reviewedDate: 2026-06-11
 date: 2024-01-06
 features:
   - title: "Water Utilities"
