@@ -7,6 +7,8 @@ tags:
   - Municipal
   - Infrastructure
   - GIS
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: "2026-06-10"
 date: 2024-01-01
 ---
 
@@ -41,15 +43,19 @@ From water networks to roads, buildings to parks, MyCivitas provides visibility 
 ## Benefits for Municipalities
 
 ### Better Planning
+
 Make informed decisions about infrastructure investments based on condition data and lifecycle costs.
 
 ### Reduced Costs
+
 Optimise maintenance schedules and extend asset life through proactive management.
 
 ### Regulatory Compliance
+
 Meet reporting requirements with comprehensive asset data and documentation.
 
 ### Improved Service
+
 Deliver better services to citizens through well-maintained infrastructure.
 
 ## Technical Highlights
