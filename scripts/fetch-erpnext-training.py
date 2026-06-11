@@ -268,51 +268,82 @@ def fetch_item_variants(item_code: str) -> dict:
     return []
 
 
-def fetch_training_courses() -> list:
-    """Fetch all training courses from ERPNext."""
+def pick_zar_price(prices: list) -> tuple:
+    """Return (price_list_rate, currency) preferring the most recent ZAR price.
+
+    When multiple ZAR entries exist (e.g. "2024 Standard Selling - ZAR",
+    "2026 Standard Selling - ZAR"), the one with the highest year in the
+    price_list name wins. Falls back to the first price in any currency.
+    """
+    if not prices:
+        return None, None
+    zar_prices = [p for p in prices if p.get("currency") == "ZAR"]
+    if zar_prices:
+        def year_key(p):
+            m = re.search(r'\b(\d{4})\b', p.get("price_list", ""))
+            return int(m.group(1)) if m else 0
+        best = max(zar_prices, key=year_key)
+        return best.get("price_list_rate"), "ZAR"
+    first = prices[0]
+    return first.get("price_list_rate"), first.get("currency")
+
+
+def get_active_items_with_variants() -> list:
+    """Fetch all active (published) training website items with their variants and prices.
+
+    Prices are sourced from get_attributes_and_values, which returns per-variant
+    price lists. The course-level price prefers ZAR; falls back to the first available.
+    """
     items = fetch_website_items()
-    courses = []
+    result = []
 
     for item in items:
-        # Filter for training-related items
+        if not item.get("published"):
+            continue
+
         item_group = item.get("item_group", "").lower()
         if "training" not in item_group and "course" not in item_group:
             continue
 
-        # Get full details
+        item_code = item.get("item_code") or item.get("item_name", "")
         details = fetch_website_item_details(item.get("name", ""))
+        variants = fetch_item_variants(item_code)
+
+        # Derive course-level price from variant prices returned by get_attributes_and_values
+        all_prices = [p for v in variants for p in v.get("prices", [])]
+        price, price_currency = pick_zar_price(all_prices)
 
         raw_slug = item.get("route", "").replace("shop/product/", "")
-        # Clean up the slug
         clean_slug = raw_slug.replace("training/", "").replace("training-courses/", "")
-        # Remove random suffixes if present
         if "-" in clean_slug:
             parts = clean_slug.rsplit("-", 1)
             if len(parts) > 1 and len(parts[1]) == 5 and parts[1].isalnum():
                 clean_slug = parts[0]
 
-        course = {
+        result.append({
             "name": item.get("web_item_name") or item.get("item_name", ""),
-            "item_code": item.get("item_code", ""),
+            "item_code": item_code,
             "slug": clean_slug,
-            "raw_slug": raw_slug,  # Keep original for shop URL
+            "raw_slug": raw_slug,
             "short_description": item.get("short_description", ""),
-            "description": details.get("web_long_description", ""),
+            "description": details.get("web_long_description", item.get("short_description", "")),
             "published": item.get("published", 0),
-        }
+            "price": price,
+            "price_currency": price_currency,
+            "variants": variants,
+        })
 
-        # Extract additional fields from details
-        if details:
-            course["description"] = details.get("web_long_description", course["short_description"])
+    return result
 
-        courses.append(course)
 
-    return courses
+def fetch_training_courses() -> list:
+    """Fetch all active training courses from ERPNext."""
+    return get_active_items_with_variants()
 
 
 def fetch_all_scheduled_sessions() -> list:
     """Fetch all scheduled training sessions (variants) from ERPNext."""
-    courses = fetch_training_courses()
+    courses = get_active_items_with_variants()
     all_sessions = []
 
     for course in courses:
@@ -320,7 +351,7 @@ def fetch_all_scheduled_sessions() -> list:
         if not item_code:
             continue
 
-        variants = fetch_item_variants(item_code)
+        variants = course.get("variants", [])
         if not variants:
             continue
 
@@ -341,6 +372,8 @@ def fetch_all_scheduled_sessions() -> list:
             if start_date <= datetime.today().strftime("%Y-%m-%d"):
                 continue
 
+            variant_price, variant_currency = pick_zar_price(attr.get("prices", []))
+
             all_sessions.append({
                 "course_name": course.get("name", ""),
                 "course_slug": course.get("slug", ""),
@@ -349,6 +382,8 @@ def fetch_all_scheduled_sessions() -> list:
                 "start_date": start_date,
                 "end_date": end_date,
                 "location": venue.title() if venue else "Online",
+                "price": variant_price,
+                "price_currency": variant_currency,
                 "shop_url": f"{ERPNEXT_URL}/shop/product/{course.get('raw_slug', course.get('slug', ''))}"
             })
     all_sessions.sort(key=lambda s: s["start_date"])
@@ -419,12 +454,20 @@ def create_course_page(course: dict, dry_run: bool = False) -> Path:
     # Escape quotes in description for YAML frontmatter
     short_desc_escaped = short_desc.replace('"', '\\"')
 
+    price = course.get("price")
+    price_currency = course.get("price_currency")
+    price_line = ""
+    if price is not None:
+        price_line = f'\nprice: {price}'
+        if price_currency:
+            price_line += f'\nprice_currency: "{price_currency}"'
+
     content = f'''---
 title: "{course.get('name', 'Training Course')}"
 description: "{short_desc_escaped}"
 thumbnail: "/img/training/{slug}.jpg"
 item_code: "{course.get('item_code', '')}"
-shop_url: "{shop_url}"
+shop_url: "{shop_url}"{price_line}
 tags:
   - Training
 draft: false
@@ -474,6 +517,8 @@ def save_calendar_data(sessions: list, dry_run: bool = False):
             "end": session.get("end_date", ""),
             "date_display": session.get("date_display", ""),
             "location": session.get("location", "Online"),
+            "price": session.get("price"),
+            "price_currency": session.get("price_currency"),
             "url": f"/training-courses/{session.get('course_slug', '')}/",
             "registration_url": session.get("shop_url", "/contact-us/"),
         })

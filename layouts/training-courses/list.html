@@ -70,6 +70,22 @@
                             {{ .Params.duration }}
                         </p>
                         {{ end }}
+                        {{- $cardPrice := .Params.price -}}
+                        {{- $cardCurrency := .Params.price_currency -}}
+                        {{- if not $cardPrice -}}
+                          {{- range first 1 (where site.Data.training.events "title" .Title) -}}
+                            {{- $cardPrice = .price -}}
+                            {{- $cardCurrency = .price_currency -}}
+                          {{- end -}}
+                        {{- end -}}
+                        {{ if $cardPrice }}
+                        <p class="training-card-price">
+                            <i class="fas fa-tag"></i>
+                            {{- $symbol := "R" -}}
+                            {{- if and $cardCurrency (ne $cardCurrency "ZAR") }}{{ $symbol = $cardCurrency }}{{ end -}}
+                            {{ $symbol }} {{ lang.FormatNumber 0 $cardPrice }} <span style="font-size:0.8em; opacity:0.75;">excl. VAT</span>
+                        </p>
+                        {{ end }}
                         <p class="training-card-description">
                             {{ .Description | truncate 100 }}
                         </p>
@@ -118,6 +134,22 @@
                         <p class="training-card-duration">
                             <i class="fas fa-clock"></i>
                             {{ .Params.duration }}
+                        </p>
+                        {{ end }}
+                        {{- $cardPrice := .Params.price -}}
+                        {{- $cardCurrency := .Params.price_currency -}}
+                        {{- if not $cardPrice -}}
+                          {{- range first 1 (where site.Data.training.events "title" .Title) -}}
+                            {{- $cardPrice = .price -}}
+                            {{- $cardCurrency = .price_currency -}}
+                          {{- end -}}
+                        {{- end -}}
+                        {{ if $cardPrice }}
+                        <p class="training-card-price">
+                            <i class="fas fa-tag"></i>
+                            {{- $symbol := "R" -}}
+                            {{- if and $cardCurrency (ne $cardCurrency "ZAR") }}{{ $symbol = $cardCurrency }}{{ end -}}
+                            {{ $symbol }} {{ lang.FormatNumber 0 $cardPrice }} <span style="font-size:0.8em; opacity:0.75;">excl. VAT</span>
                         </p>
                         {{ end }}
                         <p class="training-card-description">
@@ -170,6 +202,22 @@
                             {{ .Params.duration }}
                         </p>
                         {{ end }}
+                        {{- $cardPrice := .Params.price -}}
+                        {{- $cardCurrency := .Params.price_currency -}}
+                        {{- if not $cardPrice -}}
+                          {{- range first 1 (where site.Data.training.events "title" .Title) -}}
+                            {{- $cardPrice = .price -}}
+                            {{- $cardCurrency = .price_currency -}}
+                          {{- end -}}
+                        {{- end -}}
+                        {{ if $cardPrice }}
+                        <p class="training-card-price">
+                            <i class="fas fa-tag"></i>
+                            {{- $symbol := "R" -}}
+                            {{- if and $cardCurrency (ne $cardCurrency "ZAR") }}{{ $symbol = $cardCurrency }}{{ end -}}
+                            {{ $symbol }} {{ lang.FormatNumber 0 $cardPrice }} <span style="font-size:0.8em; opacity:0.75;">excl. VAT</span>
+                        </p>
+                        {{ end }}
                         <p class="training-card-description">
                             {{ .Description | truncate 100 }}
                         </p>
@@ -216,6 +264,22 @@
                         <p class="training-card-duration">
                             <i class="fas fa-clock"></i>
                             {{ .Params.duration }}
+                        </p>
+                        {{ end }}
+                        {{- $cardPrice := .Params.price -}}
+                        {{- $cardCurrency := .Params.price_currency -}}
+                        {{- if not $cardPrice -}}
+                          {{- range first 1 (where site.Data.training.events "title" .Title) -}}
+                            {{- $cardPrice = .price -}}
+                            {{- $cardCurrency = .price_currency -}}
+                          {{- end -}}
+                        {{- end -}}
+                        {{ if $cardPrice }}
+                        <p class="training-card-price">
+                            <i class="fas fa-tag"></i>
+                            {{- $symbol := "R" -}}
+                            {{- if and $cardCurrency (ne $cardCurrency "ZAR") }}{{ $symbol = $cardCurrency }}{{ end -}}
+                            {{ $symbol }} {{ lang.FormatNumber 0 $cardPrice }} <span style="font-size:0.8em; opacity:0.75;">excl. VAT</span>
                         </p>
                         {{ end }}
                         <p class="training-card-description">
