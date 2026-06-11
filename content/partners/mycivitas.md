@@ -59,6 +59,7 @@ MyCivitas was designed specifically for local government and utility requirement
 ### Asset Inventory
 
 Maintain a complete, accurate record of your infrastructure:
+
 - Spatial location (points, lines, polygons)
 - Physical attributes (size, material, age, capacity)
 - Condition history and deterioration curves
@@ -68,6 +69,7 @@ Maintain a complete, accurate record of your infrastructure:
 ### Condition Assessment
 
 Systematic approach to understanding asset condition:
+
 - Standardised condition rating scales
 - Mobile apps for field assessments
 - Photo documentation with geotagging
@@ -77,6 +79,7 @@ Systematic approach to understanding asset condition:
 ### Lifecycle Planning
 
 Optimise your infrastructure investment decisions:
+
 - Remaining useful life calculations
 - Renewal and replacement planning
 - Maintenance optimisation
@@ -86,6 +89,7 @@ Optimise your infrastructure investment decisions:
 ### Risk Management
 
 Identify and prioritise critical infrastructure:
+
 - Consequence of failure assessment
 - Likelihood of failure modelling
 - Risk matrix visualisation
@@ -95,6 +99,7 @@ Identify and prioritise critical infrastructure:
 ### Mobile Field Tools
 
 Empower your field crews with mobile applications:
+
 - Asset inspections and condition assessments
 - Work order management
 - Maintenance logging
@@ -104,6 +109,7 @@ Empower your field crews with mobile applications:
 ### Reporting and Analytics
 
 Communicate asset management information effectively:
+
 - Executive dashboards
 - Condition distribution reports
 - Capital needs forecasting
