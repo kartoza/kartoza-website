@@ -11,7 +11,7 @@ partnerName: "TomorrowNow"
 approved: true
 approvedDate: "2026-04-21"
 reviewedBy: "Lene van Jaarsveld"
-reviewedDate: "2026-06-11"
+reviewedDate: 2026-06-11
 date: 2024-01-08
 features:
   - title: "Climate Data"
