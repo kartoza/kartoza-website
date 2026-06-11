@@ -11,6 +11,7 @@ reviewedDate: 2026-06-11
 date: 2019-01-01
 ---
 
+<!-- markdownlint-disable MD034 -->
 {{< block
     title="miniSASS"
     subtitle="Citizen science river health assessment"
@@ -21,6 +22,7 @@ date: 2019-01-01
 >}}
 An easy-to-use tool enabling anyone to assess river and stream health.
 {{< /block >}}
+<!-- markdownlint-disable MD034 -->`
 
 ## Overview
 
