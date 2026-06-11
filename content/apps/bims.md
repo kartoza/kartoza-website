@@ -13,8 +13,8 @@ related_portfolio:
   - fbis
 related_plugins:
   - species-explorer
-reviewedBy: "Tim Sutton"
-reviewedDate: 2026-03-24
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-11
 ---
 
 ## Overview
