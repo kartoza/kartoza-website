@@ -10,8 +10,8 @@ partnerUrl: "https://tomorrownow.org/"
 partnerName: "TomorrowNow"
 approved: true
 approvedDate: "2026-04-21"
-reviewedBy: "Tim Sutton"
-reviewedDate: "2026-04-21"
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: "2026-06-10"
 date: 2024-01-08
 features:
   - title: "Climate Data"
