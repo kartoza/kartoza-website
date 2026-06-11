@@ -8,6 +8,8 @@ tags:
   - Cadastral
   - South Africa
   - Plugin
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: "2026-06-10"
 date: 2024-01-01
 ---
 
@@ -39,15 +41,19 @@ This tool streamlines the map production process, ensuring that outputs meet reg
 ## Benefits for Surveyors
 
 ### Time Savings
+
 Automate repetitive layout tasks and focus on survey accuracy.
 
 ### Consistency
+
 Ensure every map meets standards with templated outputs.
 
 ### Quality
+
 Reduce errors with automated checks and validation.
 
 ### Flexibility
+
 Work within the powerful QGIS environment with full GIS capabilities.
 
 ## Requirements
