@@ -10,7 +10,7 @@ reviewedBy: "Lene van Jaarsveld"
 reviewedDate: 2026-06-11
 date: 2020-01-01
 ---
-
+<!-- markdownlint-disable MD034 -->
 {{< block
     title="CyanoLakes"
     subtitle="Satellite monitoring of cyanobacteria in water bodies"
@@ -21,6 +21,7 @@ date: 2020-01-01
 >}}
 Real-time cyanobacteria risk levels based on satellite remote sensing.
 {{< /block >}}
+<!-- markdownlint-enable MD034 -->
 
 ## Overview
 
