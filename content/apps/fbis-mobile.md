@@ -11,6 +11,7 @@ reviewedDate: 2026-06-11
 date: 2020-01-01
 ---
 
+<!-- markdownlint-disable MD034 -->
 {{< block
     title="FBIS Mobile"
     subtitle="Freshwater biodiversity data capture in the field"
@@ -21,6 +22,7 @@ date: 2020-01-01
 >}}
 The companion mobile app for the Freshwater Biodiversity Information System.
 {{< /block >}}
+<!-- markdownlint-disable MD034 -->
 
 ## Overview
 
