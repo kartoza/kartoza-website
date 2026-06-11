@@ -1,24 +1,28 @@
 ---
 title: "FBIS for Mobile"
 description: "Mobile app supporting data entry for fish, invertebrates, algae, anurans, and plants in rivers and wetlands."
-thumbnail: "/img/apps/fbis-mobile.png"
+thumbnail: "/img/apps/fbismobi.png"
 tags:
   - Mobile
   - Biodiversity
   - Citizen Science
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-11
 date: 2020-01-01
 ---
 
+<!-- markdownlint-disable MD034 -->
 {{< block
     title="FBIS Mobile"
     subtitle="Freshwater biodiversity data capture in the field"
     class="is-primary"
     sub-block-side="bottom"
-    link="https://play.google.com/store/apps/details?id=com.fbis"
+    link="[https://play.google.com/store/apps/details?id=com.fbis](https://play.google.com/store/apps/details?id=com.fbis)"
     link-text="Get on Google Play"
 >}}
 The companion mobile app for the Freshwater Biodiversity Information System.
 {{< /block >}}
+<!-- markdownlint-disable MD034 -->
 
 ## Overview
 

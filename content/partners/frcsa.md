@@ -9,8 +9,8 @@ partnerUrl: "https://www.frcsa.org.za/"
 partnerName: "Freshwater Research Centre"
 approved: false
 approvedDate: ""
-reviewedBy: "Tim Sutton"
-reviewedDate: "2026-04-15"
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-11
 date: 2024-01-07
 features:
   - title: "Biodiversity Data"
