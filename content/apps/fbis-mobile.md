@@ -6,6 +6,8 @@ tags:
   - Mobile
   - Biodiversity
   - Citizen Science
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-11
 date: 2020-01-01
 ---
 

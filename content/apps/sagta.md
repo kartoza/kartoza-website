@@ -9,7 +9,7 @@ tags:
   - South Africa
   - Plugin
 reviewedBy: "Lene van Jaarsveld"
-reviewedDate: "2026-06-10"
+reviewedDate: 2026-06-11
 date: 2024-01-01
 ---
 

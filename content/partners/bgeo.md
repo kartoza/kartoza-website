@@ -11,7 +11,7 @@ partnerName: "BGEO"
 approved: true
 approvedDate: "2026-06-04"
 reviewedBy: "Lene van Jaarsveld"
-reviewedDate: "2026-06-04"
+reviewedDate: 2026-06-11
 date: 2024-01-06
 features:
   - title: "Water Utilities"

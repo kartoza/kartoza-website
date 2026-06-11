@@ -7,8 +7,8 @@ productUrl: "https://civitas.kartoza.com"
 productName: "MyCivitas"
 approved: false
 approvedDate: ""
-reviewedBy: "Tim Sutton"
-reviewedDate: "2026-04-15"
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-11
 date: 2024-01-03
 features:
   - title: "Complete Inventory"

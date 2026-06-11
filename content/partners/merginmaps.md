@@ -10,8 +10,8 @@ partnerName: "Mergin Maps"
 heroImage: "/img/partners/mergin-maps-logo.svg"
 approved: true
 approvedDate: "2024-01-01"
-reviewedBy: "Tim Sutton"
-reviewedDate: "2026-04-21"
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-11
 date: 2024-01-02
 features:
   - title: "QGIS Integration"
