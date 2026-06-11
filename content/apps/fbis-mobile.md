@@ -14,7 +14,7 @@ date: 2020-01-01
     subtitle="Freshwater biodiversity data capture in the field"
     class="is-primary"
     sub-block-side="bottom"
-    link="https://play.google.com/store/apps/details?id=com.fbis"
+    link="[https://play.google.com/store/apps/details?id=com.fbis](https://play.google.com/store/apps/details?id=com.fbis)"
     link-text="Get on Google Play"
 >}}
 The companion mobile app for the Freshwater Biodiversity Information System.
