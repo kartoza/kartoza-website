@@ -426,7 +426,7 @@
                             <span>Billing Address</span>
                         </div>
                         <button id="co-addr-add-new-btn" class="button is-ghost is-link addr-add-new-btn" style="display:none;" onclick="coShowAddressForm()">
-                            <span class="icon is-small"><i class="fas fa-plus"></i></span>
+                            <span class="icon is-small" ><i class="fas fa-plus"></i></span>
                             <span>Add new</span>
                         </button>
                     </div>
@@ -464,10 +464,17 @@
                                 <input type="text" id="co-addr-state" placeholder="State or province">
                             </div>
                         </div>
-                        <button id="co-addr-cancel-btn" class="button is-small is-ghost" style="margin-top:0.5rem; display:none;" onclick="coCancelAddressForm()">
-                            <span class="icon is-small"><i class="fas fa-arrow-left"></i></span>
-                            <span>Back to saved addresses</span>
-                        </button>
+                        <div style="display:flex; gap:0.5rem; margin-top:0.75rem; flex-wrap:wrap;">
+                            <button id="co-addr-save-btn" class="button is-link is-small" onclick="coSaveAddress()">
+                                <span class="icon is-small"><i class="fas fa-save"></i></span>
+                                <span>Save address</span>
+                            </button>
+                            <button id="co-addr-cancel-btn" class="button is-small is-ghost" style="display:none;" onclick="coCancelAddressForm()">
+                                <span class="icon is-small"><i class="fas fa-arrow-left"></i></span>
+                                <span>Back to saved addresses</span>
+                            </button>
+                        </div>
+                        <p id="co-addr-save-error" class="help is-danger" style="display:none; margin-top:0.4rem;"></p>
                     </div>
                 </div>
 
@@ -667,6 +674,72 @@
     };
 
     window.coValidateAddr = function () { coUpdatePayBtn(); };
+
+    window.coSaveAddress = async function () {
+        if (!coAddrFormValid()) return;
+        var v = function (id) { return ((document.getElementById(id) || {}).value || '').trim(); };
+        var saveBtn  = document.getElementById('co-addr-save-btn');
+        var errEl    = document.getElementById('co-addr-save-error');
+        if (errEl) errEl.style.display = 'none';
+        if (saveBtn) { saveBtn.classList.add('is-loading'); saveBtn.disabled = true; }
+
+        try {
+            var r = await fetch('/api/method/kartoza_custom.api.save_billing_address', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    address_line1: v('co-addr-line1'),
+                    address_line2: v('co-addr-line2'),
+                    city:          v('co-addr-city'),
+                    country:       v('co-addr-country'),
+                    state:         v('co-addr-state'),
+                    pincode:       v('co-addr-pincode'),
+                }),
+            });
+            var data = await r.json();
+            if (!r.ok || data.exc || data.exception) {
+                var msg = 'Could not save address. Please try again.';
+                try { msg = JSON.parse(JSON.parse(data._server_messages)[0]).message || msg; } catch (_) {}
+                if (errEl) { errEl.textContent = msg; errEl.style.display = ''; }
+                return;
+            }
+            var result = data.message || {};
+
+            // Build address object and add to the list (avoid duplicates)
+            var newAddr = {
+                name:          result.address_name,
+                address_line1: v('co-addr-line1'),
+                address_line2: v('co-addr-line2'),
+                city:          v('co-addr-city'),
+                country:       v('co-addr-country'),
+                state:         v('co-addr-state'),
+                pincode:       v('co-addr-pincode'),
+                display:       result.address_display || null,
+            };
+            var existing = _existingAddresses.find(function (a) { return a.name === newAddr.name; });
+            if (existing) {
+                Object.assign(existing, newAddr);
+            } else {
+                _existingAddresses.push(newAddr);
+            }
+
+            // Clear form fields for next use
+            ['co-addr-line1','co-addr-line2','co-addr-city','co-addr-pincode','co-addr-state'].forEach(function (id) {
+                var el = document.getElementById(id); if (el) el.value = '';
+            });
+            var countryEl = document.getElementById('co-addr-country');
+            if (countryEl) countryEl.value = '';
+
+            // Update totals and re-render address list with the new address selected
+            if (result.grand_total != null) updateSummaryTotals(result);
+            coRenderAddresses(_existingAddresses, newAddr.name);
+        } catch (e) {
+            if (errEl) { errEl.textContent = 'Something went wrong. Please try again.'; errEl.style.display = ''; }
+        } finally {
+            if (saveBtn) { saveBtn.classList.remove('is-loading'); saveBtn.disabled = false; }
+        }
+    };
 
     window.coRefreshTotalsFromForm = function () {
         if (!coAddrFormValid()) return;

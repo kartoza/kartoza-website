@@ -322,3 +322,8 @@ section.is-fluid > .container.is-fluid {
     gap: 1rem;
     flex-wrap: wrap;
 }
+
+.button .icon:first-child:not(:last-child) {
+    margin-left:calc(.75em - 1px) !important;
+    margin-right: .375em
+}
