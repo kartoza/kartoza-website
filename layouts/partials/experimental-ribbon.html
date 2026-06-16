@@ -1,0 +1,39 @@
+{{/* ==========================================================
+     Experimental brand-alignment ribbon.
+     Sits above the fixed navbar; dismissable per session.
+     Phase A0.5 of epic #165.
+     ========================================================== */}}
+<div class="experimental-ribbon" id="experimental-ribbon">
+  <div class="experimental-ribbon-content">
+    <span class="experimental-ribbon-icon">
+      <i class="fa-solid fa-flask"></i>
+    </span>
+    <span class="experimental-ribbon-text">
+      <strong>Brand alignment prototype</strong> — switch between
+      the current site and the brand-pack-aligned theme with the
+      <i class="fa-solid fa-palette"></i> icon in the navbar.
+      Tracking:
+      <a href="https://github.com/kartoza/kartoza-website/issues/165" target="_blank" rel="noopener">issue&nbsp;#165</a>.
+    </span>
+    <button
+      class="experimental-ribbon-close"
+      id="experimental-ribbon-close"
+      type="button"
+      aria-label="Dismiss notice"
+    >
+      <i class="fa-solid fa-times"></i>
+    </button>
+  </div>
+</div>
+<script>
+(function () {
+  document.body.classList.add('has-experimental-ribbon');
+  var btn = document.getElementById('experimental-ribbon-close');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    var r = document.getElementById('experimental-ribbon');
+    if (r) r.style.display = 'none';
+    document.body.classList.remove('has-experimental-ribbon');
+  });
+})();
+</script>

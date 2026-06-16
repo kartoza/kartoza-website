@@ -1,3 +1,6 @@
+{{/* Brand-alignment Phase A0.5 (epic #165): experimental-site ribbon */}}
+{{ partial "experimental-ribbon.html" . }}
+
 <style>
     #kartoza-navbar > .navbar-item {
       width: fit-content;
@@ -114,6 +117,9 @@
                     </a>
                 {{- end }}
             {{- end }}
+
+            {{/* Brand-alignment Phase A0.5 (epic #165): theme switcher */}}
+            {{ partial "theme-switcher.html" . }}
 
             <a class="navbar-item search-toggle" id="navbar-search-toggle" aria-label="Search" title="Search">
                 <span class="search-label">Search</span>

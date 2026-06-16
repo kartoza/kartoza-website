@@ -1,0 +1,84 @@
+{{/* ==========================================================
+     Theme switcher dropdown — navbar item.
+     Toggles html[data-theme="..."] and persists in localStorage.
+     Phase A0.5 of epic #165.
+     ========================================================== */}}
+<div class="navbar-item theme-switcher">
+  <button
+    class="theme-switcher-btn"
+    id="theme-switcher-toggle"
+    type="button"
+    aria-label="Switch brand theme"
+    title="Switch brand theme"
+  >
+    <span class="icon"><i class="fa-solid fa-palette"></i></span>
+  </button>
+  <div class="theme-switcher-dropdown" id="theme-switcher-dropdown">
+    <button class="theme-option" type="button" data-theme="current">
+      <span class="theme-swatch" style="background: linear-gradient(135deg, #53a2cc, #E8A331);"></span>
+      <span class="theme-option-label">
+        Current
+        <small>Nunito + drift palette (today's site)</small>
+      </span>
+    </button>
+    <button class="theme-option" type="button" data-theme="kartoza-2026">
+      <span class="theme-swatch" style="background: linear-gradient(135deg, #54A2CC, #EEB348);"></span>
+      <span class="theme-option-label">
+        Kartoza Brand v1.0.1
+        <small>Lato + canonical palette (in progress)</small>
+      </span>
+    </button>
+    <div class="theme-divider"></div>
+    <a class="theme-link" href="https://github.com/kartoza/kartoza-website/issues/165" target="_blank" rel="noopener">
+      <span class="icon"><i class="fa-brands fa-github"></i></span>
+      <span>Brand alignment tracking epic #165</span>
+    </a>
+    <a class="theme-link" href="https://github.com/kartoza/kartoza-website/blob/brand-alignment/docs/brand-audit-2026-06.md" target="_blank" rel="noopener">
+      <span class="icon"><i class="fa-solid fa-clipboard-list"></i></span>
+      <span>Brand-alignment audit (2026-06)</span>
+    </a>
+  </div>
+</div>
+
+<script>
+(function () {
+  var STORAGE_KEY = 'kartoza-theme';
+  var toggle      = document.getElementById('theme-switcher-toggle');
+  var dropdown    = document.getElementById('theme-switcher-dropdown');
+  if (!toggle || !dropdown) return;
+  var options = dropdown.querySelectorAll('.theme-option');
+
+  function applyTheme(theme) {
+    if (!theme || theme === 'current') {
+      document.documentElement.removeAttribute('data-theme');
+    } else {
+      document.documentElement.setAttribute('data-theme', theme);
+    }
+    options.forEach(function (opt) {
+      opt.classList.toggle('is-active', opt.getAttribute('data-theme') === (theme || 'current'));
+    });
+    try { localStorage.setItem(STORAGE_KEY, theme || 'current'); } catch (e) {}
+  }
+
+  // Read whatever the head's early-set script applied (or default to current)
+  var current = document.documentElement.getAttribute('data-theme') || 'current';
+  applyTheme(current);
+
+  toggle.addEventListener('click', function (e) {
+    e.stopPropagation();
+    dropdown.classList.toggle('is-active');
+  });
+
+  options.forEach(function (opt) {
+    opt.addEventListener('click', function (e) {
+      e.stopPropagation();
+      applyTheme(this.getAttribute('data-theme'));
+      dropdown.classList.remove('is-active');
+    });
+  });
+
+  document.addEventListener('click', function () {
+    dropdown.classList.remove('is-active');
+  });
+})();
+</script>

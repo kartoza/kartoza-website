@@ -11,6 +11,17 @@
 
         <meta charset="utf-8" />
 
+        {{/* Brand-alignment theme switcher (Phase A0.5, epic #165):
+             apply saved data-theme BEFORE any CSS loads, to kill FOUC. */}}
+        <script>
+            try {
+                var t = localStorage.getItem('kartoza-theme');
+                if (t && t !== 'current') {
+                    document.documentElement.setAttribute('data-theme', t);
+                }
+            } catch (e) {}
+        </script>
+
         <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -112,8 +123,14 @@
         {{ $themecss := resources.Get "css/theme.css" }}
         {{ $buttoncss := resources.Get "css/button.css" }}
 
+        {{/* Brand-alignment Phase A0.5 (epic #165):
+             token layer + switcher widget + experimental ribbon. */}}
+        {{ $brand2026css := resources.Get "css/theme-kartoza-2026.css" }}
+        {{ $switchercss := resources.Get "css/theme-switcher.css" }}
+        {{ $ribboncss := resources.Get "css/experimental-ribbon.css" }}
+
         {{/* must have the leading slash in css path or gh pages deploy will break */}}
-        {{ $css := slice $menucss $syntaxcss $customcss $animatecss $blockcss $highlightcss $overridescss $cookiecss $homepagecss $searchcss $engagementcss $regionalcss $trainingbookingcss $components $themecss $buttoncss | resources.Concat "/css/all.css" | resources.Minify | resources.Fingerprint }}
+        {{ $css := slice $menucss $syntaxcss $customcss $animatecss $blockcss $highlightcss $overridescss $cookiecss $homepagecss $searchcss $engagementcss $regionalcss $trainingbookingcss $components $themecss $buttoncss $brand2026css $switchercss $ribboncss | resources.Concat "/css/all.css" | resources.Minify | resources.Fingerprint }}
         <link href="{{ $css.RelPermalink }}" rel="stylesheet" />
 
         {{/* We can compile SASS too... */}}

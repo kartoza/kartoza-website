@@ -1,0 +1,118 @@
+/* ============================================================
+ * Theme switcher widget — navbar dropdown.
+ * Renders regardless of active theme so visitors can switch back.
+ * Phase A0.5 of epic #165.
+ * ============================================================ */
+
+.theme-switcher {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.theme-switcher-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 0.85rem;
+  color: inherit;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.theme-switcher-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.theme-switcher-btn .icon {
+  font-size: 1.1rem;
+}
+
+.theme-switcher-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 300px;
+  background: #ffffff;
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  padding: 0.4rem;
+  z-index: 1050;
+  display: none;
+}
+.theme-switcher-dropdown.is-active {
+  display: block;
+}
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  text-align: left;
+  color: #383939;
+  transition: background-color 0.15s ease;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+.theme-option:hover {
+  background-color: rgba(84, 162, 204, 0.08);
+}
+.theme-option.is-active {
+  background-color: rgba(84, 162, 204, 0.14);
+  font-weight: 600;
+}
+
+.theme-swatch {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.theme-option-label {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  font-size: 0.92rem;
+}
+.theme-option-label small {
+  color: #676869;
+  font-size: 0.76rem;
+  margin-top: 0.2rem;
+  font-weight: 400;
+}
+
+.theme-divider {
+  height: 1px;
+  background: #d1d1d1;
+  margin: 0.4rem 0;
+}
+
+.theme-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  color: #676869;
+  text-decoration: none;
+  border-radius: 6px;
+}
+.theme-link:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+  color: #383939;
+}
+.theme-link .icon {
+  width: 1.2rem;
+  text-align: center;
+}

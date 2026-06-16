@@ -1,0 +1,243 @@
+/* ============================================================
+ * Kartoza Brand Pack v1.0.1 theme — experimental prototype.
+ * Scoped to html[data-theme="kartoza-2026"]; ON by default ONLY
+ * for visitors who pick it via the navbar palette switcher.
+ *
+ * The CURRENT site styles still own everything when no
+ * data-theme attribute is set.  Phase A0.5 of epic #165.
+ * Source of truth: Kartoza_BrandPack_v1.0.1/Kartoza_BrandAssets_v1.0.1/.
+ * ============================================================ */
+
+
+/* ----- Web fonts: Lato (sans) + JetBrains Mono (code) ------ */
+/* Brand Pack §3.3 FR-020..025 and FR-082.                     */
+
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/webfonts/Lato-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/webfonts/Lato-Italic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/webfonts/Lato-Bold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/webfonts/Lato-BoldItalic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('/webfonts/Lato-Black.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/webfonts/JetBrainsMono.ttf') format('truetype');
+}
+
+
+/* ----- Token layer (Brand Pack App. A) --------------------- */
+
+:root[data-theme="kartoza-2026"] {
+  /* Canonical palette */
+  --kartoza-blue:     #54A2CC;
+  --kartoza-amber:    #EEB348;
+  --kartoza-grey:     #8A8B8B;
+  --kartoza-charcoal: #383939;
+  --kartoza-muted:    #676869;
+  --kartoza-rule:     #D1D1D1;
+  --kartoza-cloud:    #F5F5F2;
+  --kartoza-white:    #FFFFFF;
+
+  /* Status colours (tints kept inline at point of use) */
+  --status-success: #3C7D54;
+  --status-warn:    #EEB348;
+  --status-error:   #B0473C;
+
+  /* Derived blues so we don't reintroduce drift hues elsewhere */
+  --kartoza-blue-dark:  #3F8AB0;
+  --kartoza-blue-light: #BFE0F0;
+
+  /* Map onto the existing site's CSS-custom-property names so any
+   * place that reads var(--primary)/var(--text-primary1)/etc.
+   * instantly picks up the canonical palette. */
+  --primary:        var(--kartoza-blue);
+  --primary1:       var(--kartoza-blue);
+  --primary2:       var(--kartoza-blue-dark);
+  --primary3:       var(--kartoza-blue-light);
+  --primary4:       var(--kartoza-grey);
+  --primary5:       var(--kartoza-rule);
+  --primary6:       var(--kartoza-amber);
+  --text-primary1:  var(--kartoza-charcoal);
+  --text-primary2:  var(--kartoza-muted);
+
+  /* Typography (Brand Pack §3.3) */
+  --font-sans:   'Lato', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:   'JetBrains Mono', Consolas, monospace;
+  --font-accent: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+}
+
+
+/* ----- Chrome overrides -----------------------------------
+ * Selector specificity = html[data-theme="kartoza-2026"] (0,1,1).
+ * Beats most existing rules without needing !important except
+ * where we override a Bulma component that itself uses
+ * .button.is-X chains.
+ * --------------------------------------------------------- */
+
+html[data-theme="kartoza-2026"],
+html[data-theme="kartoza-2026"] body {
+  font-family: var(--font-sans) !important;
+  color: var(--kartoza-charcoal);
+  background-color: var(--kartoza-white);
+}
+
+html[data-theme="kartoza-2026"] h1,
+html[data-theme="kartoza-2026"] h2,
+html[data-theme="kartoza-2026"] h3,
+html[data-theme="kartoza-2026"] h4,
+html[data-theme="kartoza-2026"] h5,
+html[data-theme="kartoza-2026"] h6 {
+  font-family: var(--font-sans) !important;
+  color: var(--kartoza-charcoal);
+}
+
+html[data-theme="kartoza-2026"] code,
+html[data-theme="kartoza-2026"] pre,
+html[data-theme="kartoza-2026"] .has-text-monospace,
+html[data-theme="kartoza-2026"] .order-ref,
+html[data-theme="kartoza-2026"] .order-invoice-ref {
+  font-family: var(--font-mono) !important;
+}
+
+html[data-theme="kartoza-2026"] a {
+  color: var(--kartoza-blue);
+}
+html[data-theme="kartoza-2026"] a:hover {
+  color: var(--kartoza-blue-dark);
+}
+
+/* Buttons (Bulma) */
+html[data-theme="kartoza-2026"] .button.is-primary,
+html[data-theme="kartoza-2026"] .button.is-link {
+  background-color: var(--kartoza-blue);
+  border-color: var(--kartoza-blue);
+  color: var(--kartoza-white);
+}
+html[data-theme="kartoza-2026"] .button.is-primary:hover,
+html[data-theme="kartoza-2026"] .button.is-link:hover {
+  background-color: var(--kartoza-blue-dark);
+  border-color: var(--kartoza-blue-dark);
+}
+html[data-theme="kartoza-2026"] .button.is-warning {
+  background-color: var(--kartoza-amber);
+  border-color: var(--kartoza-amber);
+  color: var(--kartoza-charcoal);
+}
+html[data-theme="kartoza-2026"] .button.is-danger {
+  background-color: var(--status-error);
+  border-color: var(--status-error);
+  color: var(--kartoza-white);
+}
+html[data-theme="kartoza-2026"] .button.is-success {
+  background-color: var(--status-success);
+  border-color: var(--status-success);
+  color: var(--kartoza-white);
+}
+
+/* Navbar */
+html[data-theme="kartoza-2026"] .navbar.is-fixed-top {
+  background-color: var(--kartoza-white);
+  border-bottom: 1px solid var(--kartoza-rule);
+}
+html[data-theme="kartoza-2026"] .navbar-item,
+html[data-theme="kartoza-2026"] .navbar-link {
+  color: var(--kartoza-charcoal);
+}
+html[data-theme="kartoza-2026"] .navbar-item:hover,
+html[data-theme="kartoza-2026"] .navbar-link:hover,
+html[data-theme="kartoza-2026"] .navbar-link:focus {
+  color: var(--kartoza-blue);
+  background-color: transparent;
+}
+html[data-theme="kartoza-2026"] .navbar-dropdown {
+  background-color: var(--kartoza-white);
+  border-top-color: var(--kartoza-rule);
+}
+
+/* Hero overlays — replace any coloured hero with brand blue */
+html[data-theme="kartoza-2026"] .hero.is-primary,
+html[data-theme="kartoza-2026"] .hero.is-link,
+html[data-theme="kartoza-2026"] .hero.is-info {
+  background: linear-gradient(135deg, var(--kartoza-blue) 0%, var(--kartoza-blue-dark) 100%);
+  color: var(--kartoza-white);
+}
+html[data-theme="kartoza-2026"] .hero.is-primary .title,
+html[data-theme="kartoza-2026"] .hero.is-primary .subtitle,
+html[data-theme="kartoza-2026"] .hero.is-link .title,
+html[data-theme="kartoza-2026"] .hero.is-link .subtitle,
+html[data-theme="kartoza-2026"] .hero.is-info .title,
+html[data-theme="kartoza-2026"] .hero.is-info .subtitle {
+  color: var(--kartoza-white);
+}
+
+/* Footer (Bulma .footer class) */
+html[data-theme="kartoza-2026"] .footer,
+html[data-theme="kartoza-2026"] footer {
+  background-color: var(--kartoza-charcoal);
+  color: var(--kartoza-cloud);
+}
+html[data-theme="kartoza-2026"] .footer a,
+html[data-theme="kartoza-2026"] footer a {
+  color: var(--kartoza-amber);
+}
+html[data-theme="kartoza-2026"] .footer a:hover,
+html[data-theme="kartoza-2026"] footer a:hover {
+  color: var(--kartoza-white);
+}
+
+/* Bulma text/background utility classes */
+html[data-theme="kartoza-2026"] .has-text-primary  { color: var(--kartoza-blue)   !important; }
+html[data-theme="kartoza-2026"] .has-text-link     { color: var(--kartoza-blue)   !important; }
+html[data-theme="kartoza-2026"] .has-text-info     { color: var(--kartoza-blue)   !important; }
+html[data-theme="kartoza-2026"] .has-text-warning  { color: var(--kartoza-amber)  !important; }
+html[data-theme="kartoza-2026"] .has-text-success  { color: var(--status-success) !important; }
+html[data-theme="kartoza-2026"] .has-text-danger   { color: var(--status-error)   !important; }
+html[data-theme="kartoza-2026"] .has-background-primary { background-color: var(--kartoza-blue)  !important; }
+html[data-theme="kartoza-2026"] .has-background-warning { background-color: var(--kartoza-amber) !important; }
+html[data-theme="kartoza-2026"] .has-background-light   { background-color: var(--kartoza-cloud) !important; }
+
+/* Tags / pills used throughout site cards */
+html[data-theme="kartoza-2026"] .tag.is-primary {
+  background-color: var(--kartoza-blue);
+  color: var(--kartoza-white);
+}
+html[data-theme="kartoza-2026"] .tag.is-warning {
+  background-color: var(--kartoza-amber);
+  color: var(--kartoza-charcoal);
+}
+
+/* Subtle horizontal rule alignment */
+html[data-theme="kartoza-2026"] hr {
+  background-color: var(--kartoza-rule);
+}
