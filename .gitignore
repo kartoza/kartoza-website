@@ -70,3 +70,7 @@ playwright/ci-test/package-lock.json
 vscode.log
 git.out
 git.sh
+
+# Brand pack reference material — sourced separately,
+# not part of the website's git history.
+Kartoza_BrandPack_v1.0.1/
