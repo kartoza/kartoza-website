@@ -70,3 +70,5 @@ playwright/ci-test/package-lock.json
 vscode.log
 git.out
 git.sh
+claude.sh
+claude.out

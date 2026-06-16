@@ -86,14 +86,22 @@
 
         <div class="youtube-featured-embed">
             <div class="youtube-embed-wrapper">
+                {{- $playlist := .Params.uploadsPlaylist -}}
+                {{- if $playlist -}}
                 <iframe
-                    src="https://www.youtube.com/embed?listType=user_uploads&list=KartozaGeo"
-                    title="Kartoza YouTube Videos"
+                    src="https://www.youtube.com/embed/videoseries?list={{ $playlist }}"
+                    title="Latest videos from the Kartoza YouTube channel"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerpolicy="strict-origin-when-cross-origin"
                     allowfullscreen>
                 </iframe>
+                {{- else -}}
+                <p class="has-text-centered">
+                    <em>Latest videos are temporarily unavailable.</em>
+                    <a href="{{ .Params.channelUrl }}" target="_blank" rel="noopener">Watch them on YouTube</a>.
+                </p>
+                {{- end -}}
             </div>
         </div>
     </div>
