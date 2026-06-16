@@ -1,141 +1,142 @@
 /* ============================================================
- * Kartoza Brand Pack v1.0.1 theme — experimental prototype.
- * Scoped to html[data-theme="kartoza-2026"]; ON by default ONLY
- * for visitors who pick it via the navbar palette switcher.
+ *  Kartoza Brand Pack v1.0.1 — design system
+ *  Scope: html[data-theme="kartoza-2026"]
  *
- * The CURRENT site styles still own everything when no
- * data-theme attribute is set.  Phase A0.5 of epic #165.
- * Source of truth: Kartoza_BrandPack_v1.0.1/Kartoza_BrandAssets_v1.0.1/.
+ *  Design intent: restraint, hierarchy, premium materials.
+ *  The motif is a DELIBERATE accent (slant strips between
+ *  sections, single hero feature) — never wallpaper.
+ *  Brand colour appears as accent on a mostly white/cloud
+ *  canvas; the hero is the one dark moment for contrast.
  * ============================================================ */
 
 
-/* ----- Web fonts: Lato (sans) + JetBrains Mono (code) ------ */
-/* Brand Pack §3.3 FR-020..025 and FR-082.                     */
+/* ============================================================
+ * 1. FONTS
+ * ============================================================ */
 
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/webfonts/Lato-Regular.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/webfonts/Lato-Italic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/webfonts/Lato-Bold.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/webfonts/Lato-BoldItalic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 900;
-  font-display: swap;
-  src: url('/webfonts/Lato-Black.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/webfonts/JetBrainsMono.ttf') format('truetype');
-}
+@font-face { font-family:'Lato'; font-style:normal;  font-weight:400; font-display:swap;
+  src:url('/webfonts/Lato-Regular.ttf') format('truetype'); }
+@font-face { font-family:'Lato'; font-style:italic;  font-weight:400; font-display:swap;
+  src:url('/webfonts/Lato-Italic.ttf') format('truetype'); }
+@font-face { font-family:'Lato'; font-style:normal;  font-weight:700; font-display:swap;
+  src:url('/webfonts/Lato-Bold.ttf') format('truetype'); }
+@font-face { font-family:'Lato'; font-style:italic;  font-weight:700; font-display:swap;
+  src:url('/webfonts/Lato-BoldItalic.ttf') format('truetype'); }
+@font-face { font-family:'Lato'; font-style:normal;  font-weight:900; font-display:swap;
+  src:url('/webfonts/Lato-Black.ttf') format('truetype'); }
+@font-face { font-family:'JetBrains Mono'; font-style:normal; font-weight:400; font-display:swap;
+  src:url('/webfonts/JetBrainsMono.ttf') format('truetype'); }
 
 
-/* ----- Token layer (Brand Pack App. A) --------------------- */
+/* ============================================================
+ * 2. DESIGN TOKENS
+ * ============================================================ */
 
 :root[data-theme="kartoza-2026"] {
-  /* Canonical palette */
-  --kartoza-blue:     #54A2CC;
-  --kartoza-amber:    #EEB348;
-  --kartoza-grey:     #8A8B8B;
-  --kartoza-charcoal: #383939;
-  --kartoza-muted:    #676869;
-  --kartoza-rule:     #D1D1D1;
-  --kartoza-cloud:    #F5F5F2;
-  --kartoza-white:    #FFFFFF;
+  /* ---- Palette (Brand Pack App. A) ------------------------- */
+  --k-blue:           #54A2CC;
+  --k-blue-dark:      #2F7A9F;
+  --k-blue-deeper:    #1F5B78;
+  --k-blue-light:     #BFE0F0;
+  --k-amber:          #EEB348;
+  --k-amber-dark:     #C28C2A;
+  --k-amber-soft:     #F8E6BD;
+  --k-grey:           #8A8B8B;
+  --k-charcoal:       #383939;
+  --k-charcoal-deep:  #1F1F20;
+  --k-muted:          #676869;
+  --k-rule:           #E4E5E1;
+  --k-cloud:          #F5F5F2;
+  --k-cloud-warm:     #FAFAF6;
+  --k-white:          #FFFFFF;
 
-  /* Status colours (tints kept inline at point of use) */
-  --status-success: #3C7D54;
-  --status-warn:    #EEB348;
-  --status-error:   #B0473C;
+  /* ---- Status --------------------------------------------- */
+  --k-success: #3C7D54;  --k-success-tint: #EAF3EC;
+  --k-warn:    #EEB348;  --k-warn-tint:    #FCF3E0;
+  --k-error:   #B0473C;  --k-error-tint:   #FBEFEF;
 
-  /* Derived blues so we don't reintroduce drift hues elsewhere */
-  --kartoza-blue-dark:  #3F8AB0;
-  --kartoza-blue-light: #BFE0F0;
-
-  /* Map onto the existing site's CSS-custom-property names so any
-   * place that reads var(--primary)/var(--text-primary1)/etc.
-   * instantly picks up the canonical palette. */
-  --primary:        var(--kartoza-blue);
-  --primary1:       var(--kartoza-blue);
-  --primary2:       var(--kartoza-blue-dark);
-  --primary3:       var(--kartoza-blue-light);
-  --primary4:       var(--kartoza-grey);
-  --primary5:       var(--kartoza-rule);
-  --primary6:       var(--kartoza-amber);
-  --text-primary1:  var(--kartoza-charcoal);
-  --text-primary2:  var(--kartoza-muted);
-
-  /* Typography (Brand Pack §3.3) */
+  /* ---- Typography ----------------------------------------- */
   --font-sans:   'Lato', 'Helvetica Neue', Arial, sans-serif;
   --font-mono:   'JetBrains Mono', Consolas, monospace;
-  --font-accent: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+  --leading-tight:   1.15;
+  --leading-snug:    1.35;
+  --leading-normal:  1.55;
+  --leading-loose:   1.75;
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.06em;
+  --tracking-eyebrow:0.18em;
 
-  /* ---- Take over homepage.css local CSS-var declarations.
-   *      homepage.css sets these at plain :root { ... } so they normally
-   *      win against bulma defaults; our :root[data-theme] selector has
-   *      higher specificity (0,1,1 vs 0,0,1) so when the brand-2026
-   *      theme is active these reroute every .hero-*, card and shadow
-   *      that references them to the canonical Kartoza palette.       */
-  --primary-dark:  var(--kartoza-blue-dark);
-  --primary-light: var(--kartoza-blue-light);
-  --accent:        var(--kartoza-amber);
-  --accent-dark:   #D49A2B; /* derived darker amber */
-  --accent-light:  #F4C870; /* derived lighter amber */
-  --text-dark:     var(--kartoza-charcoal);
-  --text-muted:    var(--kartoza-muted);
-  --light-bg:      var(--kartoza-cloud);
-  --light-bg-alt:  #ECEDE8;
-  --white:         var(--kartoza-white);
+  /* ---- Spacing scale (4-px base) -------------------------- */
+  --space-1:  0.25rem;  /*  4 */
+  --space-2:  0.5rem;   /*  8 */
+  --space-3:  0.75rem;  /* 12 */
+  --space-4:  1rem;     /* 16 */
+  --space-5:  1.5rem;   /* 24 */
+  --space-6:  2rem;     /* 32 */
+  --space-7:  3rem;     /* 48 */
+  --space-8:  4rem;     /* 64 */
+  --space-9:  6rem;     /* 96 */
+  --space-10: 8rem;     /* 128 */
 
-  /* Charcoal-tinted shadows (Brand Pack §6: shadows take the brand's
-   * darkest tone, not pure black, so elevation feels on-brand). */
-  --shadow-sm: 0 2px 8px  rgba(56, 57, 57, 0.08);
-  --shadow-md: 0 4px 16px rgba(56, 57, 57, 0.12);
-  --shadow-lg: 0 8px 32px rgba(56, 57, 57, 0.16);
-  --shadow-xl: 0 16px 48px rgba(56, 57, 57, 0.20);
+  /* ---- Radii --------------------------------------------- */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-pill: 999px;
+
+  /* ---- Shadows (charcoal-tinted, layered) ---------------- */
+  --shadow-1: 0 1px 2px rgba(31, 31, 32, 0.06);
+  --shadow-2: 0 2px 4px rgba(31, 31, 32, 0.06), 0 4px 12px rgba(31, 31, 32, 0.08);
+  --shadow-3: 0 4px 8px rgba(31, 31, 32, 0.06), 0 12px 24px rgba(31, 31, 32, 0.10);
+  --shadow-4: 0 8px 16px rgba(31, 31, 32, 0.08), 0 24px 48px rgba(31, 31, 32, 0.12);
+  --shadow-hero-cta: 0 8px 24px rgba(238, 179, 72, 0.35);
+
+  /* ---- Motion -------------------------------------------- */
+  --motion-fast: 120ms cubic-bezier(0.2, 0, 0.2, 1);
+  --motion-med:  220ms cubic-bezier(0.2, 0, 0.2, 1);
+  --motion-slow: 360ms cubic-bezier(0.2, 0, 0.2, 1);
+
+  /* ---- Take over homepage.css's local CSS-vars so the
+   *      existing site chrome (cards, hero, buttons that
+   *      reference var(--primary-dark) etc.) picks up
+   *      canonical colours without per-rule patches.       */
+  --primary:        var(--k-blue);
+  --primary-dark:   var(--k-blue-dark);
+  --primary-light:  var(--k-blue-light);
+  --accent:         var(--k-amber);
+  --accent-dark:    var(--k-amber-dark);
+  --accent-light:   var(--k-amber-soft);
+  --text-dark:      var(--k-charcoal);
+  --text-muted:     var(--k-muted);
+  --light-bg:       var(--k-cloud);
+  --light-bg-alt:   var(--k-cloud-warm);
+  --white:          var(--k-white);
+  --shadow-sm:      var(--shadow-1);
+  --shadow-md:      var(--shadow-2);
+  --shadow-lg:      var(--shadow-3);
+  --shadow-xl:      var(--shadow-4);
 }
 
 
-/* ----- Chrome overrides -----------------------------------
- * Selector specificity = html[data-theme="kartoza-2026"] (0,1,1).
- * Beats most existing rules without needing !important except
- * where we override a Bulma component that itself uses
- * .button.is-X chains.
- * --------------------------------------------------------- */
+/* ============================================================
+ * 3. BASE
+ * ============================================================ */
 
-html[data-theme="kartoza-2026"],
+html[data-theme="kartoza-2026"] {
+  font-family: var(--font-sans);
+  color: var(--k-charcoal);
+  background: var(--k-white);
+}
 html[data-theme="kartoza-2026"] body {
   font-family: var(--font-sans) !important;
-  color: var(--kartoza-charcoal);
-  background-color: var(--kartoza-white);
+  color: var(--k-charcoal);
+  background: var(--k-white) !important;
+  line-height: var(--leading-normal);
 }
 
+/* Headings — tight tracking, confident weight. */
 html[data-theme="kartoza-2026"] h1,
 html[data-theme="kartoza-2026"] h2,
 html[data-theme="kartoza-2026"] h3,
@@ -143,241 +144,531 @@ html[data-theme="kartoza-2026"] h4,
 html[data-theme="kartoza-2026"] h5,
 html[data-theme="kartoza-2026"] h6 {
   font-family: var(--font-sans) !important;
-  color: var(--kartoza-charcoal);
+  color: var(--k-charcoal);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+  font-weight: 800;
 }
 
 html[data-theme="kartoza-2026"] code,
 html[data-theme="kartoza-2026"] pre,
-html[data-theme="kartoza-2026"] .has-text-monospace,
-html[data-theme="kartoza-2026"] .order-ref,
-html[data-theme="kartoza-2026"] .order-invoice-ref {
+html[data-theme="kartoza-2026"] .has-text-monospace {
   font-family: var(--font-mono) !important;
 }
 
 html[data-theme="kartoza-2026"] a {
-  color: var(--kartoza-blue);
+  color: var(--k-blue-dark);
+  text-decoration: none;
+  transition: color var(--motion-fast);
 }
 html[data-theme="kartoza-2026"] a:hover {
-  color: var(--kartoza-blue-dark);
+  color: var(--k-amber-dark);
 }
 
-/* Buttons (Bulma) */
-html[data-theme="kartoza-2026"] .button.is-primary,
-html[data-theme="kartoza-2026"] .button.is-link {
-  background-color: var(--kartoza-blue);
-  border-color: var(--kartoza-blue);
-  color: var(--kartoza-white);
-}
-html[data-theme="kartoza-2026"] .button.is-primary:hover,
-html[data-theme="kartoza-2026"] .button.is-link:hover {
-  background-color: var(--kartoza-blue-dark);
-  border-color: var(--kartoza-blue-dark);
-}
-html[data-theme="kartoza-2026"] .button.is-warning {
-  background-color: var(--kartoza-amber);
-  border-color: var(--kartoza-amber);
-  color: var(--kartoza-charcoal);
-}
-html[data-theme="kartoza-2026"] .button.is-danger {
-  background-color: var(--status-error);
-  border-color: var(--status-error);
-  color: var(--kartoza-white);
-}
-html[data-theme="kartoza-2026"] .button.is-success {
-  background-color: var(--status-success);
-  border-color: var(--status-success);
-  color: var(--kartoza-white);
+/* Focus rings — visible, brand-coloured, accessibility default. */
+html[data-theme="kartoza-2026"] a:focus-visible,
+html[data-theme="kartoza-2026"] button:focus-visible,
+html[data-theme="kartoza-2026"] .button:focus-visible,
+html[data-theme="kartoza-2026"] input:focus-visible,
+html[data-theme="kartoza-2026"] select:focus-visible,
+html[data-theme="kartoza-2026"] textarea:focus-visible {
+  outline: 3px solid var(--k-amber);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
 }
 
-/* Navbar */
+html[data-theme="kartoza-2026"] hr {
+  background-color: var(--k-rule);
+  height: 1px;
+  margin: var(--space-6) 0;
+}
+
+
+/* ============================================================
+ * 4. NAVBAR
+ * ============================================================ */
+
 html[data-theme="kartoza-2026"] .navbar.is-fixed-top {
-  background-color: var(--kartoza-white);
-  border-bottom: 1px solid var(--kartoza-rule);
+  background: var(--k-white);
+  border-bottom: 1px solid var(--k-rule);
+  box-shadow: var(--shadow-1);
+  height: auto;
+  min-height: 3.5rem;
+}
+html[data-theme="kartoza-2026"] .navbar-brand .navbar-item {
+  padding: 0.5rem 1rem;
 }
 html[data-theme="kartoza-2026"] .navbar-item,
 html[data-theme="kartoza-2026"] .navbar-link {
-  color: var(--kartoza-charcoal);
+  color: var(--k-charcoal);
+  font-weight: 500;
+  transition: color var(--motion-fast);
 }
 html[data-theme="kartoza-2026"] .navbar-item:hover,
 html[data-theme="kartoza-2026"] .navbar-link:hover,
 html[data-theme="kartoza-2026"] .navbar-link:focus {
-  color: var(--kartoza-blue);
-  background-color: transparent;
+  background: transparent !important;
+  color: var(--k-blue-dark) !important;
 }
 html[data-theme="kartoza-2026"] .navbar-dropdown {
-  background-color: var(--kartoza-white);
-  border-top-color: var(--kartoza-rule);
+  background: var(--k-white);
+  border: 1px solid var(--k-rule);
+  border-top: 2px solid var(--k-blue);
+  box-shadow: var(--shadow-2);
+  border-radius: 0 0 var(--r-md) var(--r-md);
+  padding: var(--space-2) 0;
+}
+html[data-theme="kartoza-2026"] .navbar-dropdown .navbar-item {
+  padding: var(--space-2) var(--space-5);
 }
 
-/* Hero overlays — replace any coloured hero with brand blue */
-html[data-theme="kartoza-2026"] .hero.is-primary,
-html[data-theme="kartoza-2026"] .hero.is-link,
-html[data-theme="kartoza-2026"] .hero.is-info {
-  background: linear-gradient(135deg, var(--kartoza-blue) 0%, var(--kartoza-blue-dark) 100%);
-  color: var(--kartoza-white);
-}
-html[data-theme="kartoza-2026"] .hero.is-primary .title,
-html[data-theme="kartoza-2026"] .hero.is-primary .subtitle,
-html[data-theme="kartoza-2026"] .hero.is-link .title,
-html[data-theme="kartoza-2026"] .hero.is-link .subtitle,
-html[data-theme="kartoza-2026"] .hero.is-info .title,
-html[data-theme="kartoza-2026"] .hero.is-info .subtitle {
-  color: var(--kartoza-white);
+
+/* ============================================================
+ * 5. HERO  (dark charcoal panel, premium type, motif slant)
+ * ============================================================ */
+
+html[data-theme="kartoza-2026"] .hero.hero-home {
+  background: var(--k-charcoal) !important;
+  color: var(--k-white);
+  position: relative;
+  overflow: hidden;
+  min-height: 90vh;
 }
 
-/* Footer (Bulma .footer class) */
+/* Single deliberate motif moment: slanted divider at the
+ * bottom of the hero, full saturation, matching the brand
+ * pack's intended use of slant_divider.png. */
+html[data-theme="kartoza-2026"] .hero.hero-home::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 120px;
+  background: url('/img/brand/slant_divider.png') center bottom / cover no-repeat;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Subtle motif texture (top-right corner) — desaturated and
+ * low opacity, doesn't compete with content. */
+html[data-theme="kartoza-2026"] .hero.hero-home::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 65%;
+  height: 100%;
+  background: url('/img/brand/kartoza-background.png') right top / cover no-repeat;
+  opacity: 0.18;
+  filter: saturate(0.7);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* The original .hero-bg-pattern layer is now redundant. */
+html[data-theme="kartoza-2026"] .hero.hero-home .hero-bg-pattern,
+html[data-theme="kartoza-2026"] [class*="hero-pattern"],
+html[data-theme="kartoza-2026"] [class*="hero-overlay"] {
+  display: none !important;
+}
+
+html[data-theme="kartoza-2026"] .hero.hero-home .hero-body {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-9) var(--space-5) var(--space-10);
+}
+
+/* Hero type — confident hierarchy. */
+html[data-theme="kartoza-2026"] .hero.hero-home .hero-company-name,
+html[data-theme="kartoza-2026"] .hero.hero-home h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: var(--tracking-tight) !important;
+  line-height: var(--leading-tight) !important;
+  color: var(--k-white) !important;
+  margin: 0 0 var(--space-2) 0 !important;
+}
+html[data-theme="kartoza-2026"] .hero.hero-home .hero-tagline {
+  display: inline-block;
+  color: var(--k-amber) !important;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  margin-bottom: var(--space-5) !important;
+  border-top: 2px solid var(--k-amber);
+  padding-top: var(--space-3);
+  background: transparent !important;
+}
+html[data-theme="kartoza-2026"] .hero.hero-home .hero-brand {
+  margin-bottom: var(--space-2);
+}
+html[data-theme="kartoza-2026"] .hero.hero-home .hero-logo {
+  width: 56px !important;
+  height: auto !important;
+  margin-right: var(--space-3);
+  filter: brightness(0) invert(1);
+}
+html[data-theme="kartoza-2026"] .hero.hero-home .vision-label {
+  display: inline-block;
+  color: var(--k-amber);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+}
+html[data-theme="kartoza-2026"] .hero.hero-home .hero-vision-statement {
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem) !important;
+  line-height: var(--leading-snug) !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  font-weight: 400;
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 0 var(--space-6) 0 !important;
+  font-style: normal !important;
+}
+html[data-theme="kartoza-2026"] .hero.hero-home .hero-vision-statement strong,
+html[data-theme="kartoza-2026"] .hero.hero-home .hero-vision-statement .has-text-white {
+  color: var(--k-amber) !important;
+  font-weight: 800 !important;
+}
+html[data-theme="kartoza-2026"] .hero.hero-home .quote-mark {
+  color: var(--k-amber);
+  font-weight: 900;
+  font-size: 1.4em;
+  line-height: 0;
+}
+
+/* Hero CTAs — amber primary on dark for punch. */
+html[data-theme="kartoza-2026"] .hero.hero-home .hero-ctas {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+html[data-theme="kartoza-2026"] .hero.hero-home .button.is-primary,
+html[data-theme="kartoza-2026"] .hero.hero-home .button.is-link {
+  background: var(--k-amber) !important;
+  color: var(--k-charcoal) !important;
+  border: none !important;
+  font-weight: 700 !important;
+  padding: 0.85rem 1.5rem !important;
+  height: auto !important;
+  border-radius: var(--r-md) !important;
+  box-shadow: var(--shadow-hero-cta) !important;
+  transition: transform var(--motion-fast), box-shadow var(--motion-fast) !important;
+}
+html[data-theme="kartoza-2026"] .hero.hero-home .button.is-primary:hover,
+html[data-theme="kartoza-2026"] .hero.hero-home .button.is-link:hover {
+  background: #F0BF60 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(238, 179, 72, 0.45) !important;
+}
+html[data-theme="kartoza-2026"] .hero.hero-home .button.is-outlined {
+  background: transparent !important;
+  color: var(--k-white) !important;
+  border: 2px solid rgba(255, 255, 255, 0.4) !important;
+  font-weight: 600 !important;
+  padding: 0.85rem 1.5rem !important;
+  height: auto !important;
+  border-radius: var(--r-md) !important;
+  transition: border-color var(--motion-fast), background var(--motion-fast) !important;
+}
+html[data-theme="kartoza-2026"] .hero.hero-home .button.is-outlined:hover {
+  border-color: var(--k-amber) !important;
+  background: rgba(238, 179, 72, 0.08) !important;
+  color: var(--k-white) !important;
+}
+
+/* The right-column showcase — premium cards on dark. */
+html[data-theme="kartoza-2026"] .hero.hero-home .hero-right .showcase-card,
+html[data-theme="kartoza-2026"] .hero.hero-home .hero-right .showcase-content,
+html[data-theme="kartoza-2026"] .hero.hero-home .hero-right .showcase-item {
+  background: rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  border-radius: var(--r-lg) !important;
+  color: var(--k-white) !important;
+}
+html[data-theme="kartoza-2026"] .hero.hero-home .hero-right .showcase-title {
+  color: var(--k-white) !important;
+}
+html[data-theme="kartoza-2026"] .hero.hero-home .hero-right .showcase-description {
+  color: rgba(255, 255, 255, 0.78) !important;
+}
+html[data-theme="kartoza-2026"] .hero.hero-home .hero-right .showcase-link {
+  color: var(--k-amber) !important;
+  font-weight: 700;
+}
+html[data-theme="kartoza-2026"] .hero.hero-home .hero-right .showcase-badge {
+  background: var(--k-amber) !important;
+  color: var(--k-charcoal) !important;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--r-pill);
+}
+
+
+/* ============================================================
+ * 6. SECTIONS — alternating canvas, generous rhythm
+ * ============================================================ */
+
+html[data-theme="kartoza-2026"] .section {
+  padding: var(--space-9) var(--space-5);
+}
+html[data-theme="kartoza-2026"] section.section:nth-of-type(odd) {
+  background: var(--k-white);
+}
+html[data-theme="kartoza-2026"] section.section:nth-of-type(even) {
+  background: var(--k-cloud);
+}
+
+/* Section header — eyebrow + title + subtitle pattern.
+ * No more heavy blue gradient panel. */
+html[data-theme="kartoza-2026"] .section-header {
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  margin: 0 auto var(--space-7) !important;
+  border: none !important;
+  max-width: 760px;
+  text-align: center;
+}
+html[data-theme="kartoza-2026"] .section-header::before,
+html[data-theme="kartoza-2026"] .section-header::after { display: none !important; }
+
+html[data-theme="kartoza-2026"] .section-header .title,
+html[data-theme="kartoza-2026"] .section-header h2,
+html[data-theme="kartoza-2026"] .services-section .section-header .title {
+  color: var(--k-charcoal) !important;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: var(--tracking-tight) !important;
+  line-height: var(--leading-tight) !important;
+  margin: 0 0 var(--space-3) 0 !important;
+}
+html[data-theme="kartoza-2026"] .section-header .subtitle,
+html[data-theme="kartoza-2026"] .section-header p {
+  color: var(--k-muted) !important;
+  font-size: 1.1rem !important;
+  font-weight: 400 !important;
+  line-height: var(--leading-normal) !important;
+  margin: 0 !important;
+  font-style: normal !important;
+}
+
+/* Eyebrow above the section title — manual opt-in via class,
+ * but most existing headers don't have one yet.  A subtle
+ * amber rule above the title gives the same brand cue without
+ * a markup change. */
+html[data-theme="kartoza-2026"] .section-header::first-line { /* no-op placeholder for clarity */ }
+html[data-theme="kartoza-2026"] .section-header .title::before {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--k-amber);
+  margin: 0 auto var(--space-4);
+  border-radius: var(--r-pill);
+}
+
+
+/* ============================================================
+ * 7. CARDS
+ * ============================================================ */
+
+html[data-theme="kartoza-2026"] .box,
+html[data-theme="kartoza-2026"] .card,
+html[data-theme="kartoza-2026"] .main-card,
+html[data-theme="kartoza-2026"] .service-card,
+html[data-theme="kartoza-2026"] .product-card,
+html[data-theme="kartoza-2026"] .product-card-small {
+  background: var(--k-white) !important;
+  border: 1px solid var(--k-rule) !important;
+  border-radius: var(--r-lg) !important;
+  box-shadow: var(--shadow-1) !important;
+  padding: var(--space-5) !important;
+  transition: transform var(--motion-med), box-shadow var(--motion-med), border-color var(--motion-med);
+}
+html[data-theme="kartoza-2026"] .box:hover,
+html[data-theme="kartoza-2026"] .card:hover,
+html[data-theme="kartoza-2026"] .main-card:hover,
+html[data-theme="kartoza-2026"] .service-card:hover,
+html[data-theme="kartoza-2026"] .product-card:hover,
+html[data-theme="kartoza-2026"] .product-card-small:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-3) !important;
+  border-color: var(--k-blue);
+}
+html[data-theme="kartoza-2026"] .card-badge-icon,
+html[data-theme="kartoza-2026"] .service-icon {
+  color: var(--k-blue);
+  font-size: 1.75rem;
+  margin-bottom: var(--space-3);
+}
+
+
+/* ============================================================
+ * 8. BUTTONS (Bulma)
+ * ============================================================ */
+
+html[data-theme="kartoza-2026"] .button {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  border-radius: var(--r-md);
+  transition: transform var(--motion-fast), box-shadow var(--motion-fast), background var(--motion-fast), border-color var(--motion-fast), color var(--motion-fast);
+}
+html[data-theme="kartoza-2026"] .button.is-primary,
+html[data-theme="kartoza-2026"] .button.is-link {
+  background: var(--k-blue);
+  border-color: var(--k-blue);
+  color: var(--k-white);
+}
+html[data-theme="kartoza-2026"] .button.is-primary:hover,
+html[data-theme="kartoza-2026"] .button.is-link:hover {
+  background: var(--k-blue-dark);
+  border-color: var(--k-blue-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(47, 122, 159, 0.30);
+}
+html[data-theme="kartoza-2026"] .button.is-outlined.is-primary,
+html[data-theme="kartoza-2026"] .button.is-outlined.is-link {
+  background: transparent;
+  color: var(--k-blue-dark);
+  border: 2px solid var(--k-blue-dark);
+}
+html[data-theme="kartoza-2026"] .button.is-outlined.is-primary:hover,
+html[data-theme="kartoza-2026"] .button.is-outlined.is-link:hover {
+  background: var(--k-blue);
+  color: var(--k-white);
+  border-color: var(--k-blue);
+}
+html[data-theme="kartoza-2026"] .button.is-warning {
+  background: var(--k-amber);
+  border-color: var(--k-amber);
+  color: var(--k-charcoal);
+}
+html[data-theme="kartoza-2026"] .button.is-danger {
+  background: var(--k-error);
+  border-color: var(--k-error);
+}
+html[data-theme="kartoza-2026"] .button.is-success {
+  background: var(--k-success);
+  border-color: var(--k-success);
+}
+
+
+/* ============================================================
+ * 9. FOOTER  (refined dark panel)
+ * ============================================================ */
+
 html[data-theme="kartoza-2026"] .footer,
 html[data-theme="kartoza-2026"] footer {
-  background-color: var(--kartoza-charcoal);
-  color: var(--kartoza-cloud);
+  background: var(--k-charcoal-deep) !important;
+  color: var(--k-cloud) !important;
+  padding: var(--space-9) var(--space-5) var(--space-7);
+  position: relative;
+}
+html[data-theme="kartoza-2026"] .footer::before,
+html[data-theme="kartoza-2026"] footer::before {
+  content: '';
+  display: block;
+  height: 80px;
+  background: url('/img/brand/slant_divider.png') center top / cover no-repeat;
+  margin: calc(var(--space-9) * -1) calc(var(--space-5) * -1) var(--space-7);
 }
 html[data-theme="kartoza-2026"] .footer a,
 html[data-theme="kartoza-2026"] footer a {
-  color: var(--kartoza-amber);
+  color: var(--k-amber);
+  transition: color var(--motion-fast);
 }
 html[data-theme="kartoza-2026"] .footer a:hover,
 html[data-theme="kartoza-2026"] footer a:hover {
-  color: var(--kartoza-white);
-}
-
-/* Bulma text/background utility classes */
-html[data-theme="kartoza-2026"] .has-text-primary  { color: var(--kartoza-blue)   !important; }
-html[data-theme="kartoza-2026"] .has-text-link     { color: var(--kartoza-blue)   !important; }
-html[data-theme="kartoza-2026"] .has-text-info     { color: var(--kartoza-blue)   !important; }
-html[data-theme="kartoza-2026"] .has-text-warning  { color: var(--kartoza-amber)  !important; }
-html[data-theme="kartoza-2026"] .has-text-success  { color: var(--status-success) !important; }
-html[data-theme="kartoza-2026"] .has-text-danger   { color: var(--status-error)   !important; }
-html[data-theme="kartoza-2026"] .has-background-primary { background-color: var(--kartoza-blue)  !important; }
-html[data-theme="kartoza-2026"] .has-background-warning { background-color: var(--kartoza-amber) !important; }
-html[data-theme="kartoza-2026"] .has-background-light   { background-color: var(--kartoza-cloud) !important; }
-
-/* Tags / pills used throughout site cards */
-html[data-theme="kartoza-2026"] .tag.is-primary {
-  background-color: var(--kartoza-blue);
-  color: var(--kartoza-white);
-}
-html[data-theme="kartoza-2026"] .tag.is-warning {
-  background-color: var(--kartoza-amber);
-  color: var(--kartoza-charcoal);
-}
-
-/* Subtle horizontal rule alignment */
-html[data-theme="kartoza-2026"] hr {
-  background-color: var(--kartoza-rule);
+  color: var(--k-white);
 }
 
 
 /* ============================================================
- * MAP MOTIF — Brand Pack §3.4, FR-030..034.
- *
- * The current site uses /img/kartoza-brand-pattern.svg (a hand-made
- * geometric pattern) in 7 *-hero-pattern selectors inside
- * themes/.../homepage.css.  Under the brand-2026 theme we re-point
- * every one of those (and any [class*="hero-pattern"]) at the
- * canonical kartoza-motif.png, lightened+desaturated per FR-031.
+ * 10. BULMA UTILITIES — colour token re-routing
  * ============================================================ */
 
-html[data-theme="kartoza-2026"] .hero-home .hero-bg-pattern,
-html[data-theme="kartoza-2026"] .youtube-hero-pattern,
-html[data-theme="kartoza-2026"] [class*="hero-pattern"] {
-  background-image: url('/img/brand/kartoza-motif.png') !important;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.22;                         /* lightened per FR-031 */
-  filter: saturate(0.55) brightness(1.05);
-  mix-blend-mode: multiply;
-}
+html[data-theme="kartoza-2026"] .has-text-primary,
+html[data-theme="kartoza-2026"] .has-text-link,
+html[data-theme="kartoza-2026"] .has-text-info     { color: var(--k-blue-dark) !important; }
+html[data-theme="kartoza-2026"] .has-text-warning  { color: var(--k-amber-dark) !important; }
+html[data-theme="kartoza-2026"] .has-text-success  { color: var(--k-success)    !important; }
+html[data-theme="kartoza-2026"] .has-text-danger   { color: var(--k-error)      !important; }
+html[data-theme="kartoza-2026"] .has-background-primary { background: var(--k-blue)  !important; color: var(--k-white) !important; }
+html[data-theme="kartoza-2026"] .has-background-warning { background: var(--k-amber) !important; color: var(--k-charcoal) !important; }
+html[data-theme="kartoza-2026"] .has-background-light   { background: var(--k-cloud) !important; }
 
-/* Homepage hero gradient → canonical Kartoza blue (not drift blue) */
-html[data-theme="kartoza-2026"] .hero-home {
-  background: linear-gradient(
-      135deg,
-      var(--kartoza-blue) 0%,
-      var(--kartoza-blue-dark) 55%,
-      #285770 100%);
-}
+html[data-theme="kartoza-2026"] .tag.is-primary { background: var(--k-blue);  color: var(--k-white); }
+html[data-theme="kartoza-2026"] .tag.is-warning { background: var(--k-amber); color: var(--k-charcoal); }
+html[data-theme="kartoza-2026"] .tag.is-success { background: var(--k-success); color: var(--k-white); }
 
 
 /* ============================================================
- * BRAND UTILITY CLASSES (scoped to brand-2026 theme so the current
- * site stays untouched; lift the scope later when promoting to
- * default).  Available for sub-issue F1..F9 PRs to opt into.
+ * 11. BRAND UTILITY CLASSES (opt-in)
  * ============================================================ */
 
-/* Eyebrow — "KARTOZA · X" letter-spaced uppercase (Brand Pack FR-024). */
 html[data-theme="kartoza-2026"] .brand-eyebrow {
-  font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+  display: inline-block;
+  font-family: var(--font-sans);
   font-weight: 700;
   font-size: 0.72rem;
-  letter-spacing: 0.18em;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
-  color: var(--kartoza-muted);
-  display: inline-block;
-  margin-bottom: 0.4rem;
+  color: var(--k-muted);
+  margin-bottom: var(--space-2);
 }
-
-/* Accent display style — Lato Italic + Amber (Brand Pack FR-022). */
 html[data-theme="kartoza-2026"] .brand-display {
-  font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-sans);
   font-style: italic;
-  font-weight: 600;
-  color: var(--kartoza-amber);
+  font-weight: 700;
+  color: var(--k-amber);
 }
-
-/* Full-bleed motif banner — full saturation (FR-031). */
 html[data-theme="kartoza-2026"] .brand-motif-banner {
-  background: url('/img/brand/kartoza-motif.png') center/cover no-repeat;
+  background: url('/img/brand/kartoza-background.png') center / cover no-repeat;
   min-height: 220px;
 }
-
-/* Slanted section divider (FR-030 motif device). */
 html[data-theme="kartoza-2026"] .brand-slant-divider {
-  background: url('/img/brand/slant_divider.png') center/cover no-repeat;
+  background: url('/img/brand/slant_divider.png') center / cover no-repeat;
   height: 96px;
 }
-
-/* Slanted title strip — heavier motif element for section title rows. */
 html[data-theme="kartoza-2026"] .brand-slant-title {
-  background: url('/img/brand/slant_title.png') center/cover no-repeat;
+  background: url('/img/brand/slant_title.png') center / cover no-repeat;
   min-height: 200px;
 }
-
-/* "Clearing" container for placing the logo on a busy motif (FR-034).  */
 html[data-theme="kartoza-2026"] .brand-clearing {
-  background-color: rgba(255, 255, 255, 0.94);
-  border-radius: 18px;
-  padding: 1.5rem 2rem;
-  box-shadow: 0 4px 16px rgba(56, 57, 57, 0.10);
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: var(--r-xl);
+  padding: var(--space-5) var(--space-6);
+  box-shadow: var(--shadow-2);
 }
 
 
 /* ============================================================
- * SECTION CHROME — light pass on commonly-visible patterns so
- * the prototype theme reads as more than "different colours".
+ * 12. RESPONSIVE
  * ============================================================ */
 
-/* Cards / boxes: charcoal-tinted shadow (already wired via --shadow-*) */
-html[data-theme="kartoza-2026"] .box,
-html[data-theme="kartoza-2026"] .card {
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--kartoza-rule);
+@media (max-width: 768px) {
+  html[data-theme="kartoza-2026"] .section {
+    padding: var(--space-7) var(--space-4);
+  }
+  html[data-theme="kartoza-2026"] .hero.hero-home .hero-body {
+    padding: var(--space-7) var(--space-4) var(--space-8);
+  }
+  html[data-theme="kartoza-2026"] .hero.hero-home::after {
+    height: 60px;
+  }
+  html[data-theme="kartoza-2026"] .hero.hero-home::before {
+    width: 100%;
+    opacity: 0.10;
+  }
+  html[data-theme="kartoza-2026"] .footer::before,
+  html[data-theme="kartoza-2026"] footer::before {
+    height: 50px;
+  }
 }
-
-/* Section tag-line (the small pill at the top of sections like
- * "FEATURED · Latest from Kartoza" on the YouTube page). */
-html[data-theme="kartoza-2026"] .section-tagline {
-  color: var(--kartoza-muted) !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.18em !important;
-  text-transform: uppercase !important;
-}
-html[data-theme="kartoza-2026"] .section-tagline i {
-  color: var(--kartoza-amber) !important;
-}
-
-/* Subtitle next to "Watch them on YouTube" etc — make it cloud-tinted */
-html[data-theme="kartoza-2026"] .subtitle {
-  color: var(--kartoza-muted);
-}
-
