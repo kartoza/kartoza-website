@@ -95,6 +95,30 @@
   --font-sans:   'Lato', 'Helvetica Neue', Arial, sans-serif;
   --font-mono:   'JetBrains Mono', Consolas, monospace;
   --font-accent: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+
+  /* ---- Take over homepage.css local CSS-var declarations.
+   *      homepage.css sets these at plain :root { ... } so they normally
+   *      win against bulma defaults; our :root[data-theme] selector has
+   *      higher specificity (0,1,1 vs 0,0,1) so when the brand-2026
+   *      theme is active these reroute every .hero-*, card and shadow
+   *      that references them to the canonical Kartoza palette.       */
+  --primary-dark:  var(--kartoza-blue-dark);
+  --primary-light: var(--kartoza-blue-light);
+  --accent:        var(--kartoza-amber);
+  --accent-dark:   #D49A2B; /* derived darker amber */
+  --accent-light:  #F4C870; /* derived lighter amber */
+  --text-dark:     var(--kartoza-charcoal);
+  --text-muted:    var(--kartoza-muted);
+  --light-bg:      var(--kartoza-cloud);
+  --light-bg-alt:  #ECEDE8;
+  --white:         var(--kartoza-white);
+
+  /* Charcoal-tinted shadows (Brand Pack §6: shadows take the brand's
+   * darkest tone, not pure black, so elevation feels on-brand). */
+  --shadow-sm: 0 2px 8px  rgba(56, 57, 57, 0.08);
+  --shadow-md: 0 4px 16px rgba(56, 57, 57, 0.12);
+  --shadow-lg: 0 8px 32px rgba(56, 57, 57, 0.16);
+  --shadow-xl: 0 16px 48px rgba(56, 57, 57, 0.20);
 }
 
 
@@ -241,3 +265,119 @@ html[data-theme="kartoza-2026"] .tag.is-warning {
 html[data-theme="kartoza-2026"] hr {
   background-color: var(--kartoza-rule);
 }
+
+
+/* ============================================================
+ * MAP MOTIF — Brand Pack §3.4, FR-030..034.
+ *
+ * The current site uses /img/kartoza-brand-pattern.svg (a hand-made
+ * geometric pattern) in 7 *-hero-pattern selectors inside
+ * themes/.../homepage.css.  Under the brand-2026 theme we re-point
+ * every one of those (and any [class*="hero-pattern"]) at the
+ * canonical kartoza-motif.png, lightened+desaturated per FR-031.
+ * ============================================================ */
+
+html[data-theme="kartoza-2026"] .hero-home .hero-bg-pattern,
+html[data-theme="kartoza-2026"] .youtube-hero-pattern,
+html[data-theme="kartoza-2026"] [class*="hero-pattern"] {
+  background-image: url('/img/brand/kartoza-motif.png') !important;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.22;                         /* lightened per FR-031 */
+  filter: saturate(0.55) brightness(1.05);
+  mix-blend-mode: multiply;
+}
+
+/* Homepage hero gradient → canonical Kartoza blue (not drift blue) */
+html[data-theme="kartoza-2026"] .hero-home {
+  background: linear-gradient(
+      135deg,
+      var(--kartoza-blue) 0%,
+      var(--kartoza-blue-dark) 55%,
+      #285770 100%);
+}
+
+
+/* ============================================================
+ * BRAND UTILITY CLASSES (scoped to brand-2026 theme so the current
+ * site stays untouched; lift the scope later when promoting to
+ * default).  Available for sub-issue F1..F9 PRs to opt into.
+ * ============================================================ */
+
+/* Eyebrow — "KARTOZA · X" letter-spaced uppercase (Brand Pack FR-024). */
+html[data-theme="kartoza-2026"] .brand-eyebrow {
+  font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--kartoza-muted);
+  display: inline-block;
+  margin-bottom: 0.4rem;
+}
+
+/* Accent display style — Lato Italic + Amber (Brand Pack FR-022). */
+html[data-theme="kartoza-2026"] .brand-display {
+  font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--kartoza-amber);
+}
+
+/* Full-bleed motif banner — full saturation (FR-031). */
+html[data-theme="kartoza-2026"] .brand-motif-banner {
+  background: url('/img/brand/kartoza-motif.png') center/cover no-repeat;
+  min-height: 220px;
+}
+
+/* Slanted section divider (FR-030 motif device). */
+html[data-theme="kartoza-2026"] .brand-slant-divider {
+  background: url('/img/brand/slant_divider.png') center/cover no-repeat;
+  height: 96px;
+}
+
+/* Slanted title strip — heavier motif element for section title rows. */
+html[data-theme="kartoza-2026"] .brand-slant-title {
+  background: url('/img/brand/slant_title.png') center/cover no-repeat;
+  min-height: 200px;
+}
+
+/* "Clearing" container for placing the logo on a busy motif (FR-034).  */
+html[data-theme="kartoza-2026"] .brand-clearing {
+  background-color: rgba(255, 255, 255, 0.94);
+  border-radius: 18px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 16px rgba(56, 57, 57, 0.10);
+}
+
+
+/* ============================================================
+ * SECTION CHROME — light pass on commonly-visible patterns so
+ * the prototype theme reads as more than "different colours".
+ * ============================================================ */
+
+/* Cards / boxes: charcoal-tinted shadow (already wired via --shadow-*) */
+html[data-theme="kartoza-2026"] .box,
+html[data-theme="kartoza-2026"] .card {
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--kartoza-rule);
+}
+
+/* Section tag-line (the small pill at the top of sections like
+ * "FEATURED · Latest from Kartoza" on the YouTube page). */
+html[data-theme="kartoza-2026"] .section-tagline {
+  color: var(--kartoza-muted) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+}
+html[data-theme="kartoza-2026"] .section-tagline i {
+  color: var(--kartoza-amber) !important;
+}
+
+/* Subtitle next to "Watch them on YouTube" etc — make it cloud-tinted */
+html[data-theme="kartoza-2026"] .subtitle {
+  color: var(--kartoza-muted);
+}
+
