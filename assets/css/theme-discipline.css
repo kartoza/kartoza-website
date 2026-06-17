@@ -1,41 +1,27 @@
 /* ============================================================
  *  theme-discipline.css
  *
- *  Shared restraint layer applied to ANY active brand variant
- *  (any element with html[data-theme*="kartoza-"]).
+ *  Shared restraint + contrast layer applied to ANY active
+ *  brand variant (any element with html[data-theme*="kartoza-"]).
  *
- *  Core rules:
- *    - No gradients (brand pack deck p.8 DON'T).
- *    - Monochromatic surfaces: each defined surface has ONE bg
- *      colour, ONE text colour, ONE link colour.  No child
- *      element may paint a different bg.
- *    - Predictable contrast: text colour is bound to the
- *      surface, not to per-element rules in the underlying
- *      homepage.css.  Dark-on-dark / light-on-light cannot
- *      occur by construction.
+ *  Architecture: each defined surface is monochromatic.  ONE
+ *  bg colour.  ONE text colour.  ONE link colour.  Per-element
+ *  text rules from the underlying homepage.css are overridden
+ *  systemically so dark-on-dark / light-on-light cannot occur
+ *  by construction.
  *
- *  Each variant defines these CSS vars in :root[data-theme]:
+ *  CSS Selectors Level 4 `:not(complex-selector)` is used to
+ *  EXCLUDE DESCENDANTS of buttons/tags/icons from the
+ *  surface-text rules — so spans/i/svg INSIDE a button keep
+ *  the button's own colour (inherited from the variant CSS),
+ *  rather than being force-painted charcoal and disappearing
+ *  on a dark button.
  *
- *    --surface-body-bg          page canvas
- *    --surface-body-text        default body text
- *    --surface-body-link        default body link
- *    --surface-body-link-hover  hover state for body links
- *
- *    --surface-footer-bg        footer panel
- *    --surface-footer-text      footer text
- *    --surface-footer-link      footer link
- *    --surface-footer-link-hover footer link hover
- *
- *    --surface-panel-bg         page banners + CTA panels
- *    --surface-panel-text       text on those panels
- *    --surface-panel-border     thin border on those panels
- *
- *    --surface-icon-bg          icon-circle backdrops
- *    --surface-icon-text        icon glyph colour
- *
- *  Heroes are deliberately NOT touched here — each variant's
- *  own CSS owns its hero treatment (text colour must match the
- *  variant's chosen hero bg).
+ *  Required --surface-* CSS vars (each variant declares them):
+ *    --surface-body-bg / -text / -link / -link-hover
+ *    --surface-footer-bg / -text / -link / -link-hover
+ *    --surface-panel-bg / -text / -border
+ *    --surface-icon-bg / -text
  * ============================================================ */
 
 
@@ -50,7 +36,7 @@ html[data-theme*="kartoza-"] [style*="radial-gradient"] {
 
 
 /* ============================================================
- * 2. BODY — page canvas + default text
+ * 2. BODY — page canvas + default text + default link
  * ============================================================ */
 
 html[data-theme*="kartoza-"] body {
@@ -58,36 +44,28 @@ html[data-theme*="kartoza-"] body {
   color: var(--surface-body-text) !important;
 }
 
-/* Default link colour everywhere outside footer / hero / button */
-html[data-theme*="kartoza-"] a:not(.button):not(.footer-cta-btn):not([class*="-hero"] *) {
+html[data-theme*="kartoza-"] a:not(.button):not(.footer-cta-btn):not(.footer-cta-primary):not(.footer-cta-secondary) {
   color: var(--surface-body-link) !important;
 }
-html[data-theme*="kartoza-"] a:not(.button):not(.footer-cta-btn):not([class*="-hero"] *):hover {
+html[data-theme*="kartoza-"] a:not(.button):not(.footer-cta-btn):not(.footer-cta-primary):not(.footer-cta-secondary):hover {
   color: var(--surface-body-link-hover) !important;
 }
 
 
 /* ============================================================
- * 3. SECTIONS — alternating canvas, charcoal text by default
+ * 3. SECTIONS — heading/paragraph/list text forced to body text
  *
- * The underlying homepage.css scatters per-element text colour
- * rules (.X-title { color: white }, .X-meta { color: amber }
- * etc.) that were designed for original-theme dark gradients.
- * Force section content back to the variant's body text colour
- * so contrast stays predictable on white/cloud bgs.
+ * Excludes descendants of buttons / tags / icon-circles so
+ * those keep their own colour (set by the variant CSS).
  * ============================================================ */
 
-html[data-theme*="kartoza-"] section:not([class*="-hero"]) h1,
-html[data-theme*="kartoza-"] section:not([class*="-hero"]) h2,
-html[data-theme*="kartoza-"] section:not([class*="-hero"]) h3,
-html[data-theme*="kartoza-"] section:not([class*="-hero"]) h4,
-html[data-theme*="kartoza-"] section:not([class*="-hero"]) h5,
-html[data-theme*="kartoza-"] section:not([class*="-hero"]) h6,
-html[data-theme*="kartoza-"] section:not([class*="-hero"]) p,
-html[data-theme*="kartoza-"] section:not([class*="-hero"]) li,
-html[data-theme*="kartoza-"] section:not([class*="-hero"]) dt,
-html[data-theme*="kartoza-"] section:not([class*="-hero"]) dd,
-html[data-theme*="kartoza-"] section:not([class*="-hero"]) blockquote {
+html[data-theme*="kartoza-"] section:not([class*="-hero"]) :is(h1, h2, h3, h4, h5, h6, p, li, dt, dd, blockquote):not(
+  .button *, .footer-cta-btn *,
+  .tag *,
+  [class*="-card-icon"] *, [class*="card-badge-icon"] *,
+  .product-card-icon *, .partner-feature-icon *, .partners-why-icon *,
+  .partner-logo-placeholder *, .card-badge *, .showcase-badge *
+) {
   color: var(--surface-body-text) !important;
 }
 
@@ -95,11 +73,10 @@ html[data-theme*="kartoza-"] section:not([class*="-hero"]) blockquote {
 /* ============================================================
  * 4. CARDS — white bg, charcoal text, flat 1px border
  *
- * The underlying theme has tons of card variants
- * (.card / .box / .main-card / .product-card / .service-card /
- *  .post-card / .partner-card / .app-card / .gallery-card /
- *  .testimonial-card / .docker-card / .training-card etc.).
- * One rule covers them all via attribute selector.
+ * `:not(complex-selector)` excludes buttons + tags + icon
+ * containers AND THEIR DESCENDANTS so glyphs inside icon
+ * circles and span text inside buttons aren't forced to the
+ * surface text colour.
  * ============================================================ */
 
 html[data-theme*="kartoza-"] [class*="-card"]:not([class*="-card-header"]):not([class*="-card-icon"]):not([class*="-cta-card"]),
@@ -119,9 +96,40 @@ html[data-theme*="kartoza-"] .card * {
   background-image: none !important;
 }
 
-html[data-theme*="kartoza-"] [class*="-card"] *:not(a):not(.button):not(.tag):not(button):not(input):not([class*="-icon"]):not([class*="-image"]):not(img),
-html[data-theme*="kartoza-"] .box *:not(a):not(.button):not(.tag):not(button):not(input):not([class*="-icon"]):not([class*="-image"]):not(img),
-html[data-theme*="kartoza-"] .card *:not(a):not(.button):not(.tag):not(button):not(input):not([class*="-icon"]):not([class*="-image"]):not(img) {
+html[data-theme*="kartoza-"] [class*="-card"] *:not(
+  a, .button, .button *,
+  .tag, .tag *,
+  button, button *,
+  input, textarea, select,
+  i, svg, svg *,
+  [class*="-icon"], [class*="-icon"] *,
+  [class*="-image"], [class*="-image"] *,
+  img,
+  .card-badge, .card-badge *,
+  .card-badge-icon, .card-badge-icon *,
+  .showcase-badge, .showcase-badge *,
+  .footer-cta-btn, .footer-cta-btn *
+),
+html[data-theme*="kartoza-"] .box *:not(
+  a, .button, .button *,
+  .tag, .tag *,
+  button, button *,
+  input, textarea, select,
+  i, svg, svg *,
+  [class*="-icon"], [class*="-icon"] *,
+  [class*="-image"], [class*="-image"] *,
+  img
+),
+html[data-theme*="kartoza-"] .card *:not(
+  a, .button, .button *,
+  .tag, .tag *,
+  button, button *,
+  input, textarea, select,
+  i, svg, svg *,
+  [class*="-icon"], [class*="-icon"] *,
+  [class*="-image"], [class*="-image"] *,
+  img
+) {
   color: var(--surface-body-text) !important;
 }
 
@@ -130,7 +138,6 @@ html[data-theme*="kartoza-"] .card *:not(a):not(.button):not(.tag):not(button):n
  * 5. FOOTER — monochromatic.  ONE bg, ONE text, ONE link.
  * ============================================================ */
 
-/* (a) strip background-image on EVERYTHING inside the footer */
 html[data-theme*="kartoza-"] footer,
 html[data-theme*="kartoza-"] footer *,
 html[data-theme*="kartoza-"] .footer,
@@ -138,7 +145,6 @@ html[data-theme*="kartoza-"] .footer * {
   background-image: none !important;
 }
 
-/* (b) the <footer> element itself paints the bg */
 html[data-theme*="kartoza-"] footer,
 html[data-theme*="kartoza-"] .footer {
   background-color: var(--surface-footer-bg) !important;
@@ -146,33 +152,53 @@ html[data-theme*="kartoza-"] .footer {
   box-shadow: none !important;
 }
 
-/* (c) all descendant containers go transparent so parent shows */
 html[data-theme*="kartoza-"] footer *,
 html[data-theme*="kartoza-"] .footer * {
   background-color: transparent !important;
 }
 
-/* (d) all non-interactive text takes the surface text colour */
-html[data-theme*="kartoza-"] footer *:not(a):not(button):not(input):not(textarea):not(select):not(.button):not(.footer-cta-btn):not(.footer-cta-primary):not(.footer-cta-secondary),
-html[data-theme*="kartoza-"] .footer *:not(a):not(button):not(input):not(textarea):not(select):not(.button):not(.footer-cta-btn):not(.footer-cta-primary):not(.footer-cta-secondary) {
+/* Non-interactive text in footer = surface text.
+ * Excludes descendants of buttons / tags so their own colour wins. */
+html[data-theme*="kartoza-"] footer *:not(
+  a, a *,
+  button, button *,
+  input, textarea, select,
+  .button, .button *,
+  .footer-cta-btn, .footer-cta-btn *,
+  .footer-cta-primary, .footer-cta-primary *,
+  .footer-cta-secondary, .footer-cta-secondary *,
+  .tag, .tag *,
+  i, svg, svg *
+),
+html[data-theme*="kartoza-"] .footer *:not(
+  a, a *,
+  button, button *,
+  input, textarea, select,
+  .button, .button *,
+  .footer-cta-btn, .footer-cta-btn *,
+  .footer-cta-primary, .footer-cta-primary *,
+  .footer-cta-secondary, .footer-cta-secondary *,
+  .tag, .tag *,
+  i, svg, svg *
+) {
   color: var(--surface-footer-text) !important;
 }
 
-/* (e) all links + inner spans/icons take the link colour */
-html[data-theme*="kartoza-"] footer a,
-html[data-theme*="kartoza-"] footer a *,
-html[data-theme*="kartoza-"] .footer a,
-html[data-theme*="kartoza-"] .footer a * {
+/* Links (and their inner spans/icons) — footer-link colour. */
+html[data-theme*="kartoza-"] footer a:not(.button):not(.footer-cta-btn):not(.footer-cta-primary):not(.footer-cta-secondary),
+html[data-theme*="kartoza-"] footer a:not(.button):not(.footer-cta-btn):not(.footer-cta-primary):not(.footer-cta-secondary) *,
+html[data-theme*="kartoza-"] .footer a:not(.button):not(.footer-cta-btn):not(.footer-cta-primary):not(.footer-cta-secondary),
+html[data-theme*="kartoza-"] .footer a:not(.button):not(.footer-cta-btn):not(.footer-cta-primary):not(.footer-cta-secondary) * {
   color: var(--surface-footer-link) !important;
 }
-html[data-theme*="kartoza-"] footer a:hover,
-html[data-theme*="kartoza-"] footer a:hover *,
-html[data-theme*="kartoza-"] .footer a:hover,
-html[data-theme*="kartoza-"] .footer a:hover * {
+html[data-theme*="kartoza-"] footer a:not(.button):not(.footer-cta-btn):hover,
+html[data-theme*="kartoza-"] footer a:not(.button):not(.footer-cta-btn):hover *,
+html[data-theme*="kartoza-"] .footer a:not(.button):not(.footer-cta-btn):hover,
+html[data-theme*="kartoza-"] .footer a:not(.button):not(.footer-cta-btn):hover * {
   color: var(--surface-footer-link-hover) !important;
 }
 
-/* (f) footer CTA buttons get a distinct flat fill */
+/* Footer CTA buttons — flat fill, distinct from inline links. */
 html[data-theme*="kartoza-"] .footer-cta-btn,
 html[data-theme*="kartoza-"] .footer-cta-primary,
 html[data-theme*="kartoza-"] .footer-cta-secondary {
@@ -182,13 +208,6 @@ html[data-theme*="kartoza-"] .footer-cta-secondary {
   border-radius: 2px !important;
   box-shadow: none !important;
   font-weight: 700 !important;
-  transform: none !important;
-}
-html[data-theme*="kartoza-"] .footer-cta-btn:hover,
-html[data-theme*="kartoza-"] .footer-cta-primary:hover,
-html[data-theme*="kartoza-"] .footer-cta-secondary:hover {
-  background-color: var(--surface-footer-link-hover) !important;
-  color: var(--surface-footer-bg) !important;
   transform: none !important;
 }
 
@@ -227,21 +246,28 @@ html[data-theme*="kartoza-"] [class*="-cta-card"] *,
 html[data-theme*="kartoza-"] .partner-card-header * {
   background-image: none !important;
 }
-html[data-theme*="kartoza-"] .portfolio-header *:not(a):not(.button),
-html[data-theme*="kartoza-"] .training-header *:not(a):not(.button),
-html[data-theme*="kartoza-"] .blog-header *:not(a):not(.button),
-html[data-theme*="kartoza-"] .solutions-header *:not(a):not(.button),
-html[data-theme*="kartoza-"] .section-list-header *:not(a):not(.button),
-html[data-theme*="kartoza-"] [class*="-cta-section"] *:not(a):not(.button),
-html[data-theme*="kartoza-"] [class*="-final-cta"] *:not(a):not(.button),
-html[data-theme*="kartoza-"] [class*="-cta-card"] *:not(a):not(.button),
-html[data-theme*="kartoza-"] .partner-card-header *:not(a):not(.button) {
+
+/* Panel text — exclude button/tag/icon descendants. */
+html[data-theme*="kartoza-"] .portfolio-header *:not(a, a *, .button, .button *, .tag, .tag *, i, svg, svg *),
+html[data-theme*="kartoza-"] .training-header *:not(a, a *, .button, .button *, .tag, .tag *, i, svg, svg *),
+html[data-theme*="kartoza-"] .blog-header *:not(a, a *, .button, .button *, .tag, .tag *, i, svg, svg *),
+html[data-theme*="kartoza-"] .solutions-header *:not(a, a *, .button, .button *, .tag, .tag *, i, svg, svg *),
+html[data-theme*="kartoza-"] .section-list-header *:not(a, a *, .button, .button *, .tag, .tag *, i, svg, svg *),
+html[data-theme*="kartoza-"] [class*="-cta-section"] *:not(a, a *, .button, .button *, .tag, .tag *, i, svg, svg *),
+html[data-theme*="kartoza-"] [class*="-final-cta"] *:not(a, a *, .button, .button *, .tag, .tag *, i, svg, svg *),
+html[data-theme*="kartoza-"] [class*="-cta-card"] *:not(a, a *, .button, .button *, .tag, .tag *, i, svg, svg *),
+html[data-theme*="kartoza-"] .partner-card-header *:not(a, a *, .button, .button *, .tag, .tag *, i, svg, svg *) {
   color: var(--surface-panel-text) !important;
 }
 
 
 /* ============================================================
- * 7. ICON BACKDROPS — flat circle fills
+ * 7. ICON BACKDROPS — flat circle fills.
+ *
+ * The container takes --surface-icon-bg + --surface-icon-text.
+ * The <i>/<svg> glyph INSIDE inherits the container's colour
+ * so the glyph is the icon-text colour (white) on the icon-bg
+ * colour.  Guaranteed contrast — no off-palette accidents.
  * ============================================================ */
 
 html[data-theme*="kartoza-"] .product-card-icon,
@@ -249,11 +275,33 @@ html[data-theme*="kartoza-"] .partner-feature-icon,
 html[data-theme*="kartoza-"] .partners-why-icon,
 html[data-theme*="kartoza-"] .partner-logo-placeholder,
 html[data-theme*="kartoza-"] [class*="-icon-circle"],
-html[data-theme*="kartoza-"] [class*="card-badge-icon"] {
+html[data-theme*="kartoza-"] .card-badge-icon {
   background: var(--surface-icon-bg) !important;
   background-image: none !important;
   color: var(--surface-icon-text) !important;
   box-shadow: none !important;
+}
+
+/* Glyphs inside icon containers inherit container colour. */
+html[data-theme*="kartoza-"] .product-card-icon i,
+html[data-theme*="kartoza-"] .product-card-icon svg,
+html[data-theme*="kartoza-"] .product-card-icon svg *,
+html[data-theme*="kartoza-"] .partner-feature-icon i,
+html[data-theme*="kartoza-"] .partner-feature-icon svg,
+html[data-theme*="kartoza-"] .partner-feature-icon svg *,
+html[data-theme*="kartoza-"] .partners-why-icon i,
+html[data-theme*="kartoza-"] .partners-why-icon svg,
+html[data-theme*="kartoza-"] .partners-why-icon svg *,
+html[data-theme*="kartoza-"] .partner-logo-placeholder i,
+html[data-theme*="kartoza-"] .partner-logo-placeholder svg,
+html[data-theme*="kartoza-"] [class*="-icon-circle"] i,
+html[data-theme*="kartoza-"] [class*="-icon-circle"] svg,
+html[data-theme*="kartoza-"] .card-badge-icon i,
+html[data-theme*="kartoza-"] .card-badge-icon svg,
+html[data-theme*="kartoza-"] .card-badge-icon svg *,
+html[data-theme*="kartoza-"] .card-badge i {
+  color: var(--surface-icon-text) !important;
+  fill: var(--surface-icon-text) !important;
 }
 
 
@@ -276,9 +324,35 @@ html[data-theme*="kartoza-"] .text-gradient {
  * ============================================================ */
 
 html[data-theme*="kartoza-"] .button,
-html[data-theme*="kartoza-"] button,
+html[data-theme*="kartoza-"] button.button,
+html[data-theme*="kartoza-"] a.button,
 html[data-theme*="kartoza-"] .button:hover,
 html[data-theme*="kartoza-"] button:hover {
   transform: none !important;
   box-shadow: none !important;
+}
+
+
+/* ============================================================
+ * 10. BUTTON / TAG / ICON DESCENDANT COLOUR INHERITANCE
+ *
+ * Belt-and-braces: every span/i/svg INSIDE a button/tag/icon
+ * inherits its parent's colour so it gets the variant's
+ * button-color, not the surface-text colour from above.
+ * ============================================================ */
+
+html[data-theme*="kartoza-"] .button > *,
+html[data-theme*="kartoza-"] .button > * > *,
+html[data-theme*="kartoza-"] a.button > *,
+html[data-theme*="kartoza-"] a.button > * > *,
+html[data-theme*="kartoza-"] button.button > *,
+html[data-theme*="kartoza-"] button.button > * > *,
+html[data-theme*="kartoza-"] [class*="-cta-btn"] > *,
+html[data-theme*="kartoza-"] [class*="-cta-btn"] > * > *,
+html[data-theme*="kartoza-"] .footer-cta-primary > *,
+html[data-theme*="kartoza-"] .footer-cta-secondary > *,
+html[data-theme*="kartoza-"] .tag > *,
+html[data-theme*="kartoza-"] .showcase-badge > *,
+html[data-theme*="kartoza-"] .card-badge > * {
+  color: inherit !important;
 }

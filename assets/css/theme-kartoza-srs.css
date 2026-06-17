@@ -53,7 +53,7 @@
   --surface-panel-bg:         var(--k-white);
   --surface-panel-text:       var(--k-charcoal);
   --surface-panel-border:     var(--k-rule);
-  --surface-icon-bg:          var(--k-blue);
+  --surface-icon-bg:          var(--k-blue-dark);  /* AA contrast vs white */
   --surface-icon-text:        var(--k-white);
 }
 
