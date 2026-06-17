@@ -39,6 +39,22 @@
   --shadow-md:     none;
   --shadow-lg:     none;
   --shadow-xl:     none;
+
+  --surface-body-bg:          var(--k-white);
+  --surface-body-text:        var(--k-charcoal);
+  --surface-body-link:        var(--k-blue-dark);
+  --surface-body-link-hover:  var(--k-charcoal);
+  /* Document feel: white footer, muted text, blue links.
+   * Panels are white-with-grey-border (no fill decoration). */
+  --surface-footer-bg:        var(--k-white);
+  --surface-footer-text:      var(--k-muted);
+  --surface-footer-link:      var(--k-blue-dark);
+  --surface-footer-link-hover:var(--k-charcoal);
+  --surface-panel-bg:         var(--k-white);
+  --surface-panel-text:       var(--k-charcoal);
+  --surface-panel-border:     var(--k-rule);
+  --surface-icon-bg:          var(--k-blue);
+  --surface-icon-text:        var(--k-white);
 }
 
 

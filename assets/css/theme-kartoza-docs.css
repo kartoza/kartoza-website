@@ -39,6 +39,20 @@
   --shadow-md:     none;
   --shadow-lg:     none;
   --shadow-xl:     none;
+
+  --surface-body-bg:          var(--k-white);
+  --surface-body-text:        var(--k-charcoal);
+  --surface-body-link:        var(--k-blue-dark);
+  --surface-body-link-hover:  var(--k-blue-deeper);
+  --surface-footer-bg:        var(--k-ink);
+  --surface-footer-text:      var(--k-cloud);
+  --surface-footer-link:      var(--k-blue);
+  --surface-footer-link-hover:var(--k-white);
+  --surface-panel-bg:         var(--k-cloud);
+  --surface-panel-text:       var(--k-charcoal);
+  --surface-panel-border:     var(--k-rule);
+  --surface-icon-bg:          var(--k-blue-dark);
+  --surface-icon-text:        var(--k-white);
 }
 
 

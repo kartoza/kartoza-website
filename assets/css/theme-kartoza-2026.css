@@ -45,6 +45,21 @@
   --shadow-md:     none;
   --shadow-lg:     none;
   --shadow-xl:     none;
+
+  /* Discipline-layer surfaces (consumed by theme-discipline.css). */
+  --surface-body-bg:          var(--k-white);
+  --surface-body-text:        var(--k-charcoal);
+  --surface-body-link:        var(--k-blue-dark);
+  --surface-body-link-hover:  var(--k-charcoal);
+  --surface-footer-bg:        var(--k-charcoal);
+  --surface-footer-text:      var(--k-cloud);
+  --surface-footer-link:      var(--k-amber);
+  --surface-footer-link-hover:var(--k-white);
+  --surface-panel-bg:         var(--k-cloud);
+  --surface-panel-text:       var(--k-charcoal);
+  --surface-panel-border:     var(--k-rule);
+  --surface-icon-bg:          var(--k-blue);
+  --surface-icon-text:        var(--k-white);
 }
 
 

@@ -1,0 +1,284 @@
+/* ============================================================
+ *  theme-discipline.css
+ *
+ *  Shared restraint layer applied to ANY active brand variant
+ *  (any element with html[data-theme*="kartoza-"]).
+ *
+ *  Core rules:
+ *    - No gradients (brand pack deck p.8 DON'T).
+ *    - Monochromatic surfaces: each defined surface has ONE bg
+ *      colour, ONE text colour, ONE link colour.  No child
+ *      element may paint a different bg.
+ *    - Predictable contrast: text colour is bound to the
+ *      surface, not to per-element rules in the underlying
+ *      homepage.css.  Dark-on-dark / light-on-light cannot
+ *      occur by construction.
+ *
+ *  Each variant defines these CSS vars in :root[data-theme]:
+ *
+ *    --surface-body-bg          page canvas
+ *    --surface-body-text        default body text
+ *    --surface-body-link        default body link
+ *    --surface-body-link-hover  hover state for body links
+ *
+ *    --surface-footer-bg        footer panel
+ *    --surface-footer-text      footer text
+ *    --surface-footer-link      footer link
+ *    --surface-footer-link-hover footer link hover
+ *
+ *    --surface-panel-bg         page banners + CTA panels
+ *    --surface-panel-text       text on those panels
+ *    --surface-panel-border     thin border on those panels
+ *
+ *    --surface-icon-bg          icon-circle backdrops
+ *    --surface-icon-text        icon glyph colour
+ *
+ *  Heroes are deliberately NOT touched here — each variant's
+ *  own CSS owns its hero treatment (text colour must match the
+ *  variant's chosen hero bg).
+ * ============================================================ */
+
+
+/* ============================================================
+ * 1. UNIVERSAL — strip every inline-style gradient
+ * ============================================================ */
+
+html[data-theme*="kartoza-"] [style*="linear-gradient"],
+html[data-theme*="kartoza-"] [style*="radial-gradient"] {
+  background-image: none !important;
+}
+
+
+/* ============================================================
+ * 2. BODY — page canvas + default text
+ * ============================================================ */
+
+html[data-theme*="kartoza-"] body {
+  background-color: var(--surface-body-bg) !important;
+  color: var(--surface-body-text) !important;
+}
+
+/* Default link colour everywhere outside footer / hero / button */
+html[data-theme*="kartoza-"] a:not(.button):not(.footer-cta-btn):not([class*="-hero"] *) {
+  color: var(--surface-body-link) !important;
+}
+html[data-theme*="kartoza-"] a:not(.button):not(.footer-cta-btn):not([class*="-hero"] *):hover {
+  color: var(--surface-body-link-hover) !important;
+}
+
+
+/* ============================================================
+ * 3. SECTIONS — alternating canvas, charcoal text by default
+ *
+ * The underlying homepage.css scatters per-element text colour
+ * rules (.X-title { color: white }, .X-meta { color: amber }
+ * etc.) that were designed for original-theme dark gradients.
+ * Force section content back to the variant's body text colour
+ * so contrast stays predictable on white/cloud bgs.
+ * ============================================================ */
+
+html[data-theme*="kartoza-"] section:not([class*="-hero"]) h1,
+html[data-theme*="kartoza-"] section:not([class*="-hero"]) h2,
+html[data-theme*="kartoza-"] section:not([class*="-hero"]) h3,
+html[data-theme*="kartoza-"] section:not([class*="-hero"]) h4,
+html[data-theme*="kartoza-"] section:not([class*="-hero"]) h5,
+html[data-theme*="kartoza-"] section:not([class*="-hero"]) h6,
+html[data-theme*="kartoza-"] section:not([class*="-hero"]) p,
+html[data-theme*="kartoza-"] section:not([class*="-hero"]) li,
+html[data-theme*="kartoza-"] section:not([class*="-hero"]) dt,
+html[data-theme*="kartoza-"] section:not([class*="-hero"]) dd,
+html[data-theme*="kartoza-"] section:not([class*="-hero"]) blockquote {
+  color: var(--surface-body-text) !important;
+}
+
+
+/* ============================================================
+ * 4. CARDS — white bg, charcoal text, flat 1px border
+ *
+ * The underlying theme has tons of card variants
+ * (.card / .box / .main-card / .product-card / .service-card /
+ *  .post-card / .partner-card / .app-card / .gallery-card /
+ *  .testimonial-card / .docker-card / .training-card etc.).
+ * One rule covers them all via attribute selector.
+ * ============================================================ */
+
+html[data-theme*="kartoza-"] [class*="-card"]:not([class*="-card-header"]):not([class*="-card-icon"]):not([class*="-cta-card"]),
+html[data-theme*="kartoza-"] .box,
+html[data-theme*="kartoza-"] .card {
+  background: var(--surface-body-bg) !important;
+  background-image: none !important;
+  color: var(--surface-body-text) !important;
+  border: 1px solid var(--surface-panel-border) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+html[data-theme*="kartoza-"] [class*="-card"] *,
+html[data-theme*="kartoza-"] .box *,
+html[data-theme*="kartoza-"] .card * {
+  background-image: none !important;
+}
+
+html[data-theme*="kartoza-"] [class*="-card"] *:not(a):not(.button):not(.tag):not(button):not(input):not([class*="-icon"]):not([class*="-image"]):not(img),
+html[data-theme*="kartoza-"] .box *:not(a):not(.button):not(.tag):not(button):not(input):not([class*="-icon"]):not([class*="-image"]):not(img),
+html[data-theme*="kartoza-"] .card *:not(a):not(.button):not(.tag):not(button):not(input):not([class*="-icon"]):not([class*="-image"]):not(img) {
+  color: var(--surface-body-text) !important;
+}
+
+
+/* ============================================================
+ * 5. FOOTER — monochromatic.  ONE bg, ONE text, ONE link.
+ * ============================================================ */
+
+/* (a) strip background-image on EVERYTHING inside the footer */
+html[data-theme*="kartoza-"] footer,
+html[data-theme*="kartoza-"] footer *,
+html[data-theme*="kartoza-"] .footer,
+html[data-theme*="kartoza-"] .footer * {
+  background-image: none !important;
+}
+
+/* (b) the <footer> element itself paints the bg */
+html[data-theme*="kartoza-"] footer,
+html[data-theme*="kartoza-"] .footer {
+  background-color: var(--surface-footer-bg) !important;
+  color: var(--surface-footer-text) !important;
+  box-shadow: none !important;
+}
+
+/* (c) all descendant containers go transparent so parent shows */
+html[data-theme*="kartoza-"] footer *,
+html[data-theme*="kartoza-"] .footer * {
+  background-color: transparent !important;
+}
+
+/* (d) all non-interactive text takes the surface text colour */
+html[data-theme*="kartoza-"] footer *:not(a):not(button):not(input):not(textarea):not(select):not(.button):not(.footer-cta-btn):not(.footer-cta-primary):not(.footer-cta-secondary),
+html[data-theme*="kartoza-"] .footer *:not(a):not(button):not(input):not(textarea):not(select):not(.button):not(.footer-cta-btn):not(.footer-cta-primary):not(.footer-cta-secondary) {
+  color: var(--surface-footer-text) !important;
+}
+
+/* (e) all links + inner spans/icons take the link colour */
+html[data-theme*="kartoza-"] footer a,
+html[data-theme*="kartoza-"] footer a *,
+html[data-theme*="kartoza-"] .footer a,
+html[data-theme*="kartoza-"] .footer a * {
+  color: var(--surface-footer-link) !important;
+}
+html[data-theme*="kartoza-"] footer a:hover,
+html[data-theme*="kartoza-"] footer a:hover *,
+html[data-theme*="kartoza-"] .footer a:hover,
+html[data-theme*="kartoza-"] .footer a:hover * {
+  color: var(--surface-footer-link-hover) !important;
+}
+
+/* (f) footer CTA buttons get a distinct flat fill */
+html[data-theme*="kartoza-"] .footer-cta-btn,
+html[data-theme*="kartoza-"] .footer-cta-primary,
+html[data-theme*="kartoza-"] .footer-cta-secondary {
+  background-color: var(--surface-footer-link) !important;
+  color: var(--surface-footer-bg) !important;
+  border: none !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  font-weight: 700 !important;
+  transform: none !important;
+}
+html[data-theme*="kartoza-"] .footer-cta-btn:hover,
+html[data-theme*="kartoza-"] .footer-cta-primary:hover,
+html[data-theme*="kartoza-"] .footer-cta-secondary:hover {
+  background-color: var(--surface-footer-link-hover) !important;
+  color: var(--surface-footer-bg) !important;
+  transform: none !important;
+}
+
+
+/* ============================================================
+ * 6. DECORATIVE PAGE BANNERS & CTA PANELS
+ * ============================================================ */
+
+html[data-theme*="kartoza-"] .portfolio-header,
+html[data-theme*="kartoza-"] .training-header,
+html[data-theme*="kartoza-"] .blog-header,
+html[data-theme*="kartoza-"] .solutions-header,
+html[data-theme*="kartoza-"] .section-list-header,
+html[data-theme*="kartoza-"] [class*="-cta-section"],
+html[data-theme*="kartoza-"] [class*="-cta-card"],
+html[data-theme*="kartoza-"] [class*="-final-cta"],
+html[data-theme*="kartoza-"] .partners-cta-section,
+html[data-theme*="kartoza-"] .portfolio-cta-section,
+html[data-theme*="kartoza-"] .gallery-final-cta,
+html[data-theme*="kartoza-"] .gallery-cta-card,
+html[data-theme*="kartoza-"] .partner-card-header {
+  background: var(--surface-panel-bg) !important;
+  background-image: none !important;
+  color: var(--surface-panel-text) !important;
+  border: 1px solid var(--surface-panel-border) !important;
+  box-shadow: none !important;
+}
+html[data-theme*="kartoza-"] .portfolio-header *,
+html[data-theme*="kartoza-"] .training-header *,
+html[data-theme*="kartoza-"] .blog-header *,
+html[data-theme*="kartoza-"] .solutions-header *,
+html[data-theme*="kartoza-"] .section-list-header *,
+html[data-theme*="kartoza-"] [class*="-cta-section"] *,
+html[data-theme*="kartoza-"] [class*="-final-cta"] *,
+html[data-theme*="kartoza-"] [class*="-cta-card"] *,
+html[data-theme*="kartoza-"] .partner-card-header * {
+  background-image: none !important;
+}
+html[data-theme*="kartoza-"] .portfolio-header *:not(a):not(.button),
+html[data-theme*="kartoza-"] .training-header *:not(a):not(.button),
+html[data-theme*="kartoza-"] .blog-header *:not(a):not(.button),
+html[data-theme*="kartoza-"] .solutions-header *:not(a):not(.button),
+html[data-theme*="kartoza-"] .section-list-header *:not(a):not(.button),
+html[data-theme*="kartoza-"] [class*="-cta-section"] *:not(a):not(.button),
+html[data-theme*="kartoza-"] [class*="-final-cta"] *:not(a):not(.button),
+html[data-theme*="kartoza-"] [class*="-cta-card"] *:not(a):not(.button),
+html[data-theme*="kartoza-"] .partner-card-header *:not(a):not(.button) {
+  color: var(--surface-panel-text) !important;
+}
+
+
+/* ============================================================
+ * 7. ICON BACKDROPS — flat circle fills
+ * ============================================================ */
+
+html[data-theme*="kartoza-"] .product-card-icon,
+html[data-theme*="kartoza-"] .partner-feature-icon,
+html[data-theme*="kartoza-"] .partners-why-icon,
+html[data-theme*="kartoza-"] .partner-logo-placeholder,
+html[data-theme*="kartoza-"] [class*="-icon-circle"],
+html[data-theme*="kartoza-"] [class*="card-badge-icon"] {
+  background: var(--surface-icon-bg) !important;
+  background-image: none !important;
+  color: var(--surface-icon-text) !important;
+  box-shadow: none !important;
+}
+
+
+/* ============================================================
+ * 8. TEXT-GRADIENT EFFECTS — flatten to single colour
+ * ============================================================ */
+
+html[data-theme*="kartoza-"] .text-gradient {
+  background: none !important;
+  background-image: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: var(--surface-body-text, currentColor) !important;
+  color: var(--surface-body-text, currentColor) !important;
+}
+
+
+/* ============================================================
+ * 9. BUTTONS — kill transform hovers + box-shadows site-wide
+ * ============================================================ */
+
+html[data-theme*="kartoza-"] .button,
+html[data-theme*="kartoza-"] button,
+html[data-theme*="kartoza-"] .button:hover,
+html[data-theme*="kartoza-"] button:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
