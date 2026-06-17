@@ -1,0 +1,280 @@
+/* ============================================================
+ *  Variant B — DECK
+ *  Aesthetic: Brand Pack PDF deck — big titles, amber rule
+ *  below the title, white slides, soft cards.  Nunito.
+ *  Scope: html[data-theme="kartoza-deck"]
+ *
+ *  No gradients.  No glass.  No hover transforms.
+ * ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;0,900;1,400&display=swap');
+
+:root[data-theme="kartoza-deck"] {
+  --k-blue:       #54A2CC;
+  --k-blue-dark:  #2F7A9F;
+  --k-amber:      #EEB348;
+  --k-charcoal:   #383939;
+  --k-muted:      #676869;
+  --k-rule:       #E4E5E1;
+  --k-cloud:      #F5F5F2;
+  --k-white:      #FFFFFF;
+
+  --font-deck:    'Nunito', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:    'JetBrains Mono', Consolas, monospace;
+
+  --primary:       var(--k-blue);
+  --primary-dark:  var(--k-blue-dark);
+  --primary-light: #BFE0F0;
+  --accent:        var(--k-amber);
+  --text-dark:     var(--k-charcoal);
+  --text-muted:    var(--k-muted);
+  --light-bg:      var(--k-cloud);
+  --white:         var(--k-white);
+  --shadow-sm:     none;
+  --shadow-md:     none;
+  --shadow-lg:     none;
+  --shadow-xl:     none;
+}
+
+
+/* ---- Base */
+html[data-theme="kartoza-deck"],
+html[data-theme="kartoza-deck"] body {
+  font-family: var(--font-deck) !important;
+  color: var(--k-charcoal);
+  background: var(--k-white) !important;
+  line-height: 1.55;
+}
+html[data-theme="kartoza-deck"] h1,
+html[data-theme="kartoza-deck"] h2,
+html[data-theme="kartoza-deck"] h3,
+html[data-theme="kartoza-deck"] h4 {
+  font-family: var(--font-deck) !important;
+  color: var(--k-charcoal);
+  font-weight: 900;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+}
+html[data-theme="kartoza-deck"] code,
+html[data-theme="kartoza-deck"] pre {
+  font-family: var(--font-mono) !important;
+}
+html[data-theme="kartoza-deck"] a { color: var(--k-blue-dark); }
+html[data-theme="kartoza-deck"] a:hover { color: var(--k-charcoal); }
+
+
+/* ---- Navbar — solid white, thin grey rule */
+html[data-theme="kartoza-deck"] .navbar.is-fixed-top {
+  background: var(--k-white);
+  border-bottom: 1px solid var(--k-rule);
+  box-shadow: none;
+}
+html[data-theme="kartoza-deck"] .navbar-item,
+html[data-theme="kartoza-deck"] .navbar-link {
+  color: var(--k-charcoal);
+  font-weight: 700;
+}
+html[data-theme="kartoza-deck"] .navbar-item:hover,
+html[data-theme="kartoza-deck"] .navbar-link:hover {
+  background: transparent !important;
+  color: var(--k-blue-dark) !important;
+}
+
+
+/* ---- Hero — solid white slide, type-driven, amber rule
+ *      below the tagline (deck H1 idiom).  No motif overlay. */
+html[data-theme="kartoza-deck"] .hero.hero-home,
+html[data-theme="kartoza-deck"] section[class*="-hero"] {
+  background: var(--k-white) !important;
+  color: var(--k-charcoal);
+  position: relative;
+  padding: 5rem 1.5rem !important;
+  border-bottom: 1px solid var(--k-rule);
+}
+html[data-theme="kartoza-deck"] .hero.hero-home::before,
+html[data-theme="kartoza-deck"] .hero.hero-home::after,
+html[data-theme="kartoza-deck"] section[class*="-hero"]::before,
+html[data-theme="kartoza-deck"] section[class*="-hero"]::after {
+  content: none !important;
+}
+html[data-theme="kartoza-deck"] [class*="-hero-pattern"],
+html[data-theme="kartoza-deck"] [class*="-hero-overlay"],
+html[data-theme="kartoza-deck"] [class*="-hero-bg"],
+html[data-theme="kartoza-deck"] .hero-bg-pattern {
+  display: none !important;
+}
+
+html[data-theme="kartoza-deck"] .hero .hero-tagline,
+html[data-theme="kartoza-deck"] [class*="-hero-tagline"] {
+  display: inline-block;
+  background: transparent !important;
+  color: var(--k-muted) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase;
+  font-size: 0.75rem !important;
+  border: none !important;
+  padding: 0 0 0.75rem !important;
+  margin: 0 0 0.75rem !important;
+  border-bottom: 2px solid var(--k-amber) !important;
+}
+html[data-theme="kartoza-deck"] .hero h1,
+html[data-theme="kartoza-deck"] [class*="-hero-title"],
+html[data-theme="kartoza-deck"] .hero.hero-home .hero-company-name,
+html[data-theme="kartoza-deck"] section[class*="-hero"] .title {
+  color: var(--k-charcoal) !important;
+  font-weight: 900 !important;
+  font-size: clamp(2.5rem, 5vw, 4rem) !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.1 !important;
+  margin: 0 0 1rem !important;
+}
+html[data-theme="kartoza-deck"] .hero .hero-vision-statement,
+html[data-theme="kartoza-deck"] [class*="-hero-subtitle"],
+html[data-theme="kartoza-deck"] section[class*="-hero"] .subtitle {
+  color: var(--k-muted) !important;
+  font-weight: 400 !important;
+  font-style: italic !important;
+  background: transparent !important;
+  border: none !important;
+  font-size: 1.15rem !important;
+  margin: 0 0 1.75rem !important;
+}
+html[data-theme="kartoza-deck"] .hero .hero-vision-statement strong,
+html[data-theme="kartoza-deck"] .hero .hero-vision-statement .has-text-white {
+  color: var(--k-charcoal) !important;
+  font-weight: 900 !important;
+}
+
+html[data-theme="kartoza-deck"] .hero .button.is-primary,
+html[data-theme="kartoza-deck"] .hero .button.is-link,
+html[data-theme="kartoza-deck"] section[class*="-hero"] .button.is-primary {
+  background: var(--k-blue) !important;
+  color: var(--k-white) !important;
+  border: none !important;
+  font-weight: 700 !important;
+  border-radius: 2px !important;
+  padding: 0.7rem 1.3rem !important;
+  height: auto !important;
+  box-shadow: none !important;
+}
+html[data-theme="kartoza-deck"] .hero .button.is-outlined,
+html[data-theme="kartoza-deck"] section[class*="-hero"] .button.is-outlined {
+  background: transparent !important;
+  color: var(--k-charcoal) !important;
+  border: 1px solid var(--k-charcoal) !important;
+  font-weight: 700 !important;
+  border-radius: 2px !important;
+}
+
+
+/* ---- Sections — white / cloud alternating; big H2 + amber rule. */
+html[data-theme="kartoza-deck"] .section {
+  padding: 5rem 1.5rem;
+  background: var(--k-white);
+}
+html[data-theme="kartoza-deck"] .section:nth-of-type(even) {
+  background: var(--k-cloud);
+}
+
+html[data-theme="kartoza-deck"] .section-header {
+  background: transparent !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  margin: 0 0 3rem !important;
+  text-align: left;
+}
+html[data-theme="kartoza-deck"] .section-header::before,
+html[data-theme="kartoza-deck"] .section-header::after {
+  display: none !important;
+}
+html[data-theme="kartoza-deck"] .section-header .title,
+html[data-theme="kartoza-deck"] .section-header h2 {
+  color: var(--k-charcoal) !important;
+  font-weight: 900 !important;
+  font-size: clamp(1.75rem, 3.2vw, 2.4rem) !important;
+  letter-spacing: -0.02em !important;
+  margin: 0 0 0.75rem !important;
+  padding: 0 0 0.75rem !important;
+  border-bottom: 2px solid var(--k-amber) !important;
+}
+html[data-theme="kartoza-deck"] .section-header .subtitle,
+html[data-theme="kartoza-deck"] .section-header p {
+  color: var(--k-muted) !important;
+  font-weight: 400 !important;
+  font-size: 1.05rem !important;
+  font-style: normal !important;
+  margin: 0 !important;
+}
+
+
+/* ---- Cards — solid white, 1px border, no shadow, no lift. */
+html[data-theme="kartoza-deck"] .box,
+html[data-theme="kartoza-deck"] .card,
+html[data-theme="kartoza-deck"] .main-card,
+html[data-theme="kartoza-deck"] .service-card,
+html[data-theme="kartoza-deck"] .product-card {
+  background: var(--k-white) !important;
+  border: 1px solid var(--k-rule) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  padding: 1.75rem !important;
+  transform: none !important;
+}
+html[data-theme="kartoza-deck"] .box:hover,
+html[data-theme="kartoza-deck"] .card:hover,
+html[data-theme="kartoza-deck"] .main-card:hover {
+  border-color: var(--k-charcoal) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+
+/* ---- Buttons */
+html[data-theme="kartoza-deck"] .button {
+  border-radius: 2px;
+  font-weight: 700;
+  box-shadow: none !important;
+  transform: none !important;
+}
+html[data-theme="kartoza-deck"] .button.is-primary,
+html[data-theme="kartoza-deck"] .button.is-link {
+  background: var(--k-blue);
+  border-color: var(--k-blue);
+  color: var(--k-white);
+}
+html[data-theme="kartoza-deck"] .button.is-primary:hover,
+html[data-theme="kartoza-deck"] .button.is-link:hover {
+  background: var(--k-blue-dark);
+  border-color: var(--k-blue-dark);
+}
+html[data-theme="kartoza-deck"] .button.is-warning {
+  background: var(--k-amber);
+  border-color: var(--k-amber);
+  color: var(--k-charcoal);
+}
+
+
+/* ---- Footer — solid charcoal, no decoration. */
+html[data-theme="kartoza-deck"] .footer,
+html[data-theme="kartoza-deck"] footer {
+  background: var(--k-charcoal) !important;
+  color: var(--k-cloud) !important;
+  padding: 4rem 1.5rem 3rem;
+}
+html[data-theme="kartoza-deck"] .footer::before,
+html[data-theme="kartoza-deck"] footer::before {
+  content: none !important;
+}
+html[data-theme="kartoza-deck"] .footer a,
+html[data-theme="kartoza-deck"] footer a { color: var(--k-amber); }
+html[data-theme="kartoza-deck"] .footer a:hover,
+html[data-theme="kartoza-deck"] footer a:hover { color: var(--k-white); }
+
+
+/* ---- Bulma utility re-routes */
+html[data-theme="kartoza-deck"] .has-text-primary,
+html[data-theme="kartoza-deck"] .has-text-link  { color: var(--k-blue-dark) !important; }
+html[data-theme="kartoza-deck"] .has-text-warning { color: var(--k-amber) !important; }
+html[data-theme="kartoza-deck"] .has-background-primary { background: var(--k-blue) !important; color: var(--k-white) !important; }

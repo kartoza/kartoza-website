@@ -1,0 +1,351 @@
+/* ============================================================
+ *  Variant C — DOCUMENT
+ *  Aesthetic: Kartoza SRS Template — document feel, generous
+ *  margins, single column reading width, charcoal-header
+ *  tables, JetBrains-Mono code on Cloud bg.  Lato throughout.
+ *  Scope: html[data-theme="kartoza-srs"]
+ *
+ *  No gradients.  No shadows.  No motif overlays.
+ * ============================================================ */
+
+
+:root[data-theme="kartoza-srs"] {
+  --k-blue:        #54A2CC;
+  --k-blue-dark:   #2F7A9F;
+  --k-blue-tint:   #E5F1F7;
+  --k-amber:       #EEB348;
+  --k-amber-tint:  #FCF3E0;
+  --k-amber-dark:  #C28C2A;
+  --k-charcoal:    #383939;
+  --k-muted:       #676869;
+  --k-rule:        #D1D1D1;
+  --k-cloud:       #F5F5F2;
+  --k-white:       #FFFFFF;
+
+  --font-sans:     'Lato', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:     'JetBrains Mono', Consolas, monospace;
+
+  --doc-reading:   720px;
+
+  --primary:       var(--k-blue);
+  --primary-dark:  var(--k-blue-dark);
+  --primary-light: #BFE0F0;
+  --accent:        var(--k-amber);
+  --text-dark:     var(--k-charcoal);
+  --text-muted:    var(--k-muted);
+  --light-bg:      var(--k-cloud);
+  --white:         var(--k-white);
+  --shadow-sm:     none;
+  --shadow-md:     none;
+  --shadow-lg:     none;
+  --shadow-xl:     none;
+}
+
+
+/* ---- Base */
+html[data-theme="kartoza-srs"],
+html[data-theme="kartoza-srs"] body {
+  font-family: var(--font-sans) !important;
+  color: var(--k-charcoal);
+  background: var(--k-white) !important;
+  line-height: 1.65;
+  font-size: 16.5px;
+}
+html[data-theme="kartoza-srs"] h1,
+html[data-theme="kartoza-srs"] h2,
+html[data-theme="kartoza-srs"] h3,
+html[data-theme="kartoza-srs"] h4 {
+  font-family: var(--font-sans) !important;
+  color: var(--k-charcoal);
+  font-weight: 700;
+  line-height: 1.25;
+}
+html[data-theme="kartoza-srs"] h1 { font-weight: 900; font-size: 2.25rem; margin: 2.5rem 0 1rem; }
+html[data-theme="kartoza-srs"] h2 { font-size: 1.55rem; margin: 2.25rem 0 0.75rem; }
+html[data-theme="kartoza-srs"] h3 { font-size: 1.2rem;  margin: 1.75rem 0 0.5rem; }
+html[data-theme="kartoza-srs"] p  { margin-bottom: 1rem; }
+
+html[data-theme="kartoza-srs"] code,
+html[data-theme="kartoza-srs"] pre {
+  font-family: var(--font-mono) !important;
+}
+html[data-theme="kartoza-srs"] pre {
+  background: var(--k-cloud);
+  border: 1px solid var(--k-rule);
+  padding: 0.85rem 1rem;
+  border-radius: 0;
+  font-size: 0.9rem;
+  overflow-x: auto;
+}
+html[data-theme="kartoza-srs"] code:not(pre code) {
+  background: var(--k-cloud);
+  padding: 0.1rem 0.35rem;
+  font-size: 0.92em;
+}
+
+html[data-theme="kartoza-srs"] a {
+  color: var(--k-blue-dark);
+  border-bottom: 1px solid transparent;
+}
+html[data-theme="kartoza-srs"] a:hover {
+  border-bottom-color: var(--k-blue-dark);
+}
+
+
+/* ---- Navbar — solid white, 2px amber bottom rule (running-header idiom) */
+html[data-theme="kartoza-srs"] .navbar.is-fixed-top {
+  background: var(--k-white);
+  border-bottom: 2px solid var(--k-amber);
+  box-shadow: none;
+}
+html[data-theme="kartoza-srs"] .navbar-item,
+html[data-theme="kartoza-srs"] .navbar-link {
+  color: var(--k-charcoal);
+  font-weight: 600;
+}
+html[data-theme="kartoza-srs"] .navbar-item:hover,
+html[data-theme="kartoza-srs"] .navbar-link:hover {
+  background: transparent !important;
+  color: var(--k-blue-dark) !important;
+}
+
+
+/* ---- Hero — document-style cover.  White bg, eyebrow + title
+ *      + italic subtitle + amber tagline + thin amber rule. */
+html[data-theme="kartoza-srs"] .hero.hero-home,
+html[data-theme="kartoza-srs"] section[class*="-hero"] {
+  background: var(--k-white) !important;
+  color: var(--k-charcoal);
+  padding: 5rem 1.5rem !important;
+  border-bottom: 1px solid var(--k-rule);
+}
+html[data-theme="kartoza-srs"] .hero.hero-home::before,
+html[data-theme="kartoza-srs"] .hero.hero-home::after,
+html[data-theme="kartoza-srs"] section[class*="-hero"]::before,
+html[data-theme="kartoza-srs"] section[class*="-hero"]::after {
+  content: none !important;
+}
+html[data-theme="kartoza-srs"] [class*="-hero-pattern"],
+html[data-theme="kartoza-srs"] [class*="-hero-overlay"],
+html[data-theme="kartoza-srs"] [class*="-hero-bg"],
+html[data-theme="kartoza-srs"] .hero-bg-pattern {
+  display: none !important;
+}
+
+html[data-theme="kartoza-srs"] .hero .hero-tagline,
+html[data-theme="kartoza-srs"] [class*="-hero-tagline"] {
+  display: inline-block;
+  background: transparent !important;
+  color: var(--k-muted) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase;
+  font-size: 0.75rem !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 0 1rem !important;
+}
+html[data-theme="kartoza-srs"] .hero h1,
+html[data-theme="kartoza-srs"] [class*="-hero-title"],
+html[data-theme="kartoza-srs"] .hero.hero-home .hero-company-name,
+html[data-theme="kartoza-srs"] section[class*="-hero"] .title {
+  color: var(--k-charcoal) !important;
+  font-weight: 900 !important;
+  font-size: clamp(2rem, 4.5vw, 3.25rem) !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.1 !important;
+  margin: 0 0 1rem !important;
+}
+html[data-theme="kartoza-srs"] .hero .hero-vision-statement,
+html[data-theme="kartoza-srs"] [class*="-hero-subtitle"],
+html[data-theme="kartoza-srs"] section[class*="-hero"] .subtitle {
+  color: var(--k-muted) !important;
+  font-weight: 400 !important;
+  font-style: italic !important;
+  background: transparent !important;
+  border: none !important;
+  font-size: 1.1rem !important;
+  margin: 0 0 1.5rem !important;
+  max-width: var(--doc-reading);
+}
+html[data-theme="kartoza-srs"] .hero .hero-vision-statement strong,
+html[data-theme="kartoza-srs"] .hero .hero-vision-statement .has-text-white {
+  color: var(--k-amber-dark) !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+}
+
+html[data-theme="kartoza-srs"] .hero .button.is-primary,
+html[data-theme="kartoza-srs"] .hero .button.is-link,
+html[data-theme="kartoza-srs"] section[class*="-hero"] .button.is-primary {
+  background: var(--k-charcoal) !important;
+  color: var(--k-white) !important;
+  border: none !important;
+  font-weight: 700 !important;
+  border-radius: 0 !important;
+  padding: 0.7rem 1.3rem !important;
+  height: auto !important;
+  box-shadow: none !important;
+}
+html[data-theme="kartoza-srs"] .hero .button.is-outlined,
+html[data-theme="kartoza-srs"] section[class*="-hero"] .button.is-outlined {
+  background: transparent !important;
+  color: var(--k-charcoal) !important;
+  border: 1px solid var(--k-charcoal) !important;
+  font-weight: 700 !important;
+  border-radius: 0 !important;
+}
+
+
+/* ---- Sections — single-column reading width, generous space. */
+html[data-theme="kartoza-srs"] .section {
+  padding: 3.5rem 1.5rem;
+  background: var(--k-white);
+}
+html[data-theme="kartoza-srs"] .section .container {
+  max-width: var(--doc-reading);
+  margin: 0 auto;
+}
+
+html[data-theme="kartoza-srs"] .section-header {
+  background: transparent !important;
+  padding: 0 0 0.5rem !important;
+  border: none !important;
+  border-bottom: 1px solid var(--k-amber) !important;
+  border-radius: 0 !important;
+  margin: 0 0 2rem !important;
+  text-align: left;
+  max-width: var(--doc-reading);
+}
+html[data-theme="kartoza-srs"] .section-header::before,
+html[data-theme="kartoza-srs"] .section-header::after {
+  display: none !important;
+}
+html[data-theme="kartoza-srs"] .section-header .title,
+html[data-theme="kartoza-srs"] .section-header h2 {
+  color: var(--k-charcoal) !important;
+  font-weight: 700 !important;
+  font-size: 1.65rem !important;
+  letter-spacing: -0.005em !important;
+  margin: 0 0 0.4rem !important;
+}
+html[data-theme="kartoza-srs"] .section-header .subtitle,
+html[data-theme="kartoza-srs"] .section-header p {
+  color: var(--k-muted) !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  font-size: 1.02rem !important;
+  margin: 0 !important;
+}
+
+
+/* ---- Tables — solid charcoal header, no zebra. */
+html[data-theme="kartoza-srs"] table,
+html[data-theme="kartoza-srs"] .table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 1rem 0;
+  border: 1px solid var(--k-rule);
+}
+html[data-theme="kartoza-srs"] table th,
+html[data-theme="kartoza-srs"] .table th {
+  background: var(--k-charcoal);
+  color: var(--k-white);
+  font-weight: 700;
+  text-align: left;
+  padding: 0.6rem 0.85rem;
+}
+html[data-theme="kartoza-srs"] table td,
+html[data-theme="kartoza-srs"] .table td {
+  padding: 0.55rem 0.85rem;
+  border-bottom: 1px solid var(--k-rule);
+  background: var(--k-white);
+}
+
+
+/* ---- Cards — flat 1px border, no shadow. */
+html[data-theme="kartoza-srs"] .box,
+html[data-theme="kartoza-srs"] .card,
+html[data-theme="kartoza-srs"] .main-card,
+html[data-theme="kartoza-srs"] .service-card {
+  background: var(--k-white) !important;
+  border: 1px solid var(--k-rule) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 1.25rem !important;
+  transform: none !important;
+}
+html[data-theme="kartoza-srs"] .box:hover,
+html[data-theme="kartoza-srs"] .card:hover,
+html[data-theme="kartoza-srs"] .main-card:hover {
+  border-color: var(--k-charcoal) !important;
+}
+
+
+/* ---- Buttons */
+html[data-theme="kartoza-srs"] .button {
+  border-radius: 0;
+  font-weight: 600;
+  box-shadow: none !important;
+  transform: none !important;
+}
+html[data-theme="kartoza-srs"] .button.is-primary,
+html[data-theme="kartoza-srs"] .button.is-link {
+  background: var(--k-charcoal);
+  border-color: var(--k-charcoal);
+  color: var(--k-white);
+}
+html[data-theme="kartoza-srs"] .button.is-primary:hover,
+html[data-theme="kartoza-srs"] .button.is-link:hover {
+  background: var(--k-blue-dark);
+  border-color: var(--k-blue-dark);
+}
+
+
+/* ---- Footer — white with grey rule, document footer feel. */
+html[data-theme="kartoza-srs"] .footer,
+html[data-theme="kartoza-srs"] footer {
+  background: var(--k-white) !important;
+  color: var(--k-muted) !important;
+  border-top: 1px solid var(--k-rule);
+  padding: 2rem 1.5rem 1.5rem;
+  font-size: 0.9rem;
+}
+html[data-theme="kartoza-srs"] .footer::before,
+html[data-theme="kartoza-srs"] footer::before {
+  content: none !important;
+}
+html[data-theme="kartoza-srs"] .footer a,
+html[data-theme="kartoza-srs"] footer a { color: var(--k-blue-dark); }
+
+
+/* ---- Callout utility classes (document idiom) */
+html[data-theme="kartoza-srs"] .srs-info {
+  background: var(--k-blue-tint);
+  border-left: 3px solid var(--k-blue-dark);
+  padding: 0.85rem 1rem;
+  margin: 1rem 0;
+}
+html[data-theme="kartoza-srs"] .srs-info::before { content: 'Info — '; font-weight: 700; color: var(--k-blue-dark); }
+html[data-theme="kartoza-srs"] .srs-highlight {
+  background: var(--k-amber-tint);
+  border-left: 3px solid var(--k-amber);
+  padding: 0.85rem 1rem;
+  margin: 1rem 0;
+}
+html[data-theme="kartoza-srs"] .srs-highlight::before { content: 'Highlight — '; font-weight: 700; color: var(--k-amber-dark); }
+html[data-theme="kartoza-srs"] .srs-note {
+  background: var(--k-cloud);
+  border-left: 3px solid var(--k-rule);
+  padding: 0.85rem 1rem;
+  margin: 1rem 0;
+}
+html[data-theme="kartoza-srs"] .srs-note::before { content: 'Note — '; font-weight: 700; color: var(--k-muted); }
+
+
+/* ---- Bulma utility re-routes */
+html[data-theme="kartoza-srs"] .has-text-primary,
+html[data-theme="kartoza-srs"] .has-text-link  { color: var(--k-blue-dark) !important; }
+html[data-theme="kartoza-srs"] .has-text-warning { color: var(--k-amber-dark) !important; }
+html[data-theme="kartoza-srs"] .has-background-primary { background: var(--k-blue) !important; color: var(--k-white) !important; }

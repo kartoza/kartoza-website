@@ -1,0 +1,342 @@
+/* ============================================================
+ *  Variant D — MKDOCS
+ *  Aesthetic: kartoza-mcp Material-for-MkDocs site — dark
+ *  header, light body, compact density, single border, no
+ *  decoration.  Inter typeface.
+ *  Scope: html[data-theme="kartoza-docs"]
+ *
+ *  No gradients.  No shadows.  No motif.  Flat material.
+ * ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root[data-theme="kartoza-docs"] {
+  --k-blue:        #54A2CC;
+  --k-blue-dark:   #2F7A9F;
+  --k-blue-deeper: #1F5B78;
+  --k-amber:       #EEB348;
+  --k-charcoal:    #383939;
+  --k-ink:         #1F1F20;     /* solid dark header / footer  */
+  --k-muted:       #676869;
+  --k-rule:        #E4E5E1;
+  --k-cloud:       #F7F8F6;
+  --k-white:       #FFFFFF;
+  --k-code-bg:     #1F1F20;
+  --k-code-fg:     #E6E8E6;
+
+  --font-docs:     'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono:     'JetBrains Mono', 'SF Mono', Consolas, monospace;
+
+  --primary:       var(--k-blue-dark);
+  --primary-dark:  var(--k-blue-deeper);
+  --primary-light: #BFE0F0;
+  --accent:        var(--k-amber);
+  --text-dark:     var(--k-charcoal);
+  --text-muted:    var(--k-muted);
+  --light-bg:      var(--k-cloud);
+  --white:         var(--k-white);
+  --shadow-sm:     none;
+  --shadow-md:     none;
+  --shadow-lg:     none;
+  --shadow-xl:     none;
+}
+
+
+/* ---- Base — compact, technical */
+html[data-theme="kartoza-docs"],
+html[data-theme="kartoza-docs"] body {
+  font-family: var(--font-docs) !important;
+  color: var(--k-charcoal);
+  background: var(--k-white) !important;
+  line-height: 1.6;
+  font-size: 15.5px;
+  -webkit-font-smoothing: antialiased;
+}
+html[data-theme="kartoza-docs"] h1,
+html[data-theme="kartoza-docs"] h2,
+html[data-theme="kartoza-docs"] h3,
+html[data-theme="kartoza-docs"] h4 {
+  font-family: var(--font-docs) !important;
+  color: var(--k-charcoal);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+html[data-theme="kartoza-docs"] h1 { font-size: 2rem; font-weight: 800; margin: 2rem 0 1rem; }
+html[data-theme="kartoza-docs"] h2 { font-size: 1.4rem; margin: 2rem 0 0.75rem; }
+html[data-theme="kartoza-docs"] h3 { font-size: 1.15rem; margin: 1.5rem 0 0.5rem; }
+
+html[data-theme="kartoza-docs"] code,
+html[data-theme="kartoza-docs"] pre {
+  font-family: var(--font-mono) !important;
+}
+html[data-theme="kartoza-docs"] pre {
+  background: var(--k-code-bg);
+  color: var(--k-code-fg);
+  padding: 1rem 1.15rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  border: none;
+}
+html[data-theme="kartoza-docs"] pre code { color: inherit; background: transparent; }
+html[data-theme="kartoza-docs"] code:not(pre code) {
+  background: var(--k-cloud);
+  color: var(--k-blue-deeper);
+  padding: 0.1rem 0.35rem;
+  border-radius: 2px;
+  font-size: 0.88em;
+}
+
+html[data-theme="kartoza-docs"] a {
+  color: var(--k-blue-dark);
+  font-weight: 500;
+}
+html[data-theme="kartoza-docs"] a:hover { color: var(--k-blue-deeper); text-decoration: underline; }
+
+
+/* ---- Navbar — solid ink */
+html[data-theme="kartoza-docs"] .navbar.is-fixed-top {
+  background: var(--k-ink);
+  border-bottom: none;
+  box-shadow: none;
+}
+html[data-theme="kartoza-docs"] .navbar-item,
+html[data-theme="kartoza-docs"] .navbar-link {
+  color: var(--k-cloud) !important;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+html[data-theme="kartoza-docs"] .navbar-item:hover,
+html[data-theme="kartoza-docs"] .navbar-link:hover {
+  background: rgba(255,255,255,0.06) !important;
+  color: var(--k-white) !important;
+}
+html[data-theme="kartoza-docs"] .navbar-dropdown {
+  background: var(--k-ink) !important;
+  border: none !important;
+  border-radius: 0 0 4px 4px;
+}
+html[data-theme="kartoza-docs"] .navbar-dropdown .navbar-item { color: var(--k-cloud) !important; }
+html[data-theme="kartoza-docs"] .navbar-dropdown .navbar-item:hover { background: rgba(255,255,255,0.06) !important; }
+html[data-theme="kartoza-docs"] .navbar-brand .navbar-item img {
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
+}
+
+
+/* ---- Hero — cloud bg, compact, no decoration. */
+html[data-theme="kartoza-docs"] .hero.hero-home,
+html[data-theme="kartoza-docs"] section[class*="-hero"] {
+  background: var(--k-cloud) !important;
+  color: var(--k-charcoal);
+  padding: 4rem 1.5rem !important;
+  border-bottom: 1px solid var(--k-rule);
+}
+html[data-theme="kartoza-docs"] .hero.hero-home::before,
+html[data-theme="kartoza-docs"] .hero.hero-home::after,
+html[data-theme="kartoza-docs"] section[class*="-hero"]::before,
+html[data-theme="kartoza-docs"] section[class*="-hero"]::after {
+  content: none !important;
+}
+html[data-theme="kartoza-docs"] [class*="-hero-pattern"],
+html[data-theme="kartoza-docs"] [class*="-hero-overlay"],
+html[data-theme="kartoza-docs"] [class*="-hero-bg"],
+html[data-theme="kartoza-docs"] .hero-bg-pattern {
+  display: none !important;
+}
+
+html[data-theme="kartoza-docs"] .hero .hero-tagline,
+html[data-theme="kartoza-docs"] [class*="-hero-tagline"] {
+  display: inline-block;
+  background: var(--k-white) !important;
+  color: var(--k-blue-deeper) !important;
+  border: 1px solid var(--k-rule) !important;
+  padding: 0.25rem 0.6rem !important;
+  border-radius: 2px;
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.04em;
+  margin: 0 0 1rem !important;
+}
+html[data-theme="kartoza-docs"] .hero h1,
+html[data-theme="kartoza-docs"] [class*="-hero-title"],
+html[data-theme="kartoza-docs"] .hero.hero-home .hero-company-name,
+html[data-theme="kartoza-docs"] section[class*="-hero"] .title {
+  color: var(--k-charcoal) !important;
+  font-weight: 800 !important;
+  font-size: clamp(1.85rem, 3.5vw, 2.75rem) !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.15 !important;
+  margin: 0 0 0.75rem !important;
+}
+html[data-theme="kartoza-docs"] .hero .hero-vision-statement,
+html[data-theme="kartoza-docs"] [class*="-hero-subtitle"],
+html[data-theme="kartoza-docs"] section[class*="-hero"] .subtitle {
+  color: var(--k-muted) !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  background: transparent !important;
+  border: none !important;
+  font-size: 1.05rem !important;
+  max-width: 720px;
+  margin: 0 0 1.5rem !important;
+}
+html[data-theme="kartoza-docs"] .hero .hero-vision-statement strong,
+html[data-theme="kartoza-docs"] .hero .hero-vision-statement .has-text-white {
+  color: var(--k-charcoal) !important;
+  font-weight: 700 !important;
+}
+
+html[data-theme="kartoza-docs"] .hero .button.is-primary,
+html[data-theme="kartoza-docs"] .hero .button.is-link,
+html[data-theme="kartoza-docs"] section[class*="-hero"] .button.is-primary {
+  background: var(--k-blue-dark) !important;
+  color: var(--k-white) !important;
+  border: none !important;
+  font-weight: 600 !important;
+  border-radius: 4px !important;
+  padding: 0.55rem 1rem !important;
+  height: auto !important;
+  box-shadow: none !important;
+}
+html[data-theme="kartoza-docs"] .hero .button.is-outlined,
+html[data-theme="kartoza-docs"] section[class*="-hero"] .button.is-outlined {
+  background: transparent !important;
+  color: var(--k-blue-dark) !important;
+  border: 1px solid var(--k-blue-dark) !important;
+  font-weight: 600 !important;
+  border-radius: 4px !important;
+}
+
+
+/* ---- Sections — white, tight rhythm */
+html[data-theme="kartoza-docs"] .section {
+  padding: 3rem 1.5rem;
+  background: var(--k-white);
+}
+html[data-theme="kartoza-docs"] .section + .section {
+  border-top: 1px solid var(--k-rule);
+}
+
+html[data-theme="kartoza-docs"] .section-header {
+  background: transparent !important;
+  padding: 0 0 0.5rem !important;
+  border: none !important;
+  border-bottom: 1px solid var(--k-rule) !important;
+  border-radius: 0 !important;
+  margin: 0 0 1.75rem !important;
+  text-align: left;
+}
+html[data-theme="kartoza-docs"] .section-header::before,
+html[data-theme="kartoza-docs"] .section-header::after {
+  display: none !important;
+}
+html[data-theme="kartoza-docs"] .section-header .title,
+html[data-theme="kartoza-docs"] .section-header h2 {
+  color: var(--k-charcoal) !important;
+  font-weight: 700 !important;
+  font-size: 1.5rem !important;
+  letter-spacing: -0.015em !important;
+  margin: 0 0 0.4rem !important;
+}
+html[data-theme="kartoza-docs"] .section-header .subtitle,
+html[data-theme="kartoza-docs"] .section-header p {
+  color: var(--k-muted) !important;
+  font-weight: 400 !important;
+  font-size: 0.98rem !important;
+  font-style: normal !important;
+  margin: 0 !important;
+}
+
+
+/* ---- Cards — 1px border, no shadow, no lift. */
+html[data-theme="kartoza-docs"] .box,
+html[data-theme="kartoza-docs"] .card,
+html[data-theme="kartoza-docs"] .main-card,
+html[data-theme="kartoza-docs"] .service-card {
+  background: var(--k-white) !important;
+  border: 1px solid var(--k-rule) !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  padding: 1.25rem !important;
+  transform: none !important;
+}
+html[data-theme="kartoza-docs"] .box:hover,
+html[data-theme="kartoza-docs"] .card:hover,
+html[data-theme="kartoza-docs"] .main-card:hover {
+  border-color: var(--k-blue-dark) !important;
+}
+
+
+/* ---- Buttons */
+html[data-theme="kartoza-docs"] .button {
+  border-radius: 4px;
+  font-weight: 600;
+  font-family: var(--font-docs);
+  box-shadow: none !important;
+  transform: none !important;
+}
+html[data-theme="kartoza-docs"] .button.is-primary,
+html[data-theme="kartoza-docs"] .button.is-link {
+  background: var(--k-blue-dark);
+  border-color: var(--k-blue-dark);
+  color: var(--k-white);
+}
+html[data-theme="kartoza-docs"] .button.is-primary:hover,
+html[data-theme="kartoza-docs"] .button.is-link:hover {
+  background: var(--k-blue-deeper);
+  border-color: var(--k-blue-deeper);
+}
+
+
+/* ---- Footer — solid ink */
+html[data-theme="kartoza-docs"] .footer,
+html[data-theme="kartoza-docs"] footer {
+  background: var(--k-ink) !important;
+  color: var(--k-cloud) !important;
+  padding: 2.5rem 1.5rem 2rem;
+  border-top: none;
+  font-size: 0.88rem;
+}
+html[data-theme="kartoza-docs"] .footer::before,
+html[data-theme="kartoza-docs"] footer::before {
+  content: none !important;
+}
+html[data-theme="kartoza-docs"] .footer a,
+html[data-theme="kartoza-docs"] footer a { color: var(--k-blue); }
+html[data-theme="kartoza-docs"] .footer a:hover,
+html[data-theme="kartoza-docs"] footer a:hover { color: var(--k-white); }
+
+
+/* ---- Tables */
+html[data-theme="kartoza-docs"] table,
+html[data-theme="kartoza-docs"] .table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  margin: 1rem 0;
+  background: var(--k-white);
+}
+html[data-theme="kartoza-docs"] table th,
+html[data-theme="kartoza-docs"] .table th {
+  background: var(--k-cloud);
+  color: var(--k-charcoal);
+  font-weight: 700;
+  text-align: left;
+  padding: 0.6rem 0.85rem;
+  border-bottom: 2px solid var(--k-rule);
+}
+html[data-theme="kartoza-docs"] table td,
+html[data-theme="kartoza-docs"] .table td {
+  padding: 0.55rem 0.85rem;
+  border-bottom: 1px solid var(--k-rule);
+}
+
+
+/* ---- Bulma utility re-routes */
+html[data-theme="kartoza-docs"] .has-text-primary,
+html[data-theme="kartoza-docs"] .has-text-link  { color: var(--k-blue-dark) !important; }
+html[data-theme="kartoza-docs"] .has-text-warning { color: var(--k-amber) !important; }
+html[data-theme="kartoza-docs"] .has-background-primary { background: var(--k-blue-dark) !important; color: var(--k-white) !important; }

@@ -1,7 +1,14 @@
 {{/* ==========================================================
      Theme switcher dropdown — navbar item.
      Toggles html[data-theme="..."] and persists in localStorage.
-     Phase A0.5 of epic #165.
+     Phase A0.5+ of epic #165.
+
+     Variants:
+       (none)            Current        — today's site, untouched
+       kartoza-2026      A: Editorial   — dark Stripe/Linear-style hero + clean sections
+       kartoza-deck      B: Deck        — Brand Pack PDF deck aesthetic (Nunito)
+       kartoza-srs       C: Document    — Brand Pack SRS Template aesthetic (Lato)
+       kartoza-docs      D: MkDocs      — kartoza-mcp Material-for-MkDocs aesthetic (Inter)
      ========================================================== */}}
 <div class="navbar-item theme-switcher">
   <button
@@ -14,20 +21,50 @@
     <span class="icon"><i class="fa-solid fa-palette"></i></span>
   </button>
   <div class="theme-switcher-dropdown" id="theme-switcher-dropdown">
+
     <button class="theme-option" type="button" data-theme="current">
-      <span class="theme-swatch" style="background: linear-gradient(135deg, #53a2cc, #E8A331);"></span>
+      <span class="theme-swatch" style="background: #9E9E9E;"></span>
       <span class="theme-option-label">
         Current
-        <small>Nunito + drift palette (today's site)</small>
+        <small>Today's site, untouched</small>
       </span>
     </button>
+
+    <div class="theme-divider"></div>
+    <div class="theme-section-label">Brand Pack variants</div>
+
     <button class="theme-option" type="button" data-theme="kartoza-2026">
-      <span class="theme-swatch" style="background: linear-gradient(135deg, #54A2CC, #EEB348);"></span>
+      <span class="theme-swatch" style="background: #383939;"></span>
       <span class="theme-option-label">
-        Kartoza Brand v1.0.1
-        <small>Lato + canonical palette (in progress)</small>
+        A: Editorial
+        <small>Solid charcoal hero · Lato · amber accent</small>
       </span>
     </button>
+
+    <button class="theme-option" type="button" data-theme="kartoza-deck">
+      <span class="theme-swatch" style="background: #EEB348;"></span>
+      <span class="theme-option-label">
+        B: Deck
+        <small>White slides · Nunito · amber rule under title</small>
+      </span>
+    </button>
+
+    <button class="theme-option" type="button" data-theme="kartoza-srs">
+      <span class="theme-swatch" style="background: #FFFFFF; box-shadow: inset 0 0 0 1px #D1D1D1; border-bottom: 2px solid #EEB348;"></span>
+      <span class="theme-option-label">
+        C: Document
+        <small>White document · Lato · 720px reading width</small>
+      </span>
+    </button>
+
+    <button class="theme-option" type="button" data-theme="kartoza-docs">
+      <span class="theme-swatch" style="background: #1F1F20;"></span>
+      <span class="theme-option-label">
+        D: MkDocs
+        <small>Dark header · light body · Inter · compact</small>
+      </span>
+    </button>
+
     <div class="theme-divider"></div>
     <a class="theme-link" href="https://github.com/kartoza/kartoza-website/issues/165" target="_blank" rel="noopener">
       <span class="icon"><i class="fa-brands fa-github"></i></span>
@@ -60,7 +97,6 @@
     try { localStorage.setItem(STORAGE_KEY, theme || 'current'); } catch (e) {}
   }
 
-  // Read whatever the head's early-set script applied (or default to current)
   var current = document.documentElement.getAttribute('data-theme') || 'current';
   applyTheme(current);
 

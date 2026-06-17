@@ -123,14 +123,17 @@
         {{ $themecss := resources.Get "css/theme.css" }}
         {{ $buttoncss := resources.Get "css/button.css" }}
 
-        {{/* Brand-alignment Phase A0.5 (epic #165):
-             token layer + switcher widget + experimental ribbon. */}}
+        {{/* Brand-alignment Phase A0.5+ (epic #165):
+             switcher + ribbon + 4 brand-pack-derived variants. */}}
         {{ $brand2026css := resources.Get "css/theme-kartoza-2026.css" }}
+        {{ $branddeckcss := resources.Get "css/theme-kartoza-deck.css" }}
+        {{ $brandsrscss  := resources.Get "css/theme-kartoza-srs.css" }}
+        {{ $branddocscss := resources.Get "css/theme-kartoza-docs.css" }}
         {{ $switchercss := resources.Get "css/theme-switcher.css" }}
         {{ $ribboncss := resources.Get "css/experimental-ribbon.css" }}
 
         {{/* must have the leading slash in css path or gh pages deploy will break */}}
-        {{ $css := slice $menucss $syntaxcss $customcss $animatecss $blockcss $highlightcss $overridescss $cookiecss $homepagecss $searchcss $engagementcss $regionalcss $trainingbookingcss $components $themecss $buttoncss $brand2026css $switchercss $ribboncss | resources.Concat "/css/all.css" | resources.Minify | resources.Fingerprint }}
+        {{ $css := slice $menucss $syntaxcss $customcss $animatecss $blockcss $highlightcss $overridescss $cookiecss $homepagecss $searchcss $engagementcss $regionalcss $trainingbookingcss $components $themecss $buttoncss $brand2026css $branddeckcss $brandsrscss $branddocscss $switchercss $ribboncss | resources.Concat "/css/all.css" | resources.Minify | resources.Fingerprint }}
         <link href="{{ $css.RelPermalink }}" rel="stylesheet" />
 
         {{/* We can compile SASS too... */}}
