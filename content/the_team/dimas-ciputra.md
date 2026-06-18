@@ -6,9 +6,7 @@ departmentIcon: "fa-code"
 weight: 12
 draft: false
 image: "/img/team/dimas-ciputra.jpg"
-location: "Indonesia"
 country: "Indonesia"
-coordinates: "-6.2088, 106.8456"
 github: "dimasciput"
 education:
   - degree: "Dual Bachelor's in Informatics Engineering"
@@ -22,17 +20,17 @@ skills:
 achievements:
   - "8+ years building mobile and web applications"
   - "Open source contributor since 2015"
-bio: "Informatics Engineering graduate with 8+ years building mobile and web applications."
-reviewedBy: "Tim Sutton"
-reviewedDate: 2026-03-16
+bio: "Dimas is a versatile Senior Developer with extensive experience building applications across mobile and web platforms."
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-18
 ---
 
-Dimas is a versatile senior developer with extensive experience across mobile and web platforms. His dual Bachelor's degree in Informatics Engineering provided him with a comprehensive understanding of software architecture and development methodologies.
+Dimas is a versatile Senior Developer with extensive experience building applications across mobile and web platforms. His broad technical expertise enables him to work across different technologies and contribute to projects throughout the software development lifecycle.
 
-Since 2013, Dimas has been building applications across iOS, Android, and web platforms, giving him rare cross-platform expertise. This breadth of experience enables him to choose the right tool for each project and understand the nuances of different development ecosystems.
+With many years of experience developing for iOS, Android, and web environments, Dimas brings valuable cross-platform knowledge to the team. This experience allows him to evaluate project requirements effectively and select appropriate technologies to deliver scalable, maintainable, and high-performing solutions.
 
-A dedicated open source contributor since 2015, Dimas embodies the collaborative spirit that defines Kartoza's culture. His contributions to various open source projects have helped improve tools used by developers worldwide.
+A dedicated contributor to open-source software, Dimas embraces the collaborative principles that are central to Kartoza's culture. His involvement in open-source communities reflects his commitment to continuous learning, knowledge sharing, and the advancement of technology.
 
-Based in Indonesia, Dimas works seamlessly with Kartoza's global team on complex geospatial applications. His experience with both mobile and web development makes him particularly valuable for projects requiring responsive, multi-platform solutions.
+As part of Kartoza's global development team, Dimas contributes to the delivery of complex geospatial and software solutions for clients across a variety of industries. His experience across multiple platforms is particularly valuable for projects that require seamless, responsive user experiences.
 
-Dimas's approach to development emphasizes user experience and performance. He believes that great software should be invisible to users - it should just work, elegantly and efficiently.
+Dimas is passionate about creating software that is both intuitive and efficient. He focuses on building solutions that prioritise usability, performance, and reliability, ensuring that technology serves users effectively while meeting technical and business requirements.
