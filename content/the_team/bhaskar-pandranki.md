@@ -7,7 +7,6 @@ weight: 42
 draft: false
 image: "/img/team/bhaskar-pandranki.jpg"
 country: "India"
-coordinates: "17.6868, 83.2185"
 github: "P-Bhaskar"
 education:
   - degree: "Bachelor's in Electronics & Communication Engineering"
@@ -22,7 +21,7 @@ achievements:
   - "Cloud services expert"
 bio: "Bhaskar is a DevOps Engineer specialising in cloud services, infrastructure automation, and application monitoring."
 reviewedBy: "Lene van Jaarsveld"
-reviewedDate: 2026-06-18
+reviewedDate: 2026-06-19
 ---
 
 Bhaskar is a DevOps Engineer specialising in cloud services, infrastructure automation, and application monitoring. He plays a key role in designing, deploying, and maintaining reliable infrastructure that supports Kartoza's projects and services.

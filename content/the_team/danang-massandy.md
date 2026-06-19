@@ -19,7 +19,7 @@ achievements:
   - "8 years development experience"
 bio: "Danang is a passionate Senior Full Stack Developer with extensive experience building a diverse range of applications."
 reviewedBy: "Lene van Jaarsveld"
-reviewedDate: 2026-06-18
+reviewedDate: 2026-06-19
 ---
 
 Danang is a passionate Senior Full Stack Developer with extensive experience building a diverse range of applications. His enthusiasm for software development drives him to continuously explore new technologies, refine his skills, and deliver high-quality solutions.

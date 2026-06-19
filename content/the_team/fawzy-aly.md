@@ -6,9 +6,7 @@ departmentIcon: "fa-tasks"
 weight: 62
 draft: false
 image: "/img/team/fawzy-aly.jpg"
-location: "Egypt"
 country: "Egypt"
-coordinates: "30.0444, 31.2357"
 github: "Fawzy-Kartoza"
 skills:
   - "Project Management"
@@ -22,16 +20,16 @@ achievements:
   - "Transition from development to project management (2019)"
   - "Managed projects across Middle East and Africa"
 bio: "In IT since 2009, transitioned to project management in 2019. Managed projects across the Middle East and Africa."
-reviewedBy: "Tim Sutton"
-reviewedDate: 2026-03-16
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-19
 ---
 
-Fawzy is our Project Management Team Lead, a Scrum Master who brings over 15 years of IT experience to his role. His career journey from software development and GIS into project management gives him deep technical understanding of the work his teams perform.
+Fawzy is Kartoza’s Project Management Team Lead and a Scrum Master with extensive experience in the IT industry. His background in software development, GIS, and project management provides him with a strong understanding of both the technical and organisational aspects of delivering successful projects.
 
-Beginning his IT career in 2009, Fawzy spent a decade building technical expertise before transitioning to project management in 2019. This progression means he can effectively bridge the gap between technical teams and stakeholder expectations.
+Having built expertise across multiple technical disciplines before moving into project leadership, Fawzy is well positioned to bridge the gap between development teams and stakeholder expectations. His combination of technical knowledge and management experience helps ensure that projects are delivered efficiently while maintaining a focus on quality and client needs.
 
-His geographic focus on the Middle East and Africa has given him expertise in managing projects across these diverse regions. Understanding cultural contexts, time zones, and regional requirements enables him to navigate the complexities of international project delivery.
+Fawzy has significant experience managing projects across diverse teams, regions, and organisational environments. His ability to coordinate complex initiatives and navigate varying requirements enables him to support effective collaboration and achieve successful project outcomes.
 
-Based in Egypt, Fawzy serves as a key connection point for Kartoza's work in the MENA region. His local knowledge and networks complement his technical and management skills.
+As a Scrum Master, Fawzy guides teams in applying agile principles and best practices. Drawing on his technical background, he understands the challenges development teams face and works to create an environment that promotes communication, continuous improvement, and sustainable delivery.
 
-As a Scrum Master, Fawzy guides teams through agile processes while drawing on his development background. He understands the challenges developers face and uses this empathy to create supportive environments where teams can do their best work.
+Known for his collaborative leadership style, Fawzy helps teams stay aligned, focused, and empowered to achieve their goals. His commitment to agile methodologies and team development contributes to the successful delivery of Kartoza’s projects and services.

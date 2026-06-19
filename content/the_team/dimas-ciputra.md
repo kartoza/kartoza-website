@@ -22,7 +22,7 @@ achievements:
   - "Open source contributor since 2015"
 bio: "Dimas is a versatile Senior Developer with extensive experience building applications across mobile and web platforms."
 reviewedBy: "Lene van Jaarsveld"
-reviewedDate: 2026-06-18
+reviewedDate: 2026-06-19
 ---
 
 Dimas is a versatile Senior Developer with extensive experience building applications across mobile and web platforms. His broad technical expertise enables him to work across different technologies and contribute to projects throughout the software development lifecycle.
