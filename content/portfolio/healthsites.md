@@ -1,56 +1,49 @@
 ---
-title: "Healthsites"
-description: "A free, curated, and canonical source of global healthcare facility location data."
-thumbnail: "/img/portfolio/healthsites.png"
+client: ''
+date: '2022-08-02'
+description: Kartoza, in collaboration with Mark Herringer, developed a free, curated,
+  and canonical source of healthcare location data.
+erpnext_id: b28b202dfc
+erpnext_modified: '2025-01-08 12:42:55.473589'
+github: https://github.com/healthsites/healthsites
+reviewedBy: Automated Check
+reviewedDate: '2026-06-19'
+services: []
 tags:
-  - Health
-  - OpenStreetMap
-  - Humanitarian
-  - Web Platform
-client: "International Committee of the Red Cross / MSF"
-date: 2016-02-01
-services:
-  - Design
-  - Development
-  - Deployment
-  - Hosting
-  - Maintenance
-reviewedBy: "Jeff Osundwa"
-reviewedDate: "2026-03-28"
+- Project
+technologies:
+- GeoDjango
+- PostGIS
+thumbnail: https://erp.kartoza.com/files/hs.io.png
+title: Healthsites
 ---
 
 {{< block
     title="Healthsites"
-    subtitle="A global canonical source of healthcare facility locations"
+    subtitle="Project"
     class="is-primary"
     sub-block-side="bottom"
-    link="<https://healthsites.io>"
-    link-text="Visit Healthsites.io"
 >}}
-Partnered with the Red Cross and MSF to build the definitive open healthcare location database.
+Kartoza, in collaboration with Mark Herringer, developed a free, curated, and canonical source of healthcare location data.
 {{< /block >}}
 
 ## Overview
 
-Kartoza developed a free, curated global healthcare location database in collaboration with Mark Herringer. Partnered with the International Committee of the Red Cross and Medecins Sans Frontieres, the platform publishes healthcare location data that demands the highest standards of quality and accuracy.
+Kartoza developed this application in collaboration with Mark Herringer to facilitate the capture and management of a global health facility dataset. Healthsites.io, in partnership with the International Committee of the Red Cross and Médecins Sans Frontières, publishes healthcare location data that demands the highest standards of quality and accuracy.
 
-The system uses docker-osm technology to mirror OpenStreetMap data, automatically submitting captured health facility information to OpenStreetMap's API while maintaining a local PostgreSQL database.
+  
 
-![Healthsites.io](/img/portfolio/healthsites.png)
+Kartoza leveraged various innovative technologies, including docker-osm, which creates a concurrent mirror of OpenStreetMap.org tailored to specific features and attributes. As data is captured on Healthsites.io, it is immediately submitted to OpenStreetMap via their API and subsequently mirrored into a local PostgreSQL database.
 
-## Technology
+  
 
-- Docker-OSM
-- OpenStreetMap API
-- PostgreSQL
-- Custom web application
+![](/files/7zshHDu.png)
 
-## Partners
+## Technologies
 
-- International Committee of the Red Cross
-- Medecins Sans Frontieres (MSF)
-- Mark Herringer
+- GeoDjango
+- PostGIS
 
-## Links
+## Source Code
 
-- [Healthsites.io](https://healthsites.io)
+[GitHub](https://github.com/healthsites/healthsites)

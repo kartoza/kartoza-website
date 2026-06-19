@@ -13,8 +13,12 @@
 
         <!-- Collect all unique tags from reviewed pages -->
         {{ $allTags := slice }}
-        {{ $reviewedPages := where .RegularPages "Params.reviewedBy" "!=" nil }}
-        {{ $reviewedPages = where $reviewedPages "Params.reviewedDate" "!=" nil }}
+        {{ $reviewedPages := slice }}
+        {{ range .RegularPages.ByDate.Reverse }}
+          {{ if and .Params.reviewedBy .Params.reviewedDate (not (in (.Params.tags | default slice) "Internal")) }}
+            {{ $reviewedPages = $reviewedPages | append . }}
+          {{ end }}
+        {{ end }}
         {{ range $reviewedPages }}
             {{ range .Params.tags }}
                 {{ $allTags = $allTags | append . }}
