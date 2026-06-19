@@ -6,12 +6,9 @@ departmentIcon: "fa-cogs"
 weight: 50
 draft: false
 image: "/img/team/suzanne-sutton.jpg"
-location: "South Africa"
-country: "South Africa"
-coordinates: "-33.9249, 18.4241"
+country: "Australia"
 education:
   - degree: "BA English Psychology"
-    institution: "UNISA"
 skills:
   - "Accounts Payable"
   - "Accounts Receivable"
@@ -20,20 +17,16 @@ skills:
   - "Bookkeeping"
 achievements:
   - "With Kartoza since 2016"
-bio: "With Kartoza since 2016. Handles accounts payable/receivable and payroll. BA English Psychology from UNISA."
-reviewedBy: "Tim Sutton"
-reviewedDate: 2026-03-16
+bio: "Handles accounts payable/receivable and payroll. BA English Psychology from UNISA."
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-19
 ---
 
 Suzanne has been the backbone of Kartoza's financial administration since 2016,
 bringing nearly a decade of institutional knowledge and dedication to the role.
-Her BA in English Psychology from UNISA reflects a diverse educational
-background that brings unique perspectives to administrative work.
 
 As Financial Administrator, Suzanne manages the critical financial operations
-that keep Kartoza running smoothly. Her responsibilities include accounts
-payable, accounts receivable, and payroll management - functions that require
-meticulous attention to detail and reliability.
+that keep Kartoza running smoothly.
 
 Her long tenure with Kartoza means she has deep understanding of the company's
 financial rhythms and requirements. This institutional knowledge is invaluable
