@@ -6,17 +6,12 @@ departmentIcon: "fa-graduation-cap"
 weight: 20
 draft: false
 image: "/img/team/seabilwe-tilodi.jpg"
-location: "South Africa"
 country: "South Africa"
-coordinates: "-26.2041, 28.0473"
 github: "Seabilwe"
 education:
   - degree: "MSc GIS and Remote Sensing"
-    institution: "University of the Witwatersrand"
   - degree: "Honours in Geography"
-    institution: "University of the Witwatersrand"
   - degree: "BSc Geological Science"
-    institution: "University of the Witwatersrand"
 skills:
   - "QGIS Training"
   - "Remote Sensing"
@@ -28,8 +23,8 @@ achievements:
   - "Training QGIS for secondary students and teachers"
   - "Passionate advocate for open source in education"
 bio: "MSc GIS and Remote Sensing. Passionate about applying open source software and open data for positive impact."
-reviewedBy: "Tim Sutton"
-reviewedDate: 2026-03-16
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-19
 ---
 
 Seabilwe leads Kartoza's training efforts, bringing academic excellence and a passion for education to the role. With a Master's degree in GIS and Remote Sensing from the University of the Witwatersrand, she has deep expertise in both the technical and pedagogical aspects of geospatial education.
