@@ -17,8 +17,8 @@ skills:
   - "Geospatial Analysis"
   - "Plugin Development"
 achievements:
-  - "Specialized in Python programming for GIS"
-bio: "From Nairobi, Kenya. BSc Geospatial Information Science. Python specialist."
+  - "Specialised in Python programming for GIS"
+bio: "QGIS developer bringing together formal geospatial education with strong programming skills."
 reviewedBy: "Lene van Jaarsveld"
 reviewedDate: 2026-06-19
 ---
