@@ -35,4 +35,3 @@ Lova's passion for geospatial technology extends beyond his work. He believes th
 Lova's work is fully funded by the QGIS.org project and as such he is a
 dedicated resource, committed to improving and maintining the QGIS.org
 infrastructure.
-
