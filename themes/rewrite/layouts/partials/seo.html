@@ -1,0 +1,57 @@
+{{/* Open Graph + Twitter + JSON-LD structured data. */}}
+{{ $title := printf "%s%s" (cond .IsHome "" (printf "%s · " .Title)) .Site.Title }}
+{{ $description := .Description | default .Summary | default .Site.Params.description | plainify | truncate 200 }}
+{{ $ogImage := .Params.og_image | default "img/kartoza-og-image.svg" }}
+{{ $ogImageURL := $ogImage | absURL }}
+
+<meta property="og:title"       content="{{ $title }}" />
+<meta property="og:description" content="{{ $description }}" />
+<meta property="og:type"        content="{{ cond .IsHome "website" "article" }}" />
+<meta property="og:url"         content="{{ .Permalink }}" />
+<meta property="og:image"       content="{{ $ogImageURL }}" />
+<meta property="og:site_name"   content="{{ .Site.Title }}" />
+
+<meta name="twitter:card"        content="summary_large_image" />
+<meta name="twitter:title"       content="{{ $title }}" />
+<meta name="twitter:description" content="{{ $description }}" />
+<meta name="twitter:image"       content="{{ $ogImageURL }}" />
+{{ with .Site.Params.twitter }}<meta name="twitter:site" content="{{ . }}" />{{ end }}
+
+{{/* JSON-LD organisation (homepage) or article (single) */}}
+{{ if .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "{{ .Site.Title }}",
+  "url": "{{ .Site.BaseURL }}",
+  "logo": "{{ "img/kartoza-logo.png" | absURL }}",
+  "description": "{{ $description }}"
+}
+</script>
+{{ else if eq .Type "blog" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ .Title | jsonify }},
+  "description": {{ $description | jsonify }},
+  "image": "{{ $ogImageURL }}",
+  "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+  "dateModified":  "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+  "author": {
+    "@type": "Organization",
+    "name": "{{ .Site.Title }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ .Site.Title }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ "img/kartoza-logo.png" | absURL }}"
+    }
+  },
+  "mainEntityOfPage": "{{ .Permalink }}"
+}
+</script>
+{{ end }}

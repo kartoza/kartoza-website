@@ -1,0 +1,52 @@
+{{/* Head — meta, links, JSON-LD, CSS bundle. */}}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#1F1F20" media="(prefers-color-scheme: dark)" />
+<meta name="color-scheme" content="light dark" />
+<meta name="view-transition" content="same-origin" />
+
+<title>{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ .Site.Title }}</title>
+
+{{ $description := .Description | default .Summary | default .Site.Params.description }}
+<meta name="description" content="{{ $description | plainify | truncate 160 }}" />
+
+{{- with .Site.Params.author }}<meta name="author" content="{{ . }}" />{{ end }}
+<meta name="generator" content="Hugo {{ hugo.Version }} · rewrite" />
+
+{{ partial "seo.html" . }}
+
+{{/* Preload the brand fonts to kill FOUT */}}
+<link rel="preload" href="/webfonts/Lato-Regular.ttf"  as="font" type="font/ttf" crossorigin />
+<link rel="preload" href="/webfonts/Lato-Bold.ttf"     as="font" type="font/ttf" crossorigin />
+<link rel="preload" href="/webfonts/Lato-Black.ttf"    as="font" type="font/ttf" crossorigin />
+
+{{/* CSS bundle — explicit ordered list (NOT resources.Match, which would
+     also pull CSS from the fallback theme and balloon the bundle). */}}
+{{ $tokens   := resources.Get "css/00-tokens.css" }}
+{{ $reset    := resources.Get "css/01-reset.css" }}
+{{ $base     := resources.Get "css/02-base.css" }}
+{{ $layout   := resources.Get "css/03-layout.css" }}
+{{ $comps    := resources.Get "css/04-components.css" }}
+{{ $utils    := resources.Get "css/05-utilities.css" }}
+{{ $bundle   := slice $tokens $reset $base $layout $comps $utils
+                  | resources.Concat "css/rewrite.css"
+                  | resources.Minify
+                  | resources.Fingerprint }}
+<link rel="stylesheet" href="{{ $bundle.RelPermalink }}" integrity="{{ $bundle.Data.Integrity }}" />
+
+{{/* Single small JS bundle (deferred) */}}
+{{ $js := resources.Get "js/app.js" | resources.Minify | resources.Fingerprint }}
+<script defer src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+
+{{/* Favicons (provided by the project's /static/img/favicon/) */}}
+<link rel="icon" type="image/png" sizes="32x32" href="{{ absURL "img/favicon/favicon-32x32.png" }}" />
+<link rel="icon" type="image/png" sizes="16x16" href="{{ absURL "img/favicon/favicon-16x16.png" }}" />
+<link rel="apple-touch-icon" sizes="180x180" href="{{ absURL "img/favicon/apple-touch-icon.png" }}" />
+<link rel="manifest" href="{{ absURL "site.webmanifest" }}" />
+
+{{/* RSS */}}
+<link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ "index.xml" | absURL }}" />
+
+{{/* Canonical */}}
+<link rel="canonical" href="{{ .Permalink }}" />

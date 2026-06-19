@@ -1,0 +1,59 @@
+{{ define "main" }}
+<section class="section">
+  <div class="container">
+
+    {{ partial "breadcrumb.html" . }}
+
+    <header class="stack stack--3 u-mb-7">
+      {{ with .Params.eyebrow | default .Type }}
+        <p class="eyebrow">{{ . | humanize }}</p>
+      {{ end }}
+      <h1 class="u-text-balance">{{ .Title }}</h1>
+      {{ with .Description | default .Params.subtitle }}
+        <p class="u-lede">{{ . }}</p>
+      {{ end }}
+    </header>
+
+    {{ with .Content }}
+      <div class="article__body stack stack--4 u-mb-7">{{ . }}</div>
+    {{ end }}
+
+    {{ $pages := .Paginate (where .Pages "Type" "!=" "") }}
+
+    {{ if $pages.Pages }}
+    <div class="listing-grid">
+      {{ range $pages.Pages }}
+        <article class="card">
+          {{ with .Params.image | default .Params.featured_image }}
+            <a class="card__media" href="{{ .Permalink }}">
+              <img src="{{ . | absURL }}" alt="" loading="lazy" decoding="async" />
+            </a>
+          {{ end }}
+          <div class="card__body stack stack--3">
+            {{ with .Params.eyebrow }}
+              <p class="eyebrow u-mb-0">{{ . }}</p>
+            {{ end }}
+            <h2 class="card__title">
+              <a href="{{ .Permalink }}">{{ .Title }}</a>
+            </h2>
+            {{ with .Description | default .Summary }}
+              <p class="card__excerpt">{{ . | plainify | truncate 160 }}</p>
+            {{ end }}
+            {{ if .Date }}
+              <footer class="card__footer">
+                <time class="u-text-muted" datetime="{{ .Date.Format "2006-01-02" }}">
+                  {{ .Date.Format "2 January 2006" }}
+                </time>
+              </footer>
+            {{ end }}
+          </div>
+        </article>
+      {{ end }}
+    </div>
+
+    {{ partial "pagination.html" . }}
+    {{ end }}
+
+  </div>
+</section>
+{{ end }}

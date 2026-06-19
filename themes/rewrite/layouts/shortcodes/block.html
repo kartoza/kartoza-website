@@ -1,0 +1,46 @@
+{{/* {{< block title="…" subtitle="…" sub-block-side="…" class="…"
+              link="…" link-text="…" image="…" >}}
+       inner markdown body
+     {{< /block >}}
+
+     Renders a card-like section with title + subtitle + body +
+     optional CTA link.  Matches upstream parameter API. */}}
+
+{{ $title    := .Get "title" | default "" }}
+{{ $subtitle := .Get "subtitle" | default "" }}
+{{ $class    := .Get "class" | default "" }}
+{{ $link     := .Get "link" | default "" }}
+{{ $linkText := .Get "link-text" | default "" }}
+{{ $image    := .Get "image" | default "" }}
+{{ $side     := .Get "sub-block-side" | default "" }}
+
+{{/* Resolve image if present (Page resource OR plain URL). */}}
+{{ $imgSrc := "" }}
+{{ with $image }}
+  {{ $r := $.Page.Resources.GetMatch . }}
+  {{ if $r }}{{ $imgSrc = $r.RelPermalink }}{{ else }}{{ $imgSrc = . | absURL }}{{ end }}
+{{ end }}
+
+<section class="card" style="padding: var(--space-7); margin-block: var(--space-6);">
+  {{ with $title }}<h2 style="margin-block-start: 0;">{{ . }}</h2>{{ end }}
+  {{ with $subtitle }}<p class="u-lede">{{ . }}</p>{{ end }}
+
+  {{ with $imgSrc }}
+    <figure class="frame frame--wide u-mt-5 u-mb-5">
+      <img src="{{ . }}" alt="" loading="lazy" decoding="async" />
+    </figure>
+  {{ end }}
+
+  {{ with .Inner }}
+    <div class="article__body stack stack--3 u-mt-3">{{ . | markdownify }}</div>
+  {{ end }}
+
+  {{ if and $link $linkText }}
+    {{ $href := cond (hasPrefix $link "http") $link (absURL $link) }}
+    <p class="u-mt-5">
+      <a class="button button--primary" href="{{ $href }}">
+        {{ $linkText }} <span aria-hidden="true">→</span>
+      </a>
+    </p>
+  {{ end }}
+</section>

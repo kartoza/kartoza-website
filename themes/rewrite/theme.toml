@@ -1,0 +1,13 @@
+name = "Rewrite"
+license = "MIT"
+licenselink = "https://github.com/kartoza/kartoza-website/blob/main/LICENSE"
+description = "Restrained, modern Hugo theme aligned with the Kartoza Brand Pack v1.0.1. No framework. Flat colour. Type-driven hierarchy. Signature charcoal + motif slant hero. WCAG 2.2 AA."
+homepage = "https://kartoza.com"
+demosite = "https://kartoza.com"
+tags = ["modern", "minimal", "geospatial", "brand-aligned", "type-driven"]
+features = ["responsive", "dark-mode", "view-transitions", "wcag-aa", "reduced-motion", "print-styles", "container-queries"]
+min_version = "0.139.0"
+
+[author]
+name = "Kartoza"
+homepage = "https://kartoza.com"

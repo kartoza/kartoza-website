@@ -1,0 +1,23 @@
+{{/* {{< info-bar "Label:Value" "Label:Value" … >}}
+
+     Self-closing.  Each positional "Label:Value" pair renders
+     as a stat block (value above label).  Matches upstream API.
+     Must NOT reference .Inner — Hugo's parser would then require
+     a closing tag, which the content never provides. */}}
+
+<aside class="info-bar info-bar--stats" role="note">
+  <ul class="cluster cluster--start" role="list"
+      style="--cluster-space: var(--space-7); margin: 0; padding: 0; list-style: none;">
+    {{ range $.Params }}
+      {{ $parts := split . ":" }}
+      <li style="margin: 0; max-width: none;">
+        <p style="margin: 0; font-size: var(--size-600); font-weight: var(--weight-black); color: var(--color-text); letter-spacing: var(--tracking-tight);">
+          {{ index $parts 1 | default "" }}
+        </p>
+        <p class="eyebrow" style="margin: 0;">
+          {{ index $parts 0 }}
+        </p>
+      </li>
+    {{ end }}
+  </ul>
+</aside>

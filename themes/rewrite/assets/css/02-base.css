@@ -1,0 +1,172 @@
+/* ============================================================
+ *  Base element styles.  Drives the document defaults: type
+ *  hierarchy, link styles, form elements, code, tables.
+ *  Anything decorative lives in components.css.
+ * ============================================================ */
+
+
+/* ---- Web fonts (self-hosted from project /static/webfonts/) -- */
+@font-face { font-family:'Lato'; font-weight:400; font-style:normal;  font-display:swap;
+  src:url('/webfonts/Lato-Regular.ttf')   format('truetype'); }
+@font-face { font-family:'Lato'; font-weight:400; font-style:italic;  font-display:swap;
+  src:url('/webfonts/Lato-Italic.ttf')    format('truetype'); }
+@font-face { font-family:'Lato'; font-weight:700; font-style:normal;  font-display:swap;
+  src:url('/webfonts/Lato-Bold.ttf')      format('truetype'); }
+@font-face { font-family:'Lato'; font-weight:700; font-style:italic;  font-display:swap;
+  src:url('/webfonts/Lato-BoldItalic.ttf')format('truetype'); }
+@font-face { font-family:'Lato'; font-weight:900; font-style:normal;  font-display:swap;
+  src:url('/webfonts/Lato-Black.ttf')     format('truetype'); }
+@font-face { font-family:'JetBrains Mono'; font-weight:400; font-display:swap;
+  src:url('/webfonts/JetBrainsMono.ttf')  format('truetype'); }
+
+
+/* ---- HTML + body ----------------------------------------------- */
+html {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+body {
+  font-size: var(--size-300);
+  line-height: var(--leading-normal);
+}
+
+
+/* ---- Headings -------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-black);
+  color: var(--color-text);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+h1 { font-size: var(--size-display); font-weight: var(--weight-black); margin-block-end: var(--space-4); }
+h2 { font-size: var(--size-800);     font-weight: var(--weight-black); margin-block: var(--space-7) var(--space-4); }
+h3 { font-size: var(--size-600);     font-weight: var(--weight-bold);  margin-block: var(--space-6) var(--space-3); }
+h4 { font-size: var(--size-500);     font-weight: var(--weight-bold);  margin-block: var(--space-5) var(--space-3); }
+h5 { font-size: var(--size-400);     font-weight: var(--weight-bold);  margin-block: var(--space-4) var(--space-2); }
+h6 { font-size: var(--size-300);     font-weight: var(--weight-bold);  margin-block: var(--space-4) var(--space-2); }
+
+
+/* ---- Paragraph + lists ----------------------------------------- */
+p {
+  max-width: var(--measure);
+  margin-block-end: var(--space-4);
+  line-height: var(--leading-normal);
+}
+
+ul, ol { padding-inline-start: var(--space-5); margin-block-end: var(--space-4); }
+li { margin-block-end: var(--space-2); max-width: var(--measure); }
+
+dl > dt { font-weight: var(--weight-bold); margin-block-start: var(--space-3); }
+dl > dd { margin-block-end: var(--space-2); margin-inline-start: var(--space-4); }
+
+blockquote {
+  border-inline-start: 3px solid var(--color-accent);
+  padding-inline-start: var(--space-5);
+  margin: var(--space-5) 0;
+  font-style: italic;
+  color: var(--color-text-muted);
+  max-width: var(--measure);
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: var(--color-rule);
+  margin-block: var(--space-7);
+}
+
+
+/* ---- Links ---------------------------------------------------- */
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color var(--duration-1) var(--ease),
+              border-color var(--duration-1) var(--ease);
+}
+a:hover { color: var(--color-link-hover); border-bottom-color: currentColor; }
+
+
+/* ---- Inline emphasis ------------------------------------------ */
+strong, b   { font-weight: var(--weight-bold); }
+em, i       { font-style: italic; }
+small       { font-size: var(--size-200); color: var(--color-text-muted); }
+abbr[title] { text-decoration-line: underline; text-decoration-style: dotted; cursor: help; }
+
+
+/* ---- Code ----------------------------------------------------- */
+code, kbd, samp, pre {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+code:not(pre code) {
+  background: var(--color-bg-elevated);
+  padding: 0.1em 0.35em;
+  border-radius: var(--radius-2);
+}
+pre {
+  background: var(--k-charcoal-deep);
+  color: var(--k-cloud);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-2);
+  overflow-x: auto;
+  margin-block: var(--space-4);
+  line-height: var(--leading-snug);
+}
+pre code { background: transparent; padding: 0; color: inherit; }
+
+
+/* ---- Tables --------------------------------------------------- */
+table {
+  width: 100%;
+  margin-block: var(--space-4);
+  font-size: var(--size-200);
+}
+th, td {
+  text-align: start;
+  padding: var(--space-2) var(--space-3);
+  border-bottom: var(--border-hairline);
+  vertical-align: top;
+}
+th {
+  background: var(--color-text);
+  color: var(--color-text-inverse);
+  font-weight: var(--weight-bold);
+}
+
+
+/* ---- Forms ---------------------------------------------------- */
+input, textarea, select {
+  background: var(--color-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-2);
+  padding: var(--space-2) var(--space-3);
+  width: 100%;
+  max-width: 32rem;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--color-accent);
+}
+
+label { display: block; font-weight: var(--weight-bold); margin-block-end: var(--space-1); }
+
+
+/* ---- Selection ----------------------------------------------- */
+::selection {
+  background: var(--color-accent);
+  color: var(--k-charcoal);
+}
+
+
+/* ---- Print --------------------------------------------------- */
+@media print {
+  body { font-size: 10pt; color: #000; background: #fff; }
+  a    { color: #000; text-decoration: underline; }
+  nav, footer, .no-print { display: none !important; }
+  h1, h2, h3 { break-after: avoid; }
+}

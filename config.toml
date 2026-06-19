@@ -2,7 +2,11 @@
 baseURL = 'https://kartoza.com/'
 languageCode = 'en-us'
 title = 'Kartoza'
-theme = 'hugo-bulma-blocks-theme'
+## Theme chain: Hugo looks in `rewrite` first, falls back to
+## hugo-bulma-blocks-theme for anything not yet ported.  Migration is
+## per-section: removing a project-level layout (e.g. layouts/about/single.html)
+## lets that section fall through to rewrite's default.
+theme = ['rewrite', 'hugo-bulma-blocks-theme']
 # Default pagination.
 # Can override this when needed e.g. {{ range (.Paginator 5).Pages }}
 [pagination]

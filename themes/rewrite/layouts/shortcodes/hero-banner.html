@@ -1,0 +1,9 @@
+{{/* {{< hero-banner "Title" >}}subtitle{{< /hero-banner >}} */}}
+<section class="hero hero--inverse">
+  <div class="container">
+    <div class="stack stack--4" style="max-width: 60ch;">
+      <h1 class="hero__title u-text-balance">{{ index .Params 0 }}</h1>
+      {{ with .Inner }}<p class="hero__lede">{{ . }}</p>{{ end }}
+    </div>
+  </div>
+</section>

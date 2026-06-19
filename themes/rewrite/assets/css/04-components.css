@@ -1,0 +1,426 @@
+/* ============================================================
+ *  Components.  Header, nav, footer, button, card, badge,
+ *  hero, breadcrumb, skip-link, info-bar.  Flat colour only.
+ * ============================================================ */
+
+
+/* ---- Skip link -------------------------------------------- */
+.skip-link {
+  position: absolute;
+  inset-inline-start: var(--space-4);
+  inset-block-start: var(--space-4);
+  background: var(--color-text);
+  color: var(--color-text-inverse);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-2);
+  z-index: var(--z-modal);
+  font-weight: var(--weight-bold);
+  transform: translateY(-150%);
+  transition: transform var(--duration-2) var(--ease);
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+
+/* ---- Site header ----------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background: var(--color-bg);
+  border-block-end: var(--border-hairline);
+  view-transition-name: header;
+}
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  min-block-size: 4rem;
+}
+.site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-weight: var(--weight-black);
+  font-size: var(--size-400);
+  letter-spacing: var(--tracking-tight);
+  text-decoration: none;
+  color: var(--color-text);
+}
+.site-header__brand:hover { color: var(--color-link); }
+.site-header__brand img { block-size: 1.75rem; inline-size: auto; }
+
+
+/* ---- Primary nav ----------------------------------------- */
+.primary-nav {
+  margin-inline-start: auto;
+}
+.primary-nav__list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: var(--space-1);
+}
+.primary-nav__item { margin: 0; max-width: none; }
+.primary-nav__link {
+  display: inline-block;
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-text);
+  font-weight: var(--weight-bold);
+  font-size: var(--size-200);
+  border-radius: var(--radius-2);
+  border-bottom: 0;
+  transition: color var(--duration-1) var(--ease),
+              background var(--duration-1) var(--ease);
+}
+.primary-nav__link:hover,
+.primary-nav__link[aria-current="page"] {
+  color: var(--color-link);
+  background: var(--color-bg-elevated);
+}
+
+/* Mobile menu toggle (visible < md) */
+.primary-nav__toggle {
+  display: none;
+  padding: var(--space-2);
+  background: none;
+  border: var(--border-hairline);
+  border-radius: var(--radius-2);
+  color: var(--color-text);
+  font-size: var(--size-400);
+}
+
+@media (max-width: 48em) {
+  .primary-nav__toggle { display: inline-flex; align-items: center; gap: var(--space-1); }
+  .primary-nav__list {
+    display: none;
+    position: absolute;
+    inset-inline: var(--space-3);
+    top: 100%;
+    flex-direction: column;
+    background: var(--color-bg);
+    border: var(--border-hairline);
+    border-radius: var(--radius-2);
+    padding: var(--space-2);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .primary-nav[data-open="true"] .primary-nav__list { display: flex; }
+  .primary-nav__link { padding-block: var(--space-3); }
+}
+
+
+/* ---- Eyebrow (small label) ------------------------------- */
+.eyebrow {
+  display: inline-block;
+  font-size: var(--size-100);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-block-end: var(--space-2);
+}
+
+
+/* ---- Buttons --------------------------------------------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  font-weight: var(--weight-bold);
+  font-size: var(--size-300);
+  line-height: 1;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-2);
+  cursor: pointer;
+  transition: background var(--duration-1) var(--ease),
+              color var(--duration-1) var(--ease),
+              border-color var(--duration-1) var(--ease);
+}
+
+.button--primary {
+  background: var(--color-link);
+  color: var(--k-white);
+}
+.button--primary:hover {
+  background: var(--k-blue-deeper);
+  color: var(--k-white);
+}
+
+.button--secondary {
+  background: transparent;
+  color: var(--color-text);
+  border-color: var(--color-text);
+}
+.button--secondary:hover {
+  background: var(--color-text);
+  color: var(--color-text-inverse);
+}
+
+.button--ghost {
+  background: transparent;
+  color: var(--color-text);
+}
+.button--ghost:hover { background: var(--color-bg-elevated); }
+
+.button--accent {
+  background: var(--color-accent);
+  color: var(--k-charcoal);
+}
+.button--accent:hover { background: var(--k-amber-dark); color: var(--k-white); }
+
+.button--full { inline-size: 100%; justify-content: center; }
+
+
+/* ---- Card ------------------------------------------------ */
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  border: var(--border-hairline);
+  border-radius: var(--radius-2);
+  overflow: hidden;
+  transition: border-color var(--duration-1) var(--ease);
+}
+.card:hover { border-color: var(--color-text); }
+.card__media { overflow: hidden; }
+.card__media img { inline-size: 100%; block-size: auto; }
+.card__body { padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); flex: 1; }
+.card__title { font-size: var(--size-500); font-weight: var(--weight-bold); margin: 0; }
+.card__excerpt { color: var(--color-text-muted); margin: 0; }
+.card__footer { margin-block-start: auto; padding-block-start: var(--space-3); border-block-start: var(--border-hairline); }
+
+
+/* ---- Badge / tag ---------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2em 0.6em;
+  font-size: var(--size-100);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  border-radius: var(--radius-pill);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  border-bottom: 0;
+}
+.badge--accent  { background: var(--color-accent-soft); color: var(--k-amber-dark); }
+.badge--info    { background: var(--k-blue-light);      color: var(--k-blue-deeper); }
+.badge--success { background: var(--k-success-soft);    color: var(--k-success); }
+.badge--error   { background: var(--k-error-soft);      color: var(--k-error); }
+
+
+/* ---- Hero ------------------------------------------------
+ *  Two variants:
+ *    .hero          — clean, body-bg, dark text.  For
+ *                     interior pages where content carries the
+ *                     visual weight.
+ *    .hero--inverse — the signature Kartoza Brand Pack hero:
+ *                     charcoal panel, map motif clipped to a
+ *                     slanted polygon on the right edge,
+ *                     amber slant rule between the two halves,
+ *                     content (text, CTAs) sits on the left. */
+
+.hero {
+  padding-block: var(--space-9) var(--space-9);
+  background: var(--color-bg);
+  position: relative;
+}
+
+.hero__eyebrow { color: var(--color-accent); }
+.hero__title {
+  font-size: var(--size-hero);
+  margin-block-end: var(--space-4);
+}
+.hero__lede {
+  font-size: var(--size-500);
+  color: var(--color-text-muted);
+  max-width: 50ch;
+  margin-block-end: var(--space-5);
+}
+
+
+/* ---- Hero — signature (charcoal + motif slant) ---------- */
+.hero--inverse {
+  background: var(--k-charcoal);
+  color: var(--color-text-inverse);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding-block: var(--space-9) var(--space-10);
+}
+
+/* Motif image, clipped to a slanted polygon on the right edge.
+ * Right column ~55% of the hero; clip-path skews the inner edge
+ * so the motif "leans" into the charcoal panel. */
+.hero--inverse::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 0 auto;
+  inline-size: 55%;
+  background: url('/img/brand/kartoza-background.png') center / cover no-repeat;
+  clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%);
+  z-index: -1;
+}
+
+/* Amber slant rule along the polygon's leading edge. */
+.hero--inverse::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 45%;
+  inline-size: 6px;
+  background: var(--color-accent);
+  transform: skewX(-12deg) translateX(50%);
+  transform-origin: top right;
+  z-index: -1;
+}
+
+.hero--inverse > * { position: relative; z-index: 1; }
+.hero--inverse :is(h1, h2, h3, p) { color: inherit; }
+.hero--inverse .hero__lede { color: rgba(255, 255, 255, 0.82); }
+.hero--inverse .hero__eyebrow { color: var(--color-accent); }
+
+/* Inner content sits in the left ~45% so the motif is visible.
+ * Use the existing .container width but pin the textual stack
+ * to a comfortable measure that won't overlap the motif. */
+.hero--inverse .container > .stack,
+.hero--inverse .container > * {
+  max-inline-size: min(50ch, 50%);
+}
+
+/* On narrow viewports the slant gets in the way of legibility.
+ * Drop the clip-path so the motif fills the full hero behind
+ * the text, and lower its opacity so text stays readable. */
+@media (max-width: 48em) {
+  .hero--inverse::before {
+    inline-size: 100%;
+    clip-path: none;
+    opacity: 0.22;
+    filter: saturate(0.7);
+  }
+  .hero--inverse::after { display: none; }
+  .hero--inverse .container > .stack,
+  .hero--inverse .container > * { max-inline-size: none; }
+}
+
+
+/* ---- Breadcrumb ------------------------------------------ */
+.breadcrumb {
+  font-size: var(--size-200);
+  color: var(--color-text-muted);
+  margin-block-end: var(--space-4);
+}
+.breadcrumb__list { display: flex; gap: var(--space-2); list-style: none; padding: 0; margin: 0; flex-wrap: wrap; }
+.breadcrumb__item { margin: 0; max-width: none; }
+.breadcrumb__item + .breadcrumb__item::before {
+  content: '·';
+  margin-inline-end: var(--space-2);
+  color: var(--color-rule);
+}
+.breadcrumb__item a { color: inherit; border-bottom: 0; }
+.breadcrumb__item a:hover { color: var(--color-link); }
+.breadcrumb__item[aria-current] { color: var(--color-text); font-weight: var(--weight-bold); }
+
+
+/* ---- Info bar ------------------------------------------- */
+.info-bar {
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-accent-soft);
+  border-inline-start: 3px solid var(--color-accent);
+  margin-block: var(--space-4);
+}
+.info-bar--success { background: var(--k-success-soft); border-color: var(--k-success); }
+.info-bar--error   { background: var(--k-error-soft);   border-color: var(--k-error); }
+
+
+/* ---- Site footer ---------------------------------------- */
+.site-footer {
+  background: var(--color-bg-inverse);
+  color: var(--color-text-inverse);
+  padding-block: var(--space-8) var(--space-6);
+  margin-block-start: var(--space-9);
+  view-transition-name: footer;
+}
+.site-footer a {
+  color: var(--color-accent);
+  border-bottom: 0;
+}
+.site-footer a:hover { color: var(--k-white); }
+.site-footer__grid {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin-block-end: var(--space-6);
+}
+.site-footer__col h2 {
+  font-size: var(--size-100);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin: 0 0 var(--space-3);
+}
+.site-footer__col ul { list-style: none; padding: 0; margin: 0; }
+.site-footer__col li { margin-block-end: var(--space-2); max-width: none; }
+.site-footer__bottom {
+  padding-block-start: var(--space-5);
+  border-block-start: 1px solid rgba(255,255,255,0.12);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  justify-content: space-between;
+  font-size: var(--size-200);
+  color: rgba(255,255,255,0.7);
+}
+
+
+/* ---- Article ------------------------------------------- */
+.article {
+  max-width: var(--content-narrow);
+  margin-inline: auto;
+}
+.article__header { margin-block-end: var(--space-6); }
+.article__meta {
+  font-size: var(--size-200);
+  color: var(--color-text-muted);
+  display: flex;
+  gap: var(--space-3);
+  margin-block-start: var(--space-2);
+}
+.article__body img,
+.article__body figure { margin-block: var(--space-5); }
+.article__body :is(h2, h3) { scroll-margin-block-start: 5rem; }
+
+
+/* ---- Listing card grid item ---------------------------- */
+.listing-grid { display: grid; gap: var(--space-5); grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); }
+
+
+/* ---- Pagination ---------------------------------------- */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-1);
+  margin-block-start: var(--space-7);
+}
+.pagination a, .pagination span {
+  display: inline-flex;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-2);
+  font-weight: var(--weight-bold);
+  border: var(--border-hairline);
+  border-radius: var(--radius-2);
+  color: var(--color-text);
+  text-decoration: none;
+}
+.pagination a:hover { border-color: var(--color-text); }
+.pagination [aria-current] { background: var(--color-text); color: var(--color-text-inverse); border-color: var(--color-text); }

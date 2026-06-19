@@ -1,0 +1,35 @@
+{{/* Primary navigation — semantic, accessible, mobile-collapsible. */}}
+<header class="site-header">
+  <div class="container">
+    <div class="site-header__inner">
+      <a class="site-header__brand" href="{{ "/" | absURL }}" rel="home">
+        <img src="{{ absURL "img/kartoza-logo.png" }}" alt="" aria-hidden="true" />
+        <span>{{ .Site.Title }}</span>
+      </a>
+
+      <nav class="primary-nav" aria-label="Primary">
+        <button
+          class="primary-nav__toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primary-nav-list"
+        >
+          <span>Menu</span>
+        </button>
+        <ul id="primary-nav-list" class="primary-nav__list" role="list">
+          {{- range site.Menus.main }}
+            {{- if not .HasChildren }}
+            <li class="primary-nav__item">
+              <a
+                class="primary-nav__link"
+                href="{{ .URL | absURL }}"
+                {{ if $.IsMenuCurrent "main" . }}aria-current="page"{{ end }}
+              >{{ .Name }}</a>
+            </li>
+            {{- end }}
+          {{- end }}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>

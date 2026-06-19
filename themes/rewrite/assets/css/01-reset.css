@@ -1,0 +1,76 @@
+/* ============================================================
+ *  Modern reset.  Based on Andy Bell + Josh Comeau.
+ *  Targets: predictable box model, sensible defaults, accessible
+ *  focus, no surprises.
+ * ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+* { margin: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  hanging-punctuation: first last;
+  color-scheme: light dark;
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  min-height: 100svh;
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input, button, textarea, select {
+  font: inherit;
+  color: inherit;
+}
+
+textarea:not([rows]) { min-height: 10em; }
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+}
+h1, h2, h3, h4 { text-wrap: balance; }
+
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+ul[role="list"], ol[role="list"] { list-style: none; padding: 0; }
+
+a { color: inherit; }
+a:not([class]) {
+  color: var(--color-link);
+  text-decoration-skip-ink: auto;
+  text-underline-offset: 0.2em;
+}
+a:not([class]):hover { color: var(--color-link-hover); }
+
+table { border-collapse: collapse; border-spacing: 0; }
+
+[hidden] { display: none !important; }
+
+:target { scroll-margin-block: var(--space-6); }
+
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-2);
+}

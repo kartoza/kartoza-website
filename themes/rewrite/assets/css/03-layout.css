@@ -1,0 +1,175 @@
+/* ============================================================
+ *  Layout primitives.  Composable, single-responsibility,
+ *  inspired by Every Layout (Heydon Pickering + Andy Bell).
+ *
+ *    .container   max-width centred page wrapper
+ *    .stack       vertical flow with consistent spacing
+ *    .cluster     horizontal flow with wrap + gap
+ *    .grid        auto-fit grid
+ *    .sidebar     content + sidebar, responsive
+ *    .switcher    columns that collapse to rows under threshold
+ *    .cover       vertical centring with min-height
+ *    .frame       fixed aspect ratio media frame
+ *    .center      horizontally centred narrow text column
+ *    .reel        horizontal scroller
+ * ============================================================ */
+
+
+/* ---- container — page max width + side gutter --------------- */
+.container {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.container--narrow { max-width: var(--content-narrow); }
+.container--full   { max-width: 100%; }
+
+
+/* ---- section — vertical rhythm ------------------------------ */
+.section {
+  padding-block: var(--section-y);
+}
+.section--tight { padding-block: var(--space-7); }
+.section--loose { padding-block: var(--space-10); }
+
+.section--bg-elevated { background: var(--color-bg-elevated); }
+.section--bg-inverse  { background: var(--color-bg-inverse); color: var(--color-text-inverse); }
+.section--bg-inverse :is(h1, h2, h3, h4, h5, h6) { color: var(--color-text-inverse); }
+.section--bg-inverse a:not(.button) { color: var(--color-accent); }
+
+
+/* ---- stack — vertical flow with consistent spacing ---------- */
+.stack > * + * { margin-block-start: var(--stack-space, var(--space-4)); }
+.stack--1 > * + * { --stack-space: var(--space-1); }
+.stack--2 > * + * { --stack-space: var(--space-2); }
+.stack--3 > * + * { --stack-space: var(--space-3); }
+.stack--4 > * + * { --stack-space: var(--space-4); }
+.stack--5 > * + * { --stack-space: var(--space-5); }
+.stack--6 > * + * { --stack-space: var(--space-6); }
+.stack--7 > * + * { --stack-space: var(--space-7); }
+
+
+/* ---- cluster — horizontal wrapping flow --------------------- */
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cluster-space, var(--space-3));
+  align-items: center;
+}
+.cluster--start { justify-content: flex-start; }
+.cluster--center { justify-content: center; }
+.cluster--between { justify-content: space-between; }
+
+
+/* ---- grid — auto-fit responsive grid ------------------------ */
+.grid {
+  display: grid;
+  gap: var(--grid-gap, var(--space-5));
+  grid-template-columns: repeat(auto-fit, minmax(var(--grid-min, 18rem), 1fr));
+}
+.grid--2 { --grid-min: 22rem; }
+.grid--3 { --grid-min: 18rem; }
+.grid--4 { --grid-min: 14rem; }
+
+
+/* ---- sidebar — main + sidebar that stacks under threshold --- */
+.sidebar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+.sidebar > :first-child {
+  flex-basis: 16rem;
+  flex-grow: 1;
+}
+.sidebar > :last-child {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-inline-size: 60%;
+}
+
+
+/* ---- switcher — N columns that collapse to rows ------------- */
+.switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+}
+.switcher > * {
+  flex-grow: 1;
+  flex-basis: calc((var(--switcher-threshold, 30rem) - 100%) * 999);
+}
+
+
+/* ---- cover — vertical centring, min-height ------------------ */
+.cover {
+  display: flex;
+  flex-direction: column;
+  min-block-size: var(--cover-min, 80vh);
+  padding-block: var(--space-7);
+}
+.cover > * { margin-block: auto; }
+.cover > :first-child { margin-block-start: 0; }
+.cover > :last-child  { margin-block-end:   0; }
+
+
+/* ---- frame — fixed aspect ratio media ----------------------- */
+.frame {
+  aspect-ratio: var(--frame-ratio, 16 / 9);
+  overflow: hidden;
+}
+.frame > img, .frame > video, .frame > iframe {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+.frame--square  { --frame-ratio: 1; }
+.frame--portrait{ --frame-ratio: 3 / 4; }
+.frame--wide    { --frame-ratio: 21 / 9; }
+
+
+/* ---- center — narrow centred text column -------------------- */
+.center {
+  box-sizing: content-box;
+  max-inline-size: var(--measure);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+
+/* ---- reel — horizontal scroller ----------------------------- */
+.reel {
+  display: flex;
+  gap: var(--space-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  scrollbar-width: thin;
+}
+.reel > * {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+
+/* ---- spread — flex space-between ---------------------------- */
+.spread {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+/* ---- visually-hidden — accessible hiding -------------------- */
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}

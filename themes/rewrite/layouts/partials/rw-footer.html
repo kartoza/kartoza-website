@@ -1,0 +1,56 @@
+{{/* Site footer — semantic columns, Kartoza credit triplet. */}}
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+
+      <div class="site-footer__col">
+        <h2>Kartoza</h2>
+        <p class="u-text-muted u-mb-3" style="color: rgba(255,255,255,0.78);">
+          Open Source Geospatial Solutions. Cape Town · Lisbon.
+        </p>
+        <p>
+          <a href="mailto:info@kartoza.com">info@kartoza.com</a>
+        </p>
+      </div>
+
+      <div class="site-footer__col">
+        <h2>Navigate</h2>
+        <ul role="list">
+          <li><a href="{{ "/" | absURL }}">Home</a></li>
+          <li><a href="{{ "solutions/" | absURL }}">Solutions</a></li>
+          <li><a href="{{ "training-courses/" | absURL }}">Training</a></li>
+          <li><a href="{{ "blog/" | absURL }}">Blog</a></li>
+          <li><a href="{{ "contact/" | absURL }}">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h2>Community</h2>
+        <ul role="list">
+          <li><a href="https://github.com/kartoza" rel="noopener">GitHub</a></li>
+          <li><a href="https://www.youtube.com/@KartozaGeo" rel="noopener">YouTube</a></li>
+          <li><a href="https://github.com/sponsors/kartoza" rel="noopener">Sponsor</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h2>Brand</h2>
+        <p style="color: rgba(255,255,255,0.78); margin-block-end: 0;">
+          Made with <span aria-hidden="true">💗</span><span class="visually-hidden">love</span>
+          by <a href="https://kartoza.com" rel="noopener">Kartoza</a>.
+          <a href="https://github.com/sponsors/kartoza" rel="noopener">Donate</a> ·
+          <a href="https://github.com/kartoza/kartoza-website" rel="noopener">GitHub</a>.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="site-footer__bottom">
+      <p>© {{ now.Year }} Kartoza (Pty) Ltd &amp; Kartoza Lda.</p>
+      <p>
+        Built with <a href="https://gohugo.io" rel="noopener">Hugo</a> ·
+        Theme <code class="u-mono">rewrite</code>
+      </p>
+    </div>
+  </div>
+</footer>

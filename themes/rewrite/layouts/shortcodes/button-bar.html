@@ -1,0 +1,20 @@
+{{/* {{< button-bar "icon:text:link" "icon:text:link" … >}}
+
+     Self-closing.  Each positional "icon:text:link" triple
+     renders as a primary button.  Matches upstream API.
+     Must NOT reference .Inner — Hugo's parser would then
+     require a closing tag, which the content never provides. */}}
+
+<div class="cluster cluster--start" style="margin-block: var(--space-5);">
+  {{ range $.Params }}
+    {{ $parts := split . ":" }}
+    {{ $icon  := index $parts 0 }}
+    {{ $text  := index $parts 1 }}
+    {{ $link  := index $parts 2 }}
+    {{ $href  := cond (hasPrefix $link "http") $link (absURL $link) }}
+    <a class="button button--primary" href="{{ $href }}">
+      {{ with $icon }}<span class="button__icon" aria-hidden="true"><i class="{{ . }}"></i></span>{{ end }}
+      <span>{{ $text }}</span>
+    </a>
+  {{ end }}
+</div>

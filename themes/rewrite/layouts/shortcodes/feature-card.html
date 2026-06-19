@@ -1,0 +1,14 @@
+{{/* {{< feature-card icon="…" title="…" class="…" >}} markdown body {{< /feature-card >}} */}}
+{{ $icon  := .Get "icon" | default "" }}
+{{ $title := .Get "title" | default "" }}
+{{ $class := .Get "class" | default "" }}
+
+<article class="card {{ $class }}">
+  <div class="card__body stack stack--3">
+    {{ with $icon }}
+      <img class="card__icon" src="{{ . | absURL }}" alt="" width="64" height="64" />
+    {{ end }}
+    {{ with $title }}<h3 class="card__title">{{ . }}</h3>{{ end }}
+    <div class="card__excerpt">{{ .Inner | markdownify }}</div>
+  </div>
+</article>

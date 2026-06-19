@@ -1,0 +1,22 @@
+{{/* {{< button class icon text link fullwidth >}}
+     Mirrors the upstream signature; renders semantic <a class="button button--…"> */}}
+{{ $class    := .Get "class" | default "is-primary" }}
+{{ $icon     := .Get "icon" | default "" }}
+{{ $text     := .Get "text" | default "" }}
+{{ $link     := .Get "link" | default "" }}
+{{ $full     := .Get "fullwidth" | default "false" }}
+
+{{/* Map legacy Bulma "is-X" classes onto modern .button--X variants. */}}
+{{ $variant  := "button--primary" }}
+{{ if   in $class "is-link"     }}{{ $variant = "button--primary" }}
+{{ else if in $class "is-info"  }}{{ $variant = "button--primary" }}
+{{ else if in $class "is-danger"}}{{ $variant = "button--secondary" }}
+{{ else if in $class "is-warning"}}{{ $variant = "button--accent" }}
+{{ else if in $class "is-light" }}{{ $variant = "button--ghost" }}
+{{ else if in $class "is-outlined" }}{{ $variant = "button--secondary" }}
+{{ end }}
+
+<a class="button {{ $variant }}{{ if eq $full "true" }} button--full{{ end }}" href="{{ absURL $link }}">
+  {{- with $icon }}<span class="button__icon" aria-hidden="true"><i class="{{ . }}"></i></span>{{ end -}}
+  <span>{{ $text }}</span>
+</a>

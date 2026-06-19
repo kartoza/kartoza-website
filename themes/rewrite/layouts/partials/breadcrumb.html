@@ -1,0 +1,18 @@
+{{/* Accessible breadcrumb trail.  Builds from .Ancestors. */}}
+{{ if not .IsHome }}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol class="breadcrumb__list" role="list">
+    <li class="breadcrumb__item">
+      <a href="{{ "/" | absURL }}">Home</a>
+    </li>
+    {{ range .Ancestors.Reverse }}
+      {{ if not .IsHome }}
+      <li class="breadcrumb__item">
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+      </li>
+      {{ end }}
+    {{ end }}
+    <li class="breadcrumb__item" aria-current="page">{{ .Title }}</li>
+  </ol>
+</nav>
+{{ end }}

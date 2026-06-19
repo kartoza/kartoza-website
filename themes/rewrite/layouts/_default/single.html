@@ -1,0 +1,30 @@
+{{ define "main" }}
+<article class="article section">
+  <div class="container">
+
+    {{ partial "breadcrumb.html" . }}
+
+    <header class="article__header stack stack--3">
+      {{ with .Params.eyebrow | default .Type }}
+        <p class="eyebrow">{{ . | humanize }}</p>
+      {{ end }}
+      <h1 class="u-text-balance">{{ .Title }}</h1>
+      {{ with .Description | default .Summary }}
+        <p class="u-lede">{{ . }}</p>
+      {{ end }}
+      {{ partial "page-meta.html" . }}
+    </header>
+
+    {{ with .Params.featured_image | default .Params.image }}
+      <figure class="frame frame--wide u-mb-7">
+        <img src="{{ . | absURL }}" alt="" loading="lazy" decoding="async" />
+      </figure>
+    {{ end }}
+
+    <div class="article__body stack stack--4">
+      {{ .Content }}
+    </div>
+
+  </div>
+</article>
+{{ end }}

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="{{ site.LanguageCode | default "en" }}">
+  <head>
+    {{ partial "head.html" . }}
+    {{ block "head" . }}{{ end }}
+  </head>
+  <body>
+    {{ partial "skip-link.html" . }}
+    {{ partial "nav.html" . }}
+
+    <main id="main" tabindex="-1">
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    {{ partial "rw-footer.html" . }}
+
+    {{ block "scripts" . }}{{ end }}
+  </body>
+</html>

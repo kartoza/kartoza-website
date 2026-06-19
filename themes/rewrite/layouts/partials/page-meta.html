@@ -1,0 +1,12 @@
+{{/* Page meta — date, reading time, author.  Used inside .article__header */}}
+{{ if or (eq .Type "blog") (.Params.author) (.Params.date) }}
+<div class="article__meta">
+  {{ with .Params.author }}<span>By {{ . }}</span>{{ end }}
+  {{ with .Date }}
+    <span>
+      <time datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 January 2006" }}</time>
+    </span>
+  {{ end }}
+  {{ if .WordCount }}<span>{{ .ReadingTime }} min read</span>{{ end }}
+</div>
+{{ end }}

@@ -1,0 +1,28 @@
+{{/* Accessible numeric pagination.  Drop-in replacement for Hugo's
+     removed _internal/pagination.html.  Uses our .pagination CSS. */}}
+{{ $paginator := .Paginator }}
+{{ if gt $paginator.TotalPages 1 }}
+<nav class="pagination" aria-label="Pagination">
+  {{ if $paginator.HasPrev }}
+    <a href="{{ $paginator.Prev.URL }}" rel="prev" aria-label="Previous page">
+      <span aria-hidden="true">←</span>
+      <span class="visually-hidden">Previous</span>
+    </a>
+  {{ end }}
+
+  {{ range $paginator.Pagers }}
+    {{ if eq . $paginator }}
+      <span aria-current="page">{{ .PageNumber }}</span>
+    {{ else }}
+      <a href="{{ .URL }}" aria-label="Page {{ .PageNumber }}">{{ .PageNumber }}</a>
+    {{ end }}
+  {{ end }}
+
+  {{ if $paginator.HasNext }}
+    <a href="{{ $paginator.Next.URL }}" rel="next" aria-label="Next page">
+      <span class="visually-hidden">Next</span>
+      <span aria-hidden="true">→</span>
+    </a>
+  {{ end }}
+</nav>
+{{ end }}

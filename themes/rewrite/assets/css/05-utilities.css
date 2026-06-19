@@ -1,0 +1,39 @@
+/* ============================================================
+ *  Utilities.  Single-property helpers for one-off cases.
+ *  Use sparingly — prefer components.
+ * ============================================================ */
+
+/* Text */
+.u-eyebrow      { font-size: var(--size-100); font-weight: var(--weight-bold); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--color-text-muted); }
+.u-display      { font-size: var(--size-display); font-weight: var(--weight-black); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); }
+.u-lede         { font-size: var(--size-500); color: var(--color-text-muted); max-width: 50ch; }
+.u-text-muted   { color: var(--color-text-muted); }
+.u-text-accent  { color: var(--color-accent); }
+.u-text-center  { text-align: center; }
+.u-text-start   { text-align: start; }
+.u-text-balance { text-wrap: balance; }
+.u-italic       { font-style: italic; }
+.u-mono         { font-family: var(--font-mono); }
+
+/* Spacing (block) */
+.u-mt-0 { margin-block-start: 0; }
+.u-mt-3 { margin-block-start: var(--space-3); }
+.u-mt-5 { margin-block-start: var(--space-5); }
+.u-mt-7 { margin-block-start: var(--space-7); }
+.u-mb-0 { margin-block-end: 0; }
+.u-mb-3 { margin-block-end: var(--space-3); }
+.u-mb-5 { margin-block-end: var(--space-5); }
+.u-mb-7 { margin-block-end: var(--space-7); }
+
+/* Display */
+.u-flex     { display: flex; }
+.u-grid     { display: grid; }
+.u-block    { display: block; }
+.u-inline   { display: inline; }
+.u-hidden   { display: none; }
+@media (max-width: 48em) { .u-hidden\@md { display: none; } }
+@media (min-width: 48em) { .u-visible\@md { display: revert; } .u-hidden-from\@md { display: none; } }
+
+/* Misc */
+.u-full-width { inline-size: 100%; }
+.u-rule       { border-block-end: var(--border-hairline); padding-block-end: var(--space-3); }

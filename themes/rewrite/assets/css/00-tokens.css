@@ -1,0 +1,172 @@
+/* ============================================================
+ *  Kartoza Modern — Design Tokens
+ *  Single source of truth for the design system.
+ *  All other CSS files only consume var(--…).
+ * ============================================================ */
+
+:root {
+  /* ---- Palette (Brand Pack v1.0.1 App. A) -------------------- */
+  --k-blue:           #54A2CC;
+  --k-blue-dark:      #2F7A9F;
+  --k-blue-deeper:    #1F5B78;
+  --k-blue-light:     #BFE0F0;
+  --k-amber:          #EEB348;
+  --k-amber-dark:     #C28C2A;
+  --k-amber-soft:     #FCF3E0;
+  --k-grey:           #8A8B8B;
+  --k-charcoal:       #383939;
+  --k-charcoal-deep:  #1F1F20;
+  --k-muted:          #676869;
+  --k-rule:           #E4E5E1;
+  --k-cloud:          #F5F5F2;
+  --k-cloud-warm:     #FAFAF6;
+  --k-white:          #FFFFFF;
+
+  --k-success:        #3C7D54;
+  --k-success-soft:   #EAF3EC;
+  --k-warn:           #EEB348;
+  --k-warn-soft:      #FCF3E0;
+  --k-error:          #B0473C;
+  --k-error-soft:     #FBEFEF;
+
+  /* ---- Semantic colour roles (consumed by base + components)
+   *      Light theme by default.  Dark theme overrides below.   */
+  --color-bg:           var(--k-white);
+  --color-bg-elevated:  var(--k-cloud);
+  --color-bg-inverse:   var(--k-charcoal);
+  --color-text:         var(--k-charcoal);
+  --color-text-muted:   var(--k-muted);
+  --color-text-inverse: var(--k-cloud);
+  --color-link:         var(--k-blue-dark);
+  --color-link-hover:   var(--k-charcoal);
+  --color-accent:       var(--k-amber);
+  --color-accent-soft:  var(--k-amber-soft);
+  --color-rule:         var(--k-rule);
+  --color-focus:        var(--k-amber);
+
+  /* ---- Typography -------------------------------------------- */
+  --font-sans:  'Lato', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:  'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  --font-display: var(--font-sans);
+
+  /* Type scale (modular, ratio 1.25, base 16px) */
+  --size-100:  0.75rem;     /* 12 */
+  --size-200:  0.875rem;    /* 14 */
+  --size-300:  1rem;        /* 16  body */
+  --size-400:  1.125rem;    /* 18 */
+  --size-500:  1.25rem;     /* 20 */
+  --size-600:  1.5rem;      /* 24 */
+  --size-700:  1.875rem;    /* 30 */
+  --size-800:  2.375rem;    /* 38 */
+  --size-900:  3rem;        /* 48 */
+  --size-1000: 3.75rem;     /* 60 */
+  --size-1100: 4.75rem;     /* 76 */
+
+  /* Fluid display sizes (clamp for headlines) */
+  --size-display:    clamp(2.5rem, 5vw + 1rem, 4.75rem);
+  --size-hero:       clamp(2rem,   4vw + 0.75rem, 3.75rem);
+
+  --weight-regular: 400;
+  --weight-bold:    700;
+  --weight-black:   900;
+
+  --leading-tight:  1.15;
+  --leading-snug:   1.35;
+  --leading-normal: 1.55;
+  --leading-loose:  1.75;
+
+  --tracking-tight:    -0.02em;
+  --tracking-normal:    0;
+  --tracking-wide:      0.04em;
+  --tracking-eyebrow:   0.18em;
+
+  /* ---- Spacing scale (4-px base) ----------------------------- */
+  --space-1:  0.25rem;   /* 4   */
+  --space-2:  0.5rem;    /* 8   */
+  --space-3:  0.75rem;   /* 12  */
+  --space-4:  1rem;      /* 16  */
+  --space-5:  1.5rem;    /* 24  */
+  --space-6:  2rem;      /* 32  */
+  --space-7:  3rem;      /* 48  */
+  --space-8:  4rem;      /* 64  */
+  --space-9:  6rem;      /* 96  */
+  --space-10: 8rem;      /* 128 */
+  --space-11: 10rem;     /* 160 */
+
+  /* ---- Layout ------------------------------------------------ */
+  --measure:        70ch;        /* readable line length    */
+  --content-max:    72rem;       /* 1152 — page container   */
+  --content-narrow: 44rem;       /* 704  — article width    */
+  --gutter:         var(--space-5);
+  --section-y:      var(--space-9);
+
+  /* ---- Radii (used sparingly — design favours sharp edges) -- */
+  --radius-1: 2px;
+  --radius-2: 4px;
+  --radius-3: 8px;
+  --radius-pill: 9999px;
+
+  /* ---- Borders ----------------------------------------------- */
+  --border-hairline: 1px solid var(--color-rule);
+
+  /* ---- Motion ----------------------------------------------- */
+  --ease:       cubic-bezier(0.2, 0, 0.2, 1);
+  --duration-1: 120ms;
+  --duration-2: 220ms;
+  --duration-3: 360ms;
+
+  /* ---- Z-index scale ---------------------------------------- */
+  --z-base:     1;
+  --z-sticky:   10;
+  --z-header:   100;
+  --z-overlay:  1000;
+  --z-modal:    10000;
+
+  /* ---- Breakpoints (for JS reading; CSS uses inline) -------- */
+  --bp-sm: 30em;     /* 480  */
+  --bp-md: 48em;     /* 768  */
+  --bp-lg: 64em;     /* 1024 */
+  --bp-xl: 80em;     /* 1280 */
+}
+
+
+/* ---- DARK MODE -------------------------------------------------
+ *  Triggered by system preference OR explicit data-color-scheme.
+ * --------------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-color-scheme="light"]) {
+    --color-bg:           var(--k-charcoal-deep);
+    --color-bg-elevated:  var(--k-charcoal);
+    --color-bg-inverse:   var(--k-cloud);
+    --color-text:         var(--k-cloud);
+    --color-text-muted:   #B5B6B6;
+    --color-text-inverse: var(--k-charcoal);
+    --color-link:         var(--k-blue-light);
+    --color-link-hover:   var(--k-amber);
+    --color-accent:       var(--k-amber);
+    --color-accent-soft:  rgba(238, 179, 72, 0.16);
+    --color-rule:         #2E2F2F;
+    --color-focus:        var(--k-amber);
+  }
+}
+:root[data-color-scheme="dark"] {
+  --color-bg:           var(--k-charcoal-deep);
+  --color-bg-elevated:  var(--k-charcoal);
+  --color-bg-inverse:   var(--k-cloud);
+  --color-text:         var(--k-cloud);
+  --color-text-muted:   #B5B6B6;
+  --color-text-inverse: var(--k-charcoal);
+  --color-link:         var(--k-blue-light);
+  --color-link-hover:   var(--k-amber);
+  --color-rule:         #2E2F2F;
+}
+
+
+/* ---- REDUCED MOTION ------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-1: 0ms;
+    --duration-2: 0ms;
+    --duration-3: 0ms;
+  }
+}

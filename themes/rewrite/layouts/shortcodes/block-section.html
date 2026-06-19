@@ -1,0 +1,30 @@
+{{/* {{< block-section backgroundColor="primary|dark|white" textColor="…"
+                       title="…" subtitle="…" class="…" >}}
+       inner markdown body (may include ## headings)
+     {{< /block-section >}}
+
+     Full-width content section.  Upstream uses Bulma colour
+     keywords; we map them onto our flat surface variants. */}}
+
+{{ $bg       := .Get "backgroundColor" | default "" }}
+{{ $fg       := .Get "textColor" | default "" }}
+{{ $subtitle := .Get "subtitle" | default "" }}
+{{ $title    := .Get "title" | default "" }}
+{{ $class    := .Get "class" | default "" }}
+
+{{/* Map upstream colour keywords to our flat surface variants */}}
+{{ $sectionClass := "" }}
+{{ if   eq $bg "dark"    }}{{ $sectionClass = "section--bg-inverse" }}
+{{ else if eq $bg "primary" }}{{ $sectionClass = "section--bg-elevated" }}
+{{ else if eq $bg "elevated"}}{{ $sectionClass = "section--bg-elevated" }}
+{{ end }}
+
+<section class="section {{ $sectionClass }} {{ $class }}">
+  <div class="container">
+    {{ with $subtitle }}<p class="eyebrow">{{ . }}</p>{{ end }}
+    {{ with $title }}<h2 style="margin-block-start: 0;">{{ . }}</h2>{{ end }}
+    {{ with .Inner }}
+      <div class="article__body stack stack--4">{{ . | markdownify }}</div>
+    {{ end }}
+  </div>
+</section>
