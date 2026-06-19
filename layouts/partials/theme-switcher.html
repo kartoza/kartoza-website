@@ -9,7 +9,12 @@
        kartoza-deck      B: Deck        — Brand Pack PDF deck aesthetic (Nunito)
        kartoza-srs       C: Document    — Brand Pack SRS Template aesthetic (Lato)
        kartoza-docs      D: MkDocs      — kartoza-mcp Material-for-MkDocs aesthetic (Inter)
-     ========================================================== */}}
+       rewrite           E: Rewrite     — brand new Hugo theme (separate render pipeline)
+
+     E:Rewrite is NOT a data-theme overlay — it is a separate theme in
+     the Hugo theme chain.  Selecting it navigates to a page that
+     currently renders through that theme (the homepage).  The JS
+     below handles this special case. */}}
 <div class="navbar-item theme-switcher">
   <button
     class="theme-switcher-btn"
@@ -66,6 +71,17 @@
     </button>
 
     <div class="theme-divider"></div>
+    <div class="theme-section-label">New theme (separate pipeline)</div>
+
+    <button class="theme-option" type="button" data-theme="rewrite" data-nav="/">
+      <span class="theme-swatch" style="background: #383939; border-right: 6px solid #EEB348;"></span>
+      <span class="theme-option-label">
+        E: Rewrite
+        <small>Brand new theme · opens homepage to preview</small>
+      </span>
+    </button>
+
+    <div class="theme-divider"></div>
     <a class="theme-link" href="https://github.com/kartoza/kartoza-website/issues/165" target="_blank" rel="noopener">
       <span class="icon"><i class="fa-brands fa-github"></i></span>
       <span>Brand alignment tracking epic #165</span>
@@ -108,6 +124,14 @@
   options.forEach(function (opt) {
     opt.addEventListener('click', function (e) {
       e.stopPropagation();
+      var navTarget = this.getAttribute('data-nav');
+      if (navTarget) {
+        // Different render pipeline (e.g. Rewrite theme) — navigate
+        // rather than overlay CSS on the current page.
+        dropdown.classList.remove('is-active');
+        window.location.href = navTarget;
+        return;
+      }
       applyTheme(this.getAttribute('data-theme'));
       dropdown.classList.remove('is-active');
     });
