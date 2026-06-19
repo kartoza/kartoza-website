@@ -10,8 +10,6 @@ country: "South Africa"
 github: "LenevJ"
 education:
   - degree: "BA Information Design"
-    institution: "University of Pretoria"
-    year: "2022"
 skills:
   - "Brand Design"
   - "Graphic Design"
@@ -21,7 +19,6 @@ skills:
   - "Digital Marketing"
 achievements:
   - "Passion for brand design and storytelling"
-  - "Au pair cultural exchange experience in America"
 bio: "Dedicated graphic designer and marketing professional."
 reviewedBy: "Lene van Jaarsveld"
 reviewedDate: 2026-06-19
