@@ -5,7 +5,7 @@ department: "Operations & Administration"
 departmentIcon: "fa-cogs"
 weight: 52
 draft: false
-image: "/img/team/marina-vandermerwe.png"
+image: "/img/team/marinanew.jpg"
 country: "South Africa"
 skills:
   - "CRM Optimisation"
