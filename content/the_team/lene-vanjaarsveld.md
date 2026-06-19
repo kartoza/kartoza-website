@@ -24,7 +24,7 @@ reviewedBy: "Lene van Jaarsveld"
 reviewedDate: 2026-06-19
 ---
 
-Lene is Kartoza's Marketing Co-Ordinator, bringing creative vision and design expertise to the company's brand communications. Her BA in Information Design provides a strong foundation in visual communication and design thinking.
+Lene is Kartoza's Marketing Co-Ordinator, bringing creative vision and design expertise to the company's brand communications. Her BA in Information Design provided a strong foundation in visual communication and design thinking.
 
 Her passion for brand design and storytelling drives her approach to marketing. Lene understands that effective marketing is not just about promotion but about communicating what makes Kartoza unique and valuable to its audience.
 
