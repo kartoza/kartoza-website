@@ -6,15 +6,11 @@ departmentIcon: "fa-layer-group"
 weight: 30
 draft: false
 image: "/img/team/victoria-nyaga.jpg"
-location: "Nairobi, Kenya"
 country: "Kenya"
-coordinates: "-1.2921, 36.8219"
 github: "vikineema"
 education:
   - degree: "BA Engineering (Geospatial)"
-    year: "2022"
   - degree: "Applied Data Science"
-    institution: "World Quant University"
 skills:
   - "GIS Product Development"
   - "Remote Sensing"
@@ -24,12 +20,12 @@ skills:
   - "Agricultural Mapping"
 achievements:
   - "Developed methods to map paddy rice using remote sensing"
-bio: "Based in Nairobi, Kenya. BA Engineering (Geospatial). Developed methods to map paddy rice using remote sensing."
-reviewedBy: "Tim Sutton"
-reviewedDate: 2026-03-17
+bio: "GIS Product Developer bringing together geospatial engineering and data science expertise."
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-19
 ---
 
-Victoria is a GIS Product Developer based in Nairobi, Kenya, bringing together geospatial engineering and data science expertise. Her BA in Engineering (Geospatial) from 2022, combined with studies in Applied Data Science at World Quant University, creates a powerful combination of spatial and analytical skills.
+Victoria is a GIS Product Developer based in Kenya, bringing together geospatial engineering and data science expertise. Her BA in Engineering (Geospatial), combined with studies in Applied Data Science creates a powerful combination of spatial and analytical skills.
 
 Her research on mapping paddy rice using remote sensing demonstrates her ability to apply geospatial technology to real-world challenges. This work contributes to agricultural monitoring and food security efforts, showing how GIS can have tangible positive impacts.
 
