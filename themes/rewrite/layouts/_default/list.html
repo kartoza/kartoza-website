@@ -23,9 +23,10 @@
     {{ if $pages.Pages }}
     <div class="listing-grid">
       {{ range $pages.Pages }}
+        {{ $permalink := .Permalink }}
         <article class="card">
           {{ with .Params.image | default .Params.featured_image }}
-            <a class="card__media" href="{{ .Permalink }}">
+            <a class="card__media" href="{{ $permalink }}">
               <img src="{{ . | absURL }}" alt="" loading="lazy" decoding="async" />
             </a>
           {{ end }}

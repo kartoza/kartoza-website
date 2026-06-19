@@ -1,0 +1,19 @@
+{{ define "main" }}
+<section class="section">
+  <div class="container">
+    <div class="stack stack--5 u-text-center">
+      <p class="eyebrow">Error 404</p>
+      <h1 class="u-text-balance">This page is off the map.</h1>
+      <p class="u-lede">
+        We couldn't find the page you were looking for.  It may have
+        moved, been retired, or the link you followed may be incorrect.
+      </p>
+      <p class="cluster cluster--center">
+        <a class="button button--primary" href="{{ "/" | absURL }}">Back to home</a>
+        <a class="button button--secondary" href="{{ "blog/" | absURL }}">Read the blog</a>
+        <a class="button button--secondary" href="{{ "contact-us/" | absURL }}">Contact us</a>
+      </p>
+    </div>
+  </div>
+</section>
+{{ end }}
