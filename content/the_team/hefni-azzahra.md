@@ -6,9 +6,7 @@ departmentIcon: "fa-graduation-cap"
 weight: 22
 draft: false
 image: "/img/team/hefni-azzahra.jpg"
-location: "Indonesia"
 country: "Indonesia"
-coordinates: "-6.2088, 106.8456"
 github: "hefniraera"
 education:
   - degree: "Bachelor's in Geodetic Engineering"
@@ -19,8 +17,8 @@ skills:
   - "Spatial Problem-Solving"
   - "QGIS"
 bio: "Bachelor's in Geodetic Engineering with a strong interest in Geographic Information Systems."
-reviewedBy: "Tim Sutton"
-reviewedDate: 2026-03-16
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-19
 ---
 
 Hefni is a Junior Document Writer whose background in Geodetic Engineering brings a precise, technical perspective to documentation work. Her education provides her with a deep understanding of spatial reference systems, surveying, and the mathematical foundations of GIS.
