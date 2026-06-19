@@ -6,9 +6,7 @@ departmentIcon: "fa-code"
 weight: 15
 draft: false
 image: "/img/team/lova-andriarimalala.jpg"
-location: "Antananarivo, Madagascar"
 country: "Madagascar"
-coordinates: "-18.8792, 47.5079"
 github: "Xpirix"
 skills:
   - "QGIS"
@@ -19,12 +17,12 @@ skills:
   - "Humanitarian GIS"
 achievements:
   - "Focus on humanitarian geospatial initiatives"
-bio: "Based in Madagascar. Passionate Web GIS Developer with expertise in Python, Django, JavaScript."
-reviewedBy: "Tim Sutton"
+bio: "Passionate Web GIS Developer with expertise in Python, Django, JavaScript."
+reviewedBy: "Lene van Jaarsveld"
 reviewedDate: 2026-03-16
 ---
 
-Lova is a passionate Web GIS developer specializing in building geospatial web applications. Based in Antananarivo, Madagascar, he brings a unique perspective from one of the world's most biodiverse regions.
+Lova is a passionate Web GIS developer specialising in building geospatial web applications. Based in Madagascar, he brings a unique perspective from one of the world's most biodiverse regions.
 
 His technical expertise spans Python, Django, and JavaScript - the core technologies for modern web mapping applications. This combination allows him to build complete solutions from backend data processing to interactive frontend visualizations.
 
