@@ -1,0 +1,60 @@
+{{ define "main" }}
+<section class="section">
+  <div class="container">
+
+    {{ partial "breadcrumb.html" . }}
+
+    <header class="stack stack--3 u-mb-7">
+      {{ with .Params.eyebrow | default .Type }}
+        <p class="eyebrow">{{ . | humanize }}</p>
+      {{ end }}
+      <h1 class="u-text-balance">{{ .Title }}</h1>
+      {{ with .Params.subtitle }}
+        <p class="u-lede u-text-accent">{{ . }}</p>
+      {{ end }}
+      {{ with .Description }}
+        <p class="u-lede">{{ . }}</p>
+      {{ end }}
+    </header>
+
+    {{ with .Content }}
+      <div class="article__body stack stack--4 u-mb-7">{{ . }}</div>
+    {{ end }}
+
+    {{ with .Params.playlists }}
+    <div class="stack stack--5">
+      <h2 class="u-text-balance">Our Playlists</h2>
+      <p class="u-text-muted">Curated collections organised by topic.</p>
+      <div class="listing-grid">
+        {{ range . }}
+          <a class="card card--linked" href="{{ .url }}" rel="noopener" target="_blank">
+            <div class="card__body stack stack--3">
+              {{ with .videoCount }}<p class="eyebrow u-mb-0">{{ . }} videos</p>{{ end }}
+              <h3 class="card__title">{{ .title }}</h3>
+              {{ with .description }}<p class="card__excerpt">{{ . }}</p>{{ end }}
+            </div>
+          </a>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+
+  </div>
+</section>
+
+{{ with .Params.subscribeUrl }}
+<section class="section hero--inverse">
+  <div class="container">
+    <div class="stack stack--4 u-text-center">
+      <p class="eyebrow">Never Miss an Update</p>
+      <h2 class="u-text-balance">Subscribe to Kartoza on YouTube</h2>
+      <p class="u-lede">Subscribe to our channel and turn on notifications to stay updated with the latest geospatial tutorials, webinars, and news.</p>
+      <p class="cluster cluster--center">
+        <a class="button button--accent" href="{{ . }}" rel="noopener" target="_blank">Subscribe</a>
+        {{ with $.Params.channelUrl }}<a class="button button--ghost" href="{{ . }}" rel="noopener" target="_blank">Visit channel</a>{{ end }}
+      </p>
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}

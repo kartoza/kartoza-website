@@ -1,0 +1,48 @@
+{{ define "main" }}
+<article class="article section">
+  <div class="container">
+
+    {{ partial "breadcrumb.html" . }}
+
+    <header class="article__header stack stack--3">
+      <p class="eyebrow">Interactive web map</p>
+      <h1 class="u-text-balance">{{ .Title }}</h1>
+      {{ with .Params.subtitle }}
+        <p class="u-lede u-text-accent">{{ . }}</p>
+      {{ end }}
+      {{ with .Description | default .Summary }}
+        <p class="u-lede">{{ . }}</p>
+      {{ end }}
+
+      {{ with .Params.mapUrl | default .Params.url }}
+        <p class="cluster">
+          <a class="button button--primary" href="{{ . }}" rel="noopener" target="_blank">Open full map</a>
+        </p>
+      {{ end }}
+    </header>
+
+    {{ with .Params.featured_image | default .Params.image | default .Params.thumbnail }}
+      <figure class="frame frame--wide u-mb-7">
+        <img src="{{ . | absURL }}" alt="" loading="lazy" decoding="async" />
+      </figure>
+    {{ end }}
+
+    <div class="article__body stack stack--4">
+      {{ .Content }}
+    </div>
+
+  </div>
+</article>
+
+{{ partial "related-in-section.html" . }}
+
+{{ partial "section-cta-banner.html" (dict
+    "eyebrow"      "Need a custom map?"
+    "title"        "Ready to bring your data to life?"
+    "subtitle"     "From custom basemaps to embedded dashboards, we build interactive web maps tailored to your data and audience."
+    "primaryUrl"   ("contact-us/" | absURL)
+    "primaryLabel" "Request similar map"
+    "secondaryUrl" ("solutions/" | absURL)
+    "secondaryLabel" "Our development services"
+) }}
+{{ end }}

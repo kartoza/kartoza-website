@@ -1,0 +1,36 @@
+{{/* Related items: other regular pages in the same section.
+     Pass `.` (Page).  Skips itself and any drafts. */}}
+{{ $section := .CurrentSection }}
+{{ if $section }}
+  {{ $siblings := where (where $section.RegularPages "Permalink" "ne" .Permalink) "Draft" "!=" true }}
+  {{ if $siblings }}
+  <section class="section">
+    <div class="container">
+      <header class="stack stack--3 u-mb-7">
+        <p class="eyebrow">{{ with .Params.relatedLabel }}{{ . }}{{ else }}More in {{ .Section | humanize }}{{ end }}</p>
+        <h2 class="u-text-balance">Related</h2>
+      </header>
+      <div class="listing-grid">
+        {{ range first 3 $siblings }}
+          {{ $permalink := .Permalink }}
+          <article class="card">
+            {{ with .Params.image | default .Params.featured_image }}
+              <a class="card__media" href="{{ $permalink }}">
+                <img src="{{ . | absURL }}" alt="" loading="lazy" decoding="async" />
+              </a>
+            {{ end }}
+            <div class="card__body stack stack--3">
+              <h3 class="card__title">
+                <a href="{{ .Permalink }}">{{ .Title }}</a>
+              </h3>
+              {{ with .Description | default .Summary }}
+                <p class="card__excerpt">{{ . | plainify | truncate 140 }}</p>
+              {{ end }}
+            </div>
+          </article>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+  {{ end }}
+{{ end }}

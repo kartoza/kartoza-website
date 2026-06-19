@@ -1,0 +1,31 @@
+{{/* Section CTA banner (inverse / charcoal panel).
+     Pass a dict:
+       eyebrow      - optional small label above the heading
+       title        - heading text (required)
+       subtitle     - lede paragraph (required)
+       primaryUrl   - href for primary button (required)
+       primaryLabel - primary button text (required)
+       secondaryUrl   - optional href for secondary button
+       secondaryLabel - optional secondary button label
+       primaryExternal / secondaryExternal - bool, opens in new tab if true */}}
+<section class="section hero--inverse">
+  <div class="container">
+    <div class="stack stack--4 u-text-center">
+      {{ with .eyebrow }}<p class="eyebrow">{{ . }}</p>{{ end }}
+      <h2 class="u-text-balance">{{ .title }}</h2>
+      <p class="u-lede">{{ .subtitle }}</p>
+      <p class="cluster cluster--center">
+        <a class="button button--accent" href="{{ .primaryUrl }}"
+           {{- if .primaryExternal }} rel="noopener" target="_blank"{{ end }}>
+          {{ .primaryLabel }}
+        </a>
+        {{ with .secondaryUrl }}
+          <a class="button button--ghost" href="{{ . }}"
+             {{- if $.secondaryExternal }} rel="noopener" target="_blank"{{ end }}>
+            {{ $.secondaryLabel }}
+          </a>
+        {{ end }}
+      </p>
+    </div>
+  </div>
+</section>

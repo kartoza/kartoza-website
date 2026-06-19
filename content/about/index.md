@@ -3,7 +3,7 @@ title: "About Kartoza"
 subtitle: "A Happy Life is a Mappy Life"
 layout: "single"
 reviewedBy: "Tim Sutton"
-reviewedDate: 2026-03-19
+reviewedDate: 2026-06-20
 ---
 
 {{< block
@@ -81,6 +81,62 @@ Kartoza is the largest FOSS geospatial service provider in South Africa and in t
     "Offices:South Africa & Portugal"
     "Reach:Global"
 >}}
+
+{{< block-section
+    backgroundColor="white"
+    textColor="dark"
+    subtitle="Open Source First"
+>}}
+
+## Why Free and Open Source?
+
+{{< columns-start >}}
+{{< column-start class="is-6" >}}
+
+{{< feature-card
+    icon="/img/support-icon.svg"
+    title="No Vendor Lock-in"
+>}}
+Your data and systems remain yours. Switch providers or manage in-house anytime.
+{{< /feature-card >}}
+
+{{< column-end >}}
+{{< column-start class="is-6" >}}
+
+{{< feature-card
+    icon="/img/consultancy-icon.svg"
+    title="Complete Transparency"
+>}}
+Review the source code. Know exactly what the software does with your data.
+{{< /feature-card >}}
+
+{{< column-end >}}
+{{< columns-end >}}
+
+{{< columns-start >}}
+{{< column-start class="is-6" >}}
+
+{{< feature-card
+    icon="/img/education-icon.svg"
+    title="Community Support"
+>}}
+Thousands of developers worldwide contribute to and support these tools.
+{{< /feature-card >}}
+
+{{< column-end >}}
+{{< column-start class="is-6" >}}
+
+{{< feature-card
+    icon="/img/support-icon.svg"
+    title="Cost Effective"
+>}}
+No license fees. Invest your budget in customization and support instead.
+{{< /feature-card >}}
+
+{{< column-end >}}
+{{< columns-end >}}
+
+{{< /block-section >}}
 
 {{< block-section
     backgroundColor="dark"

@@ -1,0 +1,55 @@
+{{ define "main" }}
+<article class="article section">
+  <div class="container">
+
+    {{ partial "breadcrumb.html" . }}
+
+    <header class="article__header stack stack--3">
+      <p class="eyebrow">QGIS plugin</p>
+      <h1 class="u-text-balance">{{ .Title }}</h1>
+      {{ with .Params.subtitle }}
+        <p class="u-lede u-text-accent">{{ . }}</p>
+      {{ end }}
+      {{ with .Description | default .Summary }}
+        <p class="u-lede">{{ . }}</p>
+      {{ end }}
+
+      {{/* Links bar: install / docs / repo / downloads */}}
+      <p class="cluster">
+        {{ with .Params.pluginUrl | default .Params.installUrl }}
+          <a class="button button--primary" href="{{ . }}" rel="noopener" target="_blank">Install plugin</a>
+        {{ end }}
+        {{ with .Params.documentationUrl | default .Params.docsUrl }}
+          <a class="button button--ghost" href="{{ . }}" rel="noopener" target="_blank">Documentation</a>
+        {{ end }}
+        {{ with .Params.repositoryUrl | default .Params.repo }}
+          <a class="button button--ghost" href="{{ . }}" rel="noopener" target="_blank">Source</a>
+        {{ end }}
+      </p>
+    </header>
+
+    {{ with .Params.featured_image | default .Params.image }}
+      <figure class="frame frame--wide u-mb-7">
+        <img src="{{ . | absURL }}" alt="" loading="lazy" decoding="async" />
+      </figure>
+    {{ end }}
+
+    <div class="article__body stack stack--4">
+      {{ .Content }}
+    </div>
+
+  </div>
+</article>
+
+{{ partial "related-in-section.html" . }}
+
+{{ partial "section-cta-banner.html" (dict
+    "eyebrow"      "Need a hand?"
+    "title"        "Get expert help with this plugin"
+    "subtitle"     "Bespoke QGIS plugin development, training on existing plugins, and contracted maintenance — all available from the team that built it."
+    "primaryUrl"   ("contact-us/" | absURL)
+    "primaryLabel" "Discuss your project"
+    "secondaryUrl" ("plugins/" | absURL)
+    "secondaryLabel" "All plugins"
+) }}
+{{ end }}

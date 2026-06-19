@@ -5,9 +5,7 @@
     {{ partial "breadcrumb.html" . }}
 
     <header class="article__header stack stack--3">
-      {{ with .Params.eyebrow | default .Type }}
-        <p class="eyebrow">{{ . | humanize }}</p>
-      {{ end }}
+      <p class="eyebrow">Application</p>
       <h1 class="u-text-balance">{{ .Title }}</h1>
       {{ with .Params.subtitle }}
         <p class="u-lede u-text-accent">{{ . }}</p>
@@ -15,7 +13,11 @@
       {{ with .Description | default .Summary }}
         <p class="u-lede">{{ . }}</p>
       {{ end }}
-      {{ partial "page-meta.html" . }}
+      {{ with .Params.tags }}
+        <p class="cluster"><span class="eyebrow">Categories</span>
+          {{ range . }}<span class="badge">{{ . }}</span>{{ end }}
+        </p>
+      {{ end }}
     </header>
 
     {{ with .Params.featured_image | default .Params.image }}
@@ -30,4 +32,16 @@
 
   </div>
 </article>
+
+{{ partial "related-in-section.html" . }}
+
+{{ partial "section-cta-banner.html" (dict
+    "eyebrow"      "Need a custom app?"
+    "title"        "We build mobile and web applications that bring geospatial capabilities to the field."
+    "subtitle"     "Tell us about your data, your users, and where they work — we'll help you scope the right app."
+    "primaryUrl"   ("contact-us/" | absURL)
+    "primaryLabel" "Discuss your project"
+    "secondaryUrl" ("apps/" | absURL)
+    "secondaryLabel" "View all apps"
+) }}
 {{ end }}

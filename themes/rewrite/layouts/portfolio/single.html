@@ -5,9 +5,7 @@
     {{ partial "breadcrumb.html" . }}
 
     <header class="article__header stack stack--3">
-      {{ with .Params.eyebrow | default .Type }}
-        <p class="eyebrow">{{ . | humanize }}</p>
-      {{ end }}
+      <p class="eyebrow">Case study</p>
       <h1 class="u-text-balance">{{ .Title }}</h1>
       {{ with .Params.subtitle }}
         <p class="u-lede u-text-accent">{{ . }}</p>
@@ -15,7 +13,9 @@
       {{ with .Description | default .Summary }}
         <p class="u-lede">{{ . }}</p>
       {{ end }}
-      {{ partial "page-meta.html" . }}
+      {{ with .Params.client }}
+        <p class="cluster"><span class="eyebrow">Client</span> <strong>{{ . }}</strong></p>
+      {{ end }}
     </header>
 
     {{ with .Params.featured_image | default .Params.image }}
@@ -30,4 +30,16 @@
 
   </div>
 </article>
+
+{{ partial "related-in-section.html" . }}
+
+{{ partial "section-cta-banner.html" (dict
+    "eyebrow"      "Interested in a similar project?"
+    "title"        "Let's discuss how Kartoza can help."
+    "subtitle"     "From scoping through delivery, we partner with organisations to turn geospatial ambitions into working systems."
+    "primaryUrl"   ("contact-us/" | absURL)
+    "primaryLabel" "Get in touch"
+    "secondaryUrl" ("solutions/" | absURL)
+    "secondaryLabel" "View our solutions"
+) }}
 {{ end }}

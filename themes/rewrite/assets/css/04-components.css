@@ -193,6 +193,15 @@
 .card__excerpt { color: var(--color-text-muted); margin: 0; }
 .card__footer { margin-block-start: auto; padding-block-start: var(--space-3); border-block-start: var(--border-hairline); }
 
+/* Whole-card link variant: keeps card chrome, no underline, blue title on hover. */
+.card--linked {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+.card--linked:hover { border-color: var(--color-link); color: inherit; }
+.card--linked:hover .card__title { color: var(--color-link); }
+
 
 /* ---- Badge / tag ---------------------------------------- */
 .badge {

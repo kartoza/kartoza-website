@@ -136,3 +136,7 @@ Szczepanek
 reconciliations
 behavior
 ugettext
+
+# Brand + content terms restored from migrated section layouts
+Mappy
+Folium

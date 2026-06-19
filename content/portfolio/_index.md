@@ -8,3 +8,5 @@ HasBanner: true
 HeroSize: "is-medium"
 HeroImage: "img/banner-portfolio.png"
 ---
+
+Each project below is a real engagement — most run for months or years, frequently in partnership with the client's in-house team. The case studies link to public-facing artefacts (live applications, open source repositories, published reports) wherever the work is publicly visible.

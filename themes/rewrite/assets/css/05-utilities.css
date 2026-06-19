@@ -14,6 +14,7 @@
 .u-text-balance { text-wrap: balance; }
 .u-italic       { font-style: italic; }
 .u-mono         { font-family: var(--font-mono); }
+.u-list-clean   { list-style: none; padding: 0; margin: 0; }
 
 /* Spacing (block) */
 .u-mt-0 { margin-block-start: 0; }

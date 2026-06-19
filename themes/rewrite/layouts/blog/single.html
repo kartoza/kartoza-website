@@ -1,0 +1,66 @@
+{{ define "main" }}
+<article class="article section">
+  <div class="container">
+
+    {{ partial "breadcrumb.html" . }}
+
+    <header class="article__header stack stack--3">
+      <p class="eyebrow">Blog</p>
+      <h1 class="u-text-balance">{{ .Title }}</h1>
+      {{ with .Params.subtitle }}
+        <p class="u-lede u-text-accent">{{ . }}</p>
+      {{ end }}
+      {{ with .Description | default .Summary }}
+        <p class="u-lede">{{ . }}</p>
+      {{ end }}
+
+      <div class="cluster u-text-muted">
+        {{ with .Params.author }}<span>Written by <strong>{{ . }}</strong></span>{{ end }}
+        {{ if .Date }}
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+        {{ end }}
+        {{ with .Params.tags }}
+          <span>· {{ delimit . " · " }}</span>
+        {{ end }}
+      </div>
+    </header>
+
+    {{ with .Params.featured_image | default .Params.thumbnail | default .Params.image }}
+      {{ if ne . "/img/blog/placeholder.png" }}
+      <figure class="frame frame--wide u-mb-7">
+        <img src="{{ . | absURL }}" alt="" loading="lazy" decoding="async" />
+      </figure>
+      {{ end }}
+    {{ end }}
+
+    <div class="article__body stack stack--4">
+      {{ .Content }}
+    </div>
+
+    <footer class="stack stack--3 u-mt-7">
+      <p class="eyebrow">Share This</p>
+      <p class="cluster">
+        <a class="button button--ghost" rel="noopener" target="_blank"
+           href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}">Twitter</a>
+        <a class="button button--ghost" rel="noopener" target="_blank"
+           href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink }}">LinkedIn</a>
+        <a class="button button--ghost" rel="noopener" target="_blank"
+           href="mailto:?subject={{ .Title }}&body={{ .Permalink }}">Email</a>
+      </p>
+    </footer>
+
+  </div>
+</article>
+
+{{ partial "related-in-section.html" . }}
+
+{{ partial "section-cta-banner.html" (dict
+    "eyebrow"      "Need help with your GIS project?"
+    "title"        "Want to learn more?"
+    "subtitle"     "Explore our training courses or get in touch to discuss how we can help your organisation."
+    "primaryUrl"   ("training-courses/" | absURL)
+    "primaryLabel" "View training courses"
+    "secondaryUrl" ("contact-us/" | absURL)
+    "secondaryLabel" "Work with us"
+) }}
+{{ end }}

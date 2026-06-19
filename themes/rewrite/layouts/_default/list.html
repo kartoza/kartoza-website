@@ -9,7 +9,10 @@
         <p class="eyebrow">{{ . | humanize }}</p>
       {{ end }}
       <h1 class="u-text-balance">{{ .Title }}</h1>
-      {{ with .Description | default .Params.subtitle }}
+      {{ with .Params.subtitle }}
+        <p class="u-lede u-text-accent">{{ . }}</p>
+      {{ end }}
+      {{ with .Description }}
         <p class="u-lede">{{ . }}</p>
       {{ end }}
     </header>
