@@ -6,9 +6,7 @@ departmentIcon: "fa-code"
 weight: 16
 draft: false
 image: "/img/team/juanique-voogt.jpg"
-location: "South Africa"
 country: "South Africa"
-coordinates: "-33.9249, 18.4241"
 github: "voogt"
 skills:
   - "Full Stack Development"
@@ -17,8 +15,8 @@ skills:
   - "Web Development"
   - "Learning & Growth"
 bio: "Passionate coder focused on continuous learning and knowledge sharing."
-reviewedBy: "Tim Sutton"
-reviewedDate: 2026-03-17
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-19
 ---
 
 Juanique is a Full Stack Developer with an infectious enthusiasm for coding and continuous learning. Her curiosity drives her to constantly explore new technologies and improve her skills.
