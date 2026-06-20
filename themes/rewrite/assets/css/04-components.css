@@ -253,8 +253,21 @@
 }
 
 
-/* ---- Hero — signature (charcoal + motif slant) ---------- */
+/* ---- Hero — signature (charcoal + motif slant) ----------
+ * Layout:
+ *   - The full hero is charcoal.
+ *   - Motif image occupies the right column (55%-wide right-anchored
+ *     element), clipped to a polygon whose left edge slants from
+ *     ~55% (top) to ~45% (bottom) of the viewport.
+ *   - An amber rule sits exactly on that polygon's left edge.
+ *   - Text content is constrained to the LEFT 42% so it never
+ *     overlaps the motif.  Variables centralise the geometry so
+ *     all three pieces stay aligned. */
 .hero--inverse {
+  --hero-motif-width: 55%;        /* width of motif column */
+  --hero-motif-skew: 10%;         /* horizontal offset of polygon's top-left, relative to motif width */
+  --hero-text-max: 42%;           /* max width of text content (must be <= 100% - motif-width) */
+
   background: var(--k-charcoal);
   color: var(--color-text-inverse);
   position: relative;
@@ -263,44 +276,74 @@
   padding-block: var(--space-9) var(--space-10);
 }
 
-/* Motif image, clipped to a slanted polygon on the right edge.
- * Right column ~55% of the hero; clip-path skews the inner edge
- * so the motif "leans" into the charcoal panel. */
+/* Motif image, clipped to a slanted polygon on the right edge. */
 .hero--inverse::before {
   content: '';
   position: absolute;
   inset: 0 0 0 auto;
-  inline-size: 55%;
+  inline-size: var(--hero-motif-width);
   background: url('/img/brand/kartoza-background.png') center / cover no-repeat;
-  clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(
+    var(--hero-motif-skew) 0,    /* top-left */
+    100% 0,                       /* top-right */
+    100% 100%,                    /* bottom-right */
+    0 100%                        /* bottom-left */
+  );
   z-index: -1;
 }
 
-/* Amber slant rule along the polygon's leading edge. */
+/* Amber stripe overlay, same width / position as the motif.
+ * Its clip-path describes a thin band exactly along the
+ * polygon's left edge — same vertices as the motif, shifted by
+ * the desired stripe thickness.  Result: pixel-aligned with the
+ * motif edge at every viewport width. */
 .hero--inverse::after {
   content: '';
   position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 45%;
-  inline-size: 6px;
+  inset: 0 0 0 auto;
+  inline-size: var(--hero-motif-width);
   background: var(--color-accent);
-  transform: skewX(-12deg) translateX(50%);
-  transform-origin: top right;
-  z-index: -1;
+  clip-path: polygon(
+    calc(var(--hero-motif-skew) - 3px) 0,
+    calc(var(--hero-motif-skew) + 3px) 0,
+    3px 100%,
+    -3px 100%
+  );
+  z-index: 0;
+  pointer-events: none;
 }
 
 .hero--inverse > * { position: relative; z-index: 1; }
-.hero--inverse :is(h1, h2, h3, p) { color: inherit; }
-.hero--inverse .hero__lede { color: rgba(255, 255, 255, 0.82); }
-.hero--inverse .hero__eyebrow { color: var(--color-accent); }
+.hero--inverse :is(h1, h2, h3, p, blockquote) { color: inherit; }
 
-/* Inner content sits in the left ~45% so the motif is visible.
- * Use the existing .container width but pin the textual stack
- * to a comfortable measure that won't overlap the motif. */
-.hero--inverse .container > .stack,
-.hero--inverse .container > * {
-  max-inline-size: min(50ch, 50%);
+/* Inner content lives in the left column only.  Width is locked
+ * to a percentage of the viewport that's strictly LESS than the
+ * narrowest point of the slant (the bottom of the polygon at
+ * 100% - motif-width = 45%). */
+.hero--inverse .container > .hero__content,
+.hero--inverse .container > .stack {
+  max-inline-size: var(--hero-text-max);
+}
+
+/* Hero typography (signature hero) */
+.hero--inverse .hero__logo { block-size: 40px; inline-size: auto; }
+.hero--inverse .hero__brand { align-items: center; gap: var(--space-3); }
+.hero--inverse .hero__brand .hero__title { margin: 0; }
+.hero--inverse .hero__tagline { color: var(--color-text-inverse); margin: 0; opacity: 0.78; }
+.hero--inverse .hero__vision {
+  font-size: var(--size-600);
+  line-height: var(--leading-normal);
+  border-inline-start: 4px solid var(--color-accent);
+  padding-inline-start: var(--space-4);
+  margin: 0;
+}
+.hero--inverse .hero__cta-secondary {
+  color: var(--k-white);
+  border-color: var(--k-white);
+}
+.hero--inverse .hero__cta-secondary:hover {
+  background: var(--k-white);
+  color: var(--k-charcoal);
 }
 
 /* On narrow viewports the slant gets in the way of legibility.
@@ -314,6 +357,7 @@
     filter: saturate(0.7);
   }
   .hero--inverse::after { display: none; }
+  .hero--inverse .container > .hero__content,
   .hero--inverse .container > .stack,
   .hero--inverse .container > * { max-inline-size: none; }
 }

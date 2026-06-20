@@ -13,7 +13,7 @@
     <div class="stack stack--4 u-text-center">
       {{ with .eyebrow }}<p class="eyebrow">{{ . }}</p>{{ end }}
       <h2 class="u-text-balance">{{ .title }}</h2>
-      <p class="u-lede">{{ .subtitle }}</p>
+      {{ with .subtitle }}<p class="u-lede">{{ . }}</p>{{ end }}
       <p class="cluster cluster--center">
         <a class="button button--accent" href="{{ .primaryUrl }}"
            {{- if .primaryExternal }} rel="noopener" target="_blank"{{ end }}>

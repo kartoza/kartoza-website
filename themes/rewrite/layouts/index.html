@@ -1,97 +1,36 @@
 {{ define "main" }}
 
-{{/* ===== HERO ===== */}}
+{{/* ===== HERO ===== Kartoza vision statement (verbatim from the
+     legacy explore.html partial — these are Kartoza's actual words,
+     not invented marketing copy). */}}
 <section class="hero hero--inverse">
   <div class="container">
-    <div class="stack stack--5" style="max-width: 60ch;">
-      <p class="hero__eyebrow eyebrow">{{ .Site.Params.tagline | default "Open Source Geospatial Solutions" }}</p>
-      <h1 class="hero__title u-text-balance">
-        {{ .Site.Params.heroHeadline | default (printf "Mapping a better world with open source." ) }}
-      </h1>
-      <p class="hero__lede">
-        {{ .Site.Params.heroLede | default "We are a free and open-source GIS service provider with registered offices in Cape Town and Lisbon. We develop and maintain geographic information systems and train teams to use geospatial software to its full potential." }}
-      </p>
+    <div class="hero__content stack stack--5">
+      <div class="cluster hero__brand">
+        <img src="{{ absURL "img/kartoza-logo.png" }}" alt="Kartoza logo" class="hero__logo" />
+        <h1 class="hero__title u-text-balance">Kartoza</h1>
+      </div>
+      <p class="eyebrow hero__tagline">Open Source Geospatial Experts</p>
+
+      <div class="stack stack--3">
+        <p class="eyebrow u-text-accent">Our vision</p>
+        <blockquote class="hero__vision">
+          &ldquo;Enable a world where spatial decision making tools are
+          <strong>universal</strong>, <strong>accessible</strong> and
+          <strong>affordable</strong> for everyone.&rdquo;
+        </blockquote>
+      </div>
+
       <div class="cluster">
-        <a class="button button--accent" href="{{ "contact/" | absURL }}">
-          Talk to an expert
-          <span aria-hidden="true">→</span>
-        </a>
-        <a class="button button--secondary" href="{{ "solutions/" | absURL }}" style="color: var(--k-white); border-color: var(--k-white);">
-          See our solutions
-        </a>
+        <a class="button button--accent" href="{{ "hosting/" | absURL }}">Explore hosting services</a>
+        <a class="button button--secondary hero__cta-secondary" href="{{ "contact-us/" | absURL }}">Talk to an expert</a>
       </div>
     </div>
   </div>
 </section>
 
 
-{{/* ===== TRUST / FEATURED LINKS ===== */}}
-<section class="section">
-  <div class="container">
-    <div class="stack stack--3 u-mb-7" style="max-width: 50ch;">
-      <p class="eyebrow">What we do</p>
-      <h2 class="u-text-balance">Geospatial that works, end-to-end.</h2>
-      <p class="u-lede">From hosting and consulting to custom development and team training, we cover the full geospatial stack.</p>
-    </div>
-
-    <div class="grid grid--3">
-      {{ $pillars := slice
-        (dict "title" "GeoSpatial Hosting" "lede" "Managed hosting for GeoServer, PostGIS, QGIS Server, GeoNode and more. Automatic backups, SSL, 24/7 monitoring." "href" "hosting/" "cta" "Explore hosting")
-        (dict "title" "Solutions"          "lede" "Strategic GIS consulting, custom application development, system integration and architecture."                   "href" "solutions/" "cta" "Browse solutions")
-        (dict "title" "Training"           "lede" "Beginner to advanced QGIS, PostGIS and GeoServer training, run online or in-person around the world."             "href" "training-courses/" "cta" "See courses")
-      }}
-      {{ range $pillars }}
-        <article class="card">
-          <div class="card__body stack stack--3">
-            <h3 class="card__title">{{ .title }}</h3>
-            <p class="card__excerpt">{{ .lede }}</p>
-            <footer class="card__footer">
-              <a class="u-text-accent" href="{{ .href | absURL }}" style="font-weight: var(--weight-bold);">
-                {{ .cta }} <span aria-hidden="true">→</span>
-              </a>
-            </footer>
-          </div>
-        </article>
-      {{ end }}
-    </div>
-  </div>
-</section>
-
-
-{{/* ===== LATEST BLOG (if any) ===== */}}
-{{ $blog := where site.RegularPages "Section" "blog" }}
-{{ if $blog }}
-<section class="section section--bg-elevated">
-  <div class="container">
-    <div class="spread u-mb-7">
-      <div class="stack stack--3" style="max-width: 50ch;">
-        <p class="eyebrow">From the blog</p>
-        <h2 class="u-text-balance">Field notes &amp; deep dives.</h2>
-      </div>
-      <a class="button button--ghost" href="{{ "blog/" | absURL }}">All posts <span aria-hidden="true">→</span></a>
-    </div>
-
-    <div class="listing-grid">
-      {{ range first 3 $blog.ByDate.Reverse }}
-        <article class="card">
-          <div class="card__body stack stack--3">
-            <p class="eyebrow u-mb-0">
-              <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
-            </p>
-            <h3 class="card__title">
-              <a href="{{ .Permalink }}">{{ .Title }}</a>
-            </h3>
-            <p class="card__excerpt">{{ .Description | default .Summary | plainify | truncate 140 }}</p>
-          </div>
-        </article>
-      {{ end }}
-    </div>
-  </div>
-</section>
-{{ end }}
-
-
-{{/* ===== CONTENT (homepage markdown body, if any) ===== */}}
+{{/* ===== HOMEPAGE BODY (markdown from content/_index.md, if any) ===== */}}
 {{ with .Content }}
 <section class="section">
   <div class="container container--narrow">
@@ -101,20 +40,46 @@
 {{ end }}
 
 
-{{/* ===== CTA STRIP ===== */}}
-<section class="section section--bg-inverse">
+{{/* ===== LATEST FROM THE BLOG ===== */}}
+{{ $blog := where site.RegularPages "Section" "blog" }}
+{{ if $blog }}
+<section class="section section--bg-elevated">
   <div class="container">
-    <div class="spread">
+    <div class="spread u-mb-7">
       <div class="stack stack--3" style="max-width: 50ch;">
-        <p class="eyebrow" style="color: var(--color-accent);">Ready to start?</p>
-        <h2 class="u-text-balance">Tell us what you're mapping.</h2>
-        <p>We respond within one business day, in English or Portuguese.</p>
+        <p class="eyebrow">From the blog</p>
+        <h2 class="u-text-balance">Latest posts</h2>
       </div>
-      <a class="button button--accent" href="{{ "contact/" | absURL }}">
-        Get in touch <span aria-hidden="true">→</span>
-      </a>
+      <a class="button button--ghost" href="{{ "blog/" | absURL }}">All posts</a>
+    </div>
+
+    <div class="listing-grid">
+      {{ range first 3 $blog.ByDate.Reverse }}
+        {{ $permalink := .Permalink }}
+        <article class="card">
+          {{ with .Params.thumbnail | default .Params.image }}
+            {{ if ne . "/img/blog/placeholder.png" }}
+              <a class="card__media" href="{{ $permalink }}">
+                <img src="{{ . | absURL }}" alt="" loading="lazy" decoding="async" />
+              </a>
+            {{ end }}
+          {{ end }}
+          <div class="card__body stack stack--3">
+            <p class="eyebrow u-mb-0">
+              <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+            </p>
+            <h3 class="card__title">
+              <a href="{{ .Permalink }}">{{ .Title }}</a>
+            </h3>
+            {{ with .Description | default .Summary }}
+              <p class="card__excerpt">{{ . | plainify | truncate 140 }}</p>
+            {{ end }}
+          </div>
+        </article>
+      {{ end }}
     </div>
   </div>
 </section>
+{{ end }}
 
 {{ end }}

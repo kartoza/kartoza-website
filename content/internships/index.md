@@ -14,7 +14,6 @@ reviewedDate: 2026-06-20
     sub-block-side="bottom"
     class="is-primary"
 >}}
-Choose the stream that matches your strengths. Both lead to a course certificate, a published capstone project, and a credible professional portfolio.
 {{< /block >}}
 
 {{< columns-start >}}
@@ -118,12 +117,10 @@ A course certificate is awarded on completion of all modules and the capstone pr
 {{< /block-section >}}
 
 {{< block
-    title="Ready to Apply?"
-    subtitle="Send your CV and a short cover note telling us which stream you're interested in and why."
+    title="Apply for internship"
     sub-block-side="bottom"
     class="is-info"
     link="mailto:internships@kartoza.com"
     link-text="Email Internships"
 >}}
-A relaxed online chat with some Kartoza people follows the application — show us your curiosity and ask us anything. We're an open book.
 {{< /block >}}

@@ -28,11 +28,9 @@
     </div>
 
     <footer class="stack stack--3 u-mt-7">
-      <h2 class="u-text-balance">How to apply</h2>
       <p>
-        Send your application — CV / resume plus a short cover note explaining why you'd like to
-        join Kartoza — to <a href="mailto:jobs@kartoza.com">jobs@kartoza.com</a>.  Please include
-        the reference <strong>{{ .Params.erpnext_id | default .Title }}</strong> in the subject line.
+        Send your application to
+        <a href="mailto:jobs@kartoza.com?subject={{ .Title | urlquery }}">jobs@kartoza.com</a>.
       </p>
     </footer>
 
