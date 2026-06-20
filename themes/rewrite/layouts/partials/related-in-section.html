@@ -14,10 +14,12 @@
         {{ range first 3 $siblings }}
           {{ $permalink := .Permalink }}
           <article class="card">
-            {{ with .Params.image | default .Params.featured_image }}
-              <a class="card__media" href="{{ $permalink }}">
-                <img src="{{ . | absURL }}" alt="" loading="lazy" decoding="async" />
-              </a>
+            {{ with .Params.image | default .Params.featured_image | default .Params.thumbnail | default .Params.heroImage | default .Params.logo }}
+              {{ if and . (ne . "/img/blog/placeholder.png") }}
+                <a class="card__media" href="{{ $permalink }}">
+                  <img src="{{ . | absURL }}" alt="" loading="lazy" decoding="async" />
+                </a>
+              {{ end }}
             {{ end }}
             <div class="card__body stack stack--3">
               <h3 class="card__title">

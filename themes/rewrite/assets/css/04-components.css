@@ -260,8 +260,17 @@
   transition: border-color var(--duration-1) var(--ease);
 }
 .card:hover { border-color: var(--color-text); }
-.card__media { overflow: hidden; }
-.card__media img { inline-size: 100%; block-size: auto; }
+.card__media {
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: var(--color-bg-elevated);
+}
+.card__media img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  display: block;
+}
 .card__body { padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); flex: 1; }
 .card__title { font-size: var(--size-500); font-weight: var(--weight-bold); margin: 0; }
 .card__excerpt { color: var(--color-text-muted); margin: 0; }
@@ -719,6 +728,30 @@
 
 /* ---- Listing card grid item ---------------------------- */
 .listing-grid { display: grid; gap: var(--space-5); grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); }
+
+/* ---- Apps grid override (loaded after legacy homepage.css) ---
+ * Legacy CSS forced .apps-grid to 3 columns with !important.
+ * The brand pack calls for fewer, bigger cards on this page so
+ * each app reads as a meaningful product card, not a thumbnail.
+ */
+.apps-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: var(--space-6) !important;
+}
+@media (max-width: 60rem) {
+  .apps-grid { grid-template-columns: 1fr !important; }
+}
+.apps-grid .app-card-image {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--color-bg-elevated);
+}
+.apps-grid .app-card-image img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  display: block;
+}
 
 
 /* ---- Pagination ---------------------------------------- */
