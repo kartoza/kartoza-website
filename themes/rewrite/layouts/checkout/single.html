@@ -1,5 +1,6 @@
-{{ partial "header.html" . }}
-{{ partial "menu.html" . }}
+{{ define "main" }}
+
+{{ partial "page-hero.html" . }}
 
 <style>
 .checkout-hero {
@@ -324,19 +325,6 @@
 }
 </style>
 
-<section class="checkout-hero">
-    <div class="container">
-        <div class="checkout-hero-content">
-            <h1 class="checkout-hero-title">
-                <span class="icon" style="margin-right: 0.4rem; vertical-align: middle;">
-                    <i class="fas fa-lock"></i>
-                </span>
-                Secure Checkout
-            </h1>
-            <p class="checkout-hero-subtitle">Complete your course purchase safely</p>
-        </div>
-    </div>
-</section>
 
 <section class="checkout-section">
     <div class="container">
@@ -1002,4 +990,4 @@
 })();
 </script>
 
-{{ partial "footer.html" . }}
+{{ end }}

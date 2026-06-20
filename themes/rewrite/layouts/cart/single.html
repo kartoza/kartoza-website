@@ -1,5 +1,6 @@
-{{ partial "header.html" . }}
-{{ partial "menu.html" . }}
+{{ define "main" }}
+
+{{ partial "page-hero.html" . }}
 
 <style>
 .cart-hero {
@@ -256,20 +257,6 @@
 }
 </style>
 
-<section class="cart-hero">
-    <div class="container">
-        <div class="cart-hero-content">
-            <h1 class="cart-hero-title">
-                <span class="icon" style="margin-right: 0.4rem; vertical-align: middle;">
-                    <i class="fas fa-shopping-bag"></i>
-                </span>
-                Your Cart
-            </h1>
-            <p class="cart-hero-subtitle">Review your selected courses before checkout</p>
-        </div>
-    </div>
-</section>
-
 <section class="cart-section">
     <div class="container">
 
@@ -519,4 +506,4 @@
 })();
 </script>
 
-{{ partial "footer.html" . }}
+{{ end }}

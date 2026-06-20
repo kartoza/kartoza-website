@@ -1,6 +1,6 @@
-{{ partial "header.html" . }}
-{{ partial "menu.html" . }}
-{{ partial "banner.html" . }}
+{{ define "main" }}
+
+{{ partial "page-hero.html" . }}
 
 <section class="section blog-section">
     <div class="container">
@@ -313,4 +313,4 @@
 })();
 </script>
 
-{{ partial "footer.html" . }}
+{{ end }}

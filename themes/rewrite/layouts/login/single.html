@@ -1,5 +1,6 @@
-{{ partial "header.html" . }}
-{{ partial "menu.html" . }}
+{{ define "main" }}
+
+{{ partial "page-hero.html" . }}
 
 {{/* erpnextBaseUrl: set in config.dev.toml for local dev (direct ERP calls),
      empty in production (nginx proxies /api/auth/* to ERP). */}}
@@ -487,14 +488,6 @@
 </style>
 
 <!-- Auth Hero -->
-<section class="auth-hero">
-    <div class="container">
-        <div class="auth-hero-content">
-            <h1 class="auth-hero-title">My Account</h1>
-            <p class="auth-hero-subtitle">Sign in to access your Kartoza portal</p>
-        </div>
-    </div>
-</section>
 
 <!-- Auth Section -->
 <section class="auth-section">
@@ -1338,4 +1331,4 @@
 })();
 </script>
 
-{{ partial "footer.html" . }}
+{{ end }}

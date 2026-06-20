@@ -6,19 +6,7 @@
      change is the surrounding chrome (Rewrite header/footer
      instead of legacy header.html / menu.html). */}}
 
-{{/* Signature hero — same chrome as the homepage so navigating
-     between pages stays visually consistent. */}}
-<section class="hero hero--inverse">
-  <div class="container">
-    <div class="hero__content stack stack--4">
-      <p class="eyebrow">Training</p>
-      <h1 class="hero__title u-text-balance">{{ .Title }}</h1>
-      {{ with .Params.subtitle }}
-        <p class="u-lede">{{ . }}</p>
-      {{ end }}
-    </div>
-  </div>
-</section>
+{{ partial "page-hero.html" . }}
 
 <section class="section">
   <div class="container">

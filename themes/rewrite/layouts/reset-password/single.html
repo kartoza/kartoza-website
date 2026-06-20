@@ -1,5 +1,6 @@
-{{ partial "header.html" . }}
-{{ partial "menu.html" . }}
+{{ define "main" }}
+
+{{ partial "page-hero.html" . }}
 
 <style>
 .auth-hero {
@@ -128,15 +129,6 @@
 .auth-card-footer a { color: var(--primary2, #3488b8); font-weight: 600; text-decoration: none; }
 .auth-card-footer a:hover { text-decoration: underline; }
 </style>
-
-<section class="auth-hero">
-    <div class="container">
-        <div class="auth-hero-content">
-            <h1 class="auth-hero-title">Reset Password</h1>
-            <p class="auth-hero-subtitle">Choose a new password for your Kartoza account</p>
-        </div>
-    </div>
-</section>
 
 <section class="auth-section">
     <div class="auth-card-wrapper">
@@ -316,4 +308,4 @@
 })();
 </script>
 
-{{ partial "footer.html" . }}
+{{ end }}

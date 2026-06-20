@@ -1,27 +1,25 @@
 {{ define "main" }}
+
+{{ partial "page-hero.html" . }}
+
 <article class="article section">
   <div class="container">
 
     {{ partial "breadcrumb.html" . }}
 
-    <header class="article__header stack stack--3">
-      <p class="eyebrow">Open position</p>
-      <h1 class="u-text-balance">{{ .Params.designation | default .Title }}</h1>
+    <ul class="cluster u-text-muted u-list-clean u-mb-5">
+      {{ with .Params.department }}<li><strong>Department:</strong> {{ . }}</li>{{ end }}
+      {{ with .Params.location }}<li><strong>Location:</strong> {{ . }}</li>{{ end }}
+      {{ with .Params.job_status }}<li><strong>Status:</strong> {{ . }}</li>{{ end }}
+      {{ with .Params.erpnext_id }}<li><strong>Ref:</strong> <code class="u-mono">{{ . }}</code></li>{{ end }}
+    </ul>
 
-      <ul class="cluster u-text-muted u-list-clean">
-        {{ with .Params.department }}<li><strong>Department:</strong> {{ . }}</li>{{ end }}
-        {{ with .Params.location }}<li><strong>Location:</strong> {{ . }}</li>{{ end }}
-        {{ with .Params.job_status }}<li><strong>Status:</strong> {{ . }}</li>{{ end }}
-        {{ with .Params.erpnext_id }}<li><strong>Ref:</strong> <code class="u-mono">{{ . }}</code></li>{{ end }}
-      </ul>
-
-      <p class="cluster">
-        <a class="button button--accent" href="mailto:jobs@kartoza.com?subject={{ .Title | urlquery }}">
-          Apply for this position
-        </a>
-        <a class="button button--ghost" href="{{ "careers/" | absURL }}">View all openings</a>
-      </p>
-    </header>
+    <p class="cluster u-mb-5">
+      <a class="button button--accent" href="mailto:jobs@kartoza.com?subject={{ .Title | urlquery }}">
+        Apply for this position
+      </a>
+      <a class="button button--ghost" href="{{ "careers/" | absURL }}">View all openings</a>
+    </p>
 
     <div class="article__body stack stack--4">
       {{ .Content }}

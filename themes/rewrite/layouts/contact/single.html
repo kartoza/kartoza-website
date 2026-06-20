@@ -1,73 +1,9 @@
+{{ define "main" }}
+
+{{ partial "page-hero.html" . }}
+
 {{- $shouldRender := partial "review-check.html" . -}}
-{{- if $shouldRender -}}
-{{ partial "header.html" . }}
-{{ partial "menu.html" . }}
-
 <!-- Contact Hero - Interactive Globe with Floating Elements -->
-<section class="contact-hero">
-    <!-- Animated Background -->
-    <div class="contact-hero-bg">
-        <div class="contact-globe-container">
-            <canvas id="globe-canvas"></canvas>
-        </div>
-        <div class="contact-particles" id="contact-particles"></div>
-        <div class="contact-grid-lines"></div>
-    </div>
-
-    <!-- Floating GIS Icons that respond to mouse -->
-    <div class="floating-icons" id="floating-icons">
-        <div class="floating-icon" data-speed="0.02" style="--x: 10%; --y: 20%;"><i class="fas fa-map-marker-alt"></i></div>
-        <div class="floating-icon" data-speed="0.03" style="--x: 85%; --y: 15%;"><i class="fas fa-globe-africa"></i></div>
-        <div class="floating-icon" data-speed="0.015" style="--x: 15%; --y: 70%;"><i class="fas fa-database"></i></div>
-        <div class="floating-icon" data-speed="0.025" style="--x: 80%; --y: 75%;"><i class="fas fa-layer-group"></i></div>
-        <div class="floating-icon" data-speed="0.02" style="--x: 50%; --y: 10%;"><i class="fas fa-satellite"></i></div>
-        <div class="floating-icon" data-speed="0.018" style="--x: 5%; --y: 45%;"><i class="fas fa-draw-polygon"></i></div>
-        <div class="floating-icon" data-speed="0.022" style="--x: 92%; --y: 50%;"><i class="fas fa-compass"></i></div>
-        <div class="floating-icon" data-speed="0.028" style="--x: 30%; --y: 85%;"><i class="fas fa-route"></i></div>
-        <div class="floating-icon" data-speed="0.016" style="--x: 70%; --y: 90%;"><i class="fas fa-map"></i></div>
-    </div>
-
-    <!-- Paper Airplane Animation on Submit -->
-    <div class="paper-airplane-container" id="paper-airplane">
-        <div class="paper-airplane">
-            <i class="fas fa-paper-plane"></i>
-        </div>
-        <div class="airplane-trail"></div>
-    </div>
-
-    <div class="container">
-        <div class="contact-hero-content">
-            <div class="hero-badge animate-bounce-in">
-                <span class="badge-ping"></span>
-                <i class="fas fa-satellite-dish"></i>
-                <span>We're Online</span>
-            </div>
-            <h1 class="contact-hero-title">
-                <span class="title-line title-line-1">Let’s Start a Conversation</span>
-            </h1>
-            <p class="contact-hero-subtitle">
-                 Support, enquiries, and collaboration requests are always welcome
-            </p>
-            <div class="hero-scroll-hint">
-                <span>Scroll to connect</span>
-                <div class="scroll-indicator">
-                    <div class="scroll-dot"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Connection Lines Animation -->
-    <svg class="connection-lines" id="connection-svg">
-        <defs>
-            <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style="stop-color:var(--primary);stop-opacity:0" />
-                <stop offset="50%" style="stop-color:var(--accent);stop-opacity:1" />
-                <stop offset="100%" style="stop-color:var(--primary);stop-opacity:0" />
-            </linearGradient>
-        </defs>
-    </svg>
-</section>
 
 <!-- Interactive Form Section -->
 <section class="contact-section">
@@ -828,11 +764,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-{{ partial "page-reviewer.html" . }}
-{{ partial "footer.html" . }}
-{{- else -}}
-{{ partial "header.html" . }}
-{{ partial "menu.html" . }}
-{{ partial "page-under-review.html" . }}
-{{ partial "footer.html" . }}
-{{- end -}}
+{{ end }}

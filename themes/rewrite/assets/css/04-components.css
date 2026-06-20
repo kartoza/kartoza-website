@@ -192,6 +192,23 @@
 .card__title { font-size: var(--size-500); font-weight: var(--weight-bold); margin: 0; }
 .card__excerpt { color: var(--color-text-muted); margin: 0; }
 .card__footer { margin-block-start: auto; padding-block-start: var(--space-3); border-block-start: var(--border-hairline); }
+.card__icon {
+  inline-size: 56px;
+  block-size: 56px;
+  object-fit: contain;
+}
+.card__badge {
+  position: absolute;
+  top: var(--space-3);
+  inset-inline-end: var(--space-3);
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 0.2em 0.6em;
+  font-size: var(--size-100);
+  font-weight: var(--weight-bold);
+  border-radius: 999px;
+  border: var(--border-hairline);
+}
 
 /* Whole-card link variant: keeps card chrome, no underline, blue title on hover. */
 .card--linked {

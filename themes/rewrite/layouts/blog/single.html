@@ -1,29 +1,21 @@
 {{ define "main" }}
+
+{{ partial "page-hero.html" . }}
+
 <article class="article section">
   <div class="container">
 
     {{ partial "breadcrumb.html" . }}
 
-    <header class="article__header stack stack--3">
-      <p class="eyebrow">Blog</p>
-      <h1 class="u-text-balance">{{ .Title }}</h1>
-      {{ with .Params.subtitle }}
-        <p class="u-lede u-text-accent">{{ . }}</p>
+    <div class="cluster u-text-muted u-mb-5">
+      {{ with .Params.author }}<span>Written by <strong>{{ . }}</strong></span>{{ end }}
+      {{ if .Date }}
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
       {{ end }}
-      {{ with .Description | default .Summary }}
-        <p class="u-lede">{{ . }}</p>
+      {{ with .Params.tags }}
+        <span>· {{ delimit . " · " }}</span>
       {{ end }}
-
-      <div class="cluster u-text-muted">
-        {{ with .Params.author }}<span>Written by <strong>{{ . }}</strong></span>{{ end }}
-        {{ if .Date }}
-          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
-        {{ end }}
-        {{ with .Params.tags }}
-          <span>· {{ delimit . " · " }}</span>
-        {{ end }}
-      </div>
-    </header>
+    </div>
 
     {{ with .Params.featured_image | default .Params.thumbnail | default .Params.image }}
       {{ if ne . "/img/blog/placeholder.png" }}

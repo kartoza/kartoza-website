@@ -1,22 +1,15 @@
 {{ define "main" }}
+
+{{ partial "page-hero.html" . }}
+
 <article class="article section">
   <div class="container">
 
     {{ partial "breadcrumb.html" . }}
 
-    <header class="article__header stack stack--3">
-      <p class="eyebrow">Technology partner</p>
-      <h1 class="u-text-balance">{{ .Title }}</h1>
-      {{ with .Params.subtitle }}
-        <p class="u-lede u-text-accent">{{ . }}</p>
-      {{ end }}
-      {{ with .Description | default .Summary }}
-        <p class="u-lede">{{ . }}</p>
-      {{ end }}
-      {{ with .Params.partnerStatus | default .Params.status }}
-        <p class="cluster"><span class="badge">{{ . }}</span></p>
-      {{ end }}
-    </header>
+    {{ with .Params.partnerStatus | default .Params.status }}
+      <p class="cluster u-mb-5"><span class="badge">{{ . }}</span></p>
+    {{ end }}
 
     {{ with .Params.featured_image | default .Params.image | default .Params.logo }}
       <figure class="frame frame--wide u-mb-7">

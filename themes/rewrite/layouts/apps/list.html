@@ -1,6 +1,6 @@
-{{ partial "header.html" . }}
-{{ partial "menu.html" . }}
-{{ partial "banner.html" . }}
+{{ define "main" }}
+
+{{ partial "page-hero.html" . }}
 
 <section class="section apps-section">
     <div class="container">
@@ -155,4 +155,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 {{ partial "physics-scroll.html" . }}
 
-{{ partial "footer.html" . }}
+{{ end }}

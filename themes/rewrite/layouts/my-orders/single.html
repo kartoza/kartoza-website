@@ -1,5 +1,6 @@
-{{ partial "header.html" . }}
-{{ partial "menu.html" . }}
+{{ define "main" }}
+
+{{ partial "page-hero.html" . }}
 
 <style>
 .orders-hero {
@@ -252,19 +253,6 @@
 .ord-page-ellipsis { color: #9aaab8; font-size: 0.875rem; padding: 0 0.25rem; align-self: center; }
 </style>
 
-<section class="orders-hero">
-    <div class="container">
-        <div class="orders-hero-content">
-            <h1 class="orders-hero-title">
-                <span class="icon" style="margin-right: 0.4rem; vertical-align: middle;">
-                    <i class="fas fa-receipt"></i>
-                </span>
-                My Orders
-            </h1>
-            <p class="orders-hero-subtitle">Your course purchase history</p>
-        </div>
-    </div>
-</section>
 
 <section class="orders-section">
     <div class="container" style="max-width: 860px;">
@@ -739,4 +727,4 @@
 })();
 </script>
 
-{{ partial "footer.html" . }}
+{{ end }}

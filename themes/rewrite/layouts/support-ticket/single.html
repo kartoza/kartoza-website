@@ -1,5 +1,6 @@
-{{ partial "header.html" . }}
-{{ partial "menu.html" . }}
+{{ define "main" }}
+
+{{ partial "page-hero.html" . }}
 
 <script>window._erpBase = '{{ .Site.Params.erpnextBaseUrl | default "" }}';</script>
 
@@ -553,14 +554,6 @@
 </style>
 
 <!-- Hero -->
-<section class="ticket-hero">
-    <div class="container">
-        <div class="ticket-hero-content">
-            <h1 class="ticket-hero-title">Log Support Ticket</h1>
-            <p class="ticket-hero-subtitle">Get help from the Kartoza support team</p>
-        </div>
-    </div>
-</section>
 
 <!-- Ticket Section -->
 <section class="ticket-section">
@@ -937,4 +930,4 @@
 })();
 </script>
 
-{{ partial "footer.html" . }}
+{{ end }}

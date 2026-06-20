@@ -1,14 +1,19 @@
-{{/* {{< feature-card icon="…" title="…" class="…" >}} markdown body {{< /feature-card >}} */}}
-{{ $icon  := .Get "icon" | default "" }}
-{{ $title := .Get "title" | default "" }}
-{{ $class := .Get "class" | default "" }}
-
+{{- /* {{< feature-card icon="…" title="…" class="…" >}} markdown body {{< /feature-card >}}
+     Output is emitted FLUSH LEFT (no leading indentation) — when
+     nested inside other shortcodes (columns-start/column-start/
+     block-section), indented HTML output would be reinterpreted
+     as a code block by Goldmark and rendered inside <pre><code>. */ -}}
+{{- $icon  := .Get "icon"  | default "" -}}
+{{- $title := .Get "title" | default "" -}}
+{{- $class := .Get "class" | default "" -}}
 <article class="card {{ $class }}">
-  <div class="card__body stack stack--3">
-    {{ with $icon }}
-      <img class="card__icon" src="{{ . | absURL }}" alt="" width="64" height="64" />
-    {{ end }}
-    {{ with $title }}<h3 class="card__title">{{ . }}</h3>{{ end }}
-    <div class="card__excerpt">{{ .Inner | markdownify }}</div>
-  </div>
+<div class="card__body stack stack--3">
+{{- with $icon }}
+<img class="card__icon" src="{{ . | absURL }}" alt="" width="64" height="64" />
+{{- end }}
+{{- with $title }}
+<h3 class="card__title">{{ . }}</h3>
+{{- end }}
+<div class="card__excerpt">{{ .Inner | markdownify }}</div>
+</div>
 </article>

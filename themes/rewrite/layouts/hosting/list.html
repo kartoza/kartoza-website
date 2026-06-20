@@ -1,21 +1,11 @@
 {{ define "main" }}
+
+{{ partial "page-hero.html" . }}
+
 <section class="section">
   <div class="container">
 
     {{ partial "breadcrumb.html" . }}
-
-    <header class="stack stack--3 u-mb-7">
-      {{ with .Params.eyebrow | default .Type }}
-        <p class="eyebrow">{{ . | humanize }}</p>
-      {{ end }}
-      <h1 class="u-text-balance">{{ .Title }}</h1>
-      {{ with .Params.tagline }}
-        <p class="u-lede u-text-accent">{{ . }}</p>
-      {{ end }}
-      {{ with .Params.intro | default .Description }}
-        <p class="u-lede">{{ . }}</p>
-      {{ end }}
-    </header>
 
     {{ with .Content }}
       <div class="article__body stack stack--4 u-mb-7">{{ . }}</div>

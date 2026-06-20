@@ -1,40 +1,32 @@
 {{ define "main" }}
+
+{{ partial "page-hero.html" . }}
+
 <article class="article section">
   <div class="container">
 
     {{ partial "breadcrumb.html" . }}
 
-    <header class="article__header stack stack--3">
-      <p class="eyebrow">Docker image</p>
-      <h1 class="u-text-balance">{{ .Title }}</h1>
-      {{ with .Params.subtitle }}
-        <p class="u-lede u-text-accent">{{ . }}</p>
-      {{ end }}
-      {{ with .Description | default .Summary }}
-        <p class="u-lede">{{ . }}</p>
-      {{ end }}
+    {{/* Derive the pull command from front-matter.  The project's
+         docker images live under the kartoza/* namespace and their
+         markdown file name matches the image slug. */}}
+    {{ $imageName := .Params.image | default (printf "kartoza/%s" .File.BaseFileName) }}
+    <div class="stack stack--2 u-mb-5">
+      <p class="eyebrow u-mb-0">Quick pull</p>
+      <pre class="u-mono"><code>docker pull {{ $imageName }}</code></pre>
+    </div>
 
-      {{/* Derive the pull command from front-matter.  The project's
-           docker images live under the kartoza/* namespace and their
-           markdown file name matches the image slug. */}}
-      {{ $imageName := .Params.image | default (printf "kartoza/%s" .File.BaseFileName) }}
-      <div class="stack stack--2">
-        <p class="eyebrow u-mb-0">Quick pull</p>
-        <pre class="u-mono"><code>docker pull {{ $imageName }}</code></pre>
-      </div>
-
-      <p class="cluster">
-        {{ with .Params.dockerhub | default .Params.dockerHubUrl }}
-          <a class="button button--primary" href="{{ . }}" rel="noopener" target="_blank">Docker Hub</a>
-        {{ end }}
-        {{ with .Params.github | default .Params.repositoryUrl | default .Params.repo }}
-          <a class="button button--ghost" href="{{ . }}" rel="noopener" target="_blank">GitHub repository</a>
-        {{ end }}
-        {{ with .Params.pulls }}
-          <span class="badge">{{ . }} pulls</span>
-        {{ end }}
-      </p>
-    </header>
+    <p class="cluster u-mb-5">
+      {{ with .Params.dockerhub | default .Params.dockerHubUrl }}
+        <a class="button button--primary" href="{{ . }}" rel="noopener" target="_blank">Docker Hub</a>
+      {{ end }}
+      {{ with .Params.github | default .Params.repositoryUrl | default .Params.repo }}
+        <a class="button button--ghost" href="{{ . }}" rel="noopener" target="_blank">GitHub repository</a>
+      {{ end }}
+      {{ with .Params.pulls }}
+        <span class="badge">{{ . }} pulls</span>
+      {{ end }}
+    </p>
 
     <div class="article__body stack stack--4">
       {{ .Content }}

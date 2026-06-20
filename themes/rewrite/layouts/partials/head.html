@@ -21,8 +21,37 @@
 <link rel="preload" href="/webfonts/Lato-Bold.ttf"     as="font" type="font/ttf" crossorigin />
 <link rel="preload" href="/webfonts/Lato-Black.ttf"    as="font" type="font/ttf" crossorigin />
 
-{{/* CSS bundle — explicit ordered list (NOT resources.Match, which would
-     also pull CSS from the fallback theme and balloon the bundle). */}}
+{{/* Legacy CSS bundle — loaded BEFORE Rewrite's own bundle on pages
+     migrated from the legacy theme that still rely on Bulma layout
+     classes or custom CSS for forms / payment / auth UI.  Triggered
+     by section (so we don't have to touch per-page front-matter) or
+     by an explicit `loadLegacyCSS: true` opt-in.  Rewrite styles
+     win cascade order because they load later. */}}
+{{ $legacySections := slice "cart" "checkout" "contact-us" "login" "my-orders" "payment-complete" "reset-password" "support-ticket" "blog" "apps" "training-courses" "document" "contact" }}
+{{ $loadLegacy := or .Params.loadLegacyCSS (in $legacySections .Section) (in $legacySections .Type) }}
+{{ if $loadLegacy }}
+  {{ $bulma     := resources.Get "sass/bulma.sass" | resources.ExecuteAsTemplate "bulma.scss" . | css.Sass }}
+  {{ $menu      := resources.Get "css/menu.css" }}
+  {{ $custom    := resources.Get "css/custom.css" }}
+  {{ $animate   := resources.Get "css/animate.css" }}
+  {{ $block     := resources.Get "css/block.css" }}
+  {{ $overrides := resources.Get "css/bulma-overrides.css" }}
+  {{ $cookie    := resources.Get "css/cookie.css" }}
+  {{ $components := resources.Get "css/components.css" }}
+  {{ $themecss  := resources.Get "css/theme.css" }}
+  {{ $button    := resources.Get "css/button.css" }}
+  {{ $regional  := resources.Get "css/regional.css" }}
+  {{ $training  := resources.Get "css/training-booking.css" }}
+  {{ $engagement := resources.Get "css/engagement.css" }}
+  {{ $legacy    := slice $bulma $menu $custom $animate $block $overrides $cookie $components $themecss $button $regional $training $engagement
+                    | resources.Concat "css/legacy-compat.css"
+                    | resources.Minify
+                    | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $legacy.RelPermalink }}" />
+{{ end }}
+
+{{/* Rewrite's own CSS bundle — loaded AFTER legacy so Rewrite chrome
+     (header, footer, hero, cards) always wins on overlapping classes. */}}
 {{ $tokens   := resources.Get "css/00-tokens.css" }}
 {{ $reset    := resources.Get "css/01-reset.css" }}
 {{ $base     := resources.Get "css/02-base.css" }}

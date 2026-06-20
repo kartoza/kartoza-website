@@ -1,25 +1,17 @@
 {{ define "main" }}
+
+{{ partial "page-hero.html" . }}
+
 <article class="article section">
   <div class="container">
 
     {{ partial "breadcrumb.html" . }}
 
-    <header class="article__header stack stack--3">
-      <p class="eyebrow">Interactive web map</p>
-      <h1 class="u-text-balance">{{ .Title }}</h1>
-      {{ with .Params.subtitle }}
-        <p class="u-lede u-text-accent">{{ . }}</p>
-      {{ end }}
-      {{ with .Description | default .Summary }}
-        <p class="u-lede">{{ . }}</p>
-      {{ end }}
-
-      {{ with .Params.mapUrl | default .Params.url }}
-        <p class="cluster">
-          <a class="button button--primary" href="{{ . }}" rel="noopener" target="_blank">Open full map</a>
-        </p>
-      {{ end }}
-    </header>
+    {{ with .Params.mapUrl | default .Params.url }}
+      <p class="cluster u-mb-5">
+        <a class="button button--primary" href="{{ . }}" rel="noopener" target="_blank">Open full map</a>
+      </p>
+    {{ end }}
 
     {{ with .Params.featured_image | default .Params.image | default .Params.thumbnail }}
       <figure class="frame frame--wide u-mb-7">

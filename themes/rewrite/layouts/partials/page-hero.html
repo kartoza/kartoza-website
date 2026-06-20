@@ -1,0 +1,34 @@
+{{/* Signature page hero — used at the top of every list and single
+     page so chrome stays consistent across the site.
+
+     Reads from the current page context (`.`):
+       .Params.heroEyebrow       optional eyebrow override
+       .Params.subtitle          shown as accented lede
+       .Description / .Summary   shown as muted lede (fallback)
+       .Title                    headline
+
+     Falls back to the section name (humanised) for the eyebrow. */}}
+<section class="hero hero--inverse">
+  <div class="container">
+    <div class="hero__content stack stack--4">
+      {{ $eyebrow := .Params.heroEyebrow | default .Params.eyebrow }}
+      {{ if not $eyebrow }}
+        {{ if .IsHome }}
+          {{ $eyebrow = "" }}
+        {{ else if .Section }}
+          {{ $eyebrow = .Section | humanize }}
+        {{ else }}
+          {{ $eyebrow = .Type | humanize }}
+        {{ end }}
+      {{ end }}
+      {{ with $eyebrow }}<p class="eyebrow">{{ . }}</p>{{ end }}
+      <h1 class="hero__title u-text-balance">{{ .Title }}</h1>
+      {{ with .Params.subtitle }}
+        <p class="u-lede">{{ . }}</p>
+      {{ end }}
+      {{ with .Description }}
+        <p class="u-lede">{{ . }}</p>
+      {{ end }}
+    </div>
+  </div>
+</section>

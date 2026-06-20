@@ -1,5 +1,6 @@
-{{ partial "header.html" . }}
-{{ partial "menu.html" . }}
+{{ define "main" }}
+
+{{ partial "page-hero.html" . }}
 
 <style>
 .callback-section {
@@ -476,4 +477,4 @@
 })();
 </script>
 
-{{ partial "footer.html" . }}
+{{ end }}

@@ -1,32 +1,24 @@
 {{ define "main" }}
+
+{{ partial "page-hero.html" . }}
+
 <article class="article section">
   <div class="container">
 
     {{ partial "breadcrumb.html" . }}
 
-    <header class="article__header stack stack--3">
-      <p class="eyebrow">QGIS plugin</p>
-      <h1 class="u-text-balance">{{ .Title }}</h1>
-      {{ with .Params.subtitle }}
-        <p class="u-lede u-text-accent">{{ . }}</p>
+    {{/* Links bar: install / docs / repo */}}
+    <p class="cluster u-mb-5">
+      {{ with .Params.pluginUrl | default .Params.installUrl }}
+        <a class="button button--primary" href="{{ . }}" rel="noopener" target="_blank">Install plugin</a>
       {{ end }}
-      {{ with .Description | default .Summary }}
-        <p class="u-lede">{{ . }}</p>
+      {{ with .Params.documentationUrl | default .Params.docsUrl }}
+        <a class="button button--ghost" href="{{ . }}" rel="noopener" target="_blank">Documentation</a>
       {{ end }}
-
-      {{/* Links bar: install / docs / repo / downloads */}}
-      <p class="cluster">
-        {{ with .Params.pluginUrl | default .Params.installUrl }}
-          <a class="button button--primary" href="{{ . }}" rel="noopener" target="_blank">Install plugin</a>
-        {{ end }}
-        {{ with .Params.documentationUrl | default .Params.docsUrl }}
-          <a class="button button--ghost" href="{{ . }}" rel="noopener" target="_blank">Documentation</a>
-        {{ end }}
-        {{ with .Params.repositoryUrl | default .Params.repo }}
-          <a class="button button--ghost" href="{{ . }}" rel="noopener" target="_blank">Source</a>
-        {{ end }}
-      </p>
-    </header>
+      {{ with .Params.repositoryUrl | default .Params.repo }}
+        <a class="button button--ghost" href="{{ . }}" rel="noopener" target="_blank">Source</a>
+      {{ end }}
+    </p>
 
     {{ with .Params.featured_image | default .Params.image }}
       <figure class="frame frame--wide u-mb-7">

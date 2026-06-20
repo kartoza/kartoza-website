@@ -1,24 +1,9 @@
-{{- $shouldRender := partial "review-check.html" . -}}
-{{- if $shouldRender -}}
-{{ partial "header.html" . }}
-{{ partial "menu.html" . }}
+{{ define "main" }}
 
+{{ partial "page-hero.html" . }}
+
+{{- $shouldRender := partial "review-check.html" . -}}
 <!-- Document Hero -->
-<section class="document-hero">
-    <div class="container">
-        <div class="document-hero-content">
-            {{ with .Params.icon }}
-            <span class="document-hero-icon">
-                <i class="fas fa-{{ . }}"></i>
-            </span>
-            {{ end }}
-            <h1 class="document-hero-title">{{ .Title }}</h1>
-            {{ with .Params.subtitle }}
-            <p class="document-hero-subtitle">{{ . }}</p>
-            {{ end }}
-        </div>
-    </div>
-</section>
 
 <!-- Document Body -->
 <section class="section">
@@ -293,11 +278,4 @@
 }
 </style>
 
-{{ partial "page-reviewer.html" . }}
-{{ partial "footer.html" . }}
-{{- else -}}
-{{ partial "header.html" . }}
-{{ partial "menu.html" . }}
-{{ partial "page-under-review.html" . }}
-{{ partial "footer.html" . }}
-{{- end -}}
+{{ end }}

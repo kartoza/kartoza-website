@@ -1,69 +1,11 @@
+{{ define "main" }}
+
+{{ partial "page-hero.html" . }}
+
 {{- $shouldRender := partial "review-check.html" . -}}
 {{- $allowBooking := .Params.allow_booking | default false -}}
 {{- $courseSlug := path.Base .File.Dir -}}
-{{- if $shouldRender -}}
-{{ partial "header.html" . }}
-{{ partial "menu.html" . }}
-
 <!-- Course Hero -->
-<section class="course-hero">
-    <div class="course-hero-bg">
-        <div class="course-hero-pattern"></div>
-        <div class="course-hero-overlay"></div>
-    </div>
-    <div class="container">
-        <div class="course-hero-content">
-            <div class="course-hero-info">
-                <div class="course-hero-tags">
-                    {{ with .Params.tags }}
-                    {{ range first 3 . }}
-                    <span class="course-tag">{{ . }}</span>
-                    {{ end }}
-                    {{ end }}
-                </div>
-                <h1 class="course-hero-title">{{ .Title }}</h1>
-                <p class="course-hero-description">{{ .Description }}</p>
-                <div class="course-hero-meta">
-                    {{ with .Params.duration }}
-                    <div class="meta-item">
-                        <i class="fas fa-clock"></i>
-                        <span>{{ . }}</span>
-                    </div>
-                    {{ else }}
-                    <div class="meta-item">
-                        <i class="fas fa-clock"></i>
-                        <span>3 Days</span>
-                    </div>
-                    {{ end }}
-                    <div class="meta-item">
-                        <i class="fas fa-laptop"></i>
-                        <span>On-site or Remote</span>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-certificate"></i>
-                        <span>Certificate Included</span>
-                    </div>
-                </div>
-                <div class="course-hero-cta">
-                    {{ if $allowBooking }}
-                    <a href="#booking-section" class="button is-primary is-medium booking-scroll-btn">
-                        <span class="icon"><i class="fas fa-calendar-check"></i></span>
-                        <span>View Dates & Book</span>
-                    </a>
-                    {{ end }}
-                    <!-- <a href="#course-content" class="button is-light is-medium">
-                        <span class="icon"><i class="fas fa-info-circle"></i></span>
-                        <span>Learn More</span>
-                    </a> -->
-                </div>
-            </div>
-            <div class="course-hero-image">
-                {{ $thumbnail := .Params.thumbnail | default "/img/courses/training.png" }}
-                <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}">
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- Quick Benefits Bar -->
 <section class="course-benefits-bar">
@@ -608,11 +550,4 @@
     </div>
 </section>
 
-{{ partial "page-reviewer.html" . }}
-{{ partial "footer.html" . }}
-{{- else -}}
-{{ partial "header.html" . }}
-{{ partial "menu.html" . }}
-{{ partial "page-under-review.html" . }}
-{{ partial "footer.html" . }}
-{{- end -}}
+{{ end }}
