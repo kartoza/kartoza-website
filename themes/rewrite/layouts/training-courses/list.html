@@ -1,0 +1,132 @@
+{{ define "main" }}
+{{/* Training courses list — ported from the legacy
+     layouts/training-courses/list.html.  All section labels,
+     track descriptions, course-card fields and the
+     training-calendar partial are preserved verbatim; the only
+     change is the surrounding chrome (Rewrite header/footer
+     instead of legacy header.html / menu.html). */}}
+
+{{/* Signature hero — same chrome as the homepage so navigating
+     between pages stays visually consistent. */}}
+<section class="hero hero--inverse">
+  <div class="container">
+    <div class="hero__content stack stack--4">
+      <p class="eyebrow">Training</p>
+      <h1 class="hero__title u-text-balance">{{ .Title }}</h1>
+      {{ with .Params.subtitle }}
+        <p class="u-lede">{{ . }}</p>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    {{ partial "breadcrumb.html" . }}
+
+    {{ with .Content }}
+      <div class="article__body stack stack--4 u-mb-7">{{ . }}</div>
+    {{ end }}
+
+    {{/* Learning-path quick nav */}}
+    <nav class="cluster u-mb-7" aria-label="Learning paths">
+      <a class="button button--secondary" href="#track-desktop-gis">Desktop GIS &amp; Cartography</a>
+      <a class="button button--secondary" href="#track-server-infrastructure">Spatial Databases</a>
+      <a class="button button--secondary" href="#track-development">Custom &amp; Enterprise</a>
+      <a class="button button--secondary" href="#track-foundational">Education &amp; Schools</a>
+    </nav>
+
+    <div class="sidebar" style="--sidebar-target-width: 22rem;">
+
+      {{/* Main column — the 4 tracks, in order */}}
+      <div class="stack stack--7">
+
+        {{/* ---- Desktop GIS & Cartography ---- */}}
+        {{ $desktopCourses := where .RegularPages "Params.track" "Desktop GIS" }}
+        {{ if $desktopCourses }}
+        <section class="stack stack--4" id="track-desktop-gis">
+          <header class="stack stack--2">
+            <p class="eyebrow u-text-accent">Track 1</p>
+            <h2 class="u-text-balance" style="margin: 0;">Desktop GIS &amp; Cartography</h2>
+            <p class="u-text-muted">Master QGIS from beginner to advanced level. Learn to create maps, analyse spatial data, and automate workflows.</p>
+          </header>
+          <div class="grid grid--3">
+            {{ range $desktopCourses.ByWeight }}
+              {{ partial "training-card.html" . }}
+            {{ end }}
+          </div>
+        </section>
+        {{ end }}
+
+        {{/* ---- Spatial Databases ---- */}}
+        {{ $serverCourses := where .RegularPages "Params.track" "Server & Infrastructure" }}
+        {{ if $serverCourses }}
+        <section class="stack stack--4" id="track-server-infrastructure">
+          <header class="stack stack--2">
+            <p class="eyebrow u-text-accent">Track 2</p>
+            <h2 class="u-text-balance" style="margin: 0;">Spatial Databases</h2>
+            <p class="u-text-muted">Build enterprise-grade spatial data infrastructure with PostGIS, GeoServer, and GeoNode.</p>
+          </header>
+          <div class="grid grid--3">
+            {{ range $serverCourses.ByWeight }}
+              {{ partial "training-card.html" . }}
+            {{ end }}
+          </div>
+        </section>
+        {{ end }}
+
+        {{/* ---- Custom & Enterprise ---- */}}
+        {{ $devCourses := where .RegularPages "Params.track" "Development" }}
+        {{ if $devCourses }}
+        <section class="stack stack--4" id="track-development">
+          <header class="stack stack--2">
+            <p class="eyebrow u-text-accent">Track 3</p>
+            <h2 class="u-text-balance" style="margin: 0;">Custom &amp; Enterprise</h2>
+            <p class="u-text-muted">For organisations deploying open source GIS at scale. Learn to plan, build, and manage enterprise-grade FOSS spatial infrastructure.</p>
+          </header>
+          <div class="grid grid--3">
+            {{ range $devCourses.ByWeight }}
+              {{ partial "training-card.html" . }}
+            {{ end }}
+          </div>
+        </section>
+        {{ end }}
+
+        {{/* ---- Education & Schools ---- */}}
+        {{ $foundCourses := where .RegularPages "Params.track" "Foundational" }}
+        {{ if $foundCourses }}
+        <section class="stack stack--4" id="track-foundational">
+          <header class="stack stack--2">
+            <p class="eyebrow u-text-accent">Track 4</p>
+            <h2 class="u-text-balance" style="margin: 0;">Education &amp; Schools</h2>
+            <p class="u-text-muted">Build confidence in teaching geospatial concepts across grade levels, from classroom fundamentals to curriculum-aligned resources for learners.</p>
+          </header>
+          <div class="grid grid--3">
+            {{ range $foundCourses.ByWeight }}
+              {{ partial "training-card.html" . }}
+            {{ end }}
+          </div>
+        </section>
+        {{ end }}
+
+      </div>
+
+      {{/* Sidebar — preserves the original interactive calendar */}}
+      <aside class="training-sidebar">
+        {{ partial "training-calendar.html" . }}
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+{{ partial "section-cta-banner.html" (dict
+    "title"        "Ready to Expand Your GIS Skills?"
+    "subtitle"     "Contact us for custom training programs tailored to your organisation's needs."
+    "primaryUrl"   ("contact-us/" | absURL)
+    "primaryLabel" "Request Training"
+    "secondaryUrl" ("solutions/" | absURL)
+    "secondaryLabel" "View our solutions"
+) }}
+{{ end }}

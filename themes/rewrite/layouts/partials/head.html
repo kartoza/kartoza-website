@@ -35,6 +35,15 @@
                   | resources.Fingerprint }}
 <link rel="stylesheet" href="{{ $bundle.RelPermalink }}" integrity="{{ $bundle.Data.Integrity }}" />
 
+{{/* FontAwesome — loaded from the legacy theme so icons used by
+     preserved partials (training-calendar, course-upcoming-events,
+     etc.) still render when those partials are invoked from
+     Rewrite-side layouts. */}}
+{{ with resources.Get "css/fontawesome.css" }}
+  {{ $fa := . | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $fa.RelPermalink }}" integrity="{{ $fa.Data.Integrity }}" />
+{{ end }}
+
 {{/* Single small JS bundle (deferred) */}}
 {{ $js := resources.Get "js/app.js" | resources.Minify | resources.Fingerprint }}
 <script defer src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>

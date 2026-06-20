@@ -1,0 +1,43 @@
+{{/* Training course card.  Field mapping preserved 1:1 from the
+     legacy training-courses/list.html.  Price is read from
+     .Params.price first, then from site.Data.training.events
+     keyed by course title (the original fallback). */}}
+{{ $permalink := .Permalink }}
+{{ $thumbnail := .Params.thumbnail | default "/img/banner-courses.png" }}
+{{ $price := .Params.price }}
+{{ $currency := .Params.price_currency }}
+{{ if not $price }}
+  {{ range first 1 (where site.Data.training.events "title" .Title) }}
+    {{ $price = .price }}
+    {{ $currency = .price_currency }}
+  {{ end }}
+{{ end }}
+<article class="card">
+  <a class="card__media" href="{{ $permalink }}">
+    <img src="{{ $thumbnail | absURL }}" alt="{{ .Title }}" loading="lazy" />
+    {{ with .Params.level }}
+      <span class="card__badge">{{ . }}</span>
+    {{ end }}
+  </a>
+  <div class="card__body stack stack--3">
+    <h3 class="card__title">
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </h3>
+    <ul class="u-list-clean u-text-muted stack stack--2">
+      {{ with .Params.duration }}
+        <li>🕒 {{ . }}</li>
+      {{ end }}
+      {{ if $price }}
+        {{ $symbol := "R" }}
+        {{ if and $currency (ne $currency "ZAR") }}{{ $symbol = $currency }}{{ end }}
+        <li>🏷 {{ $symbol }} {{ lang.FormatNumber 0 $price }} <span class="u-text-muted">excl. VAT</span></li>
+      {{ end }}
+    </ul>
+    {{ with .Description }}
+      <p class="card__excerpt">{{ . | plainify | truncate 100 }}</p>
+    {{ end }}
+    <footer class="card__footer">
+      <a class="button button--secondary button--full" href="{{ .Permalink }}">View course</a>
+    </footer>
+  </div>
+</article>

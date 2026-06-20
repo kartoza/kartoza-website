@@ -1,8 +1,9 @@
 {{ define "main" }}
 
-{{/* ===== HERO ===== Kartoza vision statement (verbatim from the
-     legacy explore.html partial — these are Kartoza's actual words,
-     not invented marketing copy). */}}
+{{/* ===== 1. HERO ===== Vision statement.  All copy verbatim from
+     themes/hugo-bulma-blocks-theme/layouts/partials/explore.html.
+     The rotating showcase from the original is presented below as
+     a static featured-cards row (section 3 — Featured). */}}
 <section class="hero hero--inverse">
   <div class="container">
     <div class="hero__content stack stack--5">
@@ -30,54 +31,427 @@
 </section>
 
 
-{{/* ===== HOMEPAGE BODY (markdown from content/_index.md, if any) ===== */}}
-{{ with .Content }}
-<section class="section">
-  <div class="container container--narrow">
-    <div class="article__body stack stack--4">{{ . }}</div>
+{{/* ===== 1b. SHOWCASE CAROUSEL ===== Auto-rotating featured
+     items.  HTML/data structure preserved 1:1 with the legacy
+     explore.html so the carousel JS in app.js drives it without
+     modification.  Items: 3 hand-picked products → 3 random
+     portfolio entries → 3 most-recent blog posts. */}}
+<section class="section section--bg-elevated">
+  <div class="container">
+    <div class="showcase-container">
+      <div class="showcase-wrapper">
+
+        {{/* Hand-picked product cards (same 3 as the original) */}}
+        <article class="showcase-item active" data-category="product">
+          <div class="showcase-card">
+            <span class="showcase-badge showcase-badge--product">Featured Service</span>
+            <a class="showcase-image" href="https://geohosting.com" rel="noopener" target="_blank">
+              <img src="{{ "img/gsh-carousel.png" | absURL }}" alt="Preview Geospatial Hosting" loading="lazy" />
+            </a>
+            <div class="showcase-content stack stack--3">
+              <h3 class="showcase-title">GeoSpatial Hosting</h3>
+              <p class="showcase-description">Deploy GeoServer, PostGIS, QGIS Server in minutes. Fully managed cloud infrastructure for your GIS needs.</p>
+              <a class="showcase-link" href="{{ "hosting/" | absURL }}">Explore hosting <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="showcase-item" data-category="product">
+          <div class="showcase-card">
+            <span class="showcase-badge showcase-badge--training">Training</span>
+            <div class="showcase-image">
+              <img src="{{ "img/courses/qgis-introduction.svg" | absURL }}" alt="QGIS Training" loading="lazy" />
+            </div>
+            <div class="showcase-content stack stack--3">
+              <h3 class="showcase-title">QGIS Training Courses</h3>
+              <p class="showcase-description">From beginner to advanced. Learn GIS with our expert-led courses, available online or on-site.</p>
+              <a class="showcase-link" href="{{ "training-courses/" | absURL }}">View courses <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="showcase-item" data-category="product">
+          <div class="showcase-card">
+            <span class="showcase-badge showcase-badge--platform">Platform</span>
+            <div class="showcase-image">
+              <img src="{{ "img/portfolio/my-civitas.png" | absURL }}" alt="MyCivitas" loading="lazy" />
+            </div>
+            <div class="showcase-content stack stack--3">
+              <h3 class="showcase-title">MyCivitas</h3>
+              <p class="showcase-description">Municipal asset management built for local governments. Track infrastructure lifecycle from desktop to field.</p>
+              <a class="showcase-link" href="{{ "solutions/mycivitas/" | absURL }}">Learn more <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </article>
+
+        {{/* Random portfolio items */}}
+        {{ $portfolioItems := where site.RegularPages "Section" "portfolio" }}
+        {{ range first 3 (shuffle $portfolioItems) }}
+        <article class="showcase-item" data-category="portfolio">
+          <div class="showcase-card">
+            <span class="showcase-badge showcase-badge--portfolio">Portfolio</span>
+            {{ with .Params.thumbnail | default .Params.image }}
+              <a class="showcase-image" href="{{ $.Permalink }}">
+                <img src="{{ . | absURL }}" alt="{{ $.Title }}" loading="lazy" />
+              </a>
+            {{ else }}
+              <div class="showcase-image showcase-image--placeholder"></div>
+            {{ end }}
+            <div class="showcase-content stack stack--3">
+              <h3 class="showcase-title">{{ .Title }}</h3>
+              <p class="showcase-description">{{ .Description | default .Summary | plainify | truncate 120 }}</p>
+              <a class="showcase-link" href="{{ .RelPermalink }}">View project <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </article>
+        {{ end }}
+
+        {{/* Latest blog items */}}
+        {{ $blogPosts := where site.RegularPages "Section" "blog" }}
+        {{ range first 3 $blogPosts.ByDate.Reverse }}
+        <article class="showcase-item" data-category="blog">
+          <div class="showcase-card">
+            <span class="showcase-badge showcase-badge--blog">Latest Blog</span>
+            {{ with .Params.thumbnail | default .Params.image }}
+              {{ if ne . "/img/blog/placeholder.png" }}
+                <a class="showcase-image" href="{{ $.Permalink }}">
+                  <img src="{{ . | absURL }}" alt="{{ $.Title }}" loading="lazy" />
+                </a>
+              {{ end }}
+            {{ end }}
+            <div class="showcase-content stack stack--3">
+              <h3 class="showcase-title">{{ .Title | truncate 60 }}</h3>
+              <p class="showcase-description">{{ .Summary | plainify | truncate 100 }}</p>
+              <a class="showcase-link" href="{{ .RelPermalink }}">Read article <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </article>
+        {{ end }}
+
+      </div>
+
+      <div class="showcase-controls">
+        <button class="showcase-prev" type="button" aria-label="Previous slide">‹</button>
+        <div class="showcase-dots" role="tablist"></div>
+        <button class="showcase-pause" type="button" aria-label="Pause autoplay"><span aria-hidden="true">⏸</span></button>
+        <button class="showcase-next" type="button" aria-label="Next slide">›</button>
+      </div>
+      <div class="showcase-progress"><div class="showcase-progress-bar"></div></div>
+    </div>
+  </div>
+</section>
+
+
+{{/* ===== 2. PARTNERS ===== Cards (no header, no footer CTA). */}}
+{{ $partners := where (where site.RegularPages "Section" "partners") ".Params.approved" true }}
+{{ if $partners }}
+<section class="section section--tight">
+  <div class="container">
+    <h2 class="u-text-balance u-text-center u-mb-5">Partners</h2>
+    <div class="grid grid--3">
+      {{ range $partners }}
+        {{ $permalink := .Permalink }}
+        <a class="card card--linked partner-card" href="{{ $permalink }}">
+          <div class="partner-card__logo-frame">
+            {{ with .Params.logo }}
+              <img class="partner-card__logo" src="{{ . | absURL }}" alt="{{ $.Title }} logo" loading="lazy" />
+            {{ end }}
+          </div>
+          <div class="card__body stack stack--2">
+            <h3 class="card__title">{{ .Title }}</h3>
+            {{ with .Params.tagline }}
+              <p class="u-text-muted u-mb-0">{{ . }}</p>
+            {{ end }}
+          </div>
+        </a>
+      {{ end }}
+    </div>
   </div>
 </section>
 {{ end }}
 
 
-{{/* ===== LATEST FROM THE BLOG ===== */}}
-{{ $blog := where site.RegularPages "Section" "blog" }}
-{{ if $blog }}
+{{/* ===== 3. PRIMARY PRODUCTS / SOLUTIONS ===== Verbatim copy.
+     Header / body / bullet text taken from explore.html lines 200-321. */}}
+<section class="section" id="products-section">
+  <div class="container">
+    <header class="stack stack--3 u-mb-7 u-text-center">
+      <h2 class="u-text-balance">Our Solutions</h2>
+      <p class="u-lede" style="margin-inline: auto;">
+        Enterprise-grade GIS hosting, biodiversity systems, municipal asset management, and expert training — all built on open source.
+      </p>
+    </header>
+
+    {{/* Featured: GeoSpatial Hosting */}}
+    <article class="card" style="padding: var(--space-7); margin-block-end: var(--space-6);">
+      <div class="sidebar" style="--sidebar-target-width: 22rem;">
+        <div class="stack stack--3">
+          <p class="eyebrow u-mb-0"><span class="badge">Most Popular</span></p>
+          <h3 class="u-text-balance" style="margin: 0;">GeoSpatial Hosting</h3>
+          <p>
+            Fully managed cloud hosting for your GIS infrastructure. Deploy GeoServer,
+            PostGIS, QGIS Server, GeoNode, and more — with automatic backups,
+            SSL, and 24/7 monitoring.
+          </p>
+          <ul class="u-list-clean stack stack--2">
+            <li>· Instant deployment of GIS servers</li>
+            <li>· Automatic scaling and load balancing</li>
+            <li>· Enterprise-grade security and DDoS protection</li>
+            <li>· Expert GIS support included</li>
+          </ul>
+          <div class="cluster">
+            <a class="button button--primary" href="{{ "hosting/" | absURL }}">View hosting options</a>
+            <span class="u-text-muted">Starting from R2,500&thinsp;/&thinsp;month · €125&thinsp;/&thinsp;month · $140&thinsp;/&thinsp;month</span>
+          </div>
+        </div>
+        <a class="frame frame--wide" href="https://geohosting.com" rel="noopener" target="_blank">
+          <img src="{{ "img/gsh-carousel.png" | absURL }}" alt="Preview Geospatial Hosting" loading="lazy" />
+        </a>
+      </div>
+    </article>
+
+    {{/* Products grid: MyCivitas, BIMS, Training */}}
+    <div class="grid grid--3">
+      <article class="card">
+        <div class="card__body stack stack--3">
+          <h3 class="card__title">MyCivitas</h3>
+          <p class="u-text-accent u-mb-0">Municipal Asset Management</p>
+          <p class="card__excerpt">
+            Complete lifecycle management for municipal infrastructure. Track assets,
+            schedule maintenance, and optimise budgets with spatial intelligence.
+          </p>
+          <ul class="u-list-clean stack stack--2">
+            <li>· Asset inventory &amp; mapping</li>
+            <li>· Condition assessments</li>
+            <li>· Maintenance scheduling</li>
+            <li>· Budget forecasting</li>
+          </ul>
+          <footer class="card__footer">
+            <a class="button button--secondary button--full" href="{{ "apps/mycivitas/" | absURL }}">Learn more</a>
+          </footer>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card__body stack stack--3">
+          <h3 class="card__title">BIMS</h3>
+          <p class="u-text-accent u-mb-0">Biodiversity Information Management</p>
+          <p class="card__excerpt">
+            Comprehensive biodiversity data platform for conservation organisations.
+            Collect, manage, and analyse species occurrence data.
+          </p>
+          <ul class="u-list-clean stack stack--2">
+            <li>· Species occurrence tracking</li>
+            <li>· Habitat mapping</li>
+            <li>· Conservation analytics</li>
+            <li>· Citizen science integration</li>
+          </ul>
+          <footer class="card__footer">
+            <a class="button button--secondary button--full" href="{{ "apps/bims/" | absURL }}">Learn more</a>
+          </footer>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card__body stack stack--3">
+          <h3 class="card__title">Training Courses</h3>
+          <p class="u-text-accent u-mb-0">Professional GIS Education</p>
+          <p class="card__excerpt">
+            Expert-led courses for teams and individuals. Master QGIS, PostGIS,
+            GeoServer, and more with hands-on practical training.
+          </p>
+          <ul class="u-list-clean stack stack--2">
+            <li>· QGIS fundamentals to advanced</li>
+            <li>· Spatial database design</li>
+            <li>· Web mapping &amp; GeoServer</li>
+            <li>· Custom corporate training</li>
+          </ul>
+          <footer class="card__footer">
+            <a class="button button--secondary button--full" href="{{ "training-courses/" | absURL }}">View courses</a>
+          </footer>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+{{/* ===== 4. SECONDARY SERVICES ===== Verbatim from explore.html 322-374. */}}
 <section class="section section--bg-elevated">
   <div class="container">
-    <div class="spread u-mb-7">
-      <div class="stack stack--3" style="max-width: 50ch;">
-        <p class="eyebrow">From the blog</p>
-        <h2 class="u-text-balance">Latest posts</h2>
-      </div>
-      <a class="button button--ghost" href="{{ "blog/" | absURL }}">All posts</a>
+    <header class="stack stack--3 u-mb-7 u-text-center">
+      <h2 class="u-text-balance">Additional Services</h2>
+      <p class="u-lede" style="margin-inline: auto;">Expert consulting, development, and specialized tools</p>
+    </header>
+
+    <div class="grid grid--3">
+      <article class="card">
+        <div class="card__body stack stack--3 u-text-center">
+          <h3 class="card__title">SAGTA Map Exporter</h3>
+          <p class="card__excerpt">Export compliant maps for South African surveying and cadastral requirements.</p>
+          <footer class="card__footer">
+            <a class="button button--secondary button--full" href="{{ "apps/sagta/" | absURL }}">Learn more</a>
+          </footer>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card__body stack stack--3 u-text-center">
+          <h3 class="card__title">Consulting Services</h3>
+          <p class="card__excerpt">Strategic GIS consulting for architecture, data strategy, and technology selection.</p>
+          <footer class="card__footer">
+            <a class="button button--secondary button--full" href="{{ "solutions/consultancy/" | absURL }}">Learn more</a>
+          </footer>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card__body stack stack--3 u-text-center">
+          <h3 class="card__title">GeoSpatial Project Management</h3>
+          <p class="card__excerpt">End-to-end project management for complex GIS implementations and deployments.</p>
+          <footer class="card__footer">
+            <a class="button button--secondary button--full" href="{{ "solutions/consultancy/" | absURL }}">Learn more</a>
+          </footer>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+{{/* ===== 5. REGIONAL OFFICES ===== Verbatim from explore.html 376-467. */}}
+<section class="section">
+  <div class="container">
+    <header class="stack stack--3 u-mb-7 u-text-center">
+      <h2 class="u-text-balance">Global Presence, Local Expertise</h2>
+      <p class="u-lede" style="margin-inline: auto;">
+        Registered offices in South Africa and Portugal serving clients worldwide
+      </p>
+    </header>
+
+    <div class="grid grid--2">
+      <article class="card">
+        <div class="card__body stack stack--3">
+          <p class="eyebrow u-mb-0">🇿🇦 South Africa · Kartoza (Pty) Ltd</p>
+          <h3 class="card__title">Cape Town</h3>
+          <p class="card__excerpt">
+            Our headquarters and primary development hub, serving clients across Africa and internationally.
+          </p>
+          <ul class="u-list-clean stack stack--2 u-text-muted">
+            <li>📍 Cape Town, South Africa</li>
+            <li>✉ <a href="mailto:info@kartoza.com">info@kartoza.com</a></li>
+            <li>🕒 UTC+2 (SAST)</li>
+          </ul>
+          <footer class="card__footer">
+            <a class="button button--secondary" href="{{ "contact-us/" | absURL }}">Contact SA office</a>
+          </footer>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card__body stack stack--3">
+          <p class="eyebrow u-mb-0">🇵🇹 Europe · Kartoza Unipessoal</p>
+          <h3 class="card__title">Lisbon</h3>
+          <p class="card__excerpt">
+            European operations center, providing EU-based services, support, and GDPR-compliant hosting solutions.
+          </p>
+          <ul class="u-list-clean stack stack--2 u-text-muted">
+            <li>📍 Lisbon, Portugal</li>
+            <li>✉ <a href="mailto:europe@kartoza.com">europe@kartoza.com</a></li>
+            <li>🕒 UTC+0/+1 (WET/WEST)</li>
+          </ul>
+          <footer class="card__footer">
+            <a class="button button--secondary" href="{{ "contact-us/" | absURL }}">Contact EU office</a>
+          </footer>
+        </div>
+      </article>
     </div>
 
-    <div class="listing-grid">
-      {{ range first 3 $blog.ByDate.Reverse }}
-        {{ $permalink := .Permalink }}
-        <article class="card">
-          {{ with .Params.thumbnail | default .Params.image }}
-            {{ if ne . "/img/blog/placeholder.png" }}
-              <a class="card__media" href="{{ $permalink }}">
-                <img src="{{ . | absURL }}" alt="" loading="lazy" decoding="async" />
-              </a>
-            {{ end }}
-          {{ end }}
-          <div class="card__body stack stack--3">
-            <p class="eyebrow u-mb-0">
-              <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
-            </p>
-            <h3 class="card__title">
-              <a href="{{ .Permalink }}">{{ .Title }}</a>
-            </h3>
-            {{ with .Description | default .Summary }}
-              <p class="card__excerpt">{{ . | plainify | truncate 140 }}</p>
-            {{ end }}
-          </div>
-        </article>
-      {{ end }}
+    <p class="u-text-center u-text-muted u-mt-7">
+      Serving clients across <strong>6 continents</strong> with local currency billing available.
+    </p>
+  </div>
+</section>
+
+
+{{/* ===== 6. WHY KARTOZA ===== Verbatim from explore.html 469-514. */}}
+<section class="section section--bg-inverse">
+  <div class="container">
+    <div class="sidebar" style="--sidebar-target-width: 26rem;">
+      <div class="stack stack--3">
+        <h2 class="u-text-balance">Why Work With Kartoza?</h2>
+        <p class="u-lede">
+          We're not just a vendor — we're open source contributors and community members.
+        </p>
+      </div>
+
+      <div class="grid grid--2">
+        <div class="stack stack--2">
+          <h3 class="card__title">Open Source First</h3>
+          <p>We contribute to QGIS, GeoServer, PostGIS and more. No vendor lock-in.</p>
+        </div>
+        <div class="stack stack--2">
+          <h3 class="card__title">Global Experience</h3>
+          <p>100+ clients across 6 continents. Local expertise, global reach.</p>
+        </div>
+        <div class="stack stack--2">
+          <h3 class="card__title">Expert Team</h3>
+          <p>Core developers of major FOSS GIS projects on our team.</p>
+        </div>
+        <div class="stack stack--2">
+          <h3 class="card__title">Dedicated Support</h3>
+          <p>Real human support from people who understand GIS.</p>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
+
+
+{{/* ===== 7. TESTIMONIAL ===== Verbatim from explore.html 515-541. */}}
+<section class="section">
+  <div class="container">
+    <article class="card" style="padding: var(--space-7);">
+      <div class="sidebar" style="--sidebar-target-width: 16rem;">
+        <blockquote class="stack stack--3" style="margin: 0;">
+          <p class="u-lede" style="max-width: none; font-style: italic;">
+            &ldquo;Kartoza transformed our approach to biodiversity monitoring. Their BIMS platform
+            and ongoing support have been invaluable to our conservation efforts.&rdquo;
+          </p>
+          <footer class="stack stack--2">
+            <strong>SANParks Scientific Services</strong>
+            <span class="u-text-muted">South African National Parks</span>
+          </footer>
+        </blockquote>
+        <p class="u-text-center">
+          <a class="button button--secondary" href="{{ "portfolio/" | absURL }}">View our portfolio</a>
+        </p>
+      </div>
+    </article>
+  </div>
+</section>
+
+
+{{/* ===== 8. FINAL CTA ===== Verbatim from explore.html 543-562. */}}
+<section class="section hero--inverse">
+  <div class="container">
+    <div class="stack stack--4 u-text-center" style="max-inline-size: none;">
+      <h2 class="u-text-balance">Ready to Transform Your GIS?</h2>
+      <p class="u-lede" style="margin-inline: auto;">
+        Let's discuss how Kartoza can help you achieve your geospatial goals.
+      </p>
+      <p class="cluster cluster--center">
+        <a class="button button--accent" href="{{ "contact-us/" | absURL }}">Get in touch</a>
+        <a class="button button--secondary hero__cta-secondary" href="{{ "hosting/" | absURL }}">Explore hosting</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+
+{{/* ===== HOMEPAGE MARKDOWN BODY (if any) ===== */}}
+{{ with .Content }}
+<section class="section">
+  <div class="container container--narrow">
+    <div class="article__body stack stack--4">{{ . }}</div>
   </div>
 </section>
 {{ end }}
