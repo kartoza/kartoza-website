@@ -1,0 +1,189 @@
+{{/*
+  Side-matter aside.  Renders as a stack of small cards next to the
+  article body — same UX shape as the legacy theme but using Rewrite
+  design tokens.  Each card is only emitted when it has content.
+
+  Cards (top → bottom):
+    1. Page meta     — date, author (linked to team page if found), reviewer
+    2. Tags          — link to /tags/<tag>/
+    3. Useful links  — partnerUrl / productUrl / repoUrl / downloadUrl /
+                       documentationUrl / homepageUrl / websiteUrl +
+                       generic .Params.links: [{label, url}]
+    4. Share         — LinkedIn + email, no tracking
+    5. Work With Us  — fixed CTA card (Training / Hosting / Contact)
+    6. Related       — top 3 same-section pages
+*/}}
+
+{{ $page := . }}
+
+{{/* ---- Resolve author → team member (for avatar + link) -------- */}}
+{{ $authorName := $page.Params.author }}
+{{ $teamMember := false }}
+{{ with $authorName }}
+  {{ range where $page.Site.RegularPages "Section" "the_team" }}
+    {{ if eq (lower .Title) (lower $authorName) }}
+      {{ $teamMember = . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* ---- Useful links: collect known URL params + generic list --- */}}
+{{ $links := slice }}
+{{ with $page.Params.partnerUrl }}
+  {{ $links = $links | append (dict "label" "Visit partner site"      "url" .) }}
+{{ end }}
+{{ with $page.Params.productUrl }}
+  {{ $links = $links | append (dict "label" (or $page.Params.productName "Visit product site") "url" .) }}
+{{ end }}
+{{ with $page.Params.homepageUrl }}
+  {{ $links = $links | append (dict "label" "Project homepage"        "url" .) }}
+{{ end }}
+{{ with $page.Params.websiteUrl }}
+  {{ $links = $links | append (dict "label" "Website"                 "url" .) }}
+{{ end }}
+{{ with $page.Params.repoUrl }}
+  {{ $links = $links | append (dict "label" "Source code"             "url" .) }}
+{{ end }}
+{{ with $page.Params.downloadUrl }}
+  {{ $links = $links | append (dict "label" "Download"                "url" .) }}
+{{ end }}
+{{ with $page.Params.documentationUrl }}
+  {{ $links = $links | append (dict "label" "Documentation"           "url" .) }}
+{{ end }}
+{{ with $page.Params.links }}
+  {{ range . }}
+    {{ if and .url .label }}
+      {{ $links = $links | append (dict "label" .label "url" .url) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* ---- Related items: same section, exclude self, top 3 -------- */}}
+{{ $related := slice }}
+{{ if $page.Section }}
+  {{ range first 4 (where (where $page.Site.RegularPages "Section" $page.Section) "Permalink" "!=" $page.Permalink) }}
+    {{ if lt (len $related) 3 }}
+      {{ $related = $related | append . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<aside class="side-matter stack stack--5" aria-label="Page side matter">
+
+  {{/* ---- Page meta ------------------------------------------- */}}
+  {{ if or $page.Params.date $authorName $page.Params.reviewedBy }}
+    <section class="side-card">
+      <h2 class="side-card__title">About this page</h2>
+      <dl class="side-card__meta">
+        {{ with $page.Date }}
+          {{ if not .IsZero }}
+            <dt>Published</dt>
+            <dd><time datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 January 2006" }}</time></dd>
+          {{ end }}
+        {{ end }}
+        {{ with $authorName }}
+          <dt>Author</dt>
+          <dd>
+            {{ if $teamMember }}
+              <a href="{{ $teamMember.Permalink }}">{{ $teamMember.Title }}</a>
+            {{ else }}
+              {{ . }}
+            {{ end }}
+          </dd>
+        {{ end }}
+        {{ with $page.Params.reviewedBy }}
+          <dt>Reviewed by</dt>
+          <dd>
+            {{ . }}
+            {{ with $page.Params.reviewedDate }}
+              <span class="side-card__meta-sub">on
+                <time datetime="{{ . }}">
+                  {{ (time .).Format "2 January 2006" }}
+                </time>
+              </span>
+            {{ end }}
+          </dd>
+        {{ end }}
+      </dl>
+    </section>
+  {{ end }}
+
+  {{/* ---- Tags ------------------------------------------------ */}}
+  {{ with $page.Params.tags }}
+    <section class="side-card">
+      <h2 class="side-card__title">Topics</h2>
+      <ul class="side-card__tags" role="list">
+        {{ range . }}
+          <li>
+            <a class="tag-pill" href="{{ printf "/tags/%s/" (urlize .) | absURL }}">{{ . }}</a>
+          </li>
+        {{ end }}
+      </ul>
+    </section>
+  {{ end }}
+
+  {{/* ---- Useful links --------------------------------------- */}}
+  {{ if $links }}
+    <section class="side-card">
+      <h2 class="side-card__title">Useful links</h2>
+      <ul class="side-card__links" role="list">
+        {{ range $links }}
+          <li>
+            <a href="{{ .url }}" rel="noopener" target="_blank">
+              <span>{{ .label }}</span>
+              <span class="side-card__link-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    </section>
+  {{ end }}
+
+  {{/* ---- Share ---------------------------------------------- */}}
+  <section class="side-card">
+    <h2 class="side-card__title">Share</h2>
+    <div class="side-card__share">
+      <a class="share-btn"
+         href="https://www.linkedin.com/shareArticle?mini=true&url={{ $page.Permalink | safeURL }}&title={{ $page.Title }}"
+         target="_blank" rel="noopener" aria-label="Share on LinkedIn">
+        <span aria-hidden="true">in</span>
+      </a>
+      <a class="share-btn"
+         href="mailto:?subject={{ $page.Title }}&body={{ $page.Permalink }}"
+         aria-label="Share via email">
+        <span aria-hidden="true">✉</span>
+      </a>
+    </div>
+  </section>
+
+  {{/* ---- Work With Us CTA ----------------------------------- */}}
+  <section class="side-card side-card--cta">
+    <h2 class="side-card__title">Work with us</h2>
+    <p class="side-card__lede">Need help with your geospatial project?</p>
+    <p class="side-card__buttons cluster">
+      <a class="button button--ghost button--small" href="{{ "training-courses/" | absURL }}">Training</a>
+      <a class="button button--ghost button--small" href="{{ "hosting/" | absURL }}">Hosting</a>
+      <a class="button button--accent button--small" href="{{ "contact-us/" | absURL }}">Contact us</a>
+    </p>
+  </section>
+
+  {{/* ---- Related in section --------------------------------- */}}
+  {{ with $related }}
+    <section class="side-card">
+      <h2 class="side-card__title">Related</h2>
+      <ul class="side-card__related" role="list">
+        {{ range . }}
+          <li>
+            <a href="{{ .Permalink }}">
+              <span class="side-card__related-title">{{ .Title }}</span>
+              {{ with .Date }}{{ if not .IsZero }}
+                <span class="side-card__related-date"><time datetime="{{ .Format "2006-01-02" }}">{{ .Format "Jan 2, 2006" }}</time></span>
+              {{ end }}{{ end }}
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    </section>
+  {{ end }}
+
+</aside>

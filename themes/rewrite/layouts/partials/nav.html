@@ -1,4 +1,8 @@
-{{/* Primary navigation — semantic, accessible, mobile-collapsible. */}}
+{{/* Primary navigation — semantic, accessible, mobile-collapsible.
+     Top-level entries with children render as accessible disclosure
+     dropdowns (hover + focus reveal, Esc closes, keyboard
+     navigable).  Top-level entries without children render as
+     simple links. */}}
 <header class="site-header">
   <div class="container">
     <div class="site-header__inner">
@@ -18,14 +22,49 @@
         </button>
         <ul id="primary-nav-list" class="primary-nav__list" role="list">
           {{- range site.Menus.main }}
-            {{- if not .HasChildren }}
-            <li class="primary-nav__item">
-              <a
-                class="primary-nav__link"
-                href="{{ .URL | absURL }}"
-                {{ if $.IsMenuCurrent "main" . }}aria-current="page"{{ end }}
-              >{{ .Name }}</a>
-            </li>
+            {{- if .HasChildren }}
+              {{- $parentName := .Name -}}
+              {{- $parentURL  := .URL  -}}
+              {{- $isCurrent := false -}}
+              {{- range .Children -}}
+                {{- if $.IsMenuCurrent "main" . -}}{{- $isCurrent = true -}}{{- end -}}
+              {{- end -}}
+              <li class="primary-nav__item primary-nav__item--has-children">
+                <button
+                  type="button"
+                  class="primary-nav__link primary-nav__link--toggle"
+                  aria-expanded="false"
+                  {{ if $isCurrent }}aria-current="page"{{ end }}
+                >
+                  <span>{{ $parentName }}</span>
+                  <span class="primary-nav__caret" aria-hidden="true">▾</span>
+                </button>
+                <ul class="primary-nav__sub" role="list">
+                  {{ with $parentURL }}
+                  <li class="primary-nav__sub-item">
+                    <a class="primary-nav__sub-link primary-nav__sub-link--overview"
+                       href="{{ . | absURL }}">All {{ $parentName }}</a>
+                  </li>
+                  {{ end }}
+                  {{- range .Children }}
+                  <li class="primary-nav__sub-item">
+                    <a
+                      class="primary-nav__sub-link"
+                      href="{{ .URL | absURL }}"
+                      {{ if $.IsMenuCurrent "main" . }}aria-current="page"{{ end }}
+                    >{{ .Name }}</a>
+                  </li>
+                  {{- end }}
+                </ul>
+              </li>
+            {{- else }}
+              <li class="primary-nav__item">
+                <a
+                  class="primary-nav__link"
+                  href="{{ .URL | absURL }}"
+                  {{ if $.IsMenuCurrent "main" . }}aria-current="page"{{ end }}
+                >{{ .Name }}</a>
+              </li>
             {{- end }}
           {{- end }}
         </ul>

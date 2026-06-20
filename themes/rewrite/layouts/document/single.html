@@ -3,279 +3,55 @@
 {{ partial "page-hero.html" . }}
 
 {{- $shouldRender := partial "review-check.html" . -}}
-<!-- Document Hero -->
 
-<!-- Document Body -->
-<section class="section">
-    <div class="container">
-        <div class="columns">
-            <!-- Main Content -->
-            <div class="column is-8">
-                <div class="document-body content">
-                    {{ .Content }}
-                </div>
-            </div>
-            <!-- Sidebar -->
-            <div class="column is-4">
-                <div class="document-sidebar">
-                    <!-- Table of Contents -->
-                    {{ if .TableOfContents }}
-                    <div class="document-toc">
-                        <h3 class="document-toc-title">
-                            <i class="fas fa-list"></i> Contents
-                        </h3>
-                        {{ .TableOfContents }}
-                    </div>
-                    {{ end }}
+<section class="article section">
+  <div class="container">
 
-                    <!-- Related Policies -->
-                    {{ with .Params.related }}
-                    <div class="document-related">
-                        <h3 class="document-related-title">
-                            <i class="fas fa-file-alt"></i> Related Policies
-                        </h3>
-                        <ul class="document-related-list">
-                            {{ range . }}
-                            <li><a href="{{ .url }}">{{ .name }}</a></li>
-                            {{ end }}
-                        </ul>
-                    </div>
-                    {{ end }}
+    {{ partial "breadcrumb.html" . }}
 
-                    <!-- CTA Card -->
-                    <div class="document-cta-card">
-                        <h3>Questions?</h3>
-                        <p>If you have questions about this document, please get in touch with our team.</p>
-                        <a class="button is-primary is-fullwidth" href="{{ absURL "contact-us/" }}">
-                            <span class="icon"><i class="fas fa-envelope"></i></span>
-                            <span>Contact Us</span>
-                        </a>
-                    </div>
-
-                    <!-- Back to Policies -->
-                    <div class="document-back">
-                        <a href="{{ absURL "policies/" }}" class="document-back-link">
-                            <i class="fas fa-arrow-left"></i> All Policies
-                        </a>
-                    </div>
-                </div>
-            </div>
+    <div class="page-with-aside">
+      <article class="article__main">
+        <div class="article__body stack stack--4">
+          {{ .Content }}
         </div>
+      </article>
+
+      <aside class="side-matter stack stack--5" aria-label="Document side matter">
+        {{/* Document-specific extras stacked above the shared side-matter:
+             a Table of Contents and a Related Policies list when present. */}}
+
+        {{ if .TableOfContents }}
+          <section class="side-card">
+            <h2 class="side-card__title">Contents</h2>
+            <div class="side-card__toc">
+              {{ .TableOfContents }}
+            </div>
+          </section>
+        {{ end }}
+
+        {{ with .Params.related }}
+          <section class="side-card">
+            <h2 class="side-card__title">Related policies</h2>
+            <ul class="side-card__related" role="list">
+              {{ range . }}
+                <li><a href="{{ .url }}"><span class="side-card__related-title">{{ .name }}</span></a></li>
+              {{ end }}
+            </ul>
+          </section>
+        {{ end }}
+
+        {{/* Shared side-matter (meta, tags, useful links, share, CTA, related). */}}
+        {{ partial "side-matter.html" . }}
+
+        <section class="side-card">
+          <p class="u-text-muted u-mb-0" style="font-size: var(--size-200);">
+            <a href="{{ "policies/" | absURL }}">← All policies</a>
+          </p>
+        </section>
+      </aside>
     </div>
+
+  </div>
 </section>
-
-<style>
-/* Document Hero */
-.document-hero {
-    background: linear-gradient(135deg, #1B6B9B 0%, #3B9DD9 100%);
-    padding: 3rem 1.5rem;
-    color: white;
-}
-.document-hero-content {
-    max-width: 800px;
-}
-.document-hero-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 56px;
-    height: 56px;
-    background: rgba(255,255,255,0.15);
-    border-radius: 12px;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-.document-hero-title {
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: white !important;
-}
-.document-hero-subtitle {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    line-height: 1.6;
-    max-width: 600px;
-}
-
-/* Document Body */
-.document-body {
-    background: white;
-    border-radius: 12px;
-    padding: 2.5rem;
-    box-shadow: 0 4px 16px rgba(27, 107, 155, 0.08);
-}
-.document-body h2 {
-    color: #1B6B9B;
-    border-bottom: 2px solid #e8ecf0;
-    padding-bottom: 0.5rem;
-    margin-top: 2rem;
-}
-.document-body h2:first-child {
-    margin-top: 0;
-}
-.document-body h3 {
-    color: #2a3a4a;
-    margin-top: 1.5rem;
-}
-.document-body ul, .document-body ol {
-    margin-left: 1rem;
-}
-.document-body li {
-    margin-bottom: 0.5rem;
-}
-.document-body strong {
-    color: #1a2a3a;
-}
-.document-body a {
-    color: #3B9DD9;
-}
-.document-body code {
-    background: #f0f4f7;
-    padding: 0.15em 0.4em;
-    border-radius: 4px;
-    font-size: 0.9em;
-}
-.document-body pre {
-    background: #1a2a3a !important;
-    border-radius: 8px;
-    padding: 1.25rem;
-    overflow-x: auto;
-}
-.document-body pre code {
-    background: transparent !important;
-    color: #e8ecf0 !important;
-    padding: 0;
-}
-.document-body .highlight pre {
-    background: #1a2a3a !important;
-}
-.document-body .highlight code,
-.document-body .highlight pre code,
-.document-body .highlight span {
-    color: #e8ecf0 !important;
-    background: transparent !important;
-}
-
-/* Sidebar */
-.document-sidebar {
-    position: sticky;
-    top: 80px;
-}
-.document-toc {
-    background: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 4px 16px rgba(27, 107, 155, 0.08);
-}
-.document-toc-title {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #1B6B9B;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-}
-.document-toc #TableOfContents ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-.document-toc #TableOfContents > ul > li {
-    margin-bottom: 0.5rem;
-}
-.document-toc #TableOfContents ul ul {
-    padding-left: 1rem;
-    margin-top: 0.3rem;
-}
-.document-toc #TableOfContents a {
-    color: #4D6370;
-    font-size: 0.9rem;
-    text-decoration: none;
-    transition: color 0.2s;
-}
-.document-toc #TableOfContents a:hover {
-    color: #3B9DD9;
-}
-
-.document-related {
-    background: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 4px 16px rgba(27, 107, 155, 0.08);
-}
-.document-related-title {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #1B6B9B;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-}
-.document-related-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-.document-related-list li {
-    margin-bottom: 0.5rem;
-}
-.document-related-list a {
-    color: #4D6370;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: color 0.2s;
-}
-.document-related-list a:hover {
-    color: #3B9DD9;
-}
-
-.document-cta-card {
-    background: linear-gradient(135deg, #1B6B9B 0%, #3B9DD9 100%);
-    border-radius: 12px;
-    padding: 1.5rem;
-    color: white;
-    margin-bottom: 1.5rem;
-}
-.document-cta-card h3 {
-    color: white;
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-}
-.document-cta-card p {
-    font-size: 0.9rem;
-    opacity: 0.9;
-    margin-bottom: 1rem;
-}
-
-.document-back {
-    text-align: center;
-}
-.document-back-link {
-    color: #4D6370;
-    font-size: 0.9rem;
-    text-decoration: none;
-    transition: color 0.2s;
-}
-.document-back-link:hover {
-    color: #3B9DD9;
-}
-
-/* Responsive */
-@media screen and (max-width: 768px) {
-    .document-hero-title {
-        font-size: 1.6rem;
-    }
-    .document-body {
-        padding: 1.5rem;
-    }
-    .document-sidebar {
-        position: static;
-        margin-top: 2rem;
-    }
-}
-</style>
 
 {{ end }}

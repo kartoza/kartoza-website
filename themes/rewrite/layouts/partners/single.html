@@ -2,29 +2,42 @@
 
 {{ partial "page-hero.html" . }}
 
-<article class="article section">
+<section class="article section">
   <div class="container">
 
     {{ partial "breadcrumb.html" . }}
 
-    {{ with .Params.partnerStatus | default .Params.status }}
-      <p class="cluster u-mb-5"><span class="badge">{{ . }}</span></p>
-    {{ end }}
+    <div class="page-with-aside">
+      <article class="article__main">
 
-    {{ with .Params.featured_image | default .Params.image | default .Params.logo }}
-      <figure class="frame frame--wide u-mb-7">
-        <img src="{{ . | absURL }}" alt="" loading="lazy" decoding="async" />
-      </figure>
-    {{ end }}
+        {{ with .Params.partnerStatus | default .Params.status }}
+          <p class="cluster u-mb-5"><span class="badge">{{ . }}</span></p>
+        {{ end }}
 
-    <div class="article__body stack stack--4">
-      {{ .Content }}
+        {{/* Hero image preferred; fall back to logo in a contain-fit frame so brand marks never clip. */}}
+        {{ $hero := .Params.featured_image | default .Params.image | default .Params.heroImage }}
+        {{ $logo := .Params.logo }}
+        {{ if $hero }}
+          <figure class="frame frame--wide u-mb-7">
+            <img src="{{ $hero | absURL }}" alt="" loading="lazy" decoding="async" />
+          </figure>
+        {{ else if $logo }}
+          <figure class="frame frame--logo frame--wide u-mb-7">
+            <img src="{{ $logo | absURL }}" alt="" loading="lazy" decoding="async" />
+          </figure>
+        {{ end }}
+
+        <div class="article__body stack stack--4">
+          {{ .Content }}
+        </div>
+
+      </article>
+
+      {{ partial "side-matter.html" . }}
     </div>
 
   </div>
-</article>
-
-{{ partial "related-in-section.html" . }}
+</section>
 
 {{ partial "section-cta-banner.html" (dict
     "title"        "Ready to get started?"

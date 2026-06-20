@@ -92,6 +92,68 @@
   font-size: var(--size-400);
 }
 
+/* Dropdown parents (About, Our Work). */
+.primary-nav__item--has-children {
+  position: relative;
+}
+.primary-nav__link--toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  background: none;
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
+.primary-nav__caret {
+  font-size: 0.7em;
+  transition: transform var(--duration-1) var(--ease);
+}
+.primary-nav__link--toggle[aria-expanded="true"] .primary-nav__caret {
+  transform: rotate(180deg);
+}
+
+.primary-nav__sub {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-2);
+  position: absolute;
+  inset-inline-start: 0;
+  top: calc(100% + var(--space-1));
+  min-inline-size: 14rem;
+  background: var(--color-bg);
+  border: var(--border-hairline);
+  border-radius: var(--radius-3);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  display: none;
+  z-index: var(--z-header, 50);
+}
+.primary-nav__item--has-children:hover > .primary-nav__sub,
+.primary-nav__item--has-children:focus-within > .primary-nav__sub,
+.primary-nav__link--toggle[aria-expanded="true"] + .primary-nav__sub {
+  display: block;
+}
+.primary-nav__sub-link {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-text);
+  font-weight: var(--weight-bold);
+  font-size: var(--size-200);
+  text-decoration: none;
+  border-radius: var(--radius-2);
+}
+.primary-nav__sub-link:hover,
+.primary-nav__sub-link[aria-current="page"] {
+  color: var(--color-link);
+  background: var(--color-bg-elevated);
+}
+.primary-nav__sub-link--overview {
+  color: var(--color-text-muted);
+  border-block-end: var(--border-hairline);
+  margin-block-end: var(--space-1);
+  padding-block-end: var(--space-3);
+}
+
 @media (max-width: 48em) {
   .primary-nav__toggle { display: inline-flex; align-items: center; gap: var(--space-1); }
   .primary-nav__list {
@@ -105,9 +167,21 @@
     border-radius: var(--radius-2);
     padding: var(--space-2);
     box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    max-block-size: calc(100vh - 5rem);
+    overflow-y: auto;
   }
   .primary-nav[data-open="true"] .primary-nav__list { display: flex; }
   .primary-nav__link { padding-block: var(--space-3); }
+
+  /* On mobile, dropdowns become inline disclosure lists (no overlap). */
+  .primary-nav__sub {
+    position: static;
+    box-shadow: none;
+    border: 0;
+    padding-block: 0;
+    padding-inline-start: var(--space-4);
+    min-inline-size: 0;
+  }
 }
 
 
@@ -617,9 +691,18 @@
 
 
 /* ---- Article ------------------------------------------- */
-.article {
+/* Pre-side-matter pages used .article directly as the narrow
+ * column.  Pages with a side-matter aside wrap the body in
+ * .article__main inside .page-with-aside, so we apply the
+ * readability cap there too — but only when there's no aside
+ * sibling (otherwise the grid handles width).
+ */
+.article:not(:has(.page-with-aside)) {
   max-width: var(--content-narrow);
   margin-inline: auto;
+}
+.article__main {
+  min-width: 0;
 }
 .article__header { margin-block-end: var(--space-6); }
 .article__meta {
@@ -660,3 +743,225 @@
 }
 .pagination a:hover { border-color: var(--color-text); }
 .pagination [aria-current] { background: var(--color-text); color: var(--color-text-inverse); border-color: var(--color-text); }
+
+
+/* ---- Page with side-matter (two-column singles) -----------
+ * Two-column shell: article body + aside.  Collapses to a
+ * single column under 60rem; the aside flows below the body
+ * so reading order is preserved on mobile.
+ */
+.page-with-aside {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-7);
+}
+@media (min-width: 60rem) {
+  .page-with-aside {
+    grid-template-columns: minmax(0, 1fr) 18rem;
+    align-items: start;
+  }
+}
+
+/* On wide screens the aside sticks while the article scrolls. */
+.side-matter {
+  display: block;
+}
+@media (min-width: 60rem) {
+  .side-matter {
+    position: sticky;
+    top: calc(4rem + var(--space-5));
+    max-block-size: calc(100vh - 5rem);
+    overflow-y: auto;
+    padding-inline-end: var(--space-2);
+  }
+}
+
+/* ---- Side-card primitive --------------------------------- */
+.side-card {
+  background: var(--color-bg-elevated);
+  border: var(--border-hairline);
+  border-radius: var(--radius-3);
+  padding: var(--space-5);
+}
+.side-card + .side-card { margin-block-start: var(--space-5); }
+.side-card__title {
+  font-size: var(--size-300);
+  font-weight: var(--weight-black);
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 var(--space-3);
+  text-transform: uppercase;
+}
+
+/* Meta dl — small caps for labels, plain for values. */
+.side-card__meta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: var(--space-4);
+  row-gap: var(--space-2);
+  margin: 0;
+  font-size: var(--size-200);
+}
+.side-card__meta dt {
+  color: var(--color-text-muted);
+  font-weight: var(--weight-bold);
+}
+.side-card__meta dd {
+  margin: 0;
+  color: var(--color-text);
+}
+.side-card__meta-sub { color: var(--color-text-muted); }
+
+/* Tags — pill row. */
+.side-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tag-pill {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  background: var(--color-bg);
+  border: var(--border-hairline);
+  border-radius: var(--radius-pill);
+  font-size: var(--size-200);
+  font-weight: var(--weight-bold);
+  text-decoration: none;
+  color: var(--color-text);
+}
+.tag-pill:hover {
+  background: var(--color-text);
+  color: var(--color-text-inverse);
+  border-color: var(--color-text);
+}
+
+/* Links list — full-width rows with arrow on the right. */
+.side-card__links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--space-2);
+}
+.side-card__links a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bg);
+  border: var(--border-hairline);
+  border-radius: var(--radius-2);
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: var(--weight-bold);
+  font-size: var(--size-200);
+}
+.side-card__links a:hover {
+  background: var(--color-text);
+  color: var(--color-text-inverse);
+  border-color: var(--color-text);
+}
+.side-card__link-arrow {
+  color: var(--color-accent);
+  font-weight: var(--weight-black);
+}
+.side-card__links a:hover .side-card__link-arrow { color: var(--color-text-inverse); }
+
+/* Share — square icon buttons. */
+.side-card__share {
+  display: flex;
+  gap: var(--space-2);
+}
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  background: var(--color-bg);
+  border: var(--border-hairline);
+  border-radius: var(--radius-2);
+  font-weight: var(--weight-black);
+  text-decoration: none;
+  color: var(--color-text);
+}
+.share-btn:hover {
+  background: var(--color-text);
+  color: var(--color-text-inverse);
+  border-color: var(--color-text);
+}
+
+/* CTA card — slightly emphasised. */
+.side-card--cta {
+  background: var(--color-bg-inverse);
+  color: var(--color-text-inverse);
+  border-color: var(--color-bg-inverse);
+}
+.side-card--cta .side-card__title { color: var(--color-text-inverse); }
+.side-card__lede {
+  margin: 0 0 var(--space-4);
+  color: var(--color-text-inverse);
+  opacity: 0.85;
+  font-size: var(--size-200);
+}
+.side-card__buttons {
+  flex-wrap: wrap;
+}
+
+/* Compact button variant — used inside side-cards. */
+.button--small {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--size-200);
+}
+
+/* Related list — title + date stacked, divider between rows. */
+.side-card__related {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--space-3);
+}
+.side-card__related a {
+  display: grid;
+  gap: var(--space-1);
+  text-decoration: none;
+  color: var(--color-text);
+}
+.side-card__related a:hover .side-card__related-title { color: var(--color-link); }
+.side-card__related-title {
+  font-weight: var(--weight-bold);
+  font-size: var(--size-200);
+  line-height: var(--leading-tight);
+}
+.side-card__related-date {
+  font-size: var(--size-100);
+  color: var(--color-text-muted);
+}
+.side-card__related li + li {
+  border-block-start: var(--border-hairline);
+  padding-block-start: var(--space-3);
+}
+
+/* Table of Contents inside a side-card. */
+.side-card__toc nav,
+.side-card__toc #TableOfContents { font-size: var(--size-200); }
+.side-card__toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.side-card__toc li + li { margin-block-start: var(--space-1); }
+.side-card__toc ul ul {
+  padding-inline-start: var(--space-4);
+  margin-block-start: var(--space-1);
+}
+.side-card__toc a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  line-height: var(--leading-tight);
+}
+.side-card__toc a:hover { color: var(--color-link); }

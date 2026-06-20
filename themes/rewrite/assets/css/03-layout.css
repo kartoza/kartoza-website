@@ -128,6 +128,17 @@
 .frame--portrait{ --frame-ratio: 3 / 4; }
 .frame--wide    { --frame-ratio: 21 / 9; }
 
+/* Brand-mark frame — never clips. Letterboxes the logo on a neutral surface. */
+.frame--logo {
+  background-color: var(--color-bg-elevated);
+  padding: var(--space-5);
+  border-radius: var(--radius-3);
+}
+.frame--logo > img,
+.frame--logo > video {
+  object-fit: contain;
+}
+
 
 /* ---- center — narrow centred text column -------------------- */
 .center {

@@ -2,29 +2,37 @@
 
 {{ partial "page-hero.html" . }}
 
-<article class="article section">
+<section class="article section">
   <div class="container">
 
     {{ partial "breadcrumb.html" . }}
 
-    {{ with .Params.mapUrl | default .Params.url }}
-      <p class="cluster u-mb-5">
-        <a class="button button--primary" href="{{ . }}" rel="noopener" target="_blank">Open full map</a>
-      </p>
-    {{ end }}
+    <div class="page-with-aside">
+      <article class="article__main">
 
-    {{ with .Params.featured_image | default .Params.image | default .Params.thumbnail }}
-      <figure class="frame frame--wide u-mb-7">
-        <img src="{{ . | absURL }}" alt="" loading="lazy" decoding="async" />
-      </figure>
-    {{ end }}
+        {{ with .Params.mapUrl | default .Params.url }}
+          <p class="cluster u-mb-5">
+            <a class="button button--primary" href="{{ . }}" rel="noopener" target="_blank">Open full map</a>
+          </p>
+        {{ end }}
 
-    <div class="article__body stack stack--4">
-      {{ .Content }}
+        {{ with .Params.featured_image | default .Params.image | default .Params.thumbnail }}
+          <figure class="frame frame--wide u-mb-7">
+            <img src="{{ . | absURL }}" alt="" loading="lazy" decoding="async" />
+          </figure>
+        {{ end }}
+
+        <div class="article__body stack stack--4">
+          {{ .Content }}
+        </div>
+
+      </article>
+
+      {{ partial "side-matter.html" . }}
     </div>
 
   </div>
-</article>
+</section>
 
 {{ partial "related-in-section.html" . }}
 

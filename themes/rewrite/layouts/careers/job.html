@@ -2,38 +2,46 @@
 
 {{ partial "page-hero.html" . }}
 
-<article class="article section">
+<section class="article section">
   <div class="container">
 
     {{ partial "breadcrumb.html" . }}
 
-    <ul class="cluster u-text-muted u-list-clean u-mb-5">
-      {{ with .Params.department }}<li><strong>Department:</strong> {{ . }}</li>{{ end }}
-      {{ with .Params.location }}<li><strong>Location:</strong> {{ . }}</li>{{ end }}
-      {{ with .Params.job_status }}<li><strong>Status:</strong> {{ . }}</li>{{ end }}
-      {{ with .Params.erpnext_id }}<li><strong>Ref:</strong> <code class="u-mono">{{ . }}</code></li>{{ end }}
-    </ul>
+    <div class="page-with-aside">
+      <article class="article__main">
 
-    <p class="cluster u-mb-5">
-      <a class="button button--accent" href="mailto:jobs@kartoza.com?subject={{ .Title | urlquery }}">
-        Apply for this position
-      </a>
-      <a class="button button--ghost" href="{{ "careers/" | absURL }}">View all openings</a>
-    </p>
+        <ul class="cluster u-text-muted u-list-clean u-mb-5">
+          {{ with .Params.department }}<li><strong>Department:</strong> {{ . }}</li>{{ end }}
+          {{ with .Params.location }}<li><strong>Location:</strong> {{ . }}</li>{{ end }}
+          {{ with .Params.job_status }}<li><strong>Status:</strong> {{ . }}</li>{{ end }}
+          {{ with .Params.erpnext_id }}<li><strong>Ref:</strong> <code class="u-mono">{{ . }}</code></li>{{ end }}
+        </ul>
 
-    <div class="article__body stack stack--4">
-      {{ .Content }}
+        <p class="cluster u-mb-5">
+          <a class="button button--accent" href="mailto:jobs@kartoza.com?subject={{ .Title | urlquery }}">
+            Apply for this position
+          </a>
+          <a class="button button--ghost" href="{{ "careers/" | absURL }}">View all openings</a>
+        </p>
+
+        <div class="article__body stack stack--4">
+          {{ .Content }}
+        </div>
+
+        <footer class="stack stack--3 u-mt-7">
+          <p>
+            Send your application to
+            <a href="mailto:jobs@kartoza.com?subject={{ .Title | urlquery }}">jobs@kartoza.com</a>.
+          </p>
+        </footer>
+
+      </article>
+
+      {{ partial "side-matter.html" . }}
     </div>
 
-    <footer class="stack stack--3 u-mt-7">
-      <p>
-        Send your application to
-        <a href="mailto:jobs@kartoza.com?subject={{ .Title | urlquery }}">jobs@kartoza.com</a>.
-      </p>
-    </footer>
-
   </div>
-</article>
+</section>
 
 {{ partial "related-in-section.html" . }}
 {{ end }}

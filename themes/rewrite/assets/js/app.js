@@ -31,6 +31,37 @@
     });
   }
 
+  /* ---- Primary nav dropdowns (About, Our Work) ---------------
+   * Hover/focus reveal is CSS-only; this script adds click toggle
+   * (for touch + keyboard activation) and Escape-to-close. */
+  var dropdowns = document.querySelectorAll('.primary-nav__link--toggle');
+  dropdowns.forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      // Close any siblings first.
+      dropdowns.forEach(function (other) {
+        if (other !== btn) other.setAttribute('aria-expanded', 'false');
+      });
+      btn.setAttribute('aria-expanded', String(!open));
+    });
+  });
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.primary-nav__item--has-children')) {
+      dropdowns.forEach(function (btn) { btn.setAttribute('aria-expanded', 'false'); });
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      dropdowns.forEach(function (btn) {
+        if (btn.getAttribute('aria-expanded') === 'true') {
+          btn.setAttribute('aria-expanded', 'false');
+          btn.focus();
+        }
+      });
+    }
+  });
+
   /* ---- Colour-scheme persistence (light / dark / auto) ----
    * Read at the earliest moment in <head> via the inline script
    * below; this listener handles explicit toggles, if a button

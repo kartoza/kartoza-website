@@ -2,23 +2,31 @@
 
 {{ partial "page-hero.html" . }}
 
-<article class="article section">
+<section class="article section">
   <div class="container">
 
     {{ partial "breadcrumb.html" . }}
 
-    {{ partial "page-meta.html" . }}
+    <div class="page-with-aside">
+      <article class="article__main">
 
-    {{ with .Params.featured_image | default .Params.image }}
-      <figure class="frame frame--wide u-mb-7">
-        <img src="{{ . | absURL }}" alt="" loading="lazy" decoding="async" />
-      </figure>
-    {{ end }}
+        {{ partial "page-meta.html" . }}
 
-    <div class="article__body stack stack--4">
-      {{ .Content }}
+        {{ with .Params.featured_image | default .Params.image }}
+          <figure class="frame frame--wide u-mb-7">
+            <img src="{{ . | absURL }}" alt="" loading="lazy" decoding="async" />
+          </figure>
+        {{ end }}
+
+        <div class="article__body stack stack--4">
+          {{ .Content }}
+        </div>
+
+      </article>
+
+      {{ partial "side-matter.html" . }}
     </div>
 
   </div>
-</article>
+</section>
 {{ end }}
