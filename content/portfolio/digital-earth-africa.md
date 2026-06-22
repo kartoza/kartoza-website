@@ -43,11 +43,7 @@ Digital Earth Africa exists to improve the lives of people across the African co
 
 [https://www.digitalearthafrica.org/](<https://www.digitalearthafrica.org>)
 
-  
-
 ### Kartoza's Role in Digital Earth Africa
-
-  
 
 On an ongoing basis, Kartoza plays a pivotal role in providing various support and development services related to Digital Earth Africa platform development, DevOps, platform support and community outreach.
 

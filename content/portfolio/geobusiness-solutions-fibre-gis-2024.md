@@ -35,11 +35,7 @@ Kartoza was subcontracted by GeoBusiness Solutions in Namibia to create a servic
 
 Kartoza was subcontracted by GeoBusiness Solutions in Namibia to create a service that would automatically ingest uploaded shapefiles into a Postgres database and then serve the resulting vector data on a QGIS Server based API. The service was created in order to allow Paratus Namibia, an internet service provider, to track queries from potential customers.
 
-  
-
 The python code handles the ingestion and processing of shapefiles to then be stored in a Postgres database. QGIS Server is used to display and edit the data. The setup of QGIS Server was done using a Docker package. API calls are used to make changes to the data stored in the database. The entire system is hosted on the end client's (Paratus) infrastructure.
-
-  
 
 ![](/files/TWNKSZQ.png)
 

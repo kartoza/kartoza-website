@@ -5,7 +5,7 @@ description: 'Afrocentric IP (Pty) Ltd initiated engagement with Kartoza in Febr
   2021 to undertake various tasks in
 
   relation to the BCCM (Buffalo City Metropolitan Municipality) asset register project
-  and wishe'
+  and wished'
 erpnext_id: jvrqi1a2b4
 erpnext_modified: '2026-06-04 14:31:44.468372'
 github: ''
@@ -32,8 +32,6 @@ relation to the BCCM (Buffalo City Metropolitan Municipality) asset register pro
 ## Overview
 
 Kartoza was contracted to:
-
-  
 
   1. Complete the implementation of GISWater to the point where it meets BCMM ToR water and sanitation module requirements by end July 2021. We plan to do this through weekly sprints throughout July, including support from BGeo as necessary.
   2. Link water and sanitation assets in GISWater to the FAR.

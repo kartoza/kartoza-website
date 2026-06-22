@@ -37,8 +37,6 @@ Kartoza has conducted technical developer training (in Nairobi) and Gavin Flemin
 
 advisory board.
 
-  
-
 ![](/files/Screenshot from 2025-01-15 17-39-43.png)
 
 ## Technologies

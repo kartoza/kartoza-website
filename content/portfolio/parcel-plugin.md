@@ -32,8 +32,6 @@ Spatial Matrix Ltd. initiated the development of Parcel Plugin in 2021 with Kart
 
 For this project, Kartoza was contracted to provide software development services for the "Parcel Plugin". This included continuing the development of the plugin. Kartoza committed to providing two senior developers as core resources for a minimum of eight days per month each, and also offered additional software developers and GIS specialists as 'second tier' or 'overflow' contributors. All resources were to work remotely unless otherwise arranged for on-site presence.
 
-  
-
 The plugin and associated PostgreSQL database were developed to assist with the rapid and accurate capture of cadastral beacons and parcels, including bearing and distance (COGO) capture. Editing takes place directly on the SDI database and the results are instantly visible to web portal users.
 
 ## Client

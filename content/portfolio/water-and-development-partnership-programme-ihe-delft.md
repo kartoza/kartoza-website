@@ -33,23 +33,15 @@ Kartoza aided in the development and setup of a GeoNode instance to serve as a r
 
 This included defining user roles (general public, project members, project leaders, program moderators), specifying user stories and expectations, and outlining the platform's features, such as filtering and searching for diverse outputs (maps, documents, videos). Emphasis was placed on making the platform user-friendly for individuals with varying levels of GIS knowledge.
 
-  
-
-Part of the development and setup was using branding elements for IHE Delft and the WDPP, such as logos and colour palettes to style the GeoNode platform to align with the organisation's visual identity. We also implemented a custom permissions system. 
-
-  
+Part of the development and setup was using branding elements for IHE Delft and the WDPP, such as logos and colour palettes to style the GeoNode platform to align with the organisation's visual identity. We also implemented a custom permissions system.
 
 Kartoza continues to provide ongoing hosting and maintenance for the platform.
-
-  
 
 Links:
 
 [Website](<https://wdpprepository.org/#/>)
 
 [GitHub Repository](<https://github.com/kartoza/IHE_Delft>)
-
-  
 
 ![](https://kartoza.com/files/sFsIRRN.png)
 

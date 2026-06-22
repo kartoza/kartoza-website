@@ -30,19 +30,13 @@ This project focused on a major overhaul of the GEOSYS QGIS plugin, transitionin
 
 The project is structured around multiple phases. The first phase focuses on significant improvements to the GEOSYS QGIS Plugin, including migrating all field-level map API requests from version 4 to version 5, streamlining coverage and product retrieval, updating parameters such as replacing "WeatherType" with "Mask" and adding a "coveragePercent" option, enhancing the product list by adding NDWI and SLOPE while removing deprecated items and simplifying product names, updating sensor support to include HUANJING and GAOFEN, refining the SAMZ product to require image selection and provide more detailed DBF file information, and ensuring continued hotspot retrieval capabilities. The second phase is dedicated to a comprehensive marketing update, transitioning the brand from GeoSys to EarthDaily, which involves renaming menus and forms, updating website redirections, cleaning up the user interface, and ensuring all company descriptions and social media links reflect the new EarthDaily branding. The third phase addresses maintenance, specifically fixing a bug with the "limit" parameter that restricts the number of displayed images. Finally, the fourth phase is for general improvements, including the implementation of an RX map feature and updates to the help centre and plugin options.
 
-  
-
 **Goals & Objectives:**
 
   1. **Maps Management:** Implement changes on API requests using the field-level map API version 5.
   2. **Hotspot Management:** Introduce a new API to request Hotspot data.
   3. **Branding:** Add new branding and update the QGIS plugin description.
 
-  
-
 ![](https://kartoza.com/files/HYNk2Zq.png)
-
-  
 
 ![](/files/gYVhwyu.png) ![](/files/xuSoeIG.png)
 

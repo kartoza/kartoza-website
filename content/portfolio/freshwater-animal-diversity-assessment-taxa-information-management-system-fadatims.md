@@ -3,7 +3,7 @@ client: Universitaet fuer Bodenkultur Wien
 date: '2025-01-20'
 description: The infraFADA project is a critical initiative focused on modernising
   and expanding the global taxonomic backbone of the Freshwater Animal Diversity Assessment
-  (FADA). The core deliverable is the deve
+  (FADA). The core deliverable is the development
 erpnext_id: qpv1o4uh67
 erpnext_modified: '2026-06-04 14:49:58.091841'
 github: https://github.com/kartoza/django-bims
@@ -30,8 +30,6 @@ The infraFADA project is a critical initiative focused on modernising and expand
 
 This work ensures the data is openly available to potential users and fully interoperable with international data infrastructures. Kartoza's role in the project is the development of the FADAtims software and platform
 
-  
-
 The primary aim of the project is to establish FADA taxa lists as a reliable taxonomic backbone for international research infrastructures. The key functional requirements for the FADAtims platform include:
 
   1. Taxa Management: Implementing an online system for FADA experts to enter new taxa, insert taxonomic decisions, and manage synonyms, with all changes being time-stamped and logged.
@@ -41,11 +39,7 @@ The primary aim of the project is to establish FADA taxa lists as a reliable tax
   5. Data Access: Allowing both FADA experts and general users to query, browse, and download customized taxon lists (as CSV or PDF).
   6. Platform Integration: Ensuring BIMS instances (like FBIS - Freshwater Biodiversity Information System) can interoperate with FADAtims, allowing local platforms to select between their local taxonomy and the new, harmonized FADAtims taxonomy.
 
-  
-
 **The History of FADA: A Global Legacy**
-
-  
 
 The infraFADA project is the latest chapter in a long-running effort to document and manage freshwater animal diversity, which has consistently highlighted the field's knowledge gaps and conservation priorities.
 
@@ -54,11 +48,7 @@ The infraFADA project is the latest chapter in a long-running effort to document
   3. Database Compilation (2009-2013): During the EU-funded BioFresh project, the real FADA database, comprising taxa checklists for dozens of animal groups, was first compiled and became a core component of the Freshwater Information Platform (FIP).
   4. Data Improvement (2014-2016): The AquaRES project focused on improving data quality, updating import procedures, and ensuring synchronisation with other key registers like WoRMS.
 
-  
-
 The current infraFADA project builds on this two-decade legacy, transforming FADA from a database of checklists into an essential, highly-connected taxonomic backbone for global biodiversity research.
-
-  
 
 ![](/files/7dRTTP6.png)
 

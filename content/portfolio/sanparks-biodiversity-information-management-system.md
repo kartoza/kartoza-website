@@ -36,10 +36,6 @@ The South African National Parks (SANParks) BIMS is an online platform enabling 
 
 It is only available to registered SANParks staff who are assigned access to relevant data. Sensitive data is only available to a very limited number of individuals who collect and manage these data. Occurrence data is uploaded and made available for point localities, ranger sections and parks for all taxonomic groups. Additionally, spatially layers, including vegetation type and ecosystem threat level, can be selected as a background display to locality data. Data can then be downloaded for selected areas using a polygonal lasso tool or selection of ranger section or park boundaries. The purpose of the SANParks BIMS is to collate and serve relevant data to inform conservation research, management and decision making for South Africa’s National Parks. One of the primary functions of the system is to output checklists for selected taxonomic groups for selected ranger sections or parks, appending selected additional information, such as conservation status.
 
-  
-
-  
-
 ![](https://kartoza.com/files/kI56wsb.png)
 
 ![](https://kartoza.com/files/AVoAJzK.png)

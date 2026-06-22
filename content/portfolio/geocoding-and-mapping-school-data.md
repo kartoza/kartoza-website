@@ -34,15 +34,9 @@ Kartoza used geospatial analysis to help St John’s College better understand s
 
 Kartoza was contracted by St John’s College in Johannesburg to provide geospatial analysis that would support strategic decision-making across admissions, marketing, and transport planning. The college wanted to move beyond static address lists and gain a deeper, data-driven understanding of where its students come from, how this has changed over time, and where future growth opportunities may lie.
 
-  
-
 Kartoza transformed two years of student address data into actionable spatial intelligence through a high-accuracy geocoding process and time-series analysis. This enabled the college to visualise current and historic enrolment patterns, identify high-potential suburbs for targeted outreach, and gain initial insight into its competitive landscape. Particular focus was placed on distance, accessibility, and socio-economic indicators relevant to the school’s ideal demographic.
 
-  
-
 The project also included transport-focused analysis, assessing existing routes from key hubs such as Rosebank and Park Station and modelling the potential impact of new bus or taxi routes. The final deliverables included an interactive QGIS project and a comprehensive report with maps and graphs, equipping the marketing and leadership teams with clear, evidence-based insights to guide future admissions strategy, transport planning, and long-term growth decisions.
-
-  
 
 ![](/files/jGCxSC4.png)
 

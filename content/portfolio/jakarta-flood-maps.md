@@ -29,7 +29,7 @@ title: Jakarta Flood Maps
     class="is-primary"
     sub-block-side="bottom"
 >}}
-The Jakarta flood maps project aims to identify and visualise flood-prone areas within the city to improve disaster preparedness and response. 
+The Jakarta flood maps project aims to identify and visualise flood-prone areas within the city to improve disaster preparedness and response.
 {{< /block >}}
 
 ## Overview

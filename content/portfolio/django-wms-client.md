@@ -37,17 +37,11 @@ This is a Django app that allows users to point at a WMS service and add a Leafl
 
 a Django website.
 
-  
-
 On the front end, we provide two views.
-
-  
 
 The Index View provides a gallery of all the maps you have registered:
 
 ![](/files/DJANGO_WMS_CLIENT_1.png)
-
-  
 
 The Map View provides a leaflet full screen map that presents the given WMS Resource:
 

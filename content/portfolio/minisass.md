@@ -31,7 +31,7 @@ title: miniSASS
     class="is-primary"
     sub-block-side="bottom"
 >}}
-Empowering Water Quality Monitoring Capture, Explore, and Improve with miniSASS! 
+Empowering Water Quality Monitoring Capture, Explore, and Improve with miniSASS!
 {{< /block >}}
 
 ## Overview
@@ -40,17 +40,11 @@ MiniSASS (mini Stream Assessment Scoring System) is a simple, cost-effective bio
 
 ![](https://erp.kartoza.com/files/OuxGLfA.png)
 
-  
-
 ### Further Phases
-
-  
 
 **Phase 3 (01/04/2025 - 31/10/2025)**
 
 Kartoza served as the project’s specialised digital solutions provider, responsible for delivering all technical upgrades, integrations, and platform enhancements required for the miniSASS website and mobile application. Acting as an independent sub-consultant to GroundTruth, Kartoza leads the design and implementation of system improvements, including data-safety compliance, interoperability between web and mobile environments, bug fixing, user-experience enhancements, expanded data-capture capabilities, analytics integration, and deployment of the upgraded app to the Google Play Store. Kartoza was also accountable for supporting multilingual availability, facilitating Single Sign-In integration with UNICEF Yoma, and ensuring all deliverables are completed in alignment with project timelines and partner specifications
-
-  
 
 ![](/files/59tnxRW.png)
 

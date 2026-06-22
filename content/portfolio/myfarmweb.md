@@ -33,7 +33,7 @@ An interactive, cloud-based platform for storing, visualising and comparing all 
 
 ## Overview
 
-Kartoza built a web application for farmers to explore and visualise field, pest and crop information about their farms, including aerial photography and satellite-derived data and in situ soil moisture observations with irrigation recommendations. 
+Kartoza built a web application for farmers to explore and visualise field, pest and crop information about their farms, including aerial photography and satellite-derived data and in situ soil moisture observations with irrigation recommendations.
 
 ![](/files/mfw.png)
 

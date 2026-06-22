@@ -3,7 +3,7 @@ client: ''
 date: '2025-01-20'
 description: An OSIRIS Data Service with a series of restful Application Programming
   Interfaces (API), geospatial-enabled image services, and Open-source Project for
-  a Network Data Access Protocol (OPeNDAP) servic
+  a Network Data Access Protocol (OPeNDAP) services
 erpnext_id: mn8gii5k37
 erpnext_modified: '2026-06-04 14:48:37.728679'
 github: ''
@@ -30,8 +30,6 @@ An OSIRIS Data Service with a series of restful Application Programming Interfac
 
 The development of a data access framework for next-generation weather technologies, specifically for the OSIRIS project funded by the Bill & Melinda Gates Foundation and in support of the seed breeding ecosystem in East Africa. The project focused on the design of a data access system to support the seed breeding ecosystem in East Africa, particularly for the Climate Bespoke Atmospheric Model (CBAM) data set.
 
-  
-
 Key aspects of the included:
 
   1. Cloud-based storage (AWS S3) for netCDF and Zarr files, and PostgreSQL with PostGIS for structured data.
@@ -39,7 +37,5 @@ Key aspects of the included:
   3. Native cloud platform access, OPENDAP, OGC API - Coverages/WCS, OGC API - Features/WFS, custom APIs, and Pangeo/Zarr.
   4. Recommendations of both weather intelligence companies and seed breeding scientists, emphasizing cloud-native solutions, open source technologies, and analysis-ready data.
   5. Details on relevant seed breeding tools and platforms like Climatrends, 1000Farms project, ClimMob Trial Analysis Software, and Bestiapop.
-
-  
 
 There are various stakeholders in the project including Tomorrow.io, CGIAR (1000Farms), and Regrow.

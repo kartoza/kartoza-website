@@ -27,7 +27,7 @@ title: Advanced Fire Information System (AFIS)
     class="is-primary"
     sub-block-side="bottom"
 >}}
-We built the new AFIS web front end. AFIS is a system for automatic detection of fires in the SADC region using MODIS and other satellite data. 
+We built the new AFIS web front end. AFIS is a system for automatic detection of fires in the SADC region using MODIS and other satellite data.
 {{< /block >}}
 
 ## Overview

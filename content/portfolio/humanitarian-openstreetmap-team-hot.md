@@ -38,15 +38,9 @@ Kartoza collaborated with the Humanitarian OpenStreetMap Team to strengthen open
 
 Kartoza partnered with the Humanitarian OpenStreetMap Team (HOT) on strategic initiatives aimed at strengthening open-source geospatial tools for humanitarian use. This collaboration drew on Kartoza’s expertise in cloud-based geospatial architecture, open standards, and community-driven development to support platforms used globally in disaster response and humanitarian planning.
 
-  
-
 A key engagement focused on the design of OpenAerialMap (OAM) v2, where Kartoza was contracted to define a modern, scalable, and high-performance platform architecture. Kartoza provided technical strategy and architectural guidance for a cloud-native solution, advising on containerisation, efficient imagery hosting, and agile development workflows. The design promoted the adoption of modern geospatial standards such as Cloud Optimized GeoTIFFs (COGs) and STAC catalogs, while also facilitating collaboration between diverse technical and humanitarian stakeholders.
 
-  
-
 In a related initiative, Kartoza subcontracted HOT to support Healthsites.io tagging standardisation within the OpenStreetMap ecosystem. This work focused on improving the consistency and clarity of healthcare facility data by aligning Healthsites.io attributes with accepted OSM tagging practices. The project delivered improved documentation, practical tagging examples, and community liaison support, helping ensure broad acceptance and long-term sustainability of healthcare data standards within the global OSM community.
-
-  
 
 ![](/files/KJt4EDD.jpg)
 

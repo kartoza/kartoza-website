@@ -32,11 +32,7 @@ Kartoza developed an enhanced WASH Information Management System for LM Internat
 
 Kartoza was engaged by LM International, with funding from UNICEF, to strengthen the Water, Sanitation, and Hygiene (WASH) Information Management System in South Sudan, focusing on Jonglei and Western Equatoria states. The project aimed to move beyond basic data collection and provide a comprehensive, user-friendly system that could support real-time monitoring and informed decision-making for WASH service delivery.
 
-  
-
 Kartoza designed and deployed an enhanced WASH MIS with a strong geospatial focus, including a scalable database that could serve as a foundation for a future national WASH system. A key deliverable was an interactive GIS dashboard that allowed government and LM International staff to visualise water points, sanitation activities, and service coverage across the two states. The system enabled users to track functionality status, identify non-functioning infrastructure, and monitor progress toward Open Defecation Free (ODF) targets.
-
-  
 
 In addition to system development, Kartoza delivered hands-on capacity-building training for LM International and state WASH officers, ensuring long-term sustainability and local ownership of the platform. The solution also incorporated a multi-layered security model, providing public access to high-level information while protecting sensitive data for authorised partners and government stakeholders.
 

@@ -38,15 +38,9 @@ The Business Engineering Map Viewer is an OpenLayers-based platform for visualis
 
 The Business Engineering Map Viewer, or Collaborator Online Map Viewer, is designed to empower municipalities with a dynamic platform that enhances communication and service delivery. It aims to foster community engagement and streamline interactions between local governments and citizens. This application enables specific features for your organisation such as Service Requests, News, Broadcasts, Contacts, and Utility Accounts throughout Africa and soon Europe and the Americas.
 
-  
-
 Geoserver is used to style and provide access to the data when using the map viewer. The map viewer also allows the user to create new features and perform searches on the attributes of the asset data.
 
-  
-
 The map viewer is funded by [Business Engineering](<https://www.be.co.za/>) and implemented by Kartoza.
-
-  
 
 ![https://kartoza.erpnext.com/files/Example_screenshotc9889c.PNG](https://kartoza.erpnext.com/files/Example_screenshotc9889c.PNG)
 

@@ -30,6 +30,4 @@ Three-week intensive training on data management with FOSS GIS to support geospa
 
 The Energy EMP-A entailed three-week (Cape Town, 2019) intensive training on data management with FOSS GIS to support geospatial electrification models for government officials, utility analysts and academic researchers. The training focused on all the steps required to develop an SDI. Kartoza developed and presented all the GIS materials.
 
-  
-
 ![](/files/22.1.png) ![](/files/22.3.png) ![](/files/22.4.png)

@@ -30,8 +30,6 @@ The Global Evergreening Alliance (GEA) Eligible Project Area Locator (EPAL) Tool
 
 The core vision of the GEA Eligible Project Area Locator (EPAL) Tool is to empower both field office users and head office personnel with a robust, open-source geospatial tool that simplifies the process of assessing potential reforestation sites. It aims to provide visual context through historical and current satellite imagery, integrate exclusion masks, and automate report generation for effective data sharing and decision-making. It is a collaborative effort between GeoTerra Image, Kartoza and The Cirrus Group.
 
-  
-
 The QGIS plugin boasts a range of features designed to enhance user experience and data accuracy:
 
   1. **Intuitive User Interface:** The plugin provides a user-friendly interface with key functionalities like selecting target areas, accessing saved projects, and navigating through historical imagery.
@@ -42,14 +40,10 @@ The QGIS plugin boasts a range of features designed to enhance user experience a
   6. **Exclusion Masks:** The tool integrates "exclusion masks" to identify areas unsuitable for reforestation based on criteria like existing forest, grassland, wetland, and high organic content soil, adhering to standards defined by Gold Standard and Verified Carbon Standard.
   7. **Data Organisation and Management:** The QGIS project is structured to logically organise associated context data, including administrative areas, masking layers, and historical imagery.
 
-  
-
 The GEA EPAL Tool is built upon:
 
   1. **QGIS:** The core open-source Geographic Information System (GIS) software.
   2. **Google Earth Engine (GEE):** Used for accessing high-resolution imagery and time-slider functionality.
-
-  
 
 ![](/files/KKwGQ79.gif)
 

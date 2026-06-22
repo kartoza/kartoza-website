@@ -41,8 +41,6 @@ UN-IGRAC approached Kartoza to develop the SADC-GIP and funded that. Subsequentl
 
 has taken over and funds an ongoing maintenance SLA with Kartoza.
 
-  
-
 ![](/files/Ua3uxr4.png)
 
 ## Technologies

@@ -34,8 +34,6 @@ Projecta started life as a visual changelog tool for InaSAFE and QGIS. It is now
 
 as a commercial platform for project changelogs, auto-build websites, certification, etc.
 
-  
-
 ![](/files/Screenshot from 2025-01-15 17-24-36.png)
 
 ## Technologies

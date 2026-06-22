@@ -34,15 +34,9 @@ Kartoza was contracted by the World Bank to further develop the Gender Enabling 
 
 The Gender Enabling Environments Spatial Tool (GEEST) project is designed to enhance women's access to employment and business opportunities by leveraging geospatial data to identify and address barriers in their environments. Supported by the World Bank Group (WBG), the project integrates open-source spatial analysis to assess critical factors such as transportation, education, digital inclusion, and socio-economic conditions that influence women's workforce participation.
 
-  
-
 Developed as a QGIS plugin, GEEST generates spatial insights to highlight areas where interventions can strengthen enabling conditions for women, empowering policymakers and stakeholders to make data-driven decisions. By mapping gaps and opportunities, the tool provides a systematic approach to fostering gender equality through spatial planning.
 
-  
-
 The final phase of the project focuses on refining the tool by incorporating a more comprehensive set of socio-economic and demographic factors. This will ensure that GEEST delivers more accurate, actionable insights to support inclusive workforce development and address gender disparities.
-
-  
 
 Links:
 
@@ -51,8 +45,6 @@ Links:
 [QGIS Plugin Page](<https://plugins.qgis.org/plugins/geest/>)
 
 [Website Home Page](<https://worldbank.github.io/GEEST/README.html>)
-
-  
 
 ![](https://kartoza.com/files/GLvgrGs.png)
 

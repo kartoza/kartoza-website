@@ -32,11 +32,7 @@ The project aimed to automate and scale a water management tool, focusing on ope
 
 This project aimed to enhance the automation and scalability of the WaterSphere360 product for GeoTerra360 and EkoSource. The primary focus was on replicating, operationalizing, and scaling the area-to-volume relationship determination algorithm. As a proof of concept, the initial development targeted the Guadiana catchment in Portugal and its upstream areas in Spain, with funding from the European Space Agency (ESA) and EDIA as a key stakeholder.
 
-  
-
 In addition to algorithm scaling, the project sought to improve cloud integration and overall scalability for WaterSphere360’s components. While some elements were already deployed on Google Cloud Platform (GCP) infrastructure in the EU, others remained on local office workstations, requiring migration to a more robust and scalable cloud environment.
-
-  
 
 This project was worked on by Kartoza LDA.
 

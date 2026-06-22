@@ -47,8 +47,6 @@ forward internally. Throughout the process, Kartoza actively engaged the team to
 
 needs, so as to better provide guidance and advice at each stage of the project.
 
-  
-
 ![](/files/Screenshot from 2025-01-15 16-30-18.png)
 
 ## Technologies

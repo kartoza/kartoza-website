@@ -36,8 +36,6 @@ The Limpopo Biodiversity Information Management System (BIMS) is a platform for 
 
 LEDET (a South African provincial government department) commissioned a BIMS to manage their own and third-party biodiversity and related data and share it in different ways with various user groups, namely their staff and other provincial government departments, the public, municipal government and EIA (environmental impact assessment) practitioners.
 
-  
-
 ![](/files/1mzyJRC.png)
 
 ## Technologies

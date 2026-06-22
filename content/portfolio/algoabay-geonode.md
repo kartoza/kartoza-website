@@ -30,11 +30,7 @@ The Algoa Bay Project is a collaborative project between universities (Rhodes, N
 
 The Algoa Bay Project is a collaborative project between universities (Rhodes, NMU, Fort Hare) and research institutions (SAEON, Council for Geoscience, SAIAB and others) with the ultimate goal of developing a marine spatial plan for Algoa Bay. One of the requirements is a spatial data repository which was chosen to be GeoNode.
 
-  
-
 They were having issues with how some of the layers displayed on their GeoNode, so they contracted Kartoza to help fix the issues.
-
-  
 
 Kartoza still provides:
 
@@ -47,8 +43,6 @@ Kartoza still provides:
 • Access and security reviews
 
 • Updates when needed
-
-  
 
 ![https://kartoza.erpnext.com/files/algoa_bay_home.png](https://kartoza.erpnext.com/files/algoa_bay_home.png)
 

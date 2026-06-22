@@ -40,8 +40,6 @@ slider control for QGIS that allows you to ‘play’ through the time series of
 
 your project.
 
-  
-
 ![](/files/Screenshot from 2025-01-15 16-12-42.png)
 
 ## Technologies

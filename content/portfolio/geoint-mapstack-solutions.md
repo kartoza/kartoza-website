@@ -33,8 +33,6 @@ This project was done to help enhance MapStack's scalability for enterprise clie
 
 This project focused on two key areas for MapStack: foundational improvements for enterprise readiness and a comprehensive UI/UX overhaul. The technical scope included transitioning to a horizontally scalable architecture with independent, organisation-partitioned instances managed by Nginx sidecar proxies. This allows for simplified integration within diverse enterprise infrastructures, addressing challenges with existing load balancers and firewalls. Furthermore, the project aims to automate templated analytics workflows, streamline deployment with Ansible and Docker Compose, and explore data sharing via foreign data wrappers in Geoserver. Concurrently, a significant effort is dedicated to refreshing the user interface and user experience, encompassing a login page revamp, a complete theme redesign, and updates to the navigation for maps, geostories, and dashboards. The project also investigates migrating charting and dashboard functionalities from MapStore to Superset for improved visualisation capabilities and adding PDF generation for GeoStories.  
 
-  
-
 **Key Components & Deliverables:**
 
   1. **Enterprise Scalability:**
@@ -69,8 +67,6 @@ This project focused on two key areas for MapStack: foundational improvements fo
   2. **Enhanced User Engagement:** A modern and intuitive UI/UX will improve user satisfaction and increase the overall usability of the platform.
   3. **Increased Efficiency:** Automated analytics and streamlined deployment processes will reduce manual effort, accelerating content generation and client onboarding.
   4. **Improved Data Management:** Strategic data sharing and isolation methods will ensure secure and flexible data handling for multi-tenant environments.
-
-  
 
 ![](https://kartoza.com/files/Dojk4KO.png)
 

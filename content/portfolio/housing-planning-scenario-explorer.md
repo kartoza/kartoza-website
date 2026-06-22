@@ -30,13 +30,9 @@ We are pleased to announce the successful completion of **Phase 1 of the Housing
 
 The project establishes a strong digital foundation for a next generation of **data-driven, scenario-based urban planning tools** , supporting more informed decision-making for rapidly growing cities.
 
-  
-
 # Building on Proven Foundations
 
 The Housing Planning Scenario Explorer builds on the Rapid Urbanism Explorer (RUE), evolving it into a modern, modular, and open-source platform. Phase 1 focused on transforming the original concept into a scalable, API-driven solution capable of supporting collaborative planning, future expansion, and integration with external systems.
-
-  
 
 # What Was Delivered in Phase 1
 
@@ -49,8 +45,6 @@ Phase 1 focused on the **core technical and architectural foundations** , includ
 
 The platform was delivered using an **Agile approach** , ensuring transparency, continuous feedback, and high delivery quality throughout the project lifecycle.
 
-  
-
 # Why It Matters
 
 Cities face increasing pressure to plan faster while balancing affordability, sustainability, and infrastructure constraints. The Housing Planning Scenario Explorer addresses this challenge by enabling planners and decision-makers to:
@@ -62,8 +56,6 @@ Cities face increasing pressure to plan faster while balancing affordability, su
 
 Phase 1 lays the groundwork for future enhancements, including advanced 3D modelling, environmental and social indicators, and deeper analytical capabilities.
 
-  
-
 # Looking Ahead
 
 With the successful delivery of Phase 1, the platform is well positioned for future development. Upcoming phases will expand functionality and analytical depth, further supporting sustainable, data-driven urban development at scale.
@@ -72,10 +64,6 @@ This milestone reflects a shared commitment to **open-source innovation** , **sm
 
 ![](https://erp.kartoza.com/files/mkEd3Ei.png)
 
-  
-
 ![](https://erp.kartoza.com/files/UXsErmM.png)
-
-  
 
 ![](https://erp.kartoza.com/files/iKisY0V.png)

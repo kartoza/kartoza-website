@@ -32,8 +32,6 @@ A docker compose project to setup an OSM PostGIS database with automatic updates
 
 This project lets users maintain their own PostGIS database of a custom subset of OpenStreetMap data and keep it up to date automatically via regular downloads of OSM diff files.
 
-  
-
 ![](/files/BJt2vzp.png)
 
 ## Technologies

@@ -41,11 +41,9 @@ Results are delivered through two complementary channels:
 
 The entire process is triggered by a simple KML polygon upload, making the service accessible even to users without remote-sensing expertise.
 
-  
-
 ### **Minimum Viable Product Workflow (Automated End-to-End)**
 
-Clients (or channel partners) supply a KML file defining the Area of Interest (AOI). The system: 
+Clients (or channel partners) supply a KML file defining the Area of Interest (AOI). The system:
 
   1. Ingests the KML and automatically selects the 20 most recent Sentinel-1 LOS scenes.
   2. Downloads and pre-processes auxiliary data (Copernicus DEM, ERA5 atmospheric corrections, precise orbits).
@@ -57,8 +55,6 @@ Clients (or channel partners) supply a KML file defining the Area of Interest (A
   8. Creates a unique username/password for the client, valid for 30 days.
 
 The report and login credentials are automatically forwarded to the channel partner, who handles client communication, final QA, invoicing, and customer support, earning a 30 % commission.
-
-  
 
 ### **Visualisation on G3W Web-GIS**
 
@@ -72,15 +68,9 @@ The G3W platform provides an intuitive, browser-based experience:
 
 Administrators can quickly create new projects, upload QGIS projects, manage users/groups, and perform quality checks via the same web interface (full guidance provided in the G3W User & Administrator Manual).
 
-  
-
 ![](/files/qAd6Hsy.png)
 
-  
-
 ![](/files/rFGuKP3.png)
-
-  
 
 ### **Key Benefits for Mining Operations**
 
@@ -91,13 +81,9 @@ Administrators can quickly create new projects, upload QGIS projects, manage use
   5. **Quality Assurance** — Every dataset includes comprehensive coherence and error statistics so engineers can assess reliability.
   6. **User-Friendly Delivery** — Mine managers receive both a ready-to-share PDF and a live web viewer—no specialist software required.
 
-  
-
 ### **Business Model & Partnership**
 
 The service is offered through authorised channel partners. Partners manage client relationships, customise reports if needed, and invoice end-users while the automated backend handles all data processing and delivery. Partners receive 30 % commission on each completed AOI package. New instances are provisioned instantly, and the system supports both one-off and subscription monitoring contracts.
-
-  
 
 ### **Technical Summary**
 
@@ -106,11 +92,7 @@ The service is offered through authorised channel partners. Partners manage clie
   3. Output formats: GeoTIFF velocity/coherence layers, shapefiles, PDF report (ODT), G3W web project.
   4. Accuracy: Typically < 5 mm/yr standard deviation on coherent surfaces (validated against corner reflectors and GNSS where available).
 
-  
-
 ![](/files/CyjNarA.png)
-
-  
 
 ### **Conclusion**
 

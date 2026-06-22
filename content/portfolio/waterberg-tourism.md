@@ -30,6 +30,4 @@ Kartoza (Pty) Ltd. was contact by the Waterberg Tourism NPC for a Tourism Map Pr
 
 The project was divided into multiple phases to create a district map, town information maps, and route maps, as well as a web version of the district map. After maps were generated, Kartoza provided ongoing support and maintenance.
 
-  
-
 Kartoza did pro bono work to create the maps. These maps were generate in specifies sizes for the maps, such as A0 and A2 (as well as later a map to fit an entire wall in a restaurant).

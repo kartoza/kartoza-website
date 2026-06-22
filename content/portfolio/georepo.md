@@ -38,8 +38,6 @@ Introducing GeoRepo: A Robust Platform for Versioned Administrative Boundaries w
 
 We built the GeoRepo platform for UNICEF to provide a platform for hosting versioned administrative boundaries. The platform uses PostgreSQL and PostGIS for the storage of measurement data and spatial data which we deliver as vector tiles using Tegola. We also implemented an API that allows users to search for boundaries and information about boundaries.
 
-  
-
 ![](/files/GeoSight.png)
 
 ## Client

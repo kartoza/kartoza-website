@@ -42,8 +42,6 @@ Within the app, you can make use of various time-series and map-based visualisat
 
 retrieved from a web API that is managed by AWARD.
 
-  
-
 ![https://kartoza.erpnext.com/files/Screenshot%20from%202025-01-15%2016-33-59.png](https://kartoza.erpnext.com/files/Screenshot%20from%202025-01-15%2016-33-59.png)
 
 ![](/files/Screenshot from 2025-01-15 16-32-04.png)

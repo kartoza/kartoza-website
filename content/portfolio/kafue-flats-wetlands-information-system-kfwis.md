@@ -35,11 +35,7 @@ KFWIS is an instance of a BIMS (Biodiversity Information Management System)set u
 
 The Kafue Flats Wetlands Information System (KFWIS) is an online platform enabling the upload, exploration and download of biodiversity occurrence data for national parks and marine protected areas in South Africa. It is only available to registered staff who are assigned access to relevant data. Sensitive data is only available to a very limited number of individuals who collect and manage these data. Occurrence data is uploaded and made available for point localities, ranger sections and parks for all taxonomic groups. Additionally, spatial layers, including vegetation type and ecosystem threat level, can be selected as a background to locality data. Data can then be downloaded for selected areas using a polygonal lasso tool or selection of ranger section or park boundaries. The purpose of the KFWIS is to collate and serve relevant data to inform conservation research, management and decision making for the Kafue Flats area. One of the primary functions of the system is to output checklists for selected taxonomic groups for selected ranger sections or parks, appending selected additional information, such as conservation status.
 
-  
-
 All of the source code for the platform is open source, and it uses popular open source tooling including Postgres/PostGIS, GeoServer, Django, Python as building blocks for the platform.
-
-  
 
 ![](/files/ZuuIa4Q.png)
 

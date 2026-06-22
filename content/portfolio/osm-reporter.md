@@ -44,8 +44,6 @@ provide details of contributor levels in a given area. The project was subsequen
 
 others (e.g. the Humanitarian OpenStreetmapTeam) who contributed additional functionality.
 
-  
-
 ![](/files/xTWcssH.png)
 
 ## Technologies

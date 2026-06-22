@@ -33,8 +33,6 @@ Kartoza was contracted to undertake software development of the OV software and 
 
 owner.
 
-  
-
 Kartoza rendered a dynamic feed of ship positions, updating every few seconds and symbolising
 
 the ships according to their type and direction of travel. In addition to the screenshot above, we also

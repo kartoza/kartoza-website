@@ -51,8 +51,6 @@ parties interested in the ultimate outcome of the plugin, Kartoza was tasked to 
 
 could serve as the one stop shop for users looking to use GeoNode functionality effectively.
 
-  
-
 ![](/files/Screenshot from 2025-01-15 13-45-31.png)
 
 ## Technologies

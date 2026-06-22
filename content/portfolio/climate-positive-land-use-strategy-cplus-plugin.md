@@ -36,8 +36,6 @@ One of the distinguishing features of CPLUS is its ability to address both globa
 
 Piloted in the Bushbuckridge Municipality in the Kruger to Canyons Biosphere of South Africa, the CPLUS framework was tested with a diverse set of stakeholders to identify land use priorities and understand the carbon benefits and biodiversity, ecosystem services co-benefits of different scenarios.
 
-  
-
 ![https://kartoza.com/files/outputs-qgis.gif](https://kartoza.com/files/outputs-qgis.gif)
 
 ## Technologies

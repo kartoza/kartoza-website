@@ -29,7 +29,7 @@ title: Land Information System for Ogun State, Nigeria
     class="is-primary"
     sub-block-side="bottom"
 >}}
-Ogun State in Nigeria started implementation in 2012 of their first digital Spatial Data Infrastructure (SDI). At its core are new Land Information and Land Administration Systems, of which Kartoza was the core developer. 
+Ogun State in Nigeria started implementation in 2012 of their first digital Spatial Data Infrastructure (SDI). At its core are new Land Information and Land Administration Systems, of which Kartoza was the core developer.
 {{< /block >}}
 
 ## Overview
@@ -42,23 +42,15 @@ The core requirements were to:
 
 • Provide tools, workflows and training for staff to conduct examinations for property transactions and applications.
 
-• provide a geo-portal (SDI) for Ogun State Government containing all core data sets required by the government. 
-
-  
+• provide a geo-portal (SDI) for Ogun State Government containing all core data sets required by the government.
 
 Kartoza conducted requirements analysis, designed the system, implemented a localised instance of 1Map (PHPand front-end customisation was done by 1Map), prepared and published all the geo-portal datasets in PostGIS and GeoServer and provided training.
 
-  
-
 Kartoza also developed a QGIS Python plugin (<https://plugins.qgis.org/plugins/parcel_plugin>) and associated PostgreSQL database to assist with the rapid and accurate capture of cadastral beacons and parcels, including bearing and distance (COGO) capture. Editing takes place directly on the SDI database and the results are instantly visible to web portal users.
-
-  
 
 ![](/files/ogungis2.png)
 
 Kartoza conducted requirements analysis, designed the system, implemented a localised instance of 1Map (php and front-end customisation was done by 1Map), prepared and published all the geo-portal datasets in PostGIS and GeoServer and provided training.
-
-  
 
 Kartoza also developed a QGIS Python plugin (<https://plugins.qgis.org/plugins/parcel_plugin>) and associated PostgreSQL database to assist with the rapid and accurate capture of cadastral beacons and parcels, including bearing and distance (COGO) capture. Editing takes place directly on the SDI database and the results are instantly visible to web portal users.§
 

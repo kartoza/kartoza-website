@@ -38,8 +38,6 @@ topographical map sheet needed a paper one or a scanned digital version. Kartoza
 
 is an attempt to emulate the official styling with QGIS and SLD styles and map compositions.
 
-  
-
 ![](/files/Screenshot from 2025-01-15 17-27-12.png)
 
 ## Technologies

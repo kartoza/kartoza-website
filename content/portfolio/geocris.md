@@ -38,11 +38,7 @@ GeoCRIS is a powerful geospatial analysis platform that enables users to visuali
 
 Kartoza was brought into support a larger team to deliver GeoCRIS, the spatial component of CRIS, the Caribbean Risk Information System of CDEMA (<https://cdema.org/cris/).> We built on the metadata management system (pyCSW and Google sheets), styled vector tile layers in QGIS, built a data validation QGIS plugin amongst other tasks.
 
-  
-
 Accurate, complete metadata and a functional CSW service are critical to the functioning of the system since the web app is driven by metadata. Available data, its description and its map service endpoints are all obtained by performing CSW queries on the metadata service. Using these, the web map dynamically offers the user whatever is available according to the metadatabase.
-
-  
 
 ![](/files/Oaznbl6.png)
 
