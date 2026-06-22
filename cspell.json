@@ -43,7 +43,9 @@
     "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b",
     "https?://[^\\s\"'>)]*",
     "/img/[^\\s\"'>)]*",
-    "\\b[0-9a-f]{7,40}\\b"
+    "\\b[0-9a-f]{7,40}\\b",
+    "erpnext_id:\\s*\\S+",
+    "erpnext_modified:\\s*\\S+"
   ],
   "words": [
     "Kartoza",
