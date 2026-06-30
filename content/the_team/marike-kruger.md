@@ -6,9 +6,7 @@ departmentIcon: "fa-crown"
 weight: 3
 draft: false
 image: "/img/team/marike-kruger.jpg"
-location: "South Africa"
 country: "South Africa"
-coordinates: "-33.9249, 18.4241"
 skills:
   - "Project Management"
   - "Team Leadership"
@@ -20,8 +18,8 @@ achievements:
   - "13+ years project management experience"
   - "Proven track record in organisational growth"
 bio: "Over 13 years of management experience. Project manager with a proven track record in making significant contributions to organisational growth."
-reviewedBy: "Tim Sutton"
-reviewedDate: 2026-03-16
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-19
 ---
 
 Marike is the driving force behind Kartoza's operational excellence. With over 13 years of project management experience, she brings a wealth of knowledge in coordinating complex initiatives and leading diverse teams.
@@ -30,6 +28,6 @@ Described by colleagues as self-motivated and hardworking, Marike possesses a re
 
 As General Manager, Marike oversees the day-to-day operations of Kartoza, ensuring that projects run smoothly, teams are supported, and clients receive exceptional service. Her contributions have been instrumental in Kartoza's growth from a small consultancy to a globally recognized geospatial services provider.
 
-Marike's leadership style emphasizes empowering team members while maintaining accountability and focus on results. She believes that a well-organised, motivated team is the foundation of any successful project, and she works tirelessly to create that environment at Kartoza.
+Marike's leadership style emphasises empowering team members while maintaining accountability and focus on results. She believes that a well-organised, motivated team is the foundation of any successful project, and she works tirelessly to create that environment at Kartoza.
 
 Her proven track record in making significant contributions to organisational growth demonstrates not just her management skills, but her deep understanding of what makes a business thrive in the competitive geospatial industry.

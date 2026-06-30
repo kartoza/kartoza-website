@@ -6,15 +6,13 @@ departmentIcon: "fa-layer-group"
 weight: 31
 draft: false
 image: "/img/team/jeremy-prior.jpg"
-location: "South Africa"
 country: "South Africa"
-coordinates: "-25.7461, 28.1881"
 education:
   - degree: "BSc Geoinformatics"
     institution: "University of Pretoria"
 skills:
   - "Cartography"
-  - "Data Visualization"
+  - "Data Visualisation"
   - "QGIS"
   - "Spatial Analysis"
   - "Map Design"
@@ -22,11 +20,11 @@ skills:
 achievements:
   - "Focus on cartographic excellence and visual interpretation"
 bio: "BSc Geoinformatics. Enjoys the conversion of raw data into useful visual interpretations."
-reviewedBy: "Tim Sutton"
-reviewedDate: 2026-03-16
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-19
 ---
 
-Jeremy is a GIS Specialist with a passion for transforming raw data into meaningful visual interpretations. His BSc in Geoinformatics from the University of Pretoria provided a strong foundation in both the technical and creative aspects of geographic information systems.
+Jeremy is a GIS Specialist with a passion for transforming raw data into meaningful visual interpretations. His BSc in Geoinformatics provided a strong foundation in both the technical and creative aspects of geographic information systems.
 
 At the core of Jeremy's work is cartography - the art and science of map making. He understands that maps are not just technical products but communication tools that tell stories and reveal patterns hidden in data.
 

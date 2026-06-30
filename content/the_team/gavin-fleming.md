@@ -6,9 +6,7 @@ departmentIcon: "fa-crown"
 weight: 2
 draft: false
 image: "/img/team/gavin-fleming.png"
-location: "Near Hermanus, South Africa"
 country: "South Africa"
-coordinates: "-34.4166, 19.2333"
 email: "gavin@kartoza.com"
 credentials:
   - "PGP 1234"
@@ -29,16 +27,16 @@ achievements:
   - "13+ years ESRI software experience"
   - "FOSS GIS advocate since 2002"
 bio: "Professional GISc Practitioner with an MSc in Genetics. Charter OSGeo member passionate about open source and open data."
-reviewedBy: "Tim Sutton"
-reviewedDate: 2026-03-16
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-19
 ---
 
-Gavin brings over two decades of experience in the geospatial industry, combining deep technical expertise with strategic business acumen. His journey began with 13+ years working with ESRI software before discovering the transformative potential of Free and Open Source GIS in 2002.
+Gavin brings over two decades of experience in the geospatial industry, combining deep technical expertise with strategic business acumen. His journey began with many years of working with proprietary GIS software before discovering the transformative potential of Free and Open Source GIS in the early 2000s.
 
 With an MSc in Genetics and formal registration as a Professional GISc Practitioner, Gavin brings a unique scientific perspective to geospatial problem-solving. This background enables him to approach complex spatial analysis challenges with rigorous methodology.
 
-In 2010, Gavin founded AfriSpatial, which later merged with Tim Sutton's Linfiniti to form Kartoza in 2014. This partnership combined their complementary skills and shared vision for open source geospatial excellence.
+In 2010, Gavin founded AfriSpatial, which later merged with Tim Sutton's Linfiniti to form Kartoza in 2014. This partnership combined their complementary skills and shared vision for open-source geospatial excellence.
 
-As an OSGeo Charter Member, Gavin is deeply committed to advancing the open source geospatial ecosystem. He is a passionate advocate for Open Source Software and open data policies, believing these principles are fundamental to democratizing access to spatial technology.
+As an OSGeo Charter Member, Gavin is deeply committed to advancing the open-source geospatial ecosystem. He is a passionate advocate for open-source software and open data policies, believing these principles are fundamental to democratising access to spatial technology.
 
-Based near the beautiful coastal town of Hermanus in South Africa, Gavin continues to guide Kartoza's strategic direction while staying hands-on with technical challenges. His blend of scientific training, practical experience, and business leadership makes him an invaluable asset to both Kartoza and the broader geospatial community.
+Gavin continues to guide Kartoza's strategic direction while remaining actively involved in tackling technical challenges. His blend of scientific training, practical experience, and business leadership makes him an invaluable asset to both Kartoza and the broader geospatial community.

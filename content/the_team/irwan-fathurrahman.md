@@ -6,9 +6,7 @@ departmentIcon: "fa-code"
 weight: 10
 draft: false
 image: "/img/team/irwan-fathurrahman.jpg"
-location: "Indonesia"
 country: "Indonesia"
-coordinates: "-6.2088, 106.8456"
 github: "meomancer"
 skills:
   - "Python"
@@ -22,8 +20,8 @@ achievements:
   - "Full stack developer since 2011"
   - "Lead developer of Healthsites.io"
 bio: "Full stack web developer with expertise in Python, Java, PostgreSQL/Django. Lead developer of Healthsites.io."
-reviewedBy: "Tim Sutton"
-reviewedDate: 2026-03-16
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-19
 ---
 
 Irwan has been building web and mobile applications since 2011, developing deep expertise across the full technology stack. His proficiency spans Python, Java, and PostgreSQL, with Django being one of his core frameworks for web development.
@@ -34,4 +32,4 @@ One of Irwan's most significant contributions is serving as the lead developer f
 
 Based in Indonesia, Irwan is part of Kartoza's globally distributed development team. His dedication to open source principles and clean code practices has made him an invaluable contributor to numerous projects throughout his career.
 
-Irwan's approach to development emphasizes maintainability, scalability, and collaboration. He believes that well-designed software can have a lasting positive impact, and he brings this philosophy to every project he leads.
+Irwan's approach to development emphasises maintainability, scalability, and collaboration. He believes that well-designed software can have a lasting positive impact, and he brings this philosophy to every project he leads.
