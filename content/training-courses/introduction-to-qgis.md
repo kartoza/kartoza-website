@@ -123,8 +123,8 @@ No prior GIS experience is required, though basic computer literacy is expected.
   </div>
 
   <div class="material-card">
-    <h4>Certificate of completion</h4>
-    <p>Issued through the Kartoza GIS Academy</p>
+    <h4>QGIS Certificate</h4>
+    <p>Accredited QGIS certificate will be issued upon successful completion of all required course work.</p>
   </div>
 
   <div class="material-card">
