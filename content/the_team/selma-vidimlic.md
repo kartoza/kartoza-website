@@ -32,4 +32,4 @@ Selma specialises in creating documentation that helps users at all levels under
 
 Beyond her professional work, Selma is passionate about protecting nature. This environmental consciousness informs her work, as she understands that GIS tools play a crucial role in conservation efforts and environmental monitoring worldwide.
 
-Selmas's work is funded by the QGIS project and community and she works full time on QGIS project related activities, especially the QGIS documentation effort. Her contribution to QGIS documentation helps users around the world access and benefit from this powerful open source tool. By lowering the barrier to entry through clear documentation, Selma is helping expand the reach and impact of open source GIS.
+Selma's work is funded by the QGIS project and community and she works full time on QGIS project related activities, especially the QGIS documentation effort. Her contribution to QGIS documentation helps users around the world access and benefit from this powerful open source tool. By lowering the barrier to entry through clear documentation, Selma is helping expand the reach and impact of open source GIS.

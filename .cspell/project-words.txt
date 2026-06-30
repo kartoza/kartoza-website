@@ -59,26 +59,59 @@ xarray
 Cyano
 
 # Team member names (add as needed)
+Andriarimalala
+Azzahra
+Bhaskar
 Ciputra
+Fawzy
 Graser
+Hefni
 Hing
+Husic
+Irwan
+Jaarsveld
+Juanique
 Kamstra
+Lene
+Lova
 Maltitz
+Merwe
+Mokubedi
+Moloko
 Muzakki
 Mwakisambwe
 Neema
+Nyaga
 Nyall
 Nyakudya
 Osundwa
+Pandranki
+Prabhu
 Samweli
 Seabilwe
+Strijdom
 Sutton
 Szczepanek
 Ternent
+Tharanath
 Tilodi
+Vidimlic
+Voogt
 Xakayi
 Zinzi
 Zulfikar
+
+# Team member GitHub usernames
+dimasciput
+hefniraera
+linstrijdom
+Loko
+meomancer
+osundwajeff
+vikineema
+voogt
+Lenev
+Xpirix
 
 # Web/tech terms
 signup
@@ -110,6 +143,7 @@ RDBMS
 USAID
 IGRAC
 GGMN
+UNISA
 
 # Portfolio project acronyms and terms
 AFIS

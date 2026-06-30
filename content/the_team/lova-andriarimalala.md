@@ -33,5 +33,5 @@ As a QGIS Full Stack Developer, Lova works on both desktop and web-based GIS sol
 Lova's passion for geospatial technology extends beyond his work. He believes that maps have the power to tell stories, reveal patterns, and drive positive change - and he dedicates his skills to making that happen.
 
 Lova's work is fully funded by the QGIS.org project and as such he is a
-dedicated resource, committed to improving and maintining the QGIS.org
+dedicated resource, committed to improving and maintaining the QGIS.org
 infrastructure.

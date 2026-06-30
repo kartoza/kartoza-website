@@ -29,7 +29,7 @@ reviewedDate: 2026-06-19
 
 Seabilwe leads Kartoza's training efforts, bringing academic excellence and a passion for education to the role. With a Master's degree in GIS and Remote Sensing from the University of the Witwatersrand, she has deep expertise in both the technical and pedagogical aspects of geospatial education.
 
-Her educational journey - from BSc in Geological Science through Honours in Geography to her Master's degree - has given her a comprehensive understanding of Earth sciences and spatial analysis. This background enables her to teach GIS concepts with the depth and rigor they deserve.
+Her educational journey - from BSc in Geological Science through Honours in Geography to her Master's degree - has given her a comprehensive understanding of Earth sciences and spatial analysis. This background enables her to teach GIS concepts with the depth and rigour they deserve.
 
 Seabilwe is particularly passionate about the application of open source software and open data for positive impact. She believes that accessible geospatial tools can transform how people understand and interact with their environment.
 
