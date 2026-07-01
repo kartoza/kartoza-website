@@ -14,23 +14,24 @@ Usage:
 
 import json
 import os
-import re
 import sys
 from datetime import datetime
 from pathlib import Path
 
-import warnings
-
 import requests
 import yaml
-from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
 from dateutil import parser as date_parser
 from tabulate import tabulate
-import html2text
 
-from fetch_erpnext_utilities import ERPNextClient
-
-warnings.filterwarnings('ignore', category=XMLParsedAsHTMLWarning)
+from fetch_erpnext_client import ERPNextClient
+from fetch_erpnext_utilities import (
+    check_fidelity,
+    find_local_file,
+    html_to_markdown,
+    read_local_file,
+    slugify,
+    update_review_fields,
+)
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
@@ -38,155 +39,6 @@ ERPNEXT = ERPNextClient()
 
 PORTFOLIO_DOCTYPE = os.environ.get('ERPNEXT_PORTFOLIO_DOCTYPE', 'Portfolio')
 CONTENT_DIR = PROJECT_ROOT / 'content' / 'portfolio'
-
-
-def slugify(text: str) -> str:
-    """Convert text to a URL-friendly slug.
-
-    :param text: Text to slugify.
-    :type text: str
-
-    :returns: Slugified string.
-    :rtype: str
-    """
-    text = text.lower()
-    text = re.sub(r'[^a-z0-9]+', '-', text)
-    text = re.sub(r'-+', '-', text)
-    return text.strip('-')
-
-
-def normalize_for_comparison(content: str) -> str:
-    """Normalize content for fidelity comparison, focusing on text only.
-
-    :param content: Raw content string (may contain HTML or shortcodes).
-    :type content: str
-
-    :returns: Normalized, lowercase, whitespace-collapsed plain text.
-    :rtype: str
-    """
-    if not content:
-        return ''
-
-    content = re.sub(r'\{\{[<>%].*?[>%]\}\}', '', content)
-
-    soup = BeautifulSoup(content, 'html.parser')
-    text = soup.get_text(separator=' ')
-
-    text = re.sub(r'\s+', ' ', text)
-    return text.strip().lower()
-
-
-def check_fidelity(local_content: str, erpnext_content: str) -> bool:
-    """Check if local and ERPNext content match, ignoring formatting.
-
-    :param local_content: Local Hugo markdown content.
-    :type local_content: str
-
-    :param erpnext_content: ERPNext content to compare against.
-    :type erpnext_content: str
-
-    :returns: True if text content matches.
-    :rtype: bool
-    """
-    return (
-        normalize_for_comparison(local_content)
-        == normalize_for_comparison(erpnext_content)
-    )
-
-
-def html_to_markdown(html_content: str) -> str:
-    """Convert HTML content to clean markdown.
-
-    :param html_content: HTML string to convert.
-    :type html_content: str
-
-    :returns: Cleaned markdown string.
-    :rtype: str
-    """
-    if not html_content:
-        return ''
-
-    converter = html2text.HTML2Text()
-    converter.body_width = 0
-    converter.unicode_snob = True
-    converter.protect_links = True
-    converter.wrap_links = False
-    converter.mark_code = True
-
-    markdown = converter.handle(html_content)
-    markdown = re.sub(r'\n{3,}', '\n\n', markdown)
-    return markdown.strip()
-
-
-def read_local_file(filepath: Path) -> tuple[dict, str] | None:
-    """Read a local Hugo file and extract front matter and content.
-
-    :param filepath: Path to the Hugo markdown file.
-    :type filepath: Path
-
-    :returns: Tuple of (front_matter_dict, content_str) or None.
-    :rtype: (dict, str) or None
-    """
-    if not filepath.exists():
-        return None
-
-    try:
-        text = filepath.read_text()
-    except (IOError, OSError):
-        return None
-
-    if not text.startswith('---'):
-        return {}, text
-
-    end_match = re.search(r'\n---\n', text[3:])
-    if not end_match:
-        return {}, text
-
-    end_pos = end_match.start() + 3
-    front_matter_raw = text[4:end_pos]
-    content = text[end_pos + 5:]
-
-    try:
-        front_matter = yaml.safe_load(front_matter_raw) or {}
-    except yaml.YAMLError:
-        front_matter = {}
-
-    return front_matter, content
-
-
-def find_local_file(
-    content_dir: Path, erpnext_id: str, title: str
-) -> Path | None:
-    """Find a local Hugo file matching the ERPNext portfolio item.
-
-    Matches by erpnext_id in front matter first, then by slugified title.
-
-    :param content_dir: Directory containing Hugo markdown files.
-    :type content_dir: Path
-
-    :param erpnext_id: ERPNext document name to match.
-    :type erpnext_id: str
-
-    :param title: Portfolio item title for slug-based fallback.
-    :type title: str
-
-    :returns: Path to matching file or None.
-    :rtype: Path or None
-    """
-    for filepath in content_dir.glob('*.md'):
-        if filepath.name in ('_index.md', 'index.md'):
-            continue
-        result = read_local_file(filepath)
-        if result:
-            front_matter, _ = result
-            if front_matter.get('erpnext_id') == erpnext_id:
-                return filepath
-
-    expected_path = content_dir / f'{slugify(title)}.md'
-    if expected_path.exists():
-        return expected_path
-
-    return None
 
 
 def fetch_portfolio_list() -> list[dict]:
@@ -393,34 +245,6 @@ def portfolio_to_hugo_content(item: dict) -> str:
     return content.strip()
 
 
-def _update_review_fields(
-    filepath: Path, front_matter: dict, content: str
-) -> None:
-    """Update review fields in an existing Hugo file.
-
-    :param filepath: Path to the file to update.
-    :type filepath: Path
-
-    :param front_matter: Existing front matter dict.
-    :type front_matter: dict
-
-    :param content: Existing body content string.
-    :type content: str
-    """
-    front_matter['reviewedBy'] = 'Automated Check'
-    front_matter['reviewedDate'] = datetime.now().strftime('%Y-%m-%d')
-
-    file_content = '---\n'
-    file_content += yaml.dump(
-        front_matter, default_flow_style=False, allow_unicode=True
-    )
-    file_content += '---\n\n'
-    file_content += content.strip()
-    file_content += '\n'
-
-    filepath.write_text(file_content)
-
-
 def sync_portfolio_item(
     item: dict,
     content_dir: Path,
@@ -463,7 +287,7 @@ def sync_portfolio_item(
             local_frontmatter, local_content = result
             if check_fidelity(local_content, erpnext_content):
                 if not local_frontmatter.get('reviewedBy') and not dry_run:
-                    _update_review_fields(
+                    update_review_fields(
                         local_file, local_frontmatter, local_content
                     )
                 return {

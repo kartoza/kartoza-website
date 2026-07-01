@@ -1,139 +1,140 @@
 #!/usr/bin/env python3
-"""Shared ERPNext HTTP client utilities for the sync scripts in this directory.
+"""Shared Hugo content-sync helpers for the ERPNext sync scripts in this directory.
 
-Environment variables:
-    ERPNEXT_URL: ERPNext instance URL (default: https://erp.kartoza.com)
-    ERPNEXT_API_KEY: API key for authentication
-    ERPNEXT_API_SECRET: API secret for authentication
+Covers slugifying titles, fidelity-checking local content against ERPNext,
+reading/matching local Hugo files, stamping review fields, and converting
+ERPNext HTML to Hugo markdown.
 """
 
-import os
+import re
+import warnings
+from datetime import datetime
 from pathlib import Path
 
-import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
+import html2text
+import yaml
+from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+# Suppress XML parsing warning when using html.parser on content that looks like XML
+warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
 
 
-def _load_env_file(path: Path) -> bool:
-    """Load KEY=VALUE entries from a dotenv-like file into os.environ."""
-    if not path.exists():
-        return False
+def slugify(text: str) -> str:
+    """Convert text to a URL-friendly slug."""
+    text = text.lower()
+    text = re.sub(r'[^a-z0-9]+', '-', text)
+    text = re.sub(r'-+', '-', text)
+    return text.strip('-')
+
+
+def normalize_for_comparison(content: str) -> str:
+    """Normalize content for fidelity comparison, focusing on text only."""
+    if not content:
+        return ''
+
+    # Remove Hugo shortcodes like {{< block >}} or {{< /block >}}
+    content = re.sub(r'\{\{[<>%].*?[>%]\}\}', '', content)
+
+    # Strip HTML tags but keep text content
+    soup = BeautifulSoup(content, 'html.parser')
+    text = soup.get_text(separator=' ')
+
+    # Collapse whitespace (multiple spaces/newlines -> single space)
+    text = re.sub(r'\s+', ' ', text)
+
+    return text.strip().lower()
+
+
+def check_fidelity(local_content: str, erpnext_content: str) -> bool:
+    """Check if local and ERPNext content match, ignoring formatting."""
+    return normalize_for_comparison(local_content) == normalize_for_comparison(erpnext_content)
+
+
+def read_local_file(filepath: Path) -> tuple[dict, str] | None:
+    """Read a local Hugo file and extract front matter and content.
+
+    Returns a tuple of (front_matter_dict, content_str), or None if the
+    file doesn't exist.
+    """
+    if not filepath.exists():
+        return None
 
     try:
-        lines = path.read_text().splitlines()
+        text = filepath.read_text()
     except (IOError, OSError):
-        return False
+        return None
 
-    for raw_line in lines:
-        line = raw_line.strip()
-        if not line or line.startswith('#') or '=' not in line:
-            continue
+    if not text.startswith('---'):
+        return {}, text
 
-        key, value = line.split('=', 1)
-        key = key.strip()
-        value = value.strip()
+    end_match = re.search(r'\n---\n', text[3:])
+    if not end_match:
+        return {}, text
 
-        if key.startswith('export '):
-            key = key[len('export '):].strip()
+    end_pos = end_match.start() + 3
+    front_matter_raw = text[4:end_pos]
+    content = text[end_pos + 5:]
 
-        if ((value.startswith('"') and value.endswith('"'))
-                or (value.startswith("'") and value.endswith("'"))):
-            value = value[1:-1]
+    try:
+        front_matter = yaml.safe_load(front_matter_raw) or {}
+    except yaml.YAMLError:
+        front_matter = {}
 
-        # Keep shell-exported values authoritative.
-        if key and key not in os.environ:
-            os.environ[key] = value
-
-    return True
+    return front_matter, content
 
 
-def _load_default_env_files() -> list[Path]:
-    """Load common environment files used by this repository."""
-    loaded_files: list[Path] = []
-    candidates = [
-        PROJECT_ROOT / '.env',
-    ]
-    for path in candidates:
-        if _load_env_file(path):
-            loaded_files.append(path)
-        else:
-            print(f"Error: env file not found: {path}")
-    return loaded_files
+def find_local_file(content_dir: Path, erpnext_id: str, title: str) -> Path | None:
+    """Find a local Hugo file matching an ERPNext document.
 
-
-def _normalize_erpnext_base_url(url: str) -> str:
-    """Normalize ERPNext URL to a base URL without trailing /api."""
-    normalized = url.strip().rstrip('/')
-    if normalized.endswith('/api'):
-        return normalized[:-4]
-    return normalized
-
-
-class ERPNextClient:
-    """Small HTTP client wrapping a retrying requests.Session for ERPNext.
-
-    Resolves the ERPNext base URL and API credentials from environment
-    variables (loading `.env` first), and exposes `get`/`post` helpers
-    that build full URLs and apply auth automatically.
+    Matches by:
+    1. erpnext_id in front matter (primary)
+    2. Slugified title matching filename (fallback)
     """
+    for filepath in content_dir.glob('*.md'):
+        if filepath.name in ('_index.md', 'index.md'):
+            continue
+        result = read_local_file(filepath)
+        if result:
+            front_matter, _ = result
+            if front_matter.get('erpnext_id') == erpnext_id:
+                return filepath
 
-    def __init__(self, base_url: str | None = None, api_key: str | None = None,
-                 api_secret: str | None = None):
-        self.loaded_env_files = _load_default_env_files()
+    expected_path = content_dir / f'{slugify(title)}.md'
+    if expected_path.exists():
+        return expected_path
 
-        raw_url = base_url or os.environ.get('ERPNEXT_URL', 'https://erp.kartoza.com')
-        self.base_url = _normalize_erpnext_base_url(raw_url)
+    return None
 
-        self.api_key = api_key or os.environ.get('ERPNEXT_API_KEY') or ''
-        self.api_secret = api_secret or os.environ.get('ERPNEXT_API_SECRET') or ''
 
-        self.session = self._build_session()
+def update_review_fields(filepath: Path, front_matter: dict, content: str) -> None:
+    """Stamp reviewedBy/reviewedDate and rewrite an existing Hugo file."""
+    front_matter['reviewedBy'] = 'Automated Check'
+    front_matter['reviewedDate'] = datetime.now().strftime('%Y-%m-%d')
 
-    def _build_session(self) -> requests.Session:
-        session = requests.Session()
+    file_content = '---\n'
+    file_content += yaml.dump(front_matter, default_flow_style=False, allow_unicode=True)
+    file_content += '---\n\n'
+    file_content += content.strip()
+    file_content += '\n'
 
-        retry = Retry(
-            total=5,
-            connect=5,
-            read=5,
-            status=5,
-            backoff_factor=1,
-            status_forcelist=(429, 500, 502, 503, 504),
-            allowed_methods=frozenset(['GET']),
-            raise_on_status=False,
-        )
-        adapter = HTTPAdapter(max_retries=retry)
-        session.mount('https://', adapter)
-        session.mount('http://', adapter)
+    filepath.write_text(file_content)
 
-        session.headers.update({
-            'Accept': 'application/json',
-            'User-Agent': 'kartoza-website-sync/1.0',
-        })
 
-        if self.api_key and self.api_secret:
-            session.headers.update({'Authorization': f'token {self.api_key}:{self.api_secret}'})
+def html_to_markdown(html_content: str) -> str:
+    """Convert HTML content to clean markdown."""
+    if not html_content:
+        return ''
 
-        return session
+    h = html2text.HTML2Text()
+    h.body_width = 0  # No wrapping
+    h.unicode_snob = True
+    h.protect_links = True
+    h.wrap_links = False
+    h.mark_code = True
 
-    @property
-    def has_credentials(self) -> bool:
-        return bool(self.api_key and self.api_secret)
+    md = h.handle(html_content)
 
-    def resolve_url(self, path: str) -> str:
-        """Return the absolute URL for a path (absolute URLs pass through unchanged)."""
-        if path.startswith('http://') or path.startswith('https://'):
-            return path
-        return f"{self.base_url}{path if path.startswith('/') else '/' + path}"
+    # Clean up excessive blank lines
+    md = re.sub(r'\n{3,}', '\n\n', md)
 
-    def get(self, path: str, **kwargs) -> requests.Response:
-        kwargs.setdefault('timeout', 30)
-        url = self.resolve_url(path)
-        return self.session.get(url, **kwargs)
-
-    def post(self, path: str, **kwargs) -> requests.Response:
-        kwargs.setdefault('timeout', 30)
-        return self.session.post(self.resolve_url(path), **kwargs)
+    return md.strip()

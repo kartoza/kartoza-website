@@ -34,7 +34,14 @@ from tabulate import tabulate
 import json
 import html2text
 
-from fetch_erpnext_utilities import ERPNextClient
+from fetch_erpnext_client import ERPNextClient
+from fetch_erpnext_utilities import (
+    check_fidelity,
+    find_local_file,
+    read_local_file,
+    slugify,
+    update_review_fields,
+)
 
 # Suppress XML parsing warning when using html.parser on content that looks like XML
 warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
@@ -145,113 +152,6 @@ def process_thumbnail(thumbnail_url: str, static_dir: Path, verbose: bool = Fals
     return local_path if local_path else thumbnail_url
 
 
-def slugify(text: str) -> str:
-    """Convert text to URL-friendly slug."""
-    text = text.lower()
-    text = re.sub(r'[^a-z0-9]+', '-', text)
-    text = re.sub(r'-+', '-', text)
-    return text.strip('-')
-
-
-def normalize_for_comparison(content: str) -> str:
-    """
-    Normalize content for fidelity comparison.
-    Focuses on TEXT content, ignores formatting/layout.
-    """
-    if not content:
-        return ''
-
-    # Remove Hugo shortcodes like {{< block >}} or {{< /block >}}
-    content = re.sub(r'\{\{[<>%].*?[>%]\}\}', '', content)
-
-    # Strip HTML tags but keep text content
-    soup = BeautifulSoup(content, 'html.parser')
-    text = soup.get_text(separator=' ')
-
-    # Collapse whitespace (multiple spaces/newlines -> single space)
-    text = re.sub(r'\s+', ' ', text)
-
-    # Strip leading/trailing whitespace and lowercase
-    return text.strip().lower()
-
-
-def check_fidelity(local_content: str, erpnext_content: str) -> bool:
-    """
-    Check if local and ERPNext content match (fidelity check).
-
-    Returns True if text content matches (ignoring formatting).
-    """
-    local_norm = normalize_for_comparison(local_content)
-    erpnext_norm = normalize_for_comparison(erpnext_content)
-    return local_norm == erpnext_norm
-
-
-def read_local_blog(filepath: Path) -> tuple[dict, str] | None:
-    """
-    Read a local Hugo blog file and extract front matter and content.
-
-    Returns:
-        Tuple of (front_matter_dict, content_str) or None if file doesn't exist
-    """
-    if not filepath.exists():
-        return None
-
-    try:
-        text = filepath.read_text()
-    except (IOError, OSError):
-        return None
-
-    # Check for front matter delimiter
-    if not text.startswith('---'):
-        return {}, text
-
-    # Find end of front matter
-    end_match = re.search(r'\n---\n', text[3:])
-    if not end_match:
-        return {}, text
-
-    end_pos = end_match.start() + 3
-    front_matter_raw = text[4:end_pos]
-    content = text[end_pos + 5:]
-
-    try:
-        front_matter = yaml.safe_load(front_matter_raw) or {}
-    except yaml.YAMLError:
-        front_matter = {}
-
-    return front_matter, content
-
-
-def find_local_file(content_dir: Path, erpnext_id: str, title: str) -> Path | None:
-    """
-    Find a local Hugo file matching the ERPNext article.
-
-    Matches by:
-    1. erpnext_id in front matter (primary)
-    2. Slugified title matching filename (fallback)
-
-    Returns:
-        Path to matching file or None
-    """
-    # First, try to find by erpnext_id in front matter
-    for filepath in content_dir.glob('*.md'):
-        if filepath.name == '_index.md':
-            continue
-        result = read_local_blog(filepath)
-        if result:
-            front_matter, _ = result
-            if front_matter.get('erpnext_id') == erpnext_id:
-                return filepath
-
-    # Fallback: match by slugified title
-    expected_filename = f"{slugify(title)}.md"
-    expected_path = content_dir / expected_filename
-    if expected_path.exists():
-        return expected_path
-
-    return None
-
-
 def sync_blog(blog: dict, content_dir: Path, static_dir: Path, dry_run: bool = False,
                force: bool = False, skip_images: bool = False, verbose: bool = False) -> dict:
     """
@@ -280,7 +180,7 @@ def sync_blog(blog: dict, content_dir: Path, static_dir: Path, dry_run: bool = F
 
     if local_file and not force:
         # File exists - check fidelity (skip if force mode)
-        result = read_local_blog(local_file)
+        result = read_local_file(local_file)
         if result:
             local_frontmatter, local_content = result
             if check_fidelity(local_content, erpnext_content):
@@ -288,7 +188,7 @@ def sync_blog(blog: dict, content_dir: Path, static_dir: Path, dry_run: bool = F
                 # Update review fields if not already set
                 if not local_frontmatter.get('reviewedBy'):
                     if not dry_run:
-                        _update_review_fields(local_file, local_frontmatter, local_content)
+                        update_review_fields(local_file, local_frontmatter, local_content)
                 return {'status': 'unchanged', 'fidelity': 'passed', 'file': local_file.name}
 
         # Content differs - overwrite with ERPNext
@@ -328,20 +228,6 @@ def sync_blog(blog: dict, content_dir: Path, static_dir: Path, dry_run: bool = F
         filepath.write_text(file_content)
 
     return {'status': status, 'fidelity': 'auto-reviewed', 'file': filepath.name}
-
-
-def _update_review_fields(filepath: Path, front_matter: dict, content: str) -> None:
-    """Update review fields in an existing file."""
-    front_matter['reviewedBy'] = 'Automated Check'
-    front_matter['reviewedDate'] = datetime.now().strftime('%Y-%m-%d')
-
-    file_content = "---\n"
-    file_content += yaml.dump(front_matter, default_flow_style=False, allow_unicode=True)
-    file_content += "---\n\n"
-    file_content += content.strip()
-    file_content += "\n"
-
-    filepath.write_text(file_content)
 
 
 def fetch_blog_list() -> list[dict]:
