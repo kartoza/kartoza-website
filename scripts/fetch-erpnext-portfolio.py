@@ -5,8 +5,8 @@ Only fetches new articles that don't exist locally to preserve local edits.
 
 Environment variables:
     ERPNEXT_URL: ERPNext instance URL (default: https://erp.kartoza.com)
-    ERPNEXT_API_KEY / GATEWAY_ERPNEXT_API_KEY: API key for authentication
-    ERPNEXT_API_SECRET / GATEWAY_ERPNEXT_API_SECRET: API secret for authentication
+    ERPNEXT_API_KEY: API key for authentication
+    ERPNEXT_API_SECRET: API secret for authentication
 
 Usage:
     ./fetch-erpnext-portfolio.py [--dry-run] [--force] [--list]
@@ -22,159 +22,22 @@ from pathlib import Path
 import warnings
 
 import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
 import yaml
 from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
 from dateutil import parser as date_parser
 from tabulate import tabulate
 import html2text
 
+from fetch_erpnext_utilities import ERPNextClient
+
 warnings.filterwarnings('ignore', category=XMLParsedAsHTMLWarning)
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-
-def _load_env_file(path: Path) -> bool:
-    """Load KEY=VALUE entries from a dotenv-like file into os.environ.
-
-    :param path: Path to the env file to load.
-    :type path: Path
-
-    :returns: True if the file was found and read, False otherwise.
-    :rtype: bool
-    """
-    if not path.exists():
-        return False
-
-    try:
-        lines = path.read_text().splitlines()
-    except (IOError, OSError):
-        return False
-
-    for raw_line in lines:
-        line = raw_line.strip()
-        if not line or line.startswith('#') or '=' not in line:
-            continue
-
-        key, value = line.split('=', 1)
-        key = key.strip()
-        value = value.strip()
-
-        if key.startswith('export '):
-            key = key[len('export '):].strip()
-
-        if (
-            (value.startswith('"') and value.endswith('"'))
-            or (value.startswith("'") and value.endswith("'"))
-        ):
-            value = value[1:-1]
-
-        if key and key not in os.environ:
-            os.environ[key] = value
-
-    return True
-
-
-def _load_default_env_files() -> list[Path]:
-    """Load common environment files used by this repository.
-
-    :returns: List of env file paths that were successfully loaded.
-    :rtype: list[Path]
-    """
-    loaded_files: list[Path] = []
-    candidates = [
-        PROJECT_ROOT / '.env',
-        PROJECT_ROOT / 'deployment' / '.env',
-    ]
-    for path in candidates:
-        if _load_env_file(path):
-            loaded_files.append(path)
-    return loaded_files
-
-
-LOADED_ENV_FILES = _load_default_env_files()
-
-
-def _normalize_erpnext_base_url(url: str) -> str:
-    """Normalize ERPNext URL to a base URL without trailing /api.
-
-    :param url: Raw URL string to normalize.
-    :type url: str
-
-    :returns: Normalized base URL.
-    :rtype: str
-    """
-    normalized = url.strip().rstrip('/')
-    if normalized.endswith('/api'):
-        return normalized[:-4]
-    return normalized
-
-
-def _get_erpnext_config() -> tuple[str, str, str]:
-    """Resolve ERPNext URL and credentials from environment.
-
-    Supports legacy and gateway-prefixed variable names.
-
-    :returns: Tuple of (base_url, api_key, api_secret).
-    :rtype: (str, str, str)
-    """
-    raw_url = os.environ.get('ERPNEXT_URL', 'https://erp.kartoza.com')
-    api_key = (
-        os.environ.get('ERPNEXT_API_KEY')
-        or os.environ.get('GATEWAY_ERPNEXT_API_KEY')
-        or ''
-    )
-    api_secret = (
-        os.environ.get('ERPNEXT_API_SECRET')
-        or os.environ.get('GATEWAY_ERPNEXT_API_SECRET')
-        or ''
-    )
-    return _normalize_erpnext_base_url(raw_url), api_key, api_secret
-
-
-ERPNEXT_URL, API_KEY, API_SECRET = _get_erpnext_config()
+ERPNEXT = ERPNextClient()
 
 PORTFOLIO_DOCTYPE = os.environ.get('ERPNEXT_PORTFOLIO_DOCTYPE', 'Portfolio')
 CONTENT_DIR = PROJECT_ROOT / 'content' / 'portfolio'
-
-
-def _build_http_session() -> requests.Session:
-    """Create an HTTP session with retries for transient network failures.
-
-    :returns: Configured requests Session.
-    :rtype: requests.Session
-    """
-    session = requests.Session()
-
-    retry = Retry(
-        total=5,
-        connect=5,
-        read=5,
-        status=5,
-        backoff_factor=1,
-        status_forcelist=(429, 500, 502, 503, 504),
-        allowed_methods=frozenset(['GET']),
-        raise_on_status=False,
-    )
-    adapter = HTTPAdapter(max_retries=retry)
-    session.mount('https://', adapter)
-    session.mount('http://', adapter)
-
-    session.headers.update({
-        'Accept': 'application/json',
-        'User-Agent': 'kartoza-website-sync/1.0',
-    })
-
-    if API_KEY and API_SECRET:
-        session.headers.update(
-            {'Authorization': f'token {API_KEY}:{API_SECRET}'}
-        )
-
-    return session
-
-
-HTTP_SESSION = _build_http_session()
 
 
 def slugify(text: str) -> str:
@@ -337,7 +200,7 @@ def fetch_portfolio_list() -> list[dict]:
     ]
     filters = [['publish', '=', 1]]
 
-    url = f'{ERPNEXT_URL}/api/resource/{PORTFOLIO_DOCTYPE}'
+    url = f'/api/resource/{PORTFOLIO_DOCTYPE}'
     params = {
         'fields': json.dumps(fields),
         'filters': json.dumps(filters),
@@ -345,7 +208,7 @@ def fetch_portfolio_list() -> list[dict]:
     }
 
     try:
-        response = HTTP_SESSION.get(url, params=params, timeout=30)
+        response = ERPNEXT.get(url, params=params)
         response.raise_for_status()
         data = response.json()
         return data.get('data', [])
@@ -357,8 +220,7 @@ def fetch_portfolio_list() -> list[dict]:
             print(
                 f'Authentication/permission error fetching portfolio list '
                 f'(HTTP {status_code}). '
-                'Set ERPNEXT_API_KEY/ERPNEXT_API_SECRET '
-                '(or GATEWAY_* variants).',
+                'Set ERPNEXT_API_KEY/ERPNEXT_API_SECRET.',
                 file=sys.stderr,
             )
             return []
@@ -381,10 +243,10 @@ def fetch_portfolio_detail(name: str) -> dict | None:
     :returns: Portfolio item data dict or None on failure.
     :rtype: dict or None
     """
-    url = f'{ERPNEXT_URL}/api/resource/{PORTFOLIO_DOCTYPE}/{name}'
+    url = f'/api/resource/{PORTFOLIO_DOCTYPE}/{name}'
 
     try:
-        response = HTTP_SESSION.get(url, timeout=30)
+        response = ERPNEXT.get(url)
         response.raise_for_status()
         data = response.json()
         return data.get('data', {})
@@ -413,7 +275,7 @@ def _resolve_thumbnail(item: dict) -> str:
         website_image = img.get('website_image', '').strip()
         if website_image:
             if website_image.startswith('/files/'):
-                return f'{ERPNEXT_URL}{website_image}'
+                return ERPNEXT.resolve_url(website_image)
             return website_image
     return '/img/portfolio/placeholder.png'
 
@@ -666,7 +528,7 @@ def print_results_table(results: list[dict], dry_run: bool = False) -> None:
     print(f'\n{"=" * 80}', file=sys.stderr)
     print(f'  {header}', file=sys.stderr)
     print(
-        f'  Source: {ERPNEXT_URL} | Date: {datetime.now().strftime("%Y-%m-%d")}',
+        f'  Source: {ERPNEXT.resolve_url("/")} | Date: {datetime.now().strftime("%Y-%m-%d")}',
         file=sys.stderr,
     )
     print(f'{"=" * 80}', file=sys.stderr)
@@ -743,15 +605,15 @@ def main() -> int:
     if args.doctype != PORTFOLIO_DOCTYPE:
         globals()['PORTFOLIO_DOCTYPE'] = args.doctype
 
-    if not API_KEY or not API_SECRET:
+    if not ERPNEXT.has_credentials:
         print(
             'Warning: API credentials not set; attempting unauthenticated access. '
             'Private ERPNext endpoints may return HTTP 401/403.',
             file=sys.stderr,
         )
         print(
-            'Looked in current shell plus .env files at '
-            f'{PROJECT_ROOT / ".env"} and {PROJECT_ROOT / "deployment" / ".env"}.',
+            'Looked in current shell plus .env file at '
+            f'{PROJECT_ROOT / ".env"}.',
             file=sys.stderr,
         )
         print(file=sys.stderr)
@@ -763,7 +625,7 @@ def main() -> int:
         )
         return 1
 
-    print(f'Fetching portfolio list from {ERPNEXT_URL}...', file=sys.stderr)
+    print(f'Fetching portfolio list from {ERPNEXT.resolve_url("/")}...', file=sys.stderr)
     print(f'Using doctype: {PORTFOLIO_DOCTYPE}', file=sys.stderr)
 
     items = fetch_portfolio_list()

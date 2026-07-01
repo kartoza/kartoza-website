@@ -123,16 +123,17 @@ class ERPNextClient:
     def has_credentials(self) -> bool:
         return bool(self.api_key and self.api_secret)
 
-    def _resolve_url(self, path: str) -> str:
+    def resolve_url(self, path: str) -> str:
+        """Return the absolute URL for a path (absolute URLs pass through unchanged)."""
         if path.startswith('http://') or path.startswith('https://'):
             return path
         return f"{self.base_url}{path if path.startswith('/') else '/' + path}"
 
     def get(self, path: str, **kwargs) -> requests.Response:
         kwargs.setdefault('timeout', 30)
-        url = self._resolve_url(path)
+        url = self.resolve_url(path)
         return self.session.get(url, **kwargs)
 
     def post(self, path: str, **kwargs) -> requests.Response:
         kwargs.setdefault('timeout', 30)
-        return self.session.post(self._resolve_url(path), **kwargs)
+        return self.session.post(self.resolve_url(path), **kwargs)
