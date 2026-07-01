@@ -1,0 +1,522 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+
+<style>
+.cart-hero {
+    background: linear-gradient(135deg, var(--dark2, #1a2a3a) 0%, var(--primary2, #3488b8) 100%);
+    padding: 5rem 1.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+}
+.cart-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(59,157,217,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(232,163,49,0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+.cart-hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: #fff;
+}
+.cart-hero-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
+.cart-hero-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+.cart-section {
+    padding: 3rem 1.5rem 5rem;
+    background: #f7f9fb;
+    min-height: 60vh;
+}
+
+.cart-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 2rem;
+    align-items: start;
+}
+@media (max-width: 900px) {
+    .cart-grid { grid-template-columns: 1fr; }
+}
+
+.cart-panel {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    overflow: hidden;
+}
+
+.cart-panel-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a2a3a;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #f6f6f6;
+    transition: background 0.15s;
+}
+.cart-item:last-child { border-bottom: none; }
+.cart-item:hover { background: #fafafa; }
+
+.cart-item-info { flex: 1; min-width: 0; }
+.cart-item-name {
+    font-weight: 600;
+    font-size: 0.975rem;
+    color: #1a2a3a;
+    margin-bottom: 0.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.cart-item-code {
+    font-size: 0.78rem;
+    color: #9aaab8;
+    font-family: monospace;
+}
+.cart-item-price {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #3B9DD9;
+    white-space: nowrap;
+    margin-right: 0.5rem;
+}
+.cart-item-remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #c8c8c8;
+    padding: 0.3rem 0.4rem;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+    line-height: 1;
+    flex-shrink: 0;
+}
+.cart-item-remove:hover {
+    color: #E55B3C;
+    background: #fff0ed;
+}
+.cart-item-remove.is-loading {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.cart-item-unit-price {
+    font-size: 0.78rem;
+    color: #9aaab8;
+    white-space: nowrap;
+}
+.cart-qty-stepper {
+    display: flex;
+    align-items: center;
+    border: 1.5px solid #d4dbe2;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f7f9fb;
+    flex-shrink: 0;
+}
+.cart-qty-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #3B9DD9;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.2rem 0.55rem;
+    line-height: 1;
+    transition: background 0.15s;
+}
+.cart-qty-btn:hover { background: #e8f4fb; }
+.cart-qty-btn:disabled { opacity: 0.4; cursor: default; }
+.cart-qty-display {
+    min-width: 1.75rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: #1a2a3a;
+    padding: 0 0.1rem;
+}
+
+.cart-summary-panel {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    padding: 1.5rem;
+    position: sticky;
+    top: 5rem;
+}
+.cart-summary-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a2a3a;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+.cart-summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.65rem;
+    font-size: 0.925rem;
+    color: #4d6370;
+}
+.cart-summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid #f0f0f0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a2a3a;
+}
+.cart-checkout-btn {
+    width: 100%;
+    margin-top: 1.25rem;
+    padding: 0.875rem !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    justify-content: center;
+}
+.cart-secure-note {
+    font-size: 0.75rem;
+    color: #b0bec8;
+    text-align: center;
+    margin-top: 0.75rem;
+}
+
+.cart-empty-state {
+    text-align: center;
+    padding: 5rem 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.cart-empty-icon {
+    font-size: 3.5rem;
+    color: #d4dbe2;
+    margin-bottom: 1.25rem;
+}
+.cart-empty-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #1a2a3a;
+    margin-bottom: 0.5rem;
+}
+.cart-empty-text {
+    color: #4d6370;
+    margin-bottom: 1.75rem;
+}
+
+.cart-auth-state {
+    text-align: center;
+    padding: 5rem 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.cart-auth-icon {
+    font-size: 3.5rem;
+    color: #d4dbe2;
+    margin-bottom: 1.25rem;
+}
+
+.cart-loading-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 5rem 2rem;
+    color: #6b7b8d;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+</style>
+
+<section class="cart-hero">
+    <div class="container">
+        <div class="cart-hero-content">
+            <h1 class="cart-hero-title">
+                <span class="icon" style="margin-right: 0.4rem; vertical-align: middle;">
+                    <i class="fas fa-shopping-bag"></i>
+                </span>
+                Your Cart
+            </h1>
+            <p class="cart-hero-subtitle">Review your selected courses before checkout</p>
+        </div>
+    </div>
+</section>
+
+<section class="cart-section">
+    <div class="container">
+
+        <!-- Not logged in -->
+        <div id="cart-state-auth" class="cart-auth-state" style="display:none">
+            <div class="cart-auth-icon"><i class="fas fa-lock"></i></div>
+            <h2 style="font-size: 1.5rem; font-weight: 700; color: #1a2a3a; margin-bottom: 0.5rem;">
+                Login to view your cart
+            </h2>
+            <p style="color: #4d6370; margin-bottom: 1.75rem;">
+                You need an account to manage course purchases.
+            </p>
+            <a id="cart-login-link" href="/login/?next=/cart/" class="button is-primary is-medium">
+                <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
+                <span>Log In</span>
+            </a>
+        </div>
+
+        <!-- Loading -->
+        <div id="cart-state-loading" class="cart-loading-state">
+            <span class="icon"><i class="fas fa-spinner fa-spin"></i></span>
+            <span>Loading your cart&hellip;</span>
+        </div>
+
+        <!-- Empty cart -->
+        <div id="cart-state-empty" class="cart-empty-state" style="display:none">
+            <div class="cart-empty-icon"><i class="fas fa-shopping-bag"></i></div>
+            <div class="cart-empty-title">Your cart is empty</div>
+            <p class="cart-empty-text">Browse our courses and add one to get started.</p>
+            <a href="/training-courses/" class="button is-primary is-medium">
+                <span class="icon"><i class="fas fa-graduation-cap"></i></span>
+                <span>Browse Courses</span>
+            </a>
+        </div>
+
+        <!-- Cart with items -->
+        <div id="cart-state-content" class="cart-grid" style="display:none">
+            <div>
+                <div class="cart-panel">
+                    <div class="cart-panel-header">
+                        <span class="icon is-small"><i class="fas fa-graduation-cap"></i></span>
+                        <span id="cart-panel-heading">Courses</span>
+                    </div>
+                    <div id="cart-items-list"></div>
+                </div>
+            </div>
+
+            <div>
+                <div class="cart-summary-panel">
+                    <div class="cart-summary-title">Order Summary</div>
+                    <div class="cart-summary-row">
+                        <span>Subtotal</span>
+                        <span id="cart-subtotal">—</span>
+                    </div>
+                    <div class="cart-summary-row" id="cart-tax-row" style="display:none">
+                        <span>Tax</span>
+                        <span id="cart-tax">—</span>
+                    </div>
+                    <div class="cart-summary-total">
+                        <span>Total</span>
+                        <span id="cart-grand-total">—</span>
+                    </div>
+                    <a href="/checkout/" class="button is-primary cart-checkout-btn">
+                        <span class="icon"><i class="fas fa-lock"></i></span>
+                        <span>Proceed to Checkout</span>
+                    </a>
+                    <p class="cart-secure-note">
+                        <i class="fas fa-shield-alt" style="margin-right: 0.3rem;"></i>
+                        Secure checkout powered by ERPNext
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+(function () {
+    function showState(id) {
+        ['cart-state-auth', 'cart-state-loading', 'cart-state-empty', 'cart-state-content'].forEach(function (s) {
+            var el = document.getElementById(s);
+            if (el) el.style.display = s === id ? '' : 'none';
+        });
+    }
+
+    function fmt(amount, currencyCode) {
+        try {
+            return new Intl.NumberFormat('en-US', { style: 'currency', currency: currencyCode || 'USD' }).format(amount);
+        } catch (e) {
+            return (currencyCode || 'USD') + ' ' + Number(amount).toFixed(2);
+        }
+    }
+
+    async function setQty(itemCode, newQty) {
+        var row = document.querySelector('.cart-item[data-item-code="' + itemCode + '"]');
+        if (row) row.style.opacity = '0.5';
+        try {
+            var r = await fetch('/api/method/webshop.webshop.shopping_cart.cart.update_cart', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ item_code: itemCode, qty: newQty })
+            });
+            if (!r.ok) throw new Error('update failed');
+            var data = await r.json();
+            if (data.exc || data.exception) throw new Error(data.exc || data.exception);
+            await loadCart();
+        } catch (e) {
+            showToast('Could not update quantity. Please try again.', 'danger');
+            if (row) row.style.opacity = '';
+        }
+    }
+
+    async function removeItem(itemCode, btn) {
+        btn.classList.add('is-loading');
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        try {
+            var r = await fetch('/api/method/kartoza_custom.api.remove_from_cart', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ item_code: itemCode })
+            });
+            if (!r.ok) throw new Error('remove failed');
+            var data = await r.json();
+            if (data.exc || data.exception) throw new Error(data.exc || data.exception);
+            await loadCart();
+        } catch (e) {
+            showToast('Could not remove item. Please try again.', 'danger');
+            btn.classList.remove('is-loading');
+            btn.innerHTML = '<i class="fas fa-times"></i>';
+        }
+    }
+
+    function renderItems(items, currencyCode) {
+        var list = document.getElementById('cart-items-list');
+        list.innerHTML = items.map(function (item) {
+            var qty = item.qty || 1;
+            var lineTotal = item.amount != null ? item.amount : item.rate * qty;
+            var ic = escHtml(item.item_code);
+            return (
+                '<div class="cart-item" data-item-code="' + ic + '">' +
+                    '<div class="cart-item-info">' +
+                        '<div class="cart-item-name" title="' + escHtml(item.item_name) + '">' + escHtml(item.item_name) + '</div>' +
+                        '<div class="cart-item-code">' + ic + '</div>' +
+                    '</div>' +
+                    '<div class="cart-item-unit-price">' + fmt(item.rate, currencyCode) + '&nbsp;ea.</div>' +
+                    '<div class="cart-qty-stepper">' +
+                        '<button class="cart-qty-btn qty-dec" data-item-code="' + ic + '" data-qty="' + qty + '" aria-label="Decrease quantity">&#8722;</button>' +
+                        '<span class="cart-qty-display">' + qty + '</span>' +
+                        '<button class="cart-qty-btn qty-inc" data-item-code="' + ic + '" data-qty="' + qty + '" aria-label="Increase quantity">&#43;</button>' +
+                    '</div>' +
+                    '<div class="cart-item-price">' + fmt(lineTotal, currencyCode) + '</div>' +
+                    '<button class="cart-item-remove" data-item-code="' + ic + '" title="Remove from cart" aria-label="Remove ' + escHtml(item.item_name) + '">' +
+                        '<i class="fas fa-times"></i>' +
+                    '</button>' +
+                '</div>'
+            );
+        }).join('');
+
+        list.querySelectorAll('.qty-dec').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var qty = parseInt(btn.dataset.qty, 10) || 1;
+                if (qty <= 1) {
+                    removeItem(btn.dataset.itemCode, btn.closest('.cart-item').querySelector('.cart-item-remove'));
+                } else {
+                    setQty(btn.dataset.itemCode, qty - 1);
+                }
+            });
+        });
+
+        list.querySelectorAll('.qty-inc').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var qty = parseInt(btn.dataset.qty, 10) || 1;
+                setQty(btn.dataset.itemCode, qty + 1);
+            });
+        });
+
+        list.querySelectorAll('.cart-item-remove').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                removeItem(btn.dataset.itemCode, btn);
+            });
+        });
+    }
+
+    function escHtml(str) {
+        var div = document.createElement('div');
+        div.appendChild(document.createTextNode(String(str || '')));
+        return div.innerHTML;
+    }
+
+    async function loadCart() {
+        try {
+            var r = await fetch('/api/method/kartoza_custom.api.get_cart_items', {
+                credentials: 'include',
+                cache: 'no-store'
+            });
+
+            if (r.status === 401 || r.status === 403) {
+                showState('cart-state-auth');
+                return;
+            }
+            if (!r.ok) throw new Error('cart fetch failed');
+
+            var data = await r.json();
+            var cart = data.message || {};
+
+            if (!cart.items || !cart.items.length) {
+                try { localStorage.setItem('kartoza_cart_count', '0'); } catch (e) {}
+                if (typeof updateCartBadge === 'function') updateCartBadge(0);
+                showState('cart-state-empty');
+                return;
+            }
+
+            var totalQty = cart.items.reduce(function (s, i) { return s + (i.qty || 1); }, 0);
+            var itemCount = cart.items.length;
+            try { localStorage.setItem('kartoza_cart_count', String(totalQty)); } catch (e) {}
+            if (typeof updateCartBadge === 'function') updateCartBadge(totalQty);
+
+            var heading = document.getElementById('cart-panel-heading');
+            if (heading) heading.textContent = itemCount === 1 ? '1 Course' : itemCount + ' Courses';
+
+            var currencyCode = cart.currency || 'USD';
+            document.getElementById('cart-subtotal').textContent = fmt(cart.total, currencyCode);
+
+            if (cart.tax_amount) {
+                document.getElementById('cart-tax-row').style.display = '';
+                document.getElementById('cart-tax').textContent = fmt(cart.tax_amount, currencyCode);
+            }
+            document.getElementById('cart-grand-total').textContent = fmt(cart.grand_total, currencyCode);
+
+            renderItems(cart.items, currencyCode);
+            showState('cart-state-content');
+
+        } catch (e) {
+            showState('cart-state-empty');
+        }
+    }
+
+    var auth = (typeof getAuth === 'function') ? getAuth() : null;
+    if (!auth || !auth.loggedIn) {
+        showState('cart-state-auth');
+    } else {
+        loadCart();
+    }
+})();
+</script>
+
+{{ partial "footer.html" . }}

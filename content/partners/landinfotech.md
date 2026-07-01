@@ -3,15 +3,15 @@ title: "LandInfo Technologies"
 tagline: "Asset Management Solutions Partner"
 description: "Kartoza partners with LandInfo Technologies to deliver MyCivitas, a comprehensive municipal asset management system built on open source geospatial technology."
 logo: "/img/partners/landinfotech-logo.png"
-heroImage: "/img/partners/landinfotech-logo.png"
+heroImage: "/img/partners/mycivitasimg.png"
 productUrl: "https://www.landinfotech.com/"
 productName: "MyCivitas"
 partnerUrl: "https://www.landinfotech.com/"
 partnerName: "LandInfo Technologies"
 approved: true
 approvedDate: "2024-01-01"
-reviewedBy: "Tim Sutton"
-reviewedDate: "2026-04-21"
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-11
 date: 2024-01-04
 features:
   - title: "Asset Management"

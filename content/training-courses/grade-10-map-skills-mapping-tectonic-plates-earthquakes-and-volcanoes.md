@@ -2,6 +2,7 @@
 title: "Grade 10 Map Skills: Tectonic Plates, Earthquakes & Volcanoes"
 description: "A self-paced GIS lesson for Grade 10 Geography learners. Map tectonic plates, earthquake epicentres, and volcanic activity using QGIS — fully aligned to the CAPS curriculum and ready to use for SBA tasks."
 thumbnail: "/img/courses/qgis-introduction.svg"
+item_code: "Grade 10 Map Skills: Mapping Tectonic Plates, Earthquakes and Volcanoes"
 duration: "Asynchronous"
 level: "Beginner"
 track: "Foundational"
@@ -13,6 +14,8 @@ tags:
   - Curriculum
   - QGIS
 date: 2024-01-01
+reviewedBy: "Juanique Voogt"
+reviewedDate: 2026-06-09
 ---
 
 ## Course Overview

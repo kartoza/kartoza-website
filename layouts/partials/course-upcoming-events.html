@@ -10,6 +10,7 @@
 {{ end }}
 
 {{ if $futureEvents }}
+{{/* Scheduled sessions exist — show per-event cart buttons */}}
 <div class="sidebar-card upcoming-events-card">
   <h4><i class="fas fa-calendar-alt"></i> Upcoming Sessions</h4>
   <div class="upcoming-events-list">
@@ -23,13 +24,209 @@
       <div class="event-info">
         <span class="dates">{{ .date_display }}</span>
         <span class="location"><i class="fas fa-map-marker-alt"></i> {{ .location }}</span>
+        {{ if .price }}
+        {{- $symbol := "R" -}}
+        {{- if and .price_currency (ne .price_currency "ZAR") }}{{ $symbol = .price_currency }}{{ end -}}
+        <span class="price"><i class="fas fa-tag"></i> {{ $symbol }} {{ lang.FormatNumber 0 .price }} <span style="font-size:0.85em; opacity:0.75;">excl. VAT</span></span>
+        {{ end }}
       </div>
       {{ $contactUrl := printf "/contact-us/?course=%s&date=%s&location=%s" (.title | urlquery) (.date_display | urlquery) (.location | urlquery) }}
-      <a href="{{ $contactUrl }}" class="button is-small is-primary">Register</a>
+      <div class="course-buy-block" style="display: flex; gap: 0.5rem; flex-direction: column">
+        {{ if and .item_code .price }}
+        <a href="/login/?next={{ $.RelPermalink }}" data-item-code="{{ .item_code }}" class="login-buy button is-small is-primary">Login</a>
+        {{ end }}
+        <a href="{{ $contactUrl }}" class="button is-small">Enquiry</a>
+      </div>
     </div>
     {{ end }}
   </div>
+  {{ if $.Params.item_code }}
+  {{ template "free-block" $ }}
+  {{ end }}
 </div>
+<script>
+  const auth = getAuth()
+  if (auth) {
+    document.querySelectorAll('.login-buy').forEach(el => {
+      const cart = document.createElement('a')
+      cart.className = el.className
+      cart.dataset.itemCode = el.dataset.itemCode
+      cart.textContent = 'Add to cart'
+      cart.addEventListener('click', async function(e) {
+        e.preventDefault()
+        const itemCode = cart.dataset.itemCode
+        cart.classList.add('is-loading')
+        cart.style.pointerEvents = 'none'
+        try {
+          await addCart(itemCode)
+        } finally {
+          cart.classList.remove('is-loading')
+          cart.style.pointerEvents = ''
+        }
+      })
+      el.replaceWith(cart)
+    })
+  }
+</script>
+
+{{ else if .Params.item_code }}
+{{/* No scheduled events but course has an item_code — self-paced / async purchase */}}
+<div class="sidebar-card upcoming-events-card">
+  <h4><i class="fas fa-infinity"></i> Self-Paced Course</h4>
+  <p style="font-size: 0.875rem; color: #4d6370; margin-bottom: 1rem;">
+    Start any time — work through the material at your own pace.
+  </p>
+  {{ if .Params.price }}
+  {{- $symbol := "R" -}}
+  {{- if and .Params.price_currency (ne .Params.price_currency "ZAR") }}{{ $symbol = .Params.price_currency }}{{ end -}}
+  <p style="font-size: 0.875rem; color: #4d6370; margin-bottom: 1rem;">
+    <i class="fas fa-tag" style="color: #00b388; margin-right: 0.25rem;"></i>
+    <strong>{{ $symbol }} {{ lang.FormatNumber 0 .Params.price }}</strong> <span style="font-size:0.8em; opacity:0.75;">excl. VAT</span>
+  </p>
+  {{ end }}
+  <div class="course-buy-block" style="display: flex; gap: 0.5rem; flex-direction: column">
+    {{ if .Params.price }}
+    <a href="/login/?next={{ .RelPermalink }}" data-item-code="{{ .Params.item_code }}" class="login-buy button is-primary">Login to Buy</a>
+    {{ end }}
+    <a href="{{ printf "/contact-us/?course=%s&subject=Course%%20Enquiry" (.Title | urlquery) }}" class="button">Enquiry</a>
+  </div>
+  {{ template "free-block" . }}
+</div>
+<script>
+  (function() {
+    const auth = getAuth()
+    if (!auth) return
+    document.querySelectorAll('.login-buy').forEach(function(el) {
+      const btn = document.createElement('button')
+      btn.className = el.className
+      btn.dataset.itemCode = el.dataset.itemCode
+      btn.textContent = 'Add to Cart'
+      btn.addEventListener('click', async function() {
+        btn.classList.add('is-loading')
+        btn.disabled = true
+        try {
+          await addCart(btn.dataset.itemCode)
+        } finally {
+          btn.classList.remove('is-loading')
+          btn.disabled = false
+        }
+      })
+      el.replaceWith(btn)
+    })
+  })()
+</script>
+{{ end }}
+
+{{ if .Params.item_code }}
+<script>
+(function () {
+  var ITEM_CODE = {{ .Params.item_code | jsonify }};
+
+  fetch('/api/method/kartoza_custom.api.get_free_courses', {
+    credentials: 'include',
+    cache: 'no-store'
+  })
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      var freeItems = (data.message || []).map(function (c) { return c.item; });
+      if (!freeItems.includes(ITEM_CODE)) return;
+
+      // Replace buy buttons with free-access form
+      document.querySelectorAll('.course-buy-block').forEach(function (el) {
+        el.style.display = 'none';
+      });
+      document.querySelectorAll('.course-free-block').forEach(function (el) {
+        el.style.display = 'flex';
+      });
+    })
+    .catch(function () {});
+
+  document.addEventListener('click', async function (e) {
+    var btn = e.target.closest('#free-access-btn');
+    if (!btn) return;
+    e.preventDefault();
+
+    var emailInput = document.getElementById('free-access-email');
+    var msgDiv = document.getElementById('free-access-msg');
+    var email = emailInput ? emailInput.value.trim() : '';
+
+    if (!email) {
+      showMsg(msgDiv, 'Please enter your email address.', 'warning');
+      return;
+    }
+
+    btn.classList.add('is-loading');
+    btn.disabled = true;
+
+    try {
+      var r = await fetch('/api/method/kartoza_custom.api.self_register_free_course', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ item_code: ITEM_CODE, email: email })
+      });
+      var data = await r.json();
+
+      if (!r.ok || data.exc || data.exception) {
+        var errMsg = 'Something went wrong. Please try again.';
+        try {
+          errMsg = JSON.parse(JSON.parse(data._server_messages)[0]).message || errMsg;
+        } catch (_) {}
+        showMsg(msgDiv, errMsg, 'danger');
+      } else {
+        var result = data.message || {};
+        var msg = result.message || 'Check your inbox for the enrollment details.';
+        if (result.status === 'already_registered') {
+          showMsg(msgDiv, msg, 'info');
+        } else {
+          document.getElementById('free-access-form').style.display = 'none';
+          showMsg(msgDiv, msg, 'success');
+        }
+      }
+    } catch (_) {
+      showMsg(msgDiv, 'Something went wrong. Please try again.', 'danger');
+    } finally {
+      btn.classList.remove('is-loading');
+      btn.disabled = false;
+    }
+  });
+
+  function showMsg(el, msg, type) {
+    if (!el) return;
+    el.style.display = 'block';
+    el.innerHTML =
+      '<div class="notification is-' + type + ' is-light" ' +
+      'style="padding:0.6rem 0.9rem;font-size:0.8rem;margin-top:0.5rem;">' +
+      msg + '</div>';
+  }
+})();
+</script>
+{{ end }}
+
+{{/* ------------------------------------------------------------------ */}}
+{{/* Reusable free-course block (rendered inline via define/template)    */}}
+{{/* ------------------------------------------------------------------ */}}
+{{ define "free-block" }}
+<div class="course-free-block" style="display:none; flex-direction:column; gap:0.6rem; margin-top:0.5rem;">
+  <p style="font-size:0.875rem; font-weight:600; color:#00b388; margin:0;">
+    <i class="fas fa-gift" style="margin-right:0.3rem;"></i> This course is free!
+  </p>
+  <p style="font-size:0.8rem; color:#4d6370; margin:0;">
+    Enter your email and we'll send you the enrollment key and course link instantly.
+  </p>
+  <div id="free-access-form">
+    <input id="free-access-email" type="email" class="input is-small"
+           placeholder="your@email.com" style="margin-bottom:0.4rem;" />
+    <button id="free-access-btn" class="button is-success" style="width:100%;">
+      <span class="icon is-small"><i class="fas fa-envelope"></i></span>
+      <span>Get Free Access</span>
+    </button>
+  </div>
+  <div id="free-access-msg" style="display:none;"></div>
+  <a href="{{ printf "/contact-us/?course=%s&subject=Course%%20Enquiry" (.Title | urlquery) }}"
+     class="button is-small">Enquiry</a>
+</div>
+{{ end }}
 
 <style>
 .upcoming-events-card h4 {
@@ -114,8 +311,17 @@
   margin-right: 0.25rem;
 }
 
+.event-info .price {
+  font-size: 0.75rem;
+  color: #6c757d;
+}
+
+.event-info .price i {
+  color: #00b388;
+  margin-right: 0.25rem;
+}
+
 .upcoming-event-item .button {
   flex-shrink: 0;
 }
 </style>
-{{ end }}

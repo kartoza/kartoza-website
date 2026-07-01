@@ -6,12 +6,9 @@ departmentIcon: "fa-server"
 weight: 40
 draft: false
 image: "/img/team/tharanath-prabhu.png"
-location: "Kerala, India"
 country: "India"
-coordinates: "10.8505, 76.2711"
 education:
   - degree: "BTech Electronics and Communication Engineering"
-    institution: "Cochin University"
 skills:
   - "Linux System Administration"
   - "DevOps"
@@ -21,12 +18,12 @@ skills:
   - "CI/CD Pipelines"
 achievements:
   - "Linux System Administrator transitioning to DevOps"
-bio: "Based in Kerala, India. BTech Electronics and Communication Engineering. Linux specialist."
-reviewedBy: "Tim Sutton"
-reviewedDate: 2026-03-16
+bio: "BTech Electronics and Communication Engineering. Linux specialist."
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-19
 ---
 
-Tharanath is a DevOps and System Administrator based in Kerala, India, bringing a strong foundation in electronics and engineering to infrastructure management. His BTech in Electronics and Communication Engineering from Cochin University provides understanding of both hardware and software systems.
+Tharanath is a DevOps and System Administrator based in India, bringing a strong foundation in electronics and engineering to infrastructure management. His BTech in Electronics and Communication Engineering provides understanding of both hardware and software systems.
 
 His career journey from Linux System Administrator to DevOps professional reflects the evolution of modern infrastructure management. Tharanath has embraced containerization, orchestration, and automation as the future of system administration.
 

@@ -1,38 +1,52 @@
 ---
-title: "MyFarmWeb"
-description: "An interactive, cloud-based platform for storing, visualising and comparing geographic and IoT agricultural data."
-thumbnail: "/img/portfolio/myfarmweb.png"
-tags:
-  - Agriculture
-  - IoT
-  - Web Platform
-date: 2019-01-01
+client: Agri Technovation (Pty) Ltd
+date: '2022-08-02'
+description: An interactive, cloud-based platform for storing, visualising and comparing
+  all types of geographic and IoT agricultural data
+erpnext_id: 1c7a209472
+erpnext_modified: '2025-01-21 11:59:33.743068'
+github: ''
+reviewedBy: Automated Check
+reviewedDate: '2026-06-19'
 services:
-  - Development
-reviewedBy: "Jeff Osundwa"
-reviewedDate: "2026-03-28"
+- Development
+tags:
+- Project
+technologies:
+- Python
+- Django
+- Javascript
+- QGIS
+- PostGIS
+thumbnail: https://erp.kartoza.com/files/Screenshot_2019-09-13_at_21.06.09.png
+title: MyFarmWeb
 ---
 
 {{< block
     title="MyFarmWeb"
-    subtitle="Cloud-based agricultural data platform with IoT integration"
+    subtitle="Project"
     class="is-primary"
     sub-block-side="bottom"
 >}}
-Bringing geographic and IoT data together for precision agriculture.
+An interactive, cloud-based platform for storing, visualising and comparing all types of geographic and IoT agricultural data
 {{< /block >}}
 
 ## Overview
 
-MyFarmWeb is an interactive, cloud-based platform for storing, visualising and comparing geographic and IoT agricultural data. The platform enables farmers and agricultural professionals to make data-driven decisions by combining spatial analysis with real-time sensor data.
+Kartoza built a web application for farmers to explore and visualise field, pest and crop information about their farms, including aerial photography and satellite-derived data and in situ soil moisture observations with irrigation recommendations.
 
-![MyFarmWeb](/img/portfolio/myfarmweb.png)
+![](/files/mfw.png)
 
-## Services Provided
+The product owner is now Mezzanineware. As of mid 2019, Kartoza remains under contract to Agritechnovation to provide core development services to MyFarmWeb.
 
-- System design and architecture
-- QGIS and web data processing workflows
-- PostGIS database management
-- Django application development
-- Front end development
-- Devops and sysadmin
+## Client
+
+Agri Technovation (Pty) Ltd
+
+## Technologies
+
+- Python
+- Django
+- Javascript
+- QGIS
+- PostGIS

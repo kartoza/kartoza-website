@@ -6,9 +6,12 @@ tags:
   - Mobile
   - Groundwater
   - UN-IGRAC
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-11
 date: 2019-01-01
 ---
 
+<!-- markdownlint-disable MD034 -->
 {{< block
     title="Groundwater Monitoring"
     subtitle="Contributing to the Global Groundwater Monitoring Network"
@@ -19,6 +22,7 @@ date: 2019-01-01
 >}}
 Georeferencing groundwater stations and submitting data to the UN-IGRAC GGMN portal.
 {{< /block >}}
+<!-- markdownlint-disable MD034 -->s
 
 ## Overview
 

@@ -3,15 +3,15 @@ title: "EO Intelligence"
 tagline: "Earth Observation and Geospatial Analytics"
 description: "Partnership with EO Intelligence for earth observation, satellite imagery analysis, and geospatial analytics solutions across Canada and Africa."
 logo: "/img/partners/eointelligence-logo.png"
-heroImage: "/img/partners/eointelligence-logo.png"
+heroImage: "/img/partners/eointelligenceimg.png"
 productUrl: "https://www.eointelligence.ca/"
 productName: "EO Intelligence"
 partnerUrl: "https://www.eointelligence.ca/"
 partnerName: "EO Intelligence"
 approved: true
 approvedDate: "2026-04-21"
-reviewedBy: "Tim Sutton"
-reviewedDate: "2026-04-21"
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-11
 date: 2024-01-05
 features:
   - title: "Satellite Imagery"

@@ -1,7 +1,7 @@
 ---
 title: "BIMS"
 description: "Biodiversity Information Management System - Collect, manage, and analyse species occurrence data for conservation."
-thumbnail: "/img/solutions/bims.svg"
+thumbnail: "/img/apps/bimstools.png"
 tags:
   - Biodiversity
   - Conservation
@@ -13,8 +13,8 @@ related_portfolio:
   - fbis
 related_plugins:
   - species-explorer
-reviewedBy: "Tim Sutton"
-reviewedDate: 2026-03-24
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-11
 ---
 
 ## Overview
