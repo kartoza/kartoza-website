@@ -19,7 +19,6 @@ Usage:
     ./fetch-erpnext-blogs.py --verbose    # Verbose output
 """
 
-import os
 import re
 import sys
 from datetime import datetime
@@ -35,21 +34,18 @@ from tabulate import tabulate
 import json
 import html2text
 
+from fetch_erpnext_utilities import ERPNextClient
+
 # Suppress XML parsing warning when using html.parser on content that looks like XML
 warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
 
 
 # Configuration
-ERPNEXT_URL = os.environ.get('ERPNEXT_URL', 'https://erp.kartoza.com')
+ERPNEXT = ERPNextClient()
 KARTOZA_URL = 'https://kartoza.com'
 
 # Image storage path relative to Hugo static folder
 IMAGE_DIR = 'img/blog/erpnext'
-
-
-def get_auth_headers() -> dict:
-    """Get authentication headers for ERPNext API (empty for public blogs)."""
-    return {}
 
 
 def download_image(url: str, static_dir: Path, verbose: bool = False) -> str | None:
@@ -92,7 +88,7 @@ def download_image(url: str, static_dir: Path, verbose: bool = False) -> str | N
     try:
         if verbose:
             print(f"  Downloading: {filename}", file=sys.stderr)
-        response = requests.get(full_url, timeout=30)
+        response = ERPNEXT.get(full_url)
         response.raise_for_status()
         target_path.write_bytes(response.content)
         return local_url
@@ -355,7 +351,7 @@ def fetch_blog_list() -> list[dict]:
     page_size = 20
 
     while True:
-        url = f"{ERPNEXT_URL}/api/method/frappe.www.list.get"
+        url = f"{ERPNEXT.base_url}/api/method/frappe.www.list.get"
         params = {
             'doctype': 'Blog Post',
             'limit_start': limit_start,
@@ -363,7 +359,7 @@ def fetch_blog_list() -> list[dict]:
         }
 
         try:
-            response = requests.get(url, params=params, timeout=30)
+            response = ERPNEXT.get(url, params=params)
             response.raise_for_status()
             data = response.json()
         except requests.RequestException as e:
@@ -423,10 +419,10 @@ def fetch_blog_detail(name: str) -> dict | None:
         return name
 
     # Fallback: scrape the public blog page
-    url = f"{ERPNEXT_URL}{name}"
+    url = f"{ERPNEXT.base_url}{name}"
 
     try:
-        response = requests.get(url, timeout=30)
+        response = ERPNEXT.get(url)
         response.raise_for_status()
     except requests.RequestException as e:
         print(f"Error fetching blog '{name}': {e}", file=sys.stderr)
@@ -518,7 +514,7 @@ def blog_to_hugo_frontmatter(blog: dict, mark_reviewed: bool = False) -> dict:
     thumbnail = blog.get('cover_image', '') or blog.get('featured_image', '') or '/img/blog/placeholder.png'
     # Ensure full URL for external images
     if thumbnail and not thumbnail.startswith(('http://', 'https://', '/')):
-        thumbnail = f"{ERPNEXT_URL}/{thumbnail}"
+        thumbnail = f"{ERPNEXT.base_url}/{thumbnail}"
 
     # Build front matter
     front_matter = {
@@ -642,7 +638,7 @@ def print_status_table(results: list[dict], dry_run: bool = False) -> None:
 
     print("\n" + "=" * 80, file=sys.stderr)
     print(f"  {header}", file=sys.stderr)
-    print(f"  Source: {ERPNEXT_URL} | Date: {datetime.now().strftime('%Y-%m-%d')}", file=sys.stderr)
+    print(f"  Source: {ERPNEXT.base_url} | Date: {datetime.now().strftime('%Y-%m-%d')}", file=sys.stderr)
     print("=" * 80, file=sys.stderr)
 
     # Print table using tabulate
@@ -700,7 +696,7 @@ def main():
         print(f"Error: Content directory not found: {content_dir}", file=sys.stderr)
         sys.exit(2)
 
-    print(f"Fetching blog list from {ERPNEXT_URL}...", file=sys.stderr)
+    print(f"Fetching blog list from {ERPNEXT.base_url}...", file=sys.stderr)
     blogs = fetch_blog_list()
 
     if not blogs:
