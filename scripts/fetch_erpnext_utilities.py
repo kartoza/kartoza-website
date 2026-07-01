@@ -1,21 +1,22 @@
 #!/usr/bin/env python3
-"""Shared Hugo content-sync helpers for the ERPNext sync scripts in this directory.
+"""Shared Hugo content-sync helpers for the ERPNext sync scripts in this
+directory.
 
 Covers slugifying titles, fidelity-checking local content against ERPNext,
 reading/matching local Hugo files, stamping review fields, and converting
 ERPNext HTML to Hugo markdown.
 """
 
+import html2text
 import re
 import warnings
+import yaml
+from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
 from datetime import datetime
 from pathlib import Path
 
-import html2text
-import yaml
-from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
-
-# Suppress XML parsing warning when using html.parser on content that looks like XML
+# Suppress XML parsing warning when using html.parser on content that looks
+# like XML
 warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
 
 
@@ -47,7 +48,10 @@ def normalize_for_comparison(content: str) -> str:
 
 def check_fidelity(local_content: str, erpnext_content: str) -> bool:
     """Check if local and ERPNext content match, ignoring formatting."""
-    return normalize_for_comparison(local_content) == normalize_for_comparison(erpnext_content)
+    return (
+            normalize_for_comparison(local_content) ==
+            normalize_for_comparison(erpnext_content)
+    )
 
 
 def read_local_file(filepath: Path) -> tuple[dict, str] | None:
@@ -83,7 +87,9 @@ def read_local_file(filepath: Path) -> tuple[dict, str] | None:
     return front_matter, content
 
 
-def find_local_file(content_dir: Path, erpnext_id: str, title: str) -> Path | None:
+def find_local_file(
+        content_dir: Path, erpnext_id: str, title: str
+) -> Path | None:
     """Find a local Hugo file matching an ERPNext document.
 
     Matches by:
@@ -106,13 +112,17 @@ def find_local_file(content_dir: Path, erpnext_id: str, title: str) -> Path | No
     return None
 
 
-def update_review_fields(filepath: Path, front_matter: dict, content: str) -> None:
+def update_review_fields(
+        filepath: Path, front_matter: dict, content: str
+) -> None:
     """Stamp reviewedBy/reviewedDate and rewrite an existing Hugo file."""
     front_matter['reviewedBy'] = 'Automated Check'
     front_matter['reviewedDate'] = datetime.now().strftime('%Y-%m-%d')
 
     file_content = '---\n'
-    file_content += yaml.dump(front_matter, default_flow_style=False, allow_unicode=True)
+    file_content += yaml.dump(
+        front_matter, default_flow_style=False, allow_unicode=True
+    )
     file_content += '---\n\n'
     file_content += content.strip()
     file_content += '\n'

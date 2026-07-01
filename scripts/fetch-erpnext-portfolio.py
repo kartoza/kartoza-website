@@ -14,13 +14,12 @@ Usage:
 
 import json
 import os
-import sys
-from datetime import datetime
-from pathlib import Path
-
 import requests
+import sys
 import yaml
+from datetime import datetime
 from dateutil import parser as date_parser
+from pathlib import Path
 from tabulate import tabulate
 
 from fetch_erpnext_client import ERPNextClient
@@ -133,7 +132,7 @@ def _resolve_thumbnail(item: dict) -> str:
 
 
 def portfolio_to_hugo_frontmatter(
-    item: dict, mark_reviewed: bool = False
+        item: dict, mark_reviewed: bool = False
 ) -> dict:
     """Convert an ERPNext Portfolio item to Hugo front matter.
 
@@ -246,11 +245,11 @@ def portfolio_to_hugo_content(item: dict) -> str:
 
 
 def sync_portfolio_item(
-    item: dict,
-    content_dir: Path,
-    dry_run: bool = False,
-    force: bool = False,
-    verbose: bool = False,
+        item: dict,
+        content_dir: Path,
+        dry_run: bool = False,
+        force: bool = False,
+        verbose: bool = False,
 ) -> dict:
     """Sync a single portfolio item from ERPNext to Hugo.
 
@@ -368,7 +367,8 @@ def print_results_table(results: list[dict], dry_run: bool = False) -> None:
             fidelity_str = fidelity
 
         table_data.append([
-            result['title'][:40] + ('...' if len(result['title']) > 40 else ''),
+            result['title'][:40] + (
+                '...' if len(result['title']) > 40 else ''),
             result.get('client', '-')[:20],
             result['status'],
             fidelity_str,
@@ -376,7 +376,8 @@ def print_results_table(results: list[dict], dry_run: bool = False) -> None:
         ])
 
     headers = ['Project', 'Client', 'Status', 'Fidelity', 'File']
-    print(tabulate(table_data, headers=headers, tablefmt='simple'), file=sys.stderr)
+    print(tabulate(table_data, headers=headers, tablefmt='simple'),
+          file=sys.stderr)
 
     new_count = sum(1 for r in results if r['status'] == 'new')
     updated_count = sum(1 for r in results if r['status'] == 'updated')
@@ -449,7 +450,8 @@ def main() -> int:
         )
         return 1
 
-    print(f'Fetching portfolio list from {ERPNEXT.resolve_url("/")}...', file=sys.stderr)
+    print(f'Fetching portfolio list from {ERPNEXT.resolve_url("/")}...',
+          file=sys.stderr)
     print(f'Using doctype: {PORTFOLIO_DOCTYPE}', file=sys.stderr)
 
     items = fetch_portfolio_list()

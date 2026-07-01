@@ -25,12 +25,11 @@ Usage:
 """
 
 import json
+import requests
 import sys
+import yaml
 from datetime import datetime
 from pathlib import Path
-
-import requests
-import yaml
 from tabulate import tabulate
 
 from fetch_erpnext_client import ERPNextClient
@@ -74,7 +73,9 @@ def fetch_job_openings() -> list:
         data = response.json()
         return data.get('data', [])
     except requests.HTTPError as e:
-        status_code = e.response.status_code if e.response is not None else None
+        status_code = (
+            e.response.status_code if e.response is not None else None
+        )
         if status_code in (401, 403):
             print(
                 "Authentication/permission error while fetching job openings "
@@ -116,7 +117,8 @@ def job_to_hugo_frontmatter(job: dict, mark_reviewed: bool = False) -> dict:
         'layout': 'job',
     }
 
-    # Status / draft — only hide truly Closed positions; Open jobs appear regardless of publish flag
+    # Status / draft — only hide truly Closed positions;
+    # Open jobs appear regardless of publish flag
     status = job.get('status', 'Open')
     if status == 'Closed':
         front_matter['draft'] = True
@@ -128,7 +130,9 @@ def job_to_hugo_frontmatter(job: dict, mark_reviewed: bool = False) -> dict:
             dt = datetime.fromisoformat(str(creation).replace('Z', '+00:00'))
             front_matter['date'] = dt.strftime('%Y-%m-%dT%H:%M:%S+00:00')
         except (ValueError, TypeError):
-            front_matter['date'] = datetime.now().strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            front_matter['date'] = datetime.now().strftime(
+                '%Y-%m-%dT%H:%M:%S+00:00'
+            )
 
     modified = job.get('modified')
     if modified:
@@ -166,8 +170,10 @@ def job_to_hugo_frontmatter(job: dict, mark_reviewed: bool = False) -> dict:
     return front_matter
 
 
-def sync_job(job: dict, content_dir: Path, dry_run: bool = False,
-             force: bool = False, verbose: bool = False) -> dict:
+def sync_job(
+        job: dict, content_dir: Path, dry_run: bool = False,
+        force: bool = False, verbose: bool = False
+) -> dict:
     """
     Sync a single job opening from ERPNext to Hugo.
 
@@ -190,8 +196,10 @@ def sync_job(job: dict, content_dir: Path, dry_run: bool = False,
                 # Content matches - fidelity passed
                 if not local_frontmatter.get('reviewedBy'):
                     if not dry_run:
-                        update_review_fields(local_file, local_frontmatter, local_content)
-                return {'status': 'unchanged', 'fidelity': 'passed', 'file': local_file.name,
+                        update_review_fields(local_file, local_frontmatter,
+                                             local_content)
+                return {'status': 'unchanged', 'fidelity': 'passed',
+                        'file': local_file.name,
                         'title': title}
 
         status = 'updated'
@@ -210,7 +218,8 @@ def sync_job(job: dict, content_dir: Path, dry_run: bool = False,
 
     # Build file content
     file_content = "---\n"
-    file_content += yaml.dump(front_matter, default_flow_style=False, allow_unicode=True)
+    file_content += yaml.dump(front_matter, default_flow_style=False,
+                              allow_unicode=True)
     file_content += "---\n\n"
     file_content += content
     file_content += "\n"
@@ -219,21 +228,28 @@ def sync_job(job: dict, content_dir: Path, dry_run: bool = False,
         content_dir.mkdir(parents=True, exist_ok=True)
         filepath.write_text(file_content)
 
-    return {'status': status, 'fidelity': 'auto-reviewed', 'file': filepath.name,
-            'title': title}
+    return {
+        'status': status, 'fidelity': 'auto-reviewed',
+        'file': filepath.name, 'title': title
+    }
 
 
-def unpublish_closed_jobs(jobs: list, content_dir: Path, dry_run: bool = False,
-                          verbose: bool = False) -> list:
+def unpublish_closed_jobs(
+        jobs: list, content_dir: Path, dry_run: bool = False,
+        verbose: bool = False
+) -> list:
     """
-    Mark local job files as draft if the corresponding ERPNext job is closed or unpublished.
+    Mark local job files as draft if the corresponding ERPNext job
+    is closed or unpublished.
 
     Returns list of result dicts for unpublished jobs.
     """
     results = []
     erpnext_ids = {j.get('name') for j in jobs}
-    open_ids = {j.get('name') for j in jobs
-                if j.get('status') == 'Open' and j.get('publish', 0)}
+    open_ids = {
+        j.get('name') for j in jobs
+        if j.get('status') == 'Open' and j.get('publish', 0)
+    }
 
     for filepath in content_dir.glob('*.md'):
         if filepath.name in ('_index.md', 'index.md'):
@@ -273,20 +289,29 @@ def main():
     parser = argparse.ArgumentParser(
         description='Sync job opportunities from ERPNext with fidelity checking'
     )
-    parser.add_argument('--dry-run', action='store_true',
-                        help='Preview changes without writing files')
-    parser.add_argument('--list', action='store_true',
-                        help='List job openings from ERPNext')
-    parser.add_argument('--force', action='store_true',
-                        help='Force overwrite all files')
-    parser.add_argument('--verbose', action='store_true',
-                        help='Show detailed output')
+    parser.add_argument(
+        '--dry-run', action='store_true',
+        help='Preview changes without writing files'
+    )
+    parser.add_argument(
+        '--list', action='store_true',
+        help='List job openings from ERPNext'
+    )
+    parser.add_argument(
+        '--force', action='store_true',
+        help='Force overwrite all files'
+    )
+    parser.add_argument(
+        '--verbose', action='store_true',
+        help='Show detailed output'
+    )
 
     args = parser.parse_args()
 
     if not ERPNEXT.has_credentials:
         print(
-            "Warning: API credentials not set; attempting unauthenticated access. "
+            "Warning: API credentials not set; "
+            "attempting unauthenticated access. "
             "Private ERPNext endpoints may return HTTP 401/403."
         )
         print(
@@ -316,7 +341,9 @@ def main():
                 job.get('department', '-'),
                 job.get('location', '-'),
             ])
-        headers = ['Title', 'ID', 'Status', 'Published', 'Department', 'Location']
+        headers = [
+            'Title', 'ID', 'Status', 'Published', 'Department', 'Location'
+        ]
         print()
         print(tabulate(table, headers=headers, tablefmt='simple'))
         return 0
@@ -348,8 +375,9 @@ def main():
         results.append(result)
 
     # Unpublish closed jobs
-    unpublished = unpublish_closed_jobs(jobs, CONTENT_DIR, dry_run=args.dry_run,
-                                        verbose=args.verbose)
+    unpublished = unpublish_closed_jobs(
+        jobs, CONTENT_DIR, dry_run=args.dry_run, verbose=args.verbose
+    )
     results.extend(unpublished)
 
     # Print results table
@@ -386,8 +414,10 @@ def main():
     error_count = sum(1 for r in results if r['status'] == 'error')
 
     print()
-    print(f"New: {new_count}, Updated: {updated_count}, Unchanged: {unchanged_count}, "
-          f"Unpublished: {unpub_count}, Errors: {error_count}")
+    print(
+        f"New: {new_count}, Updated: {updated_count}, "
+        f"Unchanged: {unchanged_count}, "
+        f"Unpublished: {unpub_count}, Errors: {error_count}")
 
     return 0 if error_count == 0 else 1
 
