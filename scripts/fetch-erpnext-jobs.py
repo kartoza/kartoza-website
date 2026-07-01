@@ -25,7 +25,6 @@ Usage:
 """
 
 import json
-import os
 import re
 import sys
 from datetime import datetime
@@ -34,12 +33,12 @@ from pathlib import Path
 import warnings
 
 import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
 import yaml
 from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
 from tabulate import tabulate
 import html2text
+
+from fetch_erpnext_utilities import ERPNextClient
 
 # Suppress XML parsing warning
 warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
@@ -47,110 +46,9 @@ warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
 # Configuration
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-
-def _load_env_file(path: Path) -> bool:
-    """Load KEY=VALUE entries from a dotenv-like file into os.environ."""
-    if not path.exists():
-        return False
-
-    try:
-        lines = path.read_text().splitlines()
-    except (IOError, OSError):
-        return False
-
-    for raw_line in lines:
-        line = raw_line.strip()
-        if not line or line.startswith('#') or '=' not in line:
-            continue
-
-        key, value = line.split('=', 1)
-        key = key.strip()
-        value = value.strip()
-
-        if key.startswith('export '):
-            key = key[len('export '):].strip()
-
-        if ((value.startswith('"') and value.endswith('"'))
-                or (value.startswith("'") and value.endswith("'"))):
-            value = value[1:-1]
-
-        # Keep shell-exported values authoritative.
-        if key and key not in os.environ:
-            os.environ[key] = value
-
-    return True
-
-
-def _load_default_env_files() -> list[Path]:
-    """Load common environment files used by this repository."""
-    loaded_files: list[Path] = []
-    candidates = [
-        PROJECT_ROOT / '.env',
-        PROJECT_ROOT / 'deployment' / '.env',
-    ]
-    for path in candidates:
-        if _load_env_file(path):
-            loaded_files.append(path)
-    return loaded_files
-
-
-LOADED_ENV_FILES = _load_default_env_files()
-
-
-def _normalize_erpnext_base_url(url: str) -> str:
-    """Normalize ERPNext URL to a base URL without trailing /api."""
-    normalized = url.strip().rstrip('/')
-    if normalized.endswith('/api'):
-        return normalized[:-4]
-    return normalized
-
-
-def _get_erpnext_config() -> tuple[str, str, str]:
-    """
-    Resolve ERPNext URL and credentials from environment.
-
-    Supports legacy and gateway-prefixed variable names.
-    """
-    raw_url = 'https://erp.kartoza.com'
-    api_key = os.environ.get('ERPNEXT_API_KEY') or os.environ.get('GATEWAY_ERPNEXT_API_KEY') or ''
-    api_secret = os.environ.get('ERPNEXT_API_SECRET') or os.environ.get('GATEWAY_ERPNEXT_API_SECRET') or ''
-    return _normalize_erpnext_base_url(raw_url), api_key, api_secret
-
-
-ERPNEXT_URL, API_KEY, API_SECRET = _get_erpnext_config()
-CONTENT_DIR = Path(__file__).parent.parent / 'content' / 'careers'
-
-
-def _build_http_session() -> requests.Session:
-    """Create an HTTP session with retries for transient network/server failures."""
-    session = requests.Session()
-
-    retry = Retry(
-        total=5,
-        connect=5,
-        read=5,
-        status=5,
-        backoff_factor=1,
-        status_forcelist=(429, 500, 502, 503, 504),
-        allowed_methods=frozenset(['GET']),
-        raise_on_status=False,
-    )
-    adapter = HTTPAdapter(max_retries=retry)
-    session.mount('https://', adapter)
-    session.mount('http://', adapter)
-
-    session.headers.update({
-        'Accept': 'application/json',
-        'User-Agent': 'kartoza-website-sync/1.0',
-    })
-
-    if API_KEY and API_SECRET:
-        session.headers.update({'Authorization': f'token {API_KEY}:{API_SECRET}'})
-
-    return session
-
-
-HTTP_SESSION = _build_http_session()
+ERPNEXT = ERPNextClient()
+ERPNEXT_URL = ERPNEXT.base_url
+CONTENT_DIR = PROJECT_ROOT / 'content' / 'careers'
 
 
 def slugify(text: str) -> str:
@@ -271,7 +169,7 @@ def fetch_job_openings() -> list:
     }
 
     try:
-        response = HTTP_SESSION.get(url, params=params, timeout=30)
+        response = ERPNEXT.get(url, params=params)
         response.raise_for_status()
         data = response.json()
         return data.get('data', [])
@@ -281,7 +179,7 @@ def fetch_job_openings() -> list:
             print(
                 "Authentication/permission error while fetching job openings "
                 f"(HTTP {status_code}). "
-                "Set ERPNEXT_API_KEY/ERPNEXT_API_SECRET (or GATEWAY_* variants)."
+                "Set ERPNEXT_API_KEY/ERPNEXT_API_SECRET."
             )
             return []
         print(f"Error fetching job openings (HTTP {status_code}): {e}")
@@ -300,7 +198,7 @@ def fetch_job_detail(job_name: str) -> dict | None:
     """Fetch full job opening details from ERPNext API."""
     url = f"{ERPNEXT_URL}/api/resource/Job Opening/{job_name}"
     try:
-        response = HTTP_SESSION.get(url, timeout=30)
+        response = ERPNEXT.get(url)
         response.raise_for_status()
         data = response.json()
         return data.get('data', {})
@@ -520,14 +418,14 @@ def main():
 
     args = parser.parse_args()
 
-    if not API_KEY or not API_SECRET:
+    if not ERPNEXT.has_credentials:
         print(
             "Warning: API credentials not set; attempting unauthenticated access. "
             "Private ERPNext endpoints may return HTTP 401/403."
         )
         print(
-            "Looked in current shell plus .env files at "
-            f"{PROJECT_ROOT / '.env'} and {PROJECT_ROOT / 'deployment' / '.env'}."
+            "Looked in current shell plus .env file at "
+            f"{PROJECT_ROOT / '.env'}."
         )
         print()
 
