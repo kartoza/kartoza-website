@@ -1,14 +1,14 @@
 ---
 client: ''
 date: '2025-01-16'
-description: 'The REZoning tool (<https://rezoning.energydata.info/>) is an interactive,
+description: 'The REZoning tool (https://rezoning.energydata.info/ ) is an interactive,
   web-based platform designed to identify, visualise, and rank zones that are most
   suitable for the development of solar, wind, '
 erpnext_id: jn1ik04sdf
 erpnext_modified: '2025-07-30 18:58:08.319378'
 github: ''
 reviewedBy: Automated Check
-reviewedDate: '2026-06-19'
+reviewedDate: '2026-07-01'
 services: []
 tags:
 - Project
@@ -25,14 +25,16 @@ title: REZoning (ESMAP)
     class="is-primary"
     sub-block-side="bottom"
 >}}
-The REZoning tool (<https://rezoning.energydata.info/>) is an interactive, web-based platform designed to identify, visualise, and rank zones that are most suitable for the development of solar, wind, or offshore wind projects. Custom spatial filters and economic parameters can be applied to meet users needs or to represent a specific country context. The REZoning tool is powered by global geospatial datasets and uses baseline industry assumptions as default values for economic calculations.
+The REZoning tool (https://rezoning.energydata.info/ ) is an interactive, web-based platform designed to identify, visualise, and rank zones that are most suitable for the development of solar, wind, or offshore wind projects. Custom spatial filters and economic parameters can be applied to meet users needs or to represent a specific country context. The REZoning tool is powered by global geospatial datasets and uses baseline industry assumptions as default values for economic calculations.
 {{< /block >}}
 
 ## Overview
 
 The REZoning platform version 1.0 was developed and deployed by [devseed](<https://developmentseed.org/>), working in partnership with Derilinx. Kartoza was contracted to extend the platform and implement a number of additional features for a version 2.0 deployment. The application is a complex and multifaceted web application
 
-which consumes and analyses multiple preprocessed data stores against the criteria specified by users in the front-end, and then processes and retrieves these results to display for end users.
+which consumes and analyzes multiple preprocessed data stores against the criteria specified by users in the front-end, and then processes and retrieves these results to display for end users.
+
+  
 
 Kartoza was contracted to:
 
@@ -47,7 +49,11 @@ Kartoza was contracted to:
   9. Add various other new features
   10. Update About page of the tool and the documentation to reflect the new changes
 
+  
+
 ![](/files/2i9eMT3.png)
+
+  
 
 ![](/files/4ryn9Hr.png)
 

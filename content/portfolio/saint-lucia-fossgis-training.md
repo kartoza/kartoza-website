@@ -8,7 +8,7 @@ erpnext_id: a0c47e46a9
 erpnext_modified: '2026-06-04 11:28:58.282068'
 github: ''
 reviewedBy: Automated Check
-reviewedDate: '2026-06-19'
+reviewedDate: '2026-07-01'
 services:
 - GIS Fundamentals
 - QGIS Basics
@@ -41,7 +41,11 @@ Kartoza implemented an Open Source GIS software training programme over the cour
 
 For this engagement we delivered a comprehensive training programme and GIS bootstrapping programme to the Government of Saint Lucia (GoSL). The key client was the Department of Physical Planning but the opportunity to participate in the programme was extended broadly to other GoSL departments, who participated enthusiastically in the programme.
 
+  
+
 The project consisted of a multifaceted approach of providing training, as well as the development and implementation of infrastructure and processes which were handed over to stakeholders with the necessary capacity to continue support and maintenance operations.
+
+  
 
 Various topics were covered according to specific departmental needs, and delegates proved capable of building tailored solutions that solved real world agency needs as a part of the competency evaluation. These solutions spanned across various domains and included some of the following projects:
 
@@ -57,11 +61,19 @@ Various topics were covered according to specific departmental needs, and delega
   10. Groundtruthing operations for topographic data validation
   11. Statistics and census map atlas production
 
+  
+
 By the conclusion of the project, the valedictorian had begun the programme with no GIS experience and went on to attain a new position leading the geospatial capabilities for emergency services on the island.
+
+  
 
 In addition, a new map service providing a national topographic map service, imagery, and other content of significance was configured and deployed, with a copy of the training materials remanded to The Sir Arthur Lewis Community College for future training programmes.
 
+  
+
 Various topics were covered according to specific departmental needs, with learning tracks and topics of interest outlined for particular roles within specific agencies. Advanced learning topics included the following:
+
+  
 
   1. Data Visualisation and Dashboarding
   2. Docker
@@ -83,7 +95,7 @@ Various topics were covered according to specific departmental needs, with learn
   18. InaSAFE
   19. National Map Production
   20. Locality and addressing systems
-  21. Beginner to Intermediate OpenDroneMap
+  21. Beginer to Intermediate OpenDroneMap
   22. Photogrammetry and Point Clouds
   23. FOSS Web Map Services
   24. Mission planning and operational considerations
@@ -108,7 +120,11 @@ Various topics were covered according to specific departmental needs, with learn
   43. Application architecture and solution design
   44. GIS Integrations
 
+  
+
 ![https://kartoza.erpnext.com/files/stlucia_outcomesaa4a8d.png](https://kartoza.erpnext.com/files/stlucia_outcomesaa4a8d.png)
+
+  
 
 ![](/files/1GgxplZ.png)
 
