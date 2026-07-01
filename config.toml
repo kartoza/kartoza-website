@@ -40,6 +40,10 @@ enableGitInfo = true
   submenu = 'submenus'
 
 [params]
+# Restricts the home page's RSS/JSON feed to blog posts only, instead of
+# defaulting to every page on the site (login, checkout, etc).
+mainSections = ["blog"]
+
 # ERPNext base URL used when running hugo server locally (no nginx proxy).
 # The JS only uses this URL on localhost — on the real domain nginx proxy is used instead.
 # Uses the same public gateway as production; requires allow_cors in ERPNext site_config.json.
