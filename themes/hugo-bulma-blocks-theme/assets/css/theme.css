@@ -27,3 +27,6 @@
 .has-text-centered {
   text-align: center;
 }
+.navbar-dropdown {
+  padding: 0;
+}
