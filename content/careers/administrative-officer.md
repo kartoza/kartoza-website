@@ -25,7 +25,7 @@ We are looking for a Bookkeeper & Admin/Logistics Officer to support the Financi
 
 ## _2 RESPONSIBILITIES_
 
-###  Financial Management
+### Financial Management
 
   1. Assist the Financial Administrator with bookkeeping tasks in **ERPNext**
   2. Capture customer and supplier invoices
@@ -63,9 +63,7 @@ We are looking for a Bookkeeper & Admin/Logistics Officer to support the Financi
   3. Prepare client weekly timesheet reports and SLA monthly reports
   4. Coordinate board meeting invites and schedules
 
-  
-
-##  _3 EDUCATION AND SKILLS_
+## _3 EDUCATION AND SKILLS_
 
   1. Bookkeeping or equivalent qualification (degree, diploma, or certificate)
   2. Knowledge of ERP systems and payroll systems
@@ -78,7 +76,7 @@ We are looking for a Bookkeeper & Admin/Logistics Officer to support the Financi
   9. Bookkeeping qualification
   10. Knowledge of ERPNext is advantageous
 
-##  _4 ABILITIES_
+## _4 ABILITIES_
 
   1. Critical thinker with strong problem-solving skills
   2. Ability to work under pressure and meet strict deadlines
@@ -87,9 +85,7 @@ We are looking for a Bookkeeper & Admin/Logistics Officer to support the Financi
   5. Effective time management skills
   6. Strong interpersonal and communication abilities
 
-  
-
-##  _5 REQUIREMENTS_
+## _5 REQUIREMENTS_
 
   1. Perform all duties with integrity, to the highest ethical standards, and in compliance with all relevant legal, contractual, and organisational requirements
   2. Keep up to date with changes in compliance obligations, controls, and measures relevant to the role
