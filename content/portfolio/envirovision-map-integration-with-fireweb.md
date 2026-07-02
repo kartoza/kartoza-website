@@ -8,7 +8,7 @@ erpnext_id: ql87t8nvni
 erpnext_modified: '2026-06-04 14:49:55.461581'
 github: https://github.com/kartoza/EVS
 reviewedBy: Automated Check
-reviewedDate: '2026-06-19'
+reviewedDate: '2026-07-01'
 services: []
 tags:
 - Project

@@ -5,8 +5,8 @@ Only fetches new articles that don't exist locally to preserve local edits.
 
 Environment variables:
     ERPNEXT_URL: ERPNext instance URL (default: https://erp.kartoza.com)
-    ERPNEXT_API_KEY / GATEWAY_ERPNEXT_API_KEY: API key for authentication
-    ERPNEXT_API_SECRET / GATEWAY_ERPNEXT_API_SECRET: API secret for authentication
+    ERPNEXT_API_KEY: API key for authentication
+    ERPNEXT_API_SECRET: API secret for authentication
 
 Usage:
     ./fetch-erpnext-portfolio.py [--dry-run] [--force] [--list]
@@ -14,316 +14,30 @@ Usage:
 
 import json
 import os
-import re
-import sys
-from datetime import datetime
-from pathlib import Path
-
-import warnings
-
 import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
+import sys
 import yaml
-from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
+from datetime import datetime
 from dateutil import parser as date_parser
+from pathlib import Path
 from tabulate import tabulate
-import html2text
 
-warnings.filterwarnings('ignore', category=XMLParsedAsHTMLWarning)
+from fetch_erpnext_client import ERPNextClient
+from fetch_erpnext_utilities import (
+    check_fidelity,
+    find_local_file,
+    html_to_markdown,
+    read_local_file,
+    slugify,
+    update_review_fields,
+)
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-
-def _load_env_file(path: Path) -> bool:
-    """Load KEY=VALUE entries from a dotenv-like file into os.environ.
-
-    :param path: Path to the env file to load.
-    :type path: Path
-
-    :returns: True if the file was found and read, False otherwise.
-    :rtype: bool
-    """
-    if not path.exists():
-        return False
-
-    try:
-        lines = path.read_text().splitlines()
-    except (IOError, OSError):
-        return False
-
-    for raw_line in lines:
-        line = raw_line.strip()
-        if not line or line.startswith('#') or '=' not in line:
-            continue
-
-        key, value = line.split('=', 1)
-        key = key.strip()
-        value = value.strip()
-
-        if key.startswith('export '):
-            key = key[len('export '):].strip()
-
-        if (
-            (value.startswith('"') and value.endswith('"'))
-            or (value.startswith("'") and value.endswith("'"))
-        ):
-            value = value[1:-1]
-
-        if key and key not in os.environ:
-            os.environ[key] = value
-
-    return True
-
-
-def _load_default_env_files() -> list[Path]:
-    """Load common environment files used by this repository.
-
-    :returns: List of env file paths that were successfully loaded.
-    :rtype: list[Path]
-    """
-    loaded_files: list[Path] = []
-    candidates = [
-        PROJECT_ROOT / '.env',
-        PROJECT_ROOT / 'deployment' / '.env',
-    ]
-    for path in candidates:
-        if _load_env_file(path):
-            loaded_files.append(path)
-    return loaded_files
-
-
-LOADED_ENV_FILES = _load_default_env_files()
-
-
-def _normalize_erpnext_base_url(url: str) -> str:
-    """Normalize ERPNext URL to a base URL without trailing /api.
-
-    :param url: Raw URL string to normalize.
-    :type url: str
-
-    :returns: Normalized base URL.
-    :rtype: str
-    """
-    normalized = url.strip().rstrip('/')
-    if normalized.endswith('/api'):
-        return normalized[:-4]
-    return normalized
-
-
-def _get_erpnext_config() -> tuple[str, str, str]:
-    """Resolve ERPNext URL and credentials from environment.
-
-    Supports legacy and gateway-prefixed variable names.
-
-    :returns: Tuple of (base_url, api_key, api_secret).
-    :rtype: (str, str, str)
-    """
-    raw_url = os.environ.get('ERPNEXT_URL', 'https://erp.kartoza.com')
-    api_key = (
-        os.environ.get('ERPNEXT_API_KEY')
-        or os.environ.get('GATEWAY_ERPNEXT_API_KEY')
-        or ''
-    )
-    api_secret = (
-        os.environ.get('ERPNEXT_API_SECRET')
-        or os.environ.get('GATEWAY_ERPNEXT_API_SECRET')
-        or ''
-    )
-    return _normalize_erpnext_base_url(raw_url), api_key, api_secret
-
-
-ERPNEXT_URL, API_KEY, API_SECRET = _get_erpnext_config()
+ERPNEXT = ERPNextClient()
 
 PORTFOLIO_DOCTYPE = os.environ.get('ERPNEXT_PORTFOLIO_DOCTYPE', 'Portfolio')
 CONTENT_DIR = PROJECT_ROOT / 'content' / 'portfolio'
-
-
-def _build_http_session() -> requests.Session:
-    """Create an HTTP session with retries for transient network failures.
-
-    :returns: Configured requests Session.
-    :rtype: requests.Session
-    """
-    session = requests.Session()
-
-    retry = Retry(
-        total=5,
-        connect=5,
-        read=5,
-        status=5,
-        backoff_factor=1,
-        status_forcelist=(429, 500, 502, 503, 504),
-        allowed_methods=frozenset(['GET']),
-        raise_on_status=False,
-    )
-    adapter = HTTPAdapter(max_retries=retry)
-    session.mount('https://', adapter)
-    session.mount('http://', adapter)
-
-    session.headers.update({
-        'Accept': 'application/json',
-        'User-Agent': 'kartoza-website-sync/1.0',
-    })
-
-    if API_KEY and API_SECRET:
-        session.headers.update(
-            {'Authorization': f'token {API_KEY}:{API_SECRET}'}
-        )
-
-    return session
-
-
-HTTP_SESSION = _build_http_session()
-
-
-def slugify(text: str) -> str:
-    """Convert text to a URL-friendly slug.
-
-    :param text: Text to slugify.
-    :type text: str
-
-    :returns: Slugified string.
-    :rtype: str
-    """
-    text = text.lower()
-    text = re.sub(r'[^a-z0-9]+', '-', text)
-    text = re.sub(r'-+', '-', text)
-    return text.strip('-')
-
-
-def normalize_for_comparison(content: str) -> str:
-    """Normalize content for fidelity comparison, focusing on text only.
-
-    :param content: Raw content string (may contain HTML or shortcodes).
-    :type content: str
-
-    :returns: Normalized, lowercase, whitespace-collapsed plain text.
-    :rtype: str
-    """
-    if not content:
-        return ''
-
-    content = re.sub(r'\{\{[<>%].*?[>%]\}\}', '', content)
-
-    soup = BeautifulSoup(content, 'html.parser')
-    text = soup.get_text(separator=' ')
-
-    text = re.sub(r'\s+', ' ', text)
-    return text.strip().lower()
-
-
-def check_fidelity(local_content: str, erpnext_content: str) -> bool:
-    """Check if local and ERPNext content match, ignoring formatting.
-
-    :param local_content: Local Hugo markdown content.
-    :type local_content: str
-
-    :param erpnext_content: ERPNext content to compare against.
-    :type erpnext_content: str
-
-    :returns: True if text content matches.
-    :rtype: bool
-    """
-    return (
-        normalize_for_comparison(local_content)
-        == normalize_for_comparison(erpnext_content)
-    )
-
-
-def html_to_markdown(html_content: str) -> str:
-    """Convert HTML content to clean markdown.
-
-    :param html_content: HTML string to convert.
-    :type html_content: str
-
-    :returns: Cleaned markdown string.
-    :rtype: str
-    """
-    if not html_content:
-        return ''
-
-    converter = html2text.HTML2Text()
-    converter.body_width = 0
-    converter.unicode_snob = True
-    converter.protect_links = True
-    converter.wrap_links = False
-    converter.mark_code = True
-
-    markdown = converter.handle(html_content)
-    markdown = re.sub(r'\n{3,}', '\n\n', markdown)
-    return markdown.strip()
-
-
-def read_local_file(filepath: Path) -> tuple[dict, str] | None:
-    """Read a local Hugo file and extract front matter and content.
-
-    :param filepath: Path to the Hugo markdown file.
-    :type filepath: Path
-
-    :returns: Tuple of (front_matter_dict, content_str) or None.
-    :rtype: (dict, str) or None
-    """
-    if not filepath.exists():
-        return None
-
-    try:
-        text = filepath.read_text()
-    except (IOError, OSError):
-        return None
-
-    if not text.startswith('---'):
-        return {}, text
-
-    end_match = re.search(r'\n---\n', text[3:])
-    if not end_match:
-        return {}, text
-
-    end_pos = end_match.start() + 3
-    front_matter_raw = text[4:end_pos]
-    content = text[end_pos + 5:]
-
-    try:
-        front_matter = yaml.safe_load(front_matter_raw) or {}
-    except yaml.YAMLError:
-        front_matter = {}
-
-    return front_matter, content
-
-
-def find_local_file(
-    content_dir: Path, erpnext_id: str, title: str
-) -> Path | None:
-    """Find a local Hugo file matching the ERPNext portfolio item.
-
-    Matches by erpnext_id in front matter first, then by slugified title.
-
-    :param content_dir: Directory containing Hugo markdown files.
-    :type content_dir: Path
-
-    :param erpnext_id: ERPNext document name to match.
-    :type erpnext_id: str
-
-    :param title: Portfolio item title for slug-based fallback.
-    :type title: str
-
-    :returns: Path to matching file or None.
-    :rtype: Path or None
-    """
-    for filepath in content_dir.glob('*.md'):
-        if filepath.name in ('_index.md', 'index.md'):
-            continue
-        result = read_local_file(filepath)
-        if result:
-            front_matter, _ = result
-            if front_matter.get('erpnext_id') == erpnext_id:
-                return filepath
-
-    expected_path = content_dir / f'{slugify(title)}.md'
-    if expected_path.exists():
-        return expected_path
-
-    return None
 
 
 def fetch_portfolio_list() -> list[dict]:
@@ -337,7 +51,7 @@ def fetch_portfolio_list() -> list[dict]:
     ]
     filters = [['publish', '=', 1]]
 
-    url = f'{ERPNEXT_URL}/api/resource/{PORTFOLIO_DOCTYPE}'
+    url = f'/api/resource/{PORTFOLIO_DOCTYPE}'
     params = {
         'fields': json.dumps(fields),
         'filters': json.dumps(filters),
@@ -345,7 +59,7 @@ def fetch_portfolio_list() -> list[dict]:
     }
 
     try:
-        response = HTTP_SESSION.get(url, params=params, timeout=30)
+        response = ERPNEXT.get(url, params=params)
         response.raise_for_status()
         data = response.json()
         return data.get('data', [])
@@ -357,8 +71,7 @@ def fetch_portfolio_list() -> list[dict]:
             print(
                 f'Authentication/permission error fetching portfolio list '
                 f'(HTTP {status_code}). '
-                'Set ERPNEXT_API_KEY/ERPNEXT_API_SECRET '
-                '(or GATEWAY_* variants).',
+                'Set ERPNEXT_API_KEY/ERPNEXT_API_SECRET.',
                 file=sys.stderr,
             )
             return []
@@ -381,10 +94,10 @@ def fetch_portfolio_detail(name: str) -> dict | None:
     :returns: Portfolio item data dict or None on failure.
     :rtype: dict or None
     """
-    url = f'{ERPNEXT_URL}/api/resource/{PORTFOLIO_DOCTYPE}/{name}'
+    url = f'/api/resource/{PORTFOLIO_DOCTYPE}/{name}'
 
     try:
-        response = HTTP_SESSION.get(url, timeout=30)
+        response = ERPNEXT.get(url)
         response.raise_for_status()
         data = response.json()
         return data.get('data', {})
@@ -413,13 +126,13 @@ def _resolve_thumbnail(item: dict) -> str:
         website_image = img.get('website_image', '').strip()
         if website_image:
             if website_image.startswith('/files/'):
-                return f'{ERPNEXT_URL}{website_image}'
+                return ERPNEXT.resolve_url(website_image)
             return website_image
     return '/img/portfolio/placeholder.png'
 
 
 def portfolio_to_hugo_frontmatter(
-    item: dict, mark_reviewed: bool = False
+        item: dict, mark_reviewed: bool = False
 ) -> dict:
     """Convert an ERPNext Portfolio item to Hugo front matter.
 
@@ -531,40 +244,12 @@ def portfolio_to_hugo_content(item: dict) -> str:
     return content.strip()
 
 
-def _update_review_fields(
-    filepath: Path, front_matter: dict, content: str
-) -> None:
-    """Update review fields in an existing Hugo file.
-
-    :param filepath: Path to the file to update.
-    :type filepath: Path
-
-    :param front_matter: Existing front matter dict.
-    :type front_matter: dict
-
-    :param content: Existing body content string.
-    :type content: str
-    """
-    front_matter['reviewedBy'] = 'Automated Check'
-    front_matter['reviewedDate'] = datetime.now().strftime('%Y-%m-%d')
-
-    file_content = '---\n'
-    file_content += yaml.dump(
-        front_matter, default_flow_style=False, allow_unicode=True
-    )
-    file_content += '---\n\n'
-    file_content += content.strip()
-    file_content += '\n'
-
-    filepath.write_text(file_content)
-
-
 def sync_portfolio_item(
-    item: dict,
-    content_dir: Path,
-    dry_run: bool = False,
-    force: bool = False,
-    verbose: bool = False,
+        item: dict,
+        content_dir: Path,
+        dry_run: bool = False,
+        force: bool = False,
+        verbose: bool = False,
 ) -> dict:
     """Sync a single portfolio item from ERPNext to Hugo.
 
@@ -601,7 +286,7 @@ def sync_portfolio_item(
             local_frontmatter, local_content = result
             if check_fidelity(local_content, erpnext_content):
                 if not local_frontmatter.get('reviewedBy') and not dry_run:
-                    _update_review_fields(
+                    update_review_fields(
                         local_file, local_frontmatter, local_content
                     )
                 return {
@@ -666,7 +351,7 @@ def print_results_table(results: list[dict], dry_run: bool = False) -> None:
     print(f'\n{"=" * 80}', file=sys.stderr)
     print(f'  {header}', file=sys.stderr)
     print(
-        f'  Source: {ERPNEXT_URL} | Date: {datetime.now().strftime("%Y-%m-%d")}',
+        f'  Source: {ERPNEXT.resolve_url("/")} | Date: {datetime.now().strftime("%Y-%m-%d")}',
         file=sys.stderr,
     )
     print(f'{"=" * 80}', file=sys.stderr)
@@ -682,7 +367,8 @@ def print_results_table(results: list[dict], dry_run: bool = False) -> None:
             fidelity_str = fidelity
 
         table_data.append([
-            result['title'][:40] + ('...' if len(result['title']) > 40 else ''),
+            result['title'][:40] + (
+                '...' if len(result['title']) > 40 else ''),
             result.get('client', '-')[:20],
             result['status'],
             fidelity_str,
@@ -690,7 +376,8 @@ def print_results_table(results: list[dict], dry_run: bool = False) -> None:
         ])
 
     headers = ['Project', 'Client', 'Status', 'Fidelity', 'File']
-    print(tabulate(table_data, headers=headers, tablefmt='simple'), file=sys.stderr)
+    print(tabulate(table_data, headers=headers, tablefmt='simple'),
+          file=sys.stderr)
 
     new_count = sum(1 for r in results if r['status'] == 'new')
     updated_count = sum(1 for r in results if r['status'] == 'updated')
@@ -743,15 +430,15 @@ def main() -> int:
     if args.doctype != PORTFOLIO_DOCTYPE:
         globals()['PORTFOLIO_DOCTYPE'] = args.doctype
 
-    if not API_KEY or not API_SECRET:
+    if not ERPNEXT.has_credentials:
         print(
             'Warning: API credentials not set; attempting unauthenticated access. '
             'Private ERPNext endpoints may return HTTP 401/403.',
             file=sys.stderr,
         )
         print(
-            'Looked in current shell plus .env files at '
-            f'{PROJECT_ROOT / ".env"} and {PROJECT_ROOT / "deployment" / ".env"}.',
+            'Looked in current shell plus .env file at '
+            f'{PROJECT_ROOT / ".env"}.',
             file=sys.stderr,
         )
         print(file=sys.stderr)
@@ -763,7 +450,8 @@ def main() -> int:
         )
         return 1
 
-    print(f'Fetching portfolio list from {ERPNEXT_URL}...', file=sys.stderr)
+    print(f'Fetching portfolio list from {ERPNEXT.resolve_url("/")}...',
+          file=sys.stderr)
     print(f'Using doctype: {PORTFOLIO_DOCTYPE}', file=sys.stderr)
 
     items = fetch_portfolio_list()

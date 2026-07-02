@@ -8,7 +8,7 @@ erpnext_id: a0c47e46a9
 erpnext_modified: '2026-06-04 11:28:58.282068'
 github: ''
 reviewedBy: Automated Check
-reviewedDate: '2026-06-19'
+reviewedDate: '2026-07-01'
 services:
 - GIS Fundamentals
 - QGIS Basics

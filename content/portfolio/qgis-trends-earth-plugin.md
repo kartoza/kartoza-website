@@ -8,7 +8,7 @@ erpnext_id: 2863fca522
 erpnext_modified: '2026-06-04 10:25:10.400728'
 github: 'https://github.com/ConservationInternational/trends.earth '
 reviewedBy: Automated Check
-reviewedDate: '2026-06-19'
+reviewedDate: '2026-07-01'
 services:
 - Development
 tags:

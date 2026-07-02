@@ -8,7 +8,7 @@ erpnext_id: n7guvttn6l
 erpnext_modified: '2025-04-02 12:10:07.479969'
 github: ''
 reviewedBy: Automated Check
-reviewedDate: '2026-06-19'
+reviewedDate: '2026-07-01'
 services: []
 tags:
 - Project

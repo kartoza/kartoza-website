@@ -1,14 +1,14 @@
 ---
 client: ''
 date: '2025-01-16'
-description: 'The REZoning tool (<https://rezoning.energydata.info/>) is an interactive,
+description: 'The REZoning tool (https://rezoning.energydata.info/ ) is an interactive,
   web-based platform designed to identify, visualise, and rank zones that are most
   suitable for the development of solar, wind, '
 erpnext_id: jn1ik04sdf
 erpnext_modified: '2025-07-30 18:58:08.319378'
 github: ''
 reviewedBy: Automated Check
-reviewedDate: '2026-06-19'
+reviewedDate: '2026-07-01'
 services: []
 tags:
 - Project

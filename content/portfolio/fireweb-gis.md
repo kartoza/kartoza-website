@@ -2,13 +2,13 @@
 client: Spinning Your Web Pty Ltd
 date: '2025-01-20'
 description: SYW.io (Spinning Your Web (Pty) Ltd) needed to add spatial visualisation
-  and interactivity to their Fireweb platform (<https://syw.io/fireweb.html>) and ultimately
+  and interactivity to their Fireweb platform (https://syw.io/fireweb.html) and ultimately
   to their Uniti platform (https://syw.i
 erpnext_id: mf5hopm8ue
 erpnext_modified: '2026-06-04 14:41:01.547497'
 github: ''
 reviewedBy: Automated Check
-reviewedDate: '2026-06-19'
+reviewedDate: '2026-07-01'
 services: []
 tags:
 - Project

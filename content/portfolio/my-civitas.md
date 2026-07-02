@@ -7,7 +7,7 @@ erpnext_id: 12f0530540
 erpnext_modified: '2025-10-15 15:50:10.449977'
 github: ''
 reviewedBy: Automated Check
-reviewedDate: '2026-06-19'
+reviewedDate: '2026-07-01'
 services:
 - Consultation
 - Development

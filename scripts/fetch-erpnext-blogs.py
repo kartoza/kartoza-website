@@ -19,40 +19,41 @@ Usage:
     ./fetch-erpnext-blogs.py --verbose    # Verbose output
 """
 
-import os
+import html2text
+import json
 import re
-import sys
-from datetime import datetime
-from pathlib import Path
-
-import warnings
-
 import requests
+import sys
+import warnings
 import yaml
 from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
+from datetime import datetime
 from dateutil import parser as date_parser
+from pathlib import Path
 from tabulate import tabulate
-import json
-import html2text
 
-# Suppress XML parsing warning when using html.parser on content that looks like XML
+from fetch_erpnext_client import ERPNextClient
+from fetch_erpnext_utilities import (
+    check_fidelity,
+    find_local_file,
+    read_local_file,
+    slugify,
+    update_review_fields,
+)
+
 warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
 
-
 # Configuration
-ERPNEXT_URL = os.environ.get('ERPNEXT_URL', 'https://erp.kartoza.com')
+ERPNEXT = ERPNextClient()
 KARTOZA_URL = 'https://kartoza.com'
 
 # Image storage path relative to Hugo static folder
 IMAGE_DIR = 'img/blog/erpnext'
 
 
-def get_auth_headers() -> dict:
-    """Get authentication headers for ERPNext API (empty for public blogs)."""
-    return {}
-
-
-def download_image(url: str, static_dir: Path, verbose: bool = False) -> str | None:
+def download_image(
+        url: str, static_dir: Path, verbose: bool = False
+) -> str | None:
     """
     Download an image from ERPNext and save it locally.
 
@@ -61,7 +62,8 @@ def download_image(url: str, static_dir: Path, verbose: bool = False) -> str | N
         static_dir: Path to Hugo's static directory
 
     Returns:
-        Local path to use in markdown (e.g., /img/blog/erpnext/xxx.png) or None on failure
+        Local path to use in markdown
+        (e.g., /img/blog/erpnext/xxx.png) or None on failure
     """
     # Normalize the URL
     if url.startswith('/files/'):
@@ -92,16 +94,21 @@ def download_image(url: str, static_dir: Path, verbose: bool = False) -> str | N
     try:
         if verbose:
             print(f"  Downloading: {filename}", file=sys.stderr)
-        response = requests.get(full_url, timeout=30)
+        response = ERPNEXT.get(full_url)
         response.raise_for_status()
         target_path.write_bytes(response.content)
         return local_url
     except requests.RequestException as e:
-        print(f"  Warning: Failed to download {full_url}: {e}", file=sys.stderr)
+        print(
+            f"  Warning: Failed to download {full_url}: {e}",
+            file=sys.stderr
+        )
         return None
 
 
-def process_images_in_content(content: str, static_dir: Path, verbose: bool = False) -> str:
+def process_images_in_content(
+        content: str, static_dir: Path, verbose: bool = False
+) -> str:
     """
     Find all images in markdown content, download them, and rewrite URLs.
 
@@ -112,7 +119,8 @@ def process_images_in_content(content: str, static_dir: Path, verbose: bool = Fa
     Returns:
         Content with rewritten image URLs
     """
-    # Pattern for markdown images: ![alt](/files/xxx) or ![alt](https://kartoza.com/files/xxx)
+    # Pattern for markdown images: ![alt](/files/xxx) or
+    # ![alt](https://kartoza.com/files/xxx)
     img_pattern = re.compile(r'!\[([^\]]*)\]\(([^)]+)\)')
 
     def replace_image(match):
@@ -131,7 +139,9 @@ def process_images_in_content(content: str, static_dir: Path, verbose: bool = Fa
     return img_pattern.sub(replace_image, content)
 
 
-def process_thumbnail(thumbnail_url: str, static_dir: Path, verbose: bool = False) -> str:
+def process_thumbnail(
+        thumbnail_url: str, static_dir: Path, verbose: bool = False
+) -> str:
     """
     Download thumbnail image and return local path.
 
@@ -149,115 +159,10 @@ def process_thumbnail(thumbnail_url: str, static_dir: Path, verbose: bool = Fals
     return local_path if local_path else thumbnail_url
 
 
-def slugify(text: str) -> str:
-    """Convert text to URL-friendly slug."""
-    text = text.lower()
-    text = re.sub(r'[^a-z0-9]+', '-', text)
-    text = re.sub(r'-+', '-', text)
-    return text.strip('-')
-
-
-def normalize_for_comparison(content: str) -> str:
-    """
-    Normalize content for fidelity comparison.
-    Focuses on TEXT content, ignores formatting/layout.
-    """
-    if not content:
-        return ''
-
-    # Remove Hugo shortcodes like {{< block >}} or {{< /block >}}
-    content = re.sub(r'\{\{[<>%].*?[>%]\}\}', '', content)
-
-    # Strip HTML tags but keep text content
-    soup = BeautifulSoup(content, 'html.parser')
-    text = soup.get_text(separator=' ')
-
-    # Collapse whitespace (multiple spaces/newlines -> single space)
-    text = re.sub(r'\s+', ' ', text)
-
-    # Strip leading/trailing whitespace and lowercase
-    return text.strip().lower()
-
-
-def check_fidelity(local_content: str, erpnext_content: str) -> bool:
-    """
-    Check if local and ERPNext content match (fidelity check).
-
-    Returns True if text content matches (ignoring formatting).
-    """
-    local_norm = normalize_for_comparison(local_content)
-    erpnext_norm = normalize_for_comparison(erpnext_content)
-    return local_norm == erpnext_norm
-
-
-def read_local_blog(filepath: Path) -> tuple[dict, str] | None:
-    """
-    Read a local Hugo blog file and extract front matter and content.
-
-    Returns:
-        Tuple of (front_matter_dict, content_str) or None if file doesn't exist
-    """
-    if not filepath.exists():
-        return None
-
-    try:
-        text = filepath.read_text()
-    except (IOError, OSError):
-        return None
-
-    # Check for front matter delimiter
-    if not text.startswith('---'):
-        return {}, text
-
-    # Find end of front matter
-    end_match = re.search(r'\n---\n', text[3:])
-    if not end_match:
-        return {}, text
-
-    end_pos = end_match.start() + 3
-    front_matter_raw = text[4:end_pos]
-    content = text[end_pos + 5:]
-
-    try:
-        front_matter = yaml.safe_load(front_matter_raw) or {}
-    except yaml.YAMLError:
-        front_matter = {}
-
-    return front_matter, content
-
-
-def find_local_file(content_dir: Path, erpnext_id: str, title: str) -> Path | None:
-    """
-    Find a local Hugo file matching the ERPNext article.
-
-    Matches by:
-    1. erpnext_id in front matter (primary)
-    2. Slugified title matching filename (fallback)
-
-    Returns:
-        Path to matching file or None
-    """
-    # First, try to find by erpnext_id in front matter
-    for filepath in content_dir.glob('*.md'):
-        if filepath.name == '_index.md':
-            continue
-        result = read_local_blog(filepath)
-        if result:
-            front_matter, _ = result
-            if front_matter.get('erpnext_id') == erpnext_id:
-                return filepath
-
-    # Fallback: match by slugified title
-    expected_filename = f"{slugify(title)}.md"
-    expected_path = content_dir / expected_filename
-    if expected_path.exists():
-        return expected_path
-
-    return None
-
-
-def sync_blog(blog: dict, content_dir: Path, static_dir: Path, dry_run: bool = False,
-               force: bool = False, skip_images: bool = False, verbose: bool = False) -> dict:
+def sync_blog(
+        blog: dict, content_dir: Path, static_dir: Path, dry_run: bool = False,
+        force: bool = False, skip_images: bool = False, verbose: bool = False
+) -> dict:
     """
     Sync a single blog article from ERPNext to Hugo.
 
@@ -284,7 +189,7 @@ def sync_blog(blog: dict, content_dir: Path, static_dir: Path, dry_run: bool = F
 
     if local_file and not force:
         # File exists - check fidelity (skip if force mode)
-        result = read_local_blog(local_file)
+        result = read_local_file(local_file)
         if result:
             local_frontmatter, local_content = result
             if check_fidelity(local_content, erpnext_content):
@@ -292,8 +197,11 @@ def sync_blog(blog: dict, content_dir: Path, static_dir: Path, dry_run: bool = F
                 # Update review fields if not already set
                 if not local_frontmatter.get('reviewedBy'):
                     if not dry_run:
-                        _update_review_fields(local_file, local_frontmatter, local_content)
-                return {'status': 'unchanged', 'fidelity': 'passed', 'file': local_file.name}
+                        update_review_fields(
+                            local_file, local_frontmatter, local_content
+                        )
+                return {'status': 'unchanged', 'fidelity': 'passed',
+                        'file': local_file.name}
 
         # Content differs - overwrite with ERPNext
         status = 'updated'
@@ -314,7 +222,9 @@ def sync_blog(blog: dict, content_dir: Path, static_dir: Path, dry_run: bool = F
 
     # Process images (download and rewrite URLs)
     if not skip_images and not dry_run:
-        content = process_images_in_content(content, static_dir, verbose=verbose)
+        content = process_images_in_content(
+            content, static_dir, verbose=verbose
+        )
         # Also process thumbnail
         if front_matter.get('thumbnail'):
             front_matter['thumbnail'] = process_thumbnail(
@@ -323,7 +233,9 @@ def sync_blog(blog: dict, content_dir: Path, static_dir: Path, dry_run: bool = F
 
     # Build file content
     file_content = "---\n"
-    file_content += yaml.dump(front_matter, default_flow_style=False, allow_unicode=True)
+    file_content += yaml.dump(
+        front_matter, default_flow_style=False, allow_unicode=True
+    )
     file_content += "---\n\n"
     file_content += content
     file_content += "\n"
@@ -331,21 +243,9 @@ def sync_blog(blog: dict, content_dir: Path, static_dir: Path, dry_run: bool = F
     if not dry_run:
         filepath.write_text(file_content)
 
-    return {'status': status, 'fidelity': 'auto-reviewed', 'file': filepath.name}
-
-
-def _update_review_fields(filepath: Path, front_matter: dict, content: str) -> None:
-    """Update review fields in an existing file."""
-    front_matter['reviewedBy'] = 'Automated Check'
-    front_matter['reviewedDate'] = datetime.now().strftime('%Y-%m-%d')
-
-    file_content = "---\n"
-    file_content += yaml.dump(front_matter, default_flow_style=False, allow_unicode=True)
-    file_content += "---\n\n"
-    file_content += content.strip()
-    file_content += "\n"
-
-    filepath.write_text(file_content)
+    return {
+        'status': status, 'fidelity': 'auto-reviewed', 'file': filepath.name
+    }
 
 
 def fetch_blog_list() -> list[dict]:
@@ -355,7 +255,7 @@ def fetch_blog_list() -> list[dict]:
     page_size = 20
 
     while True:
-        url = f"{ERPNEXT_URL}/api/method/frappe.www.list.get"
+        url = f"{ERPNEXT.base_url}/api/method/frappe.www.list.get"
         params = {
             'doctype': 'Blog Post',
             'limit_start': limit_start,
@@ -363,11 +263,14 @@ def fetch_blog_list() -> list[dict]:
         }
 
         try:
-            response = requests.get(url, params=params, timeout=30)
+            response = ERPNEXT.get(url, params=params)
             response.raise_for_status()
             data = response.json()
         except requests.RequestException as e:
-            print(f"Error fetching blog list (page {limit_start // page_size + 1}): {e}", file=sys.stderr)
+            print(
+                f"Error fetching blog list "
+                f"(page {limit_start // page_size + 1}): {e}",
+                file=sys.stderr)
             break
         except json.JSONDecodeError as e:
             print(f"Error parsing blog list response: {e}", file=sys.stderr)
@@ -378,7 +281,8 @@ def fetch_blog_list() -> list[dict]:
 
         # Parse the raw_result JSON string
         try:
-            page_blogs = json.loads(raw_result) if isinstance(raw_result, str) else raw_result
+            page_blogs = json.loads(
+                raw_result) if isinstance(raw_result, str) else raw_result
         except json.JSONDecodeError:
             page_blogs = []
 
@@ -389,14 +293,16 @@ def fetch_blog_list() -> list[dict]:
         for blog in page_blogs:
             route = blog.get('route', '')
             blogs.append({
-                'name': f"/{route}" if route and not route.startswith('/') else route,
+                'name': f"/{route}" if route and not route.startswith(
+                    '/') else route,
                 'title': blog.get('title', 'Untitled'),
                 'blog_category': blog.get('blog_category', 'uncategorised'),
                 'published_on': blog.get('published_on', ''),
                 'blogger': blog.get('blogger', 'Kartoza'),
                 'content': blog.get('content', ''),
                 'cover_image': blog.get('cover_image', ''),
-                'modified': blog.get('published_on', ''),  # Use published date as modified
+                'modified': blog.get('published_on', ''),
+                # Use published date as modified
             })
 
         # Check if there are more pages
@@ -423,10 +329,10 @@ def fetch_blog_detail(name: str) -> dict | None:
         return name
 
     # Fallback: scrape the public blog page
-    url = f"{ERPNEXT_URL}{name}"
+    url = f"{ERPNEXT.base_url}{name}"
 
     try:
-        response = requests.get(url, timeout=30)
+        response = ERPNEXT.get(url)
         response.raise_for_status()
     except requests.RequestException as e:
         print(f"Error fetching blog '{name}': {e}", file=sys.stderr)
@@ -440,7 +346,11 @@ def fetch_blog_detail(name: str) -> dict | None:
         return tag.get('content', '') if tag else ''
 
     # Get title from og:title (has proper capitalization) or meta name
-    title = get_meta('property', 'og:title') or get_meta('name', 'title') or get_meta('name', 'name')
+    title = get_meta(
+        'property', 'og:title'
+    ) or get_meta('name', 'title') or get_meta(
+        'name', 'name'
+    )
     if not title:
         h1 = soup.find('h1', class_='blog-title')
         title = h1.get_text(strip=True) if h1 else 'Untitled'
@@ -448,7 +358,9 @@ def fetch_blog_detail(name: str) -> dict | None:
     title = re.sub(r'^Kartoza\s*-\s*', '', title)
 
     # Get description/intro
-    description = get_meta('name', 'description') or get_meta('property', 'og:description')
+    description = get_meta(
+        'name', 'description'
+    ) or get_meta('property', 'og:description')
     if not description:
         intro = soup.find('p', class_='blog-intro')
         description = intro.get_text(strip=True) if intro else ''
@@ -461,15 +373,21 @@ def fetch_blog_detail(name: str) -> dict | None:
         author = avatar_span.get('title')
     # Or from author link
     if not author:
-        author_link = soup.find('a', href=lambda h: h and '/blog?blogger=' in h)
+        author_link = soup.find(
+            'a', href=lambda h: h and '/blog?blogger=' in h
+        )
         if author_link:
             author = author_link.get_text(strip=True)
     # Fallback to meta tag
     if not author:
-        author = get_meta('name', 'author') or get_meta('property', 'og:author') or 'Kartoza'
+        author = get_meta(
+            'name', 'author'
+        ) or get_meta('property', 'og:author') or 'Kartoza'
 
     # Get published date
-    published_on = get_meta('name', 'datePublished') or get_meta('property', 'og:published_on')
+    published_on = get_meta(
+        'name', 'datePublished'
+    ) or get_meta('property', 'og:published_on')
     if not published_on:
         time_tag = soup.find('time', attrs={'datetime': True})
         published_on = time_tag['datetime'] if time_tag else ''
@@ -515,15 +433,18 @@ def blog_to_hugo_frontmatter(blog: dict, mark_reviewed: bool = False) -> dict:
 
     # Get thumbnail from featured_image or use placeholder
     # Get thumbnail from cover_image (API) or featured_image (scraping) or use placeholder
-    thumbnail = blog.get('cover_image', '') or blog.get('featured_image', '') or '/img/blog/placeholder.png'
+    thumbnail = blog.get(
+        'cover_image', ''
+    ) or blog.get('featured_image', '') or '/img/blog/placeholder.png'
     # Ensure full URL for external images
     if thumbnail and not thumbnail.startswith(('http://', 'https://', '/')):
-        thumbnail = f"{ERPNEXT_URL}/{thumbnail}"
+        thumbnail = f"{ERPNEXT.base_url}/{thumbnail}"
 
     # Build front matter
     front_matter = {
         'title': blog.get('title', 'Untitled'),
-        'description': blog.get('blog_intro', '')[:200] if blog.get('blog_intro') else '',
+        'description': blog.get('blog_intro', '')[:200] if blog.get(
+            'blog_intro') else '',
         'date': date_str,
         'author': blog.get('blogger', 'Kartoza'),
         'thumbnail': thumbnail,
@@ -571,7 +492,9 @@ def blog_to_hugo_content(blog: dict) -> str:
     return markdown.strip()
 
 
-def create_hugo_file(blog: dict, content_dir: Path, dry_run: bool = False) -> tuple[str, str]:
+def create_hugo_file(
+        blog: dict, content_dir: Path, dry_run: bool = False
+) -> tuple[str, str]:
     """
     Create Hugo markdown file from ERPNext blog.
 
@@ -592,7 +515,9 @@ def create_hugo_file(blog: dict, content_dir: Path, dry_run: bool = False) -> tu
 
     # Build the file content
     file_content = "---\n"
-    file_content += yaml.dump(front_matter, default_flow_style=False, allow_unicode=True)
+    file_content += yaml.dump(
+        front_matter, default_flow_style=False, allow_unicode=True
+    )
     file_content += "---\n\n"
     file_content += content
     file_content += "\n"
@@ -642,12 +567,16 @@ def print_status_table(results: list[dict], dry_run: bool = False) -> None:
 
     print("\n" + "=" * 80, file=sys.stderr)
     print(f"  {header}", file=sys.stderr)
-    print(f"  Source: {ERPNEXT_URL} | Date: {datetime.now().strftime('%Y-%m-%d')}", file=sys.stderr)
+    print(
+        f"  Source: {ERPNEXT.base_url} | "
+        f"Date: {datetime.now().strftime('%Y-%m-%d')}",
+        file=sys.stderr)
     print("=" * 80, file=sys.stderr)
 
     # Print table using tabulate
     headers = ['Title', 'Date', 'Author', 'Status', 'Fidelity']
-    print(tabulate(table_data, headers=headers, tablefmt='simple'), file=sys.stderr)
+    print(tabulate(table_data, headers=headers, tablefmt='simple'),
+          file=sys.stderr)
 
     # Print summary
     print("-" * 80, file=sys.stderr)
@@ -656,7 +585,11 @@ def print_status_table(results: list[dict], dry_run: bool = False) -> None:
     updated_count = sum(1 for r in results if r['status'] == 'updated')
     error_count = sum(1 for r in results if r['status'] == 'error')
 
-    print(f"  Summary: {len(results)} total | {new_count} new | {unchanged_count} unchanged | {updated_count} updated | {error_count} errors", file=sys.stderr)
+    print(
+        f"  Summary: {len(results)} total | {new_count} new | "
+        f"{unchanged_count} unchanged | "
+        f"{updated_count} updated | {error_count} errors",
+        file=sys.stderr)
     print("=" * 80, file=sys.stderr)
 
 
@@ -680,16 +613,26 @@ def main():
     parser = argparse.ArgumentParser(
         description='Sync blog articles from ERPNext with fidelity checking'
     )
-    parser.add_argument('--dry-run', '-n', action='store_true',
-                        help='Show what would happen without writing files')
-    parser.add_argument('--force', '-f', action='store_true',
-                        help='Force overwrite all files, ignoring fidelity check')
-    parser.add_argument('--list', '-l', action='store_true',
-                        help='Only list available blogs, do not sync')
-    parser.add_argument('--skip-images', action='store_true',
-                        help='Skip downloading images')
-    parser.add_argument('--verbose', '-v', action='store_true',
-                        help='Show verbose output')
+    parser.add_argument(
+        '--dry-run', '-n', action='store_true',
+        help='Show what would happen without writing files'
+    )
+    parser.add_argument(
+        '--force', '-f', action='store_true',
+        help='Force overwrite all files, ignoring fidelity check'
+    )
+    parser.add_argument(
+        '--list', '-l', action='store_true',
+        help='Only list available blogs, do not sync'
+    )
+    parser.add_argument(
+        '--skip-images', action='store_true',
+        help='Skip downloading images'
+    )
+    parser.add_argument(
+        '--verbose', '-v', action='store_true',
+        help='Show verbose output'
+    )
     args = parser.parse_args()
 
     script_dir = Path(__file__).parent
@@ -697,10 +640,13 @@ def main():
     static_dir = script_dir.parent / 'static'
 
     if not content_dir.exists():
-        print(f"Error: Content directory not found: {content_dir}", file=sys.stderr)
+        print(
+            f"Error: Content directory not found: {content_dir}",
+            file=sys.stderr
+        )
         sys.exit(2)
 
-    print(f"Fetching blog list from {ERPNEXT_URL}...", file=sys.stderr)
+    print(f"Fetching blog list from {ERPNEXT.base_url}...", file=sys.stderr)
     blogs = fetch_blog_list()
 
     if not blogs:
@@ -733,7 +679,10 @@ def main():
 
         # Fetch full blog content by scraping the web page (has proper HTML formatting)
         if args.verbose:
-            print(f"Fetching {i+1}/{len(blogs)}: {blog.get('title', 'Untitled')}", file=sys.stderr)
+            print(
+                f"Fetching {i + 1}/{len(blogs)}: "
+                f"{blog.get('title', 'Untitled')}",
+                file=sys.stderr)
         blog_detail = fetch_blog_detail(blog_name)
         if not blog_detail:
             results.append({
