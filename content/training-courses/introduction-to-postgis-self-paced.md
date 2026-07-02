@@ -1,16 +1,20 @@
-<!-- ---
+---
 title: "Introduction to PostGIS (Self-paced)"
+item_code: "Introduction to PostGIS (Self-paced)"
+price: 500
+price_currency: "ZAR"
 description: "This course is presented to transfer a working knowledge of SQL to the participants. During this course you will learn about 1. General database concepts, including what is a relational database? 2. SQL basics including syntax, structure, standards and conventions 3. Connecting to a database 4. B"
 thumbnail: "/img/training/erpnext/postgis.png"
+duration: "Asynchronous"
 shop_url: "https://erp.kartoza.com/training-courses/introduction-to-postgis-self-paced-p5aci"
 tags:
   - Training
 track: "Server & Infrastructure"
 draft: false
-reviewedBy: "Tim Sutton"
-reviewedDate: 2026-04-16
+reviewedBy: "Juanique Voogt"
+reviewedDate: 2026-07-02
 ---
-
+<!-- 
 {{< block
     title="Introduction to PostGIS (Self-paced)"
     subtitle="Professional GIS Training"
@@ -18,7 +22,7 @@ reviewedDate: 2026-04-16
     sub-block-side="bottom"
 >}}
 This course is presented to transfer a working knowledge of SQL to the participants. During this course you will learn about 1. General database concepts, including what is a relational database? 2. SQL basics including syntax, structure, standards and conventions 3. Connecting to a database 4. B
-{{< /block >}}
+{{< /block >}} -->
 
 ## Overview
 
@@ -47,4 +51,4 @@ At the end of the course participants will understand and be able to:
 
 <!-- markdownlint-disable MD034 -->
 <!-- {{< button-bar "fas fa-shopping-cart:Book This Course:https://erp.kartoza.com/training-courses/introduction-to-postgis-self-paced-p5aci" "fas fa-envelope:Enquire:/contact-us/" >}}
-markdownlint-enable MD034 --> -->
+markdownlint-enable MD034 -->
