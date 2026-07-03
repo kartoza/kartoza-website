@@ -5,6 +5,7 @@ department: "DevOps & Infrastructure"
 departmentIcon: "fa-server"
 weight: 43
 draft: false
+hidden: true
 image: "/img/team/moloko-mokubedi.jpg"
 country: "South Africa"
 github: "LokoMoloko98"
