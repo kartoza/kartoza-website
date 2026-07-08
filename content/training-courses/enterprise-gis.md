@@ -12,8 +12,8 @@ tags:
   - GeoServer
   - GeoNode
 date: 2024-01-01
-reviewedBy: "Irwan Fathurrahman"
-reviewedDate: 2026-05-18
+reviewedBy: "Lené van Jaarsveld"
+reviewedDate: 2026-07-08
 ---
 
 ## Course Overview
