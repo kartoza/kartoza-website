@@ -1,7 +1,7 @@
 ---
 title: "Grade 8 Map Skills: Provinces of South Africa"
 description: "This lesson provides Grade 8 learners with access to materials aligned with their current curriculum. The resources include a printable puzzle and a task designed using QGIS to introduce students to map creation."
-thumbnail: "/img/courses/qgis-introduction.svg"
+thumbnail: "/img/courses/grade8.png"
 item_code: "Grade 8 Map Skills: Provinces of South Africa"
 price: 245
 price_currency: "ZAR"
@@ -10,8 +10,8 @@ tags:
   - Training
 track: "Foundational"
 draft: false
-reviewedBy: "Juanique Voogt"
-reviewedDate: 2026-03-07
+reviewedBy: "Lené van Jaarsveld"
+reviewedDate: 2026-07-08
 ---
 
 {{< block
