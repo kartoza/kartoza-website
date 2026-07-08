@@ -1,7 +1,7 @@
 ---
 title: "Enterprise GIS"
 description: "A comprehensive 5-day course covering everything you need to plan, deploy, and manage a production-grade open source GIS stack — PostGIS, GeoServer, QGIS Server, and GeoNode — within your organisation's IT environment."
-thumbnail: "/img/courses/qgis-introduction.svg"
+thumbnail: "/img/courses/enterprisegis.png"
 duration: "5 days"
 level: "Intermediate"
 track: "Development"
