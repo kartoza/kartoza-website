@@ -1,5 +1,5 @@
 ---
-title: "Grade 12 GIS SKills - Geography"
+title: "Grade 12 GIS Skills - Geography"
 item_code: "GR 12 GIS Course"
 price: 245
 price_currency: "ZAR"

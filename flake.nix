@@ -171,33 +171,19 @@
               # Testing tools
               pkgs.nodejs_22 # Node.js for Playwright
               pkgs.playwright-driver.browsers # Playwright browsers
+              pkgs.chafa # Terminal image rendering (kitty/sixel/ASCII)
             ];
             shellHook = ''
               export DIRENV_LOG_FORMAT=
               export PLAYWRIGHT_BROWSERS_PATH=${pkgs.playwright-driver.browsers}
               export PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=true
-              echo "-----------------------"
-              echo "🌈 Your Hugo Dev Environment is ready."
-              echo "It provides hugo and vscode for use with the Kartoza Website Project"
-              echo ""
-              echo "🪛 VSCode:"
-              echo "--------------------------------"
-              echo "Start vscode like this:"
-              echo ""
-              echo "./vscode.sh"
-              echo ""
-              echo "🪛 Hugo:"
-              echo "--------------------------------"
-              echo "Start Hugo like this:"
-              echo ""
-              echo "hugo server"
-              echo ""
-              echo "🎭 Playwright:"
-              echo "--------------------------------"
-              echo "Run e2e tests like this:"
-              echo ""
-              echo "cd playwright/ci-test && npm test"
-              echo "-----------------------"
+
+              # Render the project welcome screen. The script lives in the
+              # repo (not the Nix store) so contributors can tweak it without
+              # rebuilding the flake.
+              if [ -x scripts/dev-shell-welcome.sh ]; then
+                scripts/dev-shell-welcome.sh
+              fi
             '';
           };
         }

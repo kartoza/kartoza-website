@@ -25,232 +25,29 @@ Usage:
 """
 
 import json
-import os
-import re
+import requests
 import sys
+import yaml
 from datetime import datetime
 from pathlib import Path
-
-import warnings
-
-import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
-import yaml
-from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
 from tabulate import tabulate
-import html2text
 
-# Suppress XML parsing warning
-warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+from fetch_erpnext_client import ERPNextClient
+from fetch_erpnext_utilities import (
+    check_fidelity,
+    find_local_file,
+    html_to_markdown,
+    read_local_file,
+    slugify,
+    update_review_fields,
+)
 
 # Configuration
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-
-def _load_env_file(path: Path) -> bool:
-    """Load KEY=VALUE entries from a dotenv-like file into os.environ."""
-    if not path.exists():
-        return False
-
-    try:
-        lines = path.read_text().splitlines()
-    except (IOError, OSError):
-        return False
-
-    for raw_line in lines:
-        line = raw_line.strip()
-        if not line or line.startswith('#') or '=' not in line:
-            continue
-
-        key, value = line.split('=', 1)
-        key = key.strip()
-        value = value.strip()
-
-        if key.startswith('export '):
-            key = key[len('export '):].strip()
-
-        if ((value.startswith('"') and value.endswith('"'))
-                or (value.startswith("'") and value.endswith("'"))):
-            value = value[1:-1]
-
-        # Keep shell-exported values authoritative.
-        if key and key not in os.environ:
-            os.environ[key] = value
-
-    return True
-
-
-def _load_default_env_files() -> list[Path]:
-    """Load common environment files used by this repository."""
-    loaded_files: list[Path] = []
-    candidates = [
-        PROJECT_ROOT / '.env',
-        PROJECT_ROOT / 'deployment' / '.env',
-    ]
-    for path in candidates:
-        if _load_env_file(path):
-            loaded_files.append(path)
-    return loaded_files
-
-
-LOADED_ENV_FILES = _load_default_env_files()
-
-
-def _normalize_erpnext_base_url(url: str) -> str:
-    """Normalize ERPNext URL to a base URL without trailing /api."""
-    normalized = url.strip().rstrip('/')
-    if normalized.endswith('/api'):
-        return normalized[:-4]
-    return normalized
-
-
-def _get_erpnext_config() -> tuple[str, str, str]:
-    """
-    Resolve ERPNext URL and credentials from environment.
-
-    Supports legacy and gateway-prefixed variable names.
-    """
-    raw_url = 'https://erp.kartoza.com'
-    api_key = os.environ.get('ERPNEXT_API_KEY') or os.environ.get('GATEWAY_ERPNEXT_API_KEY') or ''
-    api_secret = os.environ.get('ERPNEXT_API_SECRET') or os.environ.get('GATEWAY_ERPNEXT_API_SECRET') or ''
-    return _normalize_erpnext_base_url(raw_url), api_key, api_secret
-
-
-ERPNEXT_URL, API_KEY, API_SECRET = _get_erpnext_config()
-CONTENT_DIR = Path(__file__).parent.parent / 'content' / 'careers'
-
-
-def _build_http_session() -> requests.Session:
-    """Create an HTTP session with retries for transient network/server failures."""
-    session = requests.Session()
-
-    retry = Retry(
-        total=5,
-        connect=5,
-        read=5,
-        status=5,
-        backoff_factor=1,
-        status_forcelist=(429, 500, 502, 503, 504),
-        allowed_methods=frozenset(['GET']),
-        raise_on_status=False,
-    )
-    adapter = HTTPAdapter(max_retries=retry)
-    session.mount('https://', adapter)
-    session.mount('http://', adapter)
-
-    session.headers.update({
-        'Accept': 'application/json',
-        'User-Agent': 'kartoza-website-sync/1.0',
-    })
-
-    if API_KEY and API_SECRET:
-        session.headers.update({'Authorization': f'token {API_KEY}:{API_SECRET}'})
-
-    return session
-
-
-HTTP_SESSION = _build_http_session()
-
-
-def slugify(text: str) -> str:
-    """Convert text to URL-friendly slug."""
-    text = text.lower()
-    text = re.sub(r'[^a-z0-9]+', '-', text)
-    text = re.sub(r'-+', '-', text)
-    return text.strip('-')
-
-
-def normalize_for_comparison(content: str) -> str:
-    """
-    Normalize content for fidelity comparison.
-    Focuses on TEXT content, ignores formatting/layout.
-    """
-    if not content:
-        return ''
-
-    # Remove Hugo shortcodes like {{< block >}} or {{< /block >}}
-    content = re.sub(r'\{\{[<>%].*?[>%]\}\}', '', content)
-
-    # Strip HTML tags but keep text content
-    soup = BeautifulSoup(content, 'html.parser')
-    text = soup.get_text(separator=' ')
-
-    # Collapse whitespace (multiple spaces/newlines -> single space)
-    text = re.sub(r'\s+', ' ', text)
-
-    # Strip leading/trailing whitespace and lowercase
-    return text.strip().lower()
-
-
-def check_fidelity(local_content: str, erpnext_content: str) -> bool:
-    """
-    Check if local and ERPNext content match (fidelity check).
-
-    Returns True if text content matches (ignoring formatting).
-    """
-    local_norm = normalize_for_comparison(local_content)
-    erpnext_norm = normalize_for_comparison(erpnext_content)
-    return local_norm == erpnext_norm
-
-
-def read_local_file(filepath: Path) -> tuple[dict, str] | None:
-    """
-    Read a local Hugo file and extract front matter and content.
-
-    Returns:
-        Tuple of (front_matter_dict, content_str) or None if file doesn't exist
-    """
-    if not filepath.exists():
-        return None
-
-    try:
-        text = filepath.read_text()
-    except (IOError, OSError):
-        return None
-
-    if not text.startswith('---'):
-        return {}, text
-
-    end_match = re.search(r'\n---\n', text[3:])
-    if not end_match:
-        return {}, text
-
-    end_pos = end_match.start() + 3
-    front_matter_raw = text[4:end_pos]
-    content = text[end_pos + 5:]
-
-    try:
-        front_matter = yaml.safe_load(front_matter_raw) or {}
-    except yaml.YAMLError:
-        front_matter = {}
-
-    return front_matter, content
-
-
-def find_local_file(content_dir: Path, erpnext_id: str, title: str) -> Path | None:
-    """
-    Find a local Hugo file matching the ERPNext job opening.
-
-    Matches by:
-    1. erpnext_id in front matter (primary)
-    2. Slugified title matching filename (fallback)
-    """
-    for filepath in content_dir.glob('*.md'):
-        if filepath.name == '_index.md' or filepath.name == 'index.md':
-            continue
-        result = read_local_file(filepath)
-        if result:
-            front_matter, _ = result
-            if front_matter.get('erpnext_id') == erpnext_id:
-                return filepath
-
-    expected_filename = f"{slugify(title)}.md"
-    expected_path = content_dir / expected_filename
-    if expected_path.exists():
-        return expected_path
-
-    return None
+ERPNEXT = ERPNextClient()
+ERPNEXT_URL = ERPNEXT.base_url
+CONTENT_DIR = PROJECT_ROOT / 'content' / 'careers'
 
 
 def fetch_job_openings() -> list:
@@ -271,17 +68,19 @@ def fetch_job_openings() -> list:
     }
 
     try:
-        response = HTTP_SESSION.get(url, params=params, timeout=30)
+        response = ERPNEXT.get(url, params=params)
         response.raise_for_status()
         data = response.json()
         return data.get('data', [])
     except requests.HTTPError as e:
-        status_code = e.response.status_code if e.response is not None else None
+        status_code = (
+            e.response.status_code if e.response is not None else None
+        )
         if status_code in (401, 403):
             print(
                 "Authentication/permission error while fetching job openings "
                 f"(HTTP {status_code}). "
-                "Set ERPNEXT_API_KEY/ERPNEXT_API_SECRET (or GATEWAY_* variants)."
+                "Set ERPNEXT_API_KEY/ERPNEXT_API_SECRET."
             )
             return []
         print(f"Error fetching job openings (HTTP {status_code}): {e}")
@@ -300,33 +99,13 @@ def fetch_job_detail(job_name: str) -> dict | None:
     """Fetch full job opening details from ERPNext API."""
     url = f"{ERPNEXT_URL}/api/resource/Job Opening/{job_name}"
     try:
-        response = HTTP_SESSION.get(url, timeout=30)
+        response = ERPNEXT.get(url)
         response.raise_for_status()
         data = response.json()
         return data.get('data', {})
     except requests.RequestException as e:
         print(f"Error fetching job detail for {job_name}: {e}")
         return None
-
-
-def html_to_markdown(html_content: str) -> str:
-    """Convert HTML content to clean markdown."""
-    if not html_content:
-        return ''
-
-    h = html2text.HTML2Text()
-    h.body_width = 0  # No wrapping
-    h.unicode_snob = True
-    h.protect_links = True
-    h.wrap_links = False
-    h.mark_code = True
-
-    md = h.handle(html_content)
-
-    # Clean up excessive blank lines
-    md = re.sub(r'\n{3,}', '\n\n', md)
-
-    return md.strip()
 
 
 def job_to_hugo_frontmatter(job: dict, mark_reviewed: bool = False) -> dict:
@@ -338,7 +117,8 @@ def job_to_hugo_frontmatter(job: dict, mark_reviewed: bool = False) -> dict:
         'layout': 'job',
     }
 
-    # Status / draft — only hide truly Closed positions; Open jobs appear regardless of publish flag
+    # Status / draft — only hide truly Closed positions;
+    # Open jobs appear regardless of publish flag
     status = job.get('status', 'Open')
     if status == 'Closed':
         front_matter['draft'] = True
@@ -350,7 +130,9 @@ def job_to_hugo_frontmatter(job: dict, mark_reviewed: bool = False) -> dict:
             dt = datetime.fromisoformat(str(creation).replace('Z', '+00:00'))
             front_matter['date'] = dt.strftime('%Y-%m-%dT%H:%M:%S+00:00')
         except (ValueError, TypeError):
-            front_matter['date'] = datetime.now().strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            front_matter['date'] = datetime.now().strftime(
+                '%Y-%m-%dT%H:%M:%S+00:00'
+            )
 
     modified = job.get('modified')
     if modified:
@@ -388,8 +170,10 @@ def job_to_hugo_frontmatter(job: dict, mark_reviewed: bool = False) -> dict:
     return front_matter
 
 
-def sync_job(job: dict, content_dir: Path, dry_run: bool = False,
-             force: bool = False, verbose: bool = False) -> dict:
+def sync_job(
+        job: dict, content_dir: Path, dry_run: bool = False,
+        force: bool = False, verbose: bool = False
+) -> dict:
     """
     Sync a single job opening from ERPNext to Hugo.
 
@@ -412,8 +196,10 @@ def sync_job(job: dict, content_dir: Path, dry_run: bool = False,
                 # Content matches - fidelity passed
                 if not local_frontmatter.get('reviewedBy'):
                     if not dry_run:
-                        _update_review_fields(local_file, local_frontmatter, local_content)
-                return {'status': 'unchanged', 'fidelity': 'passed', 'file': local_file.name,
+                        update_review_fields(local_file, local_frontmatter,
+                                             local_content)
+                return {'status': 'unchanged', 'fidelity': 'passed',
+                        'file': local_file.name,
                         'title': title}
 
         status = 'updated'
@@ -432,7 +218,8 @@ def sync_job(job: dict, content_dir: Path, dry_run: bool = False,
 
     # Build file content
     file_content = "---\n"
-    file_content += yaml.dump(front_matter, default_flow_style=False, allow_unicode=True)
+    file_content += yaml.dump(front_matter, default_flow_style=False,
+                              allow_unicode=True)
     file_content += "---\n\n"
     file_content += content
     file_content += "\n"
@@ -441,35 +228,28 @@ def sync_job(job: dict, content_dir: Path, dry_run: bool = False,
         content_dir.mkdir(parents=True, exist_ok=True)
         filepath.write_text(file_content)
 
-    return {'status': status, 'fidelity': 'auto-reviewed', 'file': filepath.name,
-            'title': title}
+    return {
+        'status': status, 'fidelity': 'auto-reviewed',
+        'file': filepath.name, 'title': title
+    }
 
 
-def _update_review_fields(filepath: Path, front_matter: dict, content: str) -> None:
-    """Update review fields in an existing file."""
-    front_matter['reviewedBy'] = 'Automated Check'
-    front_matter['reviewedDate'] = datetime.now().strftime('%Y-%m-%d')
-
-    file_content = "---\n"
-    file_content += yaml.dump(front_matter, default_flow_style=False, allow_unicode=True)
-    file_content += "---\n\n"
-    file_content += content.strip()
-    file_content += "\n"
-
-    filepath.write_text(file_content)
-
-
-def unpublish_closed_jobs(jobs: list, content_dir: Path, dry_run: bool = False,
-                          verbose: bool = False) -> list:
+def unpublish_closed_jobs(
+        jobs: list, content_dir: Path, dry_run: bool = False,
+        verbose: bool = False
+) -> list:
     """
-    Mark local job files as draft if the corresponding ERPNext job is closed or unpublished.
+    Mark local job files as draft if the corresponding ERPNext job
+    is closed or unpublished.
 
     Returns list of result dicts for unpublished jobs.
     """
     results = []
     erpnext_ids = {j.get('name') for j in jobs}
-    open_ids = {j.get('name') for j in jobs
-                if j.get('status') == 'Open' and j.get('publish', 0)}
+    open_ids = {
+        j.get('name') for j in jobs
+        if j.get('status') == 'Open' and j.get('publish', 0)
+    }
 
     for filepath in content_dir.glob('*.md'):
         if filepath.name in ('_index.md', 'index.md'):
@@ -490,7 +270,7 @@ def unpublish_closed_jobs(jobs: list, content_dir: Path, dry_run: bool = False,
                 front_matter['draft'] = True
                 front_matter['job_status'] = 'Closed'
                 if not dry_run:
-                    _update_review_fields(filepath, front_matter, content)
+                    update_review_fields(filepath, front_matter, content)
                 results.append({
                     'status': 'unpublished',
                     'fidelity': '-',
@@ -509,25 +289,34 @@ def main():
     parser = argparse.ArgumentParser(
         description='Sync job opportunities from ERPNext with fidelity checking'
     )
-    parser.add_argument('--dry-run', action='store_true',
-                        help='Preview changes without writing files')
-    parser.add_argument('--list', action='store_true',
-                        help='List job openings from ERPNext')
-    parser.add_argument('--force', action='store_true',
-                        help='Force overwrite all files')
-    parser.add_argument('--verbose', action='store_true',
-                        help='Show detailed output')
+    parser.add_argument(
+        '--dry-run', action='store_true',
+        help='Preview changes without writing files'
+    )
+    parser.add_argument(
+        '--list', action='store_true',
+        help='List job openings from ERPNext'
+    )
+    parser.add_argument(
+        '--force', action='store_true',
+        help='Force overwrite all files'
+    )
+    parser.add_argument(
+        '--verbose', action='store_true',
+        help='Show detailed output'
+    )
 
     args = parser.parse_args()
 
-    if not API_KEY or not API_SECRET:
+    if not ERPNEXT.has_credentials:
         print(
-            "Warning: API credentials not set; attempting unauthenticated access. "
+            "Warning: API credentials not set; "
+            "attempting unauthenticated access. "
             "Private ERPNext endpoints may return HTTP 401/403."
         )
         print(
-            "Looked in current shell plus .env files at "
-            f"{PROJECT_ROOT / '.env'} and {PROJECT_ROOT / 'deployment' / '.env'}."
+            "Looked in current shell plus .env file at "
+            f"{PROJECT_ROOT / '.env'}."
         )
         print()
 
@@ -552,7 +341,9 @@ def main():
                 job.get('department', '-'),
                 job.get('location', '-'),
             ])
-        headers = ['Title', 'ID', 'Status', 'Published', 'Department', 'Location']
+        headers = [
+            'Title', 'ID', 'Status', 'Published', 'Department', 'Location'
+        ]
         print()
         print(tabulate(table, headers=headers, tablefmt='simple'))
         return 0
@@ -584,8 +375,9 @@ def main():
         results.append(result)
 
     # Unpublish closed jobs
-    unpublished = unpublish_closed_jobs(jobs, CONTENT_DIR, dry_run=args.dry_run,
-                                        verbose=args.verbose)
+    unpublished = unpublish_closed_jobs(
+        jobs, CONTENT_DIR, dry_run=args.dry_run, verbose=args.verbose
+    )
     results.extend(unpublished)
 
     # Print results table
@@ -622,8 +414,10 @@ def main():
     error_count = sum(1 for r in results if r['status'] == 'error')
 
     print()
-    print(f"New: {new_count}, Updated: {updated_count}, Unchanged: {unchanged_count}, "
-          f"Unpublished: {unpub_count}, Errors: {error_count}")
+    print(
+        f"New: {new_count}, Updated: {updated_count}, "
+        f"Unchanged: {unchanged_count}, "
+        f"Unpublished: {unpub_count}, Errors: {error_count}")
 
     return 0 if error_count == 0 else 1
 

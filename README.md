@@ -231,6 +231,11 @@ hugo server
 docker-compose up --build
 ```
 
+```bash
+# Build and run with Docker Compose in development enviroment
+docker compose --env-file deployment/.env -f deployment/docker-compose.dev.yml up --build
+```
+
 ### Manual Setup
 
 ```bash

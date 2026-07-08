@@ -1,5 +1,6 @@
 {{- $shouldRender := partial "review-check.html" . -}}
-{{- if $shouldRender -}}
+{{- $isInternal := in (.Params.tags | default slice) "Internal" -}}
+{{- if and $shouldRender (not $isInternal) -}}
 {{ partial "header.html" . }}
 {{ partial "menu.html" . }}
 

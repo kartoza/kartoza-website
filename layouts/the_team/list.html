@@ -2,6 +2,7 @@
 {{ partial "menu.html" . }}
 
 {{ $allMembers := where .Pages "Kind" "page" }}
+{{ $visibleMembers := where $allMembers "Params.hidden" "ne" true }}
 
 <!-- Team Hero Section -->
 <section class="team-hero">
@@ -21,7 +22,7 @@
             </p>
             <div class="team-hero-stats">
                 <div class="team-stat">
-                    <span class="team-stat-number">{{ len $allMembers }}+</span>
+                    <span class="team-stat-number">{{ len $visibleMembers }}+</span>
                     <span class="team-stat-label">Team Members</span>
                 </div>
                 <div class="team-stat">
@@ -70,13 +71,13 @@
     </div>
 </section>
 
-{{ $leadership := where $allMembers ".Params.department" "Leadership" }}
-{{ $development := where $allMembers ".Params.department" "Development" }}
-{{ $training := where $allMembers ".Params.department" "Training & Documentation" }}
-{{ $gis := where $allMembers ".Params.department" "GIS Specialists" }}
-{{ $devops := where $allMembers ".Params.department" "DevOps & Infrastructure" }}
-{{ $operations := where $allMembers ".Params.department" "Operations & Administration" }}
-{{ $pm := where $allMembers ".Params.department" "Project Management" }}
+{{ $leadership := where $visibleMembers ".Params.department" "Leadership" }}
+{{ $development := where $visibleMembers ".Params.department" "Development" }}
+{{ $training := where $visibleMembers ".Params.department" "Training & Documentation" }}
+{{ $gis := where $visibleMembers ".Params.department" "GIS Specialists" }}
+{{ $devops := where $visibleMembers ".Params.department" "DevOps & Infrastructure" }}
+{{ $operations := where $visibleMembers ".Params.department" "Operations & Administration" }}
+{{ $pm := where $visibleMembers ".Params.department" "Project Management" }}
 
 <!-- Leadership Section -->
 {{ with $leadership }}

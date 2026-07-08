@@ -408,8 +408,10 @@
                 if (resultEl) {
                     resultEl.innerHTML =
                         '<div class="moodle-result-ok"><strong><i class="fas fa-check-circle"></i> All enrolled!</strong><br>' +
-                        'Check the registered email address(es) for login credentials to ' +
-                        '<a href="https://training.kartoza.com" target="_blank" rel="noopener">training.kartoza.com</a>.</div>';
+                        'You now have access to the course(s) on ' +
+                        '<a href="https://training.kartoza.com" target="_blank" rel="noopener">training.kartoza.com</a>. ' +
+                        'If an account did not already exist for a registered email address, an email has been sent to it with login credentials. ' +
+                        'If an account already existed, log in with your existing credentials.</div>';
                     resultEl.style.display = '';
                 }
             } else {
