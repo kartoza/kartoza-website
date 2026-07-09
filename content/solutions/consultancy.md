@@ -14,34 +14,42 @@ reviewedDate: 2026-07-09
 
 ## Overview
 
-Kartoza's GIS Consultancy services help organisations make informed decisions about their geospatial strategy, technology choices, and implementation approaches. Our experienced consultants bring deep technical knowledge and practical insights to every engagement.
+Kartoza's GIS consultancy services help organisations make informed decisions about their geospatial strategy, technology choices, and implementation approaches. Our experienced consultants bring deep technical knowledge and practical insights to every engagement.
 
-Whether you're starting your GIS journey or optimizing an existing infrastructure, we provide the guidance you need to succeed.
+Whether you're starting your GIS journey or optimising an existing infrastructure, we provide the guidance you need to succeed.
 
 ## Consultancy Services
 
-- GIS strategy development and roadmapping
-- Technology assessment and selection
-- Architecture design and review
-- Data model design and optimisation
-- Workflow analysis and improvement
-- Vendor-neutral technology recommendations
-- Open source migration planning
-- Cost-benefit analysis
-- Capacity building and skills assessment
+- Expert GIS consulting and strategic advice
+- Understand and analyse your business challenges and workflows
+- Develop GIS strategies and technology roadmaps
+- Assess and select the right GIS technologies
+- Design solution architectures and optimise data models
+- Design and implement tailored GIS solutions
+- Write specifications and terms of reference (ToRs)
+- Integrate GIS with existing business systems
+- Provide vendor-neutral technology recommendations
+- Plan and execute migration away from vendor lock-in to open-source solutions
+- Conduct cost-benefit and feasibility analyses
+- Build organisational capacity through skills assessments and knowledge transfer
+- Ensure compliance with relevant legislation, policies, and industry standards
 
 ## How We Work
 
-### Discovery
+### Step 1: Discovery
+
 We start by understanding your organisation's goals, current capabilities, and challenges through stakeholder interviews and technical assessments.
 
-### Analysis
+### Step 2: Analysis
+
 Our team analyses your requirements, evaluates options, and identifies opportunities for improvement or optimisation.
 
-### Recommendations
+### Step 3: Recommendations
+
 We deliver clear, actionable recommendations with implementation roadmaps, cost estimates, and risk assessments.
 
-### Support
+### Step 4: Support
+
 We can support implementation through project oversight, technical reviews, or hands-on assistance.
 
 ## Benefits
@@ -52,3 +60,5 @@ We can support implementation through project oversight, technical reviews, or h
 - Accelerate your GIS initiatives
 - Build internal capacity and knowledge
 - Reduce risk in technology decisions
+
+Engage with Kartoza to analyse and document your problems, design and implement solutions and offer expert advice.
