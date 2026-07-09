@@ -99,7 +99,7 @@ The main features of our support options are highlighted below. If none of these
   </tbody>
 </table>
 
-* Subject to fair-use policy
+- Subject to fair-use policy
 
 **Note**: All prices stated exclude VAT. If a customer is South African, VAT will be added to the ZAR price.*
 
