@@ -15,6 +15,12 @@ Kartoza's GIS Support services provide your organisation with reliable, expert a
 
 We offer flexible support plans designed to meet the needs of organisations of all sizes, from small NGOs to large government departments.
 
+Kartoza has teamed up with [Lutra Consulting](https://www.lutraconsulting.co.uk/) in the UK, [NaturalGIS](https://naturalgis.pt/) in Portugal, [North Road Consulting](https://north-road.com/) in Australia and [OpenGIS](https://opengis.ch/) in Switzerland to form a shared support service called Limosa, which brings the following benefits:
+
+- A large and diverse support team, from expert users to core developers and GIS professionals
+- There is no support query too simple or too complex
+- One point of contact for managing your query
+
 ## What We Support
 
 - **QGIS** - Desktop GIS configuration, plugin support, and workflow optimisation
@@ -52,7 +58,7 @@ The main features of our support options are highlighted below. If none of these
 <table class="table is-bordered is-fullwidth">
   <thead>
     <tr>
-      <th></th>
+      <th>&nbsp;</th>
       <th>Personal</th>
       <th>Small Office</th>
       <th>Large Office</th>
