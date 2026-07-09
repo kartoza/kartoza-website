@@ -40,11 +40,11 @@ Whether you're starting your GIS journey or optimising an existing infrastructur
 
 We start by understanding your organisation's goals, current capabilities, and challenges through stakeholder interviews and technical assessments.
 
-### Step 2: Analysis 
+### Step 2: Analysis
 
 Our team analyses your requirements, evaluates options, and identifies opportunities for improvement or optimisation.
 
-### Step 3: Recommendations 
+### Step 3: Recommendations
 
 We deliver clear, actionable recommendations with implementation roadmaps, cost estimates, and risk assessments.
 
