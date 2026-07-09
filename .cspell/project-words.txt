@@ -57,6 +57,9 @@ varchar
 vsicurl
 xarray
 Cyano
+topo
+Topo
+hypsometric
 
 # Team member names (add as needed)
 Andriarimalala
