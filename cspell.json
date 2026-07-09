@@ -15,7 +15,6 @@
       "name": "project-words",
       "path": ".cspell/project-words.txt",
       "addWords": true
-      "Limosa"
     }
   ],
   "ignorePaths": [
@@ -177,7 +176,8 @@
     "Muzakki",
     "zamuzakki",
     "Jogja",
-    "Yogyakarta"
+    "Yogyakarta",
+    "Limosa"
   ],
   "flagWords": [],
   "minWordLength": 4,
