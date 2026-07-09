@@ -4,15 +4,15 @@ item_code: "Introduction to GIS with QGIS (Self-paced)"
 price: 850.43
 price_currency: "ZAR"
 description: "A practical, beginner-friendly introduction to GIS using QGIS. Over ~18–20 hours you’ll learn how to create professional maps, work with vector and raster data, georeference scanned maps and imagery, and run basic spatial analyses using real-world case studies. The course is delivered online"
-thumbnail: "/img/training/erpnext/qgis-icon_big300x300-0x300.png"
+thumbnail: "/img/courses/qgisselfpaced.png"
 duration: "Asynchronous"
 shop_url: "https://erp.kartoza.com/training-courses/introduction-to-gis-with-qgis-self-paced-9ysfz"
 tags:
   - Training
 track: "Desktop GIS"
 draft: false
-reviewedBy: "Juanique Voogt"
-reviewedDate: 2026-07-02
+reviewedBy: "Lené van Jaarsveld"
+reviewedDate: 2026-07-08
 ---
 
 <!-- {{< block
