@@ -55,7 +55,7 @@ Kartoza has teamed up with [Lutra Consulting](https://www.lutraconsulting.co.uk/
 - On-site support available
 
 ## Support Packages
-The main features of our support options are highlighted below. If none of these packages meets your requirements we'll be happy to customize one to your requirements - just ask us on support@kartoza.com
+The main features of our support options are highlighted below. If none of these packages meets your requirements we'll be happy to customize one to your requirements - just ask us on [support@kartoza.com](mailto:support@kartoza.com)
 
 <table class="table is-bordered is-fullwidth">
   <thead>
