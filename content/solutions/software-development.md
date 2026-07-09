@@ -8,11 +8,13 @@ tags:
   - Web Applications
   - Mobile Apps
 date: 2024-01-01
+reviewedBy: "Lené van Jaarsveld"
+reviewedDate: 2026-07-09
 ---
 
 ## Overview
 
-Kartoza's Software Development services deliver custom geospatial solutions tailored to your specific needs. We build robust, scalable applications using modern technologies and open source platforms.
+Kartoza's software development services deliver custom geospatial solutions tailored to your specific needs. We build robust, scalable applications using modern technologies and open source platforms.
 
 From simple QGIS plugins to complex enterprise web applications, our experienced development team brings your GIS vision to life.
 
@@ -58,9 +60,10 @@ Ongoing maintenance and support keeps your solution running smoothly.
 
 ## Benefits
 
-- Solutions built for your specific needs
-- Full source code ownership
-- No vendor lock-in
-- Modern, maintainable code
-- Experienced geospatial developers
-- Agile, collaborative approach
+- Custom software solutions designed for your specific business needs
+- Professional software development by experienced geospatial developers, computer scientists, and engineers
+- Agile, collaborative project management and software development
+- Well-managed software development lifecycle (SDLC)
+- Modern, maintainable code following strict coding standards, version control with Git, and comprehensive testing
+- Full source code ownership, with code delivered to you or released as open source where appropriate
+- No vendor lock-in, giving you complete control and long-term flexibility
