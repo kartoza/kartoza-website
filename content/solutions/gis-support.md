@@ -125,8 +125,6 @@ The main features of our support options are highlighted below. If none of these
   </tbody>
 </table>
 
-
-
 ## Benefits
 
 - Reduce downtime with expert troubleshooting
