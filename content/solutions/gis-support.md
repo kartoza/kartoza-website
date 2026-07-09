@@ -103,7 +103,7 @@ The main features of our support options are highlighted below. If none of these
 
 **Note**: All prices stated exclude VAT. If a customer is South African, VAT will be added to the ZAR price.*
 
-### We offer additional support for the following products:
+### We offer additional support for the following products
 
 <table class="table is-bordered is-fullwidth">
   <thead>
