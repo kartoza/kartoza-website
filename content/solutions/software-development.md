@@ -41,21 +41,27 @@ From simple QGIS plugins to complex enterprise web applications, our experienced
 ## Our Process
 
 ### Requirements
+
 We work closely with you to understand your needs, users, and constraints.
 
 ### Design
+
 Our team creates technical designs and prototypes for your review and feedback.
 
 ### Development
+
 We build iteratively, with regular demos and opportunities for input.
 
 ### Testing
+
 Comprehensive testing ensures quality and reliability.
 
 ### Deployment
+
 We deploy to your infrastructure or our managed hosting.
 
 ### Support
+
 Ongoing maintenance and support keeps your solution running smoothly.
 
 ## Benefits
