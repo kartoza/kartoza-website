@@ -9,6 +9,13 @@ HeroSize: "is-medium"
 HeroImage: "img/banner-youtube.png"
 channelUrl: "https://www.youtube.com/@KartozaGeo"
 subscribeUrl: "https://www.youtube.com/@KartozaGeo?sub_confirmation=1"
+# Auto-generated uploads playlist for the @KartozaGeo channel (channel ID
+# UCKePmILiYx2cQapG0OBnnXg). YouTube exposes every channel's recent uploads
+# as a playlist whose ID is the channel ID with the first two characters
+# changed from "UC" to "UU". This is what powers the "Latest from Kartoza"
+# embed below — if the channel ID ever changes, regenerate this value via
+# scripts/resolve-youtube-channel.sh (or refetch youtube.com/@KartozaGeo).
+uploadsPlaylist: "UUKePmILiYx2cQapG0OBnnXg"
 playlists:
   - title: "QGIS Training"
     description: "Comprehensive QGIS training from beginner to advanced techniques."
