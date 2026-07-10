@@ -1,7 +1,7 @@
 ---
 title: "Introduction to PostGIS"
 description: "A hands-on course covering spatial database concepts and practices — store, query, analyse, and visualise spatial data using PostgreSQL and PostGIS, the industry standard open source spatial database."
-thumbnail: "/img/courses/postgis.svg"
+thumbnail: "/img/courses/postgisonline.png"
 duration: "2 Days"
 level: "Intermediate"
 track: "Server & Infrastructure"
@@ -12,8 +12,8 @@ tags:
   - PostgreSQL
   - SQL
 date: 2024-01-01
-reviewedBy: "Irwan Fathurrahman"
-reviewedDate: 2026-05-18
+reviewedBy: "Lené van Jaarsveld"
+reviewedDate: 2026-07-08
 ---
 
 ## Course Overview

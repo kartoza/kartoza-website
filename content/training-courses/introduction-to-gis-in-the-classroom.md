@@ -1,14 +1,14 @@
 ---
 title: "Introduction to GIS in the Classroom"
 description: ""
-thumbnail: "/img/training/introduction-to-gis-in-the-classroom.jpg"
+thumbnail: ""
 item_code: "CGIS"
 shop_url: "https://erp.kartoza.com/shop/product/introduction-to-gis-in-the-classroom"
 tags:
   - Training
 draft: false
-reviewedBy: "Auto-generated"
-reviewedDate: 2026-05-18
+reviewedBy: "Lené van Jaarsveld"
+reviewedDate: 2026-07-08
 ---
 
 {{< block

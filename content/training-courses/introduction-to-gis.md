@@ -1,7 +1,7 @@
 ---
 title: "GIS Fundamentals for Educators"
 description: "A hybrid course for teachers and school-level educators. Build the confidence and practical skills to introduce geospatial thinking into your classroom — with ready-to-use lesson frameworks, QGIS exercises, and curriculum-aligned resources for Grades 8, 10, and 12."
-thumbnail: "/img/courses/qgis-introduction.svg"
+thumbnail: "/img/courses/gisfundamentalsteachers.png"
 duration: "3 Days"
 level: "Beginner"
 track: "Foundational"
@@ -13,8 +13,8 @@ tags:
   - Curriculum
   - Beginner
 date: 2024-01-01
-reviewedBy: "Irwan Fathurrahman"
-reviewedDate: 2026-05-18
+reviewedBy: "Lené van Jaarsveld"
+reviewedDate: 2026-07-08
 ---
 
 ## Course Overview

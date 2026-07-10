@@ -6,9 +6,7 @@ departmentIcon: "fa-tasks"
 weight: 61
 draft: false
 image: "/img/team/michelle-vonmaltitz.jpg"
-location: "South Africa"
 country: "South Africa"
-coordinates: "-33.9249, 18.4241"
 education:
   - degree: "Honours in GIS"
 skills:
@@ -22,8 +20,8 @@ achievements:
   - "10 years leading multi-million-rand projects"
   - "Multiple project management certifications"
 bio: "Honours GIS degree. 10 years leading diverse multi-million-rand projects."
-reviewedBy: "Tim Sutton"
-reviewedDate: 2026-03-16
+reviewedBy: "Lene van Jaarsveld"
+reviewedDate: 2026-06-19
 ---
 
 Michelle is a Team Lead Scrum Master bringing both academic credentials and extensive practical experience to project leadership. Her Honours degree in GIS provides deep understanding of the geospatial domain in which Kartoza operates.

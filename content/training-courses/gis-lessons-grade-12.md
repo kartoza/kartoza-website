@@ -1,10 +1,10 @@
 ---
-title: "Grade 12 GIS SKills - Geography"
+title: "Grade 12 GIS Skills - Geography"
 item_code: "GR 12 GIS Course"
 price: 245
 price_currency: "ZAR"
 description: "Four stand-alone, self-paced GIS extension lessons covering the complete Grade 12 Geography curriculum. Each lesson includes an instructional video, notes, GIS data, and a marking guide — ready for SBA task submissions and exam preparation."
-thumbnail: "/img/courses/qgis-introduction.svg"
+thumbnail: "/img/courses/grade12.png"
 duration: "Asynchronous"
 level: "Beginner"
 track: "Foundational"
@@ -16,7 +16,7 @@ tags:
   - Curriculum
 date: 2024-01-01
 reviewedBy: "Lené van Jaarsveld"
-reviewedDate: '2026-05-14'
+reviewedDate: '2026-07-08'
 ---
 
 ## Course Overview

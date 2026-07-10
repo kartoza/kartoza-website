@@ -1,7 +1,7 @@
 ---
 title: "Introduction to QGIS"
 description: "Master the fundamentals of desktop GIS using QGIS, the world's leading open source geographic information system. Hands-on, practitioner-taught, and immediately applicable to your real-world mapping and analysis needs."
-thumbnail: "/img/courses/qgis-introduction.svg"
+thumbnail: "/img/courses/qgisonline.png"
 duration: "3 Days"
 level: "Beginner"
 track: "Desktop GIS"
@@ -12,8 +12,8 @@ tags:
   - Desktop GIS
   - Mapping
 date: 2024-01-01
-reviewedBy: "Irwan Fathurrahman"
-reviewedDate: 2026-05-18
+reviewedBy: "Lené van Jaarsveld"
+reviewedDate: 2026-07-08
 ---
 
 ## Course Overview
