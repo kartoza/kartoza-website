@@ -8,7 +8,7 @@ tags:
   - Technical Services
 date: 2024-01-01
 reviewedBy: "Lené van Jaarsveld"
-reviewedDate: 2026-07-09
+reviewedDate: 2026-07-13
 ---
 
 ## Overview
@@ -73,10 +73,10 @@ The main features of our support options are highlighted below. If none of these
   <thead>
     <tr>
       <th>&nbsp;</th>
-      <th>**Personal**</th>
-      <th>**Small Office**</th>
-      <th>**Large Office**</th>
-      <th>**The Works**</th>
+      <th>Personal</th>
+      <th>Small Office</th>
+      <th>Large Office</th>
+      <th>The Works</th>
     </tr>
   </thead>
   <tbody>
@@ -93,10 +93,10 @@ The main features of our support options are highlighted below. If none of these
 <table class="table is-bordered is-fullwidth">
   <thead>
     <tr>
-      <th>**Support Package**</th>
-      <th>**ZAR**</th>
-      <th>**USD**</th>
-      <th>**EUR**</th>
+      <th>Support Package</th>
+      <th>ZAR</th>
+      <th>USD</th>
+      <th>EUR</th>
     </tr>
   </thead>
   <tbody>
@@ -116,9 +116,9 @@ The main features of our support options are highlighted below. If none of these
 <table class="table is-bordered is-fullwidth">
   <thead>
     <tr>
-      <th>**Software**</th>
-      <th>**Includes**</th>
-      <th>**Excludes**</th>
+      <th>Software</th>
+      <th>Includes</th>
+      <th>Excludes</th>
     </tr>
   </thead>
   <tbody>
