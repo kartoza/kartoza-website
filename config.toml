@@ -340,6 +340,8 @@ matomoSiteId = ''
     baseName = "search-index"
     mediaType = "application/json"
     isPlainText = true
+  [outputFormats.RSS]
+    baseName = "rss"
 
 [outputs]
   home = ["HTML", "RSS", "JSON", "SearchIndex"]
