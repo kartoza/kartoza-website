@@ -109,7 +109,7 @@ The main features of our support options are highlighted below. If none of these
 
 - Subject to fair-use policy
 
-**Note**: All prices stated exclude VAT. If a customer is South African, VAT will be added to the ZAR price.*
+**Note**: All prices stated exclude VAT. If a customer is South African, VAT will be added to the ZAR price.
 
 ### We offer additional support for the following products
 
