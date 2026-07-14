@@ -8,20 +8,28 @@ tags:
   - Technical Services
 date: 2024-01-01
 reviewedBy: "Lené van Jaarsveld"
-reviewedDate: 2026-07-09
+reviewedDate: 2026-07-13
 ---
 
 ## Overview
 
-Kartoza's GIS Support services provide your organisation with reliable, expert assistance for your geospatial infrastructure. Whether you're running QGIS desktop deployments, PostGIS databases, web mapping servers, or complete spatial data infrastructures, our experienced team is ready to help.
+### Professional Open Source GIS Support
 
-We offer flexible support plans designed to meet the needs of organisations of all sizes, from small NGOs to large government departments.
+Kartoza provides a robust, enterprise-grade support framework designed to give you total confidence in your open-source geospatial deployment. Our support is delivered by a dedicated team of GIS specialists and core developers, ensuring that your organisation has direct access to the experts who build and maintain the tools you use every day.
 
-Kartoza has teamed up with [Lutra Consulting](https://www.lutraconsulting.co.uk/) in the UK, [NaturalGIS](https://naturalgis.pt/) in Portugal, [North Road Consulting](https://north-road.com/) in Australia and [OpenGIS](https://opengis.ch/) in Switzerland to form a shared support service called Limosa, which brings the following benefits:
+## How Our Support Portal Works
 
-- A large and diverse support team, from expert users to core developers and GIS professionals
-- There is no support query too simple or too complex
-- One point of contact for managing your query
+Our support process is integrated directly into our project management and ERP systems to ensure maximum transparency and efficiency:
+
+1. **Centralised Issue Tracking**: All support requests are logged via our dedicated **Support Portal**. This system allows you to create, track, and manage your issues in one place, ensuring no query is overlooked.
+
+2. **Direct Expert Access**: Once a ticket is created, it is routed to the appropriate tier of expertise—from GIS technicians for general guidance to core developers for complex technical challenges.
+
+3. **Integrated Workflow**: By linking our support portal to our internal ERP, we ensure that billing and service delivery are perfectly synchronised.
+
+4. **Rapid Response Times**: We offer guaranteed initial response times ranging from 2 to 16 working hours, depending on your selected support package and the priority of the issue.
+
+5. **Flexible Support Packages**: Choose from our **Personal**, **Small Office**, **Large Office**, or **The Works** packages to match the scale of your organisation and the criticality of your GIS operations.
 
 ## What We Support
 
@@ -74,13 +82,9 @@ The main features of our support options are highlighted below. If none of these
   <tbody>
     <tr><td>Maximum General Support Hours</td><td>4</td><td>10</td><td>40</td><td>180</td></tr>
     <tr><td>Response Time (Working Hours)</td><td>16</td><td>8</td><td>4</td><td>4</td></tr>
-    <tr><td>Customer Representatives</td><td>1</td><td>1</td><td>2</td><td>5</td></tr>
+    <tr><td>Customer Representatives</td><td>1</td><td>1</td><td>2</td><td>4</td></tr>
     <tr><td>Dedicated support desk (web or email)</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-    <tr><td>Guidance on Installation &amp; Upgrades</td><td>-</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-    <tr><td>Guidance on Data Management</td><td>-</td><td>-</td><td>Yes</td><td>Yes</td></tr>
-    <tr><td>Consultancy Days Included</td><td>-</td><td>-</td><td>1</td><td>3</td></tr>
-    <tr><td>Training Days Included</td><td>-</td><td>-</td><td>-</td><td>3</td></tr>
-    <tr><td>On-site Support</td><td>-</td><td>-</td><td>-</td><td>Yes, if possible</td></tr>
+    <tr><td>Guidance on Installation & Upgrades</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
   </tbody>
 </table>
 
@@ -96,16 +100,16 @@ The main features of our support options are highlighted below. If none of these
     </tr>
   </thead>
   <tbody>
-    <tr><td>Personal</td><td>R 3 744.00</td><td>$ 317.00</td><td>€ 269.00</td></tr>
-    <tr><td>Small Office</td><td>R 9 127.00</td><td>$ 774.00</td><td>€ 654.00</td></tr>
-    <tr><td>Large Office</td><td>R 35 572.00</td><td>$ 3 015.00</td><td>€ 2 535.00</td></tr>
-    <tr><td>The Works</td><td>R 151 648.00</td><td>$ 12 855.00</td><td>€ 10 805.00</td></tr>
+    <tr><td>Personal</td><td>R 4 306.00</td><td>$ 355.00</td><td>€ 309.00</td></tr>
+    <tr><td>Small Office</td><td>R 10 496.00</td><td>$ 890.00</td><td>€ 752.00</td></tr>
+    <tr><td>Large Office</td><td>R 40 908.00</td><td>$ 3 467.00</td><td>€ 2 915.00</td></tr>
+    <tr><td>The Works</td><td>R 174 395.00</td><td>$ 14 738.00</td><td>€ 19 915.00</td></tr>
   </tbody>
 </table>
 
 - Subject to fair-use policy
 
-**Note**: All prices stated exclude VAT. If a customer is South African, VAT will be added to the ZAR price.*
+**Note**: All prices stated exclude VAT. If a customer is South African, VAT will be added to the ZAR price.
 
 ### We offer additional support for the following products
 
