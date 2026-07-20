@@ -8,13 +8,15 @@ tags:
   - Infrastructure
   - Maintenance
 date: 2024-01-01
+reviewedBy: "Lené van Jaarsveld"
+reviewedDate: 2026-07-20
 ---
 
 ## Overview
 
 Kartoza's Hosting and Maintenance services provide fully managed infrastructure for your geospatial applications. We handle the technical complexity so you can focus on using your GIS tools effectively.
 
-Our team monitors, maintains, and optimises your systems around the clock, ensuring reliable performance and minimal downtime.
+Our DevOps team actively maintains and monitors systems during standard office hours (05h00-15h00 UTC, Mon-Fri), with robust automated failover systems and best-effort monitoring outside of these hours.
 
 ## What We Host
 
@@ -28,7 +30,7 @@ Our team monitors, maintains, and optimises your systems around the clock, ensur
 
 ## Service Features
 
-- Automated daily backups with off-site storage
+- Automated daily backups with a 10-day rolling archive
 - SSL certificates and security hardening
 - Performance monitoring and alerting
 - Regular security updates and patches
@@ -38,14 +40,21 @@ Our team monitors, maintains, and optimises your systems around the clock, ensur
 
 ## Hosting Plans
 
-### Starter
-Perfect for small projects and development environments with modest traffic requirements.
+### Shared Managed Infrastructure
+Ideal for standard deployments, development and testing environments, or organisations looking to balance performance against cost.
 
-### Professional
-Ideal for production applications serving hundreds of concurrent users with high availability needs.
+- **Cost-Optimised Performance**: Your services are hosted concurrently on shared Kubernetes nodes alongside other applications, delivering reliable, enterprise-grade GIS hosting at an affordable price point.
+- **Managed Environment**: Standard updates, performance monitoring, and automated backups are fully managed by our DevOps team so you can focus entirely on your spatial workflows.
 
-### Enterprise
-Mission-critical deployments requiring maximum uptime, performance, and dedicated resources.
+### Dedicated GIS Clusters
+Designed for production applications, governments, and enterprise organisations with strict resource isolation and high traffic requirements.
+
+- **Complete Segregation**: Segment your spatial databases and applications on your own dedicated virtual machines or Kubernetes clusters to prevent any "noisy-neighbor" performance issues.
+- **Predictable & Scalable Resources**: Enjoy highly predictable responsiveness and dedicated system memory. Easily configure load balancers to scale nodes dynamically as your organisation's spatial datasets and traffic grow.
+- **High Availability & Redundancy**: Optional setups for geographic redundancy, redundant cluster controller nodes, and customised failover paths to guarantee maximum uptime for mission-critical deployments.
+
+### Custom Infrastructure Deployments
+We understand that spatial workloads are unique. If your deployment requires specialised database scaling, massive tile-caching infrastructure, or specific geographical hosting zones, our DevOps team will dynamically design a custom, managed hosting package and quotation tailored to your technical requirements.
 
 ## Benefits
 
