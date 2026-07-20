@@ -41,12 +41,14 @@ Our DevOps team actively maintains and monitors systems during standard office h
 ## Hosting Plans
 
 ### Shared Managed Infrastructure
+
 Ideal for standard deployments, development and testing environments, or organisations looking to balance performance against cost.
 
 - **Cost-Optimised Performance**: Your services are hosted concurrently on shared Kubernetes nodes alongside other applications, delivering reliable, enterprise-grade GIS hosting at an affordable price point.
 - **Managed Environment**: Standard updates, performance monitoring, and automated backups are fully managed by our DevOps team so you can focus entirely on your spatial workflows.
 
 ### Dedicated GIS Clusters
+
 Designed for production applications, governments, and enterprise organisations with strict resource isolation and high traffic requirements.
 
 - **Complete Segregation**: Segment your spatial databases and applications on your own dedicated virtual machines or Kubernetes clusters to prevent any "noisy-neighbour" performance issues.
@@ -54,6 +56,7 @@ Designed for production applications, governments, and enterprise organisations 
 - **High Availability & Redundancy**: Optional setups for geographic redundancy, redundant cluster controller nodes, and customised failover paths to guarantee maximum uptime for mission-critical deployments.
 
 ### Custom Infrastructure Deployments
+
 We understand that spatial workloads are unique. If your deployment requires specialised database scaling, massive tile-caching infrastructure, or specific geographical hosting zones, our DevOps team will dynamically design a custom, managed hosting package and quotation tailored to your technical requirements.
 
 ## Benefits
