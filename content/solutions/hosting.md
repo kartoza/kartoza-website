@@ -49,7 +49,7 @@ Ideal for standard deployments, development and testing environments, or organis
 ### Dedicated GIS Clusters
 Designed for production applications, governments, and enterprise organisations with strict resource isolation and high traffic requirements.
 
-- **Complete Segregation**: Segment your spatial databases and applications on your own dedicated virtual machines or Kubernetes clusters to prevent any "noisy-neighbor" performance issues.
+- **Complete Segregation**: Segment your spatial databases and applications on your own dedicated virtual machines or Kubernetes clusters to prevent any "noisy-neighbour" performance issues.
 - **Predictable & Scalable Resources**: Enjoy highly predictable responsiveness and dedicated system memory. Easily configure load balancers to scale nodes dynamically as your organisation's spatial datasets and traffic grow.
 - **High Availability & Redundancy**: Optional setups for geographic redundancy, redundant cluster controller nodes, and customised failover paths to guarantee maximum uptime for mission-critical deployments.
 
