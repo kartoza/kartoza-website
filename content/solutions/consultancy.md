@@ -14,7 +14,8 @@ reviewedDate: 2026-07-20
 
 ## Overview
 
-###Are you or your organisation currently seeking solutions for the following:
+### Are you or your organisation currently seeking solutions for the following:
+
 - Outdated GIS
 - Spatial datasets spread across multiple systems
 - Your organisation relies on manual GIS workflows
