@@ -9,32 +9,51 @@ tags:
   - Analysis
 date: 2024-01-01
 reviewedBy: "Lené van Jaarsveld"
-reviewedDate: 2026-07-09
+reviewedDate: 2026-07-20
 ---
 
 ## Overview
+
+###Are you or your organisation currently seeking solutions for the following:
+- Outdated GIS
+- Spatial datasets spread across multiple systems
+- Your organisation relies on manual GIS workflows
+- Need to migrate from proprietary GIS to Open Source
 
 Kartoza's GIS consultancy services help organisations make informed decisions about their geospatial strategy, technology choices, and implementation approaches. Our experienced consultants bring deep technical knowledge and practical insights to every engagement.
 
 Whether you're starting your GIS journey or optimising an existing infrastructure, we provide the guidance you need to succeed.
 
-## Consultancy Services
+## Consulting Spesialisations
 
-- Expert GIS consulting and strategic advice
-- Understand and analyse your business challenges and workflows
-- Develop GIS strategies and technology roadmaps
-- Assess and select the right GIS technologies
-- Design solution architectures and optimise data models
-- Design and implement tailored GIS solutions
-- Write specifications and terms of reference (ToRs)
-- Integrate GIS with existing business systems
-- Provide vendor-neutral technology recommendations
-- Plan and execute migration away from vendor lock-in to open-source solutions
-- Conduct cost-benefit and feasibility analyses
-- Build organisational capacity through skills assessments and knowledge transfer
-- Ensure compliance with relevant legislation, policies, and industry standards
+- Enterprise GIS Strategy
+- GIS Digital Transformation
+- Cloud GIS
+- Spatial Data Infrastructure (SDI)
+- Open Source Migration
+- ArcGIS to QGIS Migration
+- GeoServer Architecture
+- PostGIS Optimisation
+- Performance Tuning
+- Data Governance
+- GIS DevOps
+- API Integration
+- AI & Machine Learning for Spatial Data
 
-## How We Work
+## Sectors We Serve
+
+- Government
+- Water Resources
+- Agriculture
+- Biodiversity
+- Utilities
+- Mining
+- Municipalities
+- Disaster Management
+- Environmental Monitoring
+- Infrastructure
+
+## How Our Consultancy Process Works
 
 ### Step 1: Discovery
 
@@ -48,15 +67,15 @@ Our team analyses your requirements, evaluates options, and identifies opportuni
 
 We deliver clear, actionable recommendations with implementation roadmaps, cost estimates, and risk assessments.
 
-### Step 4: Support
+### Step 4: Support & Hosting
 
-We can support implementation through project oversight, technical reviews, or hands-on assistance.
+We can support implementation through project oversight, technical reviews, or hands-on assistance. We also provide hosting for various GIS 
 
 ## Benefits
 
 - Objective, vendor-neutral advice
 - Avoid costly technology mistakes
-- Leverage our experience across industries
+- Leverage our experience across sectors
 - Accelerate your GIS initiatives
 - Build internal capacity and knowledge
 - Reduce risk in technology decisions
