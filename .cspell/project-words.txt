@@ -257,6 +257,11 @@ ClimMob
 Climatrends
 bono
 Agritechnovation
+Conv
+ConvLSTM
+LSTM
+polygonising
+RMSE
 
 # Qt/UI terms
 dialog
