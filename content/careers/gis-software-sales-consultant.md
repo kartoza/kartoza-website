@@ -17,8 +17,6 @@ tags:
 - Remote
 title: GIS & Software Sales Consultant
 type: careers
-reviewedBy: "Lené van Jaarsveld"
-reviewedDate: 2026-07-23
 ---
 
 # GIS & Software Sales Consultant 
