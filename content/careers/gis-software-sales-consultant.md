@@ -2,7 +2,7 @@
 date: '2026-06-01T08:09:14+00:00'
 department: Production - K
 designation: GIS & Software Sales Consultant
-draft: false
+draft: true
 erpnext_id: HR-OPN-2026-0005
 job_status: Open
 lastmod: '2026-06-01T08:21:01+00:00'
@@ -17,6 +17,8 @@ tags:
 - Remote
 title: GIS & Software Sales Consultant
 type: careers
+reviewedBy: "Lené van Jaarsveld"
+reviewedDate: 2026-07-23
 ---
 
 # GIS & Software Sales Consultant 
