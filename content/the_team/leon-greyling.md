@@ -5,6 +5,7 @@ department: "DevOps & Infrastructure"
 departmentIcon: "fa-server"
 weight: 41
 draft: true
+hidden: true
 image: "/img/team/leon-greyling.png"
 country: "South Africa"
 skills:
