@@ -4,7 +4,7 @@ role: "DevOps Manager (Technical)"
 department: "DevOps & Infrastructure"
 departmentIcon: "fa-server"
 weight: 41
-draft: false
+draft: True
 image: "/img/team/leon-greyling.png"
 country: "South Africa"
 skills:
@@ -20,7 +20,7 @@ achievements:
   - "DevOps focus since 2013"
 bio: "Over 20 years IT experience. Expertise in development, systems administration, and DevOps."
 reviewedBy: "Lene van Jaarsveld"
-reviewedDate: 2026-06-19
+reviewedDate: 2026-08-04
 ---
 
 Leon is the DevOps Manager at Kartoza, bringing over 20 years of IT industry experience to the role. His career has spanned development, systems administration, database administration, and solutions architecture - a breadth of experience that provides valuable perspective on infrastructure decisions.
