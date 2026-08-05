@@ -6618,8 +6618,15 @@ body:has(.blog-hero) .contextmenu {
 /* Team Grid */
 .team-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
     gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.team-member {
+    min-width: 280px;
 }
 
 .team-grid-leadership {
