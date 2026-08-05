@@ -2,7 +2,7 @@
 date: '2026-06-01T08:09:14+00:00'
 department: Production - K
 designation: GIS & Software Sales Consultant
-draft: false
+draft: true
 erpnext_id: HR-OPN-2026-0005
 job_status: Open
 lastmod: '2026-06-01T08:21:01+00:00'
@@ -19,15 +19,15 @@ title: GIS & Software Sales Consultant
 type: careers
 ---
 
-# GIS & Software Sales Consultant 
+# GIS & Software Sales Consultant
 
 **(3-5 years Sales experience)**
 
-#  Purpose Of The Job
+# Purpose Of The Job
 
 To maximise business growth and profitability by selling Kartoza’s hosting, consulting, support, training and other services and products, providing expert technical advice and building long-term client partnerships rooted in the value of open-source technology.
 
-# Responsibilities 
+# Responsibilities
 
   1. **Sales strategy:** Develop Kartoza’s sales strategy with management and implement it.
   2. **Technical sales and demonstrations** : Conduct high-level demonstrations of GeoServer, GeoNode, G3W, GeoSight, our in-house developed Kartoza Cloudbench platform, QGIS  and related spatial software to showcase functionality and cost-value benefits to potential clients.
@@ -36,8 +36,8 @@ To maximise business growth and profitability by selling Kartoza’s hosting, co
   5. **Solution proposal:** Prepare technical-commercial offers (tenders, quotations and proposals) ensuring alignment with customer requirements and Kartoza’s strategic goals.
   6. **Product training and support:** Provide technical input during the pre-sales process and support customer success through training and support.
   7. **Relationship management:** Maintain strong, reliable relationships with clients by delivering professional and knowledgeable service.
-  8. **Work with marketing:** Stay current with industry trends in open-source GIS, QGIS, QGIS plugins, and competitive proprietary technologies. Use social media and targeted marketing to build awareness of our products. Plan the creation of materials on our YouTube channel. Work with our management and marketing teams on marketing strategy, understanding the market, product and service prioritisation, pricing etc.  
-  9. **CRM administration:** Maintain accurate records of sales activities and customer information in our CRM systems. Ensure the CRM is optimised for maximum lead generation and conversions. 
+  8. **Work with marketing:** Stay current with industry trends in open-source GIS, QGIS, QGIS plugins, and competitive proprietary technologies. Use social media and targeted marketing to build awareness of our products. Plan the creation of materials on our YouTube channel. Work with our management and marketing teams on marketing strategy, understanding the market, product and service prioritisation, pricing etc.
+  9. **CRM administration:** Maintain accurate records of sales activities and customer information in our CRM systems. Ensure the CRM is optimised for maximum lead generation and conversions.
 
 # Education And Skills
 
@@ -54,15 +54,15 @@ To maximise business growth and profitability by selling Kartoza’s hosting, co
   1. **Solution-oriented:** Focused on finding the right technical solution for the client’s specific problem.
   2. **Resilient and proactive:** Enthusiastic about lead generation and overcoming technical or commercial obstacles.
   3. **Technically savvy:** Deeply passionate about the power of open-source mapping technology and the Kartoza mission.
-  4. Laser-focussed and passionate about about selling and closing deals
+  4. Laser-focussed and passionate about about selling and closing deals.
 
 # Location
 
 Kartoza operates with a highly distributed global team. This position is eligible for remote work, subject to the following operational conditions:
 
-  1. **Geographic location is open, within limits:** We need minimum time overlaps with most of our team. You need a distraction-free work environment with reliable, redundant power and reliable, redundant, high bandwidth internet. 
+  1. **Geographic location is open, within limits:** We need minimum time overlaps with most of our team. You need a distraction-free work environment with reliable, redundant power and reliable, redundant, high bandwidth internet.
   2. **Equipment:** Kartoza provides standard work hardware (typically a linux laptop and backup device). Bring your own internet connection and working environment.
-  3. **Travel** : You must be able and willing to travel if and when required to clients, conferences or for other sales-related reasons. 
+  3. **Travel** : You must be able and willing to travel if and when required to clients, conferences or for other sales-related reasons.
 
 # Remuneration
 
@@ -72,6 +72,6 @@ Base salary with Commission
 
 # About  Kartoza
 
-Kartoza is a leading provider of open-source geospatial solutions, specializing in QGIS, Spatial Data Infrastructure (SDI), and custom GIS development. Our vision: "enable a world where spatial decision making tools are universal, accessible and affordable for everyone." 
+Kartoza is a leading provider of open-source geospatial solutions, specializing in QGIS, Spatial Data Infrastructure (SDI), and custom GIS development. Our vision: "enable a world where spatial decision making tools are universal, accessible and affordable for everyone."
 
 With a global presence headquartered in South Africa and Portugal, we bridge the gap between complex spatial technology and real-world business needs. We are looking for a technical sales professional to drive the adoption of open-source solutions and professional services horizontally and across verticals including mining, government and agriculture.
