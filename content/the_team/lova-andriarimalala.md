@@ -3,7 +3,7 @@ title: "Lova Andriarimalala"
 role: "QGIS Full Stack Developer"
 department: "Development"
 departmentIcon: "fa-code"
-weight: 15
+weight: 16
 draft: false
 image: "/img/team/lova-andriarimalala.jpg"
 country: "Madagascar"

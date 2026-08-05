@@ -6629,12 +6629,6 @@ body:has(.blog-hero) .contextmenu {
     min-width: 280px;
 }
 
-.team-grid-leadership {
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
 @media screen and (max-width: 1200px) {
     .team-grid {
         grid-template-columns: repeat(3, 1fr);

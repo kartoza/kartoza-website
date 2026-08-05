@@ -3,7 +3,7 @@ title: "Juanique Voogt"
 role: "Junior Full Stack Developer"
 department: "Development"
 departmentIcon: "fa-code"
-weight: 16
+weight: 14
 draft: false
 image: "/img/team/juanique-voogt.jpg"
 country: "South Africa"
