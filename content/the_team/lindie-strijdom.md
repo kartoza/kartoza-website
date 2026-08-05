@@ -5,7 +5,7 @@ department: "GIS Specialists"
 departmentIcon: "fa-layer-group"
 weight: 32
 draft: false
-image: "/img/team/lindie-strijdom.jpg"
+image: "/img/team/lindiestrijdom.jpg"
 country: "South Africa"
 github: "linstrijdom"
 education:
