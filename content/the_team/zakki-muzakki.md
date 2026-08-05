@@ -3,7 +3,7 @@ title: "Zakki Muzakki"
 role: "Software Developer"
 department: "Development"
 departmentIcon: "fa-code"
-weight: 11
+weight: 13
 draft: false
 image: "/img/team/zakki-muzakki.jpg"
 country: "Indonesia"

@@ -3,7 +3,7 @@ title: "Danang Tri Massandy"
 role: "Senior Software Developer"
 department: "Development"
 departmentIcon: "fa-code"
-weight: 13
+weight: 12
 draft: false
 image: "/img/team/danang-massandy.jpg"
 country: "Indonesia"

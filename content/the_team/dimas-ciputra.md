@@ -3,7 +3,7 @@ title: "Dimas Tri Ciputra"
 role: "Senior Software Developer"
 department: "Development"
 departmentIcon: "fa-code"
-weight: 12
+weight: 11
 draft: false
 image: "/img/team/dimas-ciputra.jpg"
 country: "Indonesia"

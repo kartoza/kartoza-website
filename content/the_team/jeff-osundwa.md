@@ -3,7 +3,7 @@ title: "Jeff Osundwa"
 role: "QGIS Developer"
 department: "Development"
 departmentIcon: "fa-code"
-weight: 14
+weight: 15
 draft: false
 image: "/img/team/jeff-osundwa.jpg"
 country: "Kenya"
