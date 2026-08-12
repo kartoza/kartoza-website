@@ -74,10 +74,8 @@ This work is funded through Kartoza's consulting and training revenue. There is 
 ## Getting Started
 
 If you are new to the images, the quickest way in:
-    
-    
+
     docker pull kartoza/postgis:16-3.4
-    
 
 Browse all images on [Docker Hub](<https://hub.docker.com/search?q=kartoza>) or visit our [Docker images page](<https://kartoza.com/docker/>) for documentation, quick-start guides, and Compose examples for each image.
 
