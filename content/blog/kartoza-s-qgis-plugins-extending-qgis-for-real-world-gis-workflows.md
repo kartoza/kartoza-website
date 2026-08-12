@@ -49,10 +49,8 @@ Surveyors working with South African cadastral data will appreciate the [SG Diag
 
 Not every Kartoza QGIS extension lives in the public plugin repository. Some are deeper applications, listed on our [apps page](<https://kartoza.com/apps/>).
 
-  * **[SAGTA Map Exporter](<https://kartoza.com/apps/sagta/>)** — exports compliant cadastral and surveying maps according to South African Geomatics Technicians Association standards.
-  * **[Giswater](<https://kartoza.com/apps/giswater/>)** — models water supply and urban drainage networks inside QGIS, including running EPANET and SWMM simulations.
-
-
+- **[SAGTA Map Exporter](<https://kartoza.com/apps/sagta/>)** — exports compliant cadastral and surveying maps according to South African Geomatics Technicians Association standards.
+- **[Giswater](<https://kartoza.com/apps/giswater/>)** — models water supply and urban drainage networks inside QGIS, including running EPANET and SWMM simulations.
 
 ## Plugins and QGIS Server
 
@@ -60,12 +58,10 @@ A great plugin workflow often ends with publishing. The same rendering engine be
 
 ## Resources and Next Steps
 
-  * Grab the [QGIS Renderers Cheat Sheet](<https://kartoza.com/qgis-resources/>) for a quick reference on vector and raster styling.
-  * Developers curious about contributing to QGIS itself can follow our [Road to Nerdvana series](<https://kartoza.com/blog/qgis-road-to-nerdvana-episode-1-qgis-console-build/>), which documents building and patching QGIS from source.
-  * If your team needs guided learning, we run [QGIS training courses](<https://kartoza.com/training-courses/>) hosted at our Cape Town and Stellenbosch offices or remotely.
+- Grab the [QGIS Renderers Cheat Sheet](<https://kartoza.com/qgis-resources/>) for a quick reference on vector and raster styling.
+- Developers curious about contributing to QGIS itself can follow our [Road to Nerdvana series](<https://kartoza.com/blog/qgis-road-to-nerdvana-episode-1-qgis-console-build/>), which documents building and patching QGIS from source.
+- If your team needs guided learning, we run [QGIS training courses](<https://kartoza.com/training-courses/>) hosted at our Cape Town and Stellenbosch offices or remotely.
 
-
-
-## Install One Today!
+## Install One Today
 
 Every plugin above is in the official QGIS plugin repository and is free and open source. Install the ones that fit your workflow, star them on [plugins.qgis.org](<https://plugins.qgis.org>), and file issues or feature requests on the linked GitHub repositories. QGIS is a community effort — Kartoza funds full-time QGIS staff through community donations, and every install, review, and contribution helps sustain that work.
