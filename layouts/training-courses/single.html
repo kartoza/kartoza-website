@@ -35,14 +35,22 @@
                         <span>3 Days</span>
                     </div>
                     {{ end }}
-                    <div class="meta-item">
+                    {{ if .Params.isFree }}
+                  <div class="meta-item">
                         <i class="fas fa-laptop"></i>
-                        <span>On-site or Remote</span>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-certificate"></i>
-                        <span>Certificate Included</span>
-                    </div>
+                        <span>Asynchronous</span>
+                  </div>
+                    {{ else }}
+                        <div class="meta-item">
+                            <i class="fas fa-laptop"></i>
+                            <span>On-site or Remote</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-certificate"></i>
+                            <span>Certificate Included</span>
+                        </div>
+
+                    {{ end }}
                 </div>
                 <div class="course-hero-cta">
                     {{ if $allowBooking }}

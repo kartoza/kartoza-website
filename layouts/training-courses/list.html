@@ -69,6 +69,12 @@
                             {{ .Params.duration }}
                         </p>
                         {{ end }}
+                        {{ if .Params.isFree }}
+                        <p class="training-card-price">
+                            <i class="fas fa-gift"></i>
+                            <span>FREE</span>
+                        </p>
+                        {{ else }}
                         {{- $cardPrice := .Params.price -}}
                         {{- $cardCurrency := .Params.price_currency -}}
                         {{- if not $cardPrice -}}

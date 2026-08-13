@@ -71,6 +71,7 @@
 
 {{ else if .Params.item_code }}
 {{/* No scheduled events but course has an item_code — self-paced / async purchase */}}
+{{ if.Params.isFree }}
 <div class="sidebar-card upcoming-events-card">
   <h4><i class="fas fa-infinity"></i> Self-Paced Course</h4>
   <p style="font-size: 0.875rem; color: #4d6370; margin-bottom: 1rem;">
@@ -92,6 +93,29 @@
   </div>
   {{ template "free-block" . }}
 </div>
+{{ else }}
+<div class="sidebar-card upcoming-events-card">
+  <h4><i class="fas fa-infinity"></i> Self-Paced Course</h4>
+  <p style="font-size: 0.875rem; color: #4d6370; margin-bottom: 1rem;">
+    Start any time — work through the material at your own pace.
+  </p>
+  {{ if .Params.price }}
+  {{- $symbol := "R" -}}
+  {{- if and .Params.price_currency (ne .Params.price_currency "ZAR") }}{{ $symbol = .Params.price_currency }}{{ end -}}
+  <p style="font-size: 0.875rem; color: #4d6370; margin-bottom: 1rem;">
+    <i class="fas fa-tag" style="color: #00b388; margin-right: 0.25rem;"></i>
+    <strong>{{ $symbol }} {{ lang.FormatNumber 0 .Params.price }}</strong> <span style="font-size:0.8em; opacity:0.75;">excl. VAT</span>
+  </p>
+  {{ end }}
+  <div class="course-buy-block" style="display: flex; gap: 0.5rem; flex-direction: column">
+    {{ if .Params.price }}
+    <a href="/login/?next={{ .RelPermalink }}" data-item-code="{{ .Params.item_code }}" class="login-buy button is-primary">Login to Buy</a>
+    {{ end }}
+    <a href="{{ printf "/contact-us/?course=%s&subject=Course%%20Enquiry" (.Title | urlquery) }}" class="button">Enquiry</a>
+  </div>
+  {{ template "free-block" . }}
+</div>
+{{ end }}
 <script>
   (function() {
     const auth = getAuth()
