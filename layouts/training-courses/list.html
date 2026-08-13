@@ -72,7 +72,7 @@
                         {{ if .Params.isFree }}
                         <p class="training-card-price">
                             <i class="fas fa-gift"></i>
-                            <span>FREE</span>
+                            <span>Free</span>
                         </p>
                         {{ else }}
                         {{- $cardPrice := .Params.price -}}
@@ -270,6 +270,11 @@
                             {{ .Params.duration }}
                         </p>
                         {{ end }}
+                        {{ if .Params.isFree }}
+                        <p class="training-card-price">
+                            <span>Free</span>
+                        </p>
+                        {{ else }}
                         {{- $cardPrice := .Params.price -}}
                         {{- $cardCurrency := .Params.price_currency -}}
                         {{- if not $cardPrice -}}
@@ -285,6 +290,7 @@
                             {{- if and $cardCurrency (ne $cardCurrency "ZAR") }}{{ $symbol = $cardCurrency }}{{ end -}}
                             {{ $symbol }} {{ lang.FormatNumber 0 $cardPrice }} <span style="font-size:0.8em; opacity:0.75;">excl. VAT</span>
                         </p>
+                        {{ end }}
                         {{ end }}
                         <p class="training-card-description">
                             {{ .Description | truncate 100 }}

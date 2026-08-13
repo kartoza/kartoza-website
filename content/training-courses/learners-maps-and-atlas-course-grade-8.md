@@ -5,7 +5,7 @@ thumbnail: "/img/courses/grade8.png"
 item_code: "Grade 8 Map Skills: Provinces of South Africa"
 price: 0
 price_currency: "ZAR"
-isFree: 1
+isFree: true
 shop_url: "https://erp.kartoza.com/shop/product/learners-maps-and-atlas-course-grade-8"
 tags:
   - Training
