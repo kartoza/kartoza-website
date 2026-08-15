@@ -1,21 +1,33 @@
 ---
-title: "Introduction to QGIS"
-description: "Master the fundamentals of desktop GIS using QGIS, the world's leading open source geographic information system. Hands-on, practitioner-taught, and immediately applicable to your real-world mapping and analysis needs."
-thumbnail: "/img/courses/qgisonline.png"
-duration: "3 Days"
-delivery: "In-person/Online"
+title: "Introduction to (Self-paced)"
+item_code: "Introduction to GIS with QGIS (Self-paced)"
+price: 850.43
+price_currency: "ZAR"
+description: "A practical, beginner-friendly introduction to GIS using QGIS. Over ~18–20 hours you’ll learn how to create professional maps, work with vector and raster data, georeference scanned maps and imagery, and run basic spatial analyses using real-world case studies. The course is delivered online"
+thumbnail: "/img/courses/qgisselfpaced.png"
+duration: "~18–20 hours"
+delivery: "Self-paced · Online"
 level: "Beginner"
-track: "Desktop GIS"
-trackOrder: 1
-weight: 1
+certificate_label: "Accredited QGIS Certificate Included"
+shop_url: "https://erp.kartoza.com/training-courses/introduction-to-gis-with-qgis-self-paced-9ysfz"
 tags:
-  - QGIS
-  - Desktop GIS
-  - Mapping
-date: 2024-01-01
+  - Training
+  - QGIS Certificate
+track: "Desktop GIS"
+draft: false
 reviewedBy: "Lené van Jaarsveld"
 reviewedDate: 2026-08-14
 ---
+
+<!-- {{< block
+    title="Introduction to GIS with QGIS (Self-paced)"
+    subtitle="Professional GIS Training"
+    class="is-primary"
+    sub-block-side="bottom"
+>}}
+A practical, beginner-friendly introduction to GIS using QGIS. Over ~18–20 hours you’ll learn how to create professional maps, work with vector and raster data, georeference scanned maps and imagery, and run basic spatial analyses using real-world case studies. The course is delivered online
+{{< /block >}} -->
+
 
 ## Course Overview
 
@@ -124,7 +136,7 @@ No prior GIS experience is required, though basic computer literacy is expected.
   </div>
 
   <div class="material-card">
-    <h4>Certificate of completion</h4>
+    <h4>QGIS Certificate & Certificate of Completion</h4>
     <p>Accredited QGIS Certificate, issued by the QGIS organisation
 Certificate of Completion, issued by Kartoza GIS Academy</p>
   </div>
@@ -139,7 +151,6 @@ Certificate of Completion, issued by Kartoza GIS Academy</p>
     <p>QGIS is free — no software licence costs ever</p>
   </div>
 </div>
-
 
 ## What Participants Say
 
