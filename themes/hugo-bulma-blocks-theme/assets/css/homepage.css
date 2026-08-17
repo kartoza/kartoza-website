@@ -9711,6 +9711,62 @@ body:has(.blog-hero) .contextmenu {
     margin-bottom: 0.5rem;
 }
 
+.qgis-receive-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.qgis-receive-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    min-width: 0;
+    padding: 0.8rem 1rem;
+    background: var(--white);
+    border: 1px solid #dce3e8;
+    border-radius: 8px;
+}
+
+.qgis-receive-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 28px;
+    width: 28px;
+    height: 28px;
+    color: var(--primary);
+}
+
+.qgis-receive-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.qgis-receive-body {
+    min-width: 0;
+}
+
+.qgis-receive-body h4 {
+    margin: 0 0 0.2rem;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+    line-height: 1.25;
+}
+
+.qgis-receive-body p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    line-height: 1.4;
+}
+
+@media screen and (max-width: 768px) {
+    .qgis-receive-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .course-resource-grid {
     display: grid;
     grid-template-columns: 1fr;
