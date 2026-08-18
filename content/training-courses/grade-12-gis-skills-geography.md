@@ -119,14 +119,15 @@ Each lesson comes with an instructional video, written notes, GIS data, and a ma
   <svg class="material-card-icon" width="16" height="16" fill="none"
          stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
     <span>Written lesson notes per topic</span>
+  </p>
   </div>
 
   <div class="material-card">
     <p class="material-item">
-      <svg class="material-card-icon" width="16
-    " height="16" fill="none"
+      <svg class="material-card-icon" width="16" height="16" fill="none"
          stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
     <span>Marking guide for SBA submissions</span>
+    </p>
   </div>
 
 <div class="material-card">
@@ -134,12 +135,15 @@ Each lesson comes with an instructional video, written notes, GIS data, and a ma
   <svg class="material-card-icon" width="16" height="16" fill="none"
          stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
    <span>Certificate on completion</span>
+  </p>
   </div>
 
   <div class="material-card">
   <p class="material-item">
   <svg class="material-card-icon" width="16" height="16" fill="none"
          stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
-   <span>Lifetime access after purchase</span>
-  </div>
-  
+     <span>Lifetime access after purchase</span>
+    </p>
+    </div>
+
+</div>

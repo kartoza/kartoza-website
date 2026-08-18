@@ -9560,7 +9560,7 @@ body:has(.blog-hero) .contextmenu {
     align-items: start;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 900px) {
     .course-layout {
         grid-template-columns: 1fr;
     }
