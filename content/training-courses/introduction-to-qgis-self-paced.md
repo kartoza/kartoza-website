@@ -18,7 +18,6 @@ draft: false
 reviewedBy: "Lené van Jaarsveld"
 reviewedDate: 2026-08-17
 ---
-
 <!-- {{< block
     title="Introduction to GIS with QGIS (Self-paced)"
     subtitle="Professional GIS Training"
@@ -27,7 +26,6 @@ reviewedDate: 2026-08-17
 >}}
 A practical, beginner-friendly introduction to GIS using QGIS. Over ~18–20 hours you’ll learn how to create professional maps, work with vector and raster data, georeference scanned maps and imagery, and run basic spatial analyses using real-world case studies. The course is delivered online
 {{< /block >}} -->
-
 
 ## Course Overview
 
