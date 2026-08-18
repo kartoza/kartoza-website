@@ -190,7 +190,6 @@ Administration, Troubleshooting & Production Readiness</strong><span class="cour
   </div>
 </div>
 
-
 ## What Participants Say
 
 <section class="course-testimonials" aria-label="Course testimonials">
