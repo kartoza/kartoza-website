@@ -2110,10 +2110,14 @@
 }
 
 .training-track-sequence {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
-    align-items: stretch;
+}
+
+.training-track-sequence:has(.track-connector) {
+    grid-template-columns: 1fr 50px 1fr;
+    width: fit-content;
 }
 
 .training-track-sequence .training-card {
@@ -2142,6 +2146,8 @@
 }
 
 .track-connector {
+    width: 50px;
+    flex: 0 0 50px;
     display: flex;
     align-items: center;
     justify-content: center;
