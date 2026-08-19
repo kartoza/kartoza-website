@@ -56,19 +56,36 @@
                             <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" loading="lazy">
                         </a>
                         {{ if .Params.level }}
-                        <span class="training-card-badge">{{ .Params.level }}</span>
+                        <span class="training-card-badge level-{{ .Params.level | lower | urlize }}">
+                            {{ .Params.level }}
+                        </span>
                         {{ end }}
                     </div>
                     <div class="training-card-content">
                         <h3 class="training-card-title">
                             <a href="{{ .Permalink }}">{{ .Title }}</a>
                         </h3>
-                        {{ if .Params.duration }}
-                        <p class="training-card-duration">
-                            <i class="fas fa-clock"></i>
-                            {{ .Params.duration }}
-                        </p>
+                        <div class="training-card-meta">
+                    {{ with .Params.duration }}
+                        <span>
+                        <i class="fas fa-clock"></i>
+                        {{ . }}
+                        </span>
+                    {{ end }}
+
+                    {{ with .Params.delivery }}
+                        <span>
+                        <i class="fas fa-laptop"></i>
+                        {{ . }}
+                        </span>
                         {{ end }}
+                    </div>
+                        {{ if .Params.isFree }}
+                        <p class="training-card-price">
+                            <i class="fas fa-gift"></i>
+                            <span>Free</span>
+                        </p>
+                        {{ else }}
                         {{- $cardPrice := .Params.price -}}
                         {{- $cardCurrency := .Params.price_currency -}}
                         {{- if not $cardPrice -}}
@@ -84,6 +101,7 @@
                             {{- if and $cardCurrency (ne $cardCurrency "ZAR") }}{{ $symbol = $cardCurrency }}{{ end -}}
                             {{ $symbol }} {{ lang.FormatNumber 0 $cardPrice }} <span style="font-size:0.8em; opacity:0.75;">excl. VAT</span>
                         </p>
+                        {{ end }}
                         {{ end }}
                         <p class="training-card-description">
                             {{ .Description | truncate 100 }}
@@ -121,19 +139,28 @@
                             <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" loading="lazy">
                         </a>
                         {{ if .Params.level }}
-                        <span class="training-card-badge">{{ .Params.level }}</span>
+                        <span class="training-card-badge level-{{ .Params.level | lower | urlize }}">{{ .Params.level }}</span>
                         {{ end }}
                     </div>
                     <div class="training-card-content">
                         <h3 class="training-card-title">
                             <a href="{{ .Permalink }}">{{ .Title }}</a>
                         </h3>
-                        {{ if .Params.duration }}
-                        <p class="training-card-duration">
-                            <i class="fas fa-clock"></i>
-                            {{ .Params.duration }}
-                        </p>
-                        {{ end }}
+                        <div class="training-card-meta">
+                            {{ with .Params.duration }}
+                            <span>
+                                <i class="fas fa-clock"></i>
+                                {{ . }}
+                            </span>
+                            {{ end }}
+
+                            {{ with .Params.delivery }}
+                            <span>
+                                <i class="fas fa-laptop"></i>
+                                {{ . }}
+                            </span>
+                            {{ end }}
+                        </div>
                         {{- $cardPrice := .Params.price -}}
                         {{- $cardCurrency := .Params.price_currency -}}
                         {{- if not $cardPrice -}}
@@ -186,19 +213,28 @@
                             <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" loading="lazy">
                         </a>
                         {{ if .Params.level }}
-                        <span class="training-card-badge">{{ .Params.level }}</span>
+                        <span class="training-card-badge level-{{ .Params.level | lower | urlize }}">{{ .Params.level }}</span>
                         {{ end }}
                     </div>
                     <div class="training-card-content">
                         <h3 class="training-card-title">
                             <a href="{{ .Permalink }}">{{ .Title }}</a>
                         </h3>
-                        {{ if .Params.duration }}
-                        <p class="training-card-duration">
-                            <i class="fas fa-clock"></i>
-                            {{ .Params.duration }}
-                        </p>
-                        {{ end }}
+                        <div class="training-card-meta">
+                            {{ with .Params.duration }}
+                            <span>
+                                <i class="fas fa-clock"></i>
+                                {{ . }}
+                            </span>
+                            {{ end }}
+
+                            {{ with .Params.delivery }}
+                            <span>
+                                <i class="fas fa-laptop"></i>
+                                {{ . }}
+                            </span>
+                            {{ end }}
+                        </div>
                         {{- $cardPrice := .Params.price -}}
                         {{- $cardCurrency := .Params.price_currency -}}
                         {{- if not $cardPrice -}}
@@ -250,19 +286,34 @@
                             <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" loading="lazy">
                         </a>
                         {{ if .Params.level }}
-                        <span class="training-card-badge">{{ .Params.level }}</span>
+                        <span class="training-card-badge level-{{ .Params.level | lower | urlize }}">{{ .Params.level }}</span>
                         {{ end }}
                     </div>
                     <div class="training-card-content">
                         <h3 class="training-card-title">
                             <a href="{{ .Permalink }}">{{ .Title }}</a>
                         </h3>
-                        {{ if .Params.duration }}
-                        <p class="training-card-duration">
+                        <div class="training-card-meta">
+                    {{ with .Params.duration }}
+                        <span>
                             <i class="fas fa-clock"></i>
-                            {{ .Params.duration }}
+                           {{ . }}
+                        </span>
+                    {{ end }}
+
+                    {{ with .Params.delivery }}
+                        <span>
+                        <i class="fas fa-laptop"></i>
+                        {{ . }}
+                        </span>
+                    {{ end }}
+                    </div>
+
+                        {{ if .Params.isFree }}
+                         <p class="training-card-price">
+                            <span>Free</span>
                         </p>
-                        {{ end }}
+                        {{ else }}
                         {{- $cardPrice := .Params.price -}}
                         {{- $cardCurrency := .Params.price_currency -}}
                         {{- if not $cardPrice -}}
@@ -278,6 +329,7 @@
                             {{- if and $cardCurrency (ne $cardCurrency "ZAR") }}{{ $symbol = $cardCurrency }}{{ end -}}
                             {{ $symbol }} {{ lang.FormatNumber 0 $cardPrice }} <span style="font-size:0.8em; opacity:0.75;">excl. VAT</span>
                         </p>
+                        {{ end }}
                         {{ end }}
                         <p class="training-card-description">
                             {{ .Description | truncate 100 }}

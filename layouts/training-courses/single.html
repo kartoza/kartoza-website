@@ -5,6 +5,75 @@
 {{ partial "header.html" . }}
 {{ partial "menu.html" . }}
 
+<style>
+.course-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 350px;
+    gap: 3rem;
+    align-items: start;
+}
+.course-main { min-width: 0; }
+.course-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-width: 0;
+}
+.course-sidebar .sidebar-card {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(27,107,155,.12);
+}
+.course-sidebar .sidebar-card h4 {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin: 0 0 1rem;
+    color: #1a2a3a;
+    font-size: 1.1rem;
+    line-height: 1.3;
+}
+.course-sidebar .sidebar-card h4 i { color: #53a2cc; }
+.course-sidebar .details-list {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
+.course-sidebar .detail-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: .75rem;
+    border-bottom: 1px solid #e8ecf0;
+}
+.course-sidebar .detail-item:last-child { padding-bottom: 0; border-bottom: 0; }
+.course-sidebar .detail-label { color: #4d6370; font-size: .85rem; }
+.course-sidebar .detail-value { color: #3488b8; font-size: .9rem; font-weight: 600; text-align: right; }
+.course-sidebar .instructor-training-card p {
+    margin: 0 0 1rem;
+    color: #4d6370;
+    font-size: .9rem;
+    line-height: 1.55;
+}
+.course-sidebar .instructor-training-button {
+    display: block;
+    padding: .7rem 1rem;
+    border-radius: 6px;
+    background: #e8a331;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 700;
+}
+@media screen and (max-width: 900px) {
+    .course-layout { grid-template-columns: 1fr; }
+}
+</style>
+
 <!-- Course Hero -->
 <section class="course-hero">
     <div class="course-hero-bg">
@@ -35,14 +104,32 @@
                         <span>3 Days</span>
                     </div>
                     {{ end }}
-                    <div class="meta-item">
+                    {{ if .Params.isFree }}
+                  <div class="meta-item">
                         <i class="fas fa-laptop"></i>
-                        <span>On-site or Remote</span>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-certificate"></i>
-                        <span>Certificate Included</span>
-                    </div>
+                    {{ with .Params.delivery }}
+                        <span>{{ . }}</span>
+                    {{ else }}
+                        <span>Asynchronous</span>
+                    {{ end }}
+                  </div>
+                    {{ else }}
+                <div class="meta-item">
+                    <i class="fas fa-laptop"></i>
+                    {{ with .Params.delivery }}
+                    <span>{{ . }}</span>
+                    {{ else }}
+                    <span>On-site or Remote</span>
+                    {{ end }}
+                </div>
+
+                    {{ if ne .Params.certificate false }}
+                        <div class="meta-item">
+                            <i class="fas fa-certificate"></i>
+                            <span>{{ .Params.certificate_label | default "Certificate Included" }}</span>
+                        </div>
+                    {{ end }}
+                {{ end }}
                 </div>
                 <div class="course-hero-cta">
                     {{ if $allowBooking }}
@@ -66,6 +153,7 @@
 </section>
 
 <!-- Quick Benefits Bar -->
+{{ if not .Params.isFree }}
 <section class="course-benefits-bar">
     <div class="container">
         <div class="benefits-bar-grid">
@@ -85,9 +173,16 @@
                 <i class="fas fa-headset"></i>
                 <span>Post-Course Support</span>
             </div>
+            {{ if eq .Params.delivery "In-person/Online" }}
+            <div class="benefit-bar-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>On-site: 7+ people</span>
+            </div>
+            {{ end }}
         </div>
     </div>
 </section>
+{{ end }}
 
 <!-- Course Content -->
 <section class="course-section course-content-section" id="course-content">
@@ -163,7 +258,7 @@
                         </div>
                         <div class="detail-item">
                             <span class="detail-label">Format</span>
-                            <span class="detail-value">On-site / Remote</span>
+                            <span class="detail-value">{{ .Params.delivery | default "On-site / Remote" }}</span>
                         </div>
                         <div class="detail-item">
                             <span class="detail-label">Level</span>
@@ -171,7 +266,7 @@
                         </div>
                         <div class="detail-item">
                             <span class="detail-label">Certificate</span>
-                            <span class="detail-value">Yes</span>
+                            <span class="detail-value">{{ if eq .Params.certificate false }}No{{ else }}Yes{{ end }}</span>
                         </div>
                         <div class="detail-item">
                             <span class="detail-label">Language</span>
@@ -180,6 +275,17 @@
                     </div>
                 </div>
 
+                {{ $isSelfPaced := in (.Title | lower) "self-paced" }}
+                {{ if and (not .Params.isFree) (not $isSelfPaced) }}
+                <div class="sidebar-card instructor-training-card">
+                    <h4>Need on-site training?</h4>
+                    <p>Groups of 7+ can have this course delivered on-site, tailored to your organisation's database environment and spatial data.</p>
+                    <a href="{{ absURL "contact-us/" }}?course={{ .Title | urlquery }}&subject=On-site%20Training%20Enquiry" class="instructor-training-button">
+                        Contact Us to Arrange
+                    </a>
+                </div>
+                {{ end }}
+
                 <!-- Related Courses -->
                 {{ $currentTags := .Params.tags }}
                 {{ $currentPage := . }}
@@ -187,7 +293,7 @@
                 {{ $related = $related | first 3 }}
                 {{ if $related }}
                 <div class="sidebar-card related-card">
-                    <h4><i class="fas fa-book-open"></i> Related Courses</h4>
+                    <h4><i class="fas fa-book-open"></i> Other Kartoza Courses</h4>
                     <div class="related-list">
                         {{ range $related }}
                         <a href="{{ .Permalink }}" class="related-item">

@@ -70,7 +70,12 @@
 </script>
 
 {{ else if .Params.item_code }}
-{{/* No scheduled events but course has an item_code — self-paced / async purchase */}}
+{{/* No scheduled events: free courses get the email-access card; paid courses get purchase details. */}}
+{{ if .Params.isFree }}
+<div class="sidebar-card upcoming-events-card free-course-card">
+  {{ template "free-block" . }}
+</div>
+{{ else }}
 <div class="sidebar-card upcoming-events-card">
   <h4><i class="fas fa-infinity"></i> Self-Paced Course</h4>
   <p style="font-size: 0.875rem; color: #4d6370; margin-bottom: 1rem;">
@@ -92,6 +97,7 @@
   </div>
   {{ template "free-block" . }}
 </div>
+{{ end }}
 <script>
   (function() {
     const auth = getAuth()
@@ -207,24 +213,23 @@
 {{/* Reusable free-course block (rendered inline via define/template)    */}}
 {{/* ------------------------------------------------------------------ */}}
 {{ define "free-block" }}
-<div class="course-free-block" style="display:none; flex-direction:column; gap:0.6rem; margin-top:0.5rem;">
-  <p style="font-size:0.875rem; font-weight:600; color:#00b388; margin:0;">
-    <i class="fas fa-gift" style="margin-right:0.3rem;"></i> This course is free!
-  </p>
-  <p style="font-size:0.8rem; color:#4d6370; margin:0;">
-    Enter your email and we'll send you the enrollment key and course link instantly.
+{{ $freeDisplay := "none" }}
+{{ if .Params.isFree }}{{ $freeDisplay = "flex" }}{{ end }}
+<div class="course-free-block free-course-content" style="display:{{ $freeDisplay }};">
+  <div class="free-course-badge"><span aria-hidden="true">🎁</span> FREE COURSE</div>
+  <p class="free-course-description">
+    This lesson is free. Enter your email and we will send the enrollment key and course link straight away.
   </p>
   <div id="free-access-form">
-    <input id="free-access-email" type="email" class="input is-small"
-           placeholder="your@email.com" style="margin-bottom:0.4rem;" />
-    <button id="free-access-btn" class="button is-success" style="width:100%;">
-      <span class="icon is-small"><i class="fas fa-envelope"></i></span>
-      <span>Get Free Access</span>
+    <input id="free-access-email" type="email" class="input"
+           placeholder="your@email.com" aria-label="Email address" />
+    <button id="free-access-btn" class="button">
+      <span>Get free access</span><span aria-hidden="true">→</span>
     </button>
   </div>
-  <div id="free-access-msg" style="display:none;"></div>
+  <div id="free-access-msg"></div>
   <a href="{{ printf "/contact-us/?course=%s&subject=Course%%20Enquiry" (.Title | urlquery) }}"
-     class="button is-small">Enquiry</a>
+     class="button free-course-question">Ask a question</a>
 </div>
 {{ end }}
 
@@ -239,6 +244,87 @@
 
 .upcoming-events-card h4 i {
   color: #00b388;
+}
+
+.free-course-card {
+  background: #fff;
+}
+
+.free-course-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.free-course-badge {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: #e4f2f9;
+  color: #173f5f;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.free-course-description {
+  margin: 0.15rem 0 0.1rem;
+  color: #4d6370;
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.free-course-content #free-access-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.free-course-content #free-access-email {
+  min-height: 40px;
+  border: 1px solid #d5e0e8;
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+.free-course-content #free-access-btn {
+  width: 100%;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 40px;
+  border: 0;
+  border-radius: 6px;
+  background: #f0b544;
+  color: #1f2a30;
+  font-weight: 700;
+}
+
+.free-course-content #free-access-btn:hover,
+.free-course-content #free-access-btn:focus-visible {
+  background: #e8a331;
+}
+
+.free-course-question {
+  width: 100%;
+  justify-content: center;
+  min-height: 40px;
+  border: 1px solid #d5e0e8;
+  border-radius: 6px;
+  background: #fff;
+  color: #2c3e50;
+}
+
+.free-course-question:hover,
+.free-course-question:focus-visible {
+  border-color: #53a2cc;
+  color: #2f91c3;
+}
+
+.free-course-content #free-access-msg:empty {
+  display: none;
 }
 
 .upcoming-events-list {

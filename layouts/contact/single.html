@@ -687,9 +687,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         launchConfetti();
                     }, 800);
                 } else {
-                    throw new Error('Server error');
+                    const responseBody = await response.text().catch(() => '');
+                    throw new Error(`Server error: ${response.status} ${response.statusText} - ${responseBody}`);
                 }
             } catch (error) {
+                console.error('Contact form submission failed:', error);
                 submitBtn.classList.remove('loading');
                 errorMsg.classList.remove('is-hidden');
 
