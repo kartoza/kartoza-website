@@ -153,6 +153,7 @@
 </section>
 
 <!-- Quick Benefits Bar -->
+{{ if not .Params.isFree }}
 <section class="course-benefits-bar">
     <div class="container">
         <div class="benefits-bar-grid">
@@ -181,6 +182,7 @@
         </div>
     </div>
 </section>
+{{ end }}
 
 <!-- Course Content -->
 <section class="course-section course-content-section" id="course-content">
