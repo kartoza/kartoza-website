@@ -165,7 +165,6 @@ This course is ideal for:
   </div>
 </div>
 
-
 ## What Participants Say
 
 <section class="course-testimonials" aria-label="Course testimonials">

@@ -150,7 +150,6 @@ No prior GIS experience is required, though basic computer literacy is expected.
   </div>
 </div>
 
-
 ## What Participants Say
 
 <section class="course-testimonials" aria-label="Course testimonials">

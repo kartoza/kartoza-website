@@ -153,7 +153,7 @@ This course is ideal for:
   <div class="material-card">
   <p class="material-item">
   <svg class="material-card-icon" width="16" height="16" fill="none"
-         stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4"></path></svg> 
+         stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4"></path></svg>
     <span>Sample spatial datasets for all exercises</span></p>
   </div>
 
