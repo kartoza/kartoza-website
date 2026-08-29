@@ -172,12 +172,8 @@ This course is ideal for:
   <div class="course-testimonials-viewport">
     <div class="course-testimonials-track">
       <article class="course-testimonial-card"><div class="course-testimonial-author"><span class="course-testimonial-avatar">IO</span><span><strong>I. Olivier</strong><span class="course-testimonial-rating">★★★★★</span></span></div><blockquote>Very enjoyable and informative course, Thanks!</blockquote></article>
-      <article class="course-testimonial-card"><div class="course-testimonial-author"><span class="course-testimonial-avatar">TM</span><span><strong>N. Surname</strong><small>Add Here · Add Here</small><span class="course-testimonial-rating">★★★★★</span></span></div><blockquote>Add customer review here</blockquote></article>
-      <article class="course-testimonial-card"><div class="course-testimonial-author"><span class="course-testimonial-avatar">TM</span><span><strong>N. Surname</strong><span class="course-testimonial-rating">★★★★★</span></span></div><blockquote>Add customer review here</blockquote></article>
-      <article class="course-testimonial-card"><div class="course-testimonial-author"><span class="course-testimonial-avatar">TM</span><span><strong>N. Surname</strong><small>Add Here · Add Here</small><span class="course-testimonial-rating">★★★★★</span></span></div><blockquote>Add customer review here</blockquote></article>
     </div>
   </div>
-  <div class="course-testimonials-controls"><button class="course-testimonials-button" type="button" data-testimonials-prev aria-label="Previous testimonial">‹</button><div class="course-testimonials-dots" aria-label="Testimonial slides"></div><button class="course-testimonials-button" type="button" data-testimonials-next aria-label="Next testimonial">›</button></div>
 </section>
 
 <script>
@@ -191,10 +187,10 @@ This course is ideal for:
   const visible = () => window.matchMedia('(max-width: 700px)').matches ? 1 : 2;
   const maxIndex = () => Math.max(0, cards.length - visible());
   const setupReadMore = () => cards.forEach((card) => { const quote = card.querySelector('blockquote'); if (!quote) return; let button = card.querySelector('.course-testimonial-read-more'); quote.classList.remove('is-collapsed'); quote.classList.add('is-collapsed'); if (quote.scrollHeight > quote.clientHeight + 2) { if (!button) { button = document.createElement('button'); button.type = 'button'; button.className = 'course-testimonial-read-more'; button.textContent = 'Read more'; button.setAttribute('aria-expanded', 'false'); quote.after(button); button.addEventListener('click', () => { const expanded = quote.classList.toggle('is-collapsed') === false; button.textContent = expanded ? 'Read less' : 'Read more'; button.setAttribute('aria-expanded', String(expanded)); track.style.alignItems = expanded ? 'flex-start' : 'stretch'; }); } button.textContent = 'Read more'; button.setAttribute('aria-expanded', 'false'); } else { quote.classList.remove('is-collapsed'); if (button) button.remove(); } });
-  cards.forEach((_, i) => { const dot = document.createElement('button'); dot.type = 'button'; dot.className = 'course-testimonials-dot'; dot.setAttribute('aria-label', `Show testimonial ${i + 1}`); dot.addEventListener('click', () => { index = Math.min(i, maxIndex()); update(); }); dots.appendChild(dot); });
-  function update() { setupReadMore(); index = Math.min(index, maxIndex()); const gap = parseFloat(getComputedStyle(track).gap) || 0; const step = (cards[0]?.getBoundingClientRect().width || 0) + gap; track.style.transform = `translateX(-${index * step}px)`; [...dots.children].forEach((dot, i) => dot.classList.toggle('is-active', i === index)); }
-  carousel.querySelector('[data-testimonials-prev]').addEventListener('click', () => { index = index <= 0 ? maxIndex() : index - 1; update(); });
-  carousel.querySelector('[data-testimonials-next]').addEventListener('click', () => { index = index >= maxIndex() ? 0 : index + 1; update(); });
+  if (dots) cards.forEach((_, i) => { const dot = document.createElement('button'); dot.type = 'button'; dot.className = 'course-testimonials-dot'; dot.setAttribute('aria-label', `Show testimonial ${i + 1}`); dot.addEventListener('click', () => { index = Math.min(i, maxIndex()); update(); }); dots.appendChild(dot); });
+  function update() { setupReadMore(); index = Math.min(index, maxIndex()); const gap = parseFloat(getComputedStyle(track).gap) || 0; const step = (cards[0]?.getBoundingClientRect().width || 0) + gap; track.style.transform = `translateX(-${index * step}px)`; if (dots) [...dots.children].forEach((dot, i) => dot.classList.toggle('is-active', i === index)); }
+  carousel.querySelector('[data-testimonials-prev]')?.addEventListener('click', () => { index = index <= 0 ? maxIndex() : index - 1; update(); });
+  carousel.querySelector('[data-testimonials-next]')?.addEventListener('click', () => { index = index >= maxIndex() ? 0 : index + 1; update(); });
   window.addEventListener('resize', update); update();
 })();
 </script>
