@@ -2111,20 +2111,45 @@
 
 .training-track-sequence {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.5rem;
 }
 
-.training-track-sequence:has(.track-connector) {
-    grid-template-columns: 1fr 50px 1fr;
-    width: fit-content;
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+    .training-track-sequence {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 .training-track-sequence .training-card {
     flex: 1;
-    min-width: 280px;
-    max-width: 350px;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
     position: relative;
+}
+
+.training-track-sequence .training-card-content {
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+.training-track-sequence .training-card-title {
+    font-size: 1.25rem;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+}
+
+.training-track-sequence .training-card-meta {
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+}
+
+.training-track-sequence .training-card-meta span {
+    flex-shrink: 0;
 }
 
 .training-card-step {
@@ -2145,18 +2170,18 @@
     box-shadow: var(--shadow-md);
 }
 
-.track-connector {
-    width: 50px;
-    flex: 0 0 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--gray-400);
-    font-size: 1.25rem;
-    padding: 0 0.5rem;
-}
-
 @media screen and (max-width: 768px) {
+    .training-section .columns {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .training-section .columns > .column {
+        width: 100%;
+        max-width: 100%;
+        flex: none;
+    }
+
     .training-paths-nav {
         flex-direction: column;
         padding: 1rem;
@@ -2178,16 +2203,15 @@
     }
 
     .training-track-sequence {
+        display: flex;
         flex-direction: column;
+        width: auto;
     }
 
     .training-track-sequence .training-card {
+        width: 100%;
+        min-width: 0;
         max-width: 100%;
-    }
-
-    .track-connector {
-        transform: rotate(90deg);
-        padding: 0.5rem 0;
     }
 
     .training-card-step {

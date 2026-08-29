@@ -111,6 +111,40 @@
     </div>
     {{ end }}
 </div>
+{{ $selfPacedCourses := slice }}
+{{ $freeResources := slice }}
+{{ range where site.RegularPages "Section" "training-courses" }}
+    {{ $delivery := lower (.Params.delivery | default "") }}
+    {{ if in $delivery "self-paced" }}
+        {{ if .Params.isFree }}{{ $freeResources = $freeResources | append . }}{{ else }}{{ $selfPacedCourses = $selfPacedCourses | append . }}{{ end }}
+    {{ end }}
+{{ end }}
+{{ if or $selfPacedCourses $freeResources }}
+<div class="training-calendar-self-paced-card">
+    {{ if $selfPacedCourses }}
+    <h3><i class="fas fa-book-open"></i> Self-Paced Courses</h3>
+    <div class="training-calendar-self-paced-list">
+        {{ range $selfPacedCourses }}
+        <a href="{{ .RelPermalink }}" class="training-calendar-self-paced-item">
+            <span>{{ .Title }}</span><i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </a>
+        {{ end }}
+    </div>
+    </div>
+    {{ end }}
+    {{ if $freeResources }}
+<div class="training-calendar-self-paced-card training-calendar-free-card">
+    <h3><i class="fas fa-gift"></i> Free GIS Resources</h3>
+    <div class="training-calendar-self-paced-list">
+        {{ range $freeResources }}
+        <a href="{{ .RelPermalink }}" class="training-calendar-self-paced-item">
+            <span>{{ .Title }}</span><i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </a>
+        {{ end }}
+    </div>
+    </div>
+    {{ end }}
+{{ end }}
 <script>
   const auth = getAuth()
   if (auth) {
@@ -204,8 +238,10 @@
     padding: 1.5rem;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     border-radius: 12px;
-    position: sticky;
-    top: 100px;
+}
+
+.training-sidebar {
+    position: static;
 }
 
 .training-calendar-header {
@@ -553,7 +589,66 @@
     top: auto;
 }
 
+.training-calendar-self-paced-card {
+    margin-top: 1.25rem;
+    padding: 1.5rem;
+    border-radius: 12px;
+    background: var(--white);
+    box-shadow: 0 4px 16px rgba(27, 107, 155, 0.12);
+}
+
+.training-calendar-self-paced-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 1rem;
+    color: #1a2a3a;
+    font-size: 1.1rem;
+}
+
+.training-calendar-self-paced-card h3 i {
+    color: var(--primary);
+}
+
+.training-calendar-self-paced-card .training-calendar-free-title {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #eef2f4;
+}
+
+.training-calendar-self-paced-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.training-calendar-self-paced-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    color: #1a2a3a;
+    text-decoration: none;
+}
+
+.training-calendar-self-paced-item + .training-calendar-self-paced-item {
+    border-top: 1px solid #eef2f4;
+}
+
+.training-calendar-self-paced-item i {
+    color: var(--primary);
+}
+
+.training-calendar-self-paced-item:hover,
+.training-calendar-self-paced-item:focus-visible {
+    color: var(--primary-dark);
+}
+
 @media (max-width: 768px) {
+    .training-sidebar {
+        position: static;
+    }
+
     .training-calendar-results .training-calendar-grid {
         grid-template-columns: 1fr;
     }

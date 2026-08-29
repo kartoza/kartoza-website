@@ -48,7 +48,6 @@
             </div>
             <div class="training-track-sequence">
                 {{ range $index, $course := $desktopCourses.ByWeight }}
-                {{ if gt $index 0 }}<div class="track-connector"><i class="fas fa-arrow-right"></i></div>{{ end }}
                 <article class="training-card">
                     <div class="training-card-image">
                         <a href="{{ .Permalink }}">
@@ -131,7 +130,6 @@
             </div>
             <div class="training-track-sequence">
                 {{ range $index, $course := $serverCourses.ByWeight }}
-                {{ if gt $index 0 }}<div class="track-connector"><i class="fas fa-arrow-right"></i></div>{{ end }}
                 <article class="training-card">
                     <div class="training-card-image">
                         <a href="{{ .Permalink }}">
@@ -205,7 +203,6 @@
             </div>
             <div class="training-track-sequence">
                 {{ range $index, $course := $devCourses.ByWeight }}
-                {{ if gt $index 0 }}<div class="track-connector"><i class="fas fa-arrow-right"></i></div>{{ end }}
                 <article class="training-card">
                     <div class="training-card-image">
                         <a href="{{ .Permalink }}">
