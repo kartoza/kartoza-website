@@ -4,6 +4,7 @@ description: "A hands-on course covering spatial database concepts and practices
 thumbnail: "/img/courses/postgisonline.png"
 duration: "2 Days"
 delivery: "In-person/Online"
+certificate_label: "Certificate of Attendance & Completion"
 level: "Intermediate"
 track: "Server & Infrastructure"
 trackOrder: 2
@@ -176,7 +177,7 @@ This course is ideal for:
   <p class="material-item">
   <svg class="material-card-icon" width="16" height="16" fill="none"
          stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
-   <span>Certificate of attendance</span>
+   <span>Certificate of attendance and completion.</span>
   </div>
 
   <div class="material-card">
@@ -192,10 +193,9 @@ This course is ideal for:
 <section class="course-testimonials" aria-label="Course testimonials">
   <div class="course-testimonials-viewport">
     <div class="course-testimonials-track">
-      <article class="course-testimonial-card"><div class="course-testimonial-rating">❝ <span>★★★★★</span></div><blockquote>Add customer review here</blockquote><div class="course-testimonial-author"><span class="course-testimonial-avatar">TM</span><span><strong>N. Surname</strong><small>Add Here · Add Here</small></span></div></article>
-      <article class="course-testimonial-card"><div class="course-testimonial-rating">❝ <span>★★★★★</span></div><blockquote>Add customer review here</blockquote><div class="course-testimonial-author"><span class="course-testimonial-avatar">TM</span><span><strong>N. Surname</strong><small>Add Here · Add Here</small></span></div></article>
-      <article class="course-testimonial-card"><div class="course-testimonial-rating">❝ <span>★★★★★</span></div><blockquote>Add customer review here</blockquote><div class="course-testimonial-author"><span class="course-testimonial-avatar">TM</span><span><strong>N. Surname</strong><small>Add Here · Add Here</small></span></div></article>
-      <article class="course-testimonial-card"><div class="course-testimonial-rating">❝ <span>★★★★★</span></div><blockquote>Add customer review here</blockquote><div class="course-testimonial-author"><span class="course-testimonial-avatar">TM</span><span><strong>N. Surname</strong><small>Add Here · Add Here</small></span></div></article>
+      <article class="course-testimonial-card"><div class="course-testimonial-author"><span class="course-testimonial-avatar">LS</span><span><strong>L. Strijdom</strong><span class="course-testimonial-rating">★★★★★</span></span></div><blockquote>The course is a perfect quick start quide to PostGIS and pgAdmin. The content was thorough, with comprehensive information on the slides as well as the provided documents. The steps in the excercises are easy to follow and I really appreciated that the complete version was also provided for reference. The presenter is knowledgeable and moves through the content with efficiency, but takes enough time to answer questions and make sure everyone is keeping up. The supplemental resources are also appreciated and useful for further self study.</blockquote></article>
+      <article class="course-testimonial-card"><div class="course-testimonial-author"><span class="course-testimonial-avatar">V</span><span><strong>Victoria</strong><span class="course-testimonial-rating">★★★★★</span></span></div><blockquote>I thought that the course was really excellent, and probably learnt more during it than most other IT courses that I have attended. Using PostGIS in particular will be the test and no doubt I will have many questions along the line but I look forward to getting stuck into using the software. A great course and very worthwhile!</blockquote></article>
+      <article class="course-testimonial-card"><div class="course-testimonial-author"><span class="course-testimonial-avatar">GT</span><span><strong>G. Taylor</strong><span class="course-testimonial-rating">★★★★★</span></span></div><blockquote>I really fantastic introductory course showing what PostgreSQL/PostGIS has to offer, I would definitely recommend this course to anyone that is looking for alternatives to costly proprietary software. </blockquote></article>
     </div>
   </div>
   <div class="course-testimonials-controls"><button class="course-testimonials-button" type="button" data-testimonials-prev aria-label="Previous testimonial">‹</button><div class="course-testimonials-dots" aria-label="Testimonial slides"></div><button class="course-testimonials-button" type="button" data-testimonials-next aria-label="Next testimonial">›</button></div>
@@ -211,13 +211,16 @@ This course is ideal for:
   let index = 0;
   const visible = () => window.matchMedia('(max-width: 700px)').matches ? 1 : 2;
   const maxIndex = () => Math.max(0, cards.length - visible());
+  const setupReadMore = () => cards.forEach((card) => { const quote = card.querySelector('blockquote'); if (!quote) return; let button = card.querySelector('.course-testimonial-read-more'); quote.classList.remove('is-collapsed'); quote.classList.add('is-collapsed'); if (quote.scrollHeight > quote.clientHeight + 2) { if (!button) { button = document.createElement('button'); button.type = 'button'; button.className = 'course-testimonial-read-more'; button.textContent = 'Read more'; button.setAttribute('aria-expanded', 'false'); quote.after(button); button.addEventListener('click', () => { const expanded = quote.classList.toggle('is-collapsed') === false; button.textContent = expanded ? 'Read less' : 'Read more'; button.setAttribute('aria-expanded', String(expanded)); track.style.alignItems = expanded ? 'flex-start' : 'stretch'; }); } button.textContent = 'Read more'; button.setAttribute('aria-expanded', 'false'); } else { quote.classList.remove('is-collapsed'); if (button) button.remove(); } });
   cards.forEach((_, i) => { const dot = document.createElement('button'); dot.type = 'button'; dot.className = 'course-testimonials-dot'; dot.setAttribute('aria-label', `Show testimonial ${i + 1}`); dot.addEventListener('click', () => { index = Math.min(i, maxIndex()); update(); }); dots.appendChild(dot); });
-  function update() { index = Math.min(index, maxIndex()); track.style.transform = `translateX(-${index * (100 / visible())}%)`; [...dots.children].forEach((dot, i) => dot.classList.toggle('is-active', i === index)); }
+  function update() { setupReadMore(); index = Math.min(index, maxIndex()); const gap = parseFloat(getComputedStyle(track).gap) || 0; const step = (cards[0]?.getBoundingClientRect().width || 0) + gap; track.style.transform = `translateX(-${index * step}px)`; [...dots.children].forEach((dot, i) => dot.classList.toggle('is-active', i === index)); }
   carousel.querySelector('[data-testimonials-prev]').addEventListener('click', () => { index = index <= 0 ? maxIndex() : index - 1; update(); });
   carousel.querySelector('[data-testimonials-next]').addEventListener('click', () => { index = index >= maxIndex() ? 0 : index + 1; update(); });
   window.addEventListener('resize', update); update();
 })();
 </script>
+
+## Why Train with Kartoza?
 
 ## Why Train with Kartoza?
 

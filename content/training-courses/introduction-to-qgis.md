@@ -136,7 +136,7 @@ No prior GIS experience is required, though basic computer literacy is expected.
 
   <div class="qgis-receive-card">
     <span class="qgis-receive-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4 4h10l5 5v11H4V4zm10 0v5h5m-9 4h6m-6 3h6"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M15 3l1 2 2 .3-1.5 1.5.4 2.2L15 8l-1.9 1 .4-2.2L12 5.3l2-.3 1-2z"></path></svg></span>
-    <div class="qgis-receive-body"><h4>Certificate of completion</h4><p>Issued through the Kartoza GIS Academy</p></div>
+    <div class="qgis-receive-body"><h4>QGIS Certificate &amp; Certificate of Completion</h4><p>Accredited QGIS Certificate, issued by the QGIS organisation and certificate of completion issued by Kartoza GIS Academy</p></div>
   </div>
 
   <div class="qgis-receive-card">
@@ -155,10 +155,8 @@ No prior GIS experience is required, though basic computer literacy is expected.
 <section class="course-testimonials" aria-label="Course testimonials">
   <div class="course-testimonials-viewport">
     <div class="course-testimonials-track">
-      <article class="course-testimonial-card"><div class="course-testimonial-rating">❝ <span>★★★★★</span></div><blockquote>Add customer review here</blockquote><div class="course-testimonial-author"><span class="course-testimonial-avatar">TM</span><span><strong>N. Surname</strong><small>Add Here · Add Here</small></span></div></article>
-      <article class="course-testimonial-card"><div class="course-testimonial-rating">❝ <span>★★★★★</span></div><blockquote>Add customer review here</blockquote><div class="course-testimonial-author"><span class="course-testimonial-avatar">TM</span><span><strong>N. Surname</strong><small>Add Here · Add Here</small></span></div></article>
-      <article class="course-testimonial-card"><div class="course-testimonial-rating">❝ <span>★★★★★</span></div><blockquote>Add customer review here</blockquote><div class="course-testimonial-author"><span class="course-testimonial-avatar">TM</span><span><strong>N. Surname</strong><small>Add Here · Add Here</small></span></div></article>
-      <article class="course-testimonial-card"><div class="course-testimonial-rating">❝ <span>★★★★★</span></div><blockquote>Add customer review here</blockquote><div class="course-testimonial-author"><span class="course-testimonial-avatar">TM</span><span><strong>N. Surname</strong><small>Add Here · Add Here</small></span></div></article>
+      <article class="course-testimonial-card"><div class="course-testimonial-author"><span class="course-testimonial-avatar">CG</span><span><strong>C.Geldenhuys</strong><span class="course-testimonial-rating">★★★★</span></span></div><blockquote>Good course, knowledgeable presenter.</blockquote></article>
+      <article class="course-testimonial-card"><div class="course-testimonial-author"><span class="course-testimonial-avatar">M</span><span><strong>Mireille</strong><span class="course-testimonial-rating">★★★★★</span></span></div><blockquote>I had a great time at the course.I got a lot of useful information from the presenter about how to use the software.</blockquote></article>
     </div>
   </div>
   <div class="course-testimonials-controls"><button class="course-testimonials-button" type="button" data-testimonials-prev aria-label="Previous testimonial">‹</button><div class="course-testimonials-dots" aria-label="Testimonial slides"></div><button class="course-testimonials-button" type="button" data-testimonials-next aria-label="Next testimonial">›</button></div>
@@ -174,8 +172,9 @@ No prior GIS experience is required, though basic computer literacy is expected.
   let index = 0;
   const visible = () => window.matchMedia('(max-width: 700px)').matches ? 1 : 2;
   const maxIndex = () => Math.max(0, cards.length - visible());
+  const setupReadMore = () => cards.forEach((card) => { const quote = card.querySelector('blockquote'); if (!quote) return; let button = card.querySelector('.course-testimonial-read-more'); quote.classList.remove('is-collapsed'); quote.classList.add('is-collapsed'); if (quote.scrollHeight > quote.clientHeight + 2) { if (!button) { button = document.createElement('button'); button.type = 'button'; button.className = 'course-testimonial-read-more'; button.textContent = 'Read more'; button.setAttribute('aria-expanded', 'false'); quote.after(button); button.addEventListener('click', () => { const expanded = quote.classList.toggle('is-collapsed') === false; button.textContent = expanded ? 'Read less' : 'Read more'; button.setAttribute('aria-expanded', String(expanded)); track.style.alignItems = expanded ? 'flex-start' : 'stretch'; }); } button.textContent = 'Read more'; button.setAttribute('aria-expanded', 'false'); } else { quote.classList.remove('is-collapsed'); if (button) button.remove(); } });
   cards.forEach((_, i) => { const dot = document.createElement('button'); dot.type = 'button'; dot.className = 'course-testimonials-dot'; dot.setAttribute('aria-label', `Show testimonial ${i + 1}`); dot.addEventListener('click', () => { index = Math.min(i, maxIndex()); update(); }); dots.appendChild(dot); });
-  function update() { index = Math.min(index, maxIndex()); track.style.transform = `translateX(-${index * (100 / visible())}%)`; [...dots.children].forEach((dot, i) => dot.classList.toggle('is-active', i === index)); }
+  function update() { setupReadMore(); index = Math.min(index, maxIndex()); const gap = parseFloat(getComputedStyle(track).gap) || 0; const step = (cards[0]?.getBoundingClientRect().width || 0) + gap; track.style.transform = `translateX(-${index * step}px)`; [...dots.children].forEach((dot, i) => dot.classList.toggle('is-active', i === index)); }
   carousel.querySelector('[data-testimonials-prev]').addEventListener('click', () => { index = index <= 0 ? maxIndex() : index - 1; update(); });
   carousel.querySelector('[data-testimonials-next]').addEventListener('click', () => { index = index >= maxIndex() ? 0 : index + 1; update(); });
   window.addEventListener('resize', update); update();

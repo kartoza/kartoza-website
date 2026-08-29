@@ -10052,43 +10052,82 @@ body:has(.blog-hero) .contextmenu {
 
 .course-testimonials-track {
     display: flex;
+    align-items: stretch;
     gap: 1rem;
     transition: transform 0.35s ease;
 }
 
 .course-testimonial-card {
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     flex: 0 0 calc(50% - 0.5rem);
     min-width: 0;
     padding: 1.5rem;
-    border: 1px solid #dfe5ea;
+    border: 1px solid var(--primary-dark);
     border-radius: 12px;
-    background: var(--white);
+    background: var(--primary-light);
 }
 
 .course-testimonial-rating {
     margin-bottom: 1rem;
-    color: #c8e8d7;
+    color: #000;
     font-size: 1.25rem;
 }
 
 .course-testimonial-rating span {
-    color: var(--accent);
+    color: #000;
     font-size: 0.85rem;
 }
 
 .course-testimonial-card blockquote {
-    margin: 0 0 1.25rem;
-    color: var(--text-muted);
+    margin: 1rem 0 1.25rem;
+    color: #000;
     font-size: 0.95rem;
     font-style: italic;
     line-height: 1.65;
 }
 
+.course-testimonial-card blockquote.is-collapsed {
+    /* Reserve one of the seven visible lines for the Read more control. */
+    max-height: 9.5rem;
+    overflow: hidden;
+}
+
+.course-testimonial-read-more {
+    align-self: flex-start;
+    margin: 0 0 1.25rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #000;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.course-testimonial-read-more:hover {
+    color: var(--primary-dark);
+}
+
 .course-testimonial-author {
     display: flex;
     align-items: center;
-    gap: 0.65rem;
+    gap: 1rem;
+}
+
+.course-testimonial-author > span:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.course-testimonial-author .course-testimonial-rating {
+    margin: 0;
+    color: #000;
+    font-size: 0.85rem;
+    line-height: 1;
 }
 
 .course-testimonial-avatar {
@@ -10099,8 +10138,8 @@ body:has(.blog-hero) .contextmenu {
     height: 36px;
     flex: 0 0 36px;
     border-radius: 50%;
-    background: #e5f4ec;
-    color: var(--primary-dark, var(--primary));
+    background: var(--white);
+    color: #000;
     font-size: 0.8rem;
     font-weight: 700;
 }
@@ -10111,13 +10150,13 @@ body:has(.blog-hero) .contextmenu {
 }
 
 .course-testimonial-author strong {
-    color: var(--text-dark);
+    color: #000;
     font-size: 0.85rem;
 }
 
 .course-testimonial-author small {
     margin-top: 0.15rem;
-    color: var(--text-muted);
+    color: #000;
     font-size: 0.75rem;
 }
 
