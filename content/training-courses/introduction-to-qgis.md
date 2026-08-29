@@ -180,3 +180,27 @@ No prior GIS experience is required, though basic computer literacy is expected.
   window.addEventListener('resize', update); update();
 })();
 </script>
+
+## Why Train with Kartoza?
+
+<div class="materials-grid">
+  <div class="material-card why-train-card">
+    <h4><span class="why-train-icon" aria-hidden="true"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 18h6m-5 3h4m-7-9a5 5 0 119.2 2.7c-.8.9-1.2 1.4-1.2 2.3H9c0-.9-.4-1.4-1.2-2.3A5 5 0 017 12zm5-9v1m7.1 1.9l-.7.7M21 12h-1M4.6 5.9l.7.7M3 12h1"></path></svg></span>Open Source Contributors</h4>
+    <p>Our trainers contribute code to PostGIS, QGIS, and GeoServer. We teach from deep, real-world project expertise.</p>
+  </div>
+
+  <div class="material-card why-train-card">
+    <h4><span class="why-train-icon" aria-hidden="true"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5h12a2 2 0 012 2v7a2 2 0 01-2 2H9l-5 4v-4a2 2 0 01-2-2V7a2 2 0 012-2zm15 3h1a2 2 0 012 2v7a2 2 0 01-2 2h-2"></path></svg></span>Tailored for Your Team</h4>
+    <p>On-site sessions can be customised around your organisation's data, systems, and database environment.</p>
+  </div>
+
+  <div class="material-card why-train-card">
+    <h4><span class="why-train-icon" aria-hidden="true"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h4l2-4 4 8 2-4h4M12 3v3m0 12v3"></path></svg></span>Practical from Day One</h4>
+    <p>No death-by-slides. Every topic is covered through exercises using real spatial data from the first session.</p>
+  </div>
+
+  <div class="material-card why-train-card">
+    <h4><span class="why-train-icon" aria-hidden="true"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v5m0 0l-3-3m3 3l3-3M12 8v5m0 0H7m5 0l4 4m-9-4l-3 3m3-3l3 3"></path></svg></span>Africa & Beyond</h4>
+    <p>We have trained GIS and database professionals across Africa, Europe, and internationally, from Cape Town to Lisbon.</p>
+  </div>
+</div>
