@@ -1,7 +1,7 @@
 {{/* Training Calendar Partial */}}
 {{/* Displays upcoming training events with links to courses and registration */}}
 
-<div class="training-calendar" id="training-calendar">
+<div class="training-calendar" id="training-calendar" data-calendar-detail-url="{{ "training-calendar/" | relURL }}" data-calendar-list-url="{{ "training-courses/" | relURL }}">
     <div class="training-calendar-header">
         <div class="training-calendar-title">
             <i class="fas fa-calendar-alt"></i>
@@ -17,15 +17,35 @@
 
     {{ $events := site.Data.training.events }}
     {{ if $events }}
-    <div class="training-calendar-grid">
+    <div class="training-calendar-month-view">
+        <div class="training-calendar-month-controls">
+            <button type="button" class="training-calendar-month-button" data-calendar-prev aria-label="Previous month">‹</button>
+            <strong data-calendar-month></strong>
+            <button type="button" class="training-calendar-month-button" data-calendar-next aria-label="Next month">›</button>
+        </div>
+        <div class="training-calendar-weekdays" aria-hidden="true">
+            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+        </div>
+        <div class="training-calendar-days" data-calendar-days></div>
+        <div class="training-calendar-legend">
+            {{ range $events }}<span data-course-legend="{{ .title }}"><i style="--course-color: {{ if eq .title "Introduction to QGIS" }}#00b388{{ else if eq .title "Introduction to PostGIS" }}#3488b8{{ else if eq .title "Enterprise GIS" }}#e8a331{{ else }}#8e6bbd{{ end }}"></i>{{ .title }}</span>{{ end }}
+        </div>
+    </div>
+    <div class="training-calendar-results" data-calendar-results hidden>
+        <button type="button" class="training-calendar-back" data-calendar-back>‹ Back to calendar</button>
+        <h3 data-calendar-selected-date></h3>
+        <div class="training-calendar-grid">
         {{ range $events }}
         {{ $courseSlug := .url | default "#" }}
-        <div class="training-event-card">
-            <div class="training-event-date">
-                {{ $startDate := time .start }}
-                <span class="event-month">{{ $startDate.Format "Jan" }}</span>
-                <span class="event-day">{{ $startDate.Format "02" }}</span>
-                <span class="event-year">{{ $startDate.Format "2006" }}</span>
+        {{ $eventTitle := .title }}
+        {{ $coursePage := site.GetPage .url }}
+        {{ if not $coursePage }}{{ with first 1 (where site.RegularPages "Title" .title) }}{{ $coursePage = index . 0 }}{{ end }}{{ end }}
+        <div class="training-event-card training-card" data-event-start="{{ .start }}" data-event-end="{{ .end }}" data-event-title="{{ .title }}" style="--course-color: {{ if eq .title "Introduction to QGIS" }}#00b388{{ else if eq .title "Introduction to PostGIS" }}#3488b8{{ else if eq .title "Enterprise GIS" }}#e8a331{{ else }}#8e6bbd{{ end }}">
+            {{ $thumbnail := "/img/banner-courses.png" }}
+            {{ $level := "" }}
+            {{ with $coursePage }}{{ $thumbnail = .Params.thumbnail | default "/img/banner-courses.png" }}{{ $level = .Params.level | default "" }}{{ end }}
+            <div class="training-event-image training-card-image"><img src="{{ $thumbnail | relURL }}" alt="{{ $eventTitle }} course cover" loading="lazy">
+                {{ with $level }}<span class="training-card-badge level-{{ . | lower | urlize }}">{{ . }}</span>{{ end }}
             </div>
             <div class="training-event-details">
                 <h3 class="event-title">
@@ -68,12 +88,13 @@
                 {{ if and .item_code .price }}
                 <a href="/login/?next={{ $.RelPermalink }}" data-item-code="{{ .item_code }}" class="login-buy button is-small is-primary">Login</a>
                 {{ end }}
-                <a href="{{ $contactUrl }}" class="button is-small">
+                <a href="{{ $contactUrl }}" class="button is-small training-event-enquiry">
                     <span>Enquiry</span>
                 </a>
             </div>
         </div>
         {{ end }}
+    </div>
     </div>
     {{ else }}
     <div class="training-calendar-empty">
@@ -106,6 +127,7 @@
         cart.style.pointerEvents = 'none'
         try {
           await addCart(itemCode)
+          cart.classList.add('is-success')
         } finally {
           cart.classList.remove('is-loading')
           cart.style.pointerEvents = ''
@@ -114,6 +136,66 @@
       el.replaceWith(cart)
     })
   }
+</script>
+
+<script>
+(() => {
+  const calendar = document.querySelector('#training-calendar');
+  if (!calendar) return;
+  const monthView = calendar.querySelector('.training-calendar-month-view');
+  const results = calendar.querySelector('[data-calendar-results]');
+  const days = calendar.querySelector('[data-calendar-days]');
+  const monthLabel = calendar.querySelector('[data-calendar-month]');
+  const cards = [...calendar.querySelectorAll('.training-event-card')];
+  const seenCourses = new Set();
+  calendar.querySelectorAll('[data-course-legend]').forEach(item => { if (seenCourses.has(item.dataset.courseLegend)) item.remove(); else seenCourses.add(item.dataset.courseLegend); });
+  const events = cards.map(card => ({ card, start: new Date(`${card.dataset.eventStart}T00:00:00`), end: new Date(`${card.dataset.eventEnd}T00:00:00`), color: getComputedStyle(card).getPropertyValue('--course-color').trim() }));
+  if (!days || !events.length) return;
+  let month = new Date(events[0].start.getFullYear(), events[0].start.getMonth(), 1);
+  const dateKey = date => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  const eventsOn = date => events.filter(event => date >= event.start && date <= event.end);
+  const render = () => {
+    monthLabel.textContent = month.toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+    days.replaceChildren();
+    const firstDay = new Date(month.getFullYear(), month.getMonth(), 1);
+    const start = new Date(firstDay);
+    start.setDate(1 - firstDay.getDay());
+    for (let i = 0; i < 42; i += 1) {
+      const date = new Date(start);
+      date.setDate(start.getDate() + i);
+      const dayEvents = eventsOn(date);
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = date.getMonth() === month.getMonth() ? 'training-calendar-day' : 'training-calendar-day is-outside-month';
+      button.textContent = date.getDate();
+      button.setAttribute('aria-label', date.toLocaleDateString(undefined, { dateStyle: 'long' }));
+      if (dayEvents.length) {
+        button.classList.add('has-events');
+        button.style.setProperty('--course-color', dayEvents[0].color);
+        button.title = dayEvents.map(event => event.card.dataset.eventTitle).join(', ');
+        button.addEventListener('click', () => { window.location.href = `${calendar.dataset.calendarDetailUrl}?date=${dateKey(date)}`; });
+        const markers = document.createElement('span');
+        markers.className = 'training-calendar-day-markers';
+        dayEvents.forEach(event => { const marker = document.createElement('i'); marker.style.backgroundColor = event.color; markers.append(marker); });
+        button.append(markers);
+      } else button.disabled = true;
+      days.append(button);
+    }
+  };
+  const showResults = date => {
+    const matching = eventsOn(date);
+    monthView.hidden = true;
+    results.hidden = false;
+    results.querySelector('[data-calendar-selected-date]').textContent = `Courses on ${date.toLocaleDateString(undefined, { dateStyle: 'long' })}`;
+    cards.forEach(card => { card.hidden = !matching.some(event => event.card === card); });
+  };
+  calendar.querySelector('[data-calendar-back]').addEventListener('click', () => { if (window.location.pathname === new URL(calendar.dataset.calendarDetailUrl, window.location.origin).pathname) window.location.href = calendar.dataset.calendarListUrl; else { results.hidden = true; monthView.hidden = false; } });
+  calendar.querySelector('[data-calendar-prev]').addEventListener('click', () => { month.setMonth(month.getMonth() - 1); render(); });
+  calendar.querySelector('[data-calendar-next]').addEventListener('click', () => { month.setMonth(month.getMonth() + 1); render(); });
+  render();
+  const selectedDate = new URLSearchParams(window.location.search).get('date');
+  if (selectedDate) showResults(new Date(`${selectedDate}T00:00:00`));
+})();
 </script>
 
 <style>
@@ -182,7 +264,7 @@
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    background: #00b388;
+    background: var(--primary);
     color: white;
     border-radius: 8px;
     min-width: 80px;
@@ -208,7 +290,34 @@
 .training-event-details {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+}
+
+.training-event-image {
+    overflow: hidden;
+    border-radius: 6px 6px 0 0;
+    aspect-ratio: 16 / 9;
+}
+
+.training-event-card.training-card {
+    padding: 0;
+}
+
+.training-event-card.training-card .training-event-details,
+.training-event-card.training-card .training-event-actions {
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.training-event-card.training-card .training-event-actions {
+    padding-bottom: 1.5rem;
+}
+
+.training-event-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .event-title {
@@ -252,6 +361,37 @@
     justify-content: center;
 }
 
+.training-event-actions .button.is-light {
+    border: 1px solid var(--primary);
+    background: var(--white);
+    color: #000;
+}
+
+.training-event-actions .button.is-light:hover,
+.training-event-actions .button.is-light:focus-visible,
+.training-event-actions .button.is-light:active {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: var(--white);
+}
+
+.training-event-actions .login-buy:hover,
+.training-event-actions .login-buy:focus-visible,
+.training-event-actions .login-buy:active,
+.training-event-actions .login-buy.is-success {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--white);
+}
+
+.training-event-actions .training-event-enquiry:hover,
+.training-event-actions .training-event-enquiry:focus-visible,
+.training-event-actions .training-event-enquiry:active {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--white);
+}
+
 .training-calendar-empty {
     text-align: center;
     padding: 3rem;
@@ -273,7 +413,151 @@
     margin-bottom: 1rem;
 }
 
+.training-calendar-month-view {
+    background: #fff;
+    border-radius: 8px;
+    padding: 0.75rem;
+}
+
+.training-calendar-month-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    color: #2c3e50;
+}
+
+.training-calendar-month-button,
+.training-calendar-back {
+    border: 0;
+    background: transparent;
+    color: #3488b8;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.training-calendar-month-button {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    font-size: 1.25rem;
+}
+
+.training-calendar-month-button:hover,
+.training-calendar-back:hover {
+    background: #e8f3f8;
+}
+
+.training-calendar-weekdays,
+.training-calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    text-align: center;
+}
+
+.training-calendar-weekdays {
+    margin-bottom: 0.35rem;
+    color: #8997a3;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.training-calendar-day {
+    position: relative;
+    min-height: 2.25rem;
+    padding: 0.35rem 0.1rem 0.75rem;
+    border: 0;
+    background: transparent;
+    color: #2c3e50;
+    cursor: pointer;
+    font-size: 0.75rem;
+}
+
+.training-calendar-day.is-outside-month {
+    color: #b9c1c7;
+}
+
+.training-calendar-day.has-events {
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--course-color) 18%, white);
+    color: #17384b;
+    font-weight: 700;
+}
+
+.training-calendar-day.has-events:hover {
+    background: var(--course-color);
+    color: #fff;
+}
+
+.training-calendar-day-markers {
+    position: absolute;
+    bottom: 0.15rem;
+    left: 50%;
+    display: flex;
+    gap: 0.15rem;
+    transform: translateX(-50%);
+}
+
+.training-calendar-day-markers i {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+}
+
+.training-calendar-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-top: 0.75rem;
+    color: #5f7180;
+    font-size: 0.7rem;
+}
+
+.training-calendar-legend span {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.training-calendar-legend i {
+    width: 8px;
+    height: 8px;
+    flex: 0 0 8px;
+    border-radius: 50%;
+    background: var(--course-color);
+}
+
+.training-calendar-results[hidden],
+.training-calendar-month-view[hidden],
+.training-event-card[hidden] {
+    display: none;
+}
+
+.training-calendar-results h3 {
+    margin: 0.75rem 0 1rem;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.training-calendar-results .training-calendar-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.training-calendar-page-content {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.training-calendar-page-content .training-calendar {
+    position: relative;
+    top: auto;
+}
+
 @media (max-width: 768px) {
+    .training-calendar-results .training-calendar-grid {
+        grid-template-columns: 1fr;
+    }
+
     .training-event-card {
         grid-template-columns: 1fr;
         text-align: center;
