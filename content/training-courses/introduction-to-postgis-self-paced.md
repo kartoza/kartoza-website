@@ -15,7 +15,7 @@ tags:
 track: "Server & Infrastructure"
 draft: false
 reviewedBy: "Lené van Jaarsveld"
-reviewedDate: 2026-08-17
+reviewedDate: 2026-08-29
 ---
 
 ## Course Overview

@@ -16,7 +16,7 @@ tags:
 track: "Desktop GIS"
 draft: false
 reviewedBy: "Lené van Jaarsveld"
-reviewedDate: 2026-08-17
+reviewedDate: 2026-08-29
 ---
 <!-- {{< block
     title="Introduction to GIS with QGIS (Self-paced)"
