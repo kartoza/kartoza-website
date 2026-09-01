@@ -97,7 +97,7 @@ The course covers essential GIS workflows including data acquisition, layer mana
   </div>
 </div>
 
-<strong><em>No prior GIS experience is required, though basic computer literacy is expected.</em></strong>
+No prior GIS experience is required, though basic computer literacy is expected.
 
 ## Prerequisites
 
@@ -149,7 +149,6 @@ The course covers essential GIS workflows including data acquisition, layer mana
     <div class="qgis-receive-body"><h4>Free and open source tools only</h4><p>QGIS is free — no software licence costs ever</p></div>
   </div>
 </div>
-<br>
 
 ## What Participants Say
 
