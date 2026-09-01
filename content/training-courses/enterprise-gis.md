@@ -4,6 +4,7 @@ description: "A comprehensive 5-day course covering everything you need to plan,
 thumbnail: "/img/courses/enterprisegis.png"
 duration: "5 days"
 delivery: "In-person/Online"
+certificate_label: "Certificate of Attendance & Completion"
 level: "Advanced"
 track: "Development"
 trackOrder: 1
@@ -14,7 +15,7 @@ tags:
   - GeoNode
 date: 2024-01-01
 reviewedBy: "Lené van Jaarsveld"
-reviewedDate: 2026-08-29
+reviewedDate: 2026-09-01
 ---
 
 ## Course Overview
@@ -179,7 +180,7 @@ Administration, Troubleshooting & Production Readiness</strong><span class="cour
     <p class="material-item">
     <svg class="material-card-icon" width="16" height="16" fill="none"
          stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
-    <span>Certificate of completion</span>
+    <span>Certificate of completion and attendance</span>
   </div>
 
   <div class="material-card">

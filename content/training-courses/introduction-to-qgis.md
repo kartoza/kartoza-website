@@ -4,6 +4,7 @@ description: "Master the fundamentals of desktop GIS using QGIS, the world's lea
 thumbnail: "/img/courses/qgisonline.png"
 duration: "3 Days"
 delivery: "In-person/Online"
+certificate_label: "Accredited QGIS Certificate Included"
 level: "Beginner"
 track: "Desktop GIS"
 trackOrder: 1
@@ -14,7 +15,7 @@ tags:
   - Mapping
 date: 2024-01-01
 reviewedBy: "Lené van Jaarsveld"
-reviewedDate: 2026-08-29
+reviewedDate: 2026-09-01
 ---
 
 ## Course Overview
@@ -149,6 +150,7 @@ No prior GIS experience is required, though basic computer literacy is expected.
     <div class="qgis-receive-body"><h4>Free and open source tools only</h4><p>QGIS is free — no software licence costs ever</p></div>
   </div>
 </div>
+<br>
 
 ## What Participants Say
 
