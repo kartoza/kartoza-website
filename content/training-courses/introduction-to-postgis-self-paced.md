@@ -3,7 +3,7 @@ title: "Introduction to PostGIS (Self-paced)"
 item_code: "Introduction to PostGIS (Self-paced)"
 price: 500
 price_currency: "ZAR"
-description: "This course is presented to transfer a working knowledge of SQL to the participants. During this course you will learn about 1. General database concepts, including what is a relational database? 2. SQL basics including syntax, structure, standards and conventions 3. Connecting to a database 4. B"
+description: "This course is presented to transfer a working knowledge of SQL to the participants. During this course you will learn about 1. General database concepts, including what is a relational database? 2. SQL basics including syntax, structure, standards and conventions 3. Connecting to a database, and more."
 thumbnail: "/img/courses/postgisselfpaced.png"
 level: "Intermediate"
 duration: "~18–20 hours"
