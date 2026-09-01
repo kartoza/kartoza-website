@@ -9,11 +9,11 @@ reviewedBy: Automated Check
 reviewedDate: '2026-08-12'
 tags:
 - Docker
-thumbnail: https://erp.kartoza.com/private/files/21-million-pulls.png
+thumbnail: /img/blog/erpnext/21-million-pulls.png
 title: '21 Million Pulls: The Story Behind Kartoza''s Geospatial Docker Images'
 ---
 
-![Hero image](/private/files/21-million-pulls.png)
+![Hero image](/img/blog/erpnext/21-million-pulls.png)
 
 If you have ever spun up a PostGIS database or deployed GeoServer in a container, there is a good chance you pulled an image built by Kartoza. As of mid-2026, our geospatial Docker images have been pulled over **21 million times** on Docker Hub. That number quietly astonishes even us. We are a small team based in Cape Town and Stellenbosch, yet our containers sit in CI pipelines, university labs, government servers, and humanitarian deployments on every continent.
 
@@ -27,7 +27,7 @@ These were not built as products. They were built because Kartoza needed them in
 
 ## The Images Today
 
-![Flow diagram](/private/files/docker.png)
+![Flow diagram](/img/blog/erpnext/21-million-pulls-docker-flow.png)
 
 Kartoza now maintains seven Docker images, each targeting a different piece of the geospatial stack:
 
