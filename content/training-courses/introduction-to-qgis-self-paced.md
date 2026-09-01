@@ -3,7 +3,7 @@ title: "Introduction to (Self-paced)"
 item_code: "Introduction to GIS with QGIS (Self-paced)"
 price: 850.43
 price_currency: "ZAR"
-description: "A practical, beginner-friendly introduction to GIS using QGIS. Over ~18–20 hours you’ll learn how to create professional maps, work with vector and raster data, georeference scanned maps and imagery, and run basic spatial analyses using real-world case studies. The course is delivered online"
+description: "A practical, beginner-friendly introduction to GIS using QGIS. Over ~18–20 hours you’ll learn how to create professional maps, work with vector and raster data, georeference scanned maps and imagery, and run basic spatial analyses using real-world case studies. The course is delivered online."
 thumbnail: "/img/courses/qgisselfpaced.png"
 duration: "~18–20 hours"
 delivery: "Self-paced · Online"
@@ -107,7 +107,7 @@ The course covers essential GIS workflows including data acquisition, layer mana
   </div>
 </div>
 
-No prior GIS experience is required, though basic computer literacy is expected.
+<strong><em>No prior GIS experience is required, though basic computer literacy is expected.</em></strong>
 
 ## Prerequisites
 
@@ -159,6 +159,7 @@ No prior GIS experience is required, though basic computer literacy is expected.
     <div class="qgis-receive-body"><h4>Free and open source tools only</h4><p>QGIS is free — no software licence costs ever</p></div>
   </div>
 </div>
+<br>
 
 ## What Participants Say
 
