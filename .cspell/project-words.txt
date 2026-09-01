@@ -56,6 +56,10 @@ ssag
 varchar
 vsicurl
 xarray
+Hadoop
+GRIB
+franca
+pois
 Cyano
 topo
 Topo
