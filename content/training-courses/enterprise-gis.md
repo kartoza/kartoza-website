@@ -14,7 +14,7 @@ tags:
   - GeoNode
 date: 2024-01-01
 reviewedBy: "Lené van Jaarsveld"
-reviewedDate: 2026-08-17
+reviewedDate: 2026-08-29
 ---
 
 ## Course Overview
@@ -190,13 +190,12 @@ Administration, Troubleshooting & Production Readiness</strong><span class="cour
   </div>
 </div>
 
+<!-- Enterprise GIS supplementary section intentionally hidden from the rendered course page.
 ## What Participants Say
 
 <section class="course-testimonials" aria-label="Course testimonials">
   <div class="course-testimonials-viewport">
     <div class="course-testimonials-track">
-      <article class="course-testimonial-card"><div class="course-testimonial-rating">❝ <span>★★★★★</span></div><blockquote>Add customer review here</blockquote><div class="course-testimonial-author"><span class="course-testimonial-avatar">TM</span><span><strong>N. Surname</strong><small>Add Here · Add Here</small></span></div></article>
-      <article class="course-testimonial-card"><div class="course-testimonial-rating">❝ <span>★★★★★</span></div><blockquote>Add customer review here</blockquote><div class="course-testimonial-author"><span class="course-testimonial-avatar">TM</span><span><strong>N. Surname</strong><small>Add Here · Add Here</small></span></div></article>
       <article class="course-testimonial-card"><div class="course-testimonial-rating">❝ <span>★★★★★</span></div><blockquote>Add customer review here</blockquote><div class="course-testimonial-author"><span class="course-testimonial-avatar">TM</span><span><strong>N. Surname</strong><small>Add Here · Add Here</small></span></div></article>
       <article class="course-testimonial-card"><div class="course-testimonial-rating">❝ <span>★★★★★</span></div><blockquote>Add customer review here</blockquote><div class="course-testimonial-author"><span class="course-testimonial-avatar">TM</span><span><strong>N. Surname</strong><small>Add Here · Add Here</small></span></div></article>
     </div>
@@ -221,6 +220,7 @@ Administration, Troubleshooting & Production Readiness</strong><span class="cour
   window.addEventListener('resize', update); update();
 })();
 </script>
+</div> -->
 
 ## Why Train with Kartoza?
 

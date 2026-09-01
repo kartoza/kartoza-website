@@ -178,9 +178,11 @@
     "Jogja",
     "Yogyakarta",
     "Limosa",
-    "SDLC"
-    ,"SACE"
-    ,"rgba"
+    "SDLC",
+    "SACE",
+    "rgba",
+    "Geldenhuys",
+    "Mireille"
   ],
   "flagWords": [],
   "minWordLength": 4,

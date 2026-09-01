@@ -2111,20 +2111,45 @@
 
 .training-track-sequence {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.5rem;
 }
 
-.training-track-sequence:has(.track-connector) {
-    grid-template-columns: 1fr 50px 1fr;
-    width: fit-content;
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+    .training-track-sequence {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 .training-track-sequence .training-card {
     flex: 1;
-    min-width: 280px;
-    max-width: 350px;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
     position: relative;
+}
+
+.training-track-sequence .training-card-content {
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+.training-track-sequence .training-card-title {
+    font-size: 1.25rem;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+}
+
+.training-track-sequence .training-card-meta {
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+}
+
+.training-track-sequence .training-card-meta span {
+    flex-shrink: 0;
 }
 
 .training-card-step {
@@ -2145,18 +2170,18 @@
     box-shadow: var(--shadow-md);
 }
 
-.track-connector {
-    width: 50px;
-    flex: 0 0 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--gray-400);
-    font-size: 1.25rem;
-    padding: 0 0.5rem;
-}
-
 @media screen and (max-width: 768px) {
+    .training-section .columns {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .training-section .columns > .column {
+        width: 100%;
+        max-width: 100%;
+        flex: none;
+    }
+
     .training-paths-nav {
         flex-direction: column;
         padding: 1rem;
@@ -2178,16 +2203,15 @@
     }
 
     .training-track-sequence {
+        display: flex;
         flex-direction: column;
+        width: auto;
     }
 
     .training-track-sequence .training-card {
+        width: 100%;
+        min-width: 0;
         max-width: 100%;
-    }
-
-    .track-connector {
-        transform: rotate(90deg);
-        padding: 0.5rem 0;
     }
 
     .training-card-step {
@@ -10052,43 +10076,82 @@ body:has(.blog-hero) .contextmenu {
 
 .course-testimonials-track {
     display: flex;
+    align-items: stretch;
     gap: 1rem;
     transition: transform 0.35s ease;
 }
 
 .course-testimonial-card {
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     flex: 0 0 calc(50% - 0.5rem);
     min-width: 0;
     padding: 1.5rem;
-    border: 1px solid #dfe5ea;
+    border: 0;
     border-radius: 12px;
-    background: var(--white);
+    background: rgba(178, 213, 232, 0.65);
 }
 
 .course-testimonial-rating {
     margin-bottom: 1rem;
-    color: #c8e8d7;
+    color: #000;
     font-size: 1.25rem;
 }
 
 .course-testimonial-rating span {
-    color: var(--accent);
+    color: #000;
     font-size: 0.85rem;
 }
 
 .course-testimonial-card blockquote {
-    margin: 0 0 1.25rem;
-    color: var(--text-muted);
+    margin: 1rem 0 1.25rem;
+    color: #000;
     font-size: 0.95rem;
     font-style: italic;
     line-height: 1.65;
 }
 
+.course-testimonial-card blockquote.is-collapsed {
+    /* Reserve one of the five visible lines for the Read more control. */
+    max-height: 6.3rem;
+    overflow: hidden;
+}
+
+.course-testimonial-read-more {
+    align-self: flex-start;
+    margin: 0 0 1.25rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #000;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.course-testimonial-read-more:hover {
+    color: var(--primary-dark);
+}
+
 .course-testimonial-author {
     display: flex;
     align-items: center;
-    gap: 0.65rem;
+    gap: 1rem;
+}
+
+.course-testimonial-author > span:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.course-testimonial-author .course-testimonial-rating {
+    margin: 0;
+    color: #000;
+    font-size: 0.85rem;
+    line-height: 1;
 }
 
 .course-testimonial-avatar {
@@ -10099,8 +10162,8 @@ body:has(.blog-hero) .contextmenu {
     height: 36px;
     flex: 0 0 36px;
     border-radius: 50%;
-    background: #e5f4ec;
-    color: var(--primary-dark, var(--primary));
+    background: var(--white);
+    color: #000;
     font-size: 0.8rem;
     font-weight: 700;
 }
@@ -10111,13 +10174,13 @@ body:has(.blog-hero) .contextmenu {
 }
 
 .course-testimonial-author strong {
-    color: var(--text-dark);
+    color: #000;
     font-size: 0.85rem;
 }
 
 .course-testimonial-author small {
     margin-top: 0.15rem;
-    color: var(--text-muted);
+    color: #000;
     font-size: 0.75rem;
 }
 

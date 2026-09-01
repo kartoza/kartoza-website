@@ -1,0 +1,16 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+{{ partial "banner.html" . }}
+
+<section class="section training-calendar-page-section">
+    <div class="container">
+        <div class="training-calendar-page-content">
+            {{ if .Content }}
+            <div class="section-list-intro">{{ .Content }}</div>
+            {{ end }}
+            {{ partial "training-calendar.html" . }}
+        </div>
+    </div>
+</section>
+
+{{ partial "footer.html" . }}
