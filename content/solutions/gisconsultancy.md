@@ -27,7 +27,6 @@ Whether you're starting your GIS journey or optimising an existing infrastructur
 - 12+ years of industry experience
 - 100+ successful projects
 
-
 ## Consultancy Specialisation
 
 - Enterprise GIS Strategy
@@ -43,6 +42,19 @@ Whether you're starting your GIS journey or optimising an existing infrastructur
 - GIS DevOps
 - API Integration
 - AI & Machine Learning for Spatial Data
+
+## Industries We Serve
+
+- Govermental Departments
+- Water Resource Management
+- Agriculture
+- Biodiversity and conservation
+- Utilities
+- Mining
+- Municipalities
+- Disaster Management 
+- Environmental Monitoring
+- Infrastructure
 
 ## How We Work
 
