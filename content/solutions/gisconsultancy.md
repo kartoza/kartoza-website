@@ -18,21 +18,31 @@ Kartoza's GIS consultancy services help organisations make informed decisions ab
 
 Whether you're starting your GIS journey or optimising an existing infrastructure, we provide the guidance you need to succeed.
 
-## Consultancy Services
+## Kartoza Results
 
-- Expert GIS consulting and strategic advice
-- Understand and analyse your business challenges and workflows
-- Develop GIS strategies and technology roadmaps
-- Assess and select the right GIS technologies
-- Design solution architectures and optimise data models
-- Design and implement tailored GIS solutions
-- Write specifications and terms of reference (ToRs)
-- Integrate GIS with existing business systems
-- Provide vendor-neutral technology recommendations
-- Plan and execute migration away from vendor lock-in to open-source solutions
-- Conduct cost-benefit and feasibility analyses
-- Build organisational capacity through skills assessments and knowledge transfer
-- Ensure compliance with relevant legislation, policies, and industry standards
+- Reduce processing time by 80%
+- Managed millions in spatial records
+- Deployed in multiple countries
+- Supporting hundreds of users
+- 12+ years of industry experience
+- 100+ successful projects
+
+
+## Consultancy Specialisation
+
+- Enterprise GIS Strategy
+- GIS Digital Transformation
+- Cloud GIS
+- Spatial Data Infrastructure (SDI)
+- Open Source Migration
+- ArcGIS to QGIS Migration
+- GeoServer Architecture
+- PostGIS Optimisation
+- Performance Tuning
+- Data Governance
+- GIS DevOps
+- API Integration
+- AI & Machine Learning for Spatial Data
 
 ## How We Work
 
@@ -48,9 +58,9 @@ Our team analyses your requirements, evaluates options, and identifies opportuni
 
 We deliver clear, actionable recommendations with implementation roadmaps, cost estimates, and risk assessments.
 
-### Step 4: Support
+### Step 4: Support & Hosting
 
-We can support implementation through project oversight, technical reviews, or hands-on assistance.
+We can support implementation through project oversight, technical reviews, or hands-on assistance.Our custom hosting service, GeoSpatialHosting, offers affordable hosting packages for select open source GIS tools and programs.
 
 ## Benefits
 
@@ -62,3 +72,15 @@ We can support implementation through project oversight, technical reviews, or h
 - Reduce risk in technology decisions
 
 Engage with Kartoza to analyse and document your problems, design and implement solutions and offer expert advice.
+
+## Emerging Technologies
+
+The technological sphere is an ever evolving industry and at Kartoza we ensure that we stay informed to ensure we offer the latest and greatest tools and services to our customers.
+
+- AI-assisted spatial analysis
+- Remote Sensing
+- Drone Imagery
+- Digital Twins
+- IoT Integration
+- Real-time Dashboards
+- Predictive Analytics
