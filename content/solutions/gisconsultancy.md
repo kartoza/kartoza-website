@@ -49,21 +49,24 @@ Whether you're starting your GIS journey or optimising an existing infrastructur
 
 ## How We Work
 
-### Step 1: Discovery
-
-We start by understanding your organisation's goals, current capabilities, and challenges through stakeholder interviews and technical assessments.
-
-### Step 2: Analysis
-
-Our team analyses your requirements, evaluates options, and identifies opportunities for improvement or optimisation.
-
-### Step 3: Recommendations
-
-We deliver clear, actionable recommendations with implementation roadmaps, cost estimates, and risk assessments.
-
-### Step 4: Support & Hosting
-
-We can support implementation through project oversight, technical reviews, or hands-on assistance.Our custom hosting service, GeoSpatialHosting, offers affordable hosting packages for select open source GIS tools and programs.
+<div class="course-modules">
+  <details class="course-module">
+    <summary><span class="course-module-number">1</span><strong>Discovery</strong></summary>
+    <p>We start by understanding your organisation's goals, current capabilities, and challenges through stakeholder interviews and technical assessments.</p>
+  </details>
+    <details class="course-module">
+    <summary><span class="course-module-number">2</span><strong>Analysis</strong></summary>
+    <p>Our team analyses your requirements, evaluates options, and identifies opportunities for improvement or optimisation.</p>
+  </details>
+    <details class="course-module">
+    <summary><span class="course-module-number">3</span><strong>Recommendations</strong></summary>
+    <p>We deliver clear, actionable recommendations with implementation roadmaps, cost estimates, and risk assessments.</p>
+  </details>
+    <details class="course-module">
+    <summary><span class="course-module-number">4</span><strong>Support & Hosting</strong></summary>
+    <p>We can support implementation through project oversight, technical reviews, or hands-on assistance.Our custom hosting service, GeoSpatialHosting, offers affordable hosting packages for select open source GIS tools and programs.</p>
+  </details>
+</div>
 
 ## Benefits
 
@@ -74,11 +77,9 @@ We can support implementation through project oversight, technical reviews, or h
 - Build internal capacity and knowledge
 - Reduce risk in technology decisions
 
-Engage with Kartoza to analyse and document your problems, design and implement solutions and offer expert advice.
-
 ## Emerging Technologies
 
-The technological sphere is an ever evolving industry and at Kartoza we ensure that we stay informed to ensure we offer the latest and greatest tools and services to our customers.
+The technology landscape is constantly evolving. At Kartoza, we continuously explore emerging technologies and industry developments to bring our customers innovative tools, solutions, and services that meet their changing needs.
 
 - AI-assisted spatial analysis
 - Remote Sensing
