@@ -18,15 +18,6 @@ Kartoza's GIS consultancy services help organisations make informed decisions ab
 
 Whether you're starting your GIS journey or optimising an existing infrastructure, we provide the guidance you need to succeed.
 
-## Kartoza Results
-
-- Reduce processing time by 80%
-- Managed millions in spatial records
-- Deployed in multiple countries
-- Supporting hundreds of users
-- 12+ years of industry experience
-- 100+ successful projects
-
 ## Consultancy Specialisation
 
 - Enterprise GIS Strategy
@@ -45,7 +36,7 @@ Whether you're starting your GIS journey or optimising an existing infrastructur
 
 ## Industries We Serve
 
-- Govermental Departments
+- Government Entities
 - Water Resource Management
 - Agriculture
 - Biodiversity and conservation
