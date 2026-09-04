@@ -612,6 +612,7 @@
 
             <!-- Login Panel -->
             <div class="auth-form-panel active" id="panel-login" role="tabpanel" aria-labelledby="tab-login">
+              <div id="login-step-credentials">
                 <div class="auth-form-header">
                     <div class="auth-form-icon">
                         <i class="fas fa-lock-open"></i>
@@ -674,6 +675,64 @@
                         <span>Signed in successfully! Redirecting...</span>
                     </div>
                 </form>
+              </div>
+
+              <!-- Email verification code step -->
+              <div id="login-step-otp" style="display:none;">
+                <div class="auth-form-header">
+                    <div class="auth-form-icon">
+                        <i class="fas fa-envelope-open-text"></i>
+                    </div>
+                    <h2>Check Your Email</h2>
+                    <p id="login-otp-prompt">Enter the verification code we sent to your email address.</p>
+                </div>
+
+                <form id="login-otp-form" novalidate>
+                    <div class="auth-field">
+                        <label class="auth-label" for="login-otp">
+                            <i class="fas fa-shield-alt"></i> Verification Code
+                        </label>
+                        <div class="auth-input-wrapper">
+                            <input class="auth-input" type="text" id="login-otp"
+                                name="otp" placeholder="123456" inputmode="numeric"
+                                autocomplete="one-time-code" maxlength="8" required>
+                        </div>
+                    </div>
+
+                    <div style="text-align:right; margin-bottom:0.75rem;">
+                        <a href="#" id="login-otp-resend"
+                           style="font-size:0.82rem; color:var(--primary2,#3488b8);">
+                            Resend code
+                        </a>
+                    </div>
+
+                    <button type="submit" class="auth-submit" id="login-otp-submit">
+                        <span class="btn-text">
+                            <i class="fas fa-check"></i> Verify &amp; Sign In
+                        </span>
+                        <span class="btn-loading">
+                            <i class="fas fa-circle-notch fa-spin"></i> Verifying...
+                        </span>
+                    </button>
+
+                    <div class="auth-message is-error" id="login-otp-error" role="alert">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="login-otp-error-text">Invalid or expired code. Please try again.</span>
+                    </div>
+
+                    <div class="auth-message is-success" id="login-otp-success" role="status">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Signed in successfully! Redirecting...</span>
+                    </div>
+
+                    <div style="text-align:center; margin-top:0.75rem;">
+                        <a href="#" id="login-otp-back"
+                           style="font-size:0.82rem; color:var(--primary2,#3488b8);">
+                            &larr; Use a different account
+                        </a>
+                    </div>
+                </form>
+              </div>
             </div>
 
             <!-- Forgot Password Panel -->
@@ -831,6 +890,10 @@
 
     const AUTH_KEY = 'kartoza_auth';
 
+    // Holds the email/password/tmp_id for a login that is awaiting an
+    // emailed verification code. Kept in memory only (never persisted).
+    let pendingLogin = null;
+
     // On localhost (no nginx): call ERP directly using the URL from Hugo params.
     // On the real domain: use nginx-proxied /api/auth/* paths regardless of _erpBase.
     // NOTE: register always goes through /api/auth/register — nginx injects admin credentials.
@@ -964,6 +1027,9 @@
                 const next = new URLSearchParams(window.location.search).get('next');
                 const redirectTo = next || '/';
                 setTimeout(() => { window.location.href = redirectTo; }, 1200);
+            } else if (response.ok && data.tmp_id && data.verification) {
+                pendingLogin = { email, password, tmpId: data.tmp_id };
+                showOtpStep(data.verification.prompt);
             } else if (response.status === 404) {
                 errorText.textContent = 'ERPNext login endpoint not found (' + apiUrl('login') + '). Check erpnextBaseUrl in config.toml.';
                 errorEl.classList.add('is-visible');
@@ -983,6 +1049,127 @@
                 document.getElementById('login-password').value = '';
                 document.getElementById('login-password').classList.add('has-error');
                 setTimeout(() => document.getElementById('login-password').classList.remove('has-error'), 2000);
+            }
+        } catch (err) {
+            errorText.textContent = 'Unable to connect. Please check your internet connection and try again.';
+            errorEl.classList.add('is-visible');
+        } finally {
+            submitBtn.classList.remove('is-loading');
+            submitBtn.disabled = false;
+        }
+    });
+
+    // ============================================
+    // EMAIL VERIFICATION CODE STEP
+    // ============================================
+
+    function showOtpStep(prompt) {
+        document.getElementById('login-step-credentials').style.display = 'none';
+        document.getElementById('login-step-otp').style.display = '';
+        document.getElementById('login-otp-prompt').textContent =
+            prompt || 'Enter the verification code we sent to your email address.';
+        document.getElementById('login-otp-error').classList.remove('is-visible');
+        document.getElementById('login-otp-success').classList.remove('is-visible');
+        document.getElementById('login-otp').value = '';
+        document.getElementById('login-otp').focus();
+    }
+
+    function showCredentialsStep() {
+        pendingLogin = null;
+        document.getElementById('login-step-otp').style.display = 'none';
+        document.getElementById('login-step-credentials').style.display = '';
+        document.getElementById('login-password').value = '';
+    }
+
+    document.getElementById('login-otp-back').addEventListener('click', function(e) {
+        e.preventDefault();
+        showCredentialsStep();
+    });
+
+    document.getElementById('login-otp-resend').addEventListener('click', async function(e) {
+        e.preventDefault();
+        if (!pendingLogin) return;
+
+        try {
+            const response = await fetch(apiUrl('login'), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ usr: pendingLogin.email, pwd: pendingLogin.password }),
+                credentials: 'include'
+            });
+            const data = await response.json().catch(() => ({}));
+
+            if (response.ok && data.tmp_id && data.verification) {
+                pendingLogin.tmpId = data.tmp_id;
+                showOtpStep(data.verification.prompt || 'A new verification code has been sent to your email address.');
+            } else {
+                document.getElementById('login-otp-error-text').textContent = 'Could not resend the code. Please try again.';
+                document.getElementById('login-otp-error').classList.add('is-visible');
+            }
+        } catch (err) {
+            document.getElementById('login-otp-error-text').textContent = 'Could not resend the code. Please check your connection.';
+            document.getElementById('login-otp-error').classList.add('is-visible');
+        }
+    });
+
+    document.getElementById('login-otp-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        if (!pendingLogin) {
+            showCredentialsStep();
+            return;
+        }
+
+        const otp = document.getElementById('login-otp').value.trim();
+        const submitBtn = document.getElementById('login-otp-submit');
+        const errorEl = document.getElementById('login-otp-error');
+        const errorText = document.getElementById('login-otp-error-text');
+        const successEl = document.getElementById('login-otp-success');
+
+        if (!otp) {
+            errorText.textContent = 'Please enter the verification code.';
+            errorEl.classList.add('is-visible');
+            return;
+        }
+
+        errorEl.classList.remove('is-visible');
+        successEl.classList.remove('is-visible');
+        submitBtn.classList.add('is-loading');
+        submitBtn.disabled = true;
+
+        try {
+            const response = await fetch(apiUrl('login'), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ otp, tmp_id: pendingLogin.tmpId }),
+                credentials: 'include'
+            });
+
+            const data = await response.json().catch(() => ({}));
+
+            if (response.ok && (data.message === 'Logged In' || data.message === 'No App')) {
+                const email = pendingLogin.email;
+                saveAuth({ email, fullName: data.full_name });
+                pendingLogin = null;
+
+                if (typeof updateAuthNav === 'function') updateAuthNav();
+
+                successEl.classList.add('is-visible');
+
+                const next = new URLSearchParams(window.location.search).get('next');
+                const redirectTo = next || '/';
+                setTimeout(() => { window.location.href = redirectTo; }, 1200);
+            } else {
+                let msg = (data.message || data.exc_type || '');
+                if (data._server_messages) {
+                    try {
+                        msg = JSON.parse(JSON.parse(data._server_messages)[0]).message;
+                    } catch (err) {
+                        msg = data._server_messages;
+                    }
+                }
+                errorText.textContent = msg || 'Invalid or expired code. Please try again.';
+                errorEl.classList.add('is-visible');
+                document.getElementById('login-otp').value = '';
             }
         } catch (err) {
             errorText.textContent = 'Unable to connect. Please check your internet connection and try again.';
