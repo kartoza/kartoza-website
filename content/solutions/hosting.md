@@ -67,7 +67,6 @@ Shared Managed Infrastructure</strong></summary>
   </details>
 </div>
 
-
 ## Hosting Plans
 
 ### Starter
