@@ -40,31 +40,6 @@ Our support process is integrated directly into our project management and ERP s
 - **GDAL/OGR** - Data conversion and transformation pipelines
 - **Custom Applications** - Solutions we've built or that use open source GIS
 
-## Support Tiers
-
-### Basic Support
-
-- Email support during business hours
-- 48-hour response time guarantee
-- Access to knowledge base
-- Quarterly health checks
-
-### Professional Support
-
-- Email and phone support
-- 24-hour response time guarantee
-- Priority issue handling
-- Monthly health checks
-- Proactive monitoring
-
-### Enterprise Support
-
-- 24/7 emergency support available
-- 4-hour response time for critical issues
-- Dedicated support contact
-- Weekly health checks
-- On-site support available
-
 ## Support Packages
 
 The main features of our support options are highlighted below. If none of these packages meets your requirements we'll be happy to customize one to your requirements - just ask us on [support@kartoza.com](mailto:support@kartoza.com)
