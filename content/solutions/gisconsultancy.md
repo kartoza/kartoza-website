@@ -43,7 +43,7 @@ Whether you're starting your GIS journey or optimising an existing infrastructur
 - Utilities
 - Mining
 - Municipalities
-- Disaster Management 
+- Disaster Management
 - Environmental Monitoring
 - Infrastructure
 
