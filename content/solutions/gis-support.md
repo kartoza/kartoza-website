@@ -8,7 +8,7 @@ tags:
   - Technical Services
 date: 2024-01-01
 reviewedBy: "Lené van Jaarsveld"
-reviewedDate: 2026-07-13
+reviewedDate: 2026-09-03
 ---
 
 ## Overview
@@ -39,31 +39,6 @@ Our support process is integrated directly into our project management and ERP s
 - **GeoNode** - SDI platform administration and customization
 - **GDAL/OGR** - Data conversion and transformation pipelines
 - **Custom Applications** - Solutions we've built or that use open source GIS
-
-## Support Tiers
-
-### Basic Support
-
-- Email support during business hours
-- 48-hour response time guarantee
-- Access to knowledge base
-- Quarterly health checks
-
-### Professional Support
-
-- Email and phone support
-- 24-hour response time guarantee
-- Priority issue handling
-- Monthly health checks
-- Proactive monitoring
-
-### Enterprise Support
-
-- 24/7 emergency support available
-- 4-hour response time for critical issues
-- Dedicated support contact
-- Weekly health checks
-- On-site support available
 
 ## Support Packages
 

@@ -9,7 +9,7 @@ tags:
   - Maintenance
 date: 2024-01-01
 reviewedBy: "Lené van Jaarsveld"
-reviewedDate: 2026-07-20
+reviewedDate: 2026-09-03
 ---
 
 ## Overview
@@ -40,24 +40,46 @@ Our DevOps team actively maintains and monitors systems during standard office h
 
 ## Hosting Plans
 
-### Shared Managed Infrastructure
+<div class="course-modules">
+  <details class="course-module">
+    <summary><span class="course-module-number">1</span><strong>
+Shared Managed Infrastructure</strong></summary>
+    <p>Ideal for standard deployments, development and testing environments, or organisations looking to balance performance against cost.
 
-Ideal for standard deployments, development and testing environments, or organisations looking to balance performance against cost.
+**Cost-Optimised Performance**: Your services are hosted concurrently on shared Kubernetes nodes alongside other applications, delivering reliable, enterprise-grade GIS hosting at an affordable price point.
 
-- **Cost-Optimised Performance**: Your services are hosted concurrently on shared Kubernetes nodes alongside other applications, delivering reliable, enterprise-grade GIS hosting at an affordable price point.
-- **Managed Environment**: Standard updates, performance monitoring, and automated backups are fully managed by our DevOps team so you can focus entirely on your spatial workflows.
+**Managed Environment**: Standard updates, performance monitoring, and automated backups are fully managed by our DevOps team so you can focus entirely on your spatial workflows.
+</p>
+  </details>
+  <details class="course-module">
+    <summary><span class="course-module-number">2</span><strong>Dedicated GIS Clusters</strong></summary>
+    <p>Designed for production applications, governments, and enterprise organisations with strict resource isolation and high traffic requirements.
 
-### Dedicated GIS Clusters
+  **Complete Segregation**: Segment your spatial databases and applications on your own dedicated virtual machines or Kubernetes clusters to prevent any "noisy-neighbour" performance issues.
+  
+  **Predictable & Scalable Resources**: Enjoy highly predictable responsiveness and dedicated system memory. Easily configure load balancers to scale nodes dynamically as your organisation's spatial datasets and traffic grow.
 
-Designed for production applications, governments, and enterprise organisations with strict resource isolation and high traffic requirements.
+  **High Availability & Redundancy**: Optional setups for geographic redundancy, redundant cluster controller nodes, and customised failover paths to guarantee maximum uptime for mission-critical deployments.</p>
+  </details>
+  <details class="course-module">
+    <summary><span class="course-module-number">3</span><strong>Custom Infrastructure Deployments</strong></summary>
+    <p>We understand that spatial workloads are unique. If your deployment requires specialised database scaling, massive tile-caching infrastructure, or specific geographical hosting zones, our DevOps team will dynamically design a custom, managed hosting package and quotation tailored to your technical requirements.</p>
+  </details>
+</div>
 
-- **Complete Segregation**: Segment your spatial databases and applications on your own dedicated virtual machines or Kubernetes clusters to prevent any "noisy-neighbour" performance issues.
-- **Predictable & Scalable Resources**: Enjoy highly predictable responsiveness and dedicated system memory. Easily configure load balancers to scale nodes dynamically as your organisation's spatial datasets and traffic grow.
-- **High Availability & Redundancy**: Optional setups for geographic redundancy, redundant cluster controller nodes, and customised failover paths to guarantee maximum uptime for mission-critical deployments.
+## Hosting Plans
 
-### Custom Infrastructure Deployments
+### Starter
 
-We understand that spatial workloads are unique. If your deployment requires specialised database scaling, massive tile-caching infrastructure, or specific geographical hosting zones, our DevOps team will dynamically design a custom, managed hosting package and quotation tailored to your technical requirements.
+Perfect for small projects and development environments with modest traffic requirements.
+
+### Professional
+
+Ideal for production applications serving hundreds of concurrent users with high availability needs.
+
+### Enterprise
+
+Mission-critical deployments requiring maximum uptime, performance, and dedicated resources.
 
 ## Benefits
 
