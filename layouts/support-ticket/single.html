@@ -685,7 +685,6 @@
 
     var AUTH_KEY = 'kartoza_auth';
     var MAX_FILES = 5;
-    var MAX_BYTES = 10 * 1024 * 1024; // 10 MB per file
     var selectedFiles = [];
 
     function ticketApiUrl() {
@@ -787,10 +786,6 @@
                 showError('"' + f.name + '" is not an image or video — only images and videos are accepted.');
                 continue;
             }
-            if (f.size > MAX_BYTES) {
-                showError('"' + f.name + '" is ' + formatBytes(f.size) + ' — files must be 10 MB or smaller.');
-                continue;
-            }
             var already = selectedFiles.some(function(s) { return s.name === f.name && s.size === f.size; });
             if (!already) selectedFiles.push(f);
         }
@@ -890,6 +885,11 @@
                     attachments: attachments
                 })
             });
+
+            if (response.status === 413) {
+                showError('Your attachments are too large. Please remove some files or use smaller ones, then try again.');
+                return;
+            }
 
             var data = await response.json().catch(function() { return {}; });
 
