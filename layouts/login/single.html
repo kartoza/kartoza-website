@@ -1029,6 +1029,7 @@
                 setTimeout(() => { window.location.href = redirectTo; }, 1200);
             } else if (response.ok && data.tmp_id && data.verification) {
                 pendingLogin = { email, password, tmpId: data.tmp_id };
+                document.getElementById('login-password').value = '';
                 showOtpStep(data.verification.prompt);
             } else if (response.status === 404) {
                 errorText.textContent = 'ERPNext login endpoint not found (' + apiUrl('login') + '). Check erpnextBaseUrl in config.toml.';
