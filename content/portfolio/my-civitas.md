@@ -6,8 +6,8 @@ description: Kartoza and LandInfoTech (LiT) developed on online, streamlined CMM
 erpnext_id: 12f0530540
 erpnext_modified: '2025-10-15 15:50:10.449977'
 github: ''
-reviewedBy: Automated Check
-reviewedDate: '2026-07-01'
+reviewedBy: Lene van Jaarsveld
+reviewedDate: '2026-09-17'
 services:
 - Consultation
 - Development
@@ -43,15 +43,15 @@ MyCivitas: An affordable, user friendly asset management platform for small comm
 
 Recently we have also added a cemetery management module for mapping grave sites and memorial walls.
 
-![](https://kartoza.com/files/civitas_1.png)
+![QGIS Desktop View](/img/portfolio/mycivitas-1.png)
 
 Fig.1 - QGIS Desktop View: Operators use QGIS desktop to capture assets using a formal, well structured data model.
 
-![](https://kartoza.com/files/jGhAbEf.png)
+![MyCivitas Maputnik](/img/portfolio/mycivitas-maputnik.png)
 
 Fig.2 - Maputnik Mapbox Tile Styler. We use Maputnik and MapBox Vector Tile format to provide a responsive and flexible web mapping experience.
 
-![](https://kartoza.com/files/1SReLDa.png)
+![MyCivitas Web View](/img/portfolio/mycivitas-3.png)
 
 Fig.3 - Web View. The web application includes asset lifecycle reporting and an issue tracker for scheduled and ad-hov maintenance tracking.
 
