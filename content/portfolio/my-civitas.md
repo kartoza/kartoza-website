@@ -6,8 +6,8 @@ description: Kartoza and LandInfoTech (LiT) developed on online, streamlined CMM
 erpnext_id: 12f0530540
 erpnext_modified: '2025-10-15 15:50:10.449977'
 github: ''
-reviewedBy: Automated Check
-reviewedDate: '2026-07-01'
+reviewedBy: Lene van Jaarsveld
+reviewedDate: '2026-09-17'
 services:
 - Consultation
 - Development

@@ -7,8 +7,8 @@ description: At the time of embarking on this project, Kenya had a 71% national 
 erpnext_id: n5u5v3ade8
 erpnext_modified: '2025-10-15 14:08:23.975229'
 github: ''
-reviewedBy: Automated Check
-reviewedDate: '2026-07-01'
+reviewedBy: Lene van Jaarsveld
+reviewedDate: '2026-09-17'
 services: []
 tags:
 - Project
