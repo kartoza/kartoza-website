@@ -44,7 +44,9 @@ The project aimed to expand the [OnStove](<https://onstove-documentation.readthe
   4. Functioning as a “data repository” by providing a one-stop platform to share location-specific data and knowledge;
   5. Assisting in nationwide communication, coordination, and collaboration in the clean cooking and electricity sectors.
 
-![](https://kartoza.com/files/Lx31yGw.png)
+![Energy Access Explorer About](/img/portfolio/energyaccess-about.png)
+
+![Energy Access Explorer Kenya screen](/img/portfolio/energyaccess-explorer-kenya.png)
 
 ## Technologies
 
