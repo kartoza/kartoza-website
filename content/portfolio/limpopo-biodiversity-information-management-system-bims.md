@@ -6,8 +6,8 @@ description: The Limpopo Biodiversity Information Management System (BIMS) is a 
 erpnext_id: f50a3acb77
 erpnext_modified: '2026-06-04 09:15:19.332140'
 github: https://github.com/kartoza/LEDET_BIMS
-reviewedBy: Automated Check
-reviewedDate: '2026-06-19'
+reviewedBy: Lene van Jaarsveld
+reviewedDate: '2026-09-17'
 services:
 - Hosting
 tags:
@@ -36,7 +36,7 @@ The Limpopo Biodiversity Information Management System (BIMS) is a platform for 
 
 LEDET (a South African provincial government department) commissioned a BIMS to manage their own and third-party biodiversity and related data and share it in different ways with various user groups, namely their staff and other provincial government departments, the public, municipal government and EIA (environmental impact assessment) practitioners.
 
-![](/files/1mzyJRC.png)
+![Limpopo BIMS Login](/img/portfolio/limpopo-bims.png)
 
 ## Technologies
 
