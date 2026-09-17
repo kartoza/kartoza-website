@@ -7,8 +7,8 @@ description: The Freshwater Biodiversity Information System (FBIS) is a platform
 erpnext_id: a08ed34309
 erpnext_modified: '2025-01-08 13:03:07.784690'
 github: https://github.com/kartoza/freshwaterbiodiversity.org
-reviewedBy: Automated Check
-reviewedDate: '2026-06-19'
+reviewedBy: Lene van Jaarsveld
+reviewedDate: '2026-09-17'
 services:
 - Design
 - Development
@@ -44,7 +44,9 @@ The Freshwater Biodiversity Information System (FBIS) is a platform for hosting,
 
 The FBIS platform is funded by JRS Biodiversity and South African National Biodiversity Institute (SANBI) and implemented by the Freshwater Research Centre (FRC) and Kartoza.
 
-![](/files/fbis_KXPrSw2.png)
+![FBIS Map View](/img/portfolio/fbis-1.png)
+
+![FBIS Map View 2](/img/portfolio/fbis-2.png)
 
 ## Technologies
 
