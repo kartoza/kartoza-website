@@ -43,15 +43,15 @@ MyCivitas: An affordable, user friendly asset management platform for small comm
 
 Recently we have also added a cemetery management module for mapping grave sites and memorial walls.
 
-![](https://kartoza.com/files/civitas_1.png)
+![QGIS Desktop View](/img/portfolio/mycivitas-1.png)
 
 Fig.1 - QGIS Desktop View: Operators use QGIS desktop to capture assets using a formal, well structured data model.
 
-![](https://kartoza.com/files/jGhAbEf.png)
+![MyCivitas Maputnik](/img/portfolio/mycivitas-maputnik.png)
 
 Fig.2 - Maputnik Mapbox Tile Styler. We use Maputnik and MapBox Vector Tile format to provide a responsive and flexible web mapping experience.
 
-![](https://kartoza.com/files/1SReLDa.png)
+![MyCivitas Web View](/img/portfolio/mycivitas-3.png)
 
 Fig.3 - Web View. The web application includes asset lifecycle reporting and an issue tracker for scheduled and ad-hov maintenance tracking.
 
