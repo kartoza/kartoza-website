@@ -185,7 +185,8 @@
   calendar.querySelectorAll('[data-course-legend]').forEach(item => { if (seenCourses.has(item.dataset.courseLegend)) item.remove(); else seenCourses.add(item.dataset.courseLegend); });
   const events = cards.map(card => ({ card, start: new Date(`${card.dataset.eventStart}T00:00:00`), end: new Date(`${card.dataset.eventEnd}T00:00:00`), color: getComputedStyle(card).getPropertyValue('--course-color').trim() }));
   if (!days || !events.length) return;
-  let month = new Date(events[0].start.getFullYear(), events[0].start.getMonth(), 1);
+  const today = new Date();
+  let month = new Date(today.getFullYear(), today.getMonth(), 1);
   const dateKey = date => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
   const eventsOn = date => events.filter(event => date >= event.start && date <= event.end);
   const render = () => {

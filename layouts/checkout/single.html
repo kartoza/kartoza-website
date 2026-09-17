@@ -864,6 +864,16 @@
 
     /* ── Load checkout ─────────────────────────────────────────────────── */
 
+    /* Frappe validation errors (e.g. empty cart) return HTTP 417 with the
+       user-facing message tucked inside _server_messages, not in r.ok. */
+    function extractServerMessage(data) {
+        try {
+            var messages = JSON.parse(data._server_messages || '[]');
+            if (messages.length) return JSON.parse(messages[0]).message || null;
+        } catch (e) { /* malformed or absent _server_messages */ }
+        return null;
+    }
+
     async function loadCheckout() {
         try {
             var r = await fetch('/api/method/kartoza_custom.api.get_checkout_config', {
@@ -871,7 +881,15 @@
                 cache: 'no-store',
             });
             if (r.status === 401 || r.status === 403) { showState('co-state-auth'); return; }
-            if (!r.ok) throw new Error('fetch failed');
+            if (!r.ok) {
+                var errorData = await r.json().catch(function () { return {}; });
+                var serverMessage = extractServerMessage(errorData);
+                if (serverMessage && /cart is empty/i.test(serverMessage)) {
+                    showState('co-state-empty');
+                    return;
+                }
+                throw new Error(serverMessage || 'fetch failed');
+            }
             var data = await r.json();
             var cfg = data.message || {};
             if (!cfg.items || !cfg.items.length) { showState('co-state-empty'); return; }
@@ -879,7 +897,7 @@
         } catch (e) {
             showState('co-state-error');
             var errEl = document.getElementById('co-error-text');
-            if (errEl) errEl.textContent = 'Could not load checkout details. Please refresh the page or try again.';
+            if (errEl) errEl.textContent = (e && e.message !== 'fetch failed' && e.message) || 'Could not load checkout details. Please refresh the page or try again.';
         }
     }
 
