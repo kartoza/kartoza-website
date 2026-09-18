@@ -1,5 +1,5 @@
 ---
-title: "Introduction to (Self-paced)"
+title: "Introduction to GIS with QGIS (Self-paced)"
 item_code: "Introduction to GIS with QGIS (Self-paced)"
 price: 850.43
 price_currency: "ZAR"
@@ -16,7 +16,7 @@ tags:
 track: "Desktop GIS"
 draft: false
 reviewedBy: "Lené van Jaarsveld"
-reviewedDate: 2026-08-29
+reviewedDate: 2026-09-18
 ---
 <!-- {{< block
     title="Introduction to GIS with QGIS (Self-paced)"
