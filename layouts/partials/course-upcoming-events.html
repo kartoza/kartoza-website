@@ -126,7 +126,7 @@
 {{ if .Params.item_code }}
 <script>
 (function () {
-  var ITEM_CODE = {{ .Params.item_code | jsonify }};
+  var ITEM_CODE = {{ .Params.item_code | jsonify | safeJS }};
 
   fetch('/api/method/kartoza_custom.api.get_free_courses', {
     credentials: 'include',
