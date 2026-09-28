@@ -1,4 +1,5 @@
 ---
+draft: true
 client: ''
 date: '2025-01-17'
 description: Kartoza was contracted by Global Command and Control Technologies (GC2T)
@@ -15,6 +16,8 @@ technologies: []
 thumbnail: https://erp.kartoza.com/files/GC2T_cover.png
 title: Global Command and Control Technologies - GC2T
 ---
+
+CLIENT ASKED TO REMOVE PROJECT AS KARTOZA SIGNED NDA AND WE DON"T HAVE PERMISSION TO TALK ABOUT THE WORK WE DID FOR CLIENT.
 
 {{< block
     title="Global Command and Control Technologies - GC2T"
