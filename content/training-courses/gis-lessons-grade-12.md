@@ -24,7 +24,7 @@ These four stand-alone extension GIS lessons cover the entire Grade 12 Geography
 
 ## Overview
 
-These four stand-alone extension GIS lessons cover the entire Grade 12 Geography curriculum. 
+These four stand-alone extension GIS lessons cover the entire Grade 12 Geography curriculum.
 
 **Case studies include the following topics**: Climate, Geomorphology, Economic, and Settlement. Each lesson includes an instructional video, notes, GIS data, and a marking guide that teachers can use for SBA task submissions.
 
