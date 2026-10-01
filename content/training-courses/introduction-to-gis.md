@@ -26,7 +26,7 @@ The course is developed and delivered by experienced teachers and GIS specialist
 
 This hybrid course includes both asynchronous and online training components, designed for postgraduate-level educators. The course aims to build confidence in teaching geospatial skills and techniques.
 
-### Course Outcomes:
+### Course Outcomes
 
 - Learn how to download and install QGIS.
 - Work with vector and raster data.
@@ -35,7 +35,7 @@ This hybrid course includes both asynchronous and online training components, de
 - Desktop digitizing and data collection in the field.
 - Provided examples of Grade 8, 10, and 12 lessons for classroom use.
 
-### Delivery:** **
+### Delivery
 
 Asynchronous and online training.
 
