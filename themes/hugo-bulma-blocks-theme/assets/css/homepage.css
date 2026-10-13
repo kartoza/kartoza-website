@@ -19709,13 +19709,6 @@ a.playlist-card:hover .playlist-card-link {
         font-size: 2rem;
     }
 
-    .page-hero .blog-list-hero-title {
-        font-size: 3rem;
-    }
-
-    .page-hero .blog-list-hero-intro {
-        font-size: 1.25rem;
-    }
 
     /* on phones the strip's lines would run through the title and label */
     .blog-list-hero .site-edge-motif-top {
@@ -19830,4 +19823,29 @@ a.playlist-card:hover .playlist-card-link {
 
 .page-hero-tabs {
     margin: 2rem 0 -3.5rem;
+}
+
+/* Team page: the hero is flat now, so the intro no longer needs to overlap it */
+.page-hero + .team-intro {
+    margin-top: 0;
+}
+
+.page-hero-stats {
+    margin-top: 1.5rem;
+}
+
+/* Phones. Declared after the desktop .page-hero sizes above: same specificity, so a copy of this
+   earlier in the file (next to the other 768px rules) would lose to them. */
+@media screen and (max-width: 768px) {
+    .page-hero {
+        min-height: 0;
+    }
+
+    .page-hero .blog-list-hero-title {
+        font-size: 3rem;
+    }
+
+    .page-hero .blog-list-hero-intro {
+        font-size: 1.25rem;
+    }
 }

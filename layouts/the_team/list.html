@@ -4,57 +4,25 @@
 {{ $allMembers := where .Pages "Kind" "page" }}
 {{ $visibleMembers := where $allMembers "Params.hidden" "ne" true }}
 
-<!-- Team Hero Section -->
-<section class="team-hero">
-    <div class="team-hero-bg">
-        <div class="team-hero-map"></div>
-        <div class="team-hero-overlay"></div>
-    </div>
+<!-- Team Hero Section: the same flat white hero as the other list pages (see partials/banner.html) -->
+<section class="blog-list-hero page-hero">
+    <div class="site-edge-motif site-edge-motif-left" aria-hidden="true" style="top: 60px; width: 80px; opacity: 0.9;"></div>
+    <div class="site-edge-motif site-edge-motif-right" aria-hidden="true" style="width: 140px; opacity: 0.9;"></div>
+    <div class="site-edge-motif-top" aria-hidden="true" style="--motif-thickness: 180px;"></div>
     <div class="container">
-        <div class="team-hero-content">
-            <span class="team-hero-tagline">
-                <i class="fas fa-globe-africa"></i>
-                A Global Team
-            </span>
-            <h1 class="team-hero-title">The Kartoza Geeks</h1>
-            <p class="team-hero-subtitle">
-                Open source geospatial experts spread across the globe, united by our passion for making the world more mappable.
-            </p>
-            <div class="team-hero-stats">
-                <div class="team-stat">
-                    <span class="team-stat-number">{{ len $visibleMembers }}+</span>
-                    <span class="team-stat-label">Team Members</span>
+        <div class="columns is-vcentered">
+            <div class="column is-7 blog-list-hero-text">
+                <p class="blog-list-hero-eyebrow">A Global Team</p>
+                <h1 class="blog-list-hero-title">The Kartoza Geeks</h1>
+                <div class="blog-list-hero-intro">
+                    <p>Open source geospatial experts spread across the globe, united by our passion for making the world more mappable.</p>
                 </div>
-                <div class="team-stat">
-                    <span class="team-stat-number">8</span>
-                    <span class="team-stat-label">Countries</span>
-                </div>
-                <div class="team-stat">
-                    <span class="team-stat-number">10+</span>
-                    <span class="team-stat-label">Years Experience</span>
-                </div>
+                <p class="blog-list-hero-meta page-hero-stats">
+                    <span><strong>{{ len $visibleMembers }}+</strong> team members</span>
+                    <span><strong>8</strong> countries</span>
+                    <span><strong>10+</strong> years experience</span>
+                </p>
             </div>
-        </div>
-    </div>
-    <!-- Floating location pins -->
-    <div class="team-hero-pins">
-        <div class="hero-pin" style="--pin-x: 25%; --pin-y: 45%;" title="South Africa">
-            <i class="fas fa-map-marker-alt"></i>
-        </div>
-        <div class="hero-pin" style="--pin-x: 30%; --pin-y: 25%;" title="Portugal">
-            <i class="fas fa-map-marker-alt"></i>
-        </div>
-        <div class="hero-pin" style="--pin-x: 65%; --pin-y: 40%;" title="Indonesia">
-            <i class="fas fa-map-marker-alt"></i>
-        </div>
-        <div class="hero-pin" style="--pin-x: 55%; --pin-y: 35%;" title="India">
-            <i class="fas fa-map-marker-alt"></i>
-        </div>
-        <div class="hero-pin" style="--pin-x: 35%; --pin-y: 55%;" title="Kenya">
-            <i class="fas fa-map-marker-alt"></i>
-        </div>
-        <div class="hero-pin" style="--pin-x: 32%; --pin-y: 50%;" title="Madagascar">
-            <i class="fas fa-map-marker-alt"></i>
         </div>
     </div>
 </section>
