@@ -5,6 +5,7 @@ title: "Solutions"
 subtitle: "Professional GIS solutions and services"
 description: "Professional GIS solutions and services from Kartoza including support, hosting, consultancy and custom software development."
 HasBanner: true
+LabelText: "Services"
 HeroSize: "is-medium"
 HeroImage: "img/banner-solutions.png"
 ---

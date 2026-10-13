@@ -19709,6 +19709,14 @@ a.playlist-card:hover .playlist-card-link {
         font-size: 2rem;
     }
 
+    .page-hero .blog-list-hero-title {
+        font-size: 3rem;
+    }
+
+    .page-hero .blog-list-hero-intro {
+        font-size: 1.25rem;
+    }
+
     /* on phones the strip's lines would run through the title and label */
     .blog-list-hero .site-edge-motif-top {
         display: none;
@@ -19770,4 +19778,56 @@ a.playlist-card:hover .playlist-card-link {
 .blog-list-hero-featured-meta {
     color: var(--text-muted);
     font-size: 0.875rem;
+}
+
+/* Generic page hero (partials/banner.html), on top of the .blog-list-hero styles */
+/* One shared height, so every page's hero is the same size whatever its subtitle length */
+.page-hero {
+    min-height: 370px;
+    display: flex;
+    align-items: center;
+}
+
+.page-hero > .container {
+    width: 100%;
+}
+
+.page-hero .blog-list-hero-eyebrow {
+    font-size: 1rem;
+}
+
+.page-hero .blog-list-hero-title {
+    font-size: 4rem;
+    margin-bottom: 1.25rem;
+}
+
+.page-hero .blog-list-hero-intro {
+    color: var(--text-dark);
+    font-size: 1.5rem;
+    line-height: 1.5;
+    max-width: 48rem;
+    margin-bottom: 0;
+}
+
+.page-hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.page-hero-note {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+.page-hero-logo img {
+    display: block;
+    max-width: 100%;
+    max-height: 220px;
+    margin-left: auto;
+}
+
+.page-hero-tabs {
+    margin: 2rem 0 -3.5rem;
 }
