@@ -3,7 +3,7 @@
 
 <style>
 .checkout-hero {
-    background: linear-gradient(135deg, var(--dark2, #1a2a3a) 0%, var(--primary2, #3488b8) 100%);
+    background: var(--dark2, #383939);
     padding: 5rem 1.5rem 3rem;
     position: relative;
     overflow: hidden;
@@ -13,8 +13,8 @@
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse at 20% 50%, rgba(59,157,217,0.15) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(232,163,49,0.1) 0%, transparent 50%);
+        radial-gradient(ellipse at 20% 50%, rgba(84, 162, 204,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(238, 179, 72,0.1) 0%, transparent 50%);
     pointer-events: none;
 }
 .checkout-hero-content {
@@ -24,19 +24,19 @@
     color: #fff;
 }
 .checkout-hero-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 800;
     margin-bottom: 0.5rem;
     letter-spacing: -0.02em;
 }
 .checkout-hero-subtitle {
-    font-size: 1.1rem;
+    font-size: 1rem;
     opacity: 0.8;
 }
 
 .checkout-section {
     padding: 3rem 1.5rem 5rem;
-    background: #f7f9fb;
+    background: #F5F5F2;
     min-height: 60vh;
 }
 .checkout-grid {
@@ -51,16 +51,16 @@
 
 .checkout-panel {
     background: #fff;
-    border-radius: 12px;
+    border-radius: 4px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     overflow: hidden;
 }
 .checkout-panel-header {
     padding: 1.25rem 1.5rem;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #D1D1D1;
     font-size: 1rem;
     font-weight: 700;
-    color: #1a2a3a;
+    color: #383939;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -72,35 +72,35 @@
     align-items: center;
     gap: 1rem;
     padding: 1.1rem 1.5rem;
-    border-bottom: 1px solid #f6f6f6;
+    border-bottom: 1px solid #F5F5F2;
 }
 .checkout-item:last-child { border-bottom: none; }
 .checkout-item-info { flex: 1; min-width: 0; }
 .checkout-item-name {
     font-weight: 600;
-    font-size: 0.95rem;
-    color: #1a2a3a;
+    font-size: 1rem;
+    color: #383939;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 .checkout-item-code {
-    font-size: 0.76rem;
-    color: #9aaab8;
+    font-size: 0.75rem;
+    color: #8A8B8B;
     font-family: monospace;
     margin-top: 0.15rem;
 }
 .checkout-item-price {
     font-weight: 700;
     font-size: 1rem;
-    color: #3B9DD9;
+    color: #54A2CC;
     white-space: nowrap;
 }
 
 /* Payment summary */
 .payment-summary {
     background: #fff;
-    border-radius: 12px;
+    border-radius: 4px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     overflow: hidden;
     position: sticky;
@@ -114,8 +114,8 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0.65rem;
-    font-size: 0.925rem;
-    color: #4d6370;
+    font-size: 0.875rem;
+    color: #676869;
 }
 .summary-total {
     display: flex;
@@ -123,10 +123,10 @@
     align-items: center;
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 2px solid #f0f0f0;
-    font-size: 1.15rem;
+    border-top: 2px solid #D1D1D1;
+    font-size: 1.25rem;
     font-weight: 700;
-    color: #1a2a3a;
+    color: #383939;
 }
 
 /* Pay button */
@@ -140,7 +140,7 @@
     background: #00b259 !important;
     border-color: #00b259 !important;
     color: #fff !important;
-    border-radius: 8px !important;
+    border-radius: 4px !important;
     cursor: pointer;
     transition: background 0.2s, transform 0.1s;
 }
@@ -166,8 +166,8 @@
 /* Customer info */
 .customer-info-card {
     padding: 1.25rem 1.5rem;
-    border-bottom: 1px solid #f0f0f0;
-    background: #fafbfc;
+    border-bottom: 1px solid #D1D1D1;
+    background: #F5F5F2;
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -176,7 +176,7 @@
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    background: #3B9DD9;
+    background: #54A2CC;
     color: #fff;
     display: flex;
     align-items: center;
@@ -187,13 +187,13 @@
 }
 .customer-name-text {
     font-weight: 600;
-    font-size: 0.95rem;
-    color: #1a2a3a;
+    font-size: 1rem;
+    color: #383939;
     line-height: 1.2;
 }
 .customer-email-text {
-    font-size: 0.8rem;
-    color: #6b7b8d;
+    font-size: 0.875rem;
+    color: #676869;
 }
 
 /* Billing address panel */
@@ -202,23 +202,23 @@
     align-items: flex-start;
     gap: 0.75rem;
     padding: 0.9rem 1.5rem;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #D1D1D1;
     cursor: pointer;
     transition: background 0.15s;
 }
 .addr-card:last-child { border-bottom: none; }
-.addr-card:hover { background: #fafbfc; }
-.addr-card.is-selected { background: #f0f8ff; }
+.addr-card:hover { background: #F5F5F2; }
+.addr-card.is-selected { background: #F5F5F2; }
 .addr-radio {
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    border: 2px solid #d4dbe2;
+    border: 2px solid #D1D1D1;
     flex-shrink: 0;
     margin-top: 2px;
     position: relative;
 }
-.addr-card.is-selected .addr-radio { border-color: #3B9DD9; }
+.addr-card.is-selected .addr-radio { border-color: #54A2CC; }
 .addr-card.is-selected .addr-radio::after {
     content: '';
     position: absolute;
@@ -228,11 +228,11 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #3B9DD9;
+    background: #54A2CC;
 }
 .addr-text {
     font-size: 0.875rem;
-    color: #4d6370;
+    color: #676869;
     line-height: 1.5;
 }
 .addr-form-body {
@@ -247,9 +247,9 @@
 .addr-field { margin-bottom: 0.75rem; }
 .addr-field label {
     display: block;
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    color: #4d6370;
+    color: #676869;
     margin-bottom: 0.3rem;
     text-transform: uppercase;
     letter-spacing: 0.03em;
@@ -258,10 +258,10 @@
 .addr-field select {
     width: 100%;
     padding: 0.55rem 0.75rem;
-    border: 1.5px solid #d4dbe2;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    color: #1a2a3a;
+    border: 1.5px solid #D1D1D1;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    color: #383939;
     background: #fff;
     transition: border-color 0.15s, box-shadow 0.15s;
     box-sizing: border-box;
@@ -274,12 +274,12 @@
 .addr-field input:focus,
 .addr-field select:focus {
     outline: none;
-    border-color: #3B9DD9;
-    box-shadow: 0 0 0 3px rgba(59,157,217,0.12);
+    border-color: #54A2CC;
+    box-shadow: 0 0 0 3px rgba(84, 162, 204,0.12);
 }
 .addr-add-new-btn {
     margin-left: auto;
-    font-size: 0.8rem !important;
+    font-size: 0.875rem !important;
     padding: 0.2rem 0.6rem !important;
     height: auto !important;
     line-height: 1.5 !important;
@@ -290,7 +290,7 @@
     text-align: center;
     padding: 5rem 2rem;
     background: #fff;
-    border-radius: 12px;
+    border-radius: 4px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
 .co-state-icon {
@@ -298,19 +298,19 @@
     margin-bottom: 1.25rem;
 }
 .co-state-title {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    color: #1a2a3a;
+    color: #383939;
     margin-bottom: 0.5rem;
 }
 .co-state-text {
-    color: #4d6370;
+    color: #676869;
     margin-bottom: 1.75rem;
 }
-.co-state-success .co-state-icon { color: #27ae60; }
-.co-state-error .co-state-icon { color: #E55B3C; }
-.co-state-auth .co-state-icon, .co-state-empty .co-state-icon { color: #d4dbe2; }
-.co-state-loading .co-state-icon { color: #3B9DD9; }
+.co-state-success .co-state-icon { color: #3C7D54; }
+.co-state-error .co-state-icon { color: #B0473C; }
+.co-state-auth .co-state-icon, .co-state-empty .co-state-icon { color: #D1D1D1; }
+.co-state-loading .co-state-icon { color: #54A2CC; }
 
 /* Processing overlay */
 .pay-processing {
@@ -319,8 +319,8 @@
     gap: 0.6rem;
     justify-content: center;
     margin-top: 0.75rem;
-    font-size: 0.85rem;
-    color: #6b7b8d;
+    font-size: 0.875rem;
+    color: #676869;
 }
 </style>
 
@@ -437,7 +437,7 @@
                     <!-- Address form -->
                     <div id="co-addr-form" class="addr-form-body" style="display:none;">
                         <div class="addr-field">
-                            <label>Address Line 1 <span style="color:#E55B3C;">*</span></label>
+                            <label>Address Line 1 <span style="color:#B0473C;">*</span></label>
                             <input type="text" id="co-addr-line1" placeholder="Street address, P.O. box, etc." oninput="coValidateAddr()">
                         </div>
                         <div class="addr-field">
@@ -446,7 +446,7 @@
                         </div>
                         <div class="addr-form-grid">
                             <div class="addr-field">
-                                <label>City <span style="color:#E55B3C;">*</span></label>
+                                <label>City <span style="color:#B0473C;">*</span></label>
                                 <input type="text" id="co-addr-city" placeholder="City" oninput="coValidateAddr()">
                             </div>
                             <div class="addr-field">
@@ -454,7 +454,7 @@
                                 <input type="text" id="co-addr-pincode" placeholder="Postal code">
                             </div>
                             <div class="addr-field">
-                                <label>Country <span style="color:#E55B3C;">*</span></label>
+                                <label>Country <span style="color:#B0473C;">*</span></label>
                                 <select id="co-addr-country" onchange="coValidateAddr(); coRefreshTotalsFromForm();">
                                     <option value="">Select country…</option>
                                 </select>
@@ -478,7 +478,7 @@
                     </div>
                 </div>
 
-                <p style="font-size: 0.8rem; color: #9aaab8; margin-top: 0.75rem; text-align: center;">
+                <p style="font-size: 0.875rem; color: #8A8B8B; margin-top: 0.75rem; text-align: center;">
                     <i class="fas fa-arrow-left" style="margin-right: 0.3rem;"></i>
                     <a href="/cart/" style="color: inherit;">Back to cart</a>
                 </p>

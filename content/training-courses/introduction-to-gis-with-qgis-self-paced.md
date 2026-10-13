@@ -123,8 +123,8 @@ The course covers essential GIS workflows including data acquisition, layer mana
 .qgis-receive-icon { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 28px; width: 28px; height: 28px; color: #53a2cc; }
 .qgis-receive-icon svg { width: 22px; height: 22px; }
 .qgis-receive-body { min-width: 0; }
-.qgis-receive-body h4 { margin: 0 0 .2rem; color: #1a2a3a; font-size: .95rem; line-height: 1.25; }
-.qgis-receive-body p { margin: 0; color: #6b7b8d; font-size: .78rem; line-height: 1.4; }
+.qgis-receive-body h4 { margin: 0 0 .2rem; color: #1a2a3a; font-size: 1rem; line-height: 1.25; }
+.qgis-receive-body p { margin: 0; color: #6b7b8d; font-size: 0.75rem; line-height: 1.4; }
 @media screen and (max-width: 768px) { .qgis-receive-grid { grid-template-columns: 1fr; } }
 </style>
 

@@ -8,7 +8,7 @@
    ======================================== */
 
 .regional-presence-section {
-    background: linear-gradient(135deg, #f7f9fb 0%, #e8ecf0 100%);
+    background: #F5F5F2;
     padding: 4rem 0;
 }
 
@@ -17,7 +17,7 @@
 }
 
 .regional-presence-section .section-header .title {
-    color: #1B6B9B;
+    color: #383939;
 }
 
 .regional-presence-section .section-header .subtitle {
@@ -34,11 +34,11 @@
 
 .office-card {
     background: #ffffff;
-    border-radius: 16px;
+    border-radius: 4px;
     padding: 2rem;
     width: 100%;
     max-width: 400px;
-    box-shadow: 0 4px 20px rgba(27, 107, 155, 0.08);
+    box-shadow: 0 4px 20px rgba(56, 57, 57, 0.08);
     border: 2px solid transparent;
     transition: all 0.3s ease;
     position: relative;
@@ -52,15 +52,14 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #3B9DD9 0%, #1B6B9B 100%);
+    background: #54A2CC;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
 .office-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(27, 107, 155, 0.15);
-    border-color: rgba(59, 157, 217, 0.2);
+    box-shadow: 0 12px 40px rgba(56, 57, 57, 0.15);
+    border-color: rgba(84, 162, 204, 0.2);
 }
 
 .office-card:hover::before {
@@ -68,8 +67,8 @@
 }
 
 .office-card.is-active {
-    border-color: #3B9DD9;
-    box-shadow: 0 8px 30px rgba(59, 157, 217, 0.2);
+    border-color: #54A2CC;
+    box-shadow: 0 8px 14px rgba(84, 162, 204, 0.11);
 }
 
 .office-card.is-active::before {
@@ -81,12 +80,12 @@
     position: absolute;
     top: 1rem;
     right: 1rem;
-    background: linear-gradient(135deg, #E8A331 0%, #D4922A 100%);
+    background: #EEB348;
     color: white;
     font-size: 0.75rem;
     font-weight: 600;
     padding: 0.25rem 0.75rem;
-    border-radius: 20px;
+    border-radius: 4px;
     display: none;
 }
 
@@ -108,7 +107,7 @@
 }
 
 .office-flag {
-    font-size: 2.5rem;
+    font-size: 2rem;
     line-height: 1;
 }
 
@@ -119,18 +118,18 @@
 .office-card-title h4 {
     font-size: 1.25rem;
     font-weight: 700;
-    color: #1B6B9B;
+    color: #383939;
     margin: 0 0 0.25rem 0;
 }
 
 .office-card-title .office-entity {
-    font-size: 0.9rem;
-    color: #6B7B8D;
+    font-size: 0.875rem;
+    color: #676869;
     font-weight: 500;
 }
 
 .office-card-body p {
-    color: #4D6370;
+    color: #676869;
     margin-bottom: 1.25rem;
     line-height: 1.6;
 }
@@ -146,24 +145,24 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    font-size: 0.9rem;
-    color: #4D6370;
+    font-size: 0.875rem;
+    color: #676869;
 }
 
 .office-detail .icon {
-    color: #3B9DD9;
+    color: #54A2CC;
     width: 20px;
     text-align: center;
 }
 
 .office-detail a {
-    color: #3B9DD9;
+    color: #54A2CC;
     text-decoration: none;
     transition: color 0.25s ease;
 }
 
 .office-detail a:hover {
-    color: #1B6B9B;
+    color: #383939;
 }
 
 .office-card-cta {
@@ -185,17 +184,17 @@
 
 .price-amount {
     font-weight: 700;
-    color: #1B6B9B;
+    color: #383939;
 }
 
 .price-currency {
-    font-size: 0.85em;
-    color: #6B7B8D;
+    font-size: 0.875em;
+    color: #676869;
 }
 
 .price-period {
-    font-size: 0.85em;
-    color: #6B7B8D;
+    font-size: 0.875em;
+    color: #676869;
 }
 
 /* Regional price hint under CTAs */
@@ -225,18 +224,18 @@ body.region-INTL .price-hint .price-usd {
     gap: 0.5rem;
     padding: 0.5rem 1rem;
     background: rgba(255, 255, 255, 0.9);
-    border-radius: 8px;
-    font-size: 0.9rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
 }
 
 .region-selector-wrapper .icon {
-    color: #3B9DD9;
+    color: #54A2CC;
 }
 
 .region-selector {
     border: none;
     background: transparent;
-    color: #1B6B9B;
+    color: #383939;
     font-weight: 500;
     cursor: pointer;
     padding-right: 1.5rem;
@@ -260,9 +259,9 @@ body.region-INTL .price-hint .price-usd {
     padding: 0.5rem 1rem;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
+    border-radius: 4px;
     color: white;
-    font-size: 0.85rem;
+    font-size: 0.875rem;
     cursor: pointer;
     transition: all 0.25s ease;
     text-decoration: none;
@@ -274,8 +273,8 @@ body.region-INTL .price-hint .price-usd {
 }
 
 .region-toggle-btn.is-active {
-    background: rgba(59, 157, 217, 0.3);
-    border-color: #3B9DD9;
+    background: rgba(84, 162, 204, 0.3);
+    border-color: #54A2CC;
 }
 
 /* Footer Regional Info */
@@ -298,15 +297,15 @@ body.region-INTL .price-hint .price-usd {
 }
 
 .footer-office h5 {
-    color: #E8A331;
-    font-size: 0.9rem;
+    color: #EEB348;
+    font-size: 0.875rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
 
 .footer-office p {
     color: rgba(255, 255, 255, 0.8);
-    font-size: 0.85rem;
+    font-size: 0.875rem;
     line-height: 1.5;
     margin: 0;
 }
@@ -317,7 +316,7 @@ body.region-INTL .price-hint .price-usd {
 }
 
 .footer-office a:hover {
-    color: #3B9DD9;
+    color: #54A2CC;
 }
 
 /* Mobile responsive */
@@ -357,7 +356,7 @@ body.region-INTL .price-hint .price-usd {
 
     .office-card {
         padding: 1.5rem;
-        border-radius: 12px;
+        border-radius: 4px;
     }
 
     .office-flag {
@@ -365,19 +364,19 @@ body.region-INTL .price-hint .price-usd {
     }
 
     .office-card-title h4 {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 
     .office-card-title .office-entity {
-        font-size: 0.8rem;
+        font-size: 0.875rem;
     }
 
     .office-card-body p {
-        font-size: 0.9rem;
+        font-size: 0.875rem;
     }
 
     .office-detail {
-        font-size: 0.85rem;
+        font-size: 0.875rem;
     }
 
     .footer-offices {
@@ -389,11 +388,11 @@ body.region-INTL .price-hint .price-usd {
     }
 
     .footer-office h5 {
-        font-size: 0.85rem;
+        font-size: 0.875rem;
     }
 
     .footer-office p {
-        font-size: 0.8rem;
+        font-size: 0.875rem;
     }
 
     .region-toggle {
@@ -427,7 +426,7 @@ body.region-INTL .price-hint .price-usd {
     }
 
     .office-flag {
-        font-size: 1.75rem;
+        font-size: 1.5rem;
     }
 
     .office-card-title h4 {
@@ -440,17 +439,17 @@ body.region-INTL .price-hint .price-usd {
     }
 
     .office-detail {
-        font-size: 0.8rem;
+        font-size: 0.875rem;
         gap: 0.5rem;
     }
 
     .office-card-cta .button {
-        font-size: 0.85rem;
+        font-size: 0.875rem;
         padding: 0.6rem 1rem;
     }
 
     .your-location-badge {
-        font-size: 0.65rem;
+        font-size: 0.75rem;
         padding: 0.2rem 0.5rem;
         top: 0.75rem;
         right: 0.75rem;
@@ -471,8 +470,8 @@ body.region-INTL .price-hint .price-usd {
 
     .region-toggle-btn {
         padding: 0.35rem 0.6rem;
-        font-size: 0.7rem;
-        border-radius: 6px;
+        font-size: 0.75rem;
+        border-radius: 4px;
     }
 }
 
@@ -499,9 +498,15 @@ body.region-INTL [data-show-region*="INTL"] {
 
 /* Regional accents */
 body.region-EU .regional-accent {
-    color: #1B6B9B;
+    color: #383939;
 }
 
 body.region-ZA .regional-accent {
-    color: #E8A331;
+    color: #EEB348;
+}
+
+/* Section header is full-bleed (see homepage.css .section-header); sit flush with the top of the section. */
+.regional-presence-section {
+    padding-top: 0;
+    overflow-x: clip;
 }

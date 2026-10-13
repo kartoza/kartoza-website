@@ -22,7 +22,6 @@
 }
 
 .main-card.animate-hover:hover {
-  transform: translateY(-8px);
 }
 
 .main-card.featured::before {
@@ -32,7 +31,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
+  background: var(--primary);
 }
 
 .main-card.featured .main-image {
@@ -47,7 +46,6 @@
 }
 
 .main-card.featured:hover .main-image img {
-  transform: scale(1.02);
 }
 
 .main-card .title {
@@ -60,38 +58,38 @@
 .main-card .subtitle {
   color: var(--accent);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   margin-bottom: 1rem;
 }
 
 .main-card .card-badge {
   display: inline-block;
-  background: #edb348;
+  background: #EEB348;
   color: var(--white);
-  font-size: .75rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
   padding: .35rem .75rem;
-  border-radius: 20px;
+  border-radius: 4px;
   margin-bottom: 1rem;
 }
 
 .main-card.featured .description {
-  font-size: .95rem;
+  font-size: 1rem;
 }
 
 .main-card .description {
   color: var(--text-muted);
-  font-size: .95rem;
+  font-size: 1rem;
   margin-bottom: 1.5rem;
   line-height: 1.7;
 }
 
 .main-card .hint {
   display: block;
-  font-size: .85rem;
-  color: #6b7b8d;
+  font-size: 0.875rem;
+  color: #676869;
 }
 
 .main-card .card-badge-icon {
@@ -101,12 +99,12 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, var(--primary-light), var(--primary));
+  background: var(--primary-light);
   border-radius: var(--radius-md);
 }
 
 .main-card .card-badge-icon i {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   color: var(--white);
 }
 
@@ -123,7 +121,7 @@
 .main-card li {
   padding: .35rem 0;
   color: var(--text-dark);
-  font-size: .9rem;
+  font-size: 0.875rem;
   position: relative;
   padding-left: 1.25rem;
 }
@@ -177,7 +175,7 @@
 /* Related Card */
 .sidebar-card h4 {
   color: var(--text-dark);
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   margin-bottom: 1rem;
   display: flex;
@@ -210,13 +208,12 @@
 
 .sidebar-card .sidebar-item:hover {
   background: var(--primary);
-  transform: translateX(5px);
 }
 
 .sidebar-card .sidebar-item .sidebar-title {
   color: var(--text-dark);
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   margin: 0;
 }
 
@@ -226,19 +223,18 @@
 
 .sidebar-card .sidebar-item i {
   color: var(--primary);
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   transition: all var(--transition-fast);
 }
 
 .sidebar-card .sidebar-item:hover i {
   color: var(--white);
-  transform: translateX(3px);
 }
 
 /* ----------------------------------------- */
 /* -------------- Section CTA -------------- */
 .section-cta {
-  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  background: var(--primary-dark);
   padding: 4rem 1.5rem;
   color: var(--white);
 }
@@ -273,7 +269,7 @@
 }
 
 .section-cta-top-icon i {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: var(--white);
 }
 

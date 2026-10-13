@@ -4,12 +4,12 @@
 <style>
 .callback-section {
     padding: 5rem 1.5rem 6rem;
-    background: #f7f9fb;
+    background: #F5F5F2;
     min-height: 70vh;
 }
 .callback-card {
     background: #fff;
-    border-radius: 12px;
+    border-radius: 4px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     padding: 3rem 2rem;
     text-align: center;
@@ -27,26 +27,26 @@
 .callback-title {
     font-size: 1.5rem;
     font-weight: 800;
-    color: #1a2a3a;
+    color: #383939;
     margin-bottom: 0.5rem;
 }
 .callback-text {
-    color: #4d6370;
+    color: #676869;
     margin-bottom: 1.75rem;
 }
 .callback-ref {
-    background: #f0f8ff;
-    border-radius: 8px;
+    background: #F5F5F2;
+    border-radius: 4px;
     padding: 0.6rem 1rem;
     display: inline-block;
     font-family: monospace;
-    font-size: 0.9rem;
-    color: #1a2a3a;
+    font-size: 0.875rem;
+    color: #383939;
     margin-bottom: 1.5rem;
 }
-.callback-icon.success { color: #27ae60; }
-.callback-icon.error   { color: #E55B3C; }
-.callback-icon.loading { color: #3B9DD9; }
+.callback-icon.success { color: #3C7D54; }
+.callback-icon.error   { color: #B0473C; }
+.callback-icon.loading { color: #54A2CC; }
 
 /* Moodle registration form */
 .moodle-course-chip {
@@ -55,9 +55,9 @@
     gap: 0.4rem;
     background: #eaf4fd;
     color: #1a6fa0;
-    border-radius: 999px;
+    border-radius: 4px;
     padding: 0.3rem 0.8rem;
-    font-size: 0.82rem;
+    font-size: 0.875rem;
     font-weight: 600;
 }
 .moodle-field {
@@ -66,9 +66,9 @@
 }
 .moodle-field label {
     display: block;
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    color: #4d6370;
+    color: #676869;
     text-transform: uppercase;
     letter-spacing: 0.03em;
     margin-bottom: 0.3rem;
@@ -76,22 +76,22 @@
 .moodle-field input {
     width: 100%;
     padding: 0.6rem 0.85rem;
-    border: 1.5px solid #d4dbe2;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    color: #1a2a3a;
+    border: 1.5px solid #D1D1D1;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #383939;
     background: #fff;
     box-sizing: border-box;
     transition: border-color 0.15s, box-shadow 0.15s;
 }
 .moodle-field input:focus {
     outline: none;
-    border-color: #3B9DD9;
-    box-shadow: 0 0 0 3px rgba(59,157,217,0.12);
+    border-color: #54A2CC;
+    box-shadow: 0 0 0 3px rgba(84, 162, 204,0.12);
 }
 .moodle-field input[readonly] {
     background: #f5f7f9;
-    color: #6b7b8d;
+    color: #676869;
     cursor: default;
 }
 .moodle-field-grid {
@@ -104,24 +104,24 @@
 .moodle-result-ok {
     background: #f0fff4;
     border: 1px solid #c3e6cb;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 0.9rem 1.1rem;
     color: #1a4d2e;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     line-height: 1.5;
 }
 .moodle-result-err {
     background: #fff8f0;
     border: 1px solid #ffd09b;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 0.9rem 1.1rem;
     color: #7a3d00;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     line-height: 1.5;
 }
 .moodle-course-section {
-    border: 1px solid #e8ecf0;
-    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    border-radius: 4px;
     padding: 1rem;
     margin-bottom: 1rem;
     text-align: left;
@@ -136,22 +136,22 @@
 .moodle-qty-badge {
     background: #e8f4fd;
     color: #1a6fa0;
-    border-radius: 999px;
+    border-radius: 4px;
     padding: 0.2rem 0.6rem;
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     font-weight: 600;
 }
 .moodle-person-label {
     font-size: 0.75rem;
     font-weight: 700;
-    color: #4d6370;
+    color: #676869;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     margin-bottom: 0.4rem;
 }
 .moodle-enrollee {
     padding: 0.75rem 0;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #D1D1D1;
 }
 .moodle-enrollee:first-child { padding-top: 0; }
 .moodle-enrollee:last-child { border-bottom: none; padding-bottom: 0; }
@@ -272,7 +272,7 @@
                     (personLabel ? '<div class="moodle-person-label">' + escHtml(personLabel) + '</div>' : '') +
                     '<div class="moodle-field-grid" style="margin-bottom:0.75rem;">' +
                         '<div class="moodle-field" style="margin-bottom:0;">' +
-                            '<label>First Name <span style="color:#E55B3C;">*</span></label>' +
+                            '<label>First Name <span style="color:#B0473C;">*</span></label>' +
                             '<input type="text" class="moodle-firstname" value="' + escHtml(fnVal) + '" placeholder="First name">' +
                         '</div>' +
                         '<div class="moodle-field" style="margin-bottom:0;">' +
@@ -281,7 +281,7 @@
                         '</div>' +
                     '</div>' +
                     '<div class="moodle-field">' +
-                        '<label>Email <span style="color:#E55B3C;">*</span></label>' +
+                        '<label>Email <span style="color:#B0473C;">*</span></label>' +
                         '<input type="email" class="moodle-email" value="' + escHtml(emVal) + '"' +
                             ' placeholder="Email address">' +
                     '</div>' +
@@ -317,7 +317,7 @@
 
         card.innerHTML = (
             '<div style="padding:2rem;">' +
-                '<div style="color:#3B9DD9; font-size:3rem; margin-bottom:1rem; text-align:center;">' +
+                '<div style="color:#54A2CC; font-size:3rem; margin-bottom:1rem; text-align:center;">' +
                     '<i class="fas fa-graduation-cap"></i>' +
                 '</div>' +
                 '<div class="callback-title" style="font-size:1.25rem; text-align:center; margin-bottom:0.5rem;">' +
@@ -333,7 +333,7 @@
                     '<span class="icon"><i class="fas fa-user-graduate"></i></span>' +
                     '<span>Register &amp; Enrol' + (totalPlaces > 1 ? ' All' : '') + '</span>' +
                 '</button>' +
-                '<div id="moodle-processing" style="display:none; text-align:center; padding:0.75rem; color:#6b7b8d; font-size:0.88rem;">' +
+                '<div id="moodle-processing" style="display:none; text-align:center; padding:0.75rem; color:#676869; font-size:0.875rem;">' +
                     '<i class="fas fa-spinner fa-spin"></i> Registering accounts&hellip;' +
                 '</div>' +
                 '<div id="moodle-result" style="display:none; margin-top:1rem;"></div>' +

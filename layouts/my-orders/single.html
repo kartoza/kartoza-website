@@ -3,7 +3,7 @@
 
 <style>
 .orders-hero {
-    background: linear-gradient(135deg, var(--dark2, #1a2a3a) 0%, var(--primary2, #3488b8) 100%);
+    background: var(--dark2, #383939);
     padding: 5rem 1.5rem 3rem;
     position: relative;
     overflow: hidden;
@@ -13,17 +13,17 @@
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse at 20% 50%, rgba(59,157,217,0.15) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(232,163,49,0.1) 0%, transparent 50%);
+        radial-gradient(ellipse at 20% 50%, rgba(84, 162, 204,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(238, 179, 72,0.1) 0%, transparent 50%);
     pointer-events: none;
 }
 .orders-hero-content { position: relative; z-index: 1; text-align: center; color: #fff; }
-.orders-hero-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
-.orders-hero-subtitle { font-size: 1.1rem; opacity: 0.8; }
+.orders-hero-title { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+.orders-hero-subtitle { font-size: 1rem; opacity: 0.8; }
 
 .orders-section {
     padding: 3rem 1.5rem 5rem;
-    background: #f7f9fb;
+    background: #F5F5F2;
     min-height: 60vh;
 }
 
@@ -32,21 +32,21 @@
     text-align: center;
     padding: 5rem 2rem;
     background: #fff;
-    border-radius: 12px;
+    border-radius: 4px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     max-width: 560px;
     margin: 0 auto;
 }
-.orders-state-icon { font-size: 3.5rem; margin-bottom: 1.25rem; color: #d4dbe2; }
-.orders-state-icon.loading { color: #3B9DD9; }
-.orders-state-icon.error   { color: #E55B3C; }
-.orders-state-title { font-size: 1.35rem; font-weight: 700; color: #1a2a3a; margin-bottom: 0.5rem; }
-.orders-state-text  { color: #4d6370; margin-bottom: 1.75rem; }
+.orders-state-icon { font-size: 3.5rem; margin-bottom: 1.25rem; color: #D1D1D1; }
+.orders-state-icon.loading { color: #54A2CC; }
+.orders-state-icon.error   { color: #B0473C; }
+.orders-state-title { font-size: 1.25rem; font-weight: 700; color: #383939; margin-bottom: 0.5rem; }
+.orders-state-text  { color: #676869; margin-bottom: 1.75rem; }
 
 /* Search / filter bar */
 .orders-toolbar {
     background: #fff;
-    border-radius: 12px;
+    border-radius: 4px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     padding: 1rem 1.25rem;
     margin-bottom: 1.25rem;
@@ -65,19 +65,19 @@
     left: 0.75rem;
     top: 50%;
     transform: translateY(-50%);
-    color: #9aaab8;
-    font-size: 0.85rem;
+    color: #8A8B8B;
+    font-size: 0.875rem;
     pointer-events: none;
 }
 .orders-toolbar input[type="text"],
 .orders-toolbar input[type="date"] {
     width: 100%;
     padding: 0.5rem 0.75rem 0.5rem 2rem;
-    border: 1.5px solid #d4dbe2;
-    border-radius: 8px;
+    border: 1.5px solid #D1D1D1;
+    border-radius: 4px;
     font-size: 0.875rem;
-    color: #1a2a3a;
-    background: #f7f9fb;
+    color: #383939;
+    background: #F5F5F2;
     outline: none;
     font-family: inherit;
     transition: border-color 0.15s, box-shadow 0.15s;
@@ -88,29 +88,29 @@
     min-width: 130px;
 }
 .orders-toolbar input:focus {
-    border-color: #3B9DD9;
-    box-shadow: 0 0 0 3px rgba(59,157,217,0.1);
+    border-color: #54A2CC;
+    box-shadow: 0 0 0 3px rgba(84, 162, 204,0.1);
     background: #fff;
 }
 .orders-toolbar-date-label {
-    font-size: 0.78rem;
-    color: #6b7b8d;
+    font-size: 0.75rem;
+    color: #676869;
     white-space: nowrap;
     align-self: center;
 }
 .orders-clear-btn {
     padding: 0.5rem 0.85rem;
-    font-size: 0.8rem;
-    border: 1.5px solid #d4dbe2;
-    border-radius: 8px;
+    font-size: 0.875rem;
+    border: 1.5px solid #D1D1D1;
+    border-radius: 4px;
     background: #fff;
-    color: #6b7b8d;
+    color: #676869;
     cursor: pointer;
     white-space: nowrap;
     transition: border-color 0.15s, color 0.15s;
     font-family: inherit;
 }
-.orders-clear-btn:hover { border-color: #E55B3C; color: #E55B3C; }
+.orders-clear-btn:hover { border-color: #B0473C; color: #B0473C; }
 
 /* Results summary */
 .orders-meta {
@@ -118,17 +118,17 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 0.9rem;
-    font-size: 0.825rem;
-    color: #6b7b8d;
+    font-size: 0.875rem;
+    color: #676869;
     flex-wrap: wrap;
     gap: 0.5rem;
 }
-.orders-meta-count strong { color: #1a2a3a; }
+.orders-meta-count strong { color: #383939; }
 
 /* Order cards */
 .order-card {
     background: #fff;
-    border-radius: 12px;
+    border-radius: 4px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     margin-bottom: 1.25rem;
     overflow: hidden;
@@ -138,86 +138,86 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #D1D1D1;
     flex-wrap: wrap;
     gap: 0.5rem;
 }
-.order-ref { font-family: monospace; font-size: 0.9rem; font-weight: 700; color: #1a2a3a; }
-.order-date { font-size: 0.8rem; color: #6b7b8d; }
+.order-ref { font-family: monospace; font-size: 0.875rem; font-weight: 700; color: #383939; }
+.order-date { font-size: 0.875rem; color: #676869; }
 .order-status {
-    font-size: 0.78rem; font-weight: 600;
-    padding: 0.25rem 0.65rem; border-radius: 999px;
+    font-size: 0.75rem; font-weight: 600;
+    padding: 0.25rem 0.65rem; border-radius: 4px;
     background: #e8f5e9; color: #2e7d32;
 }
 .order-status.pending { background: #fff3e0; color: #e65100; }
 .order-item {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0.9rem 1.5rem; border-bottom: 1px solid #f6f6f6; gap: 1rem;
+    padding: 0.9rem 1.5rem; border-bottom: 1px solid #F5F5F2; gap: 1rem;
 }
 .order-item:last-child { border-bottom: none; }
-.order-item-name  { font-size: 0.95rem; font-weight: 600; color: #1a2a3a; }
-.order-item-code  { font-size: 0.76rem; color: #9aaab8; font-family: monospace; margin-top: 0.1rem; }
-.order-item-price { font-weight: 700; color: #3B9DD9; white-space: nowrap; }
+.order-item-name  { font-size: 1rem; font-weight: 600; color: #383939; }
+.order-item-code  { font-size: 0.75rem; color: #8A8B8B; font-family: monospace; margin-top: 0.1rem; }
+.order-item-price { font-weight: 700; color: #54A2CC; white-space: nowrap; }
 .order-card-footer {
     padding: 0.75rem 1.5rem;
-    background: #fafbfc; border-top: 1px solid #f0f0f0;
-    display: flex; align-items: center; justify-content: space-between; font-size: 0.9rem;
+    background: #F5F5F2; border-top: 1px solid #D1D1D1;
+    display: flex; align-items: center; justify-content: space-between; font-size: 0.875rem;
 }
-.order-total         { font-weight: 700; color: #1a2a3a; }
-.order-invoice-ref   { font-size: 0.8rem; color: #6b7b8d; font-family: monospace; }
+.order-total         { font-weight: 700; color: #383939; }
+.order-invoice-ref   { font-size: 0.875rem; color: #676869; font-family: monospace; }
 
 /* Moodle section */
 .moodle-section { border-top: 2px solid #f0f7ff; padding: 1.1rem 1.5rem; background: #f8fbff; }
 .moodle-section-header {
     display: flex; align-items: center; gap: 0.5rem;
-    font-size: 0.9rem; font-weight: 700; color: #1a2a3a; margin-bottom: 0.9rem;
+    font-size: 0.875rem; font-weight: 700; color: #383939; margin-bottom: 0.9rem;
 }
-.moodle-section-header i { color: #3B9DD9; }
+.moodle-section-header i { color: #54A2CC; }
 .moodle-enroll-row {
     display: flex; align-items: center; gap: 0.75rem;
     padding: 0.55rem 0; border-bottom: 1px solid #eef2f7;
     font-size: 0.875rem; flex-wrap: wrap;
 }
 .moodle-enroll-row:last-child { border-bottom: none; }
-.moodle-enroll-icon { font-size: 1.1rem; flex-shrink: 0; }
-.moodle-enroll-icon.success { color: #27ae60; }
-.moodle-enroll-icon.failed  { color: #E55B3C; }
+.moodle-enroll-icon { font-size: 1rem; flex-shrink: 0; }
+.moodle-enroll-icon.success { color: #3C7D54; }
+.moodle-enroll-icon.failed  { color: #B0473C; }
 .moodle-enroll-info { flex: 1; min-width: 0; }
-.moodle-enroll-name  { font-weight: 600; color: #1a2a3a; display: block; }
-.moodle-enroll-email { font-size: 0.78rem; color: #6b7b8d; }
+.moodle-enroll-name  { font-weight: 600; color: #383939; display: block; }
+.moodle-enroll-email { font-size: 0.75rem; color: #676869; }
 .moodle-enroll-course {
-    font-size: 0.78rem; color: #4d6370; flex-shrink: 0;
+    font-size: 0.75rem; color: #676869; flex-shrink: 0;
     max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
-.moodle-enroll-badge { font-size: 0.72rem; font-weight: 600; padding: 0.2rem 0.55rem; border-radius: 999px; flex-shrink: 0; }
+.moodle-enroll-badge { font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.55rem; border-radius: 4px; flex-shrink: 0; }
 .moodle-enroll-badge.is-success { background: #e8f5e9; color: #2e7d32; }
 .moodle-enroll-badge.is-danger  { background: #fde8e4; color: #c62828; }
-.moodle-form-intro { font-size: 0.85rem; color: #4d6370; margin-bottom: 0.9rem; }
+.moodle-form-intro { font-size: 0.875rem; color: #676869; margin-bottom: 0.9rem; }
 .moodle-form-seat {
     margin-bottom: 0.9rem; padding: 0.75rem;
-    background: #fff; border-radius: 8px; border: 1px solid #e4ecf4;
+    background: #fff; border-radius: 4px; border: 1px solid #e4ecf4;
 }
-.moodle-seat-label  { font-size: 0.82rem; font-weight: 700; color: #3B9DD9; margin-bottom: 0.55rem; }
+.moodle-seat-label  { font-size: 0.875rem; font-weight: 700; color: #54A2CC; margin-bottom: 0.55rem; }
 .moodle-seat-fields { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; }
 @media (max-width: 640px) { .moodle-seat-fields { grid-template-columns: 1fr; } }
 .moodle-seat-fields input {
     width: 100%; padding: 0.45rem 0.65rem;
-    border: 1.5px solid #d4dbe2; border-radius: 6px;
-    font-size: 0.85rem; color: #1a2a3a; background: #fff; box-sizing: border-box;
+    border: 1.5px solid #D1D1D1; border-radius: 4px;
+    font-size: 0.875rem; color: #383939; background: #fff; box-sizing: border-box;
 }
-.moodle-seat-fields input:focus { outline: none; border-color: #3B9DD9; box-shadow: 0 0 0 3px rgba(59,157,217,0.12); }
-.moodle-seat-fields input.is-danger { border-color: #E55B3C; }
-.moodle-failure-note { font-size: 0.82rem; color: #b45309; margin-top: 0.6rem; }
+.moodle-seat-fields input:focus { outline: none; border-color: #54A2CC; box-shadow: 0 0 0 3px rgba(84, 162, 204,0.12); }
+.moodle-seat-fields input.is-danger { border-color: #B0473C; }
+.moodle-failure-note { font-size: 0.875rem; color: #b45309; margin-top: 0.6rem; }
 .moodle-failure-note i { margin-right: 0.3rem; }
 
 /* No-results state */
 .orders-no-results {
     text-align: center; padding: 3rem 2rem;
-    background: #fff; border-radius: 12px;
+    background: #fff; border-radius: 4px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    color: #6b7b8d;
+    color: #676869;
 }
-.orders-no-results i { font-size: 2.5rem; margin-bottom: 0.75rem; color: #d4dbe2; display: block; }
+.orders-no-results i { font-size: 2rem; margin-bottom: 0.75rem; color: #D1D1D1; display: block; }
 
 /* Pagination */
 .orders-pagination {
@@ -231,10 +231,10 @@
 .ord-page-btn {
     min-width: 36px; height: 36px;
     padding: 0 0.6rem;
-    border: 1.5px solid #d4dbe2;
-    border-radius: 8px;
+    border: 1.5px solid #D1D1D1;
+    border-radius: 4px;
     background: #fff;
-    color: #4d6370;
+    color: #676869;
     font-size: 0.875rem;
     font-weight: 600;
     cursor: pointer;
@@ -243,13 +243,13 @@
     font-family: inherit;
 }
 .ord-page-btn:hover:not(:disabled):not(.is-active) {
-    border-color: #3B9DD9; color: #3B9DD9;
+    border-color: #54A2CC; color: #54A2CC;
 }
 .ord-page-btn.is-active {
-    background: #3B9DD9; border-color: #3B9DD9; color: #fff;
+    background: #54A2CC; border-color: #54A2CC; color: #fff;
 }
 .ord-page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-.ord-page-ellipsis { color: #9aaab8; font-size: 0.875rem; padding: 0 0.25rem; align-self: center; }
+.ord-page-ellipsis { color: #8A8B8B; font-size: 0.875rem; padding: 0 0.25rem; align-self: center; }
 </style>
 
 <section class="orders-hero">

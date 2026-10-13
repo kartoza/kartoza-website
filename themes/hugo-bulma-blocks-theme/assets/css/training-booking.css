@@ -8,7 +8,7 @@
    ============================================ */
 .booking-section {
     padding: 80px 0;
-    background: linear-gradient(180deg, #f7f9fb 0%, #ffffff 100%);
+    background: #F5F5F2;
 }
 
 .booking-header {
@@ -18,14 +18,14 @@
 }
 
 .booking-header h2 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
     color: var(--text-dark);
     margin-bottom: 1rem;
 }
 
 .booking-header p {
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     color: var(--text-muted);
 }
 
@@ -75,9 +75,9 @@
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    background: var(--primary);
     color: white;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -87,7 +87,7 @@
 }
 
 .step-info h3 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--text-dark);
     margin-bottom: 0.25rem;
@@ -132,12 +132,11 @@
 .session-card:hover {
     border-color: var(--primary-light);
     box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
 }
 
 .session-card.selected {
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(59, 157, 217, 0.15);
+    box-shadow: 0 0 0 3px rgba(84, 162, 204, 0.15);
 }
 
 .session-card.session-full {
@@ -170,20 +169,20 @@
 }
 
 .date-main {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--text-dark);
 }
 
 .date-sub {
-    font-size: 0.85rem;
+    font-size: 0.875rem;
     color: var(--text-muted);
 }
 
 .session-badge {
     padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -218,7 +217,7 @@
 }
 
 .session-venue i {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: var(--primary);
     flex-shrink: 0;
 }
@@ -229,13 +228,13 @@
 
 .venue-info strong {
     display: block;
-    font-size: 1.05rem;
+    font-size: 1rem;
     color: var(--text-dark);
     margin-bottom: 4px;
 }
 
 .venue-desc {
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     color: var(--text-muted);
 }
 
@@ -249,7 +248,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--text-muted);
 }
 
@@ -267,7 +266,7 @@
    CUSTOM TRAINING CARD
    ============================================ */
 .custom-training-card {
-    background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
+    background: var(--accent-light);
     border-radius: var(--radius-md);
     padding: 30px;
     margin-top: 30px;
@@ -291,7 +290,7 @@
 }
 
 .custom-training-icon i {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: var(--accent);
 }
 
@@ -300,7 +299,7 @@
 }
 
 .custom-training-info h4 {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: white;
     margin-bottom: 0.5rem;
@@ -324,7 +323,7 @@
 }
 
 .attendees-selector .label {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--text-dark);
     margin-bottom: 15px;
@@ -344,7 +343,7 @@
     background: white;
     color: var(--primary);
     border-radius: var(--radius-sm);
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     cursor: pointer;
     transition: all var(--transition-fast);
     display: flex;
@@ -373,7 +372,7 @@
 
 .help-text {
     margin-top: 12px;
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--text-muted);
     display: flex;
     align-items: center;
@@ -392,7 +391,7 @@
 }
 
 .currency-selector .label {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--text-dark);
     margin-bottom: 15px;
@@ -423,14 +422,13 @@
 
 .currency-option:hover .currency-card {
     border-color: var(--primary-light);
-    transform: translateY(-2px);
     box-shadow: var(--shadow-sm);
 }
 
 .currency-option input[type="radio"]:checked + .currency-card {
     border-color: var(--primary);
-    background: linear-gradient(135deg, rgba(59, 157, 217, 0.05) 0%, rgba(91, 181, 232, 0.05) 100%);
-    box-shadow: 0 0 0 3px rgba(59, 157, 217, 0.15);
+    background: rgba(84, 162, 204, 0.05);
+    box-shadow: 0 0 0 3px rgba(84, 162, 204, 0.15);
 }
 
 .currency-symbol {
@@ -443,7 +441,7 @@
 
 .currency-name {
     display: block;
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--text-dark);
     margin-bottom: 4px;
@@ -451,7 +449,7 @@
 
 .currency-code {
     display: block;
-    font-size: 0.8rem;
+    font-size: 0.875rem;
     color: var(--text-muted);
 }
 
@@ -466,7 +464,7 @@
 }
 
 .discount-info-box h4 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--text-dark);
     margin-bottom: 15px;
@@ -489,7 +487,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--text-muted);
 }
 
@@ -518,7 +516,7 @@
 }
 
 .summary-section h4 {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--text-dark);
     margin-bottom: 20px;
@@ -539,7 +537,7 @@
 }
 
 .summary-label {
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--text-muted);
 }
 
@@ -577,13 +575,13 @@
 }
 
 .total-item .summary-label {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--text-dark);
 }
 
 .summary-total {
-    font-size: 1.8rem !important;
+    font-size: 1.5rem !important;
     font-weight: 700 !important;
     color: var(--primary) !important;
 }
@@ -596,7 +594,7 @@
 }
 
 .summary-benefits h4 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--text-dark);
     margin-bottom: 15px;
@@ -647,7 +645,7 @@
     border-radius: 50%;
     background: var(--light-bg-alt);
     color: var(--text-muted);
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -658,7 +656,7 @@
 .progress-step.active .progress-circle {
     background: var(--primary);
     color: white;
-    box-shadow: 0 0 0 4px rgba(59, 157, 217, 0.2);
+    box-shadow: 0 0 0 4px rgba(84, 162, 204, 0.2);
 }
 
 .progress-step.completed .progress-circle {
@@ -668,11 +666,11 @@
 
 .progress-step.completed .progress-circle::after {
     content: '\2713';
-    font-size: 1.3rem;
+    font-size: 1.25rem;
 }
 
 .progress-label {
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     font-weight: 600;
     color: var(--text-muted);
 }
@@ -704,14 +702,14 @@
 }
 
 .no-sessions-message h3 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--text-dark);
     margin-bottom: 15px;
 }
 
 .no-sessions-message p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--text-muted);
     max-width: 600px;
     margin: 0 auto 30px;
@@ -721,7 +719,7 @@
    SIDEBAR BOOKING QUICK CARD
    ============================================ */
 .booking-quick-card {
-    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+    background: var(--primary-dark);
     color: white;
     border: none !important;
     box-shadow: var(--shadow-md);
@@ -739,7 +737,7 @@
 }
 
 .booking-quick-header h3 {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     font-weight: 700;
     margin: 0;
 }
@@ -761,7 +759,7 @@
     align-items: center;
     gap: 10px;
     margin-bottom: 10px;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
 }
 
 .booking-quick-features .feature-item i {

@@ -9,7 +9,7 @@
    ============================================ */
 
 .ticket-hero {
-    background: linear-gradient(135deg, var(--dark2, #1a2a3a) 0%, var(--primary2, #3488b8) 100%);
+    background: var(--dark2, #383939);
     padding: 5rem 1.5rem 3rem;
     position: relative;
     overflow: hidden;
@@ -20,8 +20,8 @@
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse at 20% 50%, rgba(59,157,217,0.15) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(232,163,49,0.1) 0%, transparent 50%);
+        radial-gradient(ellipse at 20% 50%, rgba(84, 162, 204,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(238, 179, 72,0.1) 0%, transparent 50%);
 }
 
 .ticket-hero-content {
@@ -32,14 +32,14 @@
 }
 
 .ticket-hero-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 800;
     margin-bottom: 0.75rem;
     letter-spacing: -0.02em;
 }
 
 .ticket-hero-subtitle {
-    font-size: 1.1rem;
+    font-size: 1rem;
     opacity: 0.8;
 }
 
@@ -48,7 +48,7 @@
    ============================================ */
 
 .ticket-section {
-    background: var(--light1, #f7f9fb);
+    background: var(--light1, #F5F5F2);
     min-height: 70vh;
     padding: 3rem 1.5rem 5rem;
     display: flex;
@@ -64,8 +64,8 @@
 
 .ticket-card {
     background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 8px 40px rgba(26,42,58,0.12);
+    border-radius: 4px;
+    box-shadow: 0 8px 40px rgba(56, 57, 57,0.12);
     overflow: hidden;
     position: relative;
     padding: 2rem;
@@ -78,7 +78,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--primary2, #3488b8), var(--accent, #E8A331));
+    background: var(--primary2, #383939);
 }
 
 /* ============================================
@@ -94,26 +94,26 @@
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary3, #b2d5e8), var(--primary2, #3488b8));
+    background: var(--primary3, #F5F5F2);
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 1rem;
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     color: #fff;
-    box-shadow: 0 4px 15px rgba(52,136,184,0.3);
+    box-shadow: 0 4px 15px rgba(84, 162, 204,0.3);
 }
 
 .ticket-card-header h2 {
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    color: var(--dark2, #1a2a3a);
+    color: var(--dark2, #383939);
     margin-bottom: 0.3rem;
 }
 
 .ticket-card-header p {
-    font-size: 0.9rem;
-    color: var(--dark1, #6B7B8D);
+    font-size: 0.875rem;
+    color: var(--dark1, #676869);
 }
 
 /* ============================================
@@ -128,17 +128,17 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.85rem;
+    font-size: 0.875rem;
     font-weight: 600;
-    color: var(--text-primary2, #4D6370);
+    color: var(--text-primary2, #676869);
     margin-bottom: 0.5rem;
     letter-spacing: 0.02em;
     text-transform: uppercase;
 }
 
 .ticket-label i {
-    color: var(--primary2, #3488b8);
-    font-size: 0.9em;
+    color: var(--primary2, #383939);
+    font-size: 0.875em;
 }
 
 .ticket-input,
@@ -146,11 +146,11 @@
 .ticket-select {
     width: 100%;
     padding: 0.75rem 1rem;
-    border: 2px solid var(--light2, #e8ecf0);
-    border-radius: 10px;
+    border: 2px solid var(--light2, #D1D1D1);
+    border-radius: 4px;
     font-size: 1rem;
-    color: var(--dark2, #1a2a3a);
-    background: var(--light1, #f7f9fb);
+    color: var(--dark2, #383939);
+    background: var(--light1, #F5F5F2);
     transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
     outline: none;
     font-family: inherit;
@@ -159,16 +159,16 @@
 .ticket-input:focus,
 .ticket-textarea:focus,
 .ticket-select:focus {
-    border-color: var(--primary2, #3488b8);
+    border-color: var(--primary2, #383939);
     background: #fff;
-    box-shadow: 0 0 0 3px rgba(52,136,184,0.12);
+    box-shadow: 0 0 0 3px rgba(84, 162, 204,0.12);
 }
 
 .ticket-input.has-error,
 .ticket-textarea.has-error,
 .ticket-select.has-error {
-    border-color: #e74c3c;
-    box-shadow: 0 0 0 3px rgba(231,76,60,0.1);
+    border-color: #B0473C;
+    box-shadow: 0 0 0 3px rgba(176, 71, 60,0.1);
 }
 
 .ticket-textarea {
@@ -198,8 +198,8 @@
     width: 100%;
     padding: 0.875rem;
     border: none;
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--primary2, #3488b8), var(--primary1, #53a2cc));
+    border-radius: 4px;
+    background: var(--primary2, #383939);
     color: #fff;
     font-size: 1rem;
     font-weight: 700;
@@ -217,8 +217,7 @@
 }
 
 .ticket-submit:hover:not(:disabled) {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(52,136,184,0.35);
+    box-shadow: 0 6px 20px rgba(84, 162, 204,0.35);
 }
 
 .ticket-submit:active:not(:disabled) {
@@ -255,13 +254,13 @@
    ============================================ */
 
 .ticket-message {
-    border-radius: 10px;
+    border-radius: 4px;
     padding: 1rem 1.25rem;
     margin-top: 1.25rem;
     display: none;
     align-items: flex-start;
     gap: 0.75rem;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     line-height: 1.5;
 }
 
@@ -270,15 +269,15 @@
 }
 
 .ticket-message.is-error {
-    background: rgba(231,76,60,0.08);
-    border: 1px solid rgba(231,76,60,0.2);
-    color: #c0392b;
+    background: rgba(176, 71, 60,0.08);
+    border: 1px solid rgba(176, 71, 60,0.2);
+    color: #B0473C;
 }
 
 .ticket-message.is-success {
-    background: rgba(39,174,96,0.08);
-    border: 1px solid rgba(39,174,96,0.2);
-    color: #1e8449;
+    background: rgba(60, 125, 84,0.08);
+    border: 1px solid rgba(60, 125, 84,0.2);
+    color: #3C7D54;
 }
 
 .ticket-message i {
@@ -300,26 +299,26 @@
     width: 64px;
     height: 64px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #e8a331, #f0b84d);
+    background: #EEB348;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 1.25rem;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: #fff;
-    box-shadow: 0 4px 15px rgba(232,163,49,0.3);
+    box-shadow: 0 4px 15px rgba(238, 179, 72,0.3);
 }
 
 .ticket-auth-required h3 {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    color: var(--dark2, #1a2a3a);
+    color: var(--dark2, #383939);
     margin-bottom: 0.5rem;
 }
 
 .ticket-auth-required p {
-    font-size: 0.95rem;
-    color: var(--dark1, #6B7B8D);
+    font-size: 1rem;
+    color: var(--dark1, #676869);
     margin-bottom: 1.5rem;
 }
 
@@ -328,18 +327,17 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.75rem;
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--primary2, #3488b8), var(--primary1, #53a2cc));
+    border-radius: 4px;
+    background: var(--primary2, #383939);
     color: #fff;
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 700;
     text-decoration: none;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .ticket-login-link:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(52,136,184,0.35);
+    box-shadow: 0 6px 20px rgba(84, 162, 204,0.35);
     color: #fff;
     text-decoration: none;
 }
@@ -362,38 +360,38 @@
     width: 72px;
     height: 72px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    background: #3C7D54;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 1.25rem;
     font-size: 2rem;
     color: #fff;
-    box-shadow: 0 6px 20px rgba(39,174,96,0.3);
+    box-shadow: 0 6px 20px rgba(60, 125, 84,0.3);
 }
 
 .ticket-success-state h3 {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    color: var(--dark2, #1a2a3a);
+    color: var(--dark2, #383939);
     margin-bottom: 0.5rem;
 }
 
 .ticket-success-state p {
-    font-size: 0.95rem;
-    color: var(--dark1, #6B7B8D);
+    font-size: 1rem;
+    color: var(--dark1, #676869);
     margin-bottom: 0.5rem;
 }
 
 .ticket-ref {
     display: inline-block;
-    background: var(--light2, #e8ecf0);
-    border-radius: 8px;
+    background: var(--light2, #F5F5F2);
+    border-radius: 4px;
     padding: 0.4rem 1rem;
     font-family: monospace;
     font-size: 1rem;
     font-weight: 700;
-    color: var(--dark2, #1a2a3a);
+    color: var(--dark2, #383939);
     margin: 0.5rem 0 1.5rem;
 }
 
@@ -402,11 +400,11 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.625rem 1.5rem;
-    border: 2px solid var(--primary2, #3488b8);
-    border-radius: 8px;
-    color: var(--primary2, #3488b8);
+    border: 2px solid var(--primary2, #383939);
+    border-radius: 4px;
+    color: var(--primary2, #383939);
     background: none;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     font-weight: 600;
     cursor: pointer;
     font-family: inherit;
@@ -415,7 +413,7 @@
 }
 
 .ticket-new-btn:hover {
-    background: var(--primary2, #3488b8);
+    background: var(--primary2, #383939);
     color: #fff;
     text-decoration: none;
 }
@@ -425,11 +423,11 @@
    ============================================ */
 
 .ticket-dropzone {
-    border: 2px dashed var(--light2, #e8ecf0);
-    border-radius: 10px;
+    border: 2px dashed var(--light2, #D1D1D1);
+    border-radius: 4px;
     padding: 1.5rem 1rem;
     text-align: center;
-    background: var(--light1, #f7f9fb);
+    background: var(--light1, #F5F5F2);
     cursor: pointer;
     transition: border-color 0.2s, background 0.2s;
     user-select: none;
@@ -437,24 +435,24 @@
 
 .ticket-dropzone:hover,
 .ticket-dropzone.drag-over {
-    border-color: var(--primary2, #3488b8);
-    background: rgba(52,136,184,0.04);
+    border-color: var(--primary2, #383939);
+    background: rgba(84, 162, 204,0.04);
 }
 
 .ticket-dropzone-icon {
-    font-size: 1.75rem;
-    color: var(--primary3, #b2d5e8);
+    font-size: 1.5rem;
+    color: var(--primary3, #F5F5F2);
     margin-bottom: 0.4rem;
 }
 
 .ticket-dropzone p {
-    font-size: 0.9rem;
-    color: var(--dark1, #6B7B8D);
+    font-size: 0.875rem;
+    color: var(--dark1, #676869);
     margin: 0;
 }
 
 .ticket-dropzone-hint {
-    font-size: 0.78rem !important;
+    font-size: 0.75rem !important;
     margin-top: 0.2rem !important;
     opacity: 0.8;
 }
@@ -462,7 +460,7 @@
 .ticket-browse-btn {
     background: none;
     border: none;
-    color: var(--primary2, #3488b8);
+    color: var(--primary2, #383939);
     font-weight: 600;
     cursor: pointer;
     font-family: inherit;
@@ -472,7 +470,7 @@
 }
 
 .ticket-browse-btn:hover {
-    color: var(--primary1, #53a2cc);
+    color: var(--primary1, #54A2CC);
 }
 
 .ticket-file-list {
@@ -486,9 +484,9 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    background: var(--light1, #f7f9fb);
-    border: 1px solid var(--light2, #e8ecf0);
-    border-radius: 8px;
+    background: var(--light1, #F5F5F2);
+    border: 1px solid var(--light2, #D1D1D1);
+    border-radius: 4px;
     padding: 0.5rem 0.75rem;
     font-size: 0.875rem;
 }
@@ -496,7 +494,7 @@
 .ticket-file-thumb {
     width: 40px;
     height: 40px;
-    border-radius: 6px;
+    border-radius: 4px;
     object-fit: cover;
     flex-shrink: 0;
 }
@@ -504,14 +502,14 @@
 .ticket-file-icon {
     width: 40px;
     height: 40px;
-    border-radius: 6px;
-    background: rgba(52,136,184,0.1);
+    border-radius: 4px;
+    background: rgba(84, 162, 204,0.1);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--primary2, #3488b8);
+    color: var(--primary2, #383939);
     flex-shrink: 0;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .ticket-file-info {
@@ -523,23 +521,23 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--dark2, #1a2a3a);
+    color: var(--dark2, #383939);
     font-weight: 600;
 }
 
 .ticket-file-size {
-    color: var(--dark1, #6B7B8D);
-    font-size: 0.78rem;
+    color: var(--dark1, #676869);
+    font-size: 0.75rem;
     margin-top: 0.1rem;
 }
 
 .ticket-file-remove {
     background: none;
     border: none;
-    color: var(--dark1, #6B7B8D);
+    color: var(--dark1, #676869);
     cursor: pointer;
     padding: 0.25rem;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     flex-shrink: 0;
     border-radius: 4px;
     transition: color 0.2s, background 0.2s;
@@ -547,8 +545,8 @@
 }
 
 .ticket-file-remove:hover {
-    color: #e74c3c;
-    background: rgba(231,76,60,0.08);
+    color: #B0473C;
+    background: rgba(176, 71, 60,0.08);
 }
 </style>
 
@@ -603,7 +601,7 @@
 
                     <div class="ticket-field">
                         <label class="ticket-label" for="ticket-subject">
-                            <i class="fas fa-tag"></i> Subject <span style="color:#e74c3c">*</span>
+                            <i class="fas fa-tag"></i> Subject <span style="color:#B0473C">*</span>
                         </label>
                         <input class="ticket-input" type="text" id="ticket-subject"
                             name="subject" placeholder="Brief description of your issue"
@@ -623,7 +621,7 @@
 
                     <div class="ticket-field">
                         <label class="ticket-label" for="ticket-description">
-                            <i class="fas fa-align-left"></i> Description <span style="color:#e74c3c">*</span>
+                            <i class="fas fa-align-left"></i> Description <span style="color:#B0473C">*</span>
                         </label>
                         <textarea class="ticket-textarea" id="ticket-description"
                             name="description"
@@ -634,7 +632,7 @@
                     <div class="ticket-field">
                         <label class="ticket-label">
                             <i class="fas fa-paperclip"></i> Attachments
-                            <span style="color:var(--dark1);font-weight:400;text-transform:none;font-size:0.8em;">(images &amp; videos, max 10 MB each)</span>
+                            <span style="color:var(--dark1);font-weight:400;text-transform:none;font-size:0.875em;">(images &amp; videos, max 10 MB each)</span>
                         </label>
                         <input type="file" id="ticket-files" multiple accept="image/*,video/*" style="display:none">
                         <div class="ticket-dropzone" id="ticket-dropzone">

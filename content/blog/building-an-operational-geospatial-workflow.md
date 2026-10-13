@@ -35,11 +35,11 @@ The first step in the workflow is tiling of the area of interest. This is essent
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
   <figure style="margin: 0; display: flex; flex-direction: column;">
     <img src="/blog/img/adjacenttiles.png" alt="Adjacent Tiles" style="margin: 0;">
-    <figcaption style="margin: 0; padding-top: 20px; font-size: 0.9em; text-align: center;">Adjacent Tiles</figcaption>
+    <figcaption style="margin: 0; padding-top: 20px; font-size: 0.875em; text-align: center;">Adjacent Tiles</figcaption>
   </figure>
   <figure style="margin: 0; display: flex; flex-direction: column;">
     <img src="/blog/img/overlappingtiles.png" alt="Overlapping Tiles" style="margin: 0;">
-    <figcaption style="margin: 0; padding-top: 20px; font-size: 0.9em; text-align: center;">Overlapping Tiles</figcaption>
+    <figcaption style="margin: 0; padding-top: 20px; font-size: 0.875em; text-align: center;">Overlapping Tiles</figcaption>
   </figure>
 </div>
 
@@ -50,11 +50,11 @@ Tiles are defined within a [grid index system](https://academy.carto.com/working
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
   <figure style="margin: 0; display: flex; flex-direction: column;">
     <img src="/blog/img/ubersspatialindex.png" alt="Uber's Spatial Index" style="margin: 0;">
-    <figcaption style="margin: 0; padding-top: 20px; font-size: 0.9em; text-align: center;">H3: Uber's Hexagonal Hierarchical Spatial Index</figcaption>
+    <figcaption style="margin: 0; padding-top: 20px; font-size: 0.875em; text-align: center;">H3: Uber's Hexagonal Hierarchical Spatial Index</figcaption>
   </figure>
   <figure style="margin: 0; display: flex; flex-direction: column;">
     <img src="/blog/img/africa-10grid system.png" alt="Africa-10 Grid System" style="margin: 0;">
-    <figcaption style="margin: 0; padding-top: 20px; font-size: 0.9em; text-align: center;">"africa-10" grid system from odc-dscache used in Digital Earth Africa's Water Quality Annual Variables product</figcaption>
+    <figcaption style="margin: 0; padding-top: 20px; font-size: 0.875em; text-align: center;">"africa-10" grid system from odc-dscache used in Digital Earth Africa's Water Quality Annual Variables product</figcaption>
   </figure>
 </div>
 

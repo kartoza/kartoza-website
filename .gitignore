@@ -72,3 +72,6 @@ git.out
 git.sh
 claude.sh
 claude.out
+
+# Local scratch files
+tmp/
