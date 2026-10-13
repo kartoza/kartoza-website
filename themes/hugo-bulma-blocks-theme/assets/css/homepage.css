@@ -4605,10 +4605,10 @@ body:has(.blog-hero) .contextmenu {
 /* Blog Hero Section */
 .blog-hero {
     position: relative;
-    min-height: 60vh;
+    min-height: 32vh;
     display: flex;
     align-items: flex-end;
-    padding: 4rem 0;
+    padding: 2.5rem 0;
     overflow: hidden;
 }
 
@@ -4633,7 +4633,7 @@ body:has(.blog-hero) .contextmenu {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(56, 57, 57, 0.6);
+    background: rgba(56, 57, 57, 0.94);
 }
 
 .blog-hero .container {
@@ -19578,6 +19578,7 @@ a.playlist-card:hover .playlist-card-link {
    normal content, never drawn over text or controls — the section itself needs
    position:relative (below) to both anchor and clip it to its own box. */
 .hero-home,
+.blog-list-hero,
 .partners-bar,
 .products-section,
 .services-section,
@@ -19631,7 +19632,7 @@ a.playlist-card:hover .playlist-card-link {
 .site-edge-motif-top {
     --motif-thickness: 242px;
     position: absolute;
-    top: 20px;
+    top: 0;
     left: calc(50% - var(--motif-thickness) * 2.947);
     width: var(--motif-thickness);
     aspect-ratio: 198.45 / 1169.62;
@@ -19648,4 +19649,125 @@ a.playlist-card:hover .playlist-card-link {
     .site-edge-motif-top {
         --motif-thickness: 121px;
     }
+}
+
+/* ============================================
+   BLOG INDEX HERO
+   Flat white, left-aligned: eyebrow, title, subtitle, intro, counts.
+   ============================================ */
+.blog-list-hero {
+    background: var(--white);
+    border-bottom: 1px solid var(--light-bg-alt);
+    padding: 4.5rem 1.5rem 3.5rem;
+}
+
+.blog-list-hero-eyebrow {
+    color: var(--accent);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+}
+
+.blog-list-hero-title {
+    color: var(--text-dark);
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+.blog-list-hero-intro {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 40rem;
+    margin-bottom: 1.5rem;
+}
+
+.blog-list-hero-meta {
+    display: flex;
+    gap: 2rem;
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.blog-list-hero-meta strong {
+    color: var(--text-dark);
+    font-size: 1.5rem;
+    margin-right: 0.25rem;
+}
+
+@media screen and (max-width: 768px) {
+    .blog-list-hero {
+        padding: 3rem 1.5rem 2.5rem;
+    }
+
+    .blog-list-hero-title {
+        font-size: 2rem;
+    }
+
+    /* on phones the strip's lines would run through the title and label */
+    .blog-list-hero .site-edge-motif-top {
+        display: none;
+    }
+
+}
+
+/* Latest-article card on the right of the blog hero */
+.blog-list-hero-featured {
+    display: block;
+    background: var(--white);
+    border: 1px solid var(--light-bg-alt);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    color: inherit;
+    text-decoration: none;
+}
+
+.blog-list-hero-featured img {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.blog-list-hero-featured-body {
+    padding: 1.5rem;
+}
+
+.blog-list-hero-featured-label {
+    display: block;
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.blog-list-hero-featured-title {
+    color: var(--text-dark);
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+}
+
+.blog-list-hero-featured:hover .blog-list-hero-featured-title {
+    color: var(--primary);
+}
+
+.blog-list-hero-featured-summary {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+}
+
+.blog-list-hero-featured-meta {
+    color: var(--text-muted);
+    font-size: 0.875rem;
 }

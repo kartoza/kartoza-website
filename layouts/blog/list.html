@@ -1,15 +1,62 @@
 {{ partial "header.html" . }}
 {{ partial "menu.html" . }}
-{{ partial "banner.html" . }}
+
+{{/* Counts for the hero: reviewed articles only, the same set the filter tabs and grid use. */}}
+{{ $articleCount := 0 }}
+{{ $topics := slice }}
+{{ range .RegularPages }}
+    {{ if and .Params.reviewedBy .Params.reviewedDate }}
+        {{ $articleCount = add $articleCount 1 }}
+        {{ range .Params.tags }}{{ $topics = $topics | append . }}{{ end }}
+    {{ end }}
+{{ end }}
+{{ $topicCount := len ($topics | uniq) }}
+{{ $latest := false }}
+{{ range .RegularPages.ByDate.Reverse }}
+    {{ if and (not $latest) .Params.reviewedBy .Params.reviewedDate }}{{ $latest = . }}{{ end }}
+{{ end }}
+
+<section class="blog-list-hero">
+    <div class="site-edge-motif site-edge-motif-left" aria-hidden="true" style="width: 120px; opacity: 0.9;"></div>
+    <div class="site-edge-motif site-edge-motif-right" aria-hidden="true" style="width: 140px; opacity: 0.9;"></div>
+    {{/* The right-edge motif turned 90 degrees to run along the top, centred, as on the homepage. */}}
+    <div class="site-edge-motif-top" aria-hidden="true" style="--motif-thickness: 180px;"></div>
+    <div class="container">
+        <div class="columns is-vcentered blog-list-hero-columns">
+            <div class="column is-6 blog-list-hero-text">
+                <p class="blog-list-hero-eyebrow">Kartoza Blog</p>
+                <h1 class="blog-list-hero-title">{{ .Title }}</h1>
+                {{ with .Content }}<div class="blog-list-hero-intro">{{ . }}</div>{{ end }}
+                {{ if $articleCount }}
+                <p class="blog-list-hero-meta">
+                    <span><strong>{{ $articleCount }}</strong> articles</span>
+                    <span><strong>{{ $topicCount }}</strong> topics</span>
+                </p>
+                {{ end }}
+            </div>
+            {{ with $latest }}
+            {{ $thumb := .Params.thumbnail }}
+            {{ if or (not $thumb) (eq $thumb "/img/blog/placeholder.png") }}{{ $thumb = "/img/banner-blog.png" }}{{ end }}
+            <div class="column is-6">
+                <a class="blog-list-hero-featured" href="{{ .RelPermalink }}">
+                    <img src="{{ $thumb | absURL }}" alt="{{ .Title }}">
+                    <div class="blog-list-hero-featured-body">
+                        <span class="blog-list-hero-featured-label">Latest article</span>
+                        <h2 class="blog-list-hero-featured-title">{{ .Title }}</h2>
+                        <p class="blog-list-hero-featured-summary">{{ .Summary | plainify | truncate 140 }}</p>
+                        <span class="blog-list-hero-featured-meta">
+                            {{ .Date.Format "Jan 2, 2006" }}{{ with .Params.author }} &middot; {{ . }}{{ end }}
+                        </span>
+                    </div>
+                </a>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</section>
 
 <section class="section blog-section">
     <div class="container">
-        <!-- Blog Introduction -->
-        {{ if .Content }}
-        <div class="section-list-intro">
-            {{ .Content }}
-        </div>
-        {{ end }}
 
         <!-- Collect all unique tags from reviewed pages -->
         {{ $allTags := slice }}
