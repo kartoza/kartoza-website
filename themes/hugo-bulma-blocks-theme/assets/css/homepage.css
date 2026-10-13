@@ -19621,3 +19621,31 @@ a.playlist-card:hover .playlist-card-link {
         display: none;
     }
 }
+
+/* The right-edge motif rotated 90deg so it runs along the top of a section — a single
+   copy, centred. Built as an upright tile (--motif-thickness wide, SVG proportions tall)
+   and rotated -90deg about its top-left corner, so its decorated edge faces down and the
+   edge that bleeds off the page sits at the top. Once rotated its length is
+   thickness x 5.894 (the SVG is 198.45 x 1169.62), hence the 2.947 (half of that) in
+   `left` to centre it. */
+.site-edge-motif-top {
+    --motif-thickness: 242px;
+    position: absolute;
+    top: 20px;
+    left: calc(50% - var(--motif-thickness) * 2.947);
+    width: var(--motif-thickness);
+    aspect-ratio: 198.45 / 1169.62;
+    background-image: url('/img/geohosting-edge-right.svg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    transform-origin: top left;
+    transform: translateY(var(--motif-thickness)) rotate(-90deg);
+    pointer-events: none;
+    z-index: -1;
+}
+
+@media screen and (max-width: 768px) {
+    .site-edge-motif-top {
+        --motif-thickness: 121px;
+    }
+}
