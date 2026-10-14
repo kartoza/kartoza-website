@@ -15228,115 +15228,6 @@ a.team-member-clickable:hover .team-member-view-profile {
     }
 }
 
-/* ============================================
-   YOUTUBE CHANNELS PAGE
-   ============================================ */
-
-/* YouTube Hero */
-.youtube-hero {
-    position: relative;
-    padding: 6rem 0 4rem;
-    background: #0d3a54;
-    overflow: hidden;
-}
-
-.youtube-hero-bg {
-    position: absolute;
-    inset: 0;
-}
-
-.youtube-hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: url('/img/kartoza-brand-pattern.svg');
-    background-size: 400px;
-    opacity: 0.05;
-}
-
-.youtube-hero-content {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-}
-
-.youtube-hero-tagline {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: rgba(176, 71, 60, 0.2);
-    color: #ff4444;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-}
-
-.youtube-hero-tagline i {
-    font-size: 1rem;
-}
-
-.youtube-hero-title {
-    color: var(--white);
-    font-size: 3rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-}
-
-.youtube-hero-subtitle {
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 1.25rem;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.youtube-hero-icon {
-    width: 100px;
-    height: 100px;
-    background: #B0473C;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-    font-size: 3rem;
-    color: white;
-    box-shadow: 0 10px 18px rgba(176, 71, 60, 0.17);
-}
-
-.youtube-hero-pattern {
-    position: absolute;
-    inset: 0;
-    background: url('/img/kartoza-brand-pattern.svg');
-    background-size: cover;
-    opacity: 0.08;
-}
-
-.youtube-hero-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 2rem;
-    flex-wrap: wrap;
-}
-
-.youtube-hero-actions .button.is-danger {
-    background: #B0473C;
-    border: none;
-}
-
-.youtube-hero-actions .button.is-danger:hover {
-    background: #B0473C;
-}
-
-.youtube-hero-actions .button.is-white {
-    color: var(--primary-dark);
-}
-
-.youtube-hero-actions .button.is-white:hover {
-    background: rgba(255, 255, 255, 0.9);
-}
-
 /* YouTube Intro */
 .youtube-intro {
     background: var(--light-bg);
@@ -15356,7 +15247,7 @@ a.team-member-clickable:hover .team-member-view-profile {
 .youtube-intro-icon {
     width: 70px;
     height: 70px;
-    background: #B0473C;
+    background: var(--primary);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -15399,7 +15290,7 @@ a.team-member-clickable:hover .team-member-view-profile {
 .channel-thumbnail {
     position: relative;
     height: 200px;
-    background: #1a1a1a;
+    background: var(--text-dark);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15414,7 +15305,7 @@ a.team-member-clickable:hover .team-member-view-profile {
 
 .channel-thumbnail-placeholder {
     font-size: 4rem;
-    color: #B0473C;
+    color: var(--primary);
 }
 
 .channel-play-overlay {
@@ -15485,11 +15376,11 @@ a.team-member-clickable:hover .team-member-view-profile {
 }
 
 .channel-actions .button.is-danger {
-    background: #B0473C;
+    background: var(--primary);
 }
 
 .channel-actions .button.is-danger:hover {
-    background: #B0473C;
+    background: var(--primary);
 }
 
 /* Playlists Section */
@@ -15507,6 +15398,7 @@ a.team-member-clickable:hover .team-member-view-profile {
 
 /* Playlist Card - Redesigned for interactive cards */
 a.playlist-card {
+    position: relative;
     display: flex;
     align-items: flex-start;
     gap: 1.25rem;
@@ -15522,8 +15414,8 @@ a.playlist-card {
 
 a.playlist-card:hover {
     box-shadow: var(--shadow-lg);
-    border-left-color: #B0473C;
-    background: rgba(176, 71, 60, 0.02);
+    border-left-color: var(--primary);
+    background: var(--light-bg);
 }
 
 .playlist-card-icon {
@@ -15541,7 +15433,7 @@ a.playlist-card:hover {
 }
 
 a.playlist-card:hover .playlist-card-icon {
-    background: #B0473C;
+    background: var(--primary);
 }
 
 .playlist-card-content {
@@ -15558,11 +15450,11 @@ a.playlist-card:hover .playlist-card-icon {
 }
 
 a.playlist-card:hover .playlist-card-title {
-    color: #B0473C;
+    color: var(--primary);
 }
 
 .playlist-card-description {
-    color: var(--text-light);
+    color: var(--text-muted);
     font-size: 0.875rem;
     line-height: 1.6;
     margin-bottom: 0.75rem;
@@ -15574,25 +15466,23 @@ a.playlist-card:hover .playlist-card-title {
     gap: 0.4rem;
     font-size: 0.875rem;
     color: var(--text-muted);
-    background: var(--gray-100);
-    padding: 0.25rem 0.75rem;
-    border-radius: 4px;
 }
 
 .playlist-card-count i {
-    color: #B0473C;
+    color: var(--primary);
 }
 
 .playlist-card-action {
-    display: flex;
-    align-items: center;
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
 }
 
 .playlist-card-link {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: #B0473C;
+    color: var(--primary);
     font-weight: 600;
     font-size: 0.875rem;
     white-space: nowrap;
@@ -15652,14 +15542,14 @@ a.playlist-card:hover .playlist-card-link {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: #B0473C;
+    color: var(--primary);
     font-weight: 600;
     font-size: 1rem;
     transition: var(--transition-fast);
 }
 
 .playlist-link:hover {
-    color: #B0473C;
+    color: var(--primary);
 }
 
 /* YouTube Featured Section */
@@ -15693,7 +15583,7 @@ a.playlist-card:hover .playlist-card-link {
 
 /* YouTube CTA */
 .youtube-cta {
-    background: #1a1a1a;
+    background: var(--text-dark);
     padding: 4rem 0;
     position: relative;
 }
@@ -15705,7 +15595,7 @@ a.playlist-card:hover .playlist-card-link {
     left: 0;
     right: 0;
     height: 4px;
-    background: #B0473C;
+    background: var(--primary);
 }
 
 .youtube-cta-content {
@@ -15717,7 +15607,7 @@ a.playlist-card:hover .playlist-card-link {
 .youtube-cta-icon {
     width: 80px;
     height: 80px;
-    background: #B0473C;
+    background: var(--primary);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -15745,36 +15635,6 @@ a.playlist-card:hover .playlist-card-link {
     gap: 1rem;
 }
 
-.youtube-cta-buttons .button.is-danger {
-    background: #B0473C;
-    border: none;
-}
-
-.youtube-cta-buttons .button.is-danger:hover {
-    background: #B0473C;
-    box-shadow: 0 8px 11px rgba(176, 71, 60, 0.17);
-}
-
-/* Section Tagline */
-.section-tagline {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--primary-light);
-    color: white;
-    padding: 0.4rem 1rem;
-    border-radius: 4px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 1rem;
-}
-
-.section-tagline i {
-    font-size: 0.75rem;
-}
-
 /* YouTube Page Responsive */
 @media screen and (max-width: 992px) {
     .youtube-playlists-grid {
@@ -15783,33 +15643,6 @@ a.playlist-card:hover .playlist-card-link {
 }
 
 @media screen and (max-width: 768px) {
-    .youtube-hero {
-        padding: 4rem 0 3rem;
-    }
-
-    .youtube-hero-icon {
-        width: 80px;
-        height: 80px;
-        font-size: 2rem;
-    }
-
-    .youtube-hero-title {
-        font-size: 2rem;
-    }
-
-    .youtube-hero-subtitle {
-        font-size: 1rem;
-    }
-
-    .youtube-hero-actions {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .youtube-hero-actions .button {
-        width: 100%;
-        max-width: 280px;
-    }
 
     .youtube-channels-grid {
         grid-template-columns: 1fr;
@@ -15862,9 +15695,6 @@ a.playlist-card:hover .playlist-card-link {
 }
 
 @media screen and (max-width: 480px) {
-    .youtube-hero-title {
-        font-size: 1.5rem;
-    }
 
     .youtube-cta-title {
         font-size: 1.5rem;
@@ -17973,75 +17803,6 @@ a.playlist-card:hover .playlist-card-link {
     border-color: var(--white);
 }
 
-/* Plugins List Hero */
-.plugins-list-hero {
-    padding: 8rem 0 5rem;
-    text-align: center;
-}
-
-.plugins-hero-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.plugins-hero-icon {
-    width: 100px;
-    height: 100px;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 2rem;
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-.plugins-hero-icon i {
-    font-size: 2rem;
-    color: var(--white);
-}
-
-.plugins-hero-title {
-    font-size: 3.5rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.plugins-hero-subtitle {
-    font-size: 1.25rem;
-    opacity: 0.95;
-    margin-bottom: 3rem;
-}
-
-.plugins-hero-stats {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    flex-wrap: wrap;
-}
-
-.hero-stat {
-    text-align: center;
-}
-
-.hero-stat-value {
-    display: block;
-    font-size: 2rem;
-    font-weight: 800;
-    line-height: 1;
-    margin-bottom: 0.5rem;
-}
-
-.hero-stat-label {
-    display: block;
-    font-size: 0.875rem;
-    opacity: 0.8;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
 /* Responsive */
 @media screen and (max-width: 1024px) {
     .plugin-hero-content {
@@ -18069,10 +17830,6 @@ a.playlist-card:hover .playlist-card-link {
         padding: 4rem 0 3rem;
     }
 
-    .plugins-list-hero {
-        padding: 5rem 0 3rem;
-    }
-
     .plugin-hero-icon {
         width: 80px;
         height: 80px;
@@ -18086,21 +17843,9 @@ a.playlist-card:hover .playlist-card-link {
         font-size: 2rem;
     }
 
-    .plugins-hero-title {
-        font-size: 2rem;
-    }
-
     .plugin-hero-subtitle,
     .plugins-hero-subtitle {
         font-size: 1rem;
-    }
-
-    .plugins-hero-stats {
-        gap: 1.5rem;
-    }
-
-    .hero-stat-value {
-        font-size: 1.5rem;
     }
 
     .plugin-hero-ctas {
@@ -19508,9 +19253,18 @@ a.playlist-card:hover .playlist-card-link {
 
 .page-hero-actions {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 1rem;
     margin-top: 1.5rem;
+}
+
+/* Buttons in a page hero (YouTube): same size as the homepage hero buttons */
+.page-hero-actions .button {
+    height: 50px;
+    padding: 0 1.9rem;
+    font-size: 1.25rem;
+    margin-right: 0;
 }
 
 .page-hero-note {
@@ -19804,5 +19558,17 @@ a.playlist-card:hover .playlist-card-link {
     .blog-article-content ul li,
     .blog-article-content ol li {
         font-size: 1rem;
+    }
+}
+
+/* YouTube page sections set `padding: Nrem 0`, so below the fixed container width their content
+   touched the screen edges. */
+@media screen and (max-width: 1215px) {
+    .youtube-intro,
+    .youtube-playlists-section,
+    .youtube-featured-section,
+    .youtube-cta {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
     }
 }

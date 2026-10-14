@@ -1,28 +1,25 @@
 {{ partial "header.html" . }}
 {{ partial "menu.html" . }}
 
-<!-- YouTube Hero Section -->
-<section class="youtube-hero">
-    <div class="youtube-hero-bg">
-        <div class="youtube-hero-pattern"></div>
-        <div class="youtube-hero-overlay"></div>
-    </div>
+<!-- YouTube hero: the uniform flat page hero (see partials/banner.html), with the channel buttons -->
+<section class="blog-list-hero page-hero">
+    <div class="site-edge-motif site-edge-motif-left" aria-hidden="true" style="top: 60px; width: 80px; opacity: 0.9;"></div>
+    <div class="site-edge-motif site-edge-motif-right" aria-hidden="true" style="width: 140px; opacity: 0.9;"></div>
+    <div class="site-edge-motif-top" aria-hidden="true" style="--motif-thickness: 180px;"></div>
     <div class="container">
-        <div class="youtube-hero-content">
-            <div class="youtube-hero-icon">
-                <i class="fab fa-youtube"></i>
-            </div>
-            <h1 class="youtube-hero-title">{{ .Title }}</h1>
-            <p class="youtube-hero-subtitle">{{ .Params.subtitle }}</p>
-            <div class="youtube-hero-actions">
-                <a href="{{ .Params.channelUrl }}" target="_blank" rel="noopener" class="button is-danger is-medium">
-                    <span class="icon"><i class="fab fa-youtube"></i></span>
-                    <span>Visit Channel</span>
-                </a>
-                <a href="{{ .Params.subscribeUrl }}" target="_blank" rel="noopener" class="button is-white is-medium">
-                    <span class="icon"><i class="fas fa-bell"></i></span>
-                    <span>Subscribe</span>
-                </a>
+        <div class="columns is-vcentered">
+            <div class="column is-7 blog-list-hero-text">
+                <p class="blog-list-hero-eyebrow">{{ .Params.LabelText | default "Videos" }}</p>
+                <h1 class="blog-list-hero-title">{{ .Title }}</h1>
+                {{ with .Params.subtitle }}<div class="blog-list-hero-intro"><p>{{ . }}</p></div>{{ end }}
+                <div class="page-hero-actions">
+                    <a href="{{ .Params.channelUrl }}" target="_blank" rel="noopener" class="button is-primary">
+                        <span>Visit Channel</span>
+                    </a>
+                    <a href="{{ .Params.subscribeUrl }}" target="_blank" rel="noopener" class="button is-outlined is-primary">
+                        <span>Subscribe</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -43,10 +40,12 @@
 <!-- Playlists Grid -->
 <section class="section youtube-playlists-section">
     <div class="container">
-        <div class="section-header has-text-centered">
-            <span class="section-tagline"><i class="fas fa-list"></i> Video Collections</span>
-            <h2 class="title is-2">Our Playlists</h2>
-            <p class="subtitle">Curated collections organised by topic</p>
+        <div class="section-heading">
+            <div class="section-heading-main">
+                <span class="section-heading-eyebrow">Video collections</span>
+                <h2 class="section-heading-title">Our Playlists</h2>
+            </div>
+            <p class="section-heading-sub">Curated collections organised by topic</p>
         </div>
 
         <div class="youtube-playlists-grid">
@@ -78,10 +77,12 @@
 <!-- Featured Video Section -->
 <section class="section youtube-featured-section">
     <div class="container">
-        <div class="section-header has-text-centered">
-            <span class="section-tagline"><i class="fas fa-star"></i> Featured</span>
-            <h2 class="title is-2">Latest from Kartoza</h2>
-            <p class="subtitle">Check out our recent content</p>
+        <div class="section-heading">
+            <div class="section-heading-main">
+                <span class="section-heading-eyebrow">Featured</span>
+                <h2 class="section-heading-title">Latest from Kartoza</h2>
+            </div>
+            <p class="section-heading-sub">Check out our recent content</p>
         </div>
 
         <div class="youtube-featured-embed">
@@ -117,11 +118,11 @@
             <h2 class="youtube-cta-title">Never Miss an Update</h2>
             <p class="youtube-cta-text">Subscribe to our channel and turn on notifications to stay updated with the latest geospatial tutorials, webinars, and news.</p>
             <div class="youtube-cta-buttons">
-                <a class="button is-danger is-large" href="{{ .Params.subscribeUrl }}" target="_blank" rel="noopener">
+                <a class="button is-primary is-large" href="{{ .Params.subscribeUrl }}" target="_blank" rel="noopener">
                     <span class="icon"><i class="fab fa-youtube"></i></span>
                     <span>Subscribe Now</span>
                 </a>
-                <a class="button is-light is-large" href="{{ .Params.channelUrl }}" target="_blank" rel="noopener">
+                <a class="button is-outlined is-white is-large" href="{{ .Params.channelUrl }}" target="_blank" rel="noopener">
                     <span class="icon"><i class="fas fa-external-link-alt"></i></span>
                     <span>View All Videos</span>
                 </a>
