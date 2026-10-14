@@ -4776,6 +4776,9 @@ body:has(.blog-hero) .contextmenu {
    ============================================ */
 
 /* Headings with gradient accents */
+/* Many posts and projects write their section headings as `# Heading` (an h1). Without a rule they fell
+   back to the 16px browser default, smaller than the 20px body text, so h1 shares the h2 style. */
+.blog-article-content h1,
 .blog-article-content h2 {
     font-size: 2rem;
     font-weight: 800;
@@ -4786,6 +4789,7 @@ body:has(.blog-hero) .contextmenu {
     letter-spacing: -0.5px;
 }
 
+.blog-article-content h1::after,
 .blog-article-content h2::after {
     content: '';
     position: absolute;
@@ -4797,7 +4801,8 @@ body:has(.blog-hero) .contextmenu {
     border-radius: 2px;
 }
 
-.blog-article-content h2:first-of-type {
+.blog-article-content h2:first-of-type,
+.blog-article-content > h1:first-child {
     margin-top: 0;
 }
 
