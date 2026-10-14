@@ -50,7 +50,7 @@ The interactions include:
   11. Auto plot region - Selecting cameras within an instance or region and displaying a visible polygon. Users should be able to save, edit, and delete the region of interest from the auto-plot.
   12. The ability to edit and delete a region of interest.
 
-![https://kartoza.com/files/EVS_fireweb_5.png](https://kartoza.com/files/EVS_fireweb_5.png)   ![https://kartoza.com/files/EVS_fireweb_6.png](https://kartoza.com/files/EVS_fireweb_6.png)
+![/files/EVS_fireweb_5.png](/files/EVS_fireweb_5.png)   ![/files/EVS_fireweb_6.png](/files/EVS_fireweb_6.png)
 
 ## Client
 

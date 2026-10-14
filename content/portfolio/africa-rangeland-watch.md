@@ -43,7 +43,7 @@ Specifically, the development focused on:
   2. Tool functionality and data integration, such as efficient Google Earth Engine (GEE) code, integration of relevant satellite imagery, and inclusion of user profiles for ground-based data interaction.
   3. User guidance and best practices for tool application, including a user guidance document and optimal tool performance.
 
-![https://kartoza.com/files/ARW_map.png](https://kartoza.com/files/ARW_map.png)
+![/files/ARW_map.png](/files/ARW_map.png)
 
 ## Client
 

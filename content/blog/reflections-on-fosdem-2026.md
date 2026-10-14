@@ -24,7 +24,7 @@ This was my first time attending a FOSDEM conference and only my second time to 
   
 
 
-It was great to be able to attend a community event again. I attended the event with my colleague Dimas Tri Ciputra who gave a very polished presentation on BIMS, the [Biodiversity Information Management System](<https://kartoza.com/bims>).
+It was great to be able to attend a community event again. I attended the event with my colleague Dimas Tri Ciputra who gave a very polished presentation on BIMS, the [Biodiversity Information Management System](</bims>).
 
   
 

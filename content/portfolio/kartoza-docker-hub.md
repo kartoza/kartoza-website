@@ -39,7 +39,7 @@ Our preferred means of packaging and deploying systems is with Docker containers
 
 When there is a change in the Docker code in the [GitHub repositories listed on Docker Hub](<https://hub.docker.com/search?q=kartoza>), Docker Hub picks them up and updates the images.
 
-![](https://kartoza.com/files/C3HzwGI.png)
+![](/files/C3HzwGI.png)
 
 ## Technologies
 

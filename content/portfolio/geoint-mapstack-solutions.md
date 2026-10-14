@@ -68,7 +68,7 @@ This project focused on two key areas for MapStack: foundational improvements fo
   3. **Increased Efficiency:** Automated analytics and streamlined deployment processes will reduce manual effort, accelerating content generation and client onboarding.
   4. **Improved Data Management:** Strategic data sharing and isolation methods will ensure secure and flexible data handling for multi-tenant environments.
 
-![](https://kartoza.com/files/Dojk4KO.png)
+![](/files/Dojk4KO.png)
 
 ## Source Code
 

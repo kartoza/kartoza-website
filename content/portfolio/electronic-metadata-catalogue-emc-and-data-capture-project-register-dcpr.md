@@ -33,7 +33,7 @@ The EMC and DCPR are components of the South African Spatial Data Infrastructure
 
 The only limit on what technology could be utilised to develop the systems was that the solution needed to be hosted on DALRRD’s Windows-based infrastructure. Kartoza developed a CKAN-based solution to the project.
 
-![https://kartoza.com/files/EMC_browser.png](https://kartoza.com/files/EMC_browser.png)
+![/files/EMC_browser.png](/files/EMC_browser.png)
 
 ## Technologies
 

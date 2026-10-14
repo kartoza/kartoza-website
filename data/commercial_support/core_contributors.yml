@@ -37,7 +37,7 @@
 - name: "Kartoza (Pty) Ltd."
   image: "img/contributors/kartoza.png"
   width: "200 px"
-  url: "http://kartoza.com"
+  url: "/"
   description: "(with offices in Stellenbosch and Johannesburg, South Africa). We provide commercial support and training for QGIS Desktop and Server and carry out feature development for QGIS on a contract basis.  We also develop plugins in Python and C++ for QGIS.  **Note:** Kartoza was formerly known as Linfiniti Consulting."
 
 - name: "Lutra Consulting"

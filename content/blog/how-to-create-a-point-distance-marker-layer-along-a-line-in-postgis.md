@@ -61,4 +61,4 @@ How come there are just a few markers when zoomed out and then one every km when
 
 [![](/img/blog/erpnext/screen_shot_2018-08-09_at_21.42.53.png)](<http://maps.kartoza.com/CapeTownMarathon/>)
 
-See [Part 2: Adding elevation to a line from a DEM in PostGIS and maintaining accurate measures](<http://kartoza.com/en/blog/adding-elevation-to-a-line-from-a-dem-in-postgis-and-creating-accurate-measures/>)
+See [Part 2: Adding elevation to a line from a DEM in PostGIS and maintaining accurate measures](</en/blog/adding-elevation-to-a-line-from-a-dem-in-postgis-and-creating-accurate-measures/>)

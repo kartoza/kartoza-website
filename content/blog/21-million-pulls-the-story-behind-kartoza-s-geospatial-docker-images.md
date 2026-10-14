@@ -59,11 +59,11 @@ There are plenty of Docker images that wrap a piece of software and call it a da
 
 The pull count tells part of the story, but the diversity of users is what makes it interesting.
 
-Kartoza's own [geospatial hosting platform](<https://kartoza.com/blog/geospatial-hosting-taking-the-pain-out-of-hosting-your-gis-applications/>) runs on these images. We migrated from around 70 hand-managed servers to a Kubernetes-based infrastructure built on the same containers we publish publicly. Our hosting customers get the benefit of images that we use and trust ourselves.
+Kartoza's own [geospatial hosting platform](</blog/geospatial-hosting-taking-the-pain-out-of-hosting-your-gis-applications/>) runs on these images. We migrated from around 70 hand-managed servers to a Kubernetes-based infrastructure built on the same containers we publish publicly. Our hosting customers get the benefit of images that we use and trust ourselves.
 
 Beyond that, the images show up in places we sometimes only learn about after the fact: university GIS courses where students need a local PostGIS instance in minutes, humanitarian organisations deploying GeoServer in field offices with limited connectivity, startups building location-based services who do not want to manage database infrastructure, and CI/CD pipelines where teams run spatial tests against a disposable PostGIS container on every pull request.
 
-The [Docker OSM image](<https://kartoza.com/blog/creating-a-live-topic-specific-mirror-of-openstreetmap-in-postgis/>) in particular has found a niche with teams who need a local, continuously updated mirror of OpenStreetMap data without relying on external APIs.
+The [Docker OSM image](</blog/creating-a-live-topic-specific-mirror-of-openstreetmap-in-postgis/>) in particular has found a niche with teams who need a local, continuously updated mirror of OpenStreetMap data without relying on external APIs.
 
 ## The Maintenance Burden
 
@@ -77,8 +77,8 @@ If you are new to the images, the quickest way in:
 
     docker pull kartoza/postgis:16-3.4
 
-Browse all images on [Docker Hub](<https://hub.docker.com/search?q=kartoza>) or visit our [Docker images page](<https://kartoza.com/docker/>) for documentation, quick-start guides, and Compose examples for each image.
+Browse all images on [Docker Hub](<https://hub.docker.com/search?q=kartoza>) or visit our [Docker images page](</docker/>) for documentation, quick-start guides, and Compose examples for each image.
 
-If your team needs to go deeper, our [Enterprise GIS training course](<https://kartoza.com/training-courses/enterprise-gis/>) covers the full PostGIS, GeoServer, and QGIS Server stack in a hands-on, five-day format. And if you would rather skip the self-hosting entirely, our [managed hosting service](<https://kartoza.com/hosting/>) deploys these same images with backups, monitoring, and support included.
+If your team needs to go deeper, our [Enterprise GIS training course](</training-courses/enterprise-gis/>) covers the full PostGIS, GeoServer, and QGIS Server stack in a hands-on, five-day format. And if you would rather skip the self-hosting entirely, our [managed hosting service](</hosting/>) deploys these same images with backups, monitoring, and support included.
 
 QGIS is a community effort, and so is the infrastructure around it. These images exist because people built, tested, reported bugs, and contributed back. Twenty-one million pulls later, the community is very much alive. Install one today and let us know how it goes.

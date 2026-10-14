@@ -115,7 +115,7 @@ Outside of the conference, I had a wonderful time exploring Bratislava with Selm
 
 ## Thank You to the QGIS Community
 
-I want to extend my heartfelt thanks to the [Slovak QGIS User Group](<https://qgis.sk/>) for organizing such a fantastic event, to [QGIS](<https://qgis.org/>) for funding us, and to [Tim Sutton](<https://www.linkedin.com/in/tim-sutton-8038661b/>) and the [Kartoza Team](<https://kartoza.com/the_team>) for their support. It was an unforgettable experience, and I look forward to contributing further to the QGIS project in the future.
+I want to extend my heartfelt thanks to the [Slovak QGIS User Group](<https://qgis.sk/>) for organizing such a fantastic event, to [QGIS](<https://qgis.org/>) for funding us, and to [Tim Sutton](<https://www.linkedin.com/in/tim-sutton-8038661b/>) and the [Kartoza Team](</the_team>) for their support. It was an unforgettable experience, and I look forward to contributing further to the QGIS project in the future.
 
   
 

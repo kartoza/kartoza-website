@@ -13,7 +13,7 @@ thumbnail: /img/blog/placeholder.png
 title: Mocking Requests with Responses
 ---
 
-Sometimes, making a request to third-party service is a requirement in our code. And when we test it, those requests could affect the test result i.e. when the service is down, hence causing a test error. It's also a bad idea if our request incurs a cost, like when our code requests a subscription to a third party. If you have read my blog ["Mocking Requests with requests_mock"](<https://kartoza.com/en/blog/mocking-request-with-requests_mock/>), then you would know that all those issues can be solved by mocking our requests in tests using [requests_mock](<https://requests-mock.readthedocs.io/en/latest/>). This blog will show you an alternative to  _requests_mock_ , the one that is simpler to use yet offers more features: [responses](<https://pypi.org/project/responses/>). For ease of understanding, the return value from requests will be called "response" and the library that we use is "_responses_ " (i.e. an extra "s" in "responses").
+Sometimes, making a request to third-party service is a requirement in our code. And when we test it, those requests could affect the test result i.e. when the service is down, hence causing a test error. It's also a bad idea if our request incurs a cost, like when our code requests a subscription to a third party. If you have read my blog ["Mocking Requests with requests_mock"](</en/blog/mocking-request-with-requests_mock/>), then you would know that all those issues can be solved by mocking our requests in tests using [requests_mock](<https://requests-mock.readthedocs.io/en/latest/>). This blog will show you an alternative to  _requests_mock_ , the one that is simpler to use yet offers more features: [responses](<https://pypi.org/project/responses/>). For ease of understanding, the return value from requests will be called "response" and the library that we use is "_responses_ " (i.e. an extra "s" in "responses").
 
 ## Installation
 
@@ -21,7 +21,7 @@ Simpy do `pip install responses`.
 
 ## Basic Usage
 
-We will test our weather subscription code in ["Mocking Requests with requests_mock"](<https://kartoza.com/en/blog/mocking-request-with-requests_mock/>), and update our test in my requests_mock blog to use  _responses_. First, `test_create_weather_subscription_success` can be updated to
+We will test our weather subscription code in ["Mocking Requests with requests_mock"](</en/blog/mocking-request-with-requests_mock/>), and update our test in my requests_mock blog to use  _responses_. First, `test_create_weather_subscription_success` can be updated to
     
     
     @responses.activate

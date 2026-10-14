@@ -21,7 +21,7 @@ Kartoza staff members Admire and Eli recently got the chance to attend the annua
   
 
 
-Admire Nyakudya, one of Kartoza's resident Python experts, gave a well-attended talk on [Leveraging Python in Geospatial Applications](<https://za.pycon.org/talks/26-leveraging-python-in-geospatial-applications/>). Admire discussed and provided some practical demonstrations on how he uses Python during development and in the geospatial industry to automate repetitive tasks and create custom solutions to resolve challenges related to working in remote environments. Read more about Admire's ground-breaking work here: [Kartoza at PyConZA Durban 2023](<https://kartoza.com/blog/python/kartoza-at-pyconza-durban-2023>).
+Admire Nyakudya, one of Kartoza's resident Python experts, gave a well-attended talk on [Leveraging Python in Geospatial Applications](<https://za.pycon.org/talks/26-leveraging-python-in-geospatial-applications/>). Admire discussed and provided some practical demonstrations on how he uses Python during development and in the geospatial industry to automate repetitive tasks and create custom solutions to resolve challenges related to working in remote environments. Read more about Admire's ground-breaking work here: [Kartoza at PyConZA Durban 2023](</blog/python/kartoza-at-pyconza-durban-2023>).
 
   
 

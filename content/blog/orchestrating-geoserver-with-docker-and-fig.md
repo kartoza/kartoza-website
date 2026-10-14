@@ -25,7 +25,7 @@ In this article I will detail how to set up a simple orchestrated system of dock
   
 
 
-We assume that you already have a working knowledge of GeoServer and PostGIS in this article. Docker is a tool that allows you to run applications in containers which are isolated from the host system. One of the great things about docker is that you can publish pre-made recipes for applications in their central repository. At [Kartoza.com](<http://kartoza.com/>) we publish a number of docker containers on at **<https://registry.hub.docker.com/repos/kartoza/>****.**
+We assume that you already have a working knowledge of GeoServer and PostGIS in this article. Docker is a tool that allows you to run applications in containers which are isolated from the host system. One of the great things about docker is that you can publish pre-made recipes for applications in their central repository. At [Kartoza.com](</>) we publish a number of docker containers on at **<https://registry.hub.docker.com/repos/kartoza/>****.**
 
   
 

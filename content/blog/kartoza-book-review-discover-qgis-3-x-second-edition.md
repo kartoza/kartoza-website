@@ -37,7 +37,7 @@ It was fantastic to attend the session given by Kurt at the FOSS4G 2022 conferen
 
 ### Field Data Collection
 
-This chapter focuses on obtaining data to use in QGIS through MerginMaps, one of the main data collection apps next to QField. Kartoza has explored the use of this system in a past post entitled [The Kartoza Intern's Journey Creating a Field Survey with QGIS, Mergin and Input](<https://kartoza.com/blog/qgis/the-kartoza-interns-journey-creating-a-field-survey-with-qgis-mergin-and-input>). The chapter takes the user step by step through creating a QGIS project with study area and base maps in which to create and visualise data, creating usable survey layers and data collection forms as well as collecting data using various plugins and cloud services to sync data easily from mobile devices to the main project.
+This chapter focuses on obtaining data to use in QGIS through MerginMaps, one of the main data collection apps next to QField. Kartoza has explored the use of this system in a past post entitled [The Kartoza Intern's Journey Creating a Field Survey with QGIS, Mergin and Input](</blog/qgis/the-kartoza-interns-journey-creating-a-field-survey-with-qgis-mergin-and-input>). The chapter takes the user step by step through creating a QGIS project with study area and base maps in which to create and visualise data, creating usable survey layers and data collection forms as well as collecting data using various plugins and cloud services to sync data easily from mobile devices to the main project.
 
 ### Working with Labels and Annotations
 

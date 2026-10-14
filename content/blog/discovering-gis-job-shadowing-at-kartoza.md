@@ -95,4 +95,4 @@ We are excited to see where Shakira’s journey in GIS takes her and wish her al
 
 We are dedicated to nurturing the next generation of GIS professionals. Whether through job shadowing for high school students or internships for undergraduates, we aim to provide valuable learning experiences that inspire and equip students for future success in the field of GIS. By fostering early exposure and education, we hope to contribute to a thriving GIS community and a better world for all.
 
-Are you a parent with a high schooler interested in the field of GIS? Or if you know a high school student interested in gaining job shadowing experience in the field, feel free to contact Kartoza via the [Contact Us](<https://kartoza.com/contact-us/new>) form on our website.
+Are you a parent with a high schooler interested in the field of GIS? Or if you know a high school student interested in gaining job shadowing experience in the field, feel free to contact Kartoza via the [Contact Us](</contact-us/new>) form on our website.

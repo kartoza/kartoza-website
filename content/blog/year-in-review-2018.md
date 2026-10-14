@@ -46,7 +46,7 @@ A highlight of the event was the the awarding of Honorary QGIS Project Steering 
   
 
 
-The Understanding Risk (UR) Forum was another milestone event of 2018. This took place in May in Mexico City. Kartoza shared some of the things we learnt using and building open source geospatial solutions for disaster risk reduction (DRR). For the last six years Kartoza has been actively developing tools like [InaSAFE](<http://inasafe.org/>) to support DRR efforts.. Kartoza was represented at the event by co-founder Gavin Fleming and Ismail Sunni. Read more about this event on our [blog article](<http://kartoza.com/blog/qgis-inasafe-openstreetmap-and-geonode-in-understanding-risk-2018/>).
+The Understanding Risk (UR) Forum was another milestone event of 2018. This took place in May in Mexico City. Kartoza shared some of the things we learnt using and building open source geospatial solutions for disaster risk reduction (DRR). For the last six years Kartoza has been actively developing tools like [InaSAFE](<http://inasafe.org/>) to support DRR efforts.. Kartoza was represented at the event by co-founder Gavin Fleming and Ismail Sunni. Read more about this event on our [blog article](</blog/qgis-inasafe-openstreetmap-and-geonode-in-understanding-risk-2018/>).
 
   
 
@@ -167,7 +167,7 @@ The MyFarmWeb app is available only to customers of AgriTechnovation.
 
 ![](/img/blog/erpnext/gis_box.png)
 
-We launched GISBOX a few months ago, which is an on-premise, managed open source GIS server packed with ready-to use data. Check out more info on this exciting product [here](<http://kartoza.com/shop/product/gis-box/>).
+We launched GISBOX a few months ago, which is an on-premise, managed open source GIS server packed with ready-to use data. Check out more info on this exciting product [here](</shop/product/gis-box/>).
 
   
 
@@ -176,7 +176,7 @@ We launched GISBOX a few months ago, which is an on-premise, managed open source
 
 ![](/img/blog/erpnext/trainingcourse.jpg)
 
-We presented several courses throughout the year covering various FOSS GIS technologies. In the image above, Admire presents a QGIS course at our Johannesburg office. See our upcoming 2019 courses [here](<http://kartoza.com/training-courses/>).
+We presented several courses throughout the year covering various FOSS GIS technologies. In the image above, Admire presents a QGIS course at our Johannesburg office. See our upcoming 2019 courses [here](</training-courses/>).
 
 ### Limosa Open Source GIS Support
 

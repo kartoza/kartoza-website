@@ -38,11 +38,11 @@ Kartoza’s role in this collaboration focused on:
 
 Through these enhancements, Kartoza contributed to empowering African researchers and decision-makers with **practical, locally relevant, and forward-looking tools** to address biodiversity loss on the continent.
 
-![](https://kartoza.com/files/aDmairO.png)
+![](/files/aDmairO.png)
 
-![](https://kartoza.com/files/tb3RRts.png)
+![](/files/tb3RRts.png)
 
-![](https://kartoza.com/files/0208DdG.png)
+![](/files/0208DdG.png)
 
 ## Client
 

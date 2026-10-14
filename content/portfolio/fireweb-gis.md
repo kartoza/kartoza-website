@@ -34,7 +34,7 @@ The project was an integration of spatial visualization and interactivity into S
 
 The primary goal was to implement initial GIS functionality before the end of the US fire season in November 2020. The broader objective was to integrate richer spatial data and functionality into Fireweb. The project aimed to enable SYW customers to leverage their own, third-party, and SYW-hosted spatial data within Fireweb to support their operational requirements. This is particularly important for customers in regions like Oregon, who host their own web map services.
 
-![https://kartoza.com/files/fireweb_4.png](https://kartoza.com/files/fireweb_4.png)
+![/files/fireweb_4.png](/files/fireweb_4.png)
 
 ## Client
 

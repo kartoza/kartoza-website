@@ -15,7 +15,7 @@ title: Kartoza at BioMonWeek
 
 ![](/img/blog/erpnext/tjajWKz.png)
 
-In early May Kartoza co-founders [Tim Sutton](<https://kartoza.com/the_team/tim-sutton/>) and [Gavin Fleming](<https://kartoza.com/the_team/gavin-fleming/>) attended [BioMonWeek](<https://2026.biomonweek.eu>) in Montpellier, France; the first ever European-wide conference on biodiversity monitoring. We went to show off the Biodiversity Information Management System ('[BIMS](<https://bims.kartoza.com>)') that Kartoza and the [Fresh Water Research Centre](<https://frcsa.org.za>) have developed over the past ten or so years under the careful stewardship of Dimas tri Ciputra, senior developer at Kartoza. BIMS is Open Source (AGPL) and provides a complete platform for recording biological occurrence records, managing taxonomy and for reporting and exploring one's data with numerous dashboards that help one to attain insights about the state of biodiversity in one's area of interest.
+In early May Kartoza co-founders [Tim Sutton](</the_team/tim-sutton/>) and [Gavin Fleming](</the_team/gavin-fleming/>) attended [BioMonWeek](<https://2026.biomonweek.eu>) in Montpellier, France; the first ever European-wide conference on biodiversity monitoring. We went to show off the Biodiversity Information Management System ('[BIMS](<https://bims.kartoza.com>)') that Kartoza and the [Fresh Water Research Centre](<https://frcsa.org.za>) have developed over the past ten or so years under the careful stewardship of Dimas tri Ciputra, senior developer at Kartoza. BIMS is Open Source (AGPL) and provides a complete platform for recording biological occurrence records, managing taxonomy and for reporting and exploring one's data with numerous dashboards that help one to attain insights about the state of biodiversity in one's area of interest.
 
 ![](/img/blog/erpnext/UM0hIQn.png)
 
@@ -45,7 +45,7 @@ In terms of spatial technologies, open source and open standards already provide
 
 # Here to help
 
-If you have a project in the intersection of open source, geospatial and biodiversity, please [reach out to us](<https://kartoza.com/contact-us/>), Kartoza would love to work on it with you!
+If you have a project in the intersection of open source, geospatial and biodiversity, please [reach out to us](</contact-us/>), Kartoza would love to work on it with you!
 
 BioMonWeek2026 was co-organised by:
 

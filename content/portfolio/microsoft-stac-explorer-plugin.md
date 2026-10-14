@@ -46,7 +46,7 @@ Links:
 
 [GitHub Repository](<https://github.com/stac-utils/qgis-stac-plugin>)
 
-![](https://kartoza.com/files/w1348rY.png)
+![](/files/w1348rY.png)
 
 ## Technologies
 

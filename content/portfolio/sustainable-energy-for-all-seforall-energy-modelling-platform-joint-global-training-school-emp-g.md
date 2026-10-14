@@ -63,4 +63,4 @@ Kartoza remains dedicated to advancing the capabilities of professionals in the 
 
 ![https://kartoza.erpnext.com/files/download%20\(5\).jpeg](https://kartoza.erpnext.com/files/download%20\(5\).jpeg)
 
-![](https://kartoza.com/files/mdPqRJ2.png)
+![](/files/mdPqRJ2.png)

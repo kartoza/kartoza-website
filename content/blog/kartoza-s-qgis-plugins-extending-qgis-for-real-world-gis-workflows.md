@@ -17,7 +17,7 @@ QGIS is powerful out of the box, but its real superpower is extensibility. For o
 
 ## Discovering and Installing Plugins
 
-The QGIS plugin ecosystem saw a major upgrade last year with the relaunch of the [QGIS Plugins website](<https://plugins.qgis.org>) and the launch of the [QGIS Hub](<https://hub.qgis.org>). We covered that in a [post at the time](<https://kartoza.com/blog/introducing-the-new-qgis-plugins-website-and-qgis-hub/>), but the short version: better categorisation, clearer plugin pages with ratings and download counts, and a dedicated home for sharing styles, 3D models, and project files.
+The QGIS plugin ecosystem saw a major upgrade last year with the relaunch of the [QGIS Plugins website](<https://plugins.qgis.org>) and the launch of the [QGIS Hub](<https://hub.qgis.org>). We covered that in a [post at the time](</blog/introducing-the-new-qgis-plugins-website-and-qgis-hub/>), but the short version: better categorisation, clearer plugin pages with ratings and download counts, and a dedicated home for sharing styles, 3D models, and project files.
 
 To install any of the plugins below, open **Plugins → Manage and Install Plugins** in QGIS, search by name, and click **Install Plugin**.
 
@@ -25,42 +25,42 @@ To install any of the plugins below, open **Plugins → Manage and Install Plugi
 
 ![stac-api-browser](/img/blog/kartoza-qgis-plugin-stac-api.png)
 
-The [STAC API Browser](<https://kartoza.com/plugins/stac-api-browser/>) brings cloud-native earth observation data discovery into QGIS. Developed by Kartoza with funding from Microsoft Planetary Computer, it lets you search STAC-compliant catalogs, filter by date and spatial extent, preview footprints, and load assets as Cloud Optimised GeoTIFF layers — without leaving your map canvas. Our [launch post](<https://kartoza.com/blog/qgis-stac-api-plugin/>) walks through the workflow in detail.
+The [STAC API Browser](</plugins/stac-api-browser/>) brings cloud-native earth observation data discovery into QGIS. Developed by Kartoza with funding from Microsoft Planetary Computer, it lets you search STAC-compliant catalogs, filter by date and spatial extent, preview footprints, and load assets as Cloud Optimised GeoTIFF layers — without leaving your map canvas. Our [launch post](</blog/qgis-stac-api-plugin/>) walks through the workflow in detail.
 
 ## Species Explorer
 
 ![species-explorer](/img/blog/kartoza-qgis-plugin-species-explorer.png)
 
-If biodiversity data is your focus, the [Species Explorer](<https://kartoza.com/plugins/species-explorer/>) fetches species occurrence records straight from the Global Biodiversity Information Facility (GBIF) into QGIS. Search by scientific or common name, refine by date range, and turn results into map layers ready for analysis or cartography. It is a handy companion for conservation, ecology, and environmental impact work.
+If biodiversity data is your focus, the [Species Explorer](</plugins/species-explorer/>) fetches species occurrence records straight from the Global Biodiversity Information Facility (GBIF) into QGIS. Search by scientific or common name, refine by date range, and turn results into map layers ready for analysis or cartography. It is a handy companion for conservation, ecology, and environmental impact work.
 
 ## SG Diagram Downloader
 
 ![sg-diagram-downloader](/img/blog/kartoza-qgis-plugin-sg-downloader.png)
 
-Surveyors working with South African cadastral data will appreciate the [SG Diagram Downloader](<https://kartoza.com/plugins/sg-diagram-downloader/>). Sponsored by Kirchhoff Surveyors, it downloads official Surveyor General diagrams directly within QGIS — no more browser hopping, manual file naming, or broken download links. It is one of several Kartoza plugins tailored to African geospatial workflows.
+Surveyors working with South African cadastral data will appreciate the [SG Diagram Downloader](</plugins/sg-diagram-downloader/>). Sponsored by Kirchhoff Surveyors, it downloads official Surveyor General diagrams directly within QGIS — no more browser hopping, manual file naming, or broken download links. It is one of several Kartoza plugins tailored to African geospatial workflows.
 
 ## Trends.Earth
 
 ![trends-earth](/img/blog/kartoza-qgis-plugin-trends-earth.png)
 
-[Trends.Earth](<https://kartoza.com/plugins/trends-earth/>) takes on a broader mission: tracking land productivity, land cover, and soil organic carbon in support of UN Sustainable Development Goal 15.3 (Life on Land). Developed with Conservation International, it gives governments and researchers standardised, reproducible methods for monitoring land degradation neutrality.
+[Trends.Earth](</plugins/trends-earth/>) takes on a broader mission: tracking land productivity, land cover, and soil organic carbon in support of UN Sustainable Development Goal 15.3 (Life on Land). Developed with Conservation International, it gives governments and researchers standardised, reproducible methods for monitoring land degradation neutrality.
 
 ## Specialised Applications Built as QGIS Plugins
 
-Not every Kartoza QGIS extension lives in the public plugin repository. Some are deeper applications, listed on our [apps page](<https://kartoza.com/apps/>).
+Not every Kartoza QGIS extension lives in the public plugin repository. Some are deeper applications, listed on our [apps page](</apps/>).
 
-- **[SAGTA Map Exporter](<https://kartoza.com/apps/sagta/>)** — exports compliant cadastral and surveying maps according to South African Geomatics Technicians Association standards.
-- **[Giswater](<https://kartoza.com/apps/giswater/>)** — models water supply and urban drainage networks inside QGIS, including running EPANET and SWMM simulations.
+- **[SAGTA Map Exporter](</apps/sagta/>)** — exports compliant cadastral and surveying maps according to South African Geomatics Technicians Association standards.
+- **[Giswater](</apps/giswater/>)** — models water supply and urban drainage networks inside QGIS, including running EPANET and SWMM simulations.
 
 ## Plugins and QGIS Server
 
-A great plugin workflow often ends with publishing. The same rendering engine behind every plugin above also powers our production [QGIS Server Docker image](<https://kartoza.com/docker/qgis-server/>) — publish `.qgs`/`.qgz` projects as OGC-compliant web services with pixel-perfect fidelity to what you see on your desktop. It's the natural next step when a plugin-built project needs to reach a wider audience.
+A great plugin workflow often ends with publishing. The same rendering engine behind every plugin above also powers our production [QGIS Server Docker image](</docker/qgis-server/>) — publish `.qgs`/`.qgz` projects as OGC-compliant web services with pixel-perfect fidelity to what you see on your desktop. It's the natural next step when a plugin-built project needs to reach a wider audience.
 
 ## Resources and Next Steps
 
-- Grab the [QGIS Renderers Cheat Sheet](<https://kartoza.com/qgis-resources/>) for a quick reference on vector and raster styling.
-- Developers curious about contributing to QGIS itself can follow our [Road to Nerdvana series](<https://kartoza.com/blog/qgis-road-to-nerdvana-episode-1-qgis-console-build/>), which documents building and patching QGIS from source.
-- If your team needs guided learning, we run [QGIS training courses](<https://kartoza.com/training-courses/>) hosted at our Cape Town and Stellenbosch offices or remotely.
+- Grab the [QGIS Renderers Cheat Sheet](</qgis-resources/>) for a quick reference on vector and raster styling.
+- Developers curious about contributing to QGIS itself can follow our [Road to Nerdvana series](</blog/qgis-road-to-nerdvana-episode-1-qgis-console-build/>), which documents building and patching QGIS from source.
+- If your team needs guided learning, we run [QGIS training courses](</training-courses/>) hosted at our Cape Town and Stellenbosch offices or remotely.
 
 ## Install One Today
 

@@ -62,7 +62,7 @@ Open the Windows Command Prompt and change the working directory using the comma
 
 ![](https://oldsite.kartoza.com/media/uploads/.thumbnails/flowerpotsmall.gif/flowerpotsmall-270x480.gif)
 
-![](https://kartoza.com/media/uploads/flowerpotsmall.gif)
+![](/media/uploads/flowerpotsmall.gif)
 
 For interest, you can generate the above GIF from the extracted frames using this ImageMagick command:
 

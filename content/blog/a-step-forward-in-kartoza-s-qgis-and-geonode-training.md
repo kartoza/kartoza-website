@@ -65,7 +65,7 @@ The Intern team is eager to continue work on the changelog platforms and create 
 
 Contributing Authors: Nicholas Sun Hing, Zinzi Xakayi and Amy Burness
 
-For more on FOSSGIS training with Kartoza see [Kartoza Training & Education](<https://www.kartoza.com/en/solutions/training-courses/>).
+For more on FOSSGIS training with Kartoza see [Kartoza Training & Education](</en/solutions/training-courses/>).
 
 For some interesting videos on using QGIS, visit the Kartoza [Road to Nerdvana](<https://www.youtube.com/playlist?list=PLhZmjLdJAZWwTZIWKo5cZfKHW-606qw7p>) series on YouTube.
 

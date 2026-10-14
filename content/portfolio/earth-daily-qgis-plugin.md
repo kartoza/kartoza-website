@@ -36,7 +36,7 @@ The project is structured around multiple phases. The first phase focuses on sig
   2. **Hotspot Management:** Introduce a new API to request Hotspot data.
   3. **Branding:** Add new branding and update the QGIS plugin description.
 
-![](https://kartoza.com/files/HYNk2Zq.png)
+![](/files/HYNk2Zq.png)
 
 ![](/files/gYVhwyu.png) ![](/files/xuSoeIG.png)
 

@@ -12,7 +12,7 @@ thumbnail: /img/blog/erpnext/volumes-server.png
 title: Mounting a Storage Drive in Hetzner Cloud for Rancher Deployments
 ---
 
-This article builds upon an earlier blog post by Tim Sutton on [using-a-sambacifs-mount-as-a-docker-volume](<https://kartoza.com/en/blog/using-a-sambacifs-mount-as-a-docker-volume/>). In the previous article, Tim described the process of mounting a storage driver in detail.
+This article builds upon an earlier blog post by Tim Sutton on [using-a-sambacifs-mount-as-a-docker-volume](</en/blog/using-a-sambacifs-mount-as-a-docker-volume/>). In the previous article, Tim described the process of mounting a storage driver in detail.
 
 What has necessitated this article is the recent changes in what hetzner offers to configure a storage driver. In this article, I will describe the process of mounting a storage driver in hetzner cloud to use in rancher V1.1. Yes, we are still using rancher v1 in favour of the new shiny rancher 2.
 
