@@ -19561,10 +19561,8 @@ a.playlist-card:hover .playlist-card-link {
     }
 }
 
-/* Section headers sit flush with the top of their section; clip the full-bleed overflow */
 .products-section,
 .services-section {
-    padding-top: 0;
     overflow-x: clip;
 }
 
@@ -19855,5 +19853,80 @@ a.playlist-card:hover .playlist-card-link {
 
     .page-hero .blog-list-hero-intro {
         font-size: 1.25rem;
+    }
+}
+
+/* ============================================
+   HOMEPAGE SECTION HEADINGS
+   Editorial two-column header: amber eyebrow + large title on the left, a light
+   subtitle on the right, closed off by a rule with a short amber segment.
+   (Used on the homepage only; other pages keep the .section-header bar.)
+   ============================================ */
+.section-heading {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: end;
+    gap: 1rem 4rem;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--rule-line, #D1D1D1);
+}
+
+.section-heading::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 96px;
+    height: 3px;
+    background: var(--accent);
+}
+
+.section-heading-eyebrow {
+    display: block;
+    color: var(--accent);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+}
+
+.section-heading-title {
+    color: var(--text-dark);
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.section-heading-sub {
+    color: var(--text-muted);
+    font-size: 1.25rem;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0;
+}
+
+@media screen and (max-width: 1024px) {
+    .section-heading {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .section-heading {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .section-heading-title {
+        font-size: 2rem;
+    }
+
+    .section-heading-sub {
+        font-size: 1rem;
     }
 }

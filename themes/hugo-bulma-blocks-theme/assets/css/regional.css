@@ -505,8 +505,6 @@ body.region-ZA .regional-accent {
     color: #EEB348;
 }
 
-/* Section header is full-bleed (see homepage.css .section-header); sit flush with the top of the section. */
 .regional-presence-section {
-    padding-top: 0;
     overflow-x: clip;
 }
