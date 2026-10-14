@@ -11266,6 +11266,9 @@ body:has(.blog-hero) .contextmenu {
     padding: 0 1.9rem;
     height: 50px;
     font-size: 1.25rem;
+    /* the theme gives every .hero .button a 2.5rem right margin (sass/layout/hero.sass), which
+       shoved the second button off-centre when they stack */
+    margin-right: 0;
 }
 
 /* "Explore Hosting Services" */
@@ -11591,9 +11594,19 @@ body:has(.blog-hero) .contextmenu {
         align-items: center;
     }
 
+    /* Stacked, each button centred on the same axis. "Explore Hosting Services" carries a
+       margin-right (spacing for the side-by-side layout), which offset its box from the
+       one below; it isn't wanted once they stack. */
     .hero-left .hero-ctas {
-        flex-wrap: wrap;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
         justify-content: center;
+        gap: 0.75rem;
+    }
+
+    .hero-left .hero-ctas .button.is-primary:not(.is-outlined) {
+        margin-right: 0;
     }
 
     .hero-right {
@@ -19714,12 +19727,21 @@ a.playlist-card:hover .playlist-card-link {
         font-size: 1rem;
     }
 
-
-    /* on phones the strip's lines would run through the title and label */
-    .blog-list-hero .site-edge-motif-top {
+    /* Phones: no latest-article / latest-project preview card in the hero (blog, portfolio) ... */
+    .blog-list-hero-columns > .column:not(.blog-list-hero-text) {
         display: none;
     }
 
+    /* ... and the top strip at the same smaller size as the homepage hero (121px). The inline
+       --motif-thickness on each hero would beat a plain override, hence !important. The top
+       padding clears the strip so it doesn't run through the label and title. */
+    .blog-list-hero .site-edge-motif-top {
+        --motif-thickness: 121px !important;
+    }
+
+    .blog-list-hero {
+        padding-top: 9rem;
+    }
 }
 
 /* Latest-article card on the right of the blog hero */
@@ -19928,5 +19950,13 @@ a.playlist-card:hover .playlist-card-link {
 
     .section-heading-sub {
         font-size: 1rem;
+    }
+}
+
+/* Latest-news bar (partials/contextmenu.html): hidden on phones / small screens, where it is a
+   tall fixed strip that eats the viewport. */
+@media screen and (max-width: 768px) {
+    .context-container {
+        display: none !important;
     }
 }
