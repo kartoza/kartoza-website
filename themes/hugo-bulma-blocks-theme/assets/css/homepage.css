@@ -178,8 +178,8 @@
 
 .hero-vision-statement {
     color: var(--text-dark);
-    font-size: 1.5rem;
-    font-weight: 500;
+    font-size: 1.75rem;
+    font-weight: 300;
     line-height: 1.6;
     margin-bottom: 0;
     font-style: normal;
@@ -4721,7 +4721,8 @@ body:has(.blog-hero) .contextmenu {
 
 .blog-hero-subtitle {
     color: rgba(255, 255, 255, 0.9);
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    font-weight: 300;
     line-height: 1.6;
     max-width: 700px;
 }
@@ -19681,8 +19682,9 @@ a.playlist-card:hover .playlist-card-link {
 
 .blog-list-hero-intro {
     color: var(--text-muted);
-    font-size: 1rem;
-    line-height: 1.7;
+    font-size: 1.25rem;
+    font-weight: 300;
+    line-height: 1.6;
     max-width: 40rem;
     margin-bottom: 1.5rem;
 }
@@ -19708,6 +19710,10 @@ a.playlist-card:hover .playlist-card-link {
 
     .blog-list-hero-title {
         font-size: 2rem;
+    }
+
+    .blog-list-hero-intro {
+        font-size: 1rem;
     }
 
 
@@ -19798,6 +19804,7 @@ a.playlist-card:hover .playlist-card-link {
 .page-hero .blog-list-hero-intro {
     color: var(--text-dark);
     font-size: 1.5rem;
+    font-weight: 300;
     line-height: 1.5;
     max-width: 48rem;
     margin-bottom: 0;
