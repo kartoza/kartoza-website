@@ -19623,7 +19623,7 @@ a.playlist-card:hover .playlist-card-link {
     }
 }
 
-/* The right-edge motif rotated 90deg so it runs along the top of a section — a single
+/* The left-edge motif, mirrored and then rotated 90deg so it runs along the top of a section — a single
    copy, centred. Built as an upright tile (--motif-thickness wide, SVG proportions tall)
    and rotated -90deg about its top-left corner, so its decorated edge faces down and the
    edge that bleeds off the page sits at the top. Once rotated its length is
@@ -19636,11 +19636,12 @@ a.playlist-card:hover .playlist-card-link {
     left: calc(50% - var(--motif-thickness) * 2.947);
     width: var(--motif-thickness);
     aspect-ratio: 198.45 / 1169.62;
-    background-image: url('/img/geohosting-edge-right.svg');
+    background-image: url('/img/geohosting-edge-left.svg');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     transform-origin: top left;
-    transform: translateY(var(--motif-thickness)) rotate(-90deg);
+    /* flip first (mirror within the box), then rotate */
+    transform: translateY(var(--motif-thickness)) rotate(-90deg) translateX(var(--motif-thickness)) scaleX(-1);
     pointer-events: none;
     z-index: -1;
 }
