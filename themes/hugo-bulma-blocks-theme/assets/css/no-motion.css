@@ -73,3 +73,20 @@
     left: 0;
   }
 }
+
+/* Homepage carousel: a gentle fade + short slide between slides, and a soft change on the dots.
+   Needs !important only to beat the blanket transition:none above. */
+.showcase-item {
+  transition: opacity 0.5s ease, transform 0.5s ease !important;
+}
+
+.showcase-dot {
+  transition: background-color 0.25s ease, transform 0.25s ease !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .showcase-item,
+  .showcase-dot {
+    transition: none !important;
+  }
+}

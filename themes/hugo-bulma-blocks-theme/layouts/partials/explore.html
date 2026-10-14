@@ -629,12 +629,14 @@ document.addEventListener('DOMContentLoaded', function() {
             dots[currentIndex].classList.remove('active');
 
             // Update index
+            const leavingIndex = currentIndex;
             currentIndex = index;
             if (currentIndex >= showcaseItems.length) currentIndex = 0;
             if (currentIndex < 0) currentIndex = showcaseItems.length - 1;
 
-            // Remove prev class from all and add active to current
-            showcaseItems.forEach(item => item.classList.remove('prev'));
+            // Clear prev from every slide except the one now leaving, so it eases out to the
+            // left while the next one eases in from the right (the CSS cross-fade).
+            showcaseItems.forEach((item, i) => { if (i !== leavingIndex) item.classList.remove('prev'); });
             showcaseItems[currentIndex].classList.add('active');
             dots[currentIndex].classList.add('active');
 

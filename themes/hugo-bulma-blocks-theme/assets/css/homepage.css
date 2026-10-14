@@ -11302,21 +11302,22 @@ body:has(.blog-hero) .contextmenu {
     width: 100%;
     height: 100%;
     opacity: 0;
-    transform: translateX(100px) rotateY(-15deg) scale(0.9);
-    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    /* subtle: a short horizontal drift with a fade (was a 100px 3D swing) */
+    transform: translateX(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
     pointer-events: none;
 }
 
 .showcase-item.active {
     opacity: 1;
-    transform: translateX(0) rotateY(0) scale(1);
+    transform: none;
     pointer-events: auto;
     z-index: 2;
 }
 
 .showcase-item.prev {
     opacity: 0;
-    transform: translateX(-100px) rotateY(15deg) scale(0.9);
+    transform: translateX(-24px);
 }
 
 /* Showcase Card */
