@@ -4828,18 +4828,13 @@ body:has(.blog-hero) .contextmenu {
 }
 
 /* Beautiful paragraphs */
+/* One size for all body text. The first paragraph used to be a larger "lead" (1.25rem, dark, medium)
+   while the rest were 1rem grey and light, which read as two different sizes on short project pages. */
 .blog-article-content p {
-    font-size: 1rem;
-    line-height: 1.85;
-    color: var(--text-muted);
-    margin-bottom: 1.5rem;
-}
-
-.blog-article-content > p:first-of-type {
     font-size: 1.25rem;
     line-height: 1.7;
     color: var(--text-dark);
-    font-weight: 500;
+    margin-bottom: 1.5rem;
 }
 
 /* Stunning lists */
@@ -4857,7 +4852,7 @@ body:has(.blog-hero) .contextmenu {
     margin-bottom: 0.75rem;
     background: var(--light-bg);
     border-radius: var(--radius-md);
-    font-size: 1rem;
+    font-size: 1.25rem;
     line-height: 1.6;
     color: var(--text-dark);
     transition: all var(--transition-fast);
@@ -19634,5 +19629,175 @@ a.playlist-card:hover .playlist-card-link {
 @media screen and (max-width: 768px) {
     .context-container {
         display: none !important;
+    }
+}
+
+/* Portfolio project hero: the dark blog-style hero (full-bleed picture under the overlay) with a small
+   framed copy of the picture beside the text. Non-mobile only. */
+.project-hero-figure {
+    display: none;
+}
+
+@media screen and (min-width: 769px) {
+    .project-hero-row {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+    }
+
+    .project-hero-row .blog-hero-content {
+        flex: 1 1 0;
+        min-width: 0;
+        max-width: 800px;
+    }
+
+    .project-hero-figure {
+        display: block;
+        position: relative;
+        flex: 0 0 36%;
+        height: 300px;
+        margin: 0;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: var(--radius-md);
+        cursor: zoom-in;
+    }
+
+    .project-hero-figure:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+    }
+
+    /* shown whole (not cropped), so screenshots stay readable */
+    .project-hero-thumb {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: inherit;
+    }
+
+    /* The hero clips overflow by default; the popup has to be able to extend past it. */
+    .blog-hero.has-zoom {
+        overflow: visible;
+    }
+
+    /* Hover / focus popup: a larger copy that scales out from the small picture. Hidden state is
+       collapsed (visibility) so it can't catch the mouse; the open state is the :hover/:focus-within
+       rule below. Transition values live in no-motion.css (the site-wide rule there would cancel them). */
+    .project-hero-popup {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        z-index: 30;
+        width: min(760px, 58vw);
+        padding: 0.5rem;
+        background: var(--text-dark);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: var(--radius-md);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-50%) scale(0.85);
+        transform-origin: right center;
+        pointer-events: none;
+    }
+
+    .project-hero-popup img {
+        display: block;
+        width: 100%;
+        max-height: 75vh;
+        object-fit: contain;
+        border-radius: calc(var(--radius-md) - 2px);
+    }
+
+    @media (hover: hover) {
+        .project-hero-figure:hover .project-hero-popup {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(-50%) scale(1);
+            pointer-events: auto;
+        }
+    }
+
+    .project-hero-figure:focus-within .project-hero-popup {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(-50%) scale(1);
+        pointer-events: auto;
+    }
+}
+
+/* ============================================
+   MOBILE / TABLET SPACING FIXES
+   ============================================ */
+
+/* Blog and portfolio post pages: their hero and article containers aren't inside a .section, so below
+   the fixed desktop container width they had no side padding at all (text at x=0). */
+@media screen and (max-width: 1215px) {
+    .blog-hero .container,
+    .blog-article .container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+/* Homepage hero: the columns' -0.75rem margin was cancelling the gutter once .hero-left/.hero-right
+   lose their padding (<=1024px), leaving ~4px between the content and the screen edge. */
+@media screen and (max-width: 1024px) {
+    .hero-home .hero-body {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .hero-home .hero-columns {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+/* Phones: drop the full-viewport minimum heights and the stacked carousel (about 400px of the hero),
+   keeping just the heading, quote and buttons. The same featured services are in the sections below. */
+@media screen and (max-width: 768px) {
+    /* .hero.hero-home / .hero.hero-home .hero-body: Bulma's .hero.is-fullheight-with-navbar rules
+       (min-height of the viewport) are more specific than a bare .hero-home */
+    .hero.hero-home {
+        min-height: 0;
+        padding-top: 0;
+    }
+
+    .hero.hero-home .hero-body {
+        min-height: 0;
+        /* the theme sets .hero-body { height: 100vh } on phones */
+        height: auto;
+        /* top padding clears the 121px edge strip above the heading (its tip reaches ~125px down) */
+        padding-top: 9rem;
+        padding-bottom: 2.5rem;
+    }
+
+    .hero-home .hero-columns {
+        min-height: 0;
+        padding: 0;
+    }
+
+    .hero-home .hero-right {
+        display: none;
+    }
+
+    .hero-left .hero-ctas {
+        margin-top: 1.5rem;
+    }
+
+    .blog-hero {
+        min-height: 0;
+    }
+}
+
+/* Phones: article body text back to 1rem (the shared 1.25rem is for desktop) */
+@media screen and (max-width: 768px) {
+    .blog-article-content p,
+    .blog-article-content ul li,
+    .blog-article-content ol li {
+        font-size: 1rem;
     }
 }

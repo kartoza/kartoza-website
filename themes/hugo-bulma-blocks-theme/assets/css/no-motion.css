@@ -89,3 +89,25 @@
     transition: none !important;
   }
 }
+
+/* Portfolio project hero: the zoom popup fades and scales out of the small picture. */
+.project-hero-popup {
+  transition: opacity 0.3s ease,
+              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0s linear 0.45s !important;
+}
+
+.project-hero-figure:hover .project-hero-popup,
+.project-hero-figure:focus-within .project-hero-popup {
+  transition: opacity 0.3s ease 0.08s,
+              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.08s,
+              visibility 0s linear 0s !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-hero-popup,
+  .project-hero-figure:hover .project-hero-popup,
+  .project-hero-figure:focus-within .project-hero-popup {
+    transition: none !important;
+  }
+}
