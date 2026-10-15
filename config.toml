@@ -97,9 +97,9 @@ success = "#3C7D54"
 warning = "#EEB348"
 link = "#54A2CC"
 # Brand fonts
-heading-font = "'Nunito', sans-serif"
-text-font = "'Nunito', sans-serif"
-fancy-font = "'Nunito', sans-serif"
+heading-font = "'Lato', 'Helvetica Neue', Arial, sans-serif"
+text-font = "'Lato', 'Helvetica Neue', Arial, sans-serif"
+fancy-font = "'Lato', 'Helvetica Neue', Arial, sans-serif"
 
 menuFontClass = "is-size-6"
 ## Gh repo edit link

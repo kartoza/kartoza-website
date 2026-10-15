@@ -4976,7 +4976,7 @@ body:has(.blog-hero) .contextmenu {
     background: var(--light-bg);
     padding: 0.2rem 0.5rem;
     border-radius: 4px;
-    font-family: 'Fira Code', 'Monaco', monospace;
+    font-family: 'JetBrains Mono', 'Monaco', monospace;
     font-size: 0.875em;
     color: var(--primary-dark);
 }
@@ -6076,7 +6076,7 @@ body:has(.blog-hero) .contextmenu {
     margin-top: 1rem;
     padding-top: 0.75rem;
     border-top: 1px dashed var(--light-bg-alt);
-    font-family: 'Fira Code', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.75rem;
     color: var(--text-muted);
     opacity: 0.7;
@@ -11958,14 +11958,14 @@ body:has(.blog-hero) .contextmenu {
 }
 
 .docker-content pre code {
-    font-family: 'Roboto Mono', 'Fira Code', monospace;
+    font-family: 'Roboto Mono', 'JetBrains Mono', monospace;
     font-size: 0.875rem;
     color: #d4d4d4 !important;
     background: transparent !important;
 }
 
 .docker-content code {
-    font-family: 'Roboto Mono', 'Fira Code', monospace;
+    font-family: 'Roboto Mono', 'JetBrains Mono', monospace;
     font-size: 0.875rem;
 }
 
@@ -19506,4 +19506,40 @@ pre.chroma code,
     z-index: -1;
     pointer-events: none;
     background: url('/img/landing-contours.svg') center / cover no-repeat;
+}
+
+/* Lato has a smaller x-height than the system fallback it replaced, so at the same size it reads about
+   8% smaller. Scale the root size (all rem-based sizes follow) to keep text comfortably readable. */
+html {
+    font-size: 17px;
+}
+
+/* Article text after the move to Lato (root size 17px): slightly smaller body and lighter headings */
+.blog-article-content p,
+.blog-article-content li {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+}
+
+.blog-article-content h1,
+.blog-article-content h2 {
+    font-size: 1.625rem;
+    font-weight: 700;
+    letter-spacing: 0;
+}
+
+.blog-article-content h3 {
+    font-size: 1.25rem;
+}
+
+.blog-article-content h4 {
+    font-size: 1.0625rem;
+}
+
+/* Partner pages on phones: the wide column gap's negative margins pushed the page wider than the screen */
+@media screen and (max-width: 768px) {
+    .partner-content-section .columns.is-variable {
+        margin-left: 0;
+        margin-right: 0;
+    }
 }

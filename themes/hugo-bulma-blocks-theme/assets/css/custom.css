@@ -1,4 +1,14 @@
 /**
+* Brand fonts (self-hosted, Latin subset): Lato for text, JetBrains Mono for code.
+* Regular covers 300-500 (Light looked too thin for body text) and Bold covers 600-800 (800 would otherwise pick Black).
+*/
+@font-face { font-family: 'Lato'; font-style: normal; font-weight: 300 500; font-display: swap; src: url('/fonts/Lato-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Lato'; font-style: italic; font-weight: 400; font-display: swap; src: url('/fonts/Lato-Italic.woff2') format('woff2'); }
+@font-face { font-family: 'Lato'; font-style: normal; font-weight: 600 800; font-display: swap; src: url('/fonts/Lato-Bold.woff2') format('woff2'); }
+@font-face { font-family: 'Lato'; font-style: normal; font-weight: 900; font-display: swap; src: url('/fonts/Lato-Black.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 100 800; font-display: swap; src: url('/fonts/JetBrainsMono.woff2') format('woff2'); }
+
+/**
 * Kartoza site body - clean background
 */
 body {
