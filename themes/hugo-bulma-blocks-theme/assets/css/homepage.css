@@ -19572,3 +19572,26 @@ a.playlist-card:hover .playlist-card-link {
         padding-right: 1.5rem;
     }
 }
+
+/* Equal-height product / service cards. Bulma already stretches the .column of each row to the tallest
+   one, but the .main-card inside kept its own content height, so a card with a longer description
+   (MyCivitas) came out taller than its neighbours. Let the card fill the column, and keep the
+   "Learn more" button level at the bottom of every card. */
+.products-section .columns > .column > .main-card,
+.services-section .columns > .column > .main-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.products-section .columns > .column > .main-card > ul,
+.services-section .columns > .column > .main-card > p {
+    /* keeps a gap above the bottom-pinned button even when the card has no spare height */
+    margin-bottom: 1rem;
+}
+
+.products-section .columns > .column > .main-card > .button,
+.services-section .columns > .column > .main-card > .button {
+    /* !important: the buttons carry Bulma's `mt-4`, which is itself !important */
+    margin-top: auto !important;
+}
