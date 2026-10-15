@@ -4930,18 +4930,14 @@ body:has(.blog-hero) .contextmenu {
 .blog-article-content a {
     color: var(--primary);
     font-weight: 600;
-    text-decoration: none;
-    background: var(--accent);
-    background-size: 0% 2px;
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    transition: all var(--transition-fast);
-    padding-bottom: 2px;
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
 }
 
 .blog-article-content a:hover {
     color: var(--primary-dark);
-    background-size: 100% 2px;
 }
 
 /* Beautiful blockquotes */
@@ -19070,4 +19066,55 @@ a.playlist-card:hover .playlist-card-link {
 .blog-article-sidebar .related-item:hover .related-arrow,
 .blog-article-sidebar .related-item:hover .related-arrow i {
     color: var(--primary);
+}
+
+/* "Written by" / "Client" card in article sidebars: the card is white, so the label and
+   avatar (white-on-translucent-white from the old dark card) were invisible. */
+.blog-article-sidebar .author-card {
+    color: var(--text-dark);
+    text-decoration: none;
+}
+
+.blog-article-sidebar .author-card .author-info {
+    text-align: left;
+}
+
+.blog-article-sidebar .author-card .author-label {
+    color: var(--text-muted);
+    opacity: 1;
+}
+
+.blog-article-sidebar .author-card .author-role {
+    color: var(--text-muted);
+    opacity: 1;
+}
+
+.blog-article-sidebar .author-card .author-avatar:not(.author-avatar-image) {
+    background: var(--primary);
+    border-radius: 4px;
+}
+
+.blog-article-sidebar .author-card .author-avatar-image,
+.blog-article-sidebar .author-card .author-avatar-image img {
+    border-radius: 4px;
+}
+
+.blog-article-sidebar .author-card-linked:hover .author-name {
+    color: var(--primary);
+}
+
+/* Code blocks: the token colours (highlight.css, monokai) are light-on-dark, but .chroma forces a
+   pale background, so the code was nearly invisible. Use the charcoal block everywhere. */
+pre.chroma,
+.blog-article-content pre.chroma {
+    background-color: #383939 !important;
+    color: #F5F5F2 !important;
+    box-shadow: none;
+    border-radius: 4px;
+}
+
+pre.chroma code,
+.blog-article-content pre.chroma code {
+    background: none;
+    color: inherit;
 }
