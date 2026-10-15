@@ -86,8 +86,16 @@ function populateResults(results) {
 
     // Deduplicate results by permalink
     var seenLinks = new Set();
+    var maxShown = 30;
+    var shown = 0;
+    var total = 0;
     results.forEach(function (value, key) {
         if (seenLinks.has(value.item.permalink)) {
+            return;
+        }
+        total++;
+        if (shown >= maxShown) {
+            seenLinks.add(value.item.permalink);
             return;
         }
         seenLinks.add(value.item.permalink);
@@ -99,21 +107,11 @@ function populateResults(results) {
         snippetHighlights.push(...searchTokens);
         snippet = createSnippet(contents, searchTokens);
 
-        // Replace values for tags
+        // Tags are plain labels: the whole result is already a link, and nested links are invalid HTML.
         var tags = "";
-        if (value.item.tags) {
-            value.item.tags.forEach(function (element) {
-                tags += "<span class='tag is-warning'><a href='/tags/" + element + "'>" + element + "</a></span> ";
-            });
-        }
-        
-        // Replace values for categories
-        var categories = "";
-        if (value.item.categories) {
-            value.item.categories.forEach(function (element) {
-                categories += "<span class='tag is-danger'><a href='/categories/" + element + "'>" + element + "</a></span> ";
-            });
-        }
+        (value.item.tags || []).concat(value.item.categories || []).slice(0, 4).forEach(function (element) {
+            tags += "<span class='search-tag'>" + element + "</span>";
+        });
 
         // Render the output using the template
         var output = render(templateDefinition, {
@@ -121,7 +119,6 @@ function populateResults(results) {
             title: value.item.title,
             link: value.item.permalink,
             tags: tags,
-            categories: categories,
             snippet: snippet
         });
 
@@ -130,6 +127,7 @@ function populateResults(results) {
 
         // Append the output to the search results if there is a match
         if (matchFound) {
+            shown++;
             searchResults.innerHTML += output;
 
             // Highlight each token in the snippet
@@ -139,6 +137,13 @@ function populateResults(results) {
             });
         }
     });
+
+    var summary = document.getElementById("search-summary");
+    if (summary) {
+        summary.textContent = total > shown
+            ? "Showing the top " + shown + " of " + total + " results"
+            : total + (total === 1 ? " result" : " results");
+    }
 }
 
 function createSnippet(contents, tokens) {
