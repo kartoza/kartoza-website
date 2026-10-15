@@ -19481,3 +19481,29 @@ pre.chroma code,
 .partner-content h2 {
     border-bottom-color: var(--accent);
 }
+
+/* Landing page hero: a very faint grayscale contour-line texture. A child of the hero placed before
+   the edge motifs, so it paints underneath them. */
+.hero-terrain {
+    position: absolute;
+    top: -80px;
+    left: 0;
+    right: 0;
+    bottom: -80px;
+    z-index: -1;
+    pointer-events: none;
+    background: url('/img/landing-contours.svg') center / cover no-repeat;
+    will-change: transform;
+}
+
+/* Same faint grayscale contour texture as the landing page hero, on every flat page hero (blog,
+   portfolio, team, contact, plugins, youtube, careers, ...). ::before is the section's first child,
+   so it paints under the edge motifs. */
+.blog-list-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: url('/img/landing-contours.svg') center / cover no-repeat;
+}
