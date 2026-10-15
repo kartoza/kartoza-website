@@ -19566,3 +19566,178 @@ html {
     border-color: var(--light-bg);
     color: var(--primary-dark);
 }
+
+
+/* ============================================
+   TEAM MEMBER HERO: compact, near-black, white text, with white contour lines
+   ============================================ */
+.team-member-hero {
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+    padding: 4.5rem 0 2.25rem;
+    background: #262727 url('/img/dark-contours.svg') center / cover no-repeat;
+}
+
+.team-member-hero-bg {
+    display: none;
+}
+
+.team-member-back {
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 1.25rem;
+}
+
+.team-member-back:hover {
+    color: var(--white);
+}
+
+.team-member-hero-content {
+    gap: 2rem;
+    align-items: center;
+}
+
+.team-member-hero-image {
+    width: 170px;
+    height: 170px;
+    border: 4px solid rgba(255, 255, 255, 0.85);
+    box-shadow: none;
+}
+
+.team-member-hero-location {
+    bottom: -6px;
+    font-size: 0.8125rem;
+    padding: 0.3rem 0.75rem;
+    box-shadow: none;
+}
+
+.team-member-hero-info {
+    padding-top: 0;
+}
+
+.team-member-hero-department {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.75);
+    padding: 0;
+    margin-bottom: 0.5rem;
+    font-size: 0.8125rem;
+}
+
+.team-member-hero-department i {
+    color: var(--accent);
+}
+
+.team-member-hero-name {
+    color: var(--white) !important;
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 0.25rem !important;
+    text-shadow: none;
+}
+
+.team-member-hero-role {
+    color: var(--accent) !important;
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.75rem !important;
+}
+
+.team-member-hero-bio {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.team-member-hero-links {
+    gap: 0.75rem;
+}
+
+.team-member-link {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 4px;
+    padding: 0.4rem 0.9rem;
+}
+
+.team-member-link:hover {
+    background: rgba(255, 255, 255, 0.18);
+    color: var(--white);
+}
+
+@media screen and (max-width: 768px) {
+    .team-member-hero {
+        padding: 3rem 0 1.75rem;
+    }
+
+    .team-member-hero > .container {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    .team-member-hero-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .team-member-hero-image {
+        width: 130px;
+        height: 130px;
+    }
+
+    .team-member-hero-name {
+        font-size: 1.875rem !important;
+    }
+
+    .team-member-hero-links {
+        justify-content: center;
+    }
+}
+
+/* Team member page: "About ..." and "Key Achievements" headings. The landing page's two-column
+   .section-heading grid was also applying here and pushed the title to the middle. */
+.team-member-article .section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    margin: 0 0 1.5rem;
+    padding-bottom: 1rem;
+    font-size: 1.5rem;
+    line-height: 1.25;
+    text-align: left;
+}
+
+.team-member-article .section-heading i {
+    flex: 0 0 auto;
+    font-size: 1.25rem;
+}
+
+.team-member-achievements .section-heading {
+    margin-bottom: 1.25rem;
+}
+
+
+/* ============================================
+   DARK SECTIONS: one shared background, near-black with faint white contour lines
+   (the team member hero's look, applied to every dark section and hero)
+   ============================================ */
+.why-section,
+.about-hero,
+.about-stats,
+.solution-hero,
+.section-cta,
+.hosting-cta-section,
+.portfolio-cta-section,
+.youtube-cta,
+.team-member-hero {
+    background: #262727 url('/img/dark-contours.svg') center / cover no-repeat !important;
+}
+
+/* the heroes that had their own pattern/overlay layers drop them for the shared background */
+.about-hero-bg,
+.solution-hero-bg {
+    display: none;
+}
