@@ -19543,3 +19543,9 @@ html {
         margin-right: 0;
     }
 }
+
+/* The "Kartoza" name set as text (hero heading and navbar) is Lato Black; everything else is Lato Regular/Bold. */
+.hero-company-name,
+.navbar-logo-text {
+    font-weight: 900 !important;
+}
