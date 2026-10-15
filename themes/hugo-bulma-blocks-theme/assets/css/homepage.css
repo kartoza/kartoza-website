@@ -5652,625 +5652,27 @@ body:has(.blog-hero) .contextmenu {
    APP SINGLE PAGE
    ============================================ */
 
-/* App Hero */
-.app-hero {
-    position: relative;
-    min-height: 50vh;
-    display: flex;
-    align-items: flex-end;
-    padding: 4rem 0;
-    overflow: hidden;
-}
-
-.app-hero-bg {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-}
-
-.app-hero-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.app-hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(56, 57, 57, 0.6);
-}
-
-.app-hero .container {
-    position: relative;
-    z-index: 1;
-}
-
-.app-hero-back {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.875rem;
-    font-weight: 500;
-    margin-bottom: 2rem;
-    transition: color var(--transition-fast);
-}
-
-.app-hero-back:hover {
-    color: var(--white);
-}
-
-.app-hero-content {
-    max-width: 800px;
-}
-
-.app-hero-meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.app-hero-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.app-hero-tag {
-    background: var(--accent);
-    color: var(--white);
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.35rem 1rem;
-    border-radius: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.app-hero-title {
-    color: var(--white);
-    font-size: 3rem;
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 1rem;
-}
-
-.app-hero-subtitle {
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 1.25rem;
-    line-height: 1.5;
-    max-width: 600px;
-}
-
-@media screen and (max-width: 768px) {
-    .app-hero {
-        min-height: 40vh;
-        padding: 2rem 0;
-    }
-
-    .app-hero-title {
-        font-size: 2rem;
-    }
-
-    .app-hero-subtitle {
-        font-size: 1rem;
-    }
-}
-
-/* App Article */
-.app-article {
-    padding: 4rem 0;
-    background: var(--light-bg);
-}
-
-.app-article-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 320px;
-    gap: 3rem;
-    align-items: start;
-}
-
-@media screen and (max-width: 1023px) {
-    .app-article-wrapper {
-        grid-template-columns: 1fr;
-    }
-}
-
-.app-article-content {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    padding: 3rem;
-    box-shadow: var(--shadow-sm);
-}
-
-/* ============================================
-   APP CONTENT - MIND-BLOWING TYPOGRAPHY
-   ============================================ */
-
-/* Headings with gradient accents */
-.app-article-content h2 {
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--primary-dark);
-    margin: 3rem 0 1.5rem;
-    padding-bottom: 1rem;
-    position: relative;
-    letter-spacing: -0.5px;
-}
-
-.app-article-content h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 80px;
-    height: 4px;
-    background: var(--accent);
-    border-radius: 2px;
-}
-
-.app-article-content h2:first-of-type {
-    margin-top: 0;
-}
-
-.app-article-content h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary-dark);
-    margin: 2.5rem 0 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.app-article-content h3::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-    flex-shrink: 0;
-}
-
-.app-article-content h4 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text-dark);
-    margin: 2rem 0 0.75rem;
-}
-
-/* Beautiful paragraphs */
-.app-article-content p {
-    font-size: 1rem;
-    line-height: 1.85;
-    color: var(--text-muted);
-    margin-bottom: 1.5rem;
-}
-
-.app-article-content > p:first-of-type {
-    font-size: 1.25rem;
-    line-height: 1.7;
-    color: var(--text-dark);
-    font-weight: 500;
-}
-
-/* Stunning lists */
-.app-article-content ul,
-.app-article-content ol {
-    margin: 1.5rem 0 2rem;
-    padding: 0;
-    list-style: none;
-}
-
-.app-article-content ul li,
-.app-article-content ol li {
-    position: relative;
-    padding: 1rem 1.5rem 1rem 3.5rem;
-    margin-bottom: 0.75rem;
-    background: var(--light-bg);
-    border-radius: var(--radius-md);
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--text-dark);
-    transition: all var(--transition-fast);
-    border-left: 3px solid transparent;
-}
-
-.app-article-content ul li:hover,
-.app-article-content ol li:hover {
-    background: rgba(84, 162, 204, 0.08);
-    border-left-color: var(--accent);
-}
-
-.app-article-content ul li::before {
-    content: '';
-    position: absolute;
-    left: 1.25rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 10px;
-    height: 10px;
-    background: var(--primary);
-    border-radius: 50%;
-    box-shadow: 0 0 0 3px rgba(84, 162, 204, 0.2);
-}
-
-.app-article-content ol {
-    counter-reset: app-counter;
-}
-
-.app-article-content ol li::before {
-    counter-increment: app-counter;
-    content: counter(app-counter);
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 28px;
-    height: 28px;
-    background: var(--primary);
-    color: var(--white);
-    font-weight: 700;
-    font-size: 0.875rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Beautiful images with frame effect */
-.app-article-content img {
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-lg);
-    margin: 2.5rem 0;
-    box-shadow:
-        0 4px 6px rgba(56, 57, 57, 0.1),
-        0 10px 40px rgba(56, 57, 57, 0.15),
-        0 0 0 1px rgba(56, 57, 57, 0.05);
-    transition: all var(--transition-med);
-}
-
-.app-article-content img:hover {
-    box-shadow:
-        0 8px 12px rgba(56, 57, 57, 0.15),
-        0 20px 27px rgba(56, 57, 57, 0.11),
-        0 0 0 1px rgba(56, 57, 57, 0.1);
-}
-
-/* Stunning links */
-.app-article-content a {
-    color: var(--primary);
-    font-weight: 600;
-    text-decoration: none;
-    background: var(--accent);
-    background-size: 0% 2px;
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    transition: all var(--transition-fast);
-    padding-bottom: 2px;
-}
-
-.app-article-content a:hover {
-    color: var(--primary-dark);
-    background-size: 100% 2px;
-}
-
-/* Beautiful blockquotes */
-.app-article-content blockquote {
-    margin: 2.5rem 0;
-    padding: 2rem 2.5rem;
-    background: var(--primary-dark);
-    border-radius: var(--radius-lg);
-    position: relative;
-    overflow: hidden;
-}
-
-.app-article-content blockquote::before {
-    content: '"';
-    position: absolute;
-    top: -20px;
-    left: 20px;
-    font-size: 8rem;
-    font-family: Georgia, serif;
-    color: rgba(255, 255, 255, 0.1);
-    line-height: 1;
-}
-
-.app-article-content blockquote p {
-    color: var(--white);
-    font-size: 1.25rem;
-    font-style: italic;
-    line-height: 1.7;
-    margin: 0;
-    position: relative;
-    z-index: 1;
-}
-
-/* Code blocks */
-.app-article-content code {
-    background: var(--light-bg);
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    font-family: 'Fira Code', 'Monaco', monospace;
-    font-size: 0.875em;
-    color: var(--primary-dark);
-}
-
-.app-article-content pre {
-    background: #383939;
-    border-radius: var(--radius-md);
-    padding: 1.5rem 2rem;
-    margin: 2rem 0;
-    overflow-x: auto;
-    box-shadow: var(--shadow-lg);
-}
-
-.app-article-content pre code {
-    background: none;
-    padding: 0;
-    color: #F5F5F2;
-    font-size: 1rem;
-    line-height: 1.6;
-}
-
-/* Feature highlight boxes */
-.app-article-content strong {
-    color: var(--text-dark);
-    font-weight: 700;
-}
-
-/* Horizontal rules */
-.app-article-content hr {
-    border: none;
-    height: 4px;
-    background: var(--primary);
-    border-radius: 2px;
-    margin: 3rem 0;
-    opacity: 0.3;
-}
-
-/* Tables */
-.app-article-content table {
-    width: 100%;
-    margin: 2rem 0;
-    border-collapse: separate;
-    border-spacing: 0;
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-}
-
-.app-article-content thead {
-    background: var(--primary-dark);
-}
-
-.app-article-content th {
-    color: var(--white);
-    font-weight: 700;
-    padding: 1rem 1.5rem;
-    text-align: left;
-}
-
-.app-article-content td {
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid var(--light-bg-alt);
-    background: var(--white);
-}
-
-.app-article-content tr:last-child td {
-    border-bottom: none;
-}
-
-.app-article-content tr:hover td {
-    background: var(--light-bg);
-}
-
 /* Download/Action buttons in content */
-.app-article-content a[href*="play.google.com"],
-.app-article-content a[href*="apps.apple.com"],
-.app-article-content a[href*="download"] {
+.app-page .blog-article-content a[href*="play.google.com"],
+.app-page .blog-article-content a[href*="apps.apple.com"],
+.app-page .blog-article-content a[href*="download"] {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
     background: var(--primary);
     color: var(--white) !important;
     padding: 1rem 2rem;
-    border-radius: var(--radius-md);
+    border-radius: 4px;
     font-weight: 600;
     margin: 0.5rem 0.5rem 0.5rem 0;
-    transition: all var(--transition-med);
-    box-shadow: var(--shadow-md);
+    
+    box-shadow: none;
 }
 
-.app-article-content a[href*="play.google.com"]:hover,
-.app-article-content a[href*="apps.apple.com"]:hover,
-.app-article-content a[href*="download"]:hover {
-    box-shadow: var(--shadow-lg);
-    background-size: 100% 2px;
-}
-
-/* App Article Sidebar */
-.app-article-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-@media screen and (max-width: 1023px) {
-    .app-article-sidebar {
-        order: -1;
-    }
-}
-
-/* App Info Card */
-.app-info-card {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.app-icon {
-    width: 60px;
-    height: 60px;
-    background: var(--primary);
-    border-radius: var(--radius-md);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.app-icon i {
-    font-size: 1.5rem;
-    color: var(--white);
-}
-
-.app-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.app-label {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.app-name {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text-dark);
-}
-
-/* App CTA Section */
-.app-cta-section {
+.app-page .blog-article-content a[href*="play.google.com"]:hover,
+.app-page .blog-article-content a[href*="apps.apple.com"]:hover,
+.app-page .blog-article-content a[href*="download"]:hover {
     background: var(--primary-dark);
-    padding: 3rem 1.5rem;
-}
-
-.app-cta-content {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.app-cta-title {
-    color: var(--white);
-    font-size: 2rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-}
-
-.app-cta-text {
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-}
-
-.app-cta-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-}
-
-/* App Navigation */
-.app-navigation {
-    background: var(--white);
-    padding: 2rem 1.5rem;
-    border-top: 1px solid var(--light-bg-alt);
-}
-
-.app-nav-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-}
-
-.app-nav-link {
-    flex: 1;
-    padding: 1rem;
-    border-radius: var(--radius-md);
-    transition: background var(--transition-fast);
-}
-
-.app-nav-link:not(.app-nav-empty):hover {
-    background: var(--light-bg);
-}
-
-.app-nav-prev {
-    text-align: left;
-}
-
-.app-nav-next {
-    text-align: right;
-}
-
-.app-nav-empty {
-    visibility: hidden;
-}
-
-.app-nav-direction {
-    display: block;
-    font-size: 0.875rem;
-    color: var(--text-muted);
-    margin-bottom: 0.25rem;
-}
-
-.app-nav-title {
-    display: block;
-    font-weight: 600;
-    color: var(--primary-dark);
-    font-size: 1rem;
-}
-
-.app-nav-all {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    background: var(--light-bg);
-    border-radius: var(--radius-md);
-    color: var(--text-dark);
-    font-weight: 600;
-    font-size: 0.875rem;
-    transition: all var(--transition-fast);
-}
-
-.app-nav-all:hover {
-    background: var(--primary);
-    color: var(--white);
-}
-
-@media screen and (max-width: 768px) {
-    .app-nav-wrapper {
-        flex-direction: column;
-    }
-
-    .app-nav-link {
-        width: 100%;
-        text-align: center !important;
-    }
-
-    .app-nav-empty {
-        display: none;
-    }
-}
-
-/* Hide block shortcode in app content too */
-.app-article-content .block,
-.app-article-content .rich,
-.app-article-content > section:first-of-type,
-.app-article-content > section.section:first-of-type,
-.app-article-content .notification.is-primary,
-.app-article-content section.section:has(.notification.is-primary) {
-    display: none !important;
 }
 
 /* ============================================
@@ -19594,4 +18996,78 @@ a.playlist-card:hover .playlist-card-link {
 .services-section .columns > .column > .main-card > .button {
     /* !important: the buttons carry Bulma's `mt-4`, which is itself !important */
     margin-top: auto !important;
+}
+
+/* ============================================
+   APP DETAIL PAGE (hero/article/nav share the blog-* classes with portfolio posts)
+   ============================================ */
+.app-page .app-info-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.app-page .app-info-icon {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 1.25rem;
+}
+
+.app-page .app-info-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.app-page .app-info-label {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.app-page .app-info-name {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.app-page .sidebar-tag {
+    background: var(--white);
+    border: 1px solid var(--light-bg-alt);
+    color: var(--text-dark);
+}
+
+/* Related projects / plugins in article sidebars: keep the text dark on hover.
+   (An older rule turned the title white while a later one made the hover background white.) */
+.blog-article-sidebar .related-item:hover,
+.blog-article-sidebar .related-item:focus-visible,
+.blog-article-sidebar .related-item:active {
+    background: var(--white);
+    border-color: var(--primary);
+    box-shadow: none;
+    transform: none;
+}
+
+.blog-article-sidebar .related-item:hover .related-title,
+.blog-article-sidebar .related-item:focus-visible .related-title,
+.blog-article-sidebar .related-item:active .related-title {
+    color: var(--primary-dark);
+}
+
+.blog-article-sidebar .related-item:hover .related-meta,
+.blog-article-sidebar .related-item:focus-visible .related-meta {
+    color: var(--text-muted);
+}
+
+.blog-article-sidebar .related-item:hover .related-arrow,
+.blog-article-sidebar .related-item:hover .related-arrow i {
+    color: var(--primary);
 }
