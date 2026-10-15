@@ -19549,3 +19549,20 @@ html {
 .navbar-logo-text {
     font-weight: 900 !important;
 }
+
+/* Footer: the supplied white (reversed) symbol and a white tagline on the dark blue */
+.footer-logo img {
+    filter: none;
+}
+
+.footer-tagline {
+    color: var(--white);
+}
+
+/* Partner "Get Started" card: keep the label readable on hover (the generic primary hover turned it white on white) */
+.partner-cta-card .button.is-primary:hover,
+.partner-cta-card .button.is-primary:focus {
+    background: var(--light-bg);
+    border-color: var(--light-bg);
+    color: var(--primary-dark);
+}
