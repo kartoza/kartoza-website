@@ -27,18 +27,6 @@
     </div>
 </section>
 
-<!-- Team Introduction -->
-<section class="team-intro">
-    <div class="container">
-        <div class="team-intro-content">
-            <div class="team-intro-icon">
-                <i class="fas fa-users"></i>
-            </div>
-            <p>We are a <strong>Free and Open Source GIS service provider</strong> with registered offices in South Africa and Portugal. We develop and maintain geographic information systems and train teams to use geospatial software to its full potential.</p>
-        </div>
-    </div>
-</section>
-
 {{ $leadership := where $visibleMembers ".Params.department" "Leadership" }}
 {{ $development := where $visibleMembers ".Params.department" "Development" }}
 {{ $training := where $visibleMembers ".Params.department" "Training & Documentation" }}
@@ -51,12 +39,12 @@
 {{ with $leadership }}
 <section class="team-section team-leadership">
     <div class="container">
-        <div class="team-section-header">
-            <div class="team-section-icon">
-                <i class="fas fa-crown"></i>
+        <div class="section-heading team-section-header">
+            <div class="section-heading-main">
+                <span class="section-heading-eyebrow">Guiding our mission and vision</span>
+                <h2 class="section-heading-title">Leadership</h2>
             </div>
-            <h2 class="team-section-title">Leadership</h2>
-            <p class="team-section-subtitle">Guiding our mission and vision</p>
+
         </div>
         <div class="team-grid team-grid-leadership">
             {{ range (sort . "Params.weight") }}
@@ -89,12 +77,12 @@
 {{ with $development }}
 <section class="team-section team-development">
     <div class="container">
-        <div class="team-section-header">
-            <div class="team-section-icon">
-                <i class="fas fa-code"></i>
+        <div class="section-heading team-section-header">
+            <div class="section-heading-main">
+                <span class="section-heading-eyebrow">Building the future of geospatial</span>
+                <h2 class="section-heading-title">Development</h2>
             </div>
-            <h2 class="team-section-title">Development</h2>
-            <p class="team-section-subtitle">Building the future of geospatial</p>
+
         </div>
         <div class="team-grid">
             {{ range (sort . "Params.weight") }}
@@ -127,12 +115,12 @@
 {{ with $training }}
 <section class="team-section team-training">
     <div class="container">
-        <div class="team-section-header">
-            <div class="team-section-icon">
-                <i class="fas fa-graduation-cap"></i>
+        <div class="section-heading team-section-header">
+            <div class="section-heading-main">
+                <span class="section-heading-eyebrow">Sharing knowledge worldwide</span>
+                <h2 class="section-heading-title">Training & Documentation</h2>
             </div>
-            <h2 class="team-section-title">Training & Documentation</h2>
-            <p class="team-section-subtitle">Sharing knowledge worldwide</p>
+
         </div>
         <div class="team-grid">
             {{ range (sort . "Params.weight") }}
@@ -165,12 +153,12 @@
 {{ with $gis }}
 <section class="team-section team-gis">
     <div class="container">
-        <div class="team-section-header">
-            <div class="team-section-icon">
-                <i class="fas fa-layer-group"></i>
+        <div class="section-heading team-section-header">
+            <div class="section-heading-main">
+                <span class="section-heading-eyebrow">Mapping experts and spatial analysts</span>
+                <h2 class="section-heading-title">GIS Specialists</h2>
             </div>
-            <h2 class="team-section-title">GIS Specialists</h2>
-            <p class="team-section-subtitle">Mapping experts and spatial analysts</p>
+
         </div>
         <div class="team-grid">
             {{ range (sort . "Params.weight") }}
@@ -203,12 +191,12 @@
 {{ with $devops }}
 <section class="team-section team-devops">
     <div class="container">
-        <div class="team-section-header">
-            <div class="team-section-icon">
-                <i class="fas fa-server"></i>
+        <div class="section-heading team-section-header">
+            <div class="section-heading-main">
+                <span class="section-heading-eyebrow">Keeping our systems running smoothly</span>
+                <h2 class="section-heading-title">DevOps & Infrastructure</h2>
             </div>
-            <h2 class="team-section-title">DevOps & Infrastructure</h2>
-            <p class="team-section-subtitle">Keeping our systems running smoothly</p>
+
         </div>
         <div class="team-grid">
             {{ range (sort . "Params.weight") }}
@@ -241,12 +229,12 @@
 {{ with $operations }}
 <section class="team-section team-operations">
     <div class="container">
-        <div class="team-section-header">
-            <div class="team-section-icon">
-                <i class="fas fa-cogs"></i>
+        <div class="section-heading team-section-header">
+            <div class="section-heading-main">
+                <span class="section-heading-eyebrow">The backbone of our organisation</span>
+                <h2 class="section-heading-title">Operations & Administration</h2>
             </div>
-            <h2 class="team-section-title">Operations & Administration</h2>
-            <p class="team-section-subtitle">The backbone of our organisation</p>
+
         </div>
         <div class="team-grid">
             {{ range (sort . "Params.weight") }}
@@ -279,12 +267,12 @@
 {{ with $pm }}
 <section class="team-section team-pm">
     <div class="container">
-        <div class="team-section-header">
-            <div class="team-section-icon">
-                <i class="fas fa-tasks"></i>
+        <div class="section-heading team-section-header">
+            <div class="section-heading-main">
+                <span class="section-heading-eyebrow">Delivering projects on time, every time</span>
+                <h2 class="section-heading-title">Project Management</h2>
             </div>
-            <h2 class="team-section-title">Project Management</h2>
-            <p class="team-section-subtitle">Delivering projects on time, every time</p>
+
         </div>
         <div class="team-grid team-grid-leadership">
             {{ range (sort . "Params.weight") }}

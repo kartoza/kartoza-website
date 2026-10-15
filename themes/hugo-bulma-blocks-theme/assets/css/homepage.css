@@ -19741,3 +19741,38 @@ html {
 .solution-hero-bg {
     display: none;
 }
+
+/* Team page section headings: the landing page's editorial heading (eyebrow + title left, short line right)
+   instead of a big icon circle above a centred title */
+.team-section-header.section-heading {
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    text-align: left;
+}
+
+@media screen and (max-width: 768px) {
+    .team-section > .container {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    .team-section-header.section-heading {
+        margin-bottom: 2rem;
+    }
+}
+
+/* Team page headings: the subtitle sits at the right end of the row, right-aligned and on the title's baseline */
+.team-section-header.section-heading .section-heading-sub {
+    justify-self: end;
+    max-width: 22rem;
+    margin: 0 0 0.35rem;
+    text-align: right;
+}
+
+@media screen and (max-width: 768px) {
+    .team-section-header.section-heading .section-heading-sub {
+        justify-self: start;
+        max-width: none;
+        text-align: left;
+    }
+}
