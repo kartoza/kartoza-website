@@ -97,7 +97,7 @@
 }
 
 .hero-company-name {
-    color: var(--text-dark) !important;
+    color: #515253 !important; /* between the logo wordmark's Secondary Grey #676869 and the #383939 text charcoal */
     font-size: 5.5rem !important;
     font-weight: 800 !important;
     letter-spacing: 2px;
