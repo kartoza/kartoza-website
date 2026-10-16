@@ -131,6 +131,17 @@
                     <a href="{{ absURL "careers/" }}">Careers</a>
                     <span class="divider"></span>
                     <a href="{{ absURL "about/" }}">About</a>
+                    {{- $siteVersion := "" -}}
+                    {{- if fileExists "version/version.txt" }}{{ $siteVersion = readFile "version/version.txt" | strings.TrimSpace }}{{ end -}}
+                    {{- $fullCommit := site.Params.gitcommit | default "" -}}
+                    {{- if fileExists "version/commit.txt" }}{{ $fullCommit = readFile "version/commit.txt" }}{{ end -}}
+                    {{- $fullCommit = strings.TrimSpace $fullCommit -}}
+                    {{- $shortCommit := "" -}}
+                    {{- if ge (len $fullCommit) 4 }}{{ $shortCommit = substr $fullCommit -4 }}{{ end -}}
+                    {{- if $siteVersion }}
+                    <span class="divider"></span>
+                    <span style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">{{ $siteVersion }}{{ with $shortCommit }}-{{ . }}{{ end }}</span>
+                    {{- end }}
                 </div>
             </div>
             {{- $version := site.Params.gitversion -}}
