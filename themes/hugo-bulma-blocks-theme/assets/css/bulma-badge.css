@@ -21,10 +21,10 @@
 .badge {
   background-color: #00d1b2;
   border: 2px solid transparent;
-  border-radius: 14px;
+  border-radius: 4px;
   box-shadow: 0 0 0 2px white;
   color: white;
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   height: 14px;
   line-height: calc(7px + 1px);
   min-width: 14px;

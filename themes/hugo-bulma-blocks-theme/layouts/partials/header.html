@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="en" class="has-navbar-fixed-top">
     <head>
+        {{/* Analytics only on a production build: the sandbox (hugo --environment sandbox) and
+             `hugo server` must not send page views to the live GTM container. */}}
+        {{ if eq hugo.Environment "production" }}
         <!-- Google Tag Manager -->
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -8,6 +11,7 @@
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-K5ZVLM25');</script>
         <!-- End Google Tag Manager -->
+        {{ end }}
 
         <meta charset="utf-8" />
 
@@ -29,6 +33,10 @@
             href="{{ absURL "img/favicon/favicon-16x16.png" }}"
         />
         <link rel="manifest" href="{{ absURL "site.webmanifest" }}" />
+
+        {{/* Preload the two Lato weights used above the fold */}}
+        <link rel="preload" href="{{ absURL "fonts/Lato-Regular.woff2" }}" as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href="{{ absURL "fonts/Lato-Bold.woff2" }}" as="font" type="font/woff2" crossorigin />
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{{ .Title }} &middot; {{ .Site.Title }}</title>
@@ -111,9 +119,10 @@
         {{ $components := resources.Get "css/components.css" }}
         {{ $themecss := resources.Get "css/theme.css" }}
         {{ $buttoncss := resources.Get "css/button.css" }}
+        {{ $nomotioncss := resources.Get "css/no-motion.css" }}
 
         {{/* must have the leading slash in css path or gh pages deploy will break */}}
-        {{ $css := slice $menucss $syntaxcss $customcss $animatecss $blockcss $highlightcss $overridescss $cookiecss $homepagecss $searchcss $engagementcss $regionalcss $trainingbookingcss $components $themecss $buttoncss | resources.Concat "/css/all.css" | resources.Minify | resources.Fingerprint }}
+        {{ $css := slice $menucss $syntaxcss $customcss $animatecss $blockcss $highlightcss $overridescss $cookiecss $homepagecss $searchcss $engagementcss $regionalcss $trainingbookingcss $components $themecss $buttoncss $nomotioncss | resources.Concat "/css/all.css" | resources.Minify | resources.Fingerprint }}
         <link href="{{ $css.RelPermalink }}" rel="stylesheet" />
 
         {{/* We can compile SASS too... */}}

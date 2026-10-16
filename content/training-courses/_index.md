@@ -5,6 +5,7 @@ title: "Training Courses"
 subtitle: "Building geospatial capacity across Africa and beyond"
 description: "Professional GIS and open source geospatial training courses by Kartoza."
 HasBanner: true
+LabelText: "Learn"
 HeroSize: "is-medium"
 HeroImage: "img/banner-courses.png"
 ---

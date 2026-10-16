@@ -3,58 +3,64 @@
 {{ partial "header.html" . }}
 {{ partial "menu.html" . }}
 
-<!-- App Hero Section -->
-<section class="app-hero">
-    <div class="app-hero-bg">
-        {{ $thumbnail := .Params.thumbnail }}
-        {{ if not $thumbnail }}
-            {{ $thumbnail = "/img/banner-apps.png" }}
-        {{ end }}
-        <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" class="app-hero-image">
-        <div class="app-hero-overlay"></div>
+<!-- App Hero Section: same layout as a portfolio project (text left, framed screenshot right) -->
+<section class="blog-hero has-zoom">
+    {{ $thumbnail := .Params.thumbnail | default "/img/banner-apps.png" }}
+    <div class="blog-hero-bg">
+        <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" class="blog-hero-image">
+        <div class="blog-hero-overlay"></div>
     </div>
     <div class="container">
-        <a href="{{ absURL "apps/" }}" class="app-hero-back">
+        <a href="{{ absURL "apps/" }}" class="blog-hero-back">
             <i class="fas fa-arrow-left"></i>
             Back to Apps
         </a>
-        <div class="app-hero-content">
-            <div class="app-hero-meta">
+        <div class="project-hero-row">
+        <div class="blog-hero-content">
+            <div class="blog-hero-meta">
                 {{ if .Params.tags }}
-                <div class="app-hero-tags">
-                    {{ range .Params.tags }}
-                    <span class="app-hero-tag">{{ . }}</span>
+                <div class="blog-hero-tags">
+                    {{ range first 3 .Params.tags }}
+                    <span class="blog-hero-tag">{{ . }}</span>
                     {{ end }}
                 </div>
                 {{ end }}
             </div>
-            <h1 class="app-hero-title">{{ .Title }}</h1>
+            <h1 class="blog-hero-title">{{ .Title }}</h1>
             {{ if .Description }}
-            <p class="app-hero-subtitle">{{ .Description }}</p>
+            <p class="blog-hero-subtitle">{{ .Description }}</p>
             {{ end }}
+        </div>
+        <figure class="project-hero-figure" tabindex="0">
+            <img class="project-hero-thumb" src="{{ absURL $thumbnail }}" alt="{{ .Title }}">
+            <div class="project-hero-popup" aria-hidden="true">
+                <img src="{{ absURL $thumbnail }}" alt="">
+            </div>
+        </figure>
         </div>
     </div>
 </section>
 
 <!-- App Content Section -->
-<article class="app-article">
+<article class="blog-article app-page">
     <div class="container">
-        <div class="app-article-wrapper">
+        <div class="blog-article-wrapper">
             <!-- Main Content -->
-            <div class="app-article-content">
+            <div class="blog-article-content">
                 {{ .Content }}
             </div>
 
             <!-- Sidebar -->
-            <aside class="app-article-sidebar">
+            <aside class="blog-article-sidebar">
                 <!-- App Info Card -->
+                {{ $isPlugin := in (.Params.tags | default slice) "Plugin" }}
                 <div class="sidebar-card app-info-card">
-                    <div class="app-icon">
-                        <i class="fas fa-mobile-alt"></i>
+                    <div class="app-info-icon">
+                        <i class="fas {{ if $isPlugin }}fa-puzzle-piece{{ else }}fa-mobile-alt{{ end }}"></i>
                     </div>
-                    <div class="app-info">
-                        <span class="app-label">Application</span>
-                        <span class="app-name">{{ .Title }}</span>
+                    <div class="app-info-text">
+                        <span class="app-info-label">{{ if $isPlugin }}QGIS Plugin{{ else }}Application{{ end }}</span>
+                        <span class="app-info-name">{{ .Title }}</span>
                     </div>
                 </div>
 
@@ -158,18 +164,18 @@
 </article>
 
 <!-- CTA Section -->
-<section class="section app-cta-section">
+<section class="section blog-cta-section">
     <div class="container">
-        <div class="app-cta-content">
-            <h2 class="app-cta-title">Need a Custom App?</h2>
-            <p class="app-cta-text">We build mobile and web applications that bring geospatial capabilities to the field.</p>
-            <div class="app-cta-buttons">
+        <div class="blog-cta-content">
+            <h2 class="blog-cta-title">Need a Custom App?</h2>
+            <p class="blog-cta-text">We build mobile and web applications that bring geospatial capabilities to the field.</p>
+            <div class="blog-cta-buttons">
                 <a class="button is-primary is-medium" href="{{ absURL "contact-us/" }}">
                     <span class="icon"><i class="fas fa-comments"></i></span>
                     <span>Discuss Your Project</span>
                 </a>
                 <a class="button is-light is-medium" href="{{ absURL "apps/" }}">
-                    <span class="icon"><i class="fas fa-mobile-alt"></i></span>
+                    <span class="icon"><i class="fas fa-th-large"></i></span>
                     <span>View All Apps</span>
                 </a>
             </div>
@@ -178,30 +184,30 @@
 </section>
 
 <!-- Navigation -->
-<nav class="app-navigation">
+<nav class="blog-navigation">
     <div class="container">
-        <div class="app-nav-wrapper">
+        <div class="blog-nav-wrapper">
             {{ with .PrevInSection }}
-            <a href="{{ .Permalink }}" class="app-nav-link app-nav-prev">
-                <span class="app-nav-direction"><i class="fas fa-arrow-left"></i> Previous</span>
-                <span class="app-nav-title">{{ .Title | truncate 50 }}</span>
+            <a href="{{ .Permalink }}" class="blog-nav-link blog-nav-prev">
+                <span class="blog-nav-direction"><i class="fas fa-arrow-left"></i> Previous</span>
+                <span class="blog-nav-title">{{ .Title | truncate 50 }}</span>
             </a>
             {{ else }}
-            <div class="app-nav-link app-nav-empty"></div>
+            <div class="blog-nav-link blog-nav-empty"></div>
             {{ end }}
 
-            <a href="{{ absURL "apps/" }}" class="app-nav-all">
+            <a href="{{ absURL "apps/" }}" class="blog-nav-all">
                 <i class="fas fa-th-large"></i>
                 All Apps
             </a>
 
             {{ with .NextInSection }}
-            <a href="{{ .Permalink }}" class="app-nav-link app-nav-next">
-                <span class="app-nav-direction">Next <i class="fas fa-arrow-right"></i></span>
-                <span class="app-nav-title">{{ .Title | truncate 50 }}</span>
+            <a href="{{ .Permalink }}" class="blog-nav-link blog-nav-next">
+                <span class="blog-nav-direction">Next <i class="fas fa-arrow-right"></i></span>
+                <span class="blog-nav-title">{{ .Title | truncate 50 }}</span>
             </a>
             {{ else }}
-            <div class="app-nav-link app-nav-empty"></div>
+            <div class="blog-nav-link blog-nav-empty"></div>
             {{ end }}
         </div>
     </div>

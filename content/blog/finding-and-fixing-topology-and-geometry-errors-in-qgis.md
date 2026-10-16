@@ -15,7 +15,7 @@ title: Finding and Fixing Topology and Geometry Errors in QGIS
 
 Google Maps, Google Earth, Uber are examples leading software/apps that are driven by GIS. They have allowed the ordinary person inadvertently to use GIS and appreciate its power without needing an understanding of the basics of GIS. Many people have taken the leap to using GIS by using some of the GIS capabilities in Google Earth.
 
-In a recent '[Introduction to QGIS](<https://kartoza.com/training-courses/>)' course, a client provided a dataset that had been generated in Google Earth, but each time they submitted their final layer to GIS experts they were told the layer was not correct. They just could not figure out what the error with their data was.
+In a recent '[Introduction to QGIS](</training-courses/>)' course, a client provided a dataset that had been generated in Google Earth, but each time they submitted their final layer to GIS experts they were told the layer was not correct. They just could not figure out what the error with their data was.
 
 I immediately thought that the dataset had some topology error and took it upon myself to debug and fix the errors with the layer. My main worry was how to explain topology basics to people who are not GIS experts. Terms like slivers, undershoots, overshoots are easy to understand for a GIS user or academic. In this post, I will walk through how I tried to explain and show the attendees the topology errors.
 

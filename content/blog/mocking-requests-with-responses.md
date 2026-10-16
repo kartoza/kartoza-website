@@ -13,17 +13,16 @@ thumbnail: /img/blog/placeholder.png
 title: Mocking Requests with Responses
 ---
 
-Sometimes, making a request to third-party service is a requirement in our code. And when we test it, those requests could affect the test result i.e. when the service is down, hence causing a test error. It's also a bad idea if our request incurs a cost, like when our code requests a subscription to a third party. If you have read my blog ["Mocking Requests with requests_mock"](<https://kartoza.com/en/blog/mocking-request-with-requests_mock/>), then you would know that all those issues can be solved by mocking our requests in tests using [requests_mock](<https://requests-mock.readthedocs.io/en/latest/>). This blog will show you an alternative to  _requests_mock_ , the one that is simpler to use yet offers more features: [responses](<https://pypi.org/project/responses/>). For ease of understanding, the return value from requests will be called "response" and the library that we use is "_responses_ " (i.e. an extra "s" in "responses").
+Sometimes, making a request to third-party service is a requirement in our code. And when we test it, those requests could affect the test result i.e. when the service is down, hence causing a test error. It's also a bad idea if our request incurs a cost, like when our code requests a subscription to a third party. If you have read my blog ["Mocking Requests with requests_mock"](</en/blog/mocking-request-with-requests_mock/>), then you would know that all those issues can be solved by mocking our requests in tests using [requests_mock](<https://requests-mock.readthedocs.io/en/latest/>). This blog will show you an alternative to  _requests_mock_ , the one that is simpler to use yet offers more features: [responses](<https://pypi.org/project/responses/>). For ease of understanding, the return value from requests will be called "response" and the library that we use is "_responses_ " (i.e. an extra "s" in "responses").
 
 ## Installation
 
-Simpy do `pip install responses`.
+Simply do `pip install responses`.
 
 ## Basic Usage
 
-We will test our weather subscription code in ["Mocking Requests with requests_mock"](<https://kartoza.com/en/blog/mocking-request-with-requests_mock/>), and update our test in my requests_mock blog to use  _responses_. First, `test_create_weather_subscription_success` can be updated to
-    
-    
+We will test our weather subscription code in ["Mocking Requests with requests_mock"](</en/blog/mocking-request-with-requests_mock/>), and update our test in my requests_mock blog to use  _responses_. First, `test_create_weather_subscription_success` can be updated to
+
     @responses.activate
     
     def test_create_weather_subscription_success(self):
@@ -79,8 +78,7 @@ We will test our weather subscription code in ["Mocking Requests with requests_m
         self.assertEqual(response, 'Weather data subscribed successfully!')
 
 `@response.activate` is used to activate the mocking. Remove this line, and the mocking won't work. Then, add the desired response to our request as in
-    
-    
+
     responses.add(
     
             method=responses.POST,
@@ -108,11 +106,8 @@ There, we specify the method, url, json, and status. You can check other paramet
   7. request headers
   8. request fragment identifier
 
-
-
 Awesome, right? Now I will give you an example for matching body contents in URL-encoded data, because that is what is applicable to our weather subscription function.
-    
-    
+
     @responses.activate
     
     def test_request_matching(self):
@@ -212,8 +207,7 @@ Awesome, right? Now I will give you an example for matching body contents in URL
         self.assertEqual(response, 'Package not found')
 
 The key for the mocking is here.
-    
-    
+
     responses.add(
     
             method=responses.POST,
@@ -249,8 +243,7 @@ The key for the mocking is here.
 ### **NOTE**
 
 Notice that inside matchers, we provide `'user_id': str(self.user_id)` even though our used_id is an integer. That is because the payload is converted to a string in urlencoded parameters. If we don't do so, the requests won't match and this error happens. Try updating `'user_id': str(self.user_id)` to `'user_id': self.user_id` and this will happen.
-    
-    
+
     requests.exceptions.ConnectionError: Connection refused by Responses - the call doesn't match any registered mock.
     
       
@@ -295,8 +288,7 @@ Notice that inside matchers, we provide `'user_id': str(self.user_id)` even thou
 ## Dynamic Response
 
 We could use callbacks to provide a dynamic response. The callbacks basically check the request for its body/headers/anything, and must return a tuple of `(status, headers, and body)`. Now, we will update `test_request_matching` to use a dynamic response.
-    
-    
+
     from urllib.parse import parse_qsl
     
       
@@ -376,4 +368,4 @@ The callbacks we provide check whether `user_id` and `package_id` exists, then r
 
 ## Final Thoughts
 
-I think  _responses_ provides more advanced features that are easier to use, compared to  _requests_mock_. I will most likely ditch  _requests_mock_ in favor of  _responses_.
+I think  _responses_ provides more advanced features that are easier to use, compared to  _requests_mock_. I will most likely ditch  _requests_mock_ in favour of  _responses_.

@@ -11,7 +11,7 @@
    ============================================ */
 
 .auth-hero {
-    background: linear-gradient(135deg, var(--dark2, #1a2a3a) 0%, var(--primary2, #3488b8) 100%);
+    background: var(--dark2, #383939);
     padding: 5rem 1.5rem 3rem;
     position: relative;
     overflow: hidden;
@@ -22,8 +22,8 @@
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse at 20% 50%, rgba(59,157,217,0.15) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(232,163,49,0.1) 0%, transparent 50%);
+        radial-gradient(ellipse at 20% 50%, rgba(84, 162, 204,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(238, 179, 72,0.1) 0%, transparent 50%);
 }
 
 .auth-hero-content {
@@ -34,14 +34,14 @@
 }
 
 .auth-hero-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 800;
     margin-bottom: 0.75rem;
     letter-spacing: -0.02em;
 }
 
 .auth-hero-subtitle {
-    font-size: 1.1rem;
+    font-size: 1rem;
     opacity: 0.8;
 }
 
@@ -50,7 +50,7 @@
    ============================================ */
 
 .auth-section {
-    background: var(--light1, #f7f9fb);
+    background: var(--light1, #F5F5F2);
     min-height: 70vh;
     padding: 3rem 1.5rem 5rem;
     display: flex;
@@ -66,8 +66,8 @@
 
 .auth-card {
     background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 8px 40px rgba(26,42,58,0.12);
+    border-radius: 4px;
+    box-shadow: 0 8px 40px rgba(56, 57, 57,0.12);
     overflow: hidden;
     position: relative;
 }
@@ -79,7 +79,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--primary2, #3488b8), var(--accent, #E8A331));
+    background: var(--primary2, #383939);
 }
 
 /* ============================================
@@ -88,15 +88,15 @@
 
 .auth-tabs {
     display: flex;
-    border-bottom: 1px solid var(--light2, #e8ecf0);
+    border-bottom: 1px solid var(--light2, #D1D1D1);
 }
 
 .auth-tab {
     flex: 1;
     padding: 1.1rem 1.5rem;
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 600;
-    color: var(--dark1, #6B7B8D);
+    color: var(--dark1, #676869);
     background: none;
     border: none;
     cursor: pointer;
@@ -112,14 +112,14 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: var(--primary2, #3488b8);
+    background: var(--primary2, #383939);
     transform: scaleX(0);
     transition: transform 0.2s ease;
     border-radius: 3px 3px 0 0;
 }
 
 .auth-tab.active {
-    color: var(--primary2, #3488b8);
+    color: var(--primary2, #383939);
 }
 
 .auth-tab.active::after {
@@ -127,8 +127,8 @@
 }
 
 .auth-tab:hover:not(.active) {
-    color: var(--dark2, #1a2a3a);
-    background: var(--light1, #f7f9fb);
+    color: var(--dark2, #383939);
+    background: var(--light1, #F5F5F2);
 }
 
 /* ============================================
@@ -153,26 +153,26 @@
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary3, #b2d5e8), var(--primary2, #3488b8));
+    background: var(--primary3, #F5F5F2);
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 1rem;
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     color: #fff;
-    box-shadow: 0 4px 15px rgba(52,136,184,0.3);
+    box-shadow: 0 4px 15px rgba(84, 162, 204,0.3);
 }
 
 .auth-form-header h2 {
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    color: var(--dark2, #1a2a3a);
+    color: var(--dark2, #383939);
     margin-bottom: 0.3rem;
 }
 
 .auth-form-header p {
-    font-size: 0.9rem;
-    color: var(--dark1, #6B7B8D);
+    font-size: 0.875rem;
+    color: var(--dark1, #676869);
 }
 
 .auth-field {
@@ -183,17 +183,17 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.85rem;
+    font-size: 0.875rem;
     font-weight: 600;
-    color: var(--text-primary2, #4D6370);
+    color: var(--text-primary2, #676869);
     margin-bottom: 0.5rem;
     letter-spacing: 0.02em;
     text-transform: uppercase;
 }
 
 .auth-label i {
-    color: var(--primary2, #3488b8);
-    font-size: 0.9em;
+    color: var(--primary2, #383939);
+    font-size: 0.875em;
 }
 
 .auth-input-wrapper {
@@ -203,25 +203,25 @@
 .auth-input {
     width: 100%;
     padding: 0.75rem 1rem;
-    border: 2px solid var(--light2, #e8ecf0);
-    border-radius: 10px;
+    border: 2px solid var(--light2, #D1D1D1);
+    border-radius: 4px;
     font-size: 1rem;
-    color: var(--dark2, #1a2a3a);
-    background: var(--light1, #f7f9fb);
+    color: var(--dark2, #383939);
+    background: var(--light1, #F5F5F2);
     transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
     outline: none;
     font-family: inherit;
 }
 
 .auth-input:focus {
-    border-color: var(--primary2, #3488b8);
+    border-color: var(--primary2, #383939);
     background: #fff;
-    box-shadow: 0 0 0 3px rgba(52,136,184,0.12);
+    box-shadow: 0 0 0 3px rgba(84, 162, 204,0.12);
 }
 
 .auth-input.has-error {
-    border-color: #e74c3c;
-    box-shadow: 0 0 0 3px rgba(231,76,60,0.1);
+    border-color: #B0473C;
+    box-shadow: 0 0 0 3px rgba(176, 71, 60,0.1);
 }
 
 .auth-input-toggle {
@@ -232,14 +232,14 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--dark1, #6B7B8D);
-    font-size: 0.9rem;
+    color: var(--dark1, #676869);
+    font-size: 0.875rem;
     padding: 0.25rem;
     transition: color 0.2s;
 }
 
 .auth-input-toggle:hover {
-    color: var(--primary2, #3488b8);
+    color: var(--primary2, #383939);
 }
 
 .auth-input[type="password"] {
@@ -247,8 +247,8 @@
 }
 
 .auth-field-hint {
-    font-size: 0.78rem;
-    color: var(--dark1, #6B7B8D);
+    font-size: 0.75rem;
+    color: var(--dark1, #676869);
     margin-top: 0.35rem;
     padding-left: 0.25rem;
 }
@@ -261,8 +261,8 @@
     width: 100%;
     padding: 0.875rem;
     border: none;
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--primary2, #3488b8), var(--primary1, #53a2cc));
+    border-radius: 4px;
+    background: var(--primary2, #383939);
     color: #fff;
     font-size: 1rem;
     font-weight: 700;
@@ -276,8 +276,7 @@
 }
 
 .auth-submit:hover:not(:disabled) {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(52,136,184,0.35);
+    box-shadow: 0 6px 20px rgba(84, 162, 204,0.35);
 }
 
 .auth-submit:active:not(:disabled) {
@@ -314,13 +313,13 @@
    ============================================ */
 
 .auth-message {
-    border-radius: 10px;
+    border-radius: 4px;
     padding: 1rem 1.25rem;
     margin-top: 1.25rem;
     display: none;
     align-items: flex-start;
     gap: 0.75rem;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     line-height: 1.5;
 }
 
@@ -329,21 +328,21 @@
 }
 
 .auth-message.is-error {
-    background: rgba(231,76,60,0.08);
-    border: 1px solid rgba(231,76,60,0.2);
-    color: #c0392b;
+    background: rgba(176, 71, 60,0.08);
+    border: 1px solid rgba(176, 71, 60,0.2);
+    color: #B0473C;
 }
 
 .auth-message.is-success {
-    background: rgba(39,174,96,0.08);
-    border: 1px solid rgba(39,174,96,0.2);
-    color: #1e8449;
+    background: rgba(60, 125, 84,0.08);
+    border: 1px solid rgba(60, 125, 84,0.2);
+    color: #3C7D54;
 }
 
 .auth-message.is-info {
-    background: rgba(52,136,184,0.08);
-    border: 1px solid rgba(52,136,184,0.2);
-    color: var(--primary2, #3488b8);
+    background: rgba(84, 162, 204,0.08);
+    border: 1px solid rgba(84, 162, 204,0.2);
+    color: var(--primary2, #383939);
 }
 
 .auth-message i {
@@ -358,14 +357,14 @@
 
 .auth-card-footer {
     padding: 1.25rem 2rem;
-    border-top: 1px solid var(--light2, #e8ecf0);
+    border-top: 1px solid var(--light2, #D1D1D1);
     text-align: center;
     font-size: 0.875rem;
-    color: var(--dark1, #6B7B8D);
+    color: var(--dark1, #676869);
 }
 
 .auth-card-footer a {
-    color: var(--primary2, #3488b8);
+    color: var(--primary2, #383939);
     font-weight: 600;
     text-decoration: none;
 }
@@ -392,26 +391,26 @@
     width: 72px;
     height: 72px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary2, #3488b8), var(--accent, #E8A331));
+    background: var(--primary2, #383939);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 2rem;
     color: #fff;
     margin: 0 auto 1.25rem;
-    box-shadow: 0 6px 20px rgba(52,136,184,0.3);
+    box-shadow: 0 6px 20px rgba(84, 162, 204,0.3);
 }
 
 .auth-user-name {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    color: var(--dark2, #1a2a3a);
+    color: var(--dark2, #383939);
     margin-bottom: 0.35rem;
 }
 
 .auth-user-email {
-    font-size: 0.9rem;
-    color: var(--dark1, #6B7B8D);
+    font-size: 0.875rem;
+    color: var(--dark1, #676869);
     margin-bottom: 1.5rem;
 }
 
@@ -420,11 +419,11 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.625rem 1.5rem;
-    border: 2px solid var(--primary2, #3488b8);
-    border-radius: 8px;
-    color: var(--primary2, #3488b8);
+    border: 2px solid var(--primary2, #383939);
+    border-radius: 4px;
+    color: var(--primary2, #383939);
     background: none;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     font-weight: 600;
     cursor: pointer;
     font-family: inherit;
@@ -433,7 +432,7 @@
 }
 
 .auth-logout-btn:hover {
-    background: var(--primary2, #3488b8);
+    background: var(--primary2, #383939);
     color: #fff;
 }
 
@@ -456,32 +455,32 @@
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    font-size: 0.82rem;
-    color: var(--dark1, #6B7B8D);
-    background: var(--light1, #f7f9fb);
-    border: 1px solid var(--light2, #e8ecf0);
-    border-radius: 20px;
+    font-size: 0.875rem;
+    color: var(--dark1, #676869);
+    background: var(--light1, #F5F5F2);
+    border: 1px solid var(--light2, #D1D1D1);
+    border-radius: 4px;
     padding: 0.25rem 0.75rem;
 }
 
 .auth-user-meta-item i {
-    color: var(--primary2, #3488b8);
-    font-size: 0.8em;
+    color: var(--primary2, #383939);
+    font-size: 0.875em;
 }
 
 #logged-in-meta-loading {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    font-size: 0.82rem;
-    color: var(--dark1, #6B7B8D);
+    font-size: 0.875rem;
+    color: var(--dark1, #676869);
     padding: 0.25rem 0.75rem;
     margin-bottom: 1.25rem;
 }
 
 .auth-user-last-active {
-    font-size: 0.78rem;
-    color: var(--dark1, #6B7B8D);
+    font-size: 0.75rem;
+    color: var(--dark1, #676869);
     margin-bottom: 1.5rem;
 }
 </style>
@@ -529,15 +528,15 @@
                 </button>
 
                 <!-- Account links & settings -->
-                <div style="margin-top:1.75rem; padding-top:1.5rem; border-top:1px solid var(--light2,#e8ecf0); width:100%; text-align:left;">
+                <div style="margin-top:1.75rem; padding-top:1.5rem; border-top:1px solid var(--light2,#D1D1D1); width:100%; text-align:left;">
                     <a href="/my-orders/"
-                        style="display:flex; align-items:center; gap:0.5rem; width:100%; background:none; border:none; cursor:pointer; font-size:0.9rem; font-weight:600; color:var(--primary2,#3488b8); padding:0.4rem 0; text-decoration:none; border-bottom:1px solid var(--light2,#e8ecf0); margin-bottom:0.5rem; padding-bottom:0.75rem;">
+                        style="display:flex; align-items:center; gap:0.5rem; width:100%; background:none; border:none; cursor:pointer; font-size:0.875rem; font-weight:600; color:var(--primary2,#383939); padding:0.4rem 0; text-decoration:none; border-bottom:1px solid var(--light2,#D1D1D1); margin-bottom:0.5rem; padding-bottom:0.75rem;">
                         <i class="fas fa-receipt" style="width:1em;"></i>
                         <span>My Orders</span>
                         <i class="fas fa-chevron-right" style="margin-left:auto; font-size:0.75rem;"></i>
                     </a>
                     <button id="toggle-email-btn" onclick="toggleEmailForm()"
-                        style="display:flex; align-items:center; gap:0.5rem; width:100%; background:none; border:none; cursor:pointer; font-size:0.9rem; font-weight:600; color:var(--primary2,#3488b8); padding:0.4rem 0; font-family:inherit;">
+                        style="display:flex; align-items:center; gap:0.5rem; width:100%; background:none; border:none; cursor:pointer; font-size:0.875rem; font-weight:600; color:var(--primary2,#383939); padding:0.4rem 0; font-family:inherit;">
                         <i class="fas fa-envelope" style="width:1em;"></i>
                         <span>Change Email Address</span>
                         <i class="fas fa-chevron-down" id="toggle-email-icon" style="margin-left:auto; font-size:0.75rem; transition:transform 0.2s;"></i>
@@ -651,7 +650,7 @@
 
                     <div style="text-align:right; margin-bottom:0.75rem;">
                         <a href="#" onclick="switchTab('forgot'); return false;"
-                           style="font-size:0.82rem; color:var(--primary2,#3488b8);">
+                           style="font-size:0.875rem; color:var(--primary2,#383939);">
                             Forgot password?
                         </a>
                     </div>
@@ -701,7 +700,7 @@
 
                     <div style="text-align:right; margin-bottom:0.75rem;">
                         <a href="#" id="login-otp-resend"
-                           style="font-size:0.82rem; color:var(--primary2,#3488b8);">
+                           style="font-size:0.875rem; color:var(--primary2,#383939);">
                             Resend code
                         </a>
                     </div>
@@ -727,7 +726,7 @@
 
                     <div style="text-align:center; margin-top:0.75rem;">
                         <a href="#" id="login-otp-back"
-                           style="font-size:0.82rem; color:var(--primary2,#3488b8);">
+                           style="font-size:0.875rem; color:var(--primary2,#383939);">
                             &larr; Use a different account
                         </a>
                     </div>
@@ -780,7 +779,7 @@
             <!-- Register Panel -->
             <div class="auth-form-panel" id="panel-register" role="tabpanel" aria-labelledby="tab-register">
                 <div class="auth-form-header">
-                    <div class="auth-form-icon" style="background: linear-gradient(135deg, #f0b84d, #e8a331);">
+                    <div class="auth-form-icon" style="background: #EEB348;">
                         <i class="fas fa-user-plus"></i>
                     </div>
                     <h2>Create Account</h2>
@@ -843,7 +842,7 @@
                     </div>
 
                     <button type="submit" class="auth-submit" id="register-submit"
-                        style="background: linear-gradient(135deg, #e8a331, #f0b84d);">
+                        style="background: #EEB348;">
                         <span class="btn-text">
                             <i class="fas fa-user-plus"></i> Create Account
                         </span>

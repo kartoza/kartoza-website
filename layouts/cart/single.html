@@ -3,7 +3,7 @@
 
 <style>
 .cart-hero {
-    background: linear-gradient(135deg, var(--dark2, #1a2a3a) 0%, var(--primary2, #3488b8) 100%);
+    background: var(--dark2, #383939);
     padding: 5rem 1.5rem 3rem;
     position: relative;
     overflow: hidden;
@@ -13,8 +13,8 @@
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse at 20% 50%, rgba(59,157,217,0.15) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(232,163,49,0.1) 0%, transparent 50%);
+        radial-gradient(ellipse at 20% 50%, rgba(84, 162, 204,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(238, 179, 72,0.1) 0%, transparent 50%);
     pointer-events: none;
 }
 .cart-hero-content {
@@ -24,19 +24,19 @@
     color: #fff;
 }
 .cart-hero-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 800;
     margin-bottom: 0.5rem;
     letter-spacing: -0.02em;
 }
 .cart-hero-subtitle {
-    font-size: 1.1rem;
+    font-size: 1rem;
     opacity: 0.8;
 }
 
 .cart-section {
     padding: 3rem 1.5rem 5rem;
-    background: #f7f9fb;
+    background: #F5F5F2;
     min-height: 60vh;
 }
 
@@ -52,17 +52,17 @@
 
 .cart-panel {
     background: #fff;
-    border-radius: 12px;
+    border-radius: 4px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     overflow: hidden;
 }
 
 .cart-panel-header {
     padding: 1.25rem 1.5rem;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #D1D1D1;
     font-size: 1rem;
     font-weight: 700;
-    color: #1a2a3a;
+    color: #383939;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -73,7 +73,7 @@
     align-items: center;
     gap: 1rem;
     padding: 1.25rem 1.5rem;
-    border-bottom: 1px solid #f6f6f6;
+    border-bottom: 1px solid #F5F5F2;
     transition: background 0.15s;
 }
 .cart-item:last-child { border-bottom: none; }
@@ -82,22 +82,22 @@
 .cart-item-info { flex: 1; min-width: 0; }
 .cart-item-name {
     font-weight: 600;
-    font-size: 0.975rem;
-    color: #1a2a3a;
+    font-size: 1rem;
+    color: #383939;
     margin-bottom: 0.2rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 .cart-item-code {
-    font-size: 0.78rem;
-    color: #9aaab8;
+    font-size: 0.75rem;
+    color: #8A8B8B;
     font-family: monospace;
 }
 .cart-item-price {
     font-weight: 700;
     font-size: 1rem;
-    color: #3B9DD9;
+    color: #54A2CC;
     white-space: nowrap;
     margin-right: 0.5rem;
 }
@@ -105,15 +105,15 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: #c8c8c8;
+    color: #D1D1D1;
     padding: 0.3rem 0.4rem;
-    border-radius: 6px;
+    border-radius: 4px;
     transition: color 0.2s, background 0.2s;
     line-height: 1;
     flex-shrink: 0;
 }
 .cart-item-remove:hover {
-    color: #E55B3C;
+    color: #B0473C;
     background: #fff0ed;
 }
 .cart-item-remove.is-loading {
@@ -122,24 +122,24 @@
 }
 
 .cart-item-unit-price {
-    font-size: 0.78rem;
-    color: #9aaab8;
+    font-size: 0.75rem;
+    color: #8A8B8B;
     white-space: nowrap;
 }
 .cart-qty-stepper {
     display: flex;
     align-items: center;
-    border: 1.5px solid #d4dbe2;
-    border-radius: 8px;
+    border: 1.5px solid #D1D1D1;
+    border-radius: 4px;
     overflow: hidden;
-    background: #f7f9fb;
+    background: #F5F5F2;
     flex-shrink: 0;
 }
 .cart-qty-btn {
     background: none;
     border: none;
     cursor: pointer;
-    color: #3B9DD9;
+    color: #54A2CC;
     font-size: 1rem;
     font-weight: 700;
     padding: 0.2rem 0.55rem;
@@ -152,14 +152,14 @@
     min-width: 1.75rem;
     text-align: center;
     font-weight: 600;
-    font-size: 0.92rem;
-    color: #1a2a3a;
+    font-size: 0.875rem;
+    color: #383939;
     padding: 0 0.1rem;
 }
 
 .cart-summary-panel {
     background: #fff;
-    border-radius: 12px;
+    border-radius: 4px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     padding: 1.5rem;
     position: sticky;
@@ -168,18 +168,18 @@
 .cart-summary-title {
     font-size: 1rem;
     font-weight: 700;
-    color: #1a2a3a;
+    color: #383939;
     margin-bottom: 1.25rem;
     padding-bottom: 0.75rem;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #D1D1D1;
 }
 .cart-summary-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0.65rem;
-    font-size: 0.925rem;
-    color: #4d6370;
+    font-size: 0.875rem;
+    color: #676869;
 }
 .cart-summary-total {
     display: flex;
@@ -187,10 +187,10 @@
     align-items: center;
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 2px solid #f0f0f0;
-    font-size: 1.1rem;
+    border-top: 2px solid #D1D1D1;
+    font-size: 1rem;
     font-weight: 700;
-    color: #1a2a3a;
+    color: #383939;
 }
 .cart-checkout-btn {
     width: 100%;
@@ -211,22 +211,22 @@
     text-align: center;
     padding: 5rem 2rem;
     background: #fff;
-    border-radius: 12px;
+    border-radius: 4px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
 .cart-empty-icon {
     font-size: 3.5rem;
-    color: #d4dbe2;
+    color: #D1D1D1;
     margin-bottom: 1.25rem;
 }
 .cart-empty-title {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    color: #1a2a3a;
+    color: #383939;
     margin-bottom: 0.5rem;
 }
 .cart-empty-text {
-    color: #4d6370;
+    color: #676869;
     margin-bottom: 1.75rem;
 }
 
@@ -234,12 +234,12 @@
     text-align: center;
     padding: 5rem 2rem;
     background: #fff;
-    border-radius: 12px;
+    border-radius: 4px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
 .cart-auth-icon {
     font-size: 3.5rem;
-    color: #d4dbe2;
+    color: #D1D1D1;
     margin-bottom: 1.25rem;
 }
 
@@ -249,9 +249,9 @@
     justify-content: center;
     gap: 0.75rem;
     padding: 5rem 2rem;
-    color: #6b7b8d;
+    color: #676869;
     background: #fff;
-    border-radius: 12px;
+    border-radius: 4px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
 </style>
@@ -276,10 +276,10 @@
         <!-- Not logged in -->
         <div id="cart-state-auth" class="cart-auth-state" style="display:none">
             <div class="cart-auth-icon"><i class="fas fa-lock"></i></div>
-            <h2 style="font-size: 1.5rem; font-weight: 700; color: #1a2a3a; margin-bottom: 0.5rem;">
+            <h2 style="font-size: 1.5rem; font-weight: 700; color: #383939; margin-bottom: 0.5rem;">
                 Login to view your cart
             </h2>
-            <p style="color: #4d6370; margin-bottom: 1.75rem;">
+            <p style="color: #676869; margin-bottom: 1.75rem;">
                 You need an account to manage course purchases.
             </p>
             <a id="cart-login-link" href="/login/?next=/cart/" class="button is-primary is-medium">

@@ -35,7 +35,7 @@ Several specifications have emerged that, taken together, form the cloud-native 
 
 The [Cloud Optimized GeoTIFF](<https://www.cogeo.org/>) is perhaps the most mature and widely adopted cloud-native format. It is a regular GeoTIFF with a specific internal layout: the image is organised into tiles, and an internal directory (the IFD hierarchy) is placed at the beginning of the file so that a client can quickly discover which byte ranges correspond to which tiles and overview levels. The result is that any HTTP client can stream just the pixels it needs.
 
-COGs have been supported natively in QGIS since version 3.2, and GDAL has been able to read them over HTTP via the `/vsicurl/` virtual filesystem for even longer. Today, most major satellite imagery providers, including Sentinel, Landsat, and the commercial constellations, distribute their data as COGs. At Kartoza, we have been working with COGs in our projects for years, and our [STAC API Browser plugin](<https://kartoza.com/plugins/stac-api-browser/>) loads them directly into QGIS as map layers.
+COGs have been supported natively in QGIS since version 3.2, and GDAL has been able to read them over HTTP via the `/vsicurl/` virtual filesystem for even longer. Today, most major satellite imagery providers, including Sentinel, Landsat, and the commercial constellations, distribute their data as COGs. At Kartoza, we have been working with COGs in our projects for years, and our [STAC API Browser plugin](</plugins/stac-api-browser/>) loads them directly into QGIS as map layers.
 
 ### GeoParquet
 
@@ -47,7 +47,7 @@ The advantages are significant. Columnar storage means that a query touching onl
 
 Formats solve the storage problem, but you still need a way to find the data you need. [STAC](<https://stacspec.org/>) provides a standardised way to describe and catalogue geospatial assets. A STAC item is a GeoJSON feature with metadata about a spatiotemporal asset: its bounding box, temporal extent, and links to the actual data files (which are often COGs or other cloud-native formats). STAC collections group related items, and STAC APIs provide RESTful search endpoints.
 
-STAC has become the lingua franca for earth observation data discovery. Microsoft Planetary Computer, AWS Open Data, Google Earth Engine, and most national space agencies now expose their archives through STAC APIs. Kartoza developed the [QGIS STAC API Browser plugin](<https://kartoza.com/blog/qgis-stac-api-plugin/>) with funding from Microsoft, and we have seen firsthand how STAC transforms the data discovery workflow from a tedious exercise in navigating download portals into a seamless search-and-load experience inside QGIS itself.
+STAC has become the lingua franca for earth observation data discovery. Microsoft Planetary Computer, AWS Open Data, Google Earth Engine, and most national space agencies now expose their archives through STAC APIs. Kartoza developed the [QGIS STAC API Browser plugin](</blog/qgis-stac-api-plugin/>) with funding from Microsoft, and we have seen firsthand how STAC transforms the data discovery workflow from a tedious exercise in navigating download portals into a seamless search-and-load experience inside QGIS itself.
 
 ### Zarr and Cloud-Optimised Data Cubes
 
@@ -101,7 +101,7 @@ It would be disingenuous to suggest that cloud-native geospatial has solved ever
 
 At Kartoza, we have been active participants in the cloud-native geospatial movement from its early days. We built the QGIS STAC API Browser plugin, bringing cloud-native data discovery directly into the desktop GIS environment. We maintain Docker images for PostGIS, GeoServer, and other components of the open source geospatial stack, and we are actively exploring how to integrate cloud-native formats into these services.
 
-Our [managed hosting platform](<https://kartoza.com/hosting/>) is being built with cloud-native geospatial as a first-class citizen. We see a future where our customers can spin up a GeoServer instance pre-configured to serve data from COGs in object storage, or a DuckDB-powered analytics endpoint that queries GeoParquet files in place, without needing to manage the underlying infrastructure.
+Our [managed hosting platform](</hosting/>) is being built with cloud-native geospatial as a first-class citizen. We see a future where our customers can spin up a GeoServer instance pre-configured to serve data from COGs in object storage, or a DuckDB-powered analytics endpoint that queries GeoParquet files in place, without needing to manage the underlying infrastructure.
 
 We are also watching the emergence of Apache Iceberg and Icechunk with great interest, particularly for clients managing large, versioned geospatial datasets in biodiversity monitoring, climate analysis, and environmental management.
 
@@ -113,4 +113,4 @@ The future is hybrid. Your field survey data lives in a GeoPackage on your lapto
 
 The pieces are here. The specifications are open. The tools are free. The only thing left is to start using them.
 
-If you are exploring cloud-native geospatial for your organisation and need help navigating the technology choices, [get in touch](<https://kartoza.com/contact-us/>). We would love to help you build a solution that works.
+If you are exploring cloud-native geospatial for your organisation and need help navigating the technology choices, [get in touch](</contact-us/>). We would love to help you build a solution that works.

@@ -1,0 +1,113 @@
+/* Flat, static UI: no decorative animation or transitions.
+   Loading spinners keep working. Loaded last so it wins over earlier rules. */
+*,
+*::before,
+*::after {
+  animation-duration: 0.001ms !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+.fa-spin,
+.fa-spin-pulse,
+.is-loading::after,
+.button.is-loading::after,
+.spinner,
+[class*="spinner"],
+[class*="loading"]::after {
+  animation-duration: 1s !important;
+  animation-iteration-count: infinite !important;
+}
+
+/* Elements that used to be revealed on scroll are shown immediately. */
+.faq-item-modern,
+.form-field,
+.main-card,
+.product-card.product-featured,
+.product-card-small,
+.service-card,
+.sidebar-card,
+.why-item,
+.shadowing-text,
+.shadowing-visual {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Decorative glow effects removed: flat brand style has no halos or light-emitting shadows. */
+.card-glow,
+.orb-glow,
+.social-orb:hover .orb-glow,
+.hosting-pathway-icon-glow,
+.hosting-pathway-card:hover .hosting-pathway-icon-glow,
+.nudge-glow,
+.partner-showcase-logo-glow {
+  display: none !important;
+}
+
+.hero-logo {
+  filter: none !important;
+}
+
+/* The one deliberate bit of motion: on buttons with an arrow, nudge the arrow right on hover.
+   Animates `left` on a relatively positioned icon rather than a transform: a transform puts
+   the icon on its own compositing layer, and when the un-hover transition ends the browser
+   drops that layer and can snap the glyph to a different pixel row (a small upward jump).
+   !important on the transition only to beat the blanket transition:none above. */
+.button [class*="fa-arrow-"] {
+  display: inline-block;
+  position: relative;
+  left: 0;
+  transition: left 0.2s ease !important;
+}
+
+.button:hover [class*="fa-arrow-"] {
+  left: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button:hover [class*="fa-arrow-"] {
+    left: 0;
+  }
+}
+
+/* Homepage carousel: a gentle fade + short slide between slides, and a soft change on the dots.
+   Needs !important only to beat the blanket transition:none above. */
+.showcase-item {
+  transition: opacity 0.5s ease, transform 0.5s ease !important;
+}
+
+.showcase-dot {
+  transition: background-color 0.25s ease, transform 0.25s ease !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .showcase-item,
+  .showcase-dot {
+    transition: none !important;
+  }
+}
+
+/* Portfolio project hero: the zoom popup fades and scales out of the small picture. */
+.project-hero-popup {
+  transition: opacity 0.3s ease,
+              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0s linear 0.45s !important;
+}
+
+.project-hero-figure:hover .project-hero-popup,
+.project-hero-figure:focus-within .project-hero-popup {
+  transition: opacity 0.3s ease 0.08s,
+              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.08s,
+              visibility 0s linear 0s !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-hero-popup,
+  .project-hero-figure:hover .project-hero-popup,
+  .project-hero-figure:focus-within .project-hero-popup {
+    transition: none !important;
+  }
+}

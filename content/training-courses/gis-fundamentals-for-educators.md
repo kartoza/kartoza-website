@@ -258,12 +258,12 @@ Facilitated online session</span></summary>
 .course-resource-card { display: flex; align-items: center; gap: .75rem; min-width: 0; padding: .75rem 1rem; background: #fff; border: 1px solid #dce3e8; border-radius: 10px; color: #1a2a3a; text-decoration: none; }
 .course-resource-card:hover, .course-resource-card:focus-visible { background: #f3fbf7; border-color: #187747; box-shadow: 0 2px 8px rgba(24,119,71,.1); color: #1a2a3a; }
 .course-resource-icon { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 38px; width: 38px; height: 38px; border-radius: 8px; background: #53a2cc; color: #fff; }
-.course-resource-free-icon { font-size: .62rem; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; }
+.course-resource-free-icon { font-size: 0.75rem; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; }
 .course-resource-icon svg { width: 20px; height: 20px; }
 .course-resource-content { display: flex; flex: 1; min-width: 0; flex-direction: column; gap: .2rem; }
-.course-resource-content strong { color: #1a2a3a; font-size: .9rem; line-height: 1.3; }
-.course-resource-content small { overflow: hidden; color: #4d6370; font-size: .78rem; line-height: 1.4; text-overflow: ellipsis; white-space: nowrap; }
-.course-resource-arrow { flex: 0 0 auto; color: #4d6370; font-size: 1.2rem; line-height: 1; }
+.course-resource-content strong { color: #1a2a3a; font-size: 0.875rem; line-height: 1.3; }
+.course-resource-content small { overflow: hidden; color: #4d6370; font-size: 0.75rem; line-height: 1.4; text-overflow: ellipsis; white-space: nowrap; }
+.course-resource-arrow { flex: 0 0 auto; color: #4d6370; font-size: 1.25rem; line-height: 1; }
 </style>
 
 <div class="course-resource-grid">

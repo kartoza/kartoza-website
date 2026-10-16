@@ -1,7 +1,7 @@
 ---
 author: Admire Nyakudya
 date: '2020-03-30'
-description: This is a follow-up post on https://kartoza.com/en/blog/create-a-custom-reference-grid-in-qgis-composer/
+description: This is a follow-up post on /en/blog/create-a-custom-reference-grid-in-qgis-composer/
 erpnext_id: /blog/qgis/create-a-custom-reference-grid-in-qgis-composer-part-2
 erpnext_modified: '2020-03-30'
 reviewedBy: Automated Check
@@ -12,7 +12,7 @@ thumbnail: /img/blog/erpnext/lat-long.png
 title: Create a Custom Reference Grid in QGIS Composer (Part 2)
 ---
 
-This is a follow-up post on <https://kartoza.com/en/blog/create-a-custom-reference-grid-in-qgis-composer/>.
+This is a follow-up post on </en/blog/create-a-custom-reference-grid-in-qgis-composer/>.
 
 This post outlines how to make dynamic grids that are aligned to the lat long graticule.
 

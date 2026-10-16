@@ -3,6 +3,7 @@ title: "QGIS Plugins"
 subtitle: "Extending QGIS with powerful geospatial tools"
 description: "QGIS plugins developed and maintained by Kartoza, including tools for conservation, disaster management, biodiversity, and spatial data processing."
 HasBanner: true
+LabelText: "For QGIS"
 HeroSize: "is-medium"
 HeroImage: "img/banner-plugins.png"
 ---

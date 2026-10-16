@@ -43,7 +43,7 @@ Links:
 
 [GitHub Repository](<https://github.com/kartoza/IHE_Delft>)
 
-![](https://kartoza.com/files/sFsIRRN.png)
+![](/files/sFsIRRN.png)
 
 ## Technologies
 

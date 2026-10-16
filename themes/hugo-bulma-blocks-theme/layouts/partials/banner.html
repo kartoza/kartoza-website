@@ -2,86 +2,51 @@
 {{ if .Params.HasDownloadBanner }}
     {{ partial "download-banner.html" . }}
 {{ else if .Params.HasBanner }}
-    {{ $size := .Params.HeroSize | default "is-small" }}
-    <section
-        class="hero is-primary1 {{ $size }} has-bg-img {{ if .Params.HeroIsUserConference }}user-conference{{ end }}"
-        {{ if ( .Params.HeroImage ) }}
-            style="background: url('{{ absURL .Params.HeroImage | safeCSS }}');
-            background-position: center; background-size: cover;"
-        {{ end }}
-    >
-        <div class="hero-body">
-            <div class="columns container">
-                
-                <div class="column is-8 is-flex hero-text has-text-left">
-                    <div class="hero-container">
-                        <div class="is-flex" style="gap: 1rem;">
-                            {{ if .Params.LabelText }}
-                                <div class="label">
-                                    {{ .Params.LabelText }}
-                                </div>
-                            {{ end }}
-
-                            {{ if and .Params.Badge .Params.BadgeLink }}
-                                <a class="badge-image" href="{{ .Params.BadgeLink | absURL }}" target="_blank">
-                                    <img src="{{ .Params.Badge | absURL }}" />
-                                </a>
-                            {{ end }}
-                        </div>
-                        <h1 class="title hero-title pr-3">
-                            {{ .Params.Title }}
-                        </h1>
-                        {{ if .Params.SubTitle }}
-                            <p class="subtitle hero-subtitle">
-                                {{ .Params.SubTitle }}
-                            </p>
-                        {{ end }}
-                    </div>
-                    <div class="is-vcentered">
+    {{/* Uniform page hero for every list page: flat white, left-aligned, with the edge motif.
+         Reuses the blog/portfolio hero styles (.blog-list-hero*) so all of them match. Unlike
+         those two there's no per-page content to feature, so the hero is text only:
+         label (LabelText), title, subtitle, optional button; HeroLogo goes on the right. */}}
+    <section class="blog-list-hero page-hero">
+        <div class="site-edge-motif site-edge-motif-left" aria-hidden="true" style="top: 60px; width: 80px; opacity: 0.9;"></div>
+        <div class="site-edge-motif site-edge-motif-right" aria-hidden="true" style="width: 140px; opacity: 0.9;"></div>
+        <div class="site-edge-motif-top" aria-hidden="true" style="--motif-thickness: 180px;"></div>
+        <div class="container">
+            <div class="columns is-vcentered">
+                <div class="column is-7 blog-list-hero-text">
+                    <p class="blog-list-hero-eyebrow">{{ .Params.LabelText | default "Kartoza" }}</p>
+                    <h1 class="blog-list-hero-title">{{ .Params.Title }}</h1>
+                    {{ with .Params.SubTitle }}<div class="blog-list-hero-intro"><p>{{ . }}</p></div>{{ end }}
+                    {{ if or .Params.ButtonText .Params.SupportedOS }}
+                    <div class="page-hero-actions">
                         {{ if .Params.ButtonText }}
-                            <a
-                                class="button is-primary1 is-size-5"
-                                href="{{ .Params.ButtonLink | absURL }}"
-                            >
-                                {{ .Params.ButtonText }}
-                            </a>
+                        <a class="button is-primary" href="{{ .Params.ButtonLink | absURL }}">{{ .Params.ButtonText }}</a>
                         {{ end }}
-                        {{ if .Params.SupportedOS }}
-                            <p class="subtitle hero-subtitle">
-                                {{ .Params.SupportedOS }}
-                            </p>
-                        {{ end }}
+                        {{ with .Params.SupportedOS }}<span class="page-hero-note">{{ . }}</span>{{ end }}
+                    </div>
+                    {{ end }}
                 </div>
-            </div>
-            {{ if ( .Params.HeroLogo ) }}
-                <div
-                    class="logo column is-justify-content-center"
-                >
-                    <figure class="image">
-                        <img src="{{ absURL .Params.HeroLogo | safeCSS }}" />
-                    </figure>
+                {{ if .Params.HeroLogo }}
+                <div class="column is-5 page-hero-logo">
+                    <img src="{{ absURL .Params.HeroLogo }}" alt="">
                 </div>
-            {{ end }}
+                {{ end }}
             </div>
         </div>
-
         {{ if .Params.HeroMenu }}
             {{ $menuID := default "main" .Params.HeroMenu }}
             {{ $menu := index site.Menus $menuID }}
             {{ $pageUrl := replaceRE "/$" "" .RelPermalink }}
-            <div class="hero-foot">
-                <nav class="tabs is-boxed is-right">
-                    <div class="container">
-                        <ul>
-                            {{- range $menu }}
-                            <li {{ if eq (replaceRE "/$" "" .URL) $pageUrl }} class="is-active"{{ end }}>
-                                {{ partial "link" . }}
-                            </li>
-                            {{- end }}
-                        </ul>
-                    </div>
-                </nav>
-            </div>
+            <nav class="tabs is-boxed page-hero-tabs">
+                <div class="container">
+                    <ul>
+                        {{- range $menu }}
+                        <li {{ if eq (replaceRE "/$" "" .URL) $pageUrl }} class="is-active"{{ end }}>
+                            {{ partial "link" . }}
+                        </li>
+                        {{- end }}
+                    </ul>
+                </div>
+            </nav>
         {{ end }}
     </section>
 {{ end }}

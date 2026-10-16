@@ -1,0 +1,12 @@
+{{/* Highlights, on the contact-page map, every country that has at least one visible team member.
+     Only each member's `country` front-matter value is read (deduplicated): no names, titles or
+     cities are printed. The map paths carry data-name from Natural Earth; the one country whose
+     name differs from the team files is listed below. */}}
+{{ $naturalEarthName := dict "Bosnia and Herzegovina" "Bosnia and Herz." }}
+{{ $countries := slice }}
+{{ range where (where site.RegularPages "Section" "the_team") "Params.hidden" "ne" true }}
+    {{ with .Params.country }}{{ $countries = $countries | append (index $naturalEarthName . | default .) }}{{ end }}
+{{ end }}
+<style>
+{{ range $countries | uniq | sort }}.world-map-svg .country[data-name="{{ . | safeCSS }}"] { fill: var(--primary); }
+{{ end }}</style>

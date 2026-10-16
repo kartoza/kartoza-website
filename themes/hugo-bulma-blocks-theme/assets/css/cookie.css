@@ -2,13 +2,13 @@
     position: fixed;
     bottom: -100%;
     left: 10px;
-    font-size: 14px;
+    font-size: 0.875rem;
     width: 300px;
     line-height: 19px;
     z-index: 10000;
     background: #ffffff;
     color: #888888;
-    border-radius: 10px;
+    border-radius: 4px;
     padding: 0 32px;
     box-shadow: 0 -2px 16px rgba(47, 54, 64, 0.15);
     transition: 400ms;
@@ -28,7 +28,7 @@
     color: black;
     line-height: 1;
     margin-top: 24px;
-    font-size: 18px;
+    font-size: 1rem;
 }
 .cookie-container.active {
     bottom: 10px;
@@ -45,9 +45,9 @@
     color: #f5f6fa;
     padding: 12px 48px;
     width: 100%;
-    font-size: 12px;
+    font-size: 0.75rem;
     margin-bottom: 16px;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
 }
 .cookie-btn:hover {

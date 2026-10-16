@@ -3,6 +3,7 @@ title: "Docker Images"
 subtitle: "Production-ready containers for geospatial applications"
 description: "Our collection of Docker images for PostGIS, GeoServer, QGIS, and other geospatial technologies. Used by thousands of organisations worldwide."
 HasBanner: true
+LabelText: "Containers"
 HeroSize: "is-medium"
 HeroImage: "img/banner-docker.png"
 ---

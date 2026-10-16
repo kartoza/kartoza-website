@@ -4,69 +4,25 @@
 {{ $allMembers := where .Pages "Kind" "page" }}
 {{ $visibleMembers := where $allMembers "Params.hidden" "ne" true }}
 
-<!-- Team Hero Section -->
-<section class="team-hero">
-    <div class="team-hero-bg">
-        <div class="team-hero-map"></div>
-        <div class="team-hero-overlay"></div>
-    </div>
+<!-- Team Hero Section: the same flat white hero as the other list pages (see partials/banner.html) -->
+<section class="blog-list-hero page-hero">
+    <div class="site-edge-motif site-edge-motif-left" aria-hidden="true" style="top: 60px; width: 80px; opacity: 0.9;"></div>
+    <div class="site-edge-motif site-edge-motif-right" aria-hidden="true" style="width: 140px; opacity: 0.9;"></div>
+    <div class="site-edge-motif-top" aria-hidden="true" style="--motif-thickness: 180px;"></div>
     <div class="container">
-        <div class="team-hero-content">
-            <span class="team-hero-tagline">
-                <i class="fas fa-globe-africa"></i>
-                A Global Team
-            </span>
-            <h1 class="team-hero-title">The Kartoza Geeks</h1>
-            <p class="team-hero-subtitle">
-                Open source geospatial experts spread across the globe, united by our passion for making the world more mappable.
-            </p>
-            <div class="team-hero-stats">
-                <div class="team-stat">
-                    <span class="team-stat-number">{{ len $visibleMembers }}+</span>
-                    <span class="team-stat-label">Team Members</span>
+        <div class="columns is-vcentered">
+            <div class="column is-7 blog-list-hero-text">
+                <p class="blog-list-hero-eyebrow">A Global Team</p>
+                <h1 class="blog-list-hero-title">The Kartoza Geeks</h1>
+                <div class="blog-list-hero-intro">
+                    <p>Open source geospatial experts spread across the globe, united by our passion for making the world more mappable.</p>
                 </div>
-                <div class="team-stat">
-                    <span class="team-stat-number">8</span>
-                    <span class="team-stat-label">Countries</span>
-                </div>
-                <div class="team-stat">
-                    <span class="team-stat-number">10+</span>
-                    <span class="team-stat-label">Years Experience</span>
-                </div>
+                <p class="blog-list-hero-meta page-hero-stats">
+                    <span><strong>{{ len $visibleMembers }}+</strong> team members</span>
+                    <span><strong>8</strong> countries</span>
+                    <span><strong>10+</strong> years experience</span>
+                </p>
             </div>
-        </div>
-    </div>
-    <!-- Floating location pins -->
-    <div class="team-hero-pins">
-        <div class="hero-pin" style="--pin-x: 25%; --pin-y: 45%;" title="South Africa">
-            <i class="fas fa-map-marker-alt"></i>
-        </div>
-        <div class="hero-pin" style="--pin-x: 30%; --pin-y: 25%;" title="Portugal">
-            <i class="fas fa-map-marker-alt"></i>
-        </div>
-        <div class="hero-pin" style="--pin-x: 65%; --pin-y: 40%;" title="Indonesia">
-            <i class="fas fa-map-marker-alt"></i>
-        </div>
-        <div class="hero-pin" style="--pin-x: 55%; --pin-y: 35%;" title="India">
-            <i class="fas fa-map-marker-alt"></i>
-        </div>
-        <div class="hero-pin" style="--pin-x: 35%; --pin-y: 55%;" title="Kenya">
-            <i class="fas fa-map-marker-alt"></i>
-        </div>
-        <div class="hero-pin" style="--pin-x: 32%; --pin-y: 50%;" title="Madagascar">
-            <i class="fas fa-map-marker-alt"></i>
-        </div>
-    </div>
-</section>
-
-<!-- Team Introduction -->
-<section class="team-intro">
-    <div class="container">
-        <div class="team-intro-content">
-            <div class="team-intro-icon">
-                <i class="fas fa-users"></i>
-            </div>
-            <p>We are a <strong>Free and Open Source GIS service provider</strong> with registered offices in South Africa and Portugal. We develop and maintain geographic information systems and train teams to use geospatial software to its full potential.</p>
         </div>
     </div>
 </section>
@@ -83,12 +39,12 @@
 {{ with $leadership }}
 <section class="team-section team-leadership">
     <div class="container">
-        <div class="team-section-header">
-            <div class="team-section-icon">
-                <i class="fas fa-crown"></i>
+        <div class="section-heading team-section-header">
+            <div class="section-heading-main">
+                <span class="section-heading-eyebrow">Guiding our mission and vision</span>
+                <h2 class="section-heading-title">Leadership</h2>
             </div>
-            <h2 class="team-section-title">Leadership</h2>
-            <p class="team-section-subtitle">Guiding our mission and vision</p>
+
         </div>
         <div class="team-grid team-grid-leadership">
             {{ range (sort . "Params.weight") }}
@@ -121,12 +77,12 @@
 {{ with $development }}
 <section class="team-section team-development">
     <div class="container">
-        <div class="team-section-header">
-            <div class="team-section-icon">
-                <i class="fas fa-code"></i>
+        <div class="section-heading team-section-header">
+            <div class="section-heading-main">
+                <span class="section-heading-eyebrow">Building the future of geospatial</span>
+                <h2 class="section-heading-title">Development</h2>
             </div>
-            <h2 class="team-section-title">Development</h2>
-            <p class="team-section-subtitle">Building the future of geospatial</p>
+
         </div>
         <div class="team-grid">
             {{ range (sort . "Params.weight") }}
@@ -159,12 +115,12 @@
 {{ with $training }}
 <section class="team-section team-training">
     <div class="container">
-        <div class="team-section-header">
-            <div class="team-section-icon">
-                <i class="fas fa-graduation-cap"></i>
+        <div class="section-heading team-section-header">
+            <div class="section-heading-main">
+                <span class="section-heading-eyebrow">Sharing knowledge worldwide</span>
+                <h2 class="section-heading-title">Training & Documentation</h2>
             </div>
-            <h2 class="team-section-title">Training & Documentation</h2>
-            <p class="team-section-subtitle">Sharing knowledge worldwide</p>
+
         </div>
         <div class="team-grid">
             {{ range (sort . "Params.weight") }}
@@ -197,12 +153,12 @@
 {{ with $gis }}
 <section class="team-section team-gis">
     <div class="container">
-        <div class="team-section-header">
-            <div class="team-section-icon">
-                <i class="fas fa-layer-group"></i>
+        <div class="section-heading team-section-header">
+            <div class="section-heading-main">
+                <span class="section-heading-eyebrow">Mapping experts and spatial analysts</span>
+                <h2 class="section-heading-title">GIS Specialists</h2>
             </div>
-            <h2 class="team-section-title">GIS Specialists</h2>
-            <p class="team-section-subtitle">Mapping experts and spatial analysts</p>
+
         </div>
         <div class="team-grid">
             {{ range (sort . "Params.weight") }}
@@ -235,12 +191,12 @@
 {{ with $devops }}
 <section class="team-section team-devops">
     <div class="container">
-        <div class="team-section-header">
-            <div class="team-section-icon">
-                <i class="fas fa-server"></i>
+        <div class="section-heading team-section-header">
+            <div class="section-heading-main">
+                <span class="section-heading-eyebrow">Keeping our systems running smoothly</span>
+                <h2 class="section-heading-title">DevOps & Infrastructure</h2>
             </div>
-            <h2 class="team-section-title">DevOps & Infrastructure</h2>
-            <p class="team-section-subtitle">Keeping our systems running smoothly</p>
+
         </div>
         <div class="team-grid">
             {{ range (sort . "Params.weight") }}
@@ -273,12 +229,12 @@
 {{ with $operations }}
 <section class="team-section team-operations">
     <div class="container">
-        <div class="team-section-header">
-            <div class="team-section-icon">
-                <i class="fas fa-cogs"></i>
+        <div class="section-heading team-section-header">
+            <div class="section-heading-main">
+                <span class="section-heading-eyebrow">The backbone of our organisation</span>
+                <h2 class="section-heading-title">Operations & Administration</h2>
             </div>
-            <h2 class="team-section-title">Operations & Administration</h2>
-            <p class="team-section-subtitle">The backbone of our organisation</p>
+
         </div>
         <div class="team-grid">
             {{ range (sort . "Params.weight") }}
@@ -311,12 +267,12 @@
 {{ with $pm }}
 <section class="team-section team-pm">
     <div class="container">
-        <div class="team-section-header">
-            <div class="team-section-icon">
-                <i class="fas fa-tasks"></i>
+        <div class="section-heading team-section-header">
+            <div class="section-heading-main">
+                <span class="section-heading-eyebrow">Delivering projects on time, every time</span>
+                <h2 class="section-heading-title">Project Management</h2>
             </div>
-            <h2 class="team-section-title">Project Management</h2>
-            <p class="team-section-subtitle">Delivering projects on time, every time</p>
+
         </div>
         <div class="team-grid team-grid-leadership">
             {{ range (sort . "Params.weight") }}

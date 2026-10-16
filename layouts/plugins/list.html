@@ -1,33 +1,22 @@
 {{ partial "header.html" . }}
 {{ partial "menu.html" . }}
 
-<!-- Plugins Hero Section - Beautiful Gradient -->
-<section class="plugin-hero plugin-hero-gradient plugins-list-hero">
-    <div class="plugin-hero-pattern"></div>
+<!-- Plugins hero: the uniform flat page hero (see partials/banner.html), with the plugin figures as counts -->
+<section class="blog-list-hero page-hero">
+    <div class="site-edge-motif site-edge-motif-left" aria-hidden="true" style="top: 60px; width: 80px; opacity: 0.9;"></div>
+    <div class="site-edge-motif site-edge-motif-right" aria-hidden="true" style="width: 140px; opacity: 0.9;"></div>
+    <div class="site-edge-motif-top" aria-hidden="true" style="--motif-thickness: 180px;"></div>
     <div class="container">
-        <div class="plugins-hero-content">
-            <div class="plugins-hero-icon">
-                <i class="fas fa-puzzle-piece"></i>
-            </div>
-            <h1 class="plugins-hero-title">QGIS Plugins</h1>
-            <p class="plugins-hero-subtitle">Powerful extensions for QGIS built by Kartoza</p>
-            <div class="plugins-hero-stats">
-                <div class="hero-stat">
-                    <span class="hero-stat-value">{{ len .RegularPages }}</span>
-                    <span class="hero-stat-label">Plugins</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-value">200K+</span>
-                    <span class="hero-stat-label">Downloads</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-value">10</span>
-                    <span class="hero-stat-label">Client Projects</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-value">Open</span>
-                    <span class="hero-stat-label">Source</span>
-                </div>
+        <div class="columns is-vcentered">
+            <div class="column is-7 blog-list-hero-text">
+                <p class="blog-list-hero-eyebrow">{{ .Params.LabelText | default "For QGIS" }}</p>
+                <h1 class="blog-list-hero-title">{{ .Title }}</h1>
+                {{ with .Params.subtitle }}<div class="blog-list-hero-intro"><p>{{ . }}</p></div>{{ end }}
+                <p class="blog-list-hero-meta page-hero-stats">
+                    <span><strong>{{ len .RegularPages }}</strong> plugins</span>
+                    <span><strong>200K+</strong> downloads</span>
+                    <span><strong>10</strong> client projects</span>
+                </p>
             </div>
         </div>
     </div>

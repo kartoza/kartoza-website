@@ -45,7 +45,7 @@ A key part of Kartoza’s contribution was shaping the governance model to prote
 
 Kartoza has contributed significantly beyond the original paid scope to drive GeoSight’s long-term sustainability. Our goal is to foster a growing contributor ecosystem, support multi-tenant use cases, and offer GeoSight as a hosted solution to organizations who need accessible, high-quality geospatial tools. Today, GeoSight is positioned as an independent open-source platform with a clear path for future enhancement, innovation, and community participation.
 
-![](https://kartoza.com/files/uax2Jei.png)
+![](/files/uax2Jei.png)
 
 ## Technologies
 

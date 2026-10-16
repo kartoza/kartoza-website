@@ -46,7 +46,7 @@ Links:
 
 [Website Home Page](<https://worldbank.github.io/GEEST/README.html>)
 
-![](https://kartoza.com/files/GLvgrGs.png)
+![](/files/GLvgrGs.png)
 
  _GEEST Accessibility Score, as seen in the GEEST plugin for St Lucia_
 

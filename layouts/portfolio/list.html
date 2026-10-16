@@ -1,6 +1,52 @@
 {{ partial "header.html" . }}
 {{ partial "menu.html" . }}
-{{ partial "banner.html" . }}
+
+{{/* Hero figures: same set the grid shows (reviewed, not Internal). */}}
+{{ $heroPages := slice }}
+{{ $heroClients := slice }}
+{{ range .RegularPages.ByDate.Reverse }}
+    {{ if and .Params.reviewedBy .Params.reviewedDate (not (in (.Params.tags | default slice) "Internal")) }}
+        {{ $heroPages = $heroPages | append . }}
+        {{ with .Params.client }}{{ $heroClients = $heroClients | append . }}{{ end }}
+    {{ end }}
+{{ end }}
+{{ $latestProject := index $heroPages 0 }}
+
+{{/* Reuses the blog index hero styles (.blog-list-hero*): same flat white hero, label, counts and card. */}}
+<section class="blog-list-hero">
+    <div class="site-edge-motif site-edge-motif-left" aria-hidden="true" style="top: 60px; width: 80px; opacity: 0.9;"></div>
+    <div class="site-edge-motif site-edge-motif-right" aria-hidden="true" style="width: 140px; opacity: 0.9;"></div>
+    <div class="site-edge-motif-top" aria-hidden="true" style="--motif-thickness: 180px;"></div>
+    <div class="container">
+        <div class="columns is-vcentered blog-list-hero-columns">
+            <div class="column is-6 blog-list-hero-text">
+                <p class="blog-list-hero-eyebrow">Kartoza Portfolio</p>
+                <h1 class="blog-list-hero-title">{{ .Title }}</h1>
+                {{ with .Params.subtitle }}<div class="blog-list-hero-intro"><p>{{ . }}</p></div>{{ end }}
+                {{ if $heroPages }}
+                <p class="blog-list-hero-meta">
+                    <span><strong>{{ len $heroPages }}</strong> projects</span>
+                    <span><strong>{{ len ($heroClients | uniq) }}</strong> clients</span>
+                </p>
+                {{ end }}
+            </div>
+            {{ with $latestProject }}
+            {{ $thumb := .Params.thumbnail | default "/img/banner-portfolio.png" }}
+            <div class="column is-6">
+                <a class="blog-list-hero-featured" href="{{ .Permalink }}">
+                    <img src="{{ $thumb | absURL }}" alt="{{ .Title }}">
+                    <div class="blog-list-hero-featured-body">
+                        <span class="blog-list-hero-featured-label">Latest project</span>
+                        <h2 class="blog-list-hero-featured-title">{{ .Title }}</h2>
+                        <p class="blog-list-hero-featured-summary">{{ .Description | plainify | truncate 140 }}</p>
+                        {{ with .Params.client }}<span class="blog-list-hero-featured-meta">{{ . }}</span>{{ end }}
+                    </div>
+                </a>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</section>
 
 <section class="section portfolio-section">
     <div class="container">

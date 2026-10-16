@@ -31,7 +31,7 @@ The first serious answer to that question was [QGIS Server](<https://docs.qgis.o
 
 QGIS Server speaks OGC: WMS, WFS, WMTS, and more recently OGC API Features. You design your map in QGIS desktop, save the project, and QGIS Server renders it on the web with the same symbology, labelling, and layout you see on your screen. The browser becomes a thin client, requesting map images or feature data from the server.
 
-This model has proven durable. Organisations use QGIS Server to serve authoritative basemaps, publish spatial data to stakeholders, and power web applications that need QGIS-quality cartography without reimplementing rendering logic in JavaScript. At Kartoza, we have been deploying QGIS Server for years, and our [Docker images](<https://kartoza.com/docker/>) for the geospatial stack, including PostGIS, GeoServer, and QGIS Server, have collectively surpassed 21 million pulls on Docker Hub.
+This model has proven durable. Organisations use QGIS Server to serve authoritative basemaps, publish spatial data to stakeholders, and power web applications that need QGIS-quality cartography without reimplementing rendering logic in JavaScript. At Kartoza, we have been deploying QGIS Server for years, and our [Docker images](</docker/>) for the geospatial stack, including PostGIS, GeoServer, and QGIS Server, have collectively surpassed 21 million pulls on Docker Hub.
 
 The server approach solves the distribution problem. Your maps are accessible from any browser. But it introduces a dependency: the server must be running, properly configured, and reachable. The browser is a viewer, not a participant. For many use cases, this is exactly right. For others, it is only half the story.
 
@@ -63,7 +63,7 @@ Taken together, these developments represent a fundamental shift in what QGIS is
 
 QGIS desktop remains the centre of gravity for analysis, data management, and map design. QGIS Server extends that power to the web through standard protocols. qgis-js brings the rendering engine into the browser through WebAssembly. And the broader ecosystem of plugins and tools bridges these worlds in practical ways.
 
-Consider [Mergin Maps](<https://merginmaps.com/>), which syncs QGIS projects between desktop and mobile, enabling field data collection that flows back into the same project. Or our own [STAC API Browser plugin](<https://kartoza.com/plugins/stac-api-browser/>), which brings cloud-native satellite data discovery into QGIS, connecting the desktop directly to web-based data catalogues. These are not separate tools. They are extensions of the QGIS platform that span the desktop-browser divide.
+Consider [Mergin Maps](<https://merginmaps.com/>), which syncs QGIS projects between desktop and mobile, enabling field data collection that flows back into the same project. Or our own [STAC API Browser plugin](</plugins/stac-api-browser/>), which brings cloud-native satellite data discovery into QGIS, connecting the desktop directly to web-based data catalogues. These are not separate tools. They are extensions of the QGIS platform that span the desktop-browser divide.
 
 QGIS Server itself is evolving. The addition of OGC API Features means that QGIS can serve data in modern, RESTful formats that web applications consume natively, without the XML overhead of traditional OGC services. The server is becoming more web-friendly, and the browser is becoming more GIS-capable. The two are converging.
 

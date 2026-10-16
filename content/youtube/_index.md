@@ -5,6 +5,7 @@ title: "Kartoza on YouTube"
 subtitle: "Learn, explore, and stay updated with our video content"
 description: "Discover Kartoza's YouTube playlists featuring tutorials, webinars, and geospatial insights."
 HasBanner: true
+LabelText: "Videos"
 HeroSize: "is-medium"
 HeroImage: "img/banner-youtube.png"
 channelUrl: "https://www.youtube.com/@KartozaGeo"

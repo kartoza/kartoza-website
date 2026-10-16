@@ -28,7 +28,7 @@
         </div>
         <div class="training-calendar-days" data-calendar-days></div>
         <div class="training-calendar-legend">
-            {{ range $events }}<span data-course-legend="{{ .title }}"><i style="--course-color: {{ if eq .title "Introduction to QGIS" }}#00b388{{ else if eq .title "Introduction to PostGIS" }}#3488b8{{ else if eq .title "Enterprise GIS" }}#e8a331{{ else }}#8e6bbd{{ end }}"></i>{{ .title }}</span>{{ end }}
+            {{ range $events }}<span data-course-legend="{{ .title }}"><i style="--course-color: {{ if eq .title "Introduction to QGIS" }}#3C7D54{{ else if eq .title "Introduction to PostGIS" }}#383939{{ else if eq .title "Enterprise GIS" }}#EEB348{{ else }}#8e6bbd{{ end }}"></i>{{ .title }}</span>{{ end }}
         </div>
     </div>
     <div class="training-calendar-results" data-calendar-results hidden>
@@ -40,7 +40,7 @@
         {{ $eventTitle := .title }}
         {{ $coursePage := site.GetPage .url }}
         {{ if not $coursePage }}{{ with first 1 (where site.RegularPages "Title" .title) }}{{ $coursePage = index . 0 }}{{ end }}{{ end }}
-        <div class="training-event-card training-card" data-event-start="{{ .start }}" data-event-end="{{ .end }}" data-event-title="{{ .title }}" style="--course-color: {{ if eq .title "Introduction to QGIS" }}#00b388{{ else if eq .title "Introduction to PostGIS" }}#3488b8{{ else if eq .title "Enterprise GIS" }}#e8a331{{ else }}#8e6bbd{{ end }}">
+        <div class="training-event-card training-card" data-event-start="{{ .start }}" data-event-end="{{ .end }}" data-event-title="{{ .title }}" style="--course-color: {{ if eq .title "Introduction to QGIS" }}#3C7D54{{ else if eq .title "Introduction to PostGIS" }}#383939{{ else if eq .title "Enterprise GIS" }}#EEB348{{ else }}#8e6bbd{{ end }}">
             {{ $thumbnail := "/img/banner-courses.png" }}
             {{ $level := "" }}
             {{ with $coursePage }}{{ $thumbnail = .Params.thumbnail | default "/img/banner-courses.png" }}{{ $level = .Params.level | default "" }}{{ end }}
@@ -68,7 +68,7 @@
                     <i class="fas fa-tag"></i>
                     {{- $symbol := "R" -}}
                     {{- if and .price_currency (ne .price_currency "ZAR") }}{{ $symbol = .price_currency }}{{ end -}}
-                    {{ $symbol }} {{ lang.FormatNumber 0 .price }} <span style="font-size:0.7em; opacity:0.75;">excl. VAT</span>
+                    {{ $symbol }} {{ lang.FormatNumber 0 .price }} <span style="font-size:0.75em; opacity:0.75;">excl. VAT</span>
                 </p>
                 {{ end }}
                 {{ if .spots_available }}
@@ -238,8 +238,8 @@
     margin: 0;
     padding: 1.5rem;
     background: var(--white);
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(27, 107, 155, 0.12);
+    border-radius: 4px;
+    box-shadow: 0 4px 16px rgba(56, 57, 57, 0.12);
 }
 
 .training-sidebar {
@@ -261,13 +261,13 @@
 
 .training-calendar-title i {
     font-size: 1.25rem;
-    color: #00b388;
+    color: #3C7D54;
 }
 
 .training-calendar-title h2 {
     margin: 0;
-    font-size: 1.1rem;
-    color: #2c3e50;
+    font-size: 1rem;
+    color: #383939;
 }
 
 .training-calendar-actions .button {
@@ -286,13 +286,12 @@
     gap: 0.75rem;
     padding: 1rem;
     background: white;
-    border-radius: 8px;
+    border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .training-event-card:hover {
-    transform: translateY(-2px);
     box-shadow: 0 4px 16px rgba(0,0,0,0.12);
 }
 
@@ -304,7 +303,7 @@
     padding: 1rem;
     background: var(--primary);
     color: white;
-    border-radius: 8px;
+    border-radius: 4px;
     min-width: 80px;
 }
 
@@ -333,7 +332,7 @@
 
 .training-event-image {
     overflow: hidden;
-    border-radius: 6px 6px 0 0;
+    border-radius: 4px 4px 0 0;
     aspect-ratio: 16 / 9;
 }
 
@@ -364,24 +363,24 @@
 }
 
 .event-title a {
-    color: #2c3e50;
+    color: #383939;
     text-decoration: none;
 }
 
 .event-title a:hover {
-    color: #00b388;
+    color: #3C7D54;
 }
 
 .training-event-details p {
     margin: 0.25rem 0;
     font-size: 0.875rem;
-    color: #6c757d;
+    color: #676869;
 }
 
 .training-event-details i {
     width: 20px;
     margin-right: 0.5rem;
-    color: #00b388;
+    color: #3C7D54;
 }
 
 .event-spots.spots-low {
@@ -442,7 +441,7 @@
 }
 
 .training-calendar-empty h3 {
-    color: #6c757d;
+    color: #676869;
     margin-bottom: 0.5rem;
 }
 
@@ -453,7 +452,7 @@
 
 .training-calendar-month-view {
     background: #fff;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 0.75rem;
 }
 
@@ -462,14 +461,14 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 0.75rem;
-    color: #2c3e50;
+    color: #383939;
 }
 
 .training-calendar-month-button,
 .training-calendar-back {
     border: 0;
     background: transparent;
-    color: #3488b8;
+    color: #383939;
     cursor: pointer;
     font-weight: 600;
 }
@@ -496,7 +495,7 @@
 .training-calendar-weekdays {
     margin-bottom: 0.35rem;
     color: #8997a3;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 600;
 }
 
@@ -506,7 +505,7 @@
     padding: 0.35rem 0.1rem 0.75rem;
     border: 0;
     background: transparent;
-    color: #2c3e50;
+    color: #383939;
     cursor: pointer;
     font-size: 0.75rem;
 }
@@ -547,8 +546,8 @@
     flex-direction: column;
     gap: 0.35rem;
     margin-top: 0.75rem;
-    color: #1a2a3a;
-    font-size: 0.85rem;
+    color: #383939;
+    font-size: 0.875rem;
 }
 
 .training-calendar-legend span {
@@ -573,8 +572,8 @@
 
 .training-calendar-results h3 {
     margin: 0.75rem 0 1rem;
-    color: #2c3e50;
-    font-size: 1.1rem;
+    color: #383939;
+    font-size: 1rem;
 }
 
 .training-calendar-results .training-calendar-grid {
@@ -594,9 +593,9 @@
 .training-calendar-self-paced-card {
     margin-top: 1.25rem;
     padding: 1.5rem;
-    border-radius: 12px;
+    border-radius: 4px;
     background: var(--white);
-    box-shadow: 0 4px 16px rgba(27, 107, 155, 0.12);
+    box-shadow: 0 4px 16px rgba(56, 57, 57, 0.12);
 }
 
 .training-calendar-self-paced-card h3 {
@@ -604,8 +603,8 @@
     align-items: center;
     gap: 0.5rem;
     margin: 0 0 1rem;
-    color: #1a2a3a;
-    font-size: 1.1rem;
+    color: #383939;
+    font-size: 1rem;
 }
 
 .training-calendar-self-paced-card h3 i {
@@ -629,7 +628,7 @@
     justify-content: space-between;
     gap: 1rem;
     padding: 0.75rem 0;
-    color: #1a2a3a;
+    color: #383939;
     text-decoration: none;
 }
 
