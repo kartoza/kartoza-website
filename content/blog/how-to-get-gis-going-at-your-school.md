@@ -39,7 +39,7 @@ Mergin Maps is a mobile version of QGIS. While it is mainly a survey tool to be 
 
 [QField](<https://docs.qfield.org/get-started/>) is a similar alternative to Mergin Maps, also based on QGIS.
 
-### 
+###
 
 ![](/img/blog/erpnext/gXTb2MH.png)
 
@@ -57,7 +57,7 @@ The [SAGTA Map Downloader](<https://maps.sagta.org.za/>) is an excellent tool th
 
 ![](/img/blog/erpnext/x0biSH4.png)
 
-For students who are passionate about Geography and GIS the [Geospatial Data Science Certificate (GDSC)](<https://www.up.ac.za/faculty-of-humanities/news/post_3097369-geospatial-data-science-certificate-gdsc>) is a fantastic option. The GDSC gives students ptractical experience with GIS beyond the geography curriculum. The growing programme was piloted by the IEB (Independent Examination Board) in 2022 but is open to all southern African students. It is supported by the University of Pretoria, SAGTA and [Kartoza](</geospatial-data-science-certificate>).
+For students who are passionate about Geography and GIS the [Geospatial Data Science Certificate (GDSC)](<https://www.up.ac.za/faculty-of-humanities/news/post_3097369-geospatial-data-science-certificate-gdsc>) is a fantastic option. The GDSC gives students practical experience with GIS beyond the geography curriculum. The growing programme was piloted by the IEB (Independent Examination Board) in 2022 but is open to all southern African students. It is supported by the University of Pretoria, SAGTA and [Kartoza](</geospatial-data-science-certificate>).
 
 ![](/img/blog/erpnext/33ECjme.png)
 

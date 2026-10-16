@@ -31,10 +31,10 @@ Job shadowing at Kartoza provides students with a unique opportunity to gain ins
 
 The main functions of GIS are:
 
-  1. **Data Management:** Storing, orginising, and maintaining geographic data.
+  1. **Data Management:** Storing, organising, and maintaining geographic data.
   2. **Mapping and Visualisation:** Creating maps and visual representations of spatial data.
   3. **Spatial Analysis:** Analysing spatial relationships and patterns to help with decision-making.
-  4. **Modeling and Simulation:** Simulating real-world scenarious and predicting outcomes based on geographic data.
+  4. **Modeling and Simulation:** Simulating real-world scenarios and predicting outcomes based on geographic data.
   5. **Data Integration:** Combining different types of data to analyse complex scenarios.
 
 ### The Importance of Early Exposure to GIS
@@ -56,38 +56,20 @@ During her four days of shadowing at Kartoza, Shakira was able to observe meetin
 After her time with us, Shakira had this to say about her experience:
 
 > Dear Kartoza,
-
-> 
 >
-
 > Thank you for the opportunity awarded to job shadow at your company.
-
-> 
 >
-
 > I quickly learnt that working at Kartoza means teamwork. At Kartoza, they surely have a dream team setup. The Project Manager, Marina van der Merwe, drives the client requirements, and the team, Thiasha, Jeremy, Dorah, and Amy, to mention a few, makes it all come together effortlessly. Client briefings, developer meetings, deciphering technical jargon, coding, and mapping reflect each team member’s strength within their field.
-
-> 
 >
-
 > I enjoyed taking a deeper look into the world of GIS. Working with the team at Kartoza was easy and informative. The overall experience and knowledge of the systems, software, and GIS environment reassured me that my choice to further study within the GIS field would be well worth my time.
-
-> 
 >
-
 > Thiasha was a great source of guidance in helping me navigate, create and complete the tasks assigned to me. I enjoyed playing around with the presentation of maps and styling the different map layers. It has taught me to be appreciative of maps and instilled a refreshing level of respect for map creators, be it hard copy or virtual maps; it takes a lot of time and effort to make sure that the correct information is depicted; after all, guiding people in the right direction offers great rewards.
-
-> 
 >
-
 > I am thankful to the team at Kartoza for this opportunity and look forward to the doors further studies in this field will open in the near future.
-
-> 
 >
-
 > Kind regards,
-
-> Shaikra
+>
+> Shakira
 
 ### From the Kartoza Team
 

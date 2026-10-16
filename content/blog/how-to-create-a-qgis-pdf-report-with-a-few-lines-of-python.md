@@ -159,7 +159,7 @@ Sometimes you want to automatically generate a report to reflect the latest stat
       
     
 
-(See [here](</en/admin/blog/blogpost/106/\(see%20https://gist.github.com/timlinux/486793ad61db4c1dec9d%20for%20the%20latest>) for any updates we may publish for this example)
+(See the [latest example update](</en/admin/blog/blogpost/106/\(see%20https://gist.github.com/timlinux/486793ad61db4c1dec9d%20for%20the%20latest>) for any updates we may publish for this example)
 
 Using this approach you can generate all kinds of useful outputs without ever needing to open QGIS each time you generate the report. Simply create the needed project and template files and then run it like this:
 

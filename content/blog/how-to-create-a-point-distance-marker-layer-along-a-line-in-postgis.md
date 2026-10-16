@@ -15,7 +15,7 @@ title: How to Create a Point Distance Marker Layer Along a Line in PostGIS
 
 This is part 1 of a 3-part series.
 
-If you look at the [Cape Town Marathon interactive web map](<http://maps.kartoza.com/CapeTownMarathon/>) you'll see kilometre markers along the race routes. Creating these is not as straighforward as you might think. For the team planning the marathon and the other routes, it used to involve a painstaking manual process in Google Earth.
+If you look at the [Cape Town Marathon interactive web map](<http://maps.kartoza.com/CapeTownMarathon/>) you'll see kilometre markers along the race routes. Creating these is not as straightforward as you might think. For the team planning the marathon and the other routes, it used to involve a painstaking manual process in Google Earth.
 
 - The routes are edited fairly often leading up to the event
 - They don't want to manually create points each time they edit the route

@@ -19,21 +19,15 @@ title: 'Kartoza Book Review: Discover QGIS 3.x - Second Edition'
 
 I was thrilled to win a copy of the book Discover QGIS 3.x - Second Edition by Kurt Menke at the FOSS4G 2022 conference in Florence. After two long flights and many happy hours of reading, I am pleased to say that this book is an essential guide for any new QGIS user, a fantastic syllabus for GIS educators and a gem in the back pocket of every QGIS professional. Although the book starts gently by giving some background information and essentials for beginner users, it quickly ramps up to vital theoretical knowledge and practical, real-world examples and exercises to work through.
 
-  
-
-
 The book is broken down into five main sections: Introduction to Geospatial Technology, Spatial analysis, Data Acquisition and Management, Cartographic Design and Advanced Data Visualisation. The exercises are written methodically, with an abundance of screenshots. Thus QGIS users of any level would benefit from working through them. Further, most sections and exercises are self-contained units allowing users to pick up and easily follow only the sections they require or want to learn about.
-
-  
-
 
 If you have worked through the first edition, the second edition offers seven new chapters outlining brand new functionality and seven chapters that have been largely updated and reworked. However, all of the 31 chapters have been updated with new screenshots, figures, workflows, features, descriptions, and tips. Thus the new edition is worth a read even as a QGIS expert.
 
 ![](/img/blog/erpnext/trPf6hz.jpg)
 
-## The FOSS4G Session and Some of my Favorite new Functionality
+## The FOSS4G Session and Some of my Favourite new Functionality
 
-It was fantastic to attend the session given by Kurt at the FOSS4G 2022 conference, where he highlighted some of the amazing new content available in the second edition and functionality in QGIS version 3 and up. Some of my favorite new functionality, which I outline below: Field Data Collection chapter (pg, 191-208), Working with Labels and Annotations (pg, 301-314), Animated Temporal Data with the Temporal controller (pg 365-374) and Working with 3D views (375-387).
+It was fantastic to attend the session given by Kurt at the FOSS4G 2022 conference, where he highlighted some of the amazing new content available in the second edition and functionality in QGIS version 3 and up. Some of my favourite new functionality, which I outline below: Field Data Collection chapter (pg, 191-208), Working with Labels and Annotations (pg, 301-314), Animated Temporal Data with the Temporal controller (pg 365-374) and Working with 3D views (375-387).
 
 ### Field Data Collection
 
