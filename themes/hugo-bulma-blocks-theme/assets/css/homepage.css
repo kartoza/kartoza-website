@@ -91,9 +91,10 @@
 }
 
 .hero-logo {
-    width: 90px;
+    /* horizontal colour logo (symbol + wordmark), 2837x600 */
+    display: block;
+    width: min(100%, 460px);
     height: auto;
-    filter: drop-shadow(0 0 8px rgb(255, 255, 255)) drop-shadow(0 4px 20px rgba(255, 255, 255, 0.2));
 }
 
 .hero-company-name {
@@ -134,8 +135,19 @@
         gap: 1rem;
     }
 
+    .hero-brand {
+        justify-content: center;
+    }
+
+    .hero-company-name {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
     .hero-logo {
-        width: 60px;
+        width: min(100%, 440px);
+        margin: 0 auto;
     }
 
     .hero-company-name {
@@ -10372,7 +10384,7 @@ body:has(.blog-hero) .contextmenu {
     }
 
     .hero-logo {
-        width: 50px;
+        width: min(100%, 400px);
     }
 
     .hero-company-name {
@@ -10486,7 +10498,7 @@ body:has(.blog-hero) .contextmenu {
     }
 
     .hero-logo {
-        width: 40px;
+        width: 100%;
     }
 
     .hero-company-name {
@@ -18461,7 +18473,8 @@ a.playlist-card:hover .playlist-card-link {
    thickness x 5.894 (the SVG is 198.45 x 1169.62), hence the 2.947 (half of that) in
    `left` to centre it. */
 .site-edge-motif-top {
-    --motif-thickness: 242px;
+    /* scales with the viewport: full size on large screens, smaller on laptops and tablets */
+    --motif-thickness: clamp(110px, 14vw, 242px);
     position: absolute;
     top: 0;
     left: calc(50% - var(--motif-thickness) * 2.947);
@@ -18479,7 +18492,9 @@ a.playlist-card:hover .playlist-card-link {
 
 @media screen and (max-width: 768px) {
     .site-edge-motif-top {
-        --motif-thickness: 121px;
+        --motif-thickness: 100px;
+        /* nudge the strip up so more of it bleeds off the top on small screens */
+        top: -20px;
     }
 }
 
@@ -19496,18 +19511,6 @@ pre.chroma code,
     will-change: transform;
 }
 
-/* Same faint grayscale contour texture as the landing page hero, on every flat page hero (blog,
-   portfolio, team, contact, plugins, youtube, careers, ...). ::before is the section's first child,
-   so it paints under the edge motifs. */
-.blog-list-hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background: url('/img/landing-contours.svg') center / cover no-repeat;
-}
-
 /* Lato has a smaller x-height than the system fallback it replaced, so at the same size it reads about
    8% smaller. Scale the root size (all rem-based sizes follow) to keep text comfortably readable. */
 html {
@@ -19544,10 +19547,16 @@ html {
     }
 }
 
-/* The "Kartoza" name set as text (hero heading and navbar) is Lato Black; everything else is Lato Regular/Bold. */
-.hero-company-name,
+/* The "Kartoza" name set as text (hero heading) is Lato Black; everything else is Lato Regular/Bold. */
+.hero-company-name {
+    font-weight: 900 !important;
+}
+
+/* The navbar name is set in Lato Black, all caps. */
 .navbar-logo-text {
     font-weight: 900 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 /* Footer: the supplied white (reversed) symbol and a white tagline on the dark blue */
@@ -19569,14 +19578,14 @@ html {
 
 
 /* ============================================
-   TEAM MEMBER HERO: compact, near-black, white text, with white contour lines
+   TEAM MEMBER HERO: compact, near-black, white text
    ============================================ */
 .team-member-hero {
     position: relative;
     z-index: 0;
     overflow: hidden;
     padding: 4.5rem 0 2.25rem;
-    background: #262727 url('/img/dark-contours.svg') center / cover no-repeat;
+    background: #262727;
 }
 
 .team-member-hero-bg {
@@ -19725,15 +19734,19 @@ html {
    (the team member hero's look, applied to every dark section and hero)
    ============================================ */
 .why-section,
-.about-hero,
 .about-stats,
-.solution-hero,
 .section-cta,
 .hosting-cta-section,
 .portfolio-cta-section,
-.youtube-cta,
-.team-member-hero {
+.youtube-cta {
     background: #262727 url('/img/dark-contours.svg') center / cover no-repeat !important;
+}
+
+/* heroes: solid near-black, no contour lines */
+.about-hero,
+.solution-hero,
+.team-member-hero {
+    background: #262727 !important;
 }
 
 /* the heroes that had their own pattern/overlay layers drop them for the shared background */
