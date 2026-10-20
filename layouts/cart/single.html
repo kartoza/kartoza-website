@@ -135,19 +135,6 @@
     background: #F5F5F2;
     flex-shrink: 0;
 }
-.cart-qty-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #54A2CC;
-    font-size: 1rem;
-    font-weight: 700;
-    padding: 0.2rem 0.55rem;
-    line-height: 1;
-    transition: background 0.15s;
-}
-.cart-qty-btn:hover { background: #e8f4fb; }
-.cart-qty-btn:disabled { opacity: 0.4; cursor: default; }
 .cart-qty-display {
     min-width: 1.75rem;
     text-align: center;
@@ -191,14 +178,6 @@
     font-size: 1rem;
     font-weight: 700;
     color: #383939;
-}
-.cart-checkout-btn {
-    width: 100%;
-    margin-top: 1.25rem;
-    padding: 0.875rem !important;
-    font-size: 1rem !important;
-    font-weight: 600 !important;
-    justify-content: center;
 }
 .cart-secure-note {
     font-size: 0.75rem;
@@ -332,7 +311,7 @@
                         <span>Total</span>
                         <span id="cart-grand-total">—</span>
                     </div>
-                    <a href="/checkout/" class="button is-primary cart-checkout-btn">
+                    <a href="/checkout/" class="button is-primary is-fullwidth">
                         <span class="icon"><i class="fas fa-lock"></i></span>
                         <span>Proceed to Checkout</span>
                     </a>
@@ -419,9 +398,9 @@
                     '</div>' +
                     '<div class="cart-item-unit-price">' + fmt(item.rate, currencyCode) + '&nbsp;ea.</div>' +
                     '<div class="cart-qty-stepper">' +
-                        '<button class="cart-qty-btn qty-dec" data-item-code="' + ic + '" data-qty="' + qty + '" aria-label="Decrease quantity">&#8722;</button>' +
+                        '<button class="button is-small qty-dec" data-item-code="' + ic + '" data-qty="' + qty + '" aria-label="Decrease quantity">&#8722;</button>' +
                         '<span class="cart-qty-display">' + qty + '</span>' +
-                        '<button class="cart-qty-btn qty-inc" data-item-code="' + ic + '" data-qty="' + qty + '" aria-label="Increase quantity">&#43;</button>' +
+                        '<button class="button is-small qty-inc" data-item-code="' + ic + '" data-qty="' + qty + '" aria-label="Increase quantity">&#43;</button>' +
                     '</div>' +
                     '<div class="cart-item-price">' + fmt(lineTotal, currencyCode) + '</div>' +
                     '<button class="cart-item-remove" data-item-code="' + ic + '" title="Remove from cart" aria-label="Remove ' + escHtml(item.item_name) + '">' +

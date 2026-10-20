@@ -196,9 +196,9 @@
 
             <!-- Interactive Sidebar -->
             <div class="contact-grid-sidebar">
-                <div class="contact-sidebar">
+                <div class="contact-sidebar card-stack">
                     <!-- Response Time - Animated -->
-                    <div class="sidebar-card response-card">
+                    <div class="card is-padded is-row is-accent">
                         <div class="response-clock">
                             <div class="clock-face">
                                 <div class="clock-hand hour"></div>
@@ -207,56 +207,53 @@
                             </div>
                             <div class="clock-badge">24h</div>
                         </div>
-                        <div class="response-info">
-                            <h4>Lightning Fast Response</h4>
-                            <p>We typically reply within <strong>24 hours</strong></p>
-                            <span class="business-hours">Mon-Fri, 08:00-17:00 SAST</span>
+                        <div class="card-content">
+                            <h4 class="card-title">Lightning Fast Response</h4>
+                            <p class="card-description">We typically reply within <strong>24 hours</strong></p>
+                            <span class="card-meta">Mon-Fri, 08:00-17:00 SAST</span>
                         </div>
                     </div>
 
                     <!-- Contact Methods - Interactive Cards -->
-                    <div class="sidebar-card contact-card" data-tilt data-tilt-max="8" data-tilt-speed="400">
-                     <h4><b>Contact Us</b></h4>
-                        <div class="contact-method-modern" onclick="window.location.href='mailto:info@kartoza.com'">
-                            <div class="method-icon pulse-glow">
+                    <div class="card is-padded has-border-top" data-tilt data-tilt-max="8" data-tilt-speed="400">
+                     <h4 class="card-title is-small">Contact Us</h4>
+                        <a class="card-list-item" href="mailto:info@kartoza.com">
+                            <div class="card-icon is-small">
                                 <i class="fas fa-envelope"></i>
                             </div>
-                            <div class="method-info">
-                                <span class="method-label">Email Us</span>
-                                <span class="method-value">info@kartoza.com</span>
+                            <div class="card-list-content">
+                                <span class="card-list-meta">Email Us</span>
+                                <span class="card-list-title">info@kartoza.com</span>
                             </div>
-                            <div class="method-arrow">
+                            <div>
                                 <i class="fas fa-arrow-right"></i>
                             </div>
-                        </div>
+                        </a>
 
                     </div>
 
                     <!-- Office Locations with Animation -->
-                    <div class="sidebar-card offices-card">
-                        <h4><i class="fas fa-map-marked-alt"></i> Our Locations</h4>
-                        <div class="office-locations">
-                            <div class="office-location" data-region="ZA">
-                                <div class="office-marker">
-                                    <span class="marker-ping"></span>
+                    <div class="card is-padded">
+                        <h4 class="card-title is-small"><i class="fas fa-map-marked-alt"></i> Our Locations</h4>
+                        <div class="card-list">
+                            <div class="card-list-item" data-region="ZA">
+                                <div class="card-icon is-small">
                                     ZA
                                 </div>
-                                <div class="office-info-modern">
-                                    <strong>South Africa (HQ)</strong>
-                                    <span>Kartoza (Pty) Ltd.</span>
-                                    <span>Cape Town</span>
+                                <div class="card-list-content">
+                                    <strong class="card-list-title">South Africa (HQ)</strong>
+                                    <span class="card-list-meta">Kartoza (Pty) Ltd.</span>
+                                    <span class="card-list-meta">Cape Town</span>
                                 </div>
                             </div>
-                            <div class="connection-line-vertical"></div>
-                            <div class="office-location" data-region="EU">
-                                <div class="office-marker">
-                                    <span class="marker-ping"></span>
+                            <div class="card-list-item" data-region="EU">
+                                <div class="card-icon is-small">
                                     PT
                                 </div>
-                                <div class="office-info-modern">
-                                    <strong>Europe</strong>
-                                    <span>Kartoza Lda</span>
-                                    <span>Lisbon, Portugal</span>
+                                <div class="card-list-content">
+                                    <strong class="card-list-title">Europe</strong>
+                                    <span class="card-list-meta">Kartoza Lda</span>
+                                    <span class="card-list-meta">Lisbon, Portugal</span>
                                 </div>
                             </div>
                         </div>
@@ -695,7 +692,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
 
-    document.querySelectorAll('.sidebar-card, .faq-item-modern, .form-field').forEach(el => {
+    document.querySelectorAll('.faq-item-modern, .form-field').forEach(el => {
         observer.observe(el);
     });
 

@@ -5,9 +5,11 @@
     primaryUrl     - href for primary button (required)
     primaryIcon    - Font Awesome class, e.g. "fas fa-comments" (required)
     primaryLabel   - primary button text (required)
-    secondaryUrl   - href for secondary button (required)
-    secondaryIcon  - Font Awesome class (required)
-    secondaryLabel - secondary button text (required)
+    primaryExternal - true to open the primary link in a new tab (optional)
+    secondaryUrl   - href for secondary button (optional; omit for a single button)
+    secondaryIcon  - Font Awesome class
+    secondaryLabel - secondary button text
+    secondaryExternal - true to open the secondary link in a new tab (optional)
     topIcon        - Font Awesome class shown as a large icon above the title (optional)
 
   Usage:
@@ -27,16 +29,18 @@
     <div class="container has-text-centered">
         {{ with .topIcon }}<div class="section-cta-top-icon"><i class="{{ . }}"></i></div>{{ end }}
         <h2 class="title is-3">{{ .title }}</h2>
-        <p class="subtitle is-5">{{ .subtitle }}</p>
-        <div class="section-cta-buttons">
-            <a class="button is-accent is-medium border-width-2" href="{{ .primaryUrl }}">
+        {{ with .subtitle }}<p class="subtitle is-5">{{ . }}</p>{{ end }}
+        <div class="button-group is-centered">
+            <a class="button is-accent is-medium border-width-2" href="{{ .primaryUrl }}"{{ if .primaryExternal }} target="_blank" rel="noopener"{{ end }}>
                 <span class="icon"><i class="{{ .primaryIcon }}"></i></span>
                 <span>{{ .primaryLabel }}</span>
             </a>
-            <a class="button is-light is-medium" href="{{ .secondaryUrl }}">
-                <span class="icon"><i class="{{ .secondaryIcon }}"></i></span>
-                <span>{{ .secondaryLabel }}</span>
+            {{ with .secondaryUrl }}
+            <a class="button is-light is-medium" href="{{ . }}"{{ if $.secondaryExternal }} target="_blank" rel="noopener"{{ end }}>
+                <span class="icon"><i class="{{ $.secondaryIcon }}"></i></span>
+                <span>{{ $.secondaryLabel }}</span>
             </a>
+            {{ end }}
         </div>
     </div>
 </section>

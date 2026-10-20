@@ -7,32 +7,32 @@
         <!-- Partners Grid - Beautiful Cards -->
         <div class="partners-showcase">
             {{ range where .Pages ".Params.approved" true }}
-            <article class="partner-showcase-card">
+            <article class="card is-tile">
                 <!-- Logo Section -->
-                <div class="partner-showcase-logo">
+                <div class="card-image is-logo">
                     {{ if .Params.logo }}
                     <img src="{{ .Params.logo }}" alt="{{ .Title }} logo">
                     {{ else }}
-                    <div class="partner-logo-placeholder">
+                    <div class="card-icon is-large">
                         <i class="fas fa-handshake"></i>
                     </div>
                     {{ end }}
                 </div>
 
                 <!-- Content Section -->
-                <div class="partner-showcase-content">
-                    <h2 class="partner-showcase-title">{{ .Title }}</h2>
-                    <p class="partner-showcase-tagline">{{ .Params.tagline }}</p>
-                    <p class="partner-showcase-description">
+                <div class="card-content">
+                    <h2 class="card-title">{{ .Title }}</h2>
+                    <p class="card-subtitle">{{ .Params.tagline }}</p>
+                    <p class="card-description">
                         {{ .Description | truncate 200 }}
                     </p>
 
                     <!-- Features List -->
                     {{ if .Params.features }}
-                    <div class="partner-showcase-features">
+                    <div class="checklist">
                         {{ range first 4 .Params.features }}
-                        <div class="partner-showcase-feature">
-                            <span class="partner-feature-dot"></span>
+                        <div>
+                            <i class="fas fa-check-circle"></i>
                             <span>{{ .title }}</span>
                         </div>
                         {{ end }}
@@ -40,7 +40,7 @@
                     {{ end }}
 
                     <!-- Actions -->
-                    <div class="partner-showcase-actions">
+                    <div class="button-group">
                         <a href="{{ .Permalink }}" class="button is-primary is-medium">
                             <span>Explore {{ .Title }}</span>
                             <span class="icon"><i class="fas fa-arrow-right"></i></span>
@@ -68,57 +68,57 @@
         </p>
         <div class="columns is-multiline mt-5">
             <div class="column is-4">
-                <div class="partners-why-card">
-                    <div class="partners-why-icon">
+                <div class="card is-flat is-padded has-text-centered">
+                    <div class="card-icon is-large">
                         <i class="fas fa-certificate"></i>
                     </div>
-                    <h3>Certified Expertise</h3>
-                    <p>Our team is trained and certified by our partner vendors, ensuring you get the highest quality implementation and support.</p>
+                    <h3 class="card-title">Certified Expertise</h3>
+                    <p class="card-description">Our team is trained and certified by our partner vendors, ensuring you get the highest quality implementation and support.</p>
                 </div>
             </div>
             <div class="column is-4">
-                <div class="partners-why-card">
-                    <div class="partners-why-icon">
+                <div class="card is-flat is-padded has-text-centered">
+                    <div class="card-icon is-large">
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
-                    <h3>Local Support</h3>
-                    <p>Get responsive support in your timezone with a team that understands your regional context and requirements.</p>
+                    <h3 class="card-title">Local Support</h3>
+                    <p class="card-description">Get responsive support in your timezone with a team that understands your regional context and requirements.</p>
                 </div>
             </div>
             <div class="column is-4">
-                <div class="partners-why-card">
-                    <div class="partners-why-icon">
+                <div class="card is-flat is-padded has-text-centered">
+                    <div class="card-icon is-large">
                         <i class="fas fa-puzzle-piece"></i>
                     </div>
-                    <h3>Custom Integration</h3>
-                    <p>We integrate partner solutions with your existing systems, workflows, and data infrastructure seamlessly.</p>
+                    <h3 class="card-title">Custom Integration</h3>
+                    <p class="card-description">We integrate partner solutions with your existing systems, workflows, and data infrastructure seamlessly.</p>
                 </div>
             </div>
             <div class="column is-4">
-                <div class="partners-why-card">
-                    <div class="partners-why-icon">
+                <div class="card is-flat is-padded has-text-centered">
+                    <div class="card-icon is-large">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
-                    <h3>Training Programs</h3>
-                    <p>Build internal capacity with customised training programs tailored to your team's skill levels and use cases.</p>
+                    <h3 class="card-title">Training Programs</h3>
+                    <p class="card-description">Build internal capacity with customised training programs tailored to your team's skill levels and use cases.</p>
                 </div>
             </div>
             <div class="column is-4">
-                <div class="partners-why-card">
-                    <div class="partners-why-icon">
+                <div class="card is-flat is-padded has-text-centered">
+                    <div class="card-icon is-large">
                         <i class="fas fa-headset"></i>
                     </div>
-                    <h3>Ongoing Support</h3>
-                    <p>From initial deployment to long-term maintenance, we're with you every step of the way.</p>
+                    <h3 class="card-title">Ongoing Support</h3>
+                    <p class="card-description">From initial deployment to long-term maintenance, we're with you every step of the way.</p>
                 </div>
             </div>
             <div class="column is-4">
-                <div class="partners-why-card">
-                    <div class="partners-why-icon">
+                <div class="card is-flat is-padded has-text-centered">
+                    <div class="card-icon is-large">
                         <i class="fas fa-rocket"></i>
                     </div>
-                    <h3>Faster Results</h3>
-                    <p>Leverage our experience to avoid common pitfalls and accelerate your time to value.</p>
+                    <h3 class="card-title">Faster Results</h3>
+                    <p class="card-description">Leverage our experience to avoid common pitfalls and accelerate your time to value.</p>
                 </div>
             </div>
         </div>

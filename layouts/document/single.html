@@ -35,8 +35,8 @@
                 <div class="document-sidebar">
                     <!-- Table of Contents -->
                     {{ if .TableOfContents }}
-                    <div class="document-toc">
-                        <h3 class="document-toc-title">
+                    <div class="card is-padded">
+                        <h3 class="card-title is-small">
                             <i class="fas fa-list"></i> Contents
                         </h3>
                         {{ .TableOfContents }}
@@ -45,22 +45,22 @@
 
                     <!-- Related Policies -->
                     {{ with .Params.related }}
-                    <div class="document-related">
-                        <h3 class="document-related-title">
+                    <div class="card is-padded">
+                        <h3 class="card-title is-small">
                             <i class="fas fa-file-alt"></i> Related Policies
                         </h3>
-                        <ul class="document-related-list">
+                        <ul class="card-list">
                             {{ range . }}
-                            <li><a href="{{ .url }}">{{ .name }}</a></li>
+                            <li><a class="card-list-item" href="{{ .url }}">{{ .name }}</a></li>
                             {{ end }}
                         </ul>
                     </div>
                     {{ end }}
 
                     <!-- CTA Card -->
-                    <div class="document-cta-card">
-                        <h3>Questions?</h3>
-                        <p>If you have questions about this document, please get in touch with our team.</p>
+                    <div class="card is-padded is-dark">
+                        <h3 class="card-title">Questions?</h3>
+                        <p class="card-description">If you have questions about this document, please get in touch with our team.</p>
                         <a class="button is-primary is-fullwidth" href="{{ absURL "contact-us/" }}">
                             <span class="icon"><i class="fas fa-envelope"></i></span>
                             <span>Contact Us</span>
@@ -177,92 +177,26 @@
     position: sticky;
     top: 80px;
 }
-.document-toc {
-    background: white;
-    border-radius: 4px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 4px 16px rgba(56, 57, 57, 0.08);
-}
-.document-toc-title {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #383939;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-}
-.document-toc #TableOfContents ul {
+.document-sidebar #TableOfContents ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-.document-toc #TableOfContents > ul > li {
+.document-sidebar #TableOfContents > ul > li {
     margin-bottom: 0.5rem;
 }
-.document-toc #TableOfContents ul ul {
+.document-sidebar #TableOfContents ul ul {
     padding-left: 1rem;
     margin-top: 0.3rem;
 }
-.document-toc #TableOfContents a {
+.document-sidebar #TableOfContents a {
     color: #676869;
     font-size: 0.875rem;
     text-decoration: none;
     transition: color 0.2s;
 }
-.document-toc #TableOfContents a:hover {
+.document-sidebar #TableOfContents a:hover {
     color: #54A2CC;
-}
-
-.document-related {
-    background: white;
-    border-radius: 4px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 4px 16px rgba(56, 57, 57, 0.08);
-}
-.document-related-title {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #383939;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-}
-.document-related-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-.document-related-list li {
-    margin-bottom: 0.5rem;
-}
-.document-related-list a {
-    color: #676869;
-    text-decoration: none;
-    font-size: 0.875rem;
-    transition: color 0.2s;
-}
-.document-related-list a:hover {
-    color: #54A2CC;
-}
-
-.document-cta-card {
-    background: #383939;
-    border-radius: 4px;
-    padding: 1.5rem;
-    color: white;
-    margin-bottom: 1.5rem;
-}
-.document-cta-card h3 {
-    color: white;
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-}
-.document-cta-card p {
-    font-size: 0.875rem;
-    opacity: 0.9;
-    margin-bottom: 1rem;
 }
 
 .document-back {

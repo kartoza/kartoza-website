@@ -34,15 +34,15 @@
                 <div class="content">
                     {{ .Content }}
                 </div>
-                <div class="careers-job-apply">
-                    <h3>Ready to Apply?</h3>
-                    <p>Send your application to <strong>jobs@kartoza.com</strong> including your CV, motivation statement, salary expectations, current location, and portfolio or code samples.</p>
-                    <div class="careers-job-apply-buttons">
+                <div class="card is-padded is-flat">
+                    <h3 class="card-title">Ready to Apply?</h3>
+                    <p class="card-description">Send your application to <strong>jobs@kartoza.com</strong> including your CV, motivation statement, salary expectations, current location, and portfolio or code samples.</p>
+                    <div class="button-group">
                         <a href="mailto:jobs@kartoza.com?subject={{ .Title | urlquery }}" class="button is-primary is-medium">
                             <span class="icon"><i class="fas fa-envelope"></i></span>
                             <span>Apply for this Position</span>
                         </a>
-                        <a href="{{ absURL "careers/" }}" class="button is-light is-medium">
+                        <a href="{{ absURL "careers/" }}" class="button is-secondary is-medium">
                             <span class="icon"><i class="fas fa-arrow-left"></i></span>
                             <span>View All Openings</span>
                         </a>

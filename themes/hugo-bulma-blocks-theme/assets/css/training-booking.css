@@ -121,199 +121,9 @@
     margin-bottom: 40px;
 }
 
-.session-card {
-    background: white;
-    border: 2px solid var(--light-bg-alt);
-    border-radius: var(--radius-md);
-    transition: all var(--transition-med);
-    overflow: hidden;
-}
-
-.session-card:hover {
-    border-color: var(--primary-light);
-    box-shadow: var(--shadow-md);
-}
-
-.session-card.selected {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(84, 162, 204, 0.15);
-}
-
-.session-card.session-full {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.session-card-header {
-    padding: 20px;
-    background: var(--light-bg);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.session-date {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.session-date i {
-    font-size: 1.5rem;
-    color: var(--primary);
-}
-
-.date-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.date-main {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text-dark);
-}
-
-.date-sub {
-    font-size: 0.875rem;
-    color: var(--text-muted);
-}
-
-.session-badge {
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.badge-success {
-    background: #d4edda;
-    color: #155724;
-}
-
-.badge-warning {
-    background: #fff3cd;
-    color: #856404;
-}
-
-.badge-danger {
-    background: #f8d7da;
-    color: #721c24;
-}
-
-.session-card-body {
-    padding: 20px;
-}
-
-.session-venue {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--light-bg);
-}
-
-.session-venue i {
-    font-size: 1.5rem;
-    color: var(--primary);
-    flex-shrink: 0;
-}
-
-.venue-info {
-    flex: 1;
-}
-
-.venue-info strong {
-    display: block;
-    font-size: 1rem;
-    color: var(--text-dark);
-    margin-bottom: 4px;
-}
-
-.venue-desc {
-    font-size: 0.875rem;
-    color: var(--text-muted);
-}
-
-.session-details {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.session-details .detail {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1rem;
-    color: var(--text-muted);
-}
-
-.session-details .detail i {
-    color: var(--primary);
-    width: 20px;
-}
-
-.session-card-footer {
-    padding: 20px;
-    background: var(--light-bg);
-}
-
 /* ============================================
    CUSTOM TRAINING CARD
    ============================================ */
-.custom-training-card {
-    background: var(--accent-light);
-    border-radius: var(--radius-md);
-    padding: 30px;
-    margin-top: 30px;
-}
-
-.custom-training-content {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-}
-
-.custom-training-icon {
-    width: 60px;
-    height: 60px;
-    background: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.custom-training-icon i {
-    font-size: 1.5rem;
-    color: var(--accent);
-}
-
-.custom-training-info {
-    flex: 1;
-}
-
-.custom-training-info h4 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 0.5rem;
-}
-
-.custom-training-info p {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.95);
-    margin: 0;
-}
-
-.custom-training-card .button {
-    flex-shrink: 0;
-}
 
 /* ============================================
    ATTENDEE SELECTOR
@@ -411,90 +221,9 @@
     display: none;
 }
 
-.currency-card {
-    border: 2px solid var(--light-bg-alt);
-    border-radius: var(--radius-md);
-    padding: 20px;
-    text-align: center;
-    transition: all var(--transition-fast);
-    background: white;
-}
-
-.currency-option:hover .currency-card {
-    border-color: var(--primary-light);
-    box-shadow: var(--shadow-sm);
-}
-
-.currency-option input[type="radio"]:checked + .currency-card {
-    border-color: var(--primary);
-    background: rgba(84, 162, 204, 0.05);
-    box-shadow: 0 0 0 3px rgba(84, 162, 204, 0.15);
-}
-
-.currency-symbol {
-    display: block;
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--primary);
-    margin-bottom: 8px;
-}
-
-.currency-name {
-    display: block;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-dark);
-    margin-bottom: 4px;
-}
-
-.currency-code {
-    display: block;
-    font-size: 0.875rem;
-    color: var(--text-muted);
-}
-
 /* ============================================
    DISCOUNT INFO BOX
    ============================================ */
-.discount-info-box {
-    background: var(--light-bg);
-    border-radius: var(--radius-md);
-    padding: 25px;
-    border-left: 4px solid var(--accent);
-}
-
-.discount-info-box h4 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text-dark);
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.discount-info-box h4 i {
-    color: var(--accent);
-}
-
-.discount-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.discount-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 1rem;
-    color: var(--text-muted);
-}
-
-.discount-item i {
-    color: var(--accent);
-    width: 20px;
-}
 
 /* ============================================
    BOOKING SUMMARY
@@ -554,14 +283,6 @@
 .subtotal-item {
     padding-top: 15px;
     border-top: 1px solid var(--light-bg-alt);
-}
-
-.discount-item {
-    color: var(--accent-dark);
-}
-
-.discount-item .summary-label {
-    color: var(--accent-dark);
 }
 
 .summary-discount {
@@ -718,53 +439,6 @@
 /* ============================================
    SIDEBAR BOOKING QUICK CARD
    ============================================ */
-.booking-quick-card {
-    background: var(--primary-dark);
-    color: white;
-    border: none !important;
-    box-shadow: var(--shadow-md);
-}
-
-.booking-quick-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 15px;
-}
-
-.booking-quick-header i {
-    font-size: 1.5rem;
-}
-
-.booking-quick-header h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin: 0;
-}
-
-.booking-quick-text {
-    font-size: 1rem;
-    margin-bottom: 20px;
-    opacity: 0.95;
-}
-
-.booking-quick-features {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.booking-quick-features .feature-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-    font-size: 0.875rem;
-}
-
-.booking-quick-features .feature-item i {
-    color: var(--accent-light);
-}
 
 /* ============================================
    RESPONSIVE
@@ -785,11 +459,6 @@
     .booking-step-header {
         flex-direction: column;
         align-items: flex-start;
-    }
-
-    .custom-training-content {
-        flex-direction: column;
-        text-align: center;
     }
 
     .currency-options {

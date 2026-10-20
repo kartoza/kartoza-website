@@ -64,24 +64,6 @@
     margin: -2rem auto 0;
 }
 
-.auth-card {
-    background: #fff;
-    border-radius: 4px;
-    box-shadow: 0 8px 40px rgba(56, 57, 57,0.12);
-    overflow: hidden;
-    position: relative;
-}
-
-.auth-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: var(--primary2, #383939);
-}
-
 /* ============================================
    TABS
    ============================================ */
@@ -257,57 +239,6 @@
    SUBMIT BUTTON
    ============================================ */
 
-.auth-submit {
-    width: 100%;
-    padding: 0.875rem;
-    border: none;
-    border-radius: 4px;
-    background: var(--primary2, #383939);
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
-    letter-spacing: 0.02em;
-    font-family: inherit;
-    margin-top: 0.5rem;
-}
-
-.auth-submit:hover:not(:disabled) {
-    box-shadow: 0 6px 20px rgba(84, 162, 204,0.35);
-}
-
-.auth-submit:active:not(:disabled) {
-    transform: translateY(0);
-}
-
-.auth-submit:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-}
-
-.auth-submit .btn-text,
-.auth-submit .btn-loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-.auth-submit .btn-loading {
-    display: none;
-}
-
-.auth-submit.is-loading .btn-text {
-    display: none;
-}
-
-.auth-submit.is-loading .btn-loading {
-    display: flex;
-}
-
 /* ============================================
    MESSAGES
    ============================================ */
@@ -355,24 +286,6 @@
    FOOTER LINKS
    ============================================ */
 
-.auth-card-footer {
-    padding: 1.25rem 2rem;
-    border-top: 1px solid var(--light2, #D1D1D1);
-    text-align: center;
-    font-size: 0.875rem;
-    color: var(--dark1, #676869);
-}
-
-.auth-card-footer a {
-    color: var(--primary2, #383939);
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.auth-card-footer a:hover {
-    text-decoration: underline;
-}
-
 /* ============================================
    LOGGED-IN STATE
    ============================================ */
@@ -412,28 +325,6 @@
     font-size: 0.875rem;
     color: var(--dark1, #676869);
     margin-bottom: 1.5rem;
-}
-
-.auth-logout-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.625rem 1.5rem;
-    border: 2px solid var(--primary2, #383939);
-    border-radius: 4px;
-    color: var(--primary2, #383939);
-    background: none;
-    font-size: 0.875rem;
-    font-weight: 600;
-    cursor: pointer;
-    font-family: inherit;
-    transition: background 0.2s, color 0.2s;
-    text-decoration: none;
-}
-
-.auth-logout-btn:hover {
-    background: var(--primary2, #383939);
-    color: #fff;
 }
 
 .auth-user-avatar img {
@@ -500,7 +391,7 @@
     <div class="auth-card-wrapper">
 
         <!-- Logged-in state (hidden by default, shown by JS) -->
-        <div class="auth-card" id="auth-logged-in-card" style="display:none">
+        <div class="card has-border-top" id="auth-logged-in-card" style="display:none">
             <div class="auth-logged-in is-visible" id="logged-in-content">
                 <div class="auth-user-avatar" id="logged-in-avatar">
                     <i class="fas fa-user"></i>
@@ -522,7 +413,7 @@
                     </span>
                 </div>
                 <div class="auth-user-last-active" id="logged-in-last-active"></div>
-                <button class="auth-logout-btn" id="page-logout-btn">
+                <button class="button is-secondary" id="page-logout-btn">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Sign Out</span>
                 </button>
@@ -569,7 +460,7 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="auth-submit" id="change-email-submit">
+                            <button type="submit" class="button is-primary is-fullwidth" id="change-email-submit">
                                 <span class="btn-text">
                                     <i class="fas fa-save"></i> Update Email
                                 </span>
@@ -594,7 +485,7 @@
         </div>
 
         <!-- Login/Register card (hidden when logged in) -->
-        <div class="auth-card" id="auth-forms-card">
+        <div class="card has-border-top" id="auth-forms-card">
             <!-- Tabs -->
             <div class="auth-tabs" role="tablist">
                 <button class="auth-tab active" role="tab" aria-selected="true"
@@ -655,7 +546,7 @@
                         </a>
                     </div>
 
-                    <button type="submit" class="auth-submit" id="login-submit">
+                    <button type="submit" class="button is-primary is-fullwidth" id="login-submit">
                         <span class="btn-text">
                             <i class="fas fa-sign-in-alt"></i> Sign In
                         </span>
@@ -705,7 +596,7 @@
                         </a>
                     </div>
 
-                    <button type="submit" class="auth-submit" id="login-otp-submit">
+                    <button type="submit" class="button is-primary is-fullwidth" id="login-otp-submit">
                         <span class="btn-text">
                             <i class="fas fa-check"></i> Verify &amp; Sign In
                         </span>
@@ -755,7 +646,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="auth-submit" id="forgot-submit">
+                    <button type="submit" class="button is-primary is-fullwidth" id="forgot-submit">
                         <span class="btn-text">
                             <i class="fas fa-paper-plane"></i> Send Reset Link
                         </span>
@@ -841,7 +732,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="auth-submit" id="register-submit"
+                    <button type="submit" class="button is-primary is-fullwidth" id="register-submit"
                         style="background: #EEB348;">
                         <span class="btn-text">
                             <i class="fas fa-user-plus"></i> Create Account
@@ -864,7 +755,7 @@
             </div>
 
             <!-- Card Footer -->
-            <div class="auth-card-footer" id="auth-card-footer">
+            <div class="card-footer is-centered" id="auth-card-footer">
                 <span id="footer-login-hint">
                     New to Kartoza?
                     <a href="#" onclick="switchTab('register'); return false;">Create an account</a>

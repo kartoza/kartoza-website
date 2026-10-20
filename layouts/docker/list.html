@@ -39,50 +39,50 @@
         <div class="docker-grid columns is-multiline">
             {{ range .RegularPages.ByWeight }}
             <div class="column is-4-desktop is-6-tablet">
-                <article class="docker-card">
-                    <div class="docker-card-header">
-                        <div class="docker-card-icon">
+                <article class="card is-tile">
+                    <div class="card-header">
+                        <div class="card-icon">
                             <i class="fab fa-docker"></i>
                         </div>
-                        <div class="docker-card-badges">
+                        <div class="card-tags">
                             {{ if .Params.pulls }}
-                            <span class="docker-badge docker-pulls">
+                            <span class="tag is-primary is-light">
                                 <i class="fas fa-download"></i> {{ .Params.pulls }}
                             </span>
                             {{ end }}
                             {{ if .Params.stars }}
-                            <span class="docker-badge docker-stars">
+                            <span class="tag is-accent is-light">
                                 <i class="fas fa-star"></i> {{ .Params.stars }}
                             </span>
                             {{ end }}
                         </div>
                     </div>
-                    <div class="docker-card-content">
-                        <h3 class="docker-card-title">
+                    <div class="card-content">
+                        <h3 class="card-title">
                             <a href="{{ .Permalink }}">kartoza/{{ .Params.title | default .Title | lower | urlize }}</a>
                         </h3>
-                        <p class="docker-card-description">
+                        <p class="card-description">
                             {{ .Description | truncate 120 }}
                         </p>
                         {{ if .Params.tags }}
-                        <div class="docker-card-tags">
+                        <div class="card-tags">
                             {{ range first 3 .Params.tags }}
-                            <span class="docker-card-tag">{{ . }}</span>
+                            <span class="tag">{{ . }}</span>
                             {{ end }}
                         </div>
                         {{ end }}
                     </div>
-                    <div class="docker-card-footer">
-                        <a href="{{ .Permalink }}" class="docker-card-link">
+                    <div class="card-footer">
+                        <a href="{{ .Permalink }}" class="card-link">
                             View Details <i class="fas fa-arrow-right"></i>
                         </a>
                         {{ if .Params.dockerhub }}
-                        <a href="{{ .Params.dockerhub }}" target="_blank" rel="noopener" class="docker-card-external" title="View on Docker Hub">
+                        <a href="{{ .Params.dockerhub }}" target="_blank" rel="noopener" class="card-icon-link" title="View on Docker Hub">
                             <i class="fab fa-docker"></i>
                         </a>
                         {{ end }}
                         {{ if .Params.github }}
-                        <a href="{{ .Params.github }}" target="_blank" rel="noopener" class="docker-card-external" title="View on GitHub">
+                        <a href="{{ .Params.github }}" target="_blank" rel="noopener" class="card-icon-link" title="View on GitHub">
                             <i class="fab fa-github"></i>
                         </a>
                         {{ end }}

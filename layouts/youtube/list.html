@@ -16,7 +16,7 @@
                     <a href="{{ .Params.channelUrl }}" target="_blank" rel="noopener" class="button is-primary">
                         <span>Visit Channel</span>
                     </a>
-                    <a href="{{ .Params.subscribeUrl }}" target="_blank" rel="noopener" class="button is-outlined is-primary">
+                    <a href="{{ .Params.subscribeUrl }}" target="_blank" rel="noopener" class="button is-secondary">
                         <span>Subscribe</span>
                     </a>
                 </div>
@@ -50,21 +50,21 @@
 
         <div class="youtube-playlists-grid">
             {{ range .Params.playlists }}
-            <a href="{{ .url }}" target="_blank" rel="noopener" class="playlist-card">
-                <div class="playlist-card-icon">
+            <a href="{{ .url }}" target="_blank" rel="noopener" class="card is-padded is-tile">
+                <div class="card-icon">
                     <i class="fas {{ .icon }}"></i>
                 </div>
-                <div class="playlist-card-content">
-                    <h3 class="playlist-card-title">{{ .title }}</h3>
-                    <p class="playlist-card-description">{{ .description }}</p>
+                <div class="card-content">
+                    <h3 class="card-title">{{ .title }}</h3>
+                    <p class="card-description">{{ .description }}</p>
                     {{ with .videoCount }}
-                    <span class="playlist-card-count">
+                    <span class="card-meta">
                         <i class="fas fa-video"></i> {{ . }} videos
                     </span>
                     {{ end }}
                 </div>
-                <div class="playlist-card-action">
-                    <span class="playlist-card-link">
+                <div>
+                    <span class="card-link">
                         <i class="fas fa-play"></i> Watch
                     </span>
                 </div>
@@ -109,26 +109,18 @@
 </section>
 
 <!-- CTA Section -->
-<section class="youtube-cta">
-    <div class="container">
-        <div class="youtube-cta-content">
-            <div class="youtube-cta-icon">
-                <i class="fas fa-bell"></i>
-            </div>
-            <h2 class="youtube-cta-title">Never Miss an Update</h2>
-            <p class="youtube-cta-text">Subscribe to our channel and turn on notifications to stay updated with the latest geospatial tutorials, webinars, and news.</p>
-            <div class="youtube-cta-buttons">
-                <a class="button is-primary is-large" href="{{ .Params.subscribeUrl }}" target="_blank" rel="noopener">
-                    <span class="icon"><i class="fab fa-youtube"></i></span>
-                    <span>Subscribe Now</span>
-                </a>
-                <a class="button is-outlined is-white is-large" href="{{ .Params.channelUrl }}" target="_blank" rel="noopener">
-                    <span class="icon"><i class="fas fa-external-link-alt"></i></span>
-                    <span>View All Videos</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+{{ partial "section-cta.html" (dict
+    "title"             "Never Miss an Update"
+    "subtitle"          "Subscribe to our channel and turn on notifications to stay updated with the latest geospatial tutorials, webinars, and news."
+    "primaryUrl"        .Params.subscribeUrl
+    "primaryIcon"       "fab fa-youtube"
+    "primaryLabel"      "Subscribe Now"
+    "primaryExternal"   true
+    "secondaryUrl"      .Params.channelUrl
+    "secondaryIcon"     "fas fa-external-link-alt"
+    "secondaryLabel"    "View All Videos"
+    "secondaryExternal" true
+    "topIcon"           "fas fa-bell"
+) }}
 
 {{ partial "footer.html" . }}
