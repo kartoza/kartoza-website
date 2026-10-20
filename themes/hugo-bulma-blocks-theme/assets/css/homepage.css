@@ -3,33 +3,7 @@
  * Beautiful, engaging design with Kartoza brand colors
  */
 
-/* ============================================
-   CSS VARIABLES (using Kartoza brand colors)
-   ============================================ */
-:root {
-    --primary-dark: #383939;
-    --primary: #54A2CC;
-    --primary-light: #F5F5F2;
-    --accent: #EEB348;
-    --accent-dark: #EEB348;
-    --accent-light: #EEB348;
-    --text-dark: #383939;
-    --text-muted: #676869;
-    --light-bg: #F5F5F2;
-    --light-bg-alt: #F5F5F2;
-    --white: #ffffff;
-    --shadow-sm: 0 0 0 1px #D1D1D1;
-    --shadow-md: 0 0 0 1px #D1D1D1;
-    --shadow-lg: 0 0 0 1px #D1D1D1;
-    --shadow-xl: 0 0 0 1px #D1D1D1;
-    --transition-fast: 0.2s ease;
-    --transition-med: 0.3s ease;
-    --transition-slow: 0.5s ease;
-    --radius-sm: 2px;
-    --radius-md: 4px;
-    --radius-lg: 4px;
-    --radius-xl: 6px;
-}
+/* Design tokens (colours, shadows, radii, transitions) live in theme.css. */
 
 /* ============================================
    HERO SECTION
@@ -2510,17 +2484,7 @@
     color: var(--text-muted);
 }
 
-/* Global Card Base */
-.card {
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    transition: all var(--transition-med);
-    overflow: hidden;
-}
-
-.card:hover {
-    box-shadow: var(--shadow-lg);
-}
+/* Global card base and variants live in theme.css. */
 
 /* Global Section Spacing */
 .section {
