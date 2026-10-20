@@ -15,34 +15,34 @@
         <div class="gallery-grid columns is-multiline">
             {{ range (.Paginator 50).Pages }}
             <div class="column is-6-desktop is-12-tablet">
-                <article class="gallery-card">
-                    <div class="gallery-card-image">
+                <article class="card is-tile">
+                    <div class="card-image is-cover">
                         <a href="{{ .Permalink }}">
                             {{ $thumbnail := .Params.thumbnail | default "/img/banner-gallery.png" }}
                             <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" loading="lazy">
-                            <div class="gallery-card-overlay">
-                                <span class="view-map">
+                            <div class="card-overlay">
+                                <span class="card-overlay-label">
                                     <i class="fas fa-map"></i>
                                     View Map
                                 </span>
                             </div>
                         </a>
                     </div>
-                    <div class="gallery-card-content">
-                        <h3 class="gallery-card-title">
+                    <div class="card-content">
+                        <h3 class="card-title">
                             <a href="{{ .Permalink }}">{{ .Title }}</a>
                         </h3>
-                        <p class="gallery-card-description">
+                        <p class="card-description">
                             {{ .Description | truncate 150 }}
                         </p>
                         {{ if .Params.tags }}
-                        <div class="gallery-card-tags">
+                        <div class="card-tags">
                             {{ range first 3 .Params.tags }}
                             <span class="tag">{{ . }}</span>
                             {{ end }}
                         </div>
                         {{ end }}
-                        <a href="{{ .Permalink }}" class="gallery-card-link">
+                        <a href="{{ .Permalink }}" class="card-link">
                             Explore Map <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>

@@ -1,0 +1,6 @@
+{{- /* Course level badge for a .card-image. Pass the level string, e.g.
+       {{ partial "card-level-badge.html" .Params.level }} */ -}}
+{{- with . -}}
+{{- $level := . | lower -}}
+<span class="card-badge{{ if eq $level "beginner" }} is-success{{ else if eq $level "intermediate" }} is-info{{ else if eq $level "advanced" }} is-danger{{ end }}">{{ . }}</span>
+{{- end -}}

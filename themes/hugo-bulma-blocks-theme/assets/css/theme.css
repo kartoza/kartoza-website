@@ -15,8 +15,11 @@
  *   1. Tokens
  *   2. Buttons
  *   3. Button group
- *   4. Cards
- *   5. Utilities
+ *   4. Cards (+ parts, lists, stats, Bulma tag colours)
+ *   5. Checklist, copy command
+ *   6. Page navigation
+ *   7. CTA section
+ *   8. Utilities
  */
 
 /* ============================================
@@ -147,15 +150,10 @@
     border: 2px solid rgba(255, 255, 255, 0.85);
 }
 
-/* Legacy: prefer .is-primary. Kept for existing markup. */
-.button.is-blue {
-    background: var(--primary);
-    border-color: var(--primary);
-}
-
-.button.is-blue:hover {
-    background: var(--primary-dark);
-    border-color: var(--primary-dark);
+/* Space between a bare <i> icon and the label text
+   (Bulma's own pattern wraps the icon in .icon, which has its own margins) */
+.button:has(> i) {
+    gap: 0.5rem;
 }
 
 /* ============================================
@@ -243,6 +241,14 @@
     box-shadow: var(--shadow-lg);
 }
 
+/* A bare image as the first child acts as a 16:9 cover image */
+.card > img:first-child {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
 /* Layout */
 .card.is-tile {
     height: 100%;
@@ -257,12 +263,67 @@
     flex-direction: column;
 }
 
+.card.is-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.card.is-row > .card-content {
+    flex: 1;
+    min-width: 0;
+    padding: 0;
+}
+
+.card.is-row .card-link {
+    margin-top: 0;
+}
+
+.card.is-row > .card-icon,
+.card.is-row > .card-avatar {
+    margin-bottom: 0;
+}
+
 .card.is-padded {
     padding: 1.5rem;
 }
 
+.card.is-tile.is-padded > .card-content {
+    padding: 0;
+}
+
+/* Push a trailing action to the bottom so actions line up across a row */
+.card.is-tile > .button:last-child,
+.card.is-tile > .button-group:last-child,
+.card.is-tile > .card-link:last-child {
+    margin-top: auto;
+}
+
 .card.is-padded.is-large {
     padding: 2.5rem;
+}
+
+@media screen and (max-width: 768px) {
+    .card.is-padded.is-large {
+        padding: 1.5rem;
+    }
+}
+
+/* Stacked cards (e.g. in a sidebar) */
+.card.is-padded:not(:last-child) {
+    margin-bottom: 1.5rem;
+}
+
+/* Column of cards spaced by gap (sidebars). Put it on the wrapper.
+   :where() keeps it overridable by a page's own grid layout. */
+:where(.card-stack) {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.card-stack > .card.is-padded:not(:last-child) {
+    margin-bottom: 0;
 }
 
 /* Surface */
@@ -290,6 +351,12 @@
     background: var(--accent);
 }
 
+.card.is-primary strong,
+.card.is-dark strong,
+.card.is-accent strong {
+    color: inherit;
+}
+
 .card.is-primary .card-title,
 .card.is-dark .card-title,
 .card.is-accent .card-title,
@@ -297,6 +364,18 @@
 .card.is-dark .card-description,
 .card.is-accent .card-description {
     color: var(--white);
+}
+
+/* Selected state, for cards the user picks (sessions, addresses, options).
+   Set .is-selected from JS, or put the card right after a radio/checkbox:
+     <label><input type="radio" hidden> <div class="card is-padded">…</div></label> */
+.card.is-selected,
+input:checked + .card {
+    box-shadow: 0 0 0 2px var(--primary);
+}
+
+label > .card {
+    cursor: pointer;
 }
 
 /* Edge highlight */
@@ -319,6 +398,66 @@
     aspect-ratio: var(--card-image-ratio, 16 / 9);
 }
 
+.card-image.is-cover > a {
+    display: block;
+    height: 100%;
+}
+
+/* Logo shown whole (not cropped) on a white band */
+.card-image.is-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 160px;
+    padding: 2rem;
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.card-image.is-logo img {
+    max-height: 100px;
+    width: auto;
+    object-fit: contain;
+}
+
+.card-image.is-logo.is-small {
+    min-height: 96px;
+    padding: 1rem;
+}
+
+.card-image.is-logo.is-small img {
+    max-height: 56px;
+}
+
+.card-image.is-square {
+    --card-image-ratio: 1 / 1;
+}
+
+/* Dark strip across the bottom of a .card-image (e.g. a location) */
+.card-image-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: rgba(0, 0, 0, 0.8);
+    color: var(--white);
+    font-size: 0.875rem;
+}
+
+.card-image-caption i {
+    color: var(--accent);
+}
+
+.card-image.is-cover > .card-icon {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+}
+
 .card-image.is-cover img {
     display: block;
     width: 100%;
@@ -334,11 +473,25 @@
     margin-bottom: 0.5rem;
 }
 
+.card-title a {
+    color: var(--primary-dark);
+    transition: color var(--transition-fast);
+}
+
+.card-title a:hover {
+    color: var(--primary);
+}
+
 .card-title.is-small {
     font-size: 0.875rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 1rem;
+}
+
+.card-title.is-small i {
+    color: var(--primary);
+    margin-right: 0.35rem;
 }
 
 .card-subtitle {
@@ -356,6 +509,19 @@
     flex-grow: 1;
 }
 
+.card-description:last-child {
+    margin-bottom: 0;
+}
+
+/* Quotation text (testimonials) */
+.card-quote {
+    color: var(--text-dark);
+    font-size: 1.25rem;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
 .card-link {
     display: inline-flex;
     align-items: center;
@@ -371,18 +537,667 @@
     color: var(--primary-dark);
 }
 
-/* ============================================
-   5. UTILITIES
-   ============================================ */
-.notice-yellow {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: white;
+/* Small info line: date, author, duration… Children sit in a wrapping row;
+   add .is-highlight to a child to colour it yellow. */
+.card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
 }
 
-.blue-left-border-4 {
-    border-left: 4px solid var(--primary);
+.card-meta > * {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
 }
+
+.card.has-text-centered .card-meta {
+    justify-content: center;
+}
+
+.card-meta .is-highlight {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* Row of Bulma .tag elements inside a card */
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.card-tags .tag {
+    margin: 0;
+    gap: 0.3rem;
+}
+
+.card-header .card-tags {
+    margin-bottom: 0;
+}
+
+.card-tags .tag:not([class*="is-"]) {
+    background: var(--light-bg);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+}
+
+/* Hover layer over a .card-image, holding a .card-overlay-label */
+.card-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(56, 57, 57, 0.9);
+    opacity: 0;
+    transition: opacity var(--transition-med);
+}
+
+.card:hover .card-overlay,
+.card-overlay:focus-within {
+    opacity: 1;
+}
+
+.card-overlay-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--white);
+    border-radius: var(--radius-md);
+    color: var(--white);
+    font-weight: 700;
+}
+
+/* Label pinned to the top-right of a .card-image.
+   Colours: default yellow, .is-success, .is-info, .is-danger */
+.card-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-md);
+    background: var(--accent);
+    color: var(--white);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.card-badge.is-success {
+    background: #2e9d69;
+}
+
+.card-badge.is-info {
+    background: #2563eb;
+}
+
+.card-badge.is-danger {
+    background: #dc2626;
+}
+
+/* Header row (icon on the left, tags/stats on the right) above .card-content.
+   Overrides Bulma's .card-header. */
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem 0;
+    background: none;
+    box-shadow: none;
+}
+
+.card.is-padded > .card-header {
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+.card-header > .card-content {
+    flex: 1;
+    min-width: 0;
+    padding: 0;
+}
+
+.card-header .card-title {
+    margin-bottom: 0;
+}
+
+.card-header > .card-icon {
+    margin-bottom: 0;
+}
+
+/* Icon sitting directly at the top of a padded card */
+.card.is-padded > .card-icon:first-child:not(.is-large) {
+    margin-bottom: 1rem;
+}
+
+/* Square icon tile. .is-accent for yellow, .is-large for 60px. */
+.card-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: var(--primary);
+    color: var(--white);
+    font-size: 1.25rem;
+}
+
+.card.has-text-centered .card-icon,
+.has-text-centered > .card-icon {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-icon.is-accent {
+    background: var(--accent);
+}
+
+.card-icon.is-large {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Footer bar: a .card-link on the left, optional .card-icon-link buttons on
+   the right. Overrides Bulma's .card-footer. */
+.card-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: var(--light-bg);
+    border-top: 1px solid var(--gray-200);
+}
+
+.card-footer.is-centered {
+    justify-content: center;
+}
+
+/* Footer inside a padded card runs edge to edge */
+.card.is-padded > .card-footer {
+    margin: 1.5rem -1.5rem -1.5rem;
+}
+
+.card.is-padded.is-large > .card-footer {
+    margin: 2.5rem -2.5rem -2.5rem;
+}
+
+.card-footer .card-link {
+    margin: 0 auto 0 0;
+}
+
+.card-icon-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--gray-100);
+    color: var(--text-muted);
+    transition: all var(--transition-fast);
+}
+
+.card-tags a.tag:hover {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.card-icon-link:hover {
+    background: var(--primary);
+    color: var(--white);
+}
+
+/* Small uppercase label above a title, e.g. "Written by" */
+.card-eyebrow {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+}
+
+/* Round-cornered picture or icon for a person/organisation */
+.card-avatar {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background: var(--primary);
+    color: var(--white);
+    font-size: 1.5rem;
+}
+
+.card-avatar.is-light {
+    background: var(--gray-50);
+}
+
+.card-avatar.is-light img {
+    object-fit: contain;
+    padding: 0.35rem;
+}
+
+.card-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Stacked list of rows inside a card (related links, details, contacts…).
+     .card-list-item       one row; when it is a link it highlights on hover
+       .card-icon.is-small   optional leading icon
+       .card-list-content    text block (.card-list-title + .card-list-meta)
+     .card-list.is-plain   label/value rows split by a divider, no background */
+.card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.card-list-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: var(--radius-md);
+    background: var(--gray-50);
+    color: var(--text-dark);
+    font-size: 0.875rem;
+    transition: all var(--transition-fast);
+}
+
+.card-list-item > i,
+.card-list-item > .icon {
+    color: var(--primary);
+}
+
+a.card-list-item:hover {
+    background: var(--primary);
+    color: var(--white);
+}
+
+a.card-list-item:hover i,
+a.card-list-item:hover .card-list-title,
+a.card-list-item:hover .card-list-meta {
+    color: var(--white);
+}
+
+.card-list-item.is-stacked {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+}
+
+.card-list-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-list-title {
+    color: var(--text-dark);
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.card-list-meta {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.card-list.is-plain {
+    gap: 0;
+}
+
+.card-list.is-plain .card-list-item {
+    padding: 0.6rem 0;
+    border-radius: 0;
+    background: none;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.card-list.is-plain .card-list-item:last-child {
+    border-bottom: 0;
+}
+
+/* label (.card-list-meta) on the left, value (.card-list-title) on the right */
+.card-list.is-plain .card-list-title:last-child:not(:first-child) {
+    margin-left: auto;
+    text-align: right;
+}
+
+.card-icon.is-small {
+    width: 32px;
+    height: 32px;
+    font-size: 0.875rem;
+}
+
+/* Grid of figures, e.g. downloads / rating */
+.card-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.card-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.75rem;
+    border-radius: var(--radius-md);
+    background: var(--gray-50);
+    text-align: center;
+}
+
+.card-stat > i {
+    color: var(--primary);
+    margin-bottom: 0.25rem;
+}
+
+.card-stat-value {
+    color: var(--primary);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.card-stat-label {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+/* Text on coloured cards */
+.card.is-primary .card-eyebrow,
+.card.is-dark .card-eyebrow,
+.card.is-accent .card-eyebrow,
+.card.is-primary .card-meta,
+.card.is-dark .card-meta,
+.card.is-accent .card-meta,
+.card.is-primary .card-title.is-small i,
+.card.is-dark .card-title.is-small i,
+.card.is-accent .card-title.is-small i {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.card.is-primary .card-icon,
+.card.is-primary .card-avatar {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.card.is-primary .card-list-item,
+.card.is-dark .card-list-item,
+.card.is-accent .card-list-item {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--white);
+}
+
+.card.is-primary .card-list-title,
+.card.is-dark .card-list-title,
+.card.is-accent .card-list-title,
+.card.is-primary .card-list-item > i,
+.card.is-dark .card-list-item > i,
+.card.is-accent .card-list-item > i {
+    color: var(--white);
+}
+
+.card.is-primary .card-list-meta,
+.card.is-dark .card-list-meta,
+.card.is-accent .card-list-meta {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+/* Brand colours for Bulma tags (Bulma's own palette has no accent) */
+.tag.is-primary.is-light {
+    background: rgba(84, 162, 204, 0.1);
+    color: var(--primary);
+}
+
+.tag.is-accent {
+    background: var(--accent);
+    color: var(--white);
+}
+
+.tag.is-accent.is-light {
+    background: rgba(238, 179, 72, 0.1);
+    color: var(--accent);
+}
+
+/* ============================================
+   5. CHECKLIST
+   Feature / benefit list with an icon per item (usually fa-check-circle).
+     <ul class="checklist">
+       <li><i class="fas fa-check-circle"></i> <span>Item</span></li>
+     </ul>
+   ============================================ */
+.checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin: 0 0 1rem;
+    padding: 0;
+    list-style: none;
+}
+
+.checklist > * {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.checklist > * > i,
+.checklist > * > .icon {
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+    color: var(--success);
+}
+
+.card.is-primary .checklist > * > i,
+.card.is-dark .checklist > * > i,
+.card.is-accent .checklist > * > i,
+.card.is-primary .checklist > * > .icon,
+.card.is-dark .checklist > * > .icon,
+.card.is-accent .checklist > * > .icon {
+    color: var(--white);
+}
+
+/* Command line with a copy button:
+     <div class="copy-command"><code>docker pull …</code>
+       <button class="card-icon-link" onclick="…"><i class="fas fa-copy"></i></button></div> */
+.copy-command {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.5rem 0.5rem 0.75rem;
+    border-radius: var(--radius-md);
+    background: var(--primary-dark);
+}
+
+.copy-command code {
+    flex-grow: 1;
+    padding: 0;
+    background: transparent !important;
+    color: var(--white) !important;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.875rem;
+    word-break: break-all;
+}
+
+.copy-command .card-icon-link {
+    border: 0;
+    cursor: pointer;
+}
+
+/* ============================================
+   6. PAGE NAVIGATION
+   Previous / All / Next bar at the bottom of detail pages.
+     <nav class="page-nav"><div class="container"><div class="page-nav-inner">
+       <a class="page-nav-link is-prev" href="…">
+         <span class="page-nav-direction">← Previous</span>
+         <span class="page-nav-title">Title</span></a>
+       <a class="button is-secondary" href="…">All items</a>
+       <a class="page-nav-link is-next" href="…">…</a>
+     </div></div></nav>
+   Use <div class="page-nav-link is-empty"></div> when there is no
+   previous/next page. Add .is-row to a link that holds a .card-avatar.
+   ============================================ */
+.page-nav {
+    padding: 2rem 0;
+    background: var(--white);
+    border-top: 1px solid var(--gray-200);
+}
+
+.page-nav-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 2rem;
+}
+
+.page-nav-link {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius-md);
+    background: var(--light-bg);
+    transition: all var(--transition-fast);
+}
+
+.page-nav-link.is-next {
+    text-align: right;
+}
+
+.page-nav-link.is-row {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.page-nav-link.is-row.is-next {
+    justify-content: flex-end;
+}
+
+.page-nav-link.is-empty {
+    visibility: hidden;
+}
+
+.page-nav-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.page-nav-direction {
+    margin-bottom: 0.25rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.page-nav-title {
+    color: var(--primary-dark);
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.page-nav-meta {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+a.page-nav-link:hover {
+    background: var(--primary);
+}
+
+a.page-nav-link:hover .page-nav-direction,
+a.page-nav-link:hover .page-nav-title,
+a.page-nav-link:hover .page-nav-meta {
+    color: var(--white);
+}
+
+@media screen and (max-width: 768px) {
+    .page-nav-inner {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+/* ============================================
+   7. CTA SECTION
+   Dark call-to-action band at the bottom of a page. Don't write the markup by
+   hand: use the partial, which takes a title, subtitle and one or two buttons.
+     {{ partial "section-cta.html" (dict "title" "…" "subtitle" "…"
+         "primaryUrl" … "primaryIcon" "fas fa-…" "primaryLabel" "…"
+         "secondaryUrl" … "secondaryIcon" "fas fa-…" "secondaryLabel" "…") }}
+   ============================================ */
+.section-cta {
+    padding: 4rem 1.5rem;
+    background: #262727 url('/img/dark-contours.svg') center / cover no-repeat;
+    color: var(--white);
+}
+
+.section-cta .title {
+    color: var(--white) !important;
+    margin-bottom: 3rem;
+}
+
+.section-cta .subtitle {
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 3rem !important;
+}
+
+.section-cta-top-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 2rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.section-cta-top-icon i {
+    color: var(--white);
+    font-size: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+    .section-cta {
+        padding: 3rem 1rem;
+    }
+}
+
+/* ============================================
+   8. UTILITIES
+   ============================================ */
 
 .border-width-2 {
     border-width: 2px
@@ -396,14 +1211,27 @@
     width: 100%;
 }
 
-.margin-top-1-rem {
-    margin-top: 1rem;
-}
-
 .has-text-centered {
     text-align: center;
 }
 
 .navbar-dropdown {
     padding: 0;
+}
+
+/* Cards are flex containers; make sure the hidden attribute still hides them */
+.card[hidden] {
+    display: none !important;
+}
+
+/* Keep a sidebar panel in view while the page scrolls (desktop only) */
+.is-sticky {
+    position: sticky;
+    top: 100px;
+}
+
+@media screen and (max-width: 1024px) {
+    .is-sticky {
+        position: static;
+    }
 }

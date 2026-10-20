@@ -17,10 +17,10 @@
         <!-- Pathways Grid - 2x2 -->
         <div class="hosting-pathways-grid">
             {{ range .Params.pathways }}
-            <article class="hosting-pathway-card {{ if eq .badge_type "popular" }}is-popular{{ end }}">
+            <article class="card is-tile is-padded has-border-top{{ if eq .badge_type "popular" }} has-border-accent{{ end }}">
                 <!-- Badge -->
                 {{ if .badge }}
-                <div class="hosting-pathway-badge {{ .badge_type }}">
+                <div class="card-badge{{ if eq .badge_type "new" }} is-success{{ else if eq .badge_type "coming" }} is-info{{ end }}">
                     {{ if eq .badge_type "popular" }}<i class="fas fa-star"></i>{{ end }}
                     {{ if eq .badge_type "new" }}<i class="fas fa-sparkles"></i>{{ end }}
                     {{ if eq .badge_type "coming" }}<i class="fas fa-clock"></i>{{ end }}
@@ -29,23 +29,22 @@
                 {{ end }}
 
                 <!-- Icon -->
-                <div class="hosting-pathway-icon">
-                    <div class="hosting-pathway-icon-glow"></div>
+                <div class="card-icon is-large">
                     <i class="fas {{ .icon }}"></i>
                 </div>
 
                 <!-- Content -->
-                <div class="hosting-pathway-content">
-                    <h3 class="hosting-pathway-title">{{ .title }}</h3>
-                    <p class="hosting-pathway-tagline">{{ .tagline }}</p>
-                    <p class="hosting-pathway-description">{{ .description }}</p>
+                <div class="card-content">
+                    <h3 class="card-title">{{ .title }}</h3>
+                    <p class="card-subtitle">{{ .tagline }}</p>
+                    <p class="card-description">{{ .description }}</p>
 
                     <!-- Features -->
                     {{ if .features }}
-                    <ul class="hosting-pathway-features">
+                    <ul class="checklist">
                         {{ range .features }}
                         <li>
-                            <span class="feature-check"><i class="fas fa-check"></i></span>
+                            <i class="fas fa-check-circle"></i>
                             <span>{{ . }}</span>
                         </li>
                         {{ end }}
@@ -54,7 +53,7 @@
                 </div>
 
                 <!-- CTA -->
-                <div class="hosting-pathway-cta">
+                <div class="button-group">
                     {{ if .external }}
                     <a href="{{ .url }}" target="_blank" rel="noopener" class="button is-primary is-medium">
                         <span>{{ .cta }}</span>
@@ -83,16 +82,16 @@
         <div class="columns is-multiline mt-5">
             {{ range .Params.benefits }}
             <div class="column is-4">
-                <div class="hosting-why-card">
-                    <div class="hosting-why-icon">
+                <div class="card is-flat is-padded has-text-centered">
+                    <div class="card-icon is-large">
                         {{ if .brand_icon }}
                         <i class="fab {{ .icon }}"></i>
                         {{ else }}
                         <i class="fas {{ .icon }}"></i>
                         {{ end }}
                     </div>
-                    <h3>{{ .title }}</h3>
-                    <p>{{ .description }}</p>
+                    <h3 class="card-title">{{ .title }}</h3>
+                    <p class="card-description">{{ .description }}</p>
                 </div>
             </div>
             {{ end }}
@@ -101,24 +100,17 @@
 </section>
 
 <!-- CTA Section -->
-<section class="section hosting-cta-section">
-    <div class="container">
-        <div class="hosting-cta-content">
-            <h2>Ready to Get Started?</h2>
-            <p>Contact us for a free consultation to discuss your hosting requirements and find the right solution for your organisation.</p>
-            <div class="hosting-cta-buttons">
-                <a href="{{ absURL "contact-us/" }}" class="button is-primary is-large">
-                    <span class="icon"><i class="fas fa-calendar-check"></i></span>
-                    <span>Schedule Consultation</span>
-                </a>
-                <a href="https://geospatialhosting.com" target="_blank" rel="noopener" class="button is-light is-large">
-                    <span class="icon"><i class="fas fa-server"></i></span>
-                    <span>Start Hosting Now</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+{{ partial "section-cta.html" (dict
+    "title"             "Ready to Get Started?"
+    "subtitle"          "Contact us for a free consultation to discuss your hosting requirements and find the right solution for your organisation."
+    "primaryUrl"        (absURL "contact-us/")
+    "primaryIcon"       "fas fa-calendar-check"
+    "primaryLabel"      "Schedule Consultation"
+    "secondaryUrl"      "https://geospatialhosting.com"
+    "secondaryIcon"     "fas fa-server"
+    "secondaryLabel"    "Start Hosting Now"
+    "secondaryExternal" true
+) }}
 
 {{ partial "physics-scroll.html" . }}
 

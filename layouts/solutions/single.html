@@ -70,21 +70,18 @@
         <div class="solution-layout">
             <!-- Main Content -->
             <div class="solution-main">
-                <div class="solution-content-card">
+                <div class="card is-padded is-large">
                     {{ .Content }}
                 </div>
             </div>
 
             <!-- Sidebar -->
-            <aside class="solution-sidebar">
+            <aside class="solution-sidebar card-stack">
                 <!-- Contact Card -->
-                <div class="sidebar-card contact-card">
-                    <div class="contact-card-header">
-                        <i class="fas fa-rocket"></i>
-                        <h3>Ready to Start?</h3>
-                    </div>
-                    <div class="contact-card-body">
-                        <p>Let's discuss how {{ .Title }} can help your organisation achieve its goals.</p>
+                <div class="card is-padded has-border-top">
+                    <h4 class="card-title is-small"><i class="fas fa-rocket"></i> Ready to Start?</h4>
+                    <div>
+                        <p class="card-description">Let's discuss how {{ .Title }} can help your organisation achieve its goals.</p>
                         <a href="{{ absURL "contact-us/" }}?subject=Enquiry:%20{{ .Title | urlquery }}" class="button is-primary is-medium">
                             <span class="icon"><i class="fas fa-envelope"></i></span>
                             <span>Contact Us</span>
@@ -93,9 +90,9 @@
                 </div>
 
                 <!-- Key Benefits -->
-                <div class="sidebar-card benefits-card">
-                    <h4><i class="fas fa-check-circle"></i> Key Benefits</h4>
-                    <ul class="benefits-list">
+                <div class="card is-padded">
+                    <h4 class="card-title is-small"><i class="fas fa-check-circle"></i> Key Benefits</h4>
+                    <ul class="checklist">
                         <li><i class="fas fa-check"></i> No vendor lock-in</li>
                         <li><i class="fas fa-check"></i> Full source code access</li>
                         <li><i class="fas fa-check"></i> Community support</li>
@@ -109,12 +106,12 @@
                 {{ $related := where (where site.RegularPages "Section" "solutions") ".Permalink" "!=" .Permalink }}
                 {{ $related = $related | first 3 }}
                 {{ if $related }}
-                <div class="sidebar-card blue-left-border-4">
-                    <h4><i class="fas fa-th-large"></i> Related Solutions</h4>
-                    <div class="sidebar-list">
+                <div class="card is-padded has-border-left">
+                    <h4 class="card-title is-small"><i class="fas fa-th-large"></i> Related Solutions</h4>
+                    <div class="card-list">
                         {{ range $related }}
-                        <a href="{{ .Permalink }}" class="sidebar-item">
-                            <span class="sidebar-title">{{ .Title }}</span>
+                        <a href="{{ .Permalink }}" class="card-list-item">
+                            <span class="card-list-content card-list-title">{{ .Title }}</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>
                         {{ end }}
@@ -134,33 +131,33 @@
             <p>Partner with the leading open source GIS experts in Africa</p>
         </div>
         <div class="why-choose-grid">
-            <div class="why-choose-card">
-                <div class="why-choose-icon">
+            <div class="card is-flat is-padded has-text-centered">
+                <div class="card-icon is-large">
                     <i class="fas fa-medal"></i>
                 </div>
-                <h3>Proven Expertise</h3>
-                <p>Over a decade of experience delivering GIS solutions to organisations worldwide.</p>
+                <h3 class="card-title">Proven Expertise</h3>
+                <p class="card-description">Over a decade of experience delivering GIS solutions to organisations worldwide.</p>
             </div>
-            <div class="why-choose-card">
-                <div class="why-choose-icon">
+            <div class="card is-flat is-padded has-text-centered">
+                <div class="card-icon is-large">
                     <i class="fas fa-code-branch"></i>
                 </div>
-                <h3>Core Contributors</h3>
-                <p>Active contributors to QGIS, PostGIS, GeoServer, and other open source projects.</p>
+                <h3 class="card-title">Core Contributors</h3>
+                <p class="card-description">Active contributors to QGIS, PostGIS, GeoServer, and other open source projects.</p>
             </div>
-            <div class="why-choose-card">
-                <div class="why-choose-icon">
+            <div class="card is-flat is-padded has-text-centered">
+                <div class="card-icon is-large">
                     <i class="fas fa-globe-africa"></i>
                 </div>
-                <h3>Local & Global</h3>
-                <p>Based in South Africa and Portugal, serving clients on every continent.</p>
+                <h3 class="card-title">Local & Global</h3>
+                <p class="card-description">Based in South Africa and Portugal, serving clients on every continent.</p>
             </div>
-            <div class="why-choose-card">
-                <div class="why-choose-icon">
+            <div class="card is-flat is-padded has-text-centered">
+                <div class="card-icon is-large">
                     <i class="fas fa-handshake"></i>
                 </div>
-                <h3>Long-term Partners</h3>
-                <p>We build relationships, not just software. Your success is our success.</p>
+                <h3 class="card-title">Long-term Partners</h3>
+                <p class="card-description">We build relationships, not just software. Your success is our success.</p>
             </div>
         </div>
     </div>

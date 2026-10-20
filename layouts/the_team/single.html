@@ -65,7 +65,7 @@
     <div class="container">
         <div class="team-member-article-wrapper">
             <!-- Main Content -->
-            <div class="team-member-article-content">
+            <div class="card is-padded is-large team-member-article-content">
                 {{ if .Content }}
                 <div class="team-member-story">
                     <h2 class="section-heading">
@@ -95,17 +95,17 @@
             </div>
 
             <!-- Sidebar -->
-            <aside class="team-member-sidebar">
+            <aside class="team-member-sidebar card-stack">
                 <!-- Skills Card -->
                 {{ if .Params.skills }}
-                <div class="sidebar-card skills-card">
-                    <h4 class="sidebar-card-title">
+                <div class="card is-padded">
+                    <h4 class="card-title is-small">
                         <i class="fas fa-tools"></i>
                         Skills & Expertise
                     </h4>
-                    <div class="skills-tags">
+                    <div class="card-tags">
                         {{ range .Params.skills }}
-                        <span class="skill-tag">{{ . }}</span>
+                        <span class="tag">{{ . }}</span>
                         {{ end }}
                     </div>
                 </div>
@@ -113,20 +113,20 @@
 
                 <!-- Education Card -->
                 {{ if .Params.education }}
-                <div class="sidebar-card education-card">
-                    <h4 class="sidebar-card-title">
+                <div class="card is-padded">
+                    <h4 class="card-title is-small">
                         <i class="fas fa-graduation-cap"></i>
                         Education
                     </h4>
-                    <div class="education-list">
+                    <div class="card-list">
                         {{ range .Params.education }}
-                        <div class="education-item">
-                            <span class="education-degree">{{ .degree }}</span>
+                        <div class="card-list-item is-stacked">
+                            <span class="card-list-title">{{ .degree }}</span>
                             {{ if .institution }}
-                            <span class="education-institution">{{ .institution }}</span>
+                            <span class="card-list-meta">{{ .institution }}</span>
                             {{ end }}
                             {{ if .year }}
-                            <span class="education-year">{{ .year }}</span>
+                            <span class="card-list-meta">{{ .year }}</span>
                             {{ end }}
                         </div>
                         {{ end }}
@@ -136,12 +136,12 @@
 
                 <!-- Credentials Card -->
                 {{ if .Params.credentials }}
-                <div class="sidebar-card credentials-card">
-                    <h4 class="sidebar-card-title">
+                <div class="card is-padded">
+                    <h4 class="card-title is-small">
                         <i class="fas fa-certificate"></i>
                         Credentials
                     </h4>
-                    <ul class="credentials-list">
+                    <ul class="checklist">
                         {{ range .Params.credentials }}
                         <li>{{ . }}</li>
                         {{ end }}
@@ -151,19 +151,19 @@
 
                 <!-- Location Card -->
                 {{ if .Params.country }}
-                <div class="sidebar-card location-card">
-                    <h4 class="sidebar-card-title">
+                <div class="card is-padded">
+                    <h4 class="card-title is-small">
                         <i class="fas fa-globe-africa"></i>
                         Location
                     </h4>
-                    <div class="location-info">
-                        <div class="location-flag">
+                    <div class="card-list-item">
+                        <div class="card-icon is-small">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <div class="location-details">
-                            <span class="location-country">{{ .Params.country }}</span>
+                        <div class="card-list-content">
+                            <span class="card-list-title">{{ .Params.country }}</span>
                             {{ if .Params.location }}
-                            <span class="location-city">{{ .Params.location }}</span>
+                            <span class="card-list-meta">{{ .Params.location }}</span>
                             {{ end }}
                         </div>
                     </div>
@@ -171,13 +171,13 @@
                 {{ end }}
 
                 <!-- Connect Card -->
-                <div class="sidebar-card connect-card">
-                    <h4 class="sidebar-card-title">
+                <div class="card is-padded is-dark">
+                    <h4 class="card-title is-small">
                         <i class="fas fa-handshake"></i>
                         Work With Us
                     </h4>
-                    <p class="connect-text">Interested in working with {{ .Title | title | replaceRE "^([^ ]+).*" "$1" }} and the Kartoza team?</p>
-                    <a href="{{ absURL "contact-us/" }}" class="connect-button">
+                    <p class="card-description">Interested in working with {{ .Title | title | replaceRE "^([^ ]+).*" "$1" }} and the Kartoza team?</p>
+                    <a href="{{ absURL "contact-us/" }}" class="button is-accent is-fullwidth">
                         <i class="fas fa-envelope"></i>
                         Get in Touch
                     </a>
@@ -188,44 +188,44 @@
 </article>
 
 <!-- Team Navigation -->
-<nav class="team-member-navigation">
+<nav class="page-nav">
     <div class="container">
-        <div class="team-nav-wrapper">
+        <div class="page-nav-inner">
             {{ with .PrevInSection }}
-            <a href="{{ .Permalink }}" class="team-nav-link team-nav-prev">
-                <div class="team-nav-image">
+            <a href="{{ .Permalink }}" class="page-nav-link is-row is-prev">
+                <div class="card-avatar">
                     {{ $prevImage := .Params.image | default "/img/team/placeholder.jpg" }}
                     <img src="{{ absURL $prevImage }}" alt="{{ .Title }}">
                 </div>
-                <div class="team-nav-info">
-                    <span class="team-nav-direction"><i class="fas fa-arrow-left"></i> Previous</span>
-                    <span class="team-nav-name">{{ .Title }}</span>
-                    <span class="team-nav-role">{{ .Params.role }}</span>
+                <div class="page-nav-info">
+                    <span class="page-nav-direction"><i class="fas fa-arrow-left"></i> Previous</span>
+                    <span class="page-nav-title">{{ .Title }}</span>
+                    <span class="page-nav-meta">{{ .Params.role }}</span>
                 </div>
             </a>
             {{ else }}
-            <div class="team-nav-link team-nav-empty"></div>
+            <div class="page-nav-link is-row is-empty"></div>
             {{ end }}
 
-            <a href="{{ absURL "the_team/" }}" class="team-nav-all">
+            <a href="{{ absURL "the_team/" }}" class="button is-secondary">
                 <i class="fas fa-users"></i>
                 All Team Members
             </a>
 
             {{ with .NextInSection }}
-            <a href="{{ .Permalink }}" class="team-nav-link team-nav-next">
-                <div class="team-nav-info">
-                    <span class="team-nav-direction">Next <i class="fas fa-arrow-right"></i></span>
-                    <span class="team-nav-name">{{ .Title }}</span>
-                    <span class="team-nav-role">{{ .Params.role }}</span>
+            <a href="{{ .Permalink }}" class="page-nav-link is-row is-next">
+                <div class="page-nav-info">
+                    <span class="page-nav-direction">Next <i class="fas fa-arrow-right"></i></span>
+                    <span class="page-nav-title">{{ .Title }}</span>
+                    <span class="page-nav-meta">{{ .Params.role }}</span>
                 </div>
-                <div class="team-nav-image">
+                <div class="card-avatar">
                     {{ $nextImage := .Params.image | default "/img/team/placeholder.jpg" }}
                     <img src="{{ absURL $nextImage }}" alt="{{ .Title }}">
                 </div>
             </a>
             {{ else }}
-            <div class="team-nav-link team-nav-empty"></div>
+            <div class="page-nav-link is-row is-empty"></div>
             {{ end }}
         </div>
     </div>

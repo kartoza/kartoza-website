@@ -54,54 +54,54 @@
             <div class="plugins-grid columns is-multiline">
                 {{ range where .RegularPages ".Params.plugin_type" "client" }}
                 <div class="column is-4-desktop is-6-tablet">
-                    <article class="plugin-card" data-type="client">
-                        <div class="plugin-card-header">
-                            <div class="plugin-card-icon">
+                    <article class="card is-tile has-border-top" data-type="client">
+                        <div class="card-header">
+                            <div class="card-icon">
                                 <i class="fas fa-puzzle-piece"></i>
                             </div>
-                            <div class="plugin-card-badges">
+                            <div class="card-tags">
                                 {{ if .Params.downloads }}
-                                <span class="plugin-badge plugin-downloads">
+                                <span class="tag is-primary is-light">
                                     <i class="fas fa-download"></i> {{ .Params.downloads }}
                                 </span>
                                 {{ end }}
                                 {{ if .Params.rating }}
-                                <span class="plugin-badge plugin-rating">
+                                <span class="tag is-accent is-light">
                                     <i class="fas fa-star"></i> {{ .Params.rating }}
                                 </span>
                                 {{ end }}
                             </div>
                         </div>
-                        <div class="plugin-card-content">
-                            <div class="plugin-card-client">
-                                <span class="client-label">Client:</span>
-                                <span class="client-name">{{ .Params.client }}</span>
+                        <div class="card-content">
+                            <div class="card-meta">
+                                <span>Client:</span>
+                                <span class="is-highlight">{{ .Params.client }}</span>
                             </div>
-                            <h3 class="plugin-card-title">
+                            <h3 class="card-title">
                                 <a href="{{ .Permalink }}">{{ .Title }}</a>
                             </h3>
-                            <p class="plugin-card-description">
+                            <p class="card-description">
                                 {{ .Description | truncate 120 }}
                             </p>
                             {{ if .Params.tags }}
-                            <div class="plugin-card-tags">
+                            <div class="card-tags">
                                 {{ range first 3 .Params.tags }}
-                                <span class="plugin-card-tag">{{ . }}</span>
+                                <span class="tag">{{ . }}</span>
                                 {{ end }}
                             </div>
                             {{ end }}
                         </div>
-                        <div class="plugin-card-footer">
-                            <a href="{{ .Permalink }}" class="plugin-card-link">
+                        <div class="card-footer">
+                            <a href="{{ .Permalink }}" class="card-link">
                                 View Details <i class="fas fa-arrow-right"></i>
                             </a>
                             {{ if .Params.plugin_url }}
-                            <a href="{{ .Params.plugin_url }}" target="_blank" rel="noopener" class="plugin-card-external" title="View on QGIS Plugin Repository">
+                            <a href="{{ .Params.plugin_url }}" target="_blank" rel="noopener" class="card-icon-link" title="View on QGIS Plugin Repository">
                                 <i class="fas fa-external-link-alt"></i>
                             </a>
                             {{ end }}
                             {{ if .Params.repository }}
-                            <a href="{{ .Params.repository }}" target="_blank" rel="noopener" class="plugin-card-external" title="View on GitHub">
+                            <a href="{{ .Params.repository }}" target="_blank" rel="noopener" class="card-icon-link" title="View on GitHub">
                                 <i class="fab fa-github"></i>
                             </a>
                             {{ end }}
@@ -122,54 +122,54 @@
             <div class="plugins-grid columns is-multiline">
                 {{ range where .RegularPages ".Params.plugin_type" "inhouse" }}
                 <div class="column is-4-desktop is-6-tablet">
-                    <article class="plugin-card" data-type="inhouse">
-                        <div class="plugin-card-header">
-                            <div class="plugin-card-icon inhouse">
+                    <article class="card is-tile has-border-top has-border-accent" data-type="inhouse">
+                        <div class="card-header">
+                            <div class="card-icon is-accent">
                                 <i class="fas fa-puzzle-piece"></i>
                             </div>
-                            <div class="plugin-card-badges">
+                            <div class="card-tags">
                                 {{ if .Params.downloads }}
-                                <span class="plugin-badge plugin-downloads">
+                                <span class="tag is-primary is-light">
                                     <i class="fas fa-download"></i> {{ .Params.downloads }}
                                 </span>
                                 {{ end }}
                                 {{ if .Params.rating }}
-                                <span class="plugin-badge plugin-rating">
+                                <span class="tag is-accent is-light">
                                     <i class="fas fa-star"></i> {{ .Params.rating }}
                                 </span>
                                 {{ end }}
                             </div>
                         </div>
-                        <div class="plugin-card-content">
-                            <div class="plugin-card-client inhouse">
-                                <span class="client-label">By:</span>
-                                <span class="client-name">Kartoza</span>
+                        <div class="card-content">
+                            <div class="card-meta">
+                                <span>By:</span>
+                                <span class="is-highlight">Kartoza</span>
                             </div>
-                            <h3 class="plugin-card-title">
+                            <h3 class="card-title">
                                 <a href="{{ .Permalink }}">{{ .Title }}</a>
                             </h3>
-                            <p class="plugin-card-description">
+                            <p class="card-description">
                                 {{ .Description | truncate 120 }}
                             </p>
                             {{ if .Params.tags }}
-                            <div class="plugin-card-tags">
+                            <div class="card-tags">
                                 {{ range first 3 .Params.tags }}
-                                <span class="plugin-card-tag">{{ . }}</span>
+                                <span class="tag">{{ . }}</span>
                                 {{ end }}
                             </div>
                             {{ end }}
                         </div>
-                        <div class="plugin-card-footer">
-                            <a href="{{ .Permalink }}" class="plugin-card-link">
+                        <div class="card-footer">
+                            <a href="{{ .Permalink }}" class="card-link">
                                 View Details <i class="fas fa-arrow-right"></i>
                             </a>
                             {{ if .Params.plugin_url }}
-                            <a href="{{ .Params.plugin_url }}" target="_blank" rel="noopener" class="plugin-card-external" title="View on QGIS Plugin Repository">
+                            <a href="{{ .Params.plugin_url }}" target="_blank" rel="noopener" class="card-icon-link" title="View on QGIS Plugin Repository">
                                 <i class="fas fa-external-link-alt"></i>
                             </a>
                             {{ end }}
                             {{ if .Params.repository }}
-                            <a href="{{ .Params.repository }}" target="_blank" rel="noopener" class="plugin-card-external" title="View on GitHub">
+                            <a href="{{ .Params.repository }}" target="_blank" rel="noopener" class="card-icon-link" title="View on GitHub">
                                 <i class="fab fa-github"></i>
                             </a>
                             {{ end }}

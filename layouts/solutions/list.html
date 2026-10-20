@@ -15,24 +15,24 @@
         <div class="solutions-grid columns is-multiline">
             {{ range (.Paginator 50).Pages }}
             <div class="column is-4-desktop is-6-tablet">
-                <article class="solution-card">
-                    <div class="solution-card-image">
+                <article class="card is-tile">
+                    <div class="card-image is-cover">
                         <a href="{{ .Permalink }}">
                             {{ $thumbnail := .Params.thumbnail | default "/img/banner-solutions.png" }}
                             <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" loading="lazy">
                         </a>
                     </div>
-                    <div class="solution-card-content">
-                        <h3 class="solution-card-title">
+                    <div class="card-content">
+                        <h3 class="card-title">
                             <a href="{{ .Permalink }}">{{ .Title }}</a>
                         </h3>
                         {{ if .Params.tagline }}
-                        <p class="solution-card-tagline">{{ .Params.tagline }}</p>
+                        <p class="card-subtitle">{{ .Params.tagline }}</p>
                         {{ end }}
-                        <p class="solution-card-description">
+                        <p class="card-description">
                             {{ .Description | truncate 150 }}
                         </p>
-                        <a href="{{ .Permalink }}" class="solution-card-link">
+                        <a href="{{ .Permalink }}" class="card-link">
                             Learn More <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>

@@ -88,12 +88,12 @@
         <h2 class="section-title has-text-centered">Key Features</h2>
         <div class="partner-features-grid">
             {{ range .Params.features }}
-            <div class="partner-feature-card">
-                <div class="partner-feature-icon">
+            <div class="card is-flat is-padded has-text-centered">
+                <div class="card-icon is-large">
                     <i class="fas fa-{{ .icon | default "star" }}"></i>
                 </div>
-                <h3>{{ .title }}</h3>
-                <p>{{ .description }}</p>
+                <h3 class="card-title">{{ .title }}</h3>
+                <p class="card-description">{{ .description }}</p>
             </div>
             {{ end }}
         </div>
@@ -107,7 +107,7 @@
         <div class="columns is-variable is-8">
             <!-- Main Content -->
             <div class="column is-8">
-                <div class="partner-content">
+                <div class="card is-padded is-large partner-content">
                     {{ .Content }}
                 </div>
             </div>
@@ -116,20 +116,20 @@
             <div class="column is-4">
                 <!-- Partner Website Card -->
                 {{ if or .Params.partnerUrl .Params.productUrl }}
-                <div class="partner-sidebar-card">
-                    <h3 class="partner-sidebar-card-title">
+                <div class="card is-padded">
+                    <h3 class="card-title is-small">
                         <span class="icon"><i class="fas fa-globe"></i></span>
                         Visit {{ .Title }}
                     </h3>
-                    <div class="partner-links-list">
+                    <div class="button-group is-vertical">
                         {{ with .Params.partnerUrl }}
-                        <a href="{{ . }}" target="_blank" rel="noopener" class="button is-primary is-fullwidth mb-3">
+                        <a href="{{ . }}" target="_blank" rel="noopener" class="button is-primary is-fullwidth">
                             <span class="icon"><i class="fas fa-external-link-alt"></i></span>
                             <span>{{ $.Params.partnerName | default $.Title }} Website</span>
                         </a>
                         {{ end }}
                         {{ with .Params.productUrl }}
-                        <a href="{{ . }}" target="_blank" rel="noopener" class="button is-link is-fullwidth{{ if $.Params.partnerUrl }} is-outlined{{ end }}">
+                        <a href="{{ . }}" target="_blank" rel="noopener" class="button is-fullwidth {{ if $.Params.partnerUrl }}is-secondary{{ else }}is-primary{{ end }}">
                             <span class="icon"><i class="fas fa-box-open"></i></span>
                             <span>{{ $.Params.productName | default "Product" }} Platform</span>
                         </a>
@@ -140,13 +140,13 @@
 
                 {{ if .Params.signupUrl }}
                 <!-- Signup Card -->
-                <div class="partner-sidebar-card partner-signup-card" style="background: var(--accent); color: white; border: none;">
-                    <div class="partner-cta-icon" style="background: rgba(255,255,255,0.2);">
-                        <i class="fas fa-cloud" style="color: white;"></i>
+                <div class="card is-padded is-accent has-text-centered">
+                    <div class="card-icon is-large">
+                        <i class="fas fa-cloud"></i>
                     </div>
-                    <h3 style="color: white;">{{ .Params.signupHeading | default (printf "Get %s Cloud" .Title) }}</h3>
-                    <p style="color: rgba(255,255,255,0.9);">{{ .Params.signupDescription | default (printf "Sign up for %s Cloud to sync your projects and collaborate with your team." .Title) }}</p>
-                    <a href="{{ .Params.signupUrl }}" target="_blank" rel="noopener" class="button is-white is-fullwidth" style="color: var(--accent-dark); font-weight: 600;">
+                    <h3 class="card-title">{{ .Params.signupHeading | default (printf "Get %s Cloud" .Title) }}</h3>
+                    <p class="card-description">{{ .Params.signupDescription | default (printf "Sign up for %s Cloud to sync your projects and collaborate with your team." .Title) }}</p>
+                    <a href="{{ .Params.signupUrl }}" target="_blank" rel="noopener" class="button is-light is-fullwidth">
                         <span class="icon"><i class="fas fa-user-plus"></i></span>
                         <span>{{ .Params.signupButtonText | default "Sign Up Now" }}</span>
                     </a>
@@ -154,18 +154,18 @@
                 {{ end }}
 
                 <!-- Get Started Card -->
-                <div class="partner-sidebar-card partner-cta-card" id="get-started">
-                    <div class="partner-cta-icon">
+                <div class="card is-padded has-border-top has-border-accent has-text-centered" id="get-started">
+                    <div class="card-icon is-large">
                         <i class="fas fa-paper-plane"></i>
                     </div>
-                    <h3>Get Started Today</h3>
-                    <p>Ready to transform your workflows with {{ .Title }}? Let's discuss your requirements.</p>
+                    <h3 class="card-title">Get Started Today</h3>
+                    <p class="card-description">Ready to transform your workflows with {{ .Title }}? Let's discuss your requirements.</p>
                     <a href="{{ relURL "contact-us/" }}?subject={{ .Title }}%20Enquiry" class="button is-primary is-fullwidth">
                         <span class="icon"><i class="fas fa-envelope"></i></span>
                         <span>Request Quote</span>
                     </a>
                     {{ if .Params.demoUrl }}
-                    <a href="{{ .Params.demoUrl }}" target="_blank" rel="noopener" class="button is-light is-fullwidth mt-3">
+                    <a href="{{ .Params.demoUrl }}" target="_blank" rel="noopener" class="button is-secondary is-fullwidth">
                         <span class="icon"><i class="fas fa-play-circle"></i></span>
                         <span>Request Demo</span>
                     </a>
@@ -173,36 +173,36 @@
                 </div>
 
                 <!-- Services Card -->
-                <div class="partner-sidebar-card">
-                    <h3 class="partner-sidebar-card-title">
+                <div class="card is-padded">
+                    <h3 class="card-title is-small">
                         <span class="icon"><i class="fas fa-concierge-bell"></i></span>
                         Our Services
                     </h3>
-                    <div class="partner-services-list">
+                    <div class="checklist">
                         {{ range .Params.services }}
-                        <div class="partner-service-item">
+                        <div>
                             <span class="icon"><i class="fas fa-check-circle"></i></span>
                             <span>{{ . }}</span>
                         </div>
                         {{ end }}
                         {{ if not .Params.services }}
-                        <div class="partner-service-item">
+                        <div>
                             <span class="icon"><i class="fas fa-check-circle"></i></span>
                             <span>Implementation & Setup</span>
                         </div>
-                        <div class="partner-service-item">
+                        <div>
                             <span class="icon"><i class="fas fa-check-circle"></i></span>
                             <span>Training & Workshops</span>
                         </div>
-                        <div class="partner-service-item">
+                        <div>
                             <span class="icon"><i class="fas fa-check-circle"></i></span>
                             <span>Technical Support</span>
                         </div>
-                        <div class="partner-service-item">
+                        <div>
                             <span class="icon"><i class="fas fa-check-circle"></i></span>
                             <span>Custom Development</span>
                         </div>
-                        <div class="partner-service-item">
+                        <div>
                             <span class="icon"><i class="fas fa-check-circle"></i></span>
                             <span>System Integration</span>
                         </div>
@@ -211,13 +211,13 @@
                 </div>
 
                 <!-- Quick Contact Card -->
-                <div class="partner-sidebar-card">
-                    <h3 class="partner-sidebar-card-title">
+                <div class="card is-padded">
+                    <h3 class="card-title is-small">
                         <span class="icon"><i class="fas fa-phone-alt"></i></span>
                         Quick Contact
                     </h3>
-                    <div class="partner-contact-info">
-                        <a href="mailto:info@kartoza.com" class="partner-contact-item">
+                    <div class="card-list">
+                        <a href="mailto:info@kartoza.com" class="card-list-item">
                             <span class="icon"><i class="fas fa-envelope"></i></span>
                             <span>info@kartoza.com</span>
                         </a>
@@ -229,24 +229,24 @@
                 {{ $currentPage := . }}
                 {{ $related := where (where .Site.RegularPages "Section" "partners") ".Permalink" "!=" .Permalink | first 2 }}
                 {{ if $related }}
-                <div class="partner-sidebar-card">
-                    <h3 class="partner-sidebar-card-title">
+                <div class="card is-padded">
+                    <h3 class="card-title is-small">
                         <span class="icon"><i class="fas fa-handshake"></i></span>
                         Other Partners
                     </h3>
-                    <div class="partner-related-list">
+                    <div class="card-list">
                         {{ range $related }}
-                        <a href="{{ .Permalink }}" class="partner-related-item">
+                        <a href="{{ .Permalink }}" class="card-list-item">
                             {{ if .Params.logo }}
-                            <img src="{{ .Params.logo }}" alt="{{ .Title }}">
+                            <span class="card-avatar"><img src="{{ .Params.logo }}" alt="{{ .Title }}"></span>
                             {{ else }}
-                            <span class="partner-related-placeholder">
+                            <span class="card-avatar">
                                 <i class="fas fa-handshake"></i>
                             </span>
                             {{ end }}
-                            <div class="partner-related-info">
-                                <span class="partner-related-title">{{ .Title }}</span>
-                                <span class="partner-related-tagline">{{ .Params.tagline | truncate 40 }}</span>
+                            <div class="card-list-content">
+                                <span class="card-list-title">{{ .Title }}</span>
+                                <span class="card-list-meta">{{ .Params.tagline | truncate 40 }}</span>
                             </div>
                         </a>
                         {{ end }}
@@ -320,24 +320,16 @@
 {{ end }}
 
 <!-- Final CTA Section -->
-<section class="section partner-final-cta">
-    <div class="container">
-        <div class="partner-final-cta-content">
-            <h2>Ready to Transform Your Workflows?</h2>
-            <p>Join organisations already benefiting from {{ .Title }} with Kartoza's expert implementation and support.</p>
-            <div class="partner-final-cta-buttons">
-                <a href="{{ relURL "contact-us/" }}?subject={{ .Title }}%20Enquiry" class="button is-primary is-large">
-                    <span class="icon"><i class="fas fa-rocket"></i></span>
-                    <span>Start Your Journey</span>
-                </a>
-                <a href="{{ relURL "partners/" }}" class="button is-light is-large">
-                    <span class="icon"><i class="fas fa-handshake"></i></span>
-                    <span>View All Partners</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+{{ partial "section-cta.html" (dict
+    "title"          "Ready to Transform Your Workflows?"
+    "subtitle"       (print "Join organisations already benefiting from " .Title " with Kartoza's expert implementation and support.")
+    "primaryUrl"     (print (relURL "contact-us/") "?subject=" .Title "%20Enquiry")
+    "primaryIcon"    "fas fa-rocket"
+    "primaryLabel"   "Start Your Journey"
+    "secondaryUrl"   (relURL "partners/")
+    "secondaryIcon"  "fas fa-handshake"
+    "secondaryLabel" "View All Partners"
+) }}
 
 {{ partial "page-reviewer.html" . }}
 {{ partial "footer.html" . }}

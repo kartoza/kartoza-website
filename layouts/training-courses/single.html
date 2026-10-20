@@ -19,56 +19,6 @@
     gap: 1.5rem;
     min-width: 0;
 }
-.course-sidebar .sidebar-card {
-    box-sizing: border-box;
-    width: 100%;
-    padding: 1.5rem;
-    background: #fff;
-    border-radius: 4px;
-    box-shadow: 0 4px 16px rgba(56, 57, 57,.12);
-}
-.course-sidebar .sidebar-card h4 {
-    display: flex;
-    align-items: center;
-    gap: .5rem;
-    margin: 0 0 1rem;
-    color: #383939;
-    font-size: 1rem;
-    line-height: 1.3;
-}
-.course-sidebar .sidebar-card h4 i { color: #54A2CC; }
-.course-sidebar .details-list {
-    display: flex;
-    flex-direction: column;
-    gap: .75rem;
-}
-.course-sidebar .detail-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding-bottom: .75rem;
-    border-bottom: 1px solid #D1D1D1;
-}
-.course-sidebar .detail-item:last-child { padding-bottom: 0; border-bottom: 0; }
-.course-sidebar .detail-label { color: #676869; font-size: 0.875rem; }
-.course-sidebar .detail-value { color: #383939; font-size: 0.875rem; font-weight: 600; text-align: right; }
-.course-sidebar .instructor-training-card p {
-    margin: 0 0 1rem;
-    color: #676869;
-    font-size: 0.875rem;
-    line-height: 1.55;
-}
-.course-sidebar .instructor-training-button {
-    display: block;
-    padding: .7rem 1rem;
-    border-radius: 4px;
-    background: #EEB348;
-    color: #fff;
-    text-align: center;
-    text-decoration: none;
-    font-weight: 700;
-}
 @media screen and (max-width: 900px) {
     .course-layout { grid-template-columns: 1fr; }
 }
@@ -133,7 +83,7 @@
                 </div>
                 <div class="course-hero-cta">
                     {{ if $allowBooking }}
-                    <a href="#booking-section" class="button is-primary is-medium booking-scroll-btn">
+                    <a href="#booking-section" class="button is-primary is-medium is-fullwidth">
                         <span class="icon"><i class="fas fa-calendar-check"></i></span>
                         <span>View Dates & Book</span>
                     </a>
@@ -190,21 +140,18 @@
         <div class="course-layout">
             <!-- Main Content -->
             <div class="course-main">
-                <div class="course-content-card">
+                <div class="card is-padded is-large">
                     {{ .Content }}
                 </div>
             </div>
 
             <!-- Sidebar -->
-            <aside class="course-sidebar">
+            <aside class="course-sidebar card-stack">
                 <!-- Quick Booking Card -->
                 {{ if $allowBooking }}
-                <div class="sidebar-card booking-quick-card">
-                    <div class="booking-quick-header">
-                        <i class="fas fa-calendar-check"></i>
-                        <h3>Book Your Spot</h3>
-                    </div>
-                    <div class="booking-quick-body">
+                <div class="card is-padded has-border-top">
+                    <h4 class="card-title is-small"><i class="fas fa-calendar-check"></i> Book Your Spot</h4>
+                    <div>
                         {{ $schedule := site.Data.training_schedule }}
                         {{ $courseSessions := slice }}
                         {{ range $schedule.sessions }}
@@ -214,29 +161,29 @@
                         {{ end }}
 
                         {{ if gt (len $courseSessions) 0 }}
-                            <p class="booking-quick-text">{{ len $courseSessions }} upcoming session{{ if ne (len $courseSessions) 1 }}s{{ end }} available</p>
-                            <a href="#booking-section" class="button is-primary is-medium booking-scroll-btn">
+                            <p class="card-description">{{ len $courseSessions }} upcoming session{{ if ne (len $courseSessions) 1 }}s{{ end }} available</p>
+                            <a href="#booking-section" class="button is-primary is-medium is-fullwidth">
                                 <span class="icon"><i class="fas fa-arrow-down"></i></span>
                                 <span>Choose Date & Venue</span>
                             </a>
                         {{ else }}
-                            <p class="booking-quick-text">No scheduled sessions yet</p>
+                            <p class="card-description">No scheduled sessions yet</p>
                             <a href="{{ absURL "contact-us/" }}?course={{ .Title | urlquery }}&subject=Training%20Enquiry" class="button is-primary is-medium">
                                 <span class="icon"><i class="fas fa-envelope"></i></span>
                                 <span>Request Custom Training</span>
                             </a>
                         {{ end }}
 
-                        <div class="booking-quick-features">
-                            <div class="feature-item">
+                        <div class="checklist">
+                            <div>
                                 <i class="fas fa-check-circle"></i>
                                 <span>Group discounts available</span>
                             </div>
-                            <div class="feature-item">
+                            <div>
                                 <i class="fas fa-check-circle"></i>
                                 <span>Custom on-site training</span>
                             </div>
-                            <div class="feature-item">
+                            <div>
                                 <i class="fas fa-check-circle"></i>
                                 <span>Early bird pricing</span>
                             </div>
@@ -249,38 +196,38 @@
                 {{ partial "course-upcoming-events.html" . }}
 
                 <!-- Course Details Card -->
-                <div class="sidebar-card details-card">
-                    <h4><i class="fas fa-list-ul"></i> Course Details</h4>
-                    <div class="details-list">
-                        <div class="detail-item">
-                            <span class="detail-label">Duration</span>
-                            <span class="detail-value">{{ .Params.duration | default "3 Days" }}</span>
+                <div class="card is-padded">
+                    <h4 class="card-title is-small"><i class="fas fa-list-ul"></i> Course Details</h4>
+                    <div class="card-list is-plain">
+                        <div class="card-list-item">
+                            <span class="card-list-meta">Duration</span>
+                            <span class="card-list-title">{{ .Params.duration | default "3 Days" }}</span>
                         </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Format</span>
-                            <span class="detail-value">{{ .Params.delivery | default "On-site / Remote" }}</span>
+                        <div class="card-list-item">
+                            <span class="card-list-meta">Format</span>
+                            <span class="card-list-title">{{ .Params.delivery | default "On-site / Remote" }}</span>
                         </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Level</span>
-                            <span class="detail-value">{{ .Params.level | default "All Levels" }}</span>
+                        <div class="card-list-item">
+                            <span class="card-list-meta">Level</span>
+                            <span class="card-list-title">{{ .Params.level | default "All Levels" }}</span>
                         </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Certificate</span>
-                            <span class="detail-value">{{ if eq .Params.certificate false }}No{{ else }}Yes{{ end }}</span>
+                        <div class="card-list-item">
+                            <span class="card-list-meta">Certificate</span>
+                            <span class="card-list-title">{{ if eq .Params.certificate false }}No{{ else }}Yes{{ end }}</span>
                         </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Language</span>
-                            <span class="detail-value">English</span>
+                        <div class="card-list-item">
+                            <span class="card-list-meta">Language</span>
+                            <span class="card-list-title">English</span>
                         </div>
                     </div>
                 </div>
 
                 {{ $isSelfPaced := in (.Title | lower) "self-paced" }}
                 {{ if and (not .Params.isFree) (not $isSelfPaced) }}
-                <div class="sidebar-card instructor-training-card">
-                    <h4>Need on-site training?</h4>
-                    <p>Groups of 7+ can have this course delivered on-site, tailored to your organisation's database environment and spatial data.</p>
-                    <a href="{{ absURL "contact-us/" }}?course={{ .Title | urlquery }}&subject=On-site%20Training%20Enquiry" class="instructor-training-button">
+                <div class="card is-padded is-dark">
+                    <h4 class="card-title">Need on-site training?</h4>
+                    <p class="card-description">Groups of 7+ can have this course delivered on-site, tailored to your organisation's database environment and spatial data.</p>
+                    <a href="{{ absURL "contact-us/" }}?course={{ .Title | urlquery }}&subject=On-site%20Training%20Enquiry" class="button is-accent is-fullwidth">
                         Contact Us to Arrange
                     </a>
                 </div>
@@ -292,12 +239,12 @@
                 {{ $related := where (where site.RegularPages "Section" "training-courses") ".Permalink" "!=" .Permalink }}
                 {{ $related = $related | first 3 }}
                 {{ if $related }}
-                <div class="sidebar-card related-card">
-                    <h4><i class="fas fa-book-open"></i> Other Kartoza Courses</h4>
-                    <div class="related-list">
+                <div class="card is-padded has-border-left">
+                    <h4 class="card-title is-small"><i class="fas fa-book-open"></i> Other Kartoza Courses</h4>
+                    <div class="card-list">
                         {{ range $related }}
-                        <a href="{{ .Permalink }}" class="related-item">
-                            <span class="related-title">{{ .Title }}</span>
+                        <a href="{{ .Permalink }}" class="card-list-item">
+                            <span class="card-list-content card-list-title">{{ .Title }}</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>
                         {{ end }}
@@ -343,11 +290,7 @@
                 <div class="booking-sessions-grid">
                     {{ range $courseSessions }}
                     {{ $venue := index $schedule.venues .venue }}
-                    {{ $statusClass := "session-open" }}
-                    {{ if eq .status "few-seats" }}{{ $statusClass = "session-few-seats" }}{{ end }}
-                    {{ if eq .status "full" }}{{ $statusClass = "session-full" }}{{ end }}
-
-                    <div class="session-card {{ $statusClass }}"
+                    <div class="card is-tile"
                          data-session-id="{{ .id }}"
                          data-venue-type="{{ $venue.type }}"
                          data-seats-available="{{ .seats_available }}"
@@ -356,55 +299,55 @@
                          data-instructor="{{ .instructor }}"
                          data-venue-name="{{ $venue.name }}">
 
-                        <div class="session-card-header">
-                            <div class="session-date">
+                        <div class="card-header">
+                            <div class="card-meta">
                                 <i class="fas fa-calendar"></i>
-                                <div class="date-info">
-                                    <span class="date-main">{{ dateFormat "2 Jan" .start_date }}</span>
-                                    <span class="date-sub">{{ dateFormat "2006" .start_date }}</span>
+                                <div class="card-list-content">
+                                    <span class="card-list-title">{{ dateFormat "2 Jan" .start_date }}</span>
+                                    <span class="card-list-meta">{{ dateFormat "2006" .start_date }}</span>
                                 </div>
                             </div>
                             {{ if eq .status "few-seats" }}
-                            <span class="session-badge badge-warning">
+                            <span class="tag is-warning is-light">
                                 <i class="fas fa-exclamation-circle"></i> Few Seats Left
                             </span>
                             {{ else if eq .status "full" }}
-                            <span class="session-badge badge-danger">
+                            <span class="tag is-danger is-light">
                                 <i class="fas fa-times-circle"></i> Full
                             </span>
                             {{ else }}
-                            <span class="session-badge badge-success">
+                            <span class="tag is-success is-light">
                                 <i class="fas fa-check-circle"></i> Available
                             </span>
                             {{ end }}
                         </div>
 
-                        <div class="session-card-body">
-                            <div class="session-venue">
+                        <div class="card-content">
+                            <div class="card-list-item">
                                 <i class="fas {{ $venue.icon }}"></i>
-                                <div class="venue-info">
-                                    <strong>{{ $venue.name }}</strong>
-                                    <span class="venue-desc">{{ $venue.description }}</span>
+                                <div class="card-list-content">
+                                    <strong class="card-list-title">{{ $venue.name }}</strong>
+                                    <span class="card-list-meta">{{ $venue.description }}</span>
                                 </div>
                             </div>
 
-                            <div class="session-details">
-                                <div class="detail">
+                            <div class="card-list is-plain">
+                                <div class="card-list-item">
                                     <i class="fas fa-clock"></i>
                                     <span>{{ dateFormat "2 Jan" .start_date }} - {{ dateFormat "2 Jan" .end_date }}</span>
                                 </div>
-                                <div class="detail">
+                                <div class="card-list-item">
                                     <i class="fas fa-user-tie"></i>
                                     <span>Instructor: {{ .instructor }}</span>
                                 </div>
-                                <div class="detail">
+                                <div class="card-list-item">
                                     <i class="fas fa-users"></i>
                                     <span>{{ .seats_available }} of {{ .seats_total }} seats available</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="session-card-footer">
+                        <div class="card-footer">
                             {{ if ne .status "full" }}
                             <button class="button is-primary is-medium select-session-btn">
                                 <span class="icon"><i class="fas fa-check"></i></span>
@@ -422,20 +365,18 @@
                 </div>
 
                 <!-- Custom Training Option -->
-                <div class="custom-training-card">
-                    <div class="custom-training-content">
-                        <div class="custom-training-icon">
+                <div class="card is-padded is-dark is-row">
+                        <div class="card-icon">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <div class="custom-training-info">
-                            <h4>Need Custom Training?</h4>
-                            <p>We can bring this course to your location or schedule a private session for your team.</p>
+                        <div class="card-content">
+                            <h4 class="card-title">Need Custom Training?</h4>
+                            <p class="card-description">We can bring this course to your location or schedule a private session for your team.</p>
                         </div>
                         <a href="{{ absURL "contact-us/" }}?course={{ .Title | urlquery }}&subject=Custom%20Training%20Enquiry" class="button is-light is-medium">
                             <span class="icon"><i class="fas fa-envelope"></i></span>
                             <span>Request Quote</span>
                         </a>
-                    </div>
                 </div>
             </div>
 
@@ -473,10 +414,10 @@
                             {{ range $code, $currency := $schedule.currencies }}
                             <label class="currency-option">
                                 <input type="radio" name="currency" value="{{ $code }}" {{ if eq $code "ZAR" }}checked{{ end }}>
-                                <div class="currency-card">
-                                    <span class="currency-symbol">{{ $currency.symbol }}</span>
-                                    <span class="currency-name">{{ $currency.name }}</span>
-                                    <span class="currency-code">{{ $currency.code }}</span>
+                                <div class="card is-padded has-text-centered">
+                                    <span class="card-title">{{ $currency.symbol }}</span>
+                                    <span class="card-meta">{{ $currency.name }}</span>
+                                    <span class="card-eyebrow">{{ $currency.code }}</span>
                                 </div>
                             </label>
                             {{ end }}
@@ -484,16 +425,16 @@
                     </div>
 
                     <!-- Discount Information -->
-                    <div class="discount-info-box">
-                        <h4><i class="fas fa-tags"></i> Available Discounts</h4>
-                        <div class="discount-list">
+                    <div class="card is-padded is-flat">
+                        <h4 class="card-title is-small"><i class="fas fa-tags"></i> Available Discounts</h4>
+                        <div class="card-list">
                             {{ range $schedule.group_discounts }}
-                            <div class="discount-item">
+                            <div class="card-list-item">
                                 <i class="fas fa-users"></i>
                                 <span><strong>{{ .label }}:</strong> {{ .discount_percent }}% off for {{ .min_attendees }}{{ if .max_attendees }}-{{ .max_attendees }}{{ end }}+ attendees</span>
                             </div>
                             {{ end }}
-                            <div class="discount-item">
+                            <div class="card-list-item">
                                 <i class="fas fa-calendar-alt"></i>
                                 <span><strong>Early Bird:</strong> {{ $schedule.early_bird.discount_percent }}% off when booking {{ $schedule.early_bird.days_before }}+ days in advance</span>
                             </div>
@@ -571,7 +512,7 @@
                                 <span class="summary-label">Subtotal:</span>
                                 <span class="summary-value" id="summary-subtotal">-</span>
                             </div>
-                            <div class="summary-item discount-item" id="summary-discount-row" style="display: none;">
+                            <div class="summary-item card-list-item" id="summary-discount-row" style="display: none;">
                                 <span class="summary-label">
                                     <i class="fas fa-tag"></i> Discount (<span id="summary-discount-label">-</span>):
                                 </span>
@@ -664,33 +605,33 @@
             <p>Join thousands of professionals who have advanced their careers with our training</p>
         </div>
         <div class="why-us-grid">
-            <div class="why-us-card">
-                <div class="why-us-icon">
+            <div class="card is-flat is-padded has-text-centered">
+                <div class="card-icon is-large">
                     <i class="fas fa-award"></i>
                 </div>
-                <h3>Industry Experts</h3>
-                <p>Learn from practitioners who contribute to open source projects and work with organiations worldwide.</p>
+                <h3 class="card-title">Industry Experts</h3>
+                <p class="card-description">Learn from practitioners who contribute to open source projects and work with organiations worldwide.</p>
             </div>
-            <div class="why-us-card">
-                <div class="why-us-icon">
+            <div class="card is-flat is-padded has-text-centered">
+                <div class="card-icon is-large">
                     <i class="fas fa-cogs"></i>
                 </div>
-                <h3>Practical Focus</h3>
-                <p>Our courses emphasize hands-on exercises and real-world scenarios you can apply immediately.</p>
+                <h3 class="card-title">Practical Focus</h3>
+                <p class="card-description">Our courses emphasize hands-on exercises and real-world scenarios you can apply immediately.</p>
             </div>
-            <div class="why-us-card">
-                <div class="why-us-icon">
+            <div class="card is-flat is-padded has-text-centered">
+                <div class="card-icon is-large">
                     <i class="fas fa-users"></i>
                 </div>
-                <h3>Customized Training</h3>
-                <p>We tailor content to your team's specific needs, data, and workflows for maximum relevance.</p>
+                <h3 class="card-title">Customized Training</h3>
+                <p class="card-description">We tailor content to your team's specific needs, data, and workflows for maximum relevance.</p>
             </div>
-            <div class="why-us-card">
-                <div class="why-us-icon">
+            <div class="card is-flat is-padded has-text-centered">
+                <div class="card-icon is-large">
                     <i class="fab fa-osi"></i>
                 </div>
-                <h3>Open Source Leaders</h3>
-                <p>As major contributors to QGIS, PostGIS, and other projects, we teach from deep expertise.</p>
+                <h3 class="card-title">Open Source Leaders</h3>
+                <p class="card-description">As major contributors to QGIS, PostGIS, and other projects, we teach from deep expertise.</p>
             </div>
         </div>
     </div>
