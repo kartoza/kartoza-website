@@ -18,19 +18,19 @@
         <div class="hosting-pathways-grid">
             {{ range .Params.pathways }}
             <article class="card is-tile is-padded has-border-top{{ if eq .badge_type "popular" }} has-border-accent{{ end }}">
-                <!-- Badge -->
-                {{ if .badge }}
-                <div class="card-badge{{ if eq .badge_type "new" }} is-success{{ else if eq .badge_type "coming" }} is-info{{ end }}">
-                    {{ if eq .badge_type "popular" }}<i class="fas fa-star"></i>{{ end }}
-                    {{ if eq .badge_type "new" }}<i class="fas fa-sparkles"></i>{{ end }}
-                    {{ if eq .badge_type "coming" }}<i class="fas fa-clock"></i>{{ end }}
-                    <span>{{ .badge }}</span>
-                </div>
-                {{ end }}
-
-                <!-- Icon -->
-                <div class="card-icon is-large">
-                    <i class="fas {{ .icon }}"></i>
+                <!-- Icon and badge -->
+                <div class="card-header">
+                    <div class="card-icon is-large">
+                        <i class="fas {{ .icon }}"></i>
+                    </div>
+                    {{ if .badge }}
+                    <div class="card-badge is-inline{{ if eq .badge_type "new" }} is-success{{ else if eq .badge_type "coming" }} is-info{{ end }}">
+                        {{ if eq .badge_type "popular" }}<i class="fas fa-star"></i>{{ end }}
+                        {{ if eq .badge_type "new" }}<i class="fas fa-sparkles"></i>{{ end }}
+                        {{ if eq .badge_type "coming" }}<i class="fas fa-clock"></i>{{ end }}
+                        <span>{{ .badge }}</span>
+                    </div>
+                    {{ end }}
                 </div>
 
                 <!-- Content -->

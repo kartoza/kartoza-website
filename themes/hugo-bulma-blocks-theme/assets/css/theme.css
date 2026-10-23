@@ -721,7 +721,8 @@ label > .card {
     margin-bottom: 0;
 }
 
-.card-header > .card-icon {
+.card-header > .card-icon,
+.card-header > .card-badge.is-inline {
     margin-bottom: 0;
 }
 
