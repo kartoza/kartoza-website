@@ -178,7 +178,7 @@
         <div class="partners-grid">
             {{ $partners := where (where .Site.RegularPages "Section" "partners") ".Params.approved" true }}
             {{ range $partners }}
-            <a href="{{ .Permalink }}" class="card is-tile has-text-centered" title="{{ .Title }}">
+            <a href="{{ .Permalink }}" class="card is-tile is-flat has-text-centered" title="{{ .Title }}">
                 <div class="card-image is-logo is-small">
                     <img src="{{ .Params.logo | absURL }}" alt="{{ .Title }}" />
                 </div>
@@ -214,11 +214,11 @@
         </div>
 
         <!-- Priority 1: GeoSpatial Hosting -->
-        <div class="card is-padded is-tile is-large has-border-top">
+        <div class="card is-padded is-tile has-border-top">
             <div class="columns is-vcentered">
                 <div class="column is-6">
-                    <span class="tag is-accent">Most Popular</span>
-                    <h3 class="card-title">
+                    <span class="card-badge is-inline">Most Popular</span>
+                    <h3 class="card-title is-large">
                         <i class="fas fa-server"></i>
                         GeoSpatial Hosting
                     </h3>
@@ -271,10 +271,10 @@
                         schedule maintenance, and optimise budgets with spatial intelligence.
                     </p>
                     <ul class="checklist">
-                        <li>Asset inventory & mapping</li>
-                        <li>Condition assessments</li>
-                        <li>Maintenance scheduling</li>
-                        <li>Budget forecasting</li>
+                        <li><i class="fas fa-check"></i> Asset inventory & mapping</li>
+                        <li><i class="fas fa-check"></i> Condition assessments</li>
+                        <li><i class="fas fa-check"></i> Maintenance scheduling</li>
+                        <li><i class="fas fa-check"></i> Budget forecasting</li>
                     </ul>
                     <a class="button is-secondary is-medium is-fullwidth mt-4" href="{{ absURL "apps/mycivitas/" }}">
                         Learn More <i class="fas fa-arrow-right ml-2"></i>
@@ -295,10 +295,10 @@
                         Collect, manage, and analyse species occurrence data.
                     </p>
                     <ul class="checklist">
-                        <li>Species occurrence tracking</li>
-                        <li>Habitat mapping</li>
-                        <li>Conservation analytics</li>
-                        <li>Citizen science integration</li>
+                        <li><i class="fas fa-check"></i> Species occurrence tracking</li>
+                        <li><i class="fas fa-check"></i> Habitat mapping</li>
+                        <li><i class="fas fa-check"></i> Conservation analytics</li>
+                        <li><i class="fas fa-check"></i> Citizen science integration</li>
                     </ul>
                     <a class="button is-secondary is-medium is-fullwidth mt-4" href="{{ absURL "apps/bims/" }}">
                         Learn More <i class="fas fa-arrow-right ml-2"></i>
@@ -319,10 +319,10 @@
                         GeoServer, and more with hands-on practical training.
                     </p>
                     <ul class="checklist">
-                        <li>QGIS fundamentals to advanced</li>
-                        <li>Spatial database design</li>
-                        <li>Web mapping & GeoServer</li>
-                        <li>Custom corporate training</li>
+                        <li><i class="fas fa-check"></i> QGIS fundamentals to advanced</li>
+                        <li><i class="fas fa-check"></i> Spatial database design</li>
+                        <li><i class="fas fa-check"></i> Web mapping & GeoServer</li>
+                        <li><i class="fas fa-check"></i> Custom corporate training</li>
                     </ul>
                     <a class="button is-secondary is-medium is-fullwidth mt-4" href="{{ absURL "training-courses/" }}">
                         View Courses <i class="fas fa-arrow-right ml-2"></i>

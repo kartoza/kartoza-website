@@ -76,6 +76,15 @@
     --radius-md: 4px;
     --radius-lg: 4px;
     --radius-xl: 6px;
+
+    /* Inner spacing of every card, including its header and footer */
+    --card-padding: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+    :root {
+        --card-padding: 1.5rem;
+    }
 }
 
 /* ============================================
@@ -150,6 +159,15 @@
     border: 2px solid rgba(255, 255, 255, 0.85);
 }
 
+/* Same 2px border on every variant, so a solid and an outline button in one
+   row are the same height */
+.button.is-primary,
+.button.is-secondary,
+.button.is-accent,
+.button.is-light {
+    border-width: 2px;
+}
+
 /* Space between a bare <i> icon and the label text
    (Bulma's own pattern wraps the icon in .icon, which has its own margins) */
 .button:has(> i) {
@@ -196,7 +214,8 @@
      .is-tile         grid/listing card: fills the column height, content
                       stretches so links line up at the bottom
      .is-padded       padding on the card itself (sidebar/info boxes);
-                      add .is-large for roomier padding
+                      add .is-large for long-form article panels
+   Every card uses the same --card-padding, so don't override padding per page.
 
    Surface
      .is-flat         grey background, no outline (feature / "why us" boxes)
@@ -256,8 +275,11 @@
     flex-direction: column;
 }
 
+.card .card-content {
+    padding: var(--card-padding);
+}
+
 .card.is-tile > .card-content {
-    padding: 1.5rem 2rem 2rem;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -285,7 +307,7 @@
 }
 
 .card.is-padded {
-    padding: 1.5rem;
+    padding: var(--card-padding);
 }
 
 .card.is-tile.is-padded > .card-content {
@@ -305,7 +327,7 @@
 
 @media screen and (max-width: 768px) {
     .card.is-padded.is-large {
-        padding: 1.5rem;
+        padding: var(--card-padding);
     }
 }
 
@@ -330,6 +352,15 @@
 .card.is-flat {
     background: var(--light-bg);
     box-shadow: none;
+}
+
+.card.is-flat .card-image.is-logo {
+    background: none;
+    border-bottom: 0;
+}
+
+.card.is-flat .card-image.is-logo + .card-content {
+    padding-top: 0;
 }
 
 .card.is-primary,
@@ -494,6 +525,16 @@ label > .card {
     margin-right: 0.35rem;
 }
 
+/* Heading of a featured card */
+.card-title.is-large {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.card-title.is-large > i:first-child {
+    margin-right: 0.5rem;
+}
+
 .card-subtitle {
     color: var(--accent);
     font-size: 0.875rem;
@@ -617,12 +658,13 @@ label > .card {
     font-weight: 700;
 }
 
-/* Label pinned to the top-right of a .card-image.
+/* Label pinned to the top-left of a .card-image; .is-inline puts it in the
+   text flow instead (above a title).
    Colours: default yellow, .is-success, .is-info, .is-danger */
 .card-badge {
     position: absolute;
     top: 1rem;
-    right: 1rem;
+    left: 1rem;
     z-index: 1;
     padding: 0.35rem 0.75rem;
     border-radius: var(--radius-md);
@@ -632,6 +674,12 @@ label > .card {
     font-weight: 700;
     letter-spacing: 0.5px;
     text-transform: uppercase;
+}
+
+.card-badge.is-inline {
+    position: static;
+    display: inline-block;
+    margin-bottom: 1rem;
 }
 
 .card-badge.is-success {
@@ -653,7 +701,7 @@ label > .card {
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: 1.25rem 1.5rem 0;
+    padding: var(--card-padding) var(--card-padding) 0;
     background: none;
     box-shadow: none;
 }
@@ -719,7 +767,7 @@ label > .card {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 1rem 1.5rem;
+    padding: 1rem var(--card-padding);
     background: var(--light-bg);
     border-top: 1px solid var(--gray-200);
 }
@@ -730,11 +778,14 @@ label > .card {
 
 /* Footer inside a padded card runs edge to edge */
 .card.is-padded > .card-footer {
-    margin: 1.5rem -1.5rem -1.5rem;
+    --card-footer-bleed: var(--card-padding);
+    margin: var(--card-footer-bleed) calc(-1 * var(--card-footer-bleed)) calc(-1 * var(--card-footer-bleed));
 }
 
-.card.is-padded.is-large > .card-footer {
-    margin: 2.5rem -2.5rem -2.5rem;
+@media screen and (min-width: 769px) {
+    .card.is-padded.is-large > .card-footer {
+        --card-footer-bleed: 2.5rem;
+    }
 }
 
 .card-footer .card-link {

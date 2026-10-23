@@ -72,10 +72,6 @@ a.heading-anchor {
     object-fit: cover;
 }
 
-.card .card-content {
-    padding: 1.25rem;
-}
-
 .card .card-content .title {
     color: #383939;
     margin-bottom: 0.25rem;
