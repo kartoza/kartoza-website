@@ -18,7 +18,7 @@ The new plugin comes with features that give the user a comfortable interface an
 
 The plugin supports searching for STAC item resources, loading and downloading STAC items and retrieving information about STAC API services.
 
-#### How to install the plugin
+## How to install the plugin
 
 The plugin is available to download and install in QGIS from the [official QGIS plugin repository](<https://plugins.qgis.org>).
 

@@ -23,7 +23,7 @@ First, we need to install Requests and Beautiful Soup. We need Requests, as Beau
 $ pip install requests beautifulsoup4
 ```
 
-### **Getting Web Page with Requests**
+## **Getting Web Page with Requests**
 
 First, we will use Python shell to understand web scraping line-by-line, then import the Requests library.
 
@@ -51,7 +51,7 @@ We’ll assign the URI of the page to the variable _url_ , then get that page us
 50198
 ```
 
-### **Parsing Page Source with Beautiful Soup**
+## **Parsing Page Source with Beautiful Soup**
 
 Beautiful Soup (BeautifulSoup) creates a parse tree from the parsed HTML or XML document. Using the previously fetched web page, we will create a Beautiful Soup object that is usually called soup. For the HTML page, we can use Python’s built-in`html.parser`. The object represents the HTML page as a nested data structure.
 
@@ -60,7 +60,7 @@ Beautiful Soup (BeautifulSoup) creates a parse tree from the parsed HTML or XML 
 >>> soup = BeautifulSoup(response.text, 'html.parser')
 ```
 
-### **Finding HTML Tag**
+## **Finding HTML Tag**
 
 We can easily find a tag from a page using Beautiful Soup’s find_all function. This will return all element within the page.
 
@@ -92,7 +92,7 @@ True
 
 They all returns the first `div` of the page.
 
-### **Finding Tags by Class and Id**
+## **Finding Tags by Class and Id**
 
 There will be a time when we want to find specific tags. Instead of only using tag, we can also find by class and id. Finding by class is accommodated by the keyword argument `class_`.
 
@@ -122,7 +122,7 @@ There could be multiple tags and classes throughout the page, but there can be o
 
 Beautiful Soup features don’t stop here. You can cread the [documentation](<https://www.crummy.com/software/BeautifulSoup/bs4/doc/>) to see more.
 
-### **Getting an Attribute of an Instance**
+## **Getting an Attribute of an Instance**
 
 A Beautiful Soup instance that represents an HTML element has attributes corresponding its HTML counterpart. The `a` tag for example, has at least the `href` attribute. We can get the attribute using the `get()` function.
 
@@ -133,7 +133,7 @@ A Beautiful Soup instance that represents an HTML element has attributes corresp
 'http://www.dwa.gov.za'
 ```
 
-### **Scraping a Certain Page**
+## **Scraping a Certain Page**
 
 After knowing which information we want to extract, we have to understand the page structure. For example, we want to extract **Region** , **Date** , **Dam** , **River** , **Photo** , **Indicators** , **FSC** , **This Week** , **Last Week** , and **Last Year**. Let’s inspect the web page to better understand the structure.
 
@@ -181,15 +181,15 @@ for row in result.find(id='ContentPlaceHolder1_tw').findAll('tr'):
             row_data[headers[index]] = value
 ```
 
-#### Explanation 1
+### Explanation 1
 
 We don’t want to extract last row. So, we need to make sure the length of the header matches the number of cells in the row. There are other ways to do it, you can find them on your own and tell us in the comment section.
 
-#### Explanation 2
+### Explanation 2
 
 We use `get_text()` to get the text inside the element, then remove the leading and trailing white space with `strip()`.
 
-#### Explanation 3
+### Explanation 3
 
 _Photo_ and _Indicator_ each contain a link and we want to extract its link value instead of the anchor text. We get `a` from a cell, and get the `href` value using `get()`. We only do simple web scraping here, so we only get the URL of the Photo and Indicator Page which contain image of dam water and graph. In real world, we might want to get the URL of the image instead of the page. You can fiddle with the code to get the URL of the Dam image and Indicator graph.
 

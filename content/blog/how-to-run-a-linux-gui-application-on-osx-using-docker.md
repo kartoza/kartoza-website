@@ -18,7 +18,7 @@ Ok so here is the scenario:
 
 Well that is what happened to me, so I decided to give working with OSX a try on this laptop with the help of docker for running all those essential apps that I use for development. One thing I was curious about was whether it would be possible to run native GUI (X11) applications from inside docker and have them show up on my OSX desktop. I turns out that it is fairly easy to do this - here is what I did:
 
-### Overview
+## Overview
 
   - Install brew
 
@@ -32,7 +32,7 @@ Well that is what happened to me, so I decided to give working with OSX a try on
 
   - Run it forwarding the display to your OSX host
 
-### Digging In
+## Digging In
 
 Ok first install [brew](<http://brew.sh/>) (an apt-like package manager for OSX).
 
@@ -58,7 +58,7 @@ docker pull kartoza/qgis-desktop
 
 Once the image is downloaded we are done with the basic setup and can kick over to running our Linux GUI application (obviously QGIS in this example).
 
-### Running QGIS
+## Running QGIS
 
 Ok so there are four steps we need to do to run our Linux app:
 

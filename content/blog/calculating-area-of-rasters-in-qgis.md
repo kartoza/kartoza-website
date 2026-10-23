@@ -43,7 +43,7 @@ The image below depicts the elevation of the raster post-classification.
 
 The image below depicts the render type applied to the elevation raster.
 
-#### ![](/img/blog/erpnext/ras-class.png)
+## ![](/img/blog/erpnext/ras-class.png)
 
 Procedure
 
@@ -53,7 +53,7 @@ Procedure
 - Open the editor and load your script **raster_classifier.py**.
 - Run the script and your raster is then loaded into QGIS.
 
-#### A summary of the script is provided below
+## A summary of the script is provided below
 
 The script will emulate how a user would symbolise a single band raster using the GUI in QGIS.
 

@@ -21,7 +21,7 @@ The docker [image](<https://github.com/kartoza/docker-postgis>) provides SSL sup
 
 When this option is enabled, connecting to the database will be through SSL.
 
-#### Let's walk through the process
+## Let's walk through the process
 
 Set up a database connection using the docker image
 
@@ -35,7 +35,7 @@ Setup QGIS to connect to the database
 
 Note the SSL Mode set to 'Require' above now!
 
-#### Using user-defined certificates
+## Using user-defined certificates
 
 I had to generate some certificates using OpenSSL
 

@@ -23,7 +23,7 @@ On each topographic map is printed map sheets that correspond to the printed are
 
 In order to generate the list as above, I had to do an intersection between the map extent and map layer in QGIS. Since the attributes of layers are not exposed I could not use in built expressions.
 
-### Getting extent of a map using QGIS expressions
+## Getting extent of a map using QGIS expressions
 
 `map_get(item_variables('main_map'), 'map_extent')`
 
@@ -31,7 +31,7 @@ Where main_map is the Item ID of a map. This will return a QGIS Geometry which c
 
 ![Item ID](/img/blog/erpnext/map-id.png)
 
-### Writing a custom function in QGIS
+## Writing a custom function in QGIS
 
 In order to achieve what I needed, I had to write a custom QGIS function to do the map intersects with the layer features.
 

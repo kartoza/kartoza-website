@@ -37,7 +37,7 @@ def create_weather_subscription(user_id, package_id, start_date, end_date):
 
 How can we test that function? Using the real service to subscribe to weather data is definitely not an option. Imagine running tests numerous times and creating at least 1 subscription for each test. That would cost us a lot. Mocking create_weather_subscription is also not a good idea since there could be errors in our function, and mocking it could make the test give false positive results.
 
-### **Using requests-mock**
+## **Using requests-mock**
 
 One way to test this code is by mocking our request to the weather service using [requests-mock](<https://requests-mock.readthedocs.io/en/latest/>). With _requests-mock_ , we can preload the requests with responses that are returned if certain URIs are requested. This is particularly useful in unit tests where we want to return known responses from HTTP requests without making actual calls. To ensure the test result, we need to correctly set the response data and status code for each test.
 

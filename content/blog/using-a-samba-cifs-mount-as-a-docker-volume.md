@@ -15,7 +15,7 @@ title: Using a SAMBA/CIFS Mount as a Docker Volume
 
 I preface this article by saying that what I am showing here is probably not best practice and you should test to see if it works reliably for you before taking this route. I should also mention that this is a hacky approach because it breaks our ‘never log on to a server’ rule, so it is not a long-term solution - it is a short-term hack until Hetzner adds a cloud storage offering to their cloud platform.
 
-### The problem
+## The problem
 
 Our hosting provider ([https://www.hetzner.com](<https://www.hetzner.com/>)) recently added new cloud services which provide compute server capacity. In our architectures, we use Docker and Rancher to deploy services onto these cloud servers. Hetzner doesn’t yet have any cloud storage option equivalent to Amazon S3 which presents a problem for application stacks which need larger amounts of storage. On their legacy platform, Hetzner does provide cheap storage which can be accessed by FTP or SMB. They don’t, however, provide NFS (which is supported by Rancher). So I looked for a way to support mounting docker volumes on SMB mount points.
 
@@ -63,6 +63,6 @@ lftp `-u` someuser smb`.host`
 
 Everything worked perfectly and now my space limited server can make backups without using up local storage space!
 
-### Summary:
+## Summary:
 
 This technique is a handy way to attach cheap storage into your cloud hosts that use docker, but be aware of the shortcomings - especially in the fact that it requires you to log in and administer the cloud host, rather than just let it be completely managed by Rancher.

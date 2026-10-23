@@ -836,6 +836,8 @@ def clean_markdown(markdown: str) -> str:
 
     lines = []
     in_code_block = False
+    # (original level, new level) of the enclosing headings
+    heading_stack = []
     for line in markdown.split('\n'):
         stripped = line.rstrip()
         if stripped.lstrip().startswith(('```', '~~~')):
@@ -843,6 +845,17 @@ def clean_markdown(markdown: str) -> str:
         # Drop empty headings like "###", but not "#" comments in code
         if not in_code_block and re.fullmatch(r'#{1,6}', stripped):
             continue
+        # Headings may only go one level deeper at a time (MD001). The page
+        # title is the h1, so the first heading can be at most an h2.
+        heading = re.match(r'(#{1,6})(\s.*)$', stripped)
+        if not in_code_block and heading:
+            level = len(heading.group(1))
+            while heading_stack and heading_stack[-1][0] >= level:
+                heading_stack.pop()
+            parent_level = heading_stack[-1][1] if heading_stack else 1
+            new_level = min(level, parent_level + 1)
+            heading_stack.append((level, new_level))
+            stripped = '#' * new_level + heading.group(2)
         # Drop spaces inside inline code: "a ` code `." -> "a `code`." (MD038)
         if not in_code_block and '``' not in stripped:
             stripped = re.sub(

@@ -13,7 +13,7 @@ thumbnail: /img/blog/placeholder.png
 title: How to Setup SSL on Nginx Using LetsEncrypt
 ---
 
-### Introduction
+## Introduction
 
 Another doc about SSL? Maybe... We are writing this to explain our trial and error on setup SSL on the servers. You might have read somewhere about setting up SSL (so have we, and it's painful).  
 Our blog is based on hands-on experience and hopefully you can learn something from it.
@@ -24,7 +24,7 @@ There are various options for how to configure your web server. We assume you ha
 
 We start with a short version following by a long one.
 
-### Setting up SSL - short version
+## Setting up SSL - short version
 
 In short, you will need to obtain the certificate and configure NGINX.
 
@@ -50,16 +50,16 @@ Restart your NGINX so the new config file can be reloaded: `sudo service nginx r
 
 Voila! Your system has been upgraded to using https protocol.
 
-### Setting up SSL - long version
+## Setting up SSL - long version
 
 The certbot installation should be pretty straightforward and simple. We are sorry if you reach this section as you might find something went wrong on the server.  
 Never mind... we also had the same problem. That's the main reason we wrote this article.
 
 Let us step back and do the process manually. We will need to configure the nginx first. Then, obtain the certicate from LE. Finally, we have to make some adjustments to the nginx configuration file.
 
-#### Install On Your Machine
+### Install On Your Machine
 
-##### Configure NGINX
+#### Configure NGINX
 
 You may have a hard time giving LE access to your server during the verification process. This is where you really need to understand your server as one may differ from another.
 
@@ -88,7 +88,7 @@ You can test your new config by typing the following command: `nginx -t`
 Make sure nginx is not complaining before proceed to the next step.  
 Next, you need to restart nginx: `sudo service nginx restart`
 
-##### Obtain the certificate
+#### Obtain the certificate
 
 We suggest that you use `--test-cert` when trying to obtain the certificate.
 
@@ -105,7 +105,7 @@ _****_`certbot certonly --test-cert --webroot -w /home/web/example.com/deploymen
 
 Once LE is happy and gives you a certificate, you can try the same command without `--test-cert`.
 
-##### Modify the NGINX config file
+#### Modify the NGINX config file
 
 Congratulations! You have the certificate for your domain now.
 

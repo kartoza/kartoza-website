@@ -13,7 +13,7 @@ thumbnail: /img/blog/erpnext/architecture.png
 title: Creating a Live, Topic Specific Mirror of OpenStreetMap in PostGIS
 ---
 
-### Introduction
+## Introduction
 
 In this article, we will do a walk-through of creating a live mirror of OSM for a specific country or region and for a specific set of OSM features. For this example, we will fetch all building data for Angola into a PostGIS database, and update that database with new features as they arrive in OSM. Providing an OSM mirror in this way is a powerful tool to pair the power of OSM with the power of QGIS and PostGIS. Now you will be able to do offline analysis of the data in OSM. How does this all work? Here is a little diagram that illustrates the underlying architecture (click for a larger version):
 
@@ -23,7 +23,7 @@ Note that all the code for docker-osm, osm-enrich etc. is available in our GitHu
 
 So let's build a mirror of OSM buildings in Angola!
 
-### Overview of the steps we will follow
+## Overview of the steps we will follow
 
 1) Identify the country / region .pbf file you will use.
 
@@ -41,7 +41,7 @@ So let's build a mirror of OSM buildings in Angola!
 
 7) Use time manager in QGIS to animate the data in your OSM mirror
 
-### Prerequisites
+## Prerequisites
 
 In this article, we assume you are already familiar with and have set up and installed (where applicable):
 
@@ -57,7 +57,7 @@ In this article, we assume you are already familiar with and have set up and ins
 
 6) using QGIS and the time manager plugin in QGIS
 
-### Quickstart - Angola Buildings
+## Quickstart - Angola Buildings
 
 Let's do a quickstart to demonstrate the system working and then we can follow on with an example where you create your own custom mirror.
 
@@ -128,7 +128,7 @@ select
 
 Which will tell you the total number of records in total and the number of records still due to be updated via OSMENRICH.
 
-### Making a time series visualisation
+## Making a time series visualisation
 
 Now that you have the mirror running, it is possible to use QGIS to do desktop based analysis and visualisation on OSM data. In this example, we will create a view first that shows only records that have been updated by OSMENRICH and then use that view as the basis for our time manager layer. We do this because timemanager does not like it when we have a table with partially populated timestamps. Here is the SQL for the OSMENRICH populated view:
 
@@ -164,7 +164,7 @@ And here is an example output:
 
 ![](https://user-images.githubusercontent.com/178003/56976353-ab877f00-6b6a-11e9-89a8-d4aedb3aa634.gif)
 
-### Getting started with your own settings and region
+## Getting started with your own settings and region
 
 You can customise the area and mappings file (which determines which OSM features are loaded into the PostGIS database) using the following process:
 
@@ -178,7 +178,7 @@ You can customise the area and mappings file (which determines which OSM feature
 
 Then run make deploy as per our simple example above.
 
-### Credits
+## Credits
 
 The work presented here is the brainchild of and was developed by:
 

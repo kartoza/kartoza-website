@@ -13,7 +13,7 @@ thumbnail: /img/blog/placeholder.png
 title: 'Under the Hood: Lightning-Fast Spatial Queries with PostGIS'
 ---
 
-### Preparing for Scale Before It Hurts
+## Preparing for Scale Before It Hurts
 
 While working on a recent client project involving a PostgreSQL and PostGIS database, I was working with just a few hundred spatial records. Everything ran relatively smoothly, but a slight lag during query execution got me thinking: If an unoptimised query takes noticeable time on a dataset this small, what happens when the project scales to tens of thousands or millions of features?
 
@@ -31,7 +31,7 @@ PostGIS transforms PostgreSQL into a world-class geospatial database, but out of
 
 Here is how you can optimise your database to handle scaling smoothly and return results in milliseconds.
 
-### 1\. Why Standard Indexes Fail: The GiST Solution
+## 1\. Why Standard Indexes Fail: The GiST Solution
 
 In standard relational databases, the B-Tree index is the gold standard. It is perfect for numbers, text, and dates. However, spatial data is multi-dimensional. A B-Tree cannot understand that a polygon in London is geographically next to a polygon in Kent.
 
@@ -46,7 +46,7 @@ CREATE INDEX idx_pois_geom ON pois USING GIST (geom);
 
  _(Pro Tip: If you are spinning up a fresh database to test this, using the official_`_kartoza/postgis_` _Docker image comes with many of these spatial optimisations ready to go.)_
 
-### 2\. The Two-Step Query Execution Model
+## 2\. The Two-Step Query Execution Model
 
 Once your GiST index is in place, PostGIS uses a brilliant two-step technique to speed up spatial queries:
 
@@ -55,7 +55,7 @@ Once your GiST index is in place, PostGIS uses a brilliant two-step technique to
 
 Most modern PostGIS functions (like `ST_Intersects` and `ST_DWithin`) automatically wrap this two-step process. However, if you ever write custom dynamic geometries or forget to build your index, you might accidentally bypass Phase 1 and trigger a catastrophic full table scan when your dataset grows.
 
-### 3\. Nearest Neighbour Searches: Avoid ST_Distance
+## 3\. Nearest Neighbour Searches: Avoid ST_Distance
 
 A classic mistake when searching for the closest feature (e.g., "Find the 5 closest hospitals to this crash site") is using `ST_Distance` in an `ORDER BY` clause. Calculating the exact distance to every single hospital in the country before sorting them requires a massive full table scan.
 
@@ -79,7 +79,7 @@ ORDER BY geom <-> ST_SetSRID(ST_MakePoint(-0.12, 51.50), 4326)
 LIMIT 5;
 ```
 
-### 4\. Bulk Nearest Neighbours: Enter the Lateral Join
+## 4\. Bulk Nearest Neighbours: Enter the Lateral Join
 
 The `<->` KNN operator is incredibly fast, but it has one major drawback: It only uses the spatial index when one side of the operator is a constant, static geometry. This is fine for finding the objects nearest to a single point, but it does not help for a spatial join where you want to find the nearest hospital for _every_ school in your dataset.
 
@@ -96,7 +96,7 @@ CROSS JOIN LATERAL (
 ) AS h;
 ```
 
-### 5\. Prove It with EXPLAIN ANALYZE
+## 5\. Prove It with EXPLAIN ANALYZE
 
 Never guess why a query is slow; ask the database directly. By putting `EXPLAIN (ANALYZE, BUFFERS)` before your `SELECT` statement, PostgreSQL will output the exact execution plan. _(Note: The SQL command itself retains the American spelling_`_ANALYZE_` _, as it is hardcoded into PostgreSQL)._
 
@@ -105,7 +105,7 @@ Never guess why a query is slow; ask the database directly. By putting `EXPLAIN 
 
 Finally, remember that creating an index is not enough. You must run `VACUUM ANALYZE table_name;` after importing large datasets. This forces PostGIS to gather spatial statistics regarding your geometry distribution. Without these statistics, the query planner relies on stale data and routinely chooses a slow sequential scan even when a perfect GiST index is available.
 
-### The Kartoza Challenge
+## The Kartoza Challenge
 
 Now it is your turn to test the difference indexing makes on your own machine.
 

@@ -23,7 +23,7 @@ Python has been [known](<https://realpython.com/python-gil/>) to struggle with c
 
 [RealPython](<https://realpython.com/async-io-python/>) and [Medium](<https://medium.com/analytics-vidhya/asyncio-threading-and-multiprocessing-in-python-4f5ff6ca75e8>) have great articles explaining the different approaches. We found asyncio to be ideal for sending multiple network requests in our Django app. Asyncio uses asynchronous functions, referred to as [coroutines](<https://docs.python.org/3/library/asyncio-task.html>), running in an event loop _._ These get called, start their process and hand control back to the loop. Once each routine is complete they return their response to the event loop which gathers all the results. If a routine is not able to yield control back to the loop we refer to it as a blocker since all the other coroutines have to wait for that process to complete.
 
-### **From Sync to Async**
+## **From Sync to Async**
 
 Now let's get to some code. In this example I will do a simple WMS request for JSON content from the Kartoza GeoServer serving a digital elevation model. To make it fun (for us, not the server) we will do it 100 times.
 

@@ -13,7 +13,7 @@ thumbnail: /img/blog/erpnext/5qmnUx1.jpg
 title: A New Plugin to Manage Land (survey) Parcels in QGIS
 ---
 
-#### Kartoza releases the CoGo Plugin for QGIS
+## Kartoza releases the CoGo Plugin for QGIS
 
 Kartoza recently published the CoGo Plugin (aka Parcel Plugin) in the QGIS plugin repository. This plugin expands the group of plugins designed to manage SDI (Spatial Data Infrastructure). CoGo ('coordinate geometry') refers to its ability to handle both types of coordinates used in land surveying, namely cartesian coordinates (x,y; long/lat) and polar coordinates (bearing and distance).
 
@@ -23,11 +23,11 @@ Example of Survey Diagram
 
 ![](/img/blog/erpnext/5qmnUx1.jpg)
 
-#### Why the CoGo plugin?
+## Why the CoGo plugin?
 
 Cadastral surveying is concerned with the survey and demarcation of land for the purpose of defining parcels of land for registration in a land registry. Any survey that has to be captured in a GIS has to be a true reflection of what occurs on the ground and what is represented by survey diagrams. To do this, we needed to define a tool that allows beacons to be captured and edited, bearings and distances to be defined and then use these to automatically define the land parcels. The plugin supports multiple users working on the same PostGIS database. It facilitates efficient and accurate data capture by operators as well as bulk uploading of structured data.
 
-#### Features of the plugin
+## Features of the plugin
 
 - Supports PostgreSQL 9.6 and higher
 - Runs materialised views and their triggers which increases speed for rendering data in QGIS
