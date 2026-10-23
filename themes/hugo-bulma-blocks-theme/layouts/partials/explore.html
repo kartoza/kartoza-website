@@ -2,9 +2,6 @@
 
 <!-- Hero Section with Vision Statement and Rotating Showcase -->
 <section class="hero is-fullheight-with-navbar hero-home">
-    {{/* Very faint contour-line texture; sits under the edge motifs below,
-         fades out behind the text and card, and drifts slightly slower than the page (see script at the end). */}}
-    <div class="hero-terrain" aria-hidden="true"></div>
     {{/* Edge map-motif decoration, matching geospatialhosting.com's treatment (a Kartoza product).
          Scoped to this section (left+right, size varies per section) rather than one continuous
          page-spanning background — simpler, and never depends on any other section's height. */}}
@@ -19,10 +16,10 @@
                 <!-- Left Column: Branding & Vision -->
                 <div class="column is-5 hero-left">
                     <div class="hero-brand">
-                        <img src="{{ absURL "img/kartoza-logo.png" }}" alt="Kartoza Logo" class="hero-logo" />
-                        <h1 class="hero-company-name">Kartoza</h1>
+                        <h1 class="hero-company-name">
+                            <img src="{{ absURL "img/kartoza-logo-horizontal-color.svg" }}" alt="Kartoza" class="hero-logo" />
+                        </h1>
                     </div>
-                    <p class="hero-tagline">Open Source Geospatial Experts</p>
                     <div class="hero-vision-container">
                         <blockquote class="hero-vision-statement">
                             Enable a world where spatial decision making tools are
@@ -572,21 +569,6 @@
     "secondaryLabel" "Explore Hosting"
 ) }}
 
-<script>
-// Subtle parallax for the hero terrain: it moves at a fraction of the scroll speed. Skipped for reduced motion.
-(function () {
-    var el = document.querySelector('.hero-terrain');
-    if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var ticking = false;
-    function update() {
-        el.style.transform = 'translate3d(0,' + Math.round(Math.min(window.scrollY, 1200) * 0.18) + 'px,0)';
-        ticking = false;
-    }
-    window.addEventListener('scroll', function () {
-        if (!ticking) { ticking = true; requestAnimationFrame(update); }
-    }, { passive: true });
-})();
-</script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // ============================================
