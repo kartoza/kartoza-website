@@ -6,7 +6,7 @@ description: This book is an essential guide for any new QGIS user, a fantastic 
 erpnext_id: /blog/conference/kartoza-book-review-discover-qgis-3x-second-edition
 erpnext_modified: '2022-09-30'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-23'
 tags:
 - Conference
 thumbnail: /img/blog/erpnext/Blog Post with the Author Instagram (4).png
@@ -25,9 +25,9 @@ If you have worked through the first edition, the second edition offers seven ne
 
 ![](/img/blog/erpnext/trPf6hz.jpg)
 
-## The FOSS4G Session and Some of my Favourite new Functionality
+## The FOSS4G Session and Some of my Favorite new Functionality
 
-It was fantastic to attend the session given by Kurt at the FOSS4G 2022 conference, where he highlighted some of the amazing new content available in the second edition and functionality in QGIS version 3 and up. Some of my favourite new functionality, which I outline below: Field Data Collection chapter (pg, 191-208), Working with Labels and Annotations (pg, 301-314), Animated Temporal Data with the Temporal controller (pg 365-374) and Working with 3D views (375-387).
+It was fantastic to attend the session given by Kurt at the FOSS4G 2022 conference, where he highlighted some of the amazing new content available in the second edition and functionality in QGIS version 3 and up. Some of my favorite new functionality, which I outline below: Field Data Collection chapter (pg, 191-208), Working with Labels and Annotations (pg, 301-314), Animated Temporal Data with the Temporal controller (pg 365-374) and Working with 3D views (375-387).
 
 ### Field Data Collection
 

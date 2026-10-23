@@ -6,10 +6,10 @@ description: Discover how GeoAI combines artificial intelligence and GIS to pred
 erpnext_id: /blog/ai/geoai-building-smarter-spatial-decision-making-systems
 erpnext_modified: '2026-07-21'
 reviewedBy: Automated Check
-reviewedDate: '2026-07-22'
+reviewedDate: '2026-10-23'
 tags:
 - Ai
-thumbnail: /img/blog/erpnext/placeholder.png
+thumbnail: /img/blog/placeholder.png
 title: 'GeoAI: Building Smarter Spatial Decision-Making Systems'
 ---
 
@@ -47,7 +47,7 @@ Prediction is only one part of GeoAI. Teams first use **segmentation** to map wh
 
 GeoAI is not only raster-based; many production workflows run on **vector GIS** layers such as parcels, roads, utilities, and points. Models use geometry and topology to score risk, suitability, service gaps, and hotspots. Predictions are then written back to PostGIS-backed layers. Because each output is linked to a feature ID and geometry, decisions remain auditable at feature level.
 
-Tooling is usually practical and mixed: **PyTorch** and **TorchGeo** for modelling, Rasterio/GDAL for raster processing, and GeoPandas/Shapely with PostGIS for vector operations. Quality checks go beyond a single score, using segmentation metrics (IoU/F1), forecast error (RMSE/MAE), and spatial validation across districts or seasons. In practice, GeoAI works best when it combines perception (what exists), **change detection** (what changed), and prediction (what may happen next) into **georeferenced outputs** teams can act on quickly.
+Tooling is usually practical and mixed: **PyTorc** h and **TorchGeo** for modelling, Rasterio/GDAL for raster processing, and GeoPandas/Shapely with PostGIS for vector operations. Quality checks go beyond a single score, using segmentation metrics (IoU/F1), forecast error (RMSE/MAE), and spatial validation across districts or seasons. In practice, GeoAI works best when it combines perception (what exists), **change detection** (what changed), and prediction (what may happen next) into **georeferenced outputs** teams can act on quickly.
 
 ## Practical Use Cases
 

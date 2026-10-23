@@ -9,7 +9,7 @@ reviewedBy: Automated Check
 reviewedDate: '2026-09-18'
 tags:
 - Qgis
-thumbnail: /img/blog/erpnext/placeholder.png
+thumbnail: /img/blog/placeholder.png
 title: QGIS vs. the Browser
 ---
 

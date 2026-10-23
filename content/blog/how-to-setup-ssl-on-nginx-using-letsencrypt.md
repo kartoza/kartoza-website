@@ -6,7 +6,7 @@ description: Introduction Another doc about SSL? Maybe... We are writing this to
 erpnext_id: /blog/uncategorised/how-to-setup-ssl-on-nginx-using-letsencrypt
 erpnext_modified: '2018-06-21'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-23'
 tags:
 - Uncategorised
 thumbnail: /img/blog/placeholder.png
@@ -29,11 +29,11 @@ We start with a short version following by a long one.
 In short, you will need to obtain the certificate and configure NGINX.
 
 **Install certbot on your server (also known as letsencrypt or letsencrypt-auto on older version) to obtain the certificate:**  
-\- Go to **<https://certbot.eff.org>**  
-\- On the site, select Nginx in **Software section** and your OS in the **System section** (in our case: Ubuntu 16.04).
+\- Go to **https://certbot.eff.org**  
+\- On the site, select Nginx in **Software section** and your OS in the **System section** (in our case: Ubuntu 16.04).  
 \- There will be an explanation on how to install certbot. Follow the steps and certbot will be on your system.
 
-Alternatively, you may find certbot in Docker is more convenient. Download and dockerise certbot by typing this command:
+Alternatively, you may find certbot in Docker is more convenient. Download and dockerise certbot by typing this command:  
 `docker run -it --rm --name certbot -v "/etc/letsencrypt:/etc/letsencrypt" -v "/var/lib/letsencrypt:/var/lib/letsencrypt" certbot/certbot certonly`
 
 The command above will download certbot and run the software to obtain the certificate from LE.
@@ -63,24 +63,26 @@ Let us step back and do the process manually. We will need to configure the ngin
 
 You may have a hard time giving LE access to your server during the verification process. This is where you really need to understand your server as one may differ from another.
 
-The main task is to make sure that LE can access the following url: **<http://example.com/.well-known/acme-challenge>.**LE will try to add new file in the folder during the verification process.  
+The main task is to make sure that LE can access the following url: **<http://example.com/.well-known/acme-challenge>. **LE will try to add new file in the folder during the verification process.  
 If it succeeds, the certificate can be issued. Otherwise, certbot will stop.
 
 To give LE access to your server, make sure you have these lines on your nginx' config file:
 
-    ...  
-    server {  
-     ...  
-     server_name example.com;  
-     listen 80;  
-     ...  
-     location /.well-known/acme-challenge {  
-         default_type "text/plain";  
-         root /var/www/webroot;  
-     }  
-     ...  
-    }  
-    ...
+```
+...
+server {
+ ...
+ server_name example.com;
+ listen 80;
+ ...
+ location /.well-known/acme-challenge {
+     default_type "text/plain";
+     root /var/www/webroot;
+ }
+ ...
+}
+...
+```
 
 You can test your new config by typing the following command: `nginx -t`  
 Make sure nginx is not complaining before proceed to the next step.  
@@ -92,7 +94,7 @@ We suggest that you use `--test-cert` when trying to obtain the certificate.
 
 `--test-cert` basically tells LE to use its staging server, instead of its production server.
 
-The production server limits a certificate request of 20 request per week (<https://letsencrypt.org/docs/rate-limits/>). If you manage to obtain a certificate in a single shot, congratulations!
+The production server limits a certificate request of 20 request per week (https://letsencrypt.org/docs/rate-limits/). If you manage to obtain a certificate in a single shot, congratulations!
 
 But, if you still doubt that you will obtain the certificate, `--test-cert` will save your day.
 
@@ -115,33 +117,35 @@ Also, it's time to redirect a request from port 80 to port 443.
 
 Add the following lines to your nginx config file:
 
-    server {  
-     ...  
-     # the port your site will be served on  
-     listen 443 ssl;  
-     # the domain name it will serve for  
-     server_name example.com;  
-      
-     ssl on;  
-     ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;  
-     ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;  
-     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;  
-     ssl_prefer_server_ciphers on;  
-     ssl_ciphers 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH';  
-      
-     location /.well-known/acme-challenge {  
-     default_type "text/plain";  
-     # set to webroot path  
-     root /var/www/webroot;  
-     }  
-     ...  
-    }  
-    server {  
-     # tells nginx to redirected http request to https  
-     listen 80;  
-     server_name example.com;  
-     return 301 https://$host$request_uri;}  
-    ...
+```
+server {
+ ...
+ # the port your site will be served on
+ listen 443 ssl;
+ # the domain name it will serve for
+ server_name example.com;
+
+ ssl on;
+ ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
+ ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+ ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+ ssl_prefer_server_ciphers on;
+ ssl_ciphers 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH';
+
+ location /.well-known/acme-challenge {
+ default_type "text/plain";
+ # set to webroot path
+ root /var/www/webroot;
+ }
+ ...
+}
+server {
+ # tells nginx to redirected http request to https
+ listen 80;
+ server_name example.com;
+ return 301 https://$host$request_uri;}
+...
+```
 
 Restart your nginx for the new change to take effect.
 

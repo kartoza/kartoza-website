@@ -6,7 +6,7 @@ description: Kartoza highlights Python's role in addressing intricate geospatial
 erpnext_id: /blog/python/kartoza-providing-talks-at-pyconza-2023
 erpnext_modified: '2024-06-17'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-23'
 tags:
 - Python
 thumbnail: /img/blog/erpnext/admire_talk2.jpg
@@ -21,10 +21,10 @@ Admire Nyakudya, one of Kartoza's resident Python experts, gave a well-attended 
 
 Some of our favourite talks and events included:
 
-  1. Supercharge Your Django Apps: Unveiling Performance Secrets with the Magic of Django Silk! - Using Django SIlk to optimise database queries, detect N+1 and other performance issues to improve the performance of your database.
-  2. River - A Python library that can be used to build an MOA (Massive Online Analysis) framework, enabling users to do machine learning tasks on streaming data.
-  3. PRQL: A modern language for data transformation - A language specifically designed for data analysts and engineering that combines the elegance of relational algebra with the usability of popular libraries like Pandas, Polars, dplyr, and LINQ, which supports multiple SQL dialects.
-  4. Toolsmithing: Convenience through code-building tools to automate everyday tasks or fill gaps where existing tools lack functionality, putting the power of convenience back in the user's hands.
+- Supercharge Your Django Apps: Unveiling Performance Secrets with the Magic of Django Silk! - Using Django SIlk to optimise database queries, detect N+1 and other performance issues to improve the performance of your database.
+- River - A Python library that can be used to build an MOA (Massive Online Analysis) framework, enabling users to do machine learning tasks on streaming data.
+- PRQL: A modern language for data transformation - A language specifically designed for data analysts and engineering that combines the elegance of relational algebra with the usability of popular libraries like Pandas, Polars, dplyr, and LINQ, which supports multiple SQL dialects.
+- Toolsmithing: Convenience through code-building tools to automate everyday tasks or fill gaps where existing tools lack functionality, putting the power of convenience back in the user's hands.
 
 ![](/img/blog/erpnext/aaview2.jpg)
 

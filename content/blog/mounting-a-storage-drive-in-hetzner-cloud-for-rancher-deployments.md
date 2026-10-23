@@ -37,7 +37,7 @@ Variable | Number to keep | Total Size
 DAILY number of daily backups to keep | 2 | 20 g  
 MONTHLY number of monthly backups to keep | 6 | 60  
 YEARLY number of yearly backups to keep | 1 | 10  
-  
+
 The numbers above are based inspecting a manual backup which is roughly about 8gig and I then assumed in the future the backup would grow up to 10gig.
 
 4\. Attach your storage driver to your specific server instance.

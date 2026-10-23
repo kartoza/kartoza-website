@@ -1,116 +1,103 @@
 ---
 author: Jeff Osundwa
 date: '2026-09-25'
-description: The geospatial world is changing fast as cloud-native tools reshape spatial
-  data storage, discovery, and analysis.
+description: The geospatial world is undergoing a quiet revolution. Cloud-native formats
+  and tools are reshaping how we store, discover, and analyse spatial data at scale.
+draft: true
 erpnext_id: /blog/cloud-native-gis/the-rise-of-cloud-native-geospatial
 erpnext_modified: '2026-09-25'
 reviewedBy: Automated Check
-reviewedDate: '2026-09-01'
+reviewedDate: '2026-10-23'
 tags:
 - Cloud Native Gis
 thumbnail: /img/blog/erpnext/cloud-native.png
 title: The Rise of Cloud-Native Geospatial
 ---
 
-For most of GIS history, the workflow has been the same: find a dataset, download it, unzip it, load it into your desktop software, and then work with it locally. It is a process that has served us well for decades, but it breaks down the moment your datasets are measured in terabytes, your users are spread across continents, and your analysis needs to be reproducible and collaborative.
+I started using GIS the way most people do: find a dataset, download it, unzip it, and load it into desktop software. It worked for years. It still works, until your datasets are measured in terabytes, your users span continents, and you need your analysis to be reproducible instead of locked to one machine.
 
-A quiet revolution has been building in the geospatial community over the past few years. It does not have a single flagship product or a dominant vendor behind it. Instead, it is a collection of open specifications, open source tools, and a shift in thinking about how geospatial data should live in the world. This movement is called cloud-native geospatial, and it is changing the game.
+Cloud-native geospatial is the emerging answer. There is no single flagship product or dominant vendor behind it, just open specifications, open source tools, and a change in how geospatial data is meant to live on the internet rather than on a hard drive.
 
-## What Does Cloud-Native Geospatial Actually Mean?
+## What does cloud-native geospatial actually mean?
 
-![Hero image](/img/blog/erpnext/cloud-native.png)
+Traditional formats were designed for local access. To open a Shapefile you need the whole bundle, it is really at least three files, often more. A standard GeoTIFF stores its pixels so that reading even a small region requires loading the whole file. All of this assumes the data is on your disk.
 
-At its core, cloud-native geospatial is about designing data formats and workflows for the reality that data lives on the internet, not on your hard drive. Traditional geospatial formats like Shapefiles and standard GeoTIFFs were designed for local access. To use them, you need the entire file on your machine. A Shapefile is actually a bundle of at least three files (and often more), and a standard GeoTIFF stores its pixel data in a way that requires reading the whole file to access even a small region.
+Cloud-native formats flip that. A client can make small, targeted HTTP range requests and read only the portion of the data it needs. You can view a satellite image covering all of Africa and download no more than the pixels in your current viewport. You can run a spatial query against a vector dataset with millions of features, pulling only the rows that intersect your area of interest, while the file sits in an object bucket. The data stays put; the computation moves to it.
 
-Cloud-native formats flip this model. They are designed so that a client can make small, targeted HTTP range requests to read just the portion of the data it needs, without downloading the entire file. This means you can visualise a satellite image covering all of Africa without ever downloading more than the pixels visible in your current map viewport. You can run a spatial query on a vector dataset containing millions of features stored in an object bucket, pulling only the rows that intersect your area of interest.
+## The key formats and specifications
 
-The paradigm shift is simple but profound: instead of moving data to compute, you move compute to data.
-
-## The Key Formats and Specifications
-
-Several specifications have emerged that, taken together, form the cloud-native geospatial stack. None of them are proprietary, and all of them are designed to interoperate.
+Several specifications form the cloud-native geospatial stack. They are all open and designed to interoperate.
 
 ### Cloud Optimized GeoTIFF (COG)
 
-The [Cloud Optimized GeoTIFF](<https://www.cogeo.org/>) is perhaps the most mature and widely adopted cloud-native format. It is a regular GeoTIFF with a specific internal layout: the image is organised into tiles, and an internal directory (the IFD hierarchy) is placed at the beginning of the file so that a client can quickly discover which byte ranges correspond to which tiles and overview levels. The result is that any HTTP client can stream just the pixels it needs.
+The [Cloud Optimized GeoTIFF](<https://www.cogeo.org/>) is the most mature and widely adopted cloud-native format. It is a regular GeoTIFF with a specific internal layout: the image is tiled, and an internal directory sits at the start of the file, letting a client discover which byte ranges hold which tiles and overviews. An HTTP client can then stream just the pixels it needs.
 
-COGs have been supported natively in QGIS since version 3.2, and GDAL has been able to read them over HTTP via the `/vsicurl/` virtual filesystem for even longer. Today, most major satellite imagery providers, including Sentinel, Landsat, and the commercial constellations, distribute their data as COGs. At Kartoza, we have been working with COGs in our projects for years, and our [STAC API Browser plugin](</plugins/stac-api-browser/>) loads them directly into QGIS as map layers.
+QGIS has supported COGs natively since version 3.2, and GDAL could read them over HTTP through `/vsicurl/` even earlier. Most major satellite imagery providers, Sentinel, Landsat, and the commercial constellations, now distribute their data as COGs. We have used them at Kartoza for years; our [STAC API Browser plugin](</plugins/stac-api-browser/>) loads them straight into QGIS as map layers.
 
 ### GeoParquet
 
-If COG solved cloud-native raster, [GeoParquet](<https://geoparquet.org/>) is doing the same for vector data. Parquet is a columnar storage format originally developed in the big data world (Apache Hadoop, Spark, and so on). GeoParquet extends it with a geometry column encoded as Well-Known Binary (WKB), making it a first-class geospatial format.
+If COG solved cloud-native raster, [GeoParquet](<https://geoparquet.org/>) is doing the same for vector data. It extends Parquet, the columnar format from the big data world, Apache Hadoop and Spark and the rest, with a geometry column encoded as Well-Known Binary, making it a proper geospatial format.
 
-The advantages are significant. Columnar storage means that a query touching only a few attributes does not need to read the entire row for every feature. Parquet files are splittable, so they can be processed in parallel. And because Parquet is already the de facto format in the data engineering world, GeoParquet slots naturally into modern data pipelines built around tools like DuckDB, Apache Arrow, and Polars.
+Columnar storage means a query that touches only a few attributes does not read the whole row for every feature. Parquet files split for parallel processing. And because Parquet is already the default in data engineering, GeoParquet fits naturally into pipelines built around DuckDB, Apache Arrow, and Polars.
 
 ### STAC (SpatioTemporal Asset Catalog)
 
-Formats solve the storage problem, but you still need a way to find the data you need. [STAC](<https://stacspec.org/>) provides a standardised way to describe and catalogue geospatial assets. A STAC item is a GeoJSON feature with metadata about a spatiotemporal asset: its bounding box, temporal extent, and links to the actual data files (which are often COGs or other cloud-native formats). STAC collections group related items, and STAC APIs provide RESTful search endpoints.
+Formats solve storage; you still need to find the data. [STAC](<https://stacspec.org/>) standardises how geospatial assets are described and catalogued. A STAC item is a GeoJSON feature carrying metadata about an asset, its bounding box, temporal extent, and links to the actual data files, which are often COGs. STAC collections group related items, and STAC APIs expose RESTful search.
 
-STAC has become the lingua franca for earth observation data discovery. Microsoft Planetary Computer, AWS Open Data, Google Earth Engine, and most national space agencies now expose their archives through STAC APIs. Kartoza developed the [QGIS STAC API Browser plugin](</blog/qgis-stac-api-plugin/>) with funding from Microsoft, and we have seen firsthand how STAC transforms the data discovery workflow from a tedious exercise in navigating download portals into a seamless search-and-load experience inside QGIS itself.
+STAC has become the working language of earth observation data discovery. Microsoft Planetary Computer, AWS Open Data, Google Earth Engine, and most national space agencies publish archives through STAC APIs. We built the [QGIS STAC API Browser plugin](</blog/qgis-stac-api-plugin/>) with funding from Microsoft, and we have watched it turn what used to be a round trip to a download portal into a search-and-load step inside QGIS.
 
-### Zarr and Cloud-Optimised Data Cubes
+### Zarr and cloud-optimised data cubes
 
-For multidimensional data, time series, and climate model outputs, [Zarr](<https://zarr.dev/>) has emerged as a cloud-native alternative to NetCDF and HDF5. Zarr stores data as chunked, compressed arrays that can be read in parallel from object storage. Combined with the [Xarray](<https://docs.xarray.dev/>) ecosystem in Python, it enables efficient analysis of massive gridded datasets without loading them into memory.
+[Zarr](<https://zarr.dev/>) has emerged as the cloud-native alternative to NetCDF and HDF5 for multidimensional data, time series, and climate model output. It stores chunked, compressed arrays that can be read in parallel from object storage. Combined with the [Xarray](<https://docs.xarray.dev/>) ecosystem, it allows analysis of massive gridded datasets without loading them into memory.
 
-The [Virtualizarr](<https://virtualizarr.readthedocs.io/>) project takes this further by creating virtual Zarr stores that reference existing NetCDF or GRIB files without copying or converting them, making it possible to treat legacy archives as cloud-native data cubes.
+The [Virtualizarr](<https://virtualizarr.readthedocs.io/>) project goes further: it builds virtual Zarr stores that reference existing NetCDF or GRIB files without copying or converting them, so legacy archives behave like cloud-native data cubes.
 
 ### Apache Iceberg and Icechunk
 
-[Apache Iceberg](<https://iceberg.apache.org/>) is a table format that brings schema evolution, time travel, and ACID transactions to data lakes. While not geospatial-specific, it is increasingly used as the storage layer for large-scale geospatial analytics pipelines. [Icechunk](<https://icechunk.io/>) extends this concept to Zarr-based data, providing versioned, transactional access to multidimensional arrays.
+[Apache Iceberg](<https://iceberg.apache.org/>) is a table format that brings schema evolution, time travel, and ACID transactions to data lakes. It is not geospatial-specific, but it is increasingly the storage layer for large-scale geospatial analytics. [Icechunk](<https://icechunk.io/>) brings the same versioned, transactional idea to Zarr-based arrays.
 
-Both are early-stage in the geospatial context, but they represent where the field is heading: geospatial data living in proper data lake architectures, with all the governance, versioning, and scalability benefits that entails.
+Neither is mature in a geospatial context yet, but they point the direction of travel: geospatial data living in proper data lake architectures, with the governance and versioning that come with them.
 
-## The Tools Making It Real
+## The tools making it real
 
-Formats and specifications are only useful if there are tools to work with them. Fortunately, the tooling ecosystem has matured rapidly.
+Specifications only matter if the tools exist. The tooling has now caught up.
 
-**GDAL Virtual Filesystems** remain the unsung hero of cloud-native geospatial. The `/vsicurl/`, `/vsis3/`, `/vsigs/`, and `/vsiaz/` drivers allow GDAL (and by extension, QGIS, PostGIS, and most open source geospatial software) to read data directly from HTTP endpoints and cloud object stores as if they were local files. This single capability underpins much of the cloud-native stack.
+**GDAL virtual filesystems** are quietly the workhorse. The `/vsicurl/`, `/vsis3/`, `/vsigs/`, and `/vsiaz/` drivers let GDAL, and with it QGIS, PostGIS, and most open source geospatial software, read directly from HTTP endpoints and cloud object stores as if they were local files. A lot of the cloud-native stack rests on that one capability.
 
-**DuckDB Spatial** has been a revelation. DuckDB is an in-process analytical database (think SQLite for OLAP workloads), and its spatial extension can read GeoParquet files directly from S3, run spatial queries with SQL, and return results in milliseconds. At FOSDEM 2026, the [ClickHouse](<https://clickhouse.com/>) team showed similar capabilities, running analytics over Apache Iceberg tables and GeoParquet files at massive scale. These tools are collapsing the distance between data engineering and geospatial analysis.
+**DuckDB Spatial** has changed how vector analytics feel. DuckDB is an in-process analytical database, SQLite for OLAP, and its spatial extension reads GeoParquet directly from S3, runs SQL spatial queries, and returns results in milliseconds. At FOSDEM 2026 the [ClickHouse](<https://clickhouse.com/>) team demonstrated similar performance over Apache Iceberg tables and GeoParquet, at much larger scale. The distance between data engineering and geospatial analysis is collapsing.
 
-**The Python Ecosystem** continues to lead in analysis tooling. Libraries like [stackstac](<https://stackstac.readthedocs.io/>) can take a STAC search result and lazily load it as an Xarray DataArray backed by COGs in cloud storage. [rioxarray](<https://corteva.github.io/rioxarray/>) provides rasterio-powered geospatial operations on Xarray datasets. [PDAL](<https://pdal.io/>) handles point cloud data with similar cloud-native sensibilities.
+**The Python ecosystem** still leads on analysis. [stackstac](<https://stackstac.readthedocs.io/>) takes a STAC search result and loads it lazily as an Xarray DataArray backed by COGs in cloud storage. [rioxarray](<https://corteva.github.io/rioxarray/>) adds rasterio-powered geospatial operations to Xarray. [PDAL](<https://pdal.io/>) handles point clouds with the same cloud-native sensibilities.
 
-**QGIS** itself is meeting cloud-native halfway. Beyond native COG support and the STAC plugin, QGIS can connect to WMS/WMTS services that are themselves backed by cloud-native data stores, creating a bridge between the familiar desktop GIS experience and modern cloud infrastructure.
+**QGIS** meets cloud-native halfway. Beyond native COG support and the STAC plugin, it can connect to WMS/WMTS services that are themselves backed by cloud-native stores, a bridge between the familiar desktop GIS and modern cloud infrastructure.
 
-## Why This Matters
+## Why this matters
 
-The shift to cloud-native geospatial is not just a technical curiosity. It has real implications for how organisations work with spatial data.
+The point is not abstract. When data lives behind a download portal, access is limited by bandwidth, storage, and patience. Cloud-native formats let anyone with a connection query petabyte-scale datasets from a laptop, a real difference for researchers, NGOs, and people working where high-speed connectivity and large storage are not a given.
 
-**Democratisation of Access.** When data lives behind a download portal, access is gated by bandwidth, storage, and patience. Cloud-native formats allow anyone with an internet connection to query petabyte-scale datasets from a laptop. This is transformative for researchers, NGOs, and organisations in regions where high-speed connectivity and large storage are not a given.
+The same applies to reproducibility. If an analysis references data by URI instead of a local copy, someone else can run the same code against the same data without recreating your file layout. Cost and scale follow: cloud-native workflows drop the copy-then-store step of the old pipeline, and the formats are built for parallel, distributed processing whether the job is one Sentinel-2 scene or a decade of archive over a whole continent.
 
-**Reproducibility.** When your analysis references data by URI rather than relying on a local copy, your workflow is inherently reproducible. Anyone can run the same code against the same data without needing to replicate your local file structure.
+## What is still hard
 
-**Cost Reduction.** Traditional geospatial pipelines involve copying data from a source, storing it locally, and then processing it. Cloud-native workflows eliminate the copy step entirely. You pay for compute and egress, not for redundant storage.
+None of this is frictionless yet. The sticking points are practical.
 
-**Scalability.** Cloud-native formats are designed for parallel access and distributed processing. Whether you are analysing a single Sentinel-2 scene or processing a decade of archive data across an entire continent, the same tools and patterns apply.
+Enterprise environments are the hard case for authentication. Most cloud-native tooling assumes either fully public data or simple token auth; complex identity management, SAML/OIDC federation, and fine-grained access control still need real integration work.
 
-## What is Still Difficult?
+Latency is another. Cloud-native workflows depend on reliable, low-latency connections, and in parts of Africa, South America, and Southeast Asia the round trip to a major cloud region makes interactive use frustrating. Edge caching and regional replicas help, at the cost of complexity.
 
-It would be disingenuous to suggest that cloud-native geospatial has solved everything. Several challenges remain.
+The tooling is also still young. The core tools are solid, but error messages can be cryptic and documentation is scattered; the learning curve from a traditional GIS background is steep. And the biggest blocker is inertia, Shapefiles and GeoTIFFs are embedded in workflows, training material, and institutional habit. Changing how an organisation stores data is a cultural problem as much as a technical one.
 
-**Authentication and Authorisation.** Most cloud-native tooling assumes either fully public data or simple token-based auth. Enterprise environments with complex identity management, SAML/OIDC federation, and fine-grained access control still require significant integration work.
+## Where Kartoza fits
 
-**Latency in Developing Regions.** Cloud-native workflows depend on reliable, low-latency internet connections. In many parts of Africa, South America, and Southeast Asia, the round-trip time to major cloud regions can make interactive cloud-native analysis frustrating. Edge caching and regional data replicas help, but they add complexity.
+We have been in the cloud-native space since its early days. We built the QGIS STAC API Browser plugin, bringing cloud-native discovery directly into the desktop GIS. We maintain Docker images for PostGIS, GeoServer, and other parts of the open source geospatial stack, and we are working on how to build cloud-native formats into those services.
 
-**Tooling Maturity.** While the core tools are solid, the ecosystem is still young. Error messages can be cryptic, documentation is scattered, and the learning curve for someone coming from a traditional GIS background is steep. The gap between "possible" and "easy" is still wide.
+Our [managed hosting platform](</hosting/>) treats cloud-native geospatial as a first-class concern. The direction we are building towards: a customer spins up a GeoServer instance pre-configured to serve COGs from object storage, or a DuckDB analytics endpoint that queries GeoParquet in place, without managing the infrastructure underneath.
 
-**Inertia.** Shapefiles and GeoTIFFs are deeply embedded in workflows, training materials, and institutional knowledge. Convincing organisations to change how they store and share data is as much a cultural challenge as a technical one.
+We are also following Apache Iceberg and Icechunk closely, particularly for clients with large, versioned geospatial datasets in biodiversity monitoring, climate analysis, and environmental management.
 
-## Where Kartoza Fits
+## The hybrid future
 
-At Kartoza, we have been active participants in the cloud-native geospatial movement from its early days. We built the QGIS STAC API Browser plugin, bringing cloud-native data discovery directly into the desktop GIS environment. We maintain Docker images for PostGIS, GeoServer, and other components of the open source geospatial stack, and we are actively exploring how to integrate cloud-native formats into these services.
+Cloud-native geospatial is not replacing the desktop GIS. QGIS is not going anywhere, and plenty of workflows still want data locally. What it does is remove the old limit on scale and reuse.
 
-Our [managed hosting platform](</hosting/>) is being built with cloud-native geospatial as a first-class citizen. We see a future where our customers can spin up a GeoServer instance pre-configured to serve data from COGs in object storage, or a DuckDB-powered analytics endpoint that queries GeoParquet files in place, without needing to manage the underlying infrastructure.
+The realistic setup a few years from now is mixed: field survey data in a GeoPackage on a laptop, a satellite archive as COGs in an S3 bucket catalogued by STAC, vector analytics as SQL over GeoParquet in DuckDB, time series in Zarr and Xarray, all reachable from the same QGIS window, Python notebook, or web application.
 
-We are also watching the emergence of Apache Iceberg and Icechunk with great interest, particularly for clients managing large, versioned geospatial datasets in biodiversity monitoring, climate analysis, and environmental management.
-
-## The Hybrid Future
-
-Cloud-native geospatial is not going to replace your desktop GIS. QGIS is not going away, and there will always be workflows that benefit from having data locally. But cloud-native is giving GIS a superpower: the ability to work with data at a scale and with a fluidity that was simply impossible a few years ago.
-
-The future is hybrid. Your field survey data lives in a GeoPackage on your laptop. Your satellite imagery archive lives as COGs in an S3 bucket, catalogued by STAC. Your vector analytics run as SQL queries over GeoParquet in DuckDB. Your time series analysis uses Zarr and Xarray. And all of it is accessible from the same QGIS window, the same Python notebook, or the same web application.
-
-The pieces are here. The specifications are open. The tools are free. The only thing left is to start using them.
-
-If you are exploring cloud-native geospatial for your organisation and need help navigating the technology choices, [get in touch](</contact-us/>). We would love to help you build a solution that works.
+The specifications are open and the tools are there. The practical question is where to start, and that is usually specific to the datasets and users involved. If you are working through cloud-native geospatial for your organisation, [get in touch](</contact-us/>), we are happy to help you figure out a setup that works.

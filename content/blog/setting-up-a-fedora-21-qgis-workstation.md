@@ -6,7 +6,7 @@ description: I have been a long time Ubuntu user (I have actually been using it 
 erpnext_id: /blog/fossgis/setting-up-a-fedora-21-qgis-workstation
 erpnext_modified: '2014-12-24'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-23'
 tags:
 - Fossgis
 thumbnail: /img/blog/erpnext/Qu4RdxA.png
@@ -21,87 +21,29 @@ I have been using docker heavily for the last year and have come to the point wh
 
 Thus I decided to try and see how easy it would be to get Fedora 21 installed on my MacBook 13" Laptop which was running Ubuntu quite nicely until now. In the Gist below, I detail the various installation steps I took to get my standard suite of applications installed. These include:
 
-  
+- docker
 
+- QGIS compilation build chain
 
-  1. docker
+- PyCharm 4
 
+- Shutter
 
+- Skype
 
-  
+- QtCreator / QtDesigner etc.
 
+- btsync
 
-  1. QGIS compilation build chain
+- Google Chrome
 
+- vlc and assorted video codecs
 
+- keepassx
 
-  
-
-
-  1. PyCharm 4
-
-
-
-  
-
-
-  1. Shutter
-
-
-
-  
-
-
-  1. Skype
-
-
-
-  
-
-
-  1. QtCreator / QtDesigner etc.
-
-
-
-  
-
-
-  1. btsync
-
-
-
-  
-
-
-  1. Google Chrome
-
-
-
-  
-
-
-  1. vlc and assorted video codecs
-
-
-
-  
-
-
-  1. keepassx
-
-
-
-  
-
-
-  1. Elegance gnome theme (must-have if you use Gnome!)
-
-
+- Elegance gnome theme (must-have if you use Gnome!)
 
 ![](/img/blog/erpnext/Qu4RdxA.png)
-
-  
-
 
 I will keep the above Gist updated as I tweak my configuration, but by and large the migration to Fedora has been fairly painless and I am enjoying working on the latest Gnome desktop. I was able to replicate pretty much all of the application stack I ran on Ubuntu, though in some cases the setup & installation of applications was a little more complex than on Ubuntu, and in one case (btsync-gtk-gui) I have not yet found a binary installation package.
 

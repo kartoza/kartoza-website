@@ -6,7 +6,7 @@ description: A reflection on my first time attending a FOSDEM conference. I lear
 erpnext_id: /blog/conference/reflections-on-fosdem-2026
 erpnext_modified: '2026-02-17'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-23'
 tags:
 - Conference
 thumbnail: /img/blog/erpnext/Image_20260211_083448_972.jpeg
@@ -43,18 +43,18 @@ It's been a while since I wrote any low level C++ code, but if I was planning to
 
 [Every Door](<https://every-door.app/>) is a mobile mapping tool for iOS and Android that makes it easy to contribute POIs and amenities to [OpenStreetMap](<https://www.openstreetmap.org/#map=6/-28.68/24.68>). It's feature complete and uses an interesting approach for plugins as simple text files (YAML). There's a possibility to use this with HealthSites if we create a healthsites profile.
 
-  1. [GitHub repository](<https://github.com/Zverik/every_door>)
-  2. [OpenStreetMap Wiki](<https://wiki.openstreetmap.org/wiki/Every_Door>)
+- [GitHub repository](<https://github.com/Zverik/every_door>)
+- [OpenStreetMap Wiki](<https://wiki.openstreetmap.org/wiki/Every_Door>)
 
 ## OpenBenches
 
-[OpenBenches](<https://openbenches.org/>)is an open repository of memorial benches - a crowd-sourced map of over 39,000 memorial benches around the world.
+[OpenBenches](<https://openbenches.org/>) is an open repository of memorial benches - a crowd-sourced map of over 39,000 memorial benches around the world.
 
 ## GeoDesk Tiles
 
 [geodesk-tiles](<https://github.com/styluslabs/geodesk-tiles>) can generate tiles on demand and cache to mbtiles. GeoDesk v2 will support minute updates.
 
-Related project: Ascend Maps - a cross-platform 3D map application with vector tiles, 3D terrain, customisable shaders, track recording, and raster tile overlays. It's built on Tangram NG (derived from [Tangram ES](<https://github.com/tangrams/tangram-es>)from Mapzen).
+Related project: Ascend Maps - a cross-platform 3D map application with vector tiles, 3D terrain, customisable shaders, track recording, and raster tile overlays. It's built on Tangram NG (derived from [Tangram ES](<https://github.com/tangrams/tangram-es>) from Mapzen).
 
 ## Samaki (Raku)
 

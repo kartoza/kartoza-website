@@ -48,7 +48,7 @@ In order to achieve what I needed, I had to write a custom QGIS function to do t
 `field_name_idx = f.fieldNameIndex(source_attribute)`  
 `field_value = f.attributes()[field_name_idx]`  
 `records.append(field_value)`  
-` result = ','.join(records) `  
+`result = ','.join(records)`  
 `return result`
 
 In the map composer, I then added a text box so that I could use the custom function.

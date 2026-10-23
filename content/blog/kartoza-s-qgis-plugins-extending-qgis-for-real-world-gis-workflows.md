@@ -6,10 +6,10 @@ description: 'Discover Kartoza''s QGIS plugins: STAC API Browser, Species Explor
 erpnext_id: /blog/qgis/kartozas-qgis-plugins-extending-qgis-for-real-world-gis-workflows
 erpnext_modified: '2026-08-14'
 reviewedBy: Automated Check
-reviewedDate: '2026-08-12'
+reviewedDate: '2026-10-23'
 tags:
 - Qgis
-thumbnail: /img/blog/kartoza-qgis-plugin-stac-api.png
+thumbnail: /img/blog/erpnext/stac-api.png
 title: 'Kartoza''s QGIS Plugins: Extending QGIS for Real-World GIS Workflows'
 ---
 
@@ -23,25 +23,25 @@ To install any of the plugins below, open **Plugins → Manage and Install Plugi
 
 ## STAC API Browser
 
-![stac-api-browser](/img/blog/kartoza-qgis-plugin-stac-api.png)
+![stac-api-browser](/img/blog/erpnext/stac-api.png)
 
 The [STAC API Browser](</plugins/stac-api-browser/>) brings cloud-native earth observation data discovery into QGIS. Developed by Kartoza with funding from Microsoft Planetary Computer, it lets you search STAC-compliant catalogs, filter by date and spatial extent, preview footprints, and load assets as Cloud Optimised GeoTIFF layers — without leaving your map canvas. Our [launch post](</blog/qgis-stac-api-plugin/>) walks through the workflow in detail.
 
 ## Species Explorer
 
-![species-explorer](/img/blog/kartoza-qgis-plugin-species-explorer.png)
+![species-explorer](/img/blog/erpnext/species-explorer.png)
 
 If biodiversity data is your focus, the [Species Explorer](</plugins/species-explorer/>) fetches species occurrence records straight from the Global Biodiversity Information Facility (GBIF) into QGIS. Search by scientific or common name, refine by date range, and turn results into map layers ready for analysis or cartography. It is a handy companion for conservation, ecology, and environmental impact work.
 
 ## SG Diagram Downloader
 
-![sg-diagram-downloader](/img/blog/kartoza-qgis-plugin-sg-downloader.png)
+![sg-diagram-downloader](/img/blog/erpnext/sg-downloader.png)
 
 Surveyors working with South African cadastral data will appreciate the [SG Diagram Downloader](</plugins/sg-diagram-downloader/>). Sponsored by Kirchhoff Surveyors, it downloads official Surveyor General diagrams directly within QGIS — no more browser hopping, manual file naming, or broken download links. It is one of several Kartoza plugins tailored to African geospatial workflows.
 
 ## Trends.Earth
 
-![trends-earth](/img/blog/kartoza-qgis-plugin-trends-earth.png)
+![trends-earth](/img/blog/erpnext/trends-earth-plugin.png)
 
 [Trends.Earth](</plugins/trends-earth/>) takes on a broader mission: tracking land productivity, land cover, and soil organic carbon in support of UN Sustainable Development Goal 15.3 (Life on Land). Developed with Conservation International, it gives governments and researchers standardised, reproducible methods for monitoring land degradation neutrality.
 
@@ -62,6 +62,6 @@ A great plugin workflow often ends with publishing. The same rendering engine be
 - Developers curious about contributing to QGIS itself can follow our [Road to Nerdvana series](</blog/qgis-road-to-nerdvana-episode-1-qgis-console-build/>), which documents building and patching QGIS from source.
 - If your team needs guided learning, we run [QGIS training courses](</training-courses/>) hosted at our Cape Town and Stellenbosch offices or remotely.
 
-## Install One Today
+## Install One Today!
 
 Every plugin above is in the official QGIS plugin repository and is free and open source. Install the ones that fit your workflow, star them on [plugins.qgis.org](<https://plugins.qgis.org>), and file issues or feature requests on the linked GitHub repositories. QGIS is a community effort — Kartoza funds full-time QGIS staff through community donations, and every install, review, and contribution helps sustain that work.

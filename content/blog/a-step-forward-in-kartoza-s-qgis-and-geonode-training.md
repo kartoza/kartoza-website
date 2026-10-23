@@ -45,4 +45,4 @@ For some interesting videos on using QGIS, visit the Kartoza [Road to Nerdvana](
 
 Also see the [QGIS Training Manual](<https://docs.qgis.org/3.16/en/docs/training_manual/index.html>) and [A Gentle Introduction to GIS](<https://docs.qgis.org/3.16/en/docs/gentle_gis_introduction>)
 
-[](<https://docs.qgis.org/3.16/en/docs/training_manual/index.html>)
+ [](<https://docs.qgis.org/3.16/en/docs/training_manual/index.html>)

@@ -51,5 +51,5 @@ The following are the steps I took to inspect the layer
 - Symbolize the difference layer using outer fill to only highlight the areas where there are gaps.  
 ![](/img/blog/erpnext/gaps-slivers.png)  
 ![](/img/blog/erpnext/gaps-layers.png)  
-  
-  - Finally, to fix all these errors you would need to run the algorithm 'Delete duplicate geometries', activate snapping, and then correct the errors manually. Alternatively, you could run the processing algorithm v.clean provided you understand what the parameters mean.
+
+- Finally, to fix all these errors you would need to run the algorithm 'Delete duplicate geometries', activate snapping, and then correct the errors manually. Alternatively, you could run the processing algorithm v.clean provided you understand what the parameters mean.

@@ -6,7 +6,7 @@ description: Discover how BIMS connects to GBIF, making biodiversity data sharin
 erpnext_id: /blog/biodiversity/publishing-biodiversity-data-to-gbif-straight-from-bims
 erpnext_modified: '2026-09-18'
 reviewedBy: Automated Check
-reviewedDate: '2026-09-18'
+reviewedDate: '2026-10-23'
 tags:
 - Biodiversity
 thumbnail: https://codahosted.io/docs/HTK21Ov0iO/blobs/bl-KINt5-mhCW/419b19578d0e190e8c47cdba4d4be5d5689af041ae118483ae66b38cab67d018f1e56023803f2b7baca28ac3746a6c9f6f8644b2421697632bbc06e7409e88d685ee0e77ce9e9a08fe06521c8df6fcad2a23f808058d0275c93c63ecc879aef83dcf7517
@@ -27,13 +27,13 @@ Before this feature, getting BIMS data onto GBIF meant exporting spreadsheets by
 
 The goal was simple to state and interesting to build:
 
-  1. **One click to publish** a dataset to GBIF.
-  2. **Keep the same GBIF dataset in sync** as records are added or corrected, without minting a new DOI every time.
-  3. **Bake in data governance** : only publish data whose custodians have consented, with the correct licence and citation attached.
+- **One click to publish** a dataset to GBIF.
+- **Keep the same GBIF dataset in sync** as records are added or corrected, without minting a new DOI every time.
+- **Bake in data governance** : only publish data whose custodians have consented, with the correct licence and citation attached.
 
 The unit we publish is the source reference. Each source reference maps to exactly one GBIF dataset, and that one-to-one link is what lets us update data in place instead of creating duplicates.
 
-## Step 1 - Set up the GBIF connection
+## Why This Matters
 
 An administrator sets up the connection to GBIF a single time from the admin page. This holds the GBIF credentials, which GBIF environment to talk to (production or test server), the publishing organisation, and a default licence for shared data. The credentials are encrypted.
 
@@ -63,11 +63,11 @@ GBIF publish schedule setup screen
 
 Behind the scenes, the platform packages the records into a Darwin Core Archive. It is essentially a zip file with three parts:
 
-  1. the records themselves, one row per observation, mapped to standard Darwin Core fields (scientific name, date, latitude and longitude, who recorded it, the licence, and more)
-  2. a small map describing which column means what
-  3. a metadata file with the dataset's title, summary, credited contacts, licence, and a formal citation
+- the records themselves, one row per observation, mapped to standard Darwin Core fields (scientific name, date, latitude and longitude, who recorded it, the licence, and more)
+- a small map describing which column means what
+- a metadata file with the dataset's title, summary, credited contacts, licence, and a formal citation
 
-Along the way, BIMS translates its own vocabulary into GBIF's. For example, record types become Darwin Core "basis of record" values (a specimen versus a visual observation), and abundance measures become standard quantity types (individual counts, percentage cover, cells per millilitre, and so on). Each record also gets an ID prefixed with the organisation name, so identifiers stay globally unique. For instance, an identifier might look like **fbis:3f2b9504-9c1a-4e7d-b8a2-1c6f5d0e9a73**.​
+Along the way, BIMS translates its own vocabulary into GBIF's. For example, record types become Darwin Core "basis of record" values (a specimen versus a visual observation), and abundance measures become standard quantity types (individual counts, percentage cover, cells per millilitre, and so on). Each record also gets an ID prefixed with the organisation name, so identifiers stay globally unique. For instance, an identifier might look like **fbis:3f2b9504-9c1a-4e7d-b8a2-1c6f5d0e9a73**.
 
 Only records that are public and have been verified are included, so nothing half-finished or private slips out.
 
@@ -87,9 +87,9 @@ Every publish, manual or scheduled, is logged as a session: when it ran, whether
 
 Beyond the plumbing, we tried to build in some care around how data is shared:
 
-  1. **Consent** \- data is only shared when its owners have agreed.
-  2. **Licensing** \- every dataset and every record carries a licence, so people know how they may use it.
-  3. **Credit** \- a proper citation is generated from the dataset's authors, year, title, and DOI, so the original contributors are acknowledged.
-  4. **Data quality** \- records without a responsible custodian are held back, keeping the shared data clean and trustworthy.
+- **Consent** \- data is only shared when its owners have agreed.
+- **Licensing** \- every dataset and every record carries a licence, so people know how they may use it.
+- **Credit** \- a proper citation is generated from the dataset's authors, year, title, and DOI, so the original contributors are acknowledged.
+- **Data quality** \- records without a responsible custodian are held back, keeping the shared data clean and trustworthy.
 
 Curious about the details? The GBIF publishing feature lives in _bims/models/gbif_publish.py and bims/utils/gbif_publish.py_ in the **[bims](<https://github.com/kartoza/bims>)** repository.

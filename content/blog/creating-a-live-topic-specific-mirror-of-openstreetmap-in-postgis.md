@@ -65,39 +65,49 @@ Start by downloading our docker-osm-examples from [here](<https://github.com/kar
 
 Now unzip the archive and cd into the 'angola-buildings' folder:
 
-    cd docker-osm-examples/angola-buildings
+```
+cd docker-osm-examples/angola-buildings
+```
 
 Next, we need to build the settings container and deploy everything:
 
-    make deploy
+```
+make deploy
+```
 
 Assuming the deploy step runs without errors, you should see a few docker containers running:
 
-    ------------------------------------------------------------------  
-    Bringing up docker osm instance   
-    ------------------------------------------------------------------  
-    Creating network "angola-buildings-osm-mirror_default" with the default driver  
-    Creating volume "angola-buildings-osm-mirror_osm-postgis-data" with default driver  
-    Creating volume "angola-buildings-osm-mirror_import_done" with default driver  
-    Creating volume "angola-buildings-osm-mirror_import_queue" with default driver  
-    Creating volume "angola-buildings-osm-mirror_cache" with default driver  
-    Creating dockerosm_db ... done  
-    Creating dockerosm_osmupdate ... done  
-    Creating dockerosm_osmenrich ... done  
-    Creating dockerosm_imposm    ... done
+```
+------------------------------------------------------------------
+Bringing up docker osm instance
+------------------------------------------------------------------
+Creating network "angola-buildings-osm-mirror_default" with the default driver
+Creating volume "angola-buildings-osm-mirror_osm-postgis-data" with default driver
+Creating volume "angola-buildings-osm-mirror_import_done" with default driver
+Creating volume "angola-buildings-osm-mirror_import_queue" with default driver
+Creating volume "angola-buildings-osm-mirror_cache" with default driver
+Creating dockerosm_db ... done
+Creating dockerosm_osmupdate ... done
+Creating dockerosm_osmenrich ... done
+Creating dockerosm_imposm    ... done
+```
 
 Once the docker containers start running, the PostGIS database will be initialised, the country.pbf file imported using imposm and then osm-enrich will start running to update the username and timestamp for each feature. You can track its progress like this:
 
-    docker logs -f dockerosm_osmenrich
+```
+docker logs -f dockerosm_osmenrich
+```
 
 Which should show the update stream from OSMENRICH:
 
-    Update for 381148400  
-    Update for 381148402  
-    Update for 381148404  
-    Update for 381148406  
-    Update for 381148408  
-    Update for 381148410
+```
+Update for 381148400
+Update for 381148402
+Update for 381148404
+Update for 381148406
+Update for 381148408
+Update for 381148410
+```
 
 After waiting a minute or two you should be able to establish a connection to the database from QGIS:
 
@@ -109,10 +119,12 @@ From where you can then drag and drop your OSM mirror layers into your project:
 
 Depending on the size of your clip area / country area, the OSMENRICH process will take some time to run. Be kind to the OSM servers and don't use a larger clip area than you need as the OSMENRICH process will put some pressure on the OSM servers if you are running it from scratch too often. Once your mirror is initially updated from OSMENRICH, all of your records will have a user name and date associated. You can see the current status of OSMENRICH with this simple query in QGIS' dbmanager tool:
 
-    select   
-      count(*) as total,   
-      (select count(*) from osm_buildings where changeset_user is null) as to_update   
-      from osm_buildings;
+```
+select
+  count(*) as total,
+  (select count(*) from osm_buildings where changeset_user is null) as to_update
+  from osm_buildings;
+```
 
 Which will tell you the total number of records in total and the number of records still due to be updated via OSMENRICH.
 
@@ -120,9 +132,11 @@ Which will tell you the total number of records in total and the number of recor
 
 Now that you have the mirror running, it is possible to use QGIS to do desktop based analysis and visualisation on OSM data. In this example, we will create a view first that shows only records that have been updated by OSMENRICH and then use that view as the basis for our time manager layer. We do this because timemanager does not like it when we have a table with partially populated timestamps. Here is the SQL for the OSMENRICH populated view:
 
-    SELECT *  
-    FROM osm_buildings  
-    WHERE (osm_buildings.changeset_timestamp IS NOT NULL);
+```
+SELECT *
+FROM osm_buildings
+WHERE (osm_buildings.changeset_timestamp IS NOT NULL);
+```
 
 Test the query and then create a view from it, either by using a CREATE VIEW sql statement or by using the feature in QGIS' dbmanager that lets you quickly turn any query into a view as shown below.
 
@@ -142,7 +156,9 @@ Now test your time series visualisation by scubbing the time slider left and rig
 
 I then output my series as an animated GIF (check [this blog article](<https://anitagraser.com/2011/11/20/nice-animations-with-time-managers-offset-feature/>) for hints on creating videos), how to do it is beyond the scope of this article. If you know a bit of imagemagick, here are the options I used:
 
-    convert -resize 33% -dither none -deconstruct -layers optimize -matte -depth 8 angola.gif angola-small.gif
+```
+convert -resize 33% -dither none -deconstruct -layers optimize -matte -depth 8 angola.gif angola-small.gif
+```
 
 And here is an example output:
 

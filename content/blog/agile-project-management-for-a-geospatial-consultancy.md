@@ -6,7 +6,7 @@ description: GIS projects face challenges like data complexity, tech changes, an
 erpnext_id: /blog/gis/agile-project-management-for-a-geospatial-consultancy
 erpnext_modified: '2025-06-30'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-23'
 tags:
 - Gis
 thumbnail: https://lh7-rt.googleusercontent.com/docsz/AD_4nXd1aY_W2ExHts_oPxt57t5IExvutfQ_aZLQkiK4aGxpqMAwGAg3w72V6nRyaBCsRsVEEX2o2lq9QAC6aYDvL_cbhWjFqgjLnNnTWyQ7laqWmHWBzHHU3jIC1-uqu1bs8VWsxXQ7ZA?key=mFmX8BKXW5AvJe9gSgnMTcKQ
@@ -31,9 +31,9 @@ One of the biggest hurdles in GIS projects is managing costs and timelines effec
 
 How to Overcome This:
 
-  1. Clearly define deliverables to set realistic expectations early.
-  2. Develop a minimum viable product (MVP) to provide value without over committing resources.
-  3. Leverage free and open-source software (FOSS) to reduce licensing costs and make projects more cost-effective.
+- Clearly define deliverables to set realistic expectations early.
+- Develop a minimum viable product (MVP) to provide value without over committing resources.
+- Leverage free and open-source software (FOSS) to reduce licensing costs and make projects more cost-effective.
 
 ## 2\. Data Collection Complexities
 
@@ -45,9 +45,9 @@ _Image of data points in FBIS_
 
 How to Overcome This:
 
-  1. Understand project requirements to ensure data collection aligns with the overall objectives.
-  2. Educate stakeholders on the importance of high-quality data and how it impacts project outcomes.
-  3. Utilise open data sources and advancements in data collection technology to improve efficiency and accuracy.
+- Understand project requirements to ensure data collection aligns with the overall objectives.
+- Educate stakeholders on the importance of high-quality data and how it impacts project outcomes.
+- Utilise open data sources and advancements in data collection technology to improve efficiency and accuracy.
 
 ## 3\. Keeping Up with Rapidly Evolving Technology
 
@@ -59,9 +59,9 @@ _Image of InaSafe viewer_
 
 How to Overcome This:
 
-  1. Establish upfront communication with clients about potential software updates and their impact.
-  2. Implement Service Level Agreements (SLAs) to ensure ongoing support for long-term projects.
-  3. Encourage continuous learning within teams to stay up to date with the latest geospatial technologies.
+- Establish upfront communication with clients about potential software updates and their impact.
+- Implement Service Level Agreements (SLAs) to ensure ongoing support for long-term projects.
+- Encourage continuous learning within teams to stay up to date with the latest geospatial technologies.
 
 ## 4\. Limited Awareness and Adoption Outside GIS
 
@@ -71,9 +71,9 @@ Despite its growing importance, GIS is still underutilised in many industries. L
 
 How to Overcome This:
 
-  1. Educate other departments on how GIS can improve decision-making and efficiency.
-  2. Use storytelling with data to make geospatial insights more accessible and relatable.
-  3. Showcase success stories and return on investment (ROI) to demonstrate the tangible value of GIS solutions.
+- Educate other departments on how GIS can improve decision-making and efficiency.
+- Use storytelling with data to make geospatial insights more accessible and relatable.
+- Showcase success stories and return on investment (ROI) to demonstrate the tangible value of GIS solutions.
 
 By understanding these challenges and proactively addressing them, geospatial consultancies can improve project success rates and deliver more impactful solutions. Adopting a strategic, flexible approach to project management is key to overcoming these obstacles and ensuring long-term success in the GIS industry.
 
@@ -91,10 +91,9 @@ _Image of GitHub Task Tracking Table View_
 
 Scrum is built around three key components:
 
-  1. Artefacts: The product backlog, sprint backlog, and increment, which help track tasks and deliverables.
-  2. Events: Regular sprint cycles, including sprint planning, daily stand-ups, sprint reviews, and retrospectives, which keep projects on track.
-  3. Roles: A defined team structure that includes the Product Owner, Developers, and Scrum Master, ensuring accountability and streamlined decision-making.
-  4.
+- Artefacts: The product backlog, sprint backlog, and increment, which help track tasks and deliverables.
+- Events: Regular sprint cycles, including sprint planning, daily stand-ups, sprint reviews, and retrospectives, which keep projects on track.
+- Roles: A defined team structure that includes the Product Owner, Developers, and Scrum Master, ensuring accountability and streamlined decision-making.
 
 By implementing Scrum, Kartoza ensures that geospatial projects are delivered efficiently, with a focus on continuous improvement and stakeholder engagement. Agile methodologies enable our teams to adapt quickly to evolving project requirements, optimise workflows, and consistently deliver high-quality solutions.
 

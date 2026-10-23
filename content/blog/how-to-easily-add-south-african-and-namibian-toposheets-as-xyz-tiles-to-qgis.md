@@ -6,7 +6,7 @@ description: Thanks to the great work of Grant Slater and the OpenStreetmap tea
 erpnext_id: /blog/qgis/how-to-easily-add-south-african-and-namibian-toposheets-as-xyz-tiles-to-qgis
 erpnext_modified: '2019-01-08'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-23'
 tags:
 - Qgis
 thumbnail: /img/blog/erpnext/screenshot_2019-01-08_at_14.04.28.png
@@ -33,7 +33,7 @@ Thanks to the great work of Grant Slater and the OpenStreetmap team, there are f
 
 **Useful XYZ tile** urls**:**
 
-  1. Namibia 1:50 000 toposheets: <https://namibia-topo.openstreetmap.org.za/layer/na_sgswa_topo_50k/{z}/{x}/{y}.png>
-  2. South Africa 1:50k Toposheets: <https://htonl.dev.openstreetmap.org/ngi-tiles/tiles/50k/{z}/{x}/{-y}.png>
-  3. South Africa NGI Imagery: <http://aerial.openstreetmap.org.za/ngi-aerial/{z}/{x}/{y}.jpg>
-  4. Zanzibar Mapping Initiatives: <https://tiles.openaerialmap.org/user/5ac4842b26964b0010033104/{z}/{x}/{y}.png>
+1. Namibia 1:50 000 toposheets: https://namibia-topo.openstreetmap.org.za/layer/na_sgswa_topo_50k/{z}/{x}/{y}.png
+2. South Africa 1:50k Toposheets: <https://htonl.dev.openstreetmap.org/ngi-tiles/tiles/50k/{z}/{x}/{-y}.png>
+3. South Africa NGI Imagery: <http://aerial.openstreetmap.org.za/ngi-aerial/{z}/{x}/{y}.jpg>
+4. Zanzibar Mapping Initiatives: https://tiles.openaerialmap.org/user/5ac4842b26964b0010033104/{z}/{x}/{y}.png

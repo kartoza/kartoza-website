@@ -19,15 +19,13 @@ Call out labels are a handy cartographic instrument for attaching labels to feat
 
 I am using logic like this to make callout labels using a geometry generator:
 
-    make_line(
-    
-      closest_point($geometry,
-    
-      make_point( "auxiliary_storage_labeling_positionx" , "auxiliary_storage_labeling_positiony" )),
-    
-      make_point( "auxiliary_storage_labeling_positionx" , "auxiliary_storage_labeling_positiony" )
-    
-    )
+```
+make_line(
+  closest_point($geometry,
+  make_point( "auxiliary_storage_labeling_positionx" , "auxiliary_storage_labeling_positiony" )),
+  make_point( "auxiliary_storage_labeling_positionx" , "auxiliary_storage_labeling_positiony" )
+)
+```
 
 The line runs from the closest point along the edge of the polygon to the bottom left corner of the label box. With this configuration it works well when my ‘lollipop’ callout label is north-east of the polygon being labelled:
 
@@ -43,15 +41,13 @@ To address that I used data defined label alignments in the "Layer Properties ->
 
 Here are the expressions I used for horizontal:
 
-    if (
-    
-      X(closest_point($geometry,
-    
-      make_point( "auxiliary_storage_labeling_positionx" , "auxiliary_storage_labeling_positiony" ))) >
-    
-      X(make_point( "auxiliary_storage_labeling_positionx" , "auxiliary_storage_labeling_positiony" )),
-    
-      'Right', 'Left’)
+```
+if (
+  X(closest_point($geometry,
+  make_point( "auxiliary_storage_labeling_positionx" , "auxiliary_storage_labeling_positiony" ))) >
+  X(make_point( "auxiliary_storage_labeling_positionx" , "auxiliary_storage_labeling_positiony" )),
+  'Right', 'Left’)
+```
 
 Which gives this:
 
@@ -59,15 +55,13 @@ Which gives this:
 
 And Vertical:
 
-    if (
-    
-      Y(closest_point($geometry,
-    
-      make_point( "auxiliary_storage_labeling_positionx" , "auxiliary_storage_labeling_positiony" ))) <
-    
-      Y(make_point( "auxiliary_storage_labeling_positionx" , "auxiliary_storage_labeling_positiony" )),
-    
-      ’Top’, ‘Bottom’)
+```
+if (
+  Y(closest_point($geometry,
+  make_point( "auxiliary_storage_labeling_positionx" , "auxiliary_storage_labeling_positiony" ))) <
+  Y(make_point( "auxiliary_storage_labeling_positionx" , "auxiliary_storage_labeling_positiony" )),
+  ’Top’, ‘Bottom’)
+```
 
 Which gives this:
 

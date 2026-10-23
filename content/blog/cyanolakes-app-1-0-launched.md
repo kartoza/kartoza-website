@@ -6,7 +6,7 @@ description: We recently launched a mobile application that we developed with th
 erpnext_id: /blog/javascript/cyanolakes-app-10-launched
 erpnext_modified: '2020-11-15'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-23'
 tags:
 - Javascript
 thumbnail: /img/blog/erpnext/BxjO7p2.png
@@ -17,36 +17,22 @@ We recently launched a mobile application that we developed with the CyanoLakes 
 
 The app uses satellite remote sensing data to provide cyanobacteria health risk levels and advisories for full and partial contact water activites, based on World Health Organisation guidelines and standards.
 
-We built it with React Native against the Cyanolakes web API. 
+We built it with React Native against the Cyanolakes web API.
 
 It provides daily updates, depending on cloud or ice and snow cover.
 
 ![](/img/blog/erpnext/BxjO7p2.png)
 
-  
-
-
-Add any lake on earth and easily manage your list of lakes. 
-
-  
-
+Add any lake on earth and easily manage your list of lakes.
 
 ![](/img/blog/erpnext/FX7ibgG.png)![](/img/blog/erpnext/GzxnQW6.png)
 
-  
-
-
 These features will be coming in version 2 :
 
-  1. Forecasts
-  2. High-resolution maps
-  3. Notifications and alerts
-  4. Data: Copernicus Sentinel-3 and Sentinel-2.
-
-
-
-  
-
+- Forecasts
+- High-resolution maps
+- Notifications and alerts
+- Data: Copernicus Sentinel-3 and Sentinel-2.
 
 **Download the app for free here :**
 

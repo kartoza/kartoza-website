@@ -6,10 +6,10 @@ description: Master disaster management with InaSafe, an open-source plugin for 
 erpnext_id: /blog/qgis/disaster-management-with-qgis-and-the-inasafe-plugin
 erpnext_modified: '2024-10-22'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-23'
 tags:
 - Qgis
-thumbnail: /img/blog/placeholder.png
+thumbnail: https://lh7-rt.googleusercontent.com/docsz/AD_4nXfw16OrAYg4VjSan3KPsn9vBO-Ej79EY4CiHwDt4nw39g5UqrSQNnrJe19EmNnHNwpe-kYEeV_tsn82d7ILptj4vJ2-Jo2HWB1OqJbqvH1ykYCaLmxO-981ORBQULOEsmEuY9nXeOVkj_dxLnITyWZ5gPY?key=CPE94m5H-_7sNPtMTw_GQg
 title: Disaster Management with QGIS and the InaSafe Plugin
 ---
 
@@ -29,7 +29,7 @@ InaSafe is a plugin that allows users to conduct impact assessments based on haz
 
 **Website:**[InaSafe.org](<https://inasafe.org>)
 
-**Manual and Resources:**[InaSafe User Manual](<https://manual.inasafe.org>)
+**Manual and Resources:** [InaSafe User Manual](<https://manual.inasafe.org>)
 
 ## The Power of Simple and Complex Analyses
 
@@ -39,9 +39,9 @@ During the session, I performed two different types of flood analysis to highlig
 
 ## Key Benefits for Disaster Management
 
-  1. **Real-World Applications:** InaSafe isn’t just theoretical—it’s actively used in disaster-prone regions around the world, from Southeast Asia to Africa. Governments, NGOs, and disaster response teams leverage it to improve preparedness and risk mitigation strategies.
-  2. **Customisable Outputs:** InaSafe allows users to generate tailored impact reports. These reports can include detailed statistics, maps, and charts, making it easy to communicate risks and necessary actions to decision-makers and stakeholders.
-  3. **Community Driven:** The tool is open-source and free, with a global community contributing to its development. This ensures that InaSafe stays up to date with the latest disaster management needs and best practices.
+- **Real-World Applications:** InaSafe isn’t just theoretical—it’s actively used in disaster-prone regions around the world, from Southeast Asia to Africa. Governments, NGOs, and disaster response teams leverage it to improve preparedness and risk mitigation strategies.
+- **Customisable Outputs:** InaSafe allows users to generate tailored impact reports. These reports can include detailed statistics, maps, and charts, making it easy to communicate risks and necessary actions to decision-makers and stakeholders.
+- **Community Driven:** The tool is open-source and free, with a global community contributing to its development. This ensures that InaSafe stays up to date with the latest disaster management needs and best practices.
 
 **![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXe49QjKh82zsbYlFHw2KLxLRyF4E833AwWOI0rS6IkNnAA0p56mMSbcO2pBoAhf_LxzuT8cOQ-xtHa4zkMXJhKtDM98XsLlSbO4hPgjahdBC4bM8s4ADtaidfhDFbXOqs9JQQs_a1kKZW_xit--jTtv0FU?key=CPE94m5H-_7sNPtMTw_GQg)**
 
