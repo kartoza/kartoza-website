@@ -21,43 +21,45 @@ In this article I will describe the process of publishing a QGIS project with CO
 
 This is the docker-compose.yml file:
 
-    version: '2.1'  
-      
-    volumes:  
-       transfer-data:  
-       web-data:  
-       plugins:  
-      
-    services:    
-       transfer:  
-         image: dutchcoders/transfer.sh:latest  
-         volumes:  
-           - transfer-data:/data  
-         ports:  
-           - "8080:8080"  
-         restart: on-failure  
-         command: --provider local --basedir /data --temp-path /data  
-         healthcheck:  
-           test: "exit 0"  
-      
-       qgis_server:  
-         image: 3liz/qgis-map-server:3.8  
-         environment:  
-           - QGSRV_SERVER_WORKERS=10  
-           - QGSRV_LOGGING_LEVEL=DEBUG  
-           - QGSRV_CACHE_ROOTDIR=/projects  
-           - QGSRV_CACHE_SIZE=10  
-           - QGSRV_SERVER_PLUGINPATH=/plugins  
-           - QGIS_SERVER_PARALLEL_RENDERING=true  
-           - QGIS_SERVER_MAX_THREADS=10  
-         ports:  
-           - 8081:8080  
-         volumes:  
-           - web-data:/projects  
-           - plugins:/plugins  
-         depends_on:  
-           transfer:  
-             condition: service_healthy
+```
+version: '2.1'
+
+volumes:
+   transfer-data:
+   web-data:
+   plugins:
+
+services:  
+   transfer:
+     image: dutchcoders/transfer.sh:latest
+     volumes:
+       - transfer-data:/data
+     ports:
+       - "8080:8080"
+     restart: on-failure
+     command: --provider local --basedir /data --temp-path /data
+     healthcheck:
+       test: "exit 0"
+
+   qgis_server:
+     image: 3liz/qgis-map-server:3.8
+     environment:
+       - QGSRV_SERVER_WORKERS=10
+       - QGSRV_LOGGING_LEVEL=DEBUG
+       - QGSRV_CACHE_ROOTDIR=/projects
+       - QGSRV_CACHE_SIZE=10
+       - QGSRV_SERVER_PLUGINPATH=/plugins
+       - QGIS_SERVER_PARALLEL_RENDERING=true
+       - QGIS_SERVER_MAX_THREADS=10
+     ports:
+       - 8081:8080
+     volumes:
+       - web-data:/projects
+       - plugins:/plugins
+     depends_on:
+       transfer:
+         condition: service_healthy
+```
 
 I downloaded a DEM layer and followed the procedure from [GDAL](<https://trac.osgeo.org/gdal/wiki/CloudOptimizedGeoTIFF>) on how to generate a COG. Using docker-compose I started my containers by running `docker-compose up -d`
 

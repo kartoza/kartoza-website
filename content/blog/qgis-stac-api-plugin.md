@@ -18,18 +18,16 @@ The new plugin comes with features that give the user a comfortable interface an
 
 The plugin supports searching for STAC item resources, loading and downloading STAC items and retrieving information about STAC API services.
 
-#### How to install the plugin
+## How to install the plugin
 
 The plugin is available to download and install in QGIS from the [official QGIS plugin repository](<https://plugins.qgis.org>).
 
 To install the plugin, follow these steps.
 
-  * Launch QGIS and open plugin manager.
-  * Search for **STAC API Browser** in the**All** page of the manager.
-  * Click on the **STAC API Browser** result item and plugin information will show up.
-  * Click the **Install Plugin** button at the bottom of the dialog to install the plugin.
-
-
+- Launch QGIS and open plugin manager.
+- Search for **STAC API Browser** in the**All** page of the manager.
+- Click on the **STAC API Browser** result item and plugin information will show up.
+- Click the **Install Plugin** button at the bottom of the dialog to install the plugin.
 
 # Available features
 
@@ -43,11 +41,9 @@ The corresponding STAC API service used when searching needs to ensure that it h
 
 The plugin contains the following filters that can be used when searching for STAC item objects.
 
-  * Date filter - users can search for single instance temporal resources or resources with a temporal range.
-  * Spatial extent filter - users can provide a bounding box against which the results should be filtered.
-  * Advanced filter - this enables usage of STAC API filter languages to provide advanced queries for the search. For more information see <https://github.com/radiantearth/stac-api-spec/tree/master/fragments/filter>.
-
-
+- Date filter - users can search for single instance temporal resources or resources with a temporal range.
+- Spatial extent filter - users can provide a bounding box against which the results should be filtered.
+- Advanced filter - this enables usage of STAC API filter languages to provide advanced queries for the search. For more information see <https://github.com/radiantearth/stac-api-spec/tree/master/fragments/filter>.
 
 ## Accessing STAC assets
 
@@ -109,7 +105,7 @@ All the search filters can be used only when their corresponding group boxes hav
 
 For the **Advanced filter** group, the available filter languages are based on the supported STAC API filter languages. When **STAC_QUERY** is used then filter input will be treated as a query text as defined in <https://github.com/radiantearth/stac-api-spec/tree/master/fragments/query>. If **CQL_JSON** is selected then you can use a CQL filter text as defined in <https://github.com/radiantearth/stac-api-spec/tree/master/fragments/filter>.
 
-![](/img/blog/erpnext/filters-956x1059.png)   
+![](/img/blog/erpnext/filters-956x1059.png)  
 _Available filters_
 
 ![](/img/blog/erpnext/search_result_stac_api_plugin-925x877.png)

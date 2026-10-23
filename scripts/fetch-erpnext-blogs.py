@@ -36,6 +36,7 @@ from fetch_erpnext_client import ERPNextClient
 from fetch_erpnext_utilities import (
     check_fidelity,
     find_local_file,
+    normalize_for_comparison,
     read_local_file,
     slugify,
     update_review_fields,
@@ -49,6 +50,11 @@ KARTOZA_URL = 'https://kartoza.com'
 
 # Image storage path relative to Hugo static folder
 IMAGE_DIR = 'img/blog/erpnext'
+
+PLACEHOLDER_IMAGE = '/img/blog/placeholder.png'
+# Placeholder paths that mean the post has no image of its own; the
+# second is a copy older syncs downloaded by mistake
+PLACEHOLDER_IMAGES = (PLACEHOLDER_IMAGE, f'/{IMAGE_DIR}/placeholder.png')
 
 
 def download_image(
@@ -65,14 +71,28 @@ def download_image(
         Local path to use in markdown
         (e.g., /img/blog/erpnext/xxx.png) or None on failure
     """
+    # Site paths that already exist, like the placeholder, stay as they are
+    if (url.startswith('/') and not url.startswith(('/files/', '/private/'))
+            and (static_dir / url.lstrip('/')).exists()):
+        return url
+
     # Normalize the URL
-    if url.startswith('/files/'):
+    if url.startswith('/private/files/'):
+        # Private files need auth, so fetch them from ERPNext directly
+        full_url = f"{ERPNEXT.base_url}{url}"
+        filename = url.split('/')[-1]
+    elif url.startswith('/files/'):
         full_url = f"{KARTOZA_URL}{url}"
         filename = url.split('/')[-1]
     elif url.startswith('/'):
         full_url = f"{KARTOZA_URL}{url}"
         filename = url.split('/')[-1]
-    elif 'kartoza.com/files/' in url or 'erp.kartoza.com/files/' in url:
+    elif re.search(r'kartoza\.erpnext\.com/(private/)?files/', url):
+        # The old ERPNext host is gone, the files now live on ERPNext
+        path = re.sub(r'^https?://kartoza\.erpnext\.com', '', url)
+        full_url = f"{ERPNEXT.base_url}{path}"
+        filename = url.split('/')[-1]
+    elif re.search(r'kartoza\.com/(private/)?files/', url):
         full_url = url
         filename = url.split('/')[-1]
     else:
@@ -153,7 +173,7 @@ def process_thumbnail(
         Local path or original URL if download failed
     """
     if not thumbnail_url:
-        return '/img/blog/placeholder.png'
+        return PLACEHOLDER_IMAGE
 
     local_path = download_image(thumbnail_url, static_dir, verbose=verbose)
     return local_path if local_path else thumbnail_url
@@ -182,17 +202,21 @@ def sync_blog(
     """
     erpnext_id = blog.get('name', '')
     title = blog.get('title', 'Untitled')
-    erpnext_content = blog.get('content') or blog.get('content_html') or ''
+    erpnext_content = get_blog_content(blog)
 
     # Find existing local file
     local_file = find_local_file(content_dir, erpnext_id, title)
+    result = read_local_file(local_file) if local_file else None
 
     if local_file and not force:
         # File exists - check fidelity (skip if force mode)
-        result = read_local_file(local_file)
         if result:
             local_frontmatter, local_content = result
-            if check_fidelity(local_content, erpnext_content):
+            # A change of published state always needs a rewrite
+            same_draft = (
+                bool(local_frontmatter.get('draft')) == bool(blog.get('draft'))
+            )
+            if same_draft and check_fidelity(local_content, erpnext_content):
                 # Content matches - fidelity passed
                 # Update review fields if not already set
                 if not local_frontmatter.get('reviewedBy'):
@@ -210,6 +234,9 @@ def sync_blog(
         # Force mode - overwrite existing file
         status = 'forced'
         filepath = local_file
+    elif blog.get('draft'):
+        # Unpublished and not on the site yet, so nothing to add
+        return {'status': 'skipped', 'fidelity': '-', 'file': ''}
     else:
         # New file
         status = 'new'
@@ -231,6 +258,24 @@ def sync_blog(
                 front_matter['thumbnail'], static_dir, verbose=verbose
             )
 
+    if result:
+        local_frontmatter, local_content = result
+
+        # Keep the local thumbnail when ERPNext has no image for the post
+        local_thumbnail = local_frontmatter.get('thumbnail')
+        if (front_matter.get('thumbnail') in PLACEHOLDER_IMAGES
+                and local_thumbnail
+                and local_thumbnail not in PLACEHOLDER_IMAGES):
+            front_matter['thumbnail'] = local_thumbnail
+
+        # Keep the previous review fields if the content itself did not change
+        if (local_frontmatter.get('reviewedDate')
+                and comparable_text(local_content) ==
+                comparable_text(content)):
+            for field in ('reviewedBy', 'reviewedDate'):
+                if local_frontmatter.get(field):
+                    front_matter[field] = local_frontmatter[field]
+
     # Build file content
     file_content = "---\n"
     file_content += yaml.dump(
@@ -246,6 +291,17 @@ def sync_blog(
     return {
         'status': status, 'fidelity': 'auto-reviewed', 'file': filepath.name
     }
+
+
+def comparable_text(markdown: str) -> str:
+    """Normalize markdown so cleanup-only changes don't count as changes.
+
+    Applies the same cleanup as new content, and ignores code fences, which
+    older content had as indented code blocks.
+    """
+    markdown = clean_markdown(fix_list_markers(markdown))
+    markdown = re.sub(r'^\s*```.*$', '', markdown, flags=re.MULTILINE)
+    return normalize_for_comparison(markdown)
 
 
 def fetch_blog_list() -> list[dict]:
@@ -313,6 +369,95 @@ def fetch_blog_list() -> list[dict]:
             break
 
         limit_start = next_start
+
+    return blogs
+
+
+def fetch_blogger_name(blogger: str) -> str:
+    """Fetch a blogger's full name, falling back to the blogger ID."""
+    try:
+        response = ERPNEXT.get(
+            f"{ERPNEXT.base_url}/api/resource/Blogger/{blogger}"
+        )
+        response.raise_for_status()
+        return response.json().get('data', {}).get('full_name') or blogger
+    except (requests.RequestException, json.JSONDecodeError):
+        return blogger
+
+
+def find_first_image(post: dict) -> str:
+    """Find the first image URL in a blog post's content."""
+    if post.get('content_type') == 'Markdown':
+        match = re.search(
+            r'!\[[^\]]*\]\(<?([^)>\s]+)', post.get('content_md') or ''
+        )
+        return match.group(1) if match else ''
+
+    content = post.get('content') or post.get('content_html') or ''
+    img = BeautifulSoup(content, 'html.parser').find('img', src=True)
+    return img['src'] if img else ''
+
+
+def fetch_unpublished_blogs() -> list[dict]:
+    """Fetch unpublished blog posts using the authenticated REST API.
+
+    The public list API only returns published posts, and unpublished posts
+    have no public page to scrape, so the content comes from the API too.
+    These are synced as Hugo drafts.
+    """
+    fields = [
+        'name', 'title', 'route', 'blogger', 'blog_category', 'published_on',
+        'creation', 'blog_intro', 'meta_image', 'content_type', 'content',
+        'content_md', 'content_html',
+    ]
+    try:
+        response = ERPNEXT.get(
+            f"{ERPNEXT.base_url}/api/resource/Blog Post",
+            params={
+                'filters': json.dumps([['published', '=', 0]]),
+                'fields': json.dumps(fields),
+                'limit_page_length': 0,
+            }
+        )
+        response.raise_for_status()
+        posts = response.json().get('data', [])
+    except (requests.RequestException, json.JSONDecodeError) as e:
+        print(f"Error fetching unpublished blogs: {e}", file=sys.stderr)
+        return []
+
+    blogger_names = {}
+    blogs = []
+    for post in posts:
+        category = post.get('blog_category') or 'uncategorised'
+        route = post.get('route') or f"blog/{category}/{post['name']}"
+        # Same category source as published posts: the URL path
+        parts = route.strip('/').split('/')
+        if len(parts) >= 3:
+            category = parts[1]
+
+        blogger = post.get('blogger') or 'Kartoza'
+        if blogger not in blogger_names:
+            blogger_names[blogger] = fetch_blogger_name(blogger)
+
+        published_on = post.get('published_on') or post.get('creation') or ''
+        blogs.append({
+            'name': f"/{route.strip('/')}",
+            'title': post.get('title') or 'Untitled',
+            'blog_intro': post.get('blog_intro') or '',
+            'blogger': blogger_names[blogger],
+            'published_on': published_on,
+            'modified': published_on,  # Use published date as modified
+            'blog_category': category,
+            'content_type': post.get('content_type'),
+            'content': post.get('content') or '',
+            'content_md': post.get('content_md') or '',
+            'content_html': post.get('content_html') or '',
+            # The public list uses the first image in the content as cover
+            'featured_image': (
+                post.get('meta_image') or find_first_image(post)
+            ),
+            'draft': True,
+        })
 
     return blogs
 
@@ -435,7 +580,7 @@ def blog_to_hugo_frontmatter(blog: dict, mark_reviewed: bool = False) -> dict:
     # Get thumbnail from cover_image (API) or featured_image (scraping) or use placeholder
     thumbnail = blog.get(
         'cover_image', ''
-    ) or blog.get('featured_image', '') or '/img/blog/placeholder.png'
+    ) or blog.get('featured_image', '') or PLACEHOLDER_IMAGE
     # Ensure full URL for external images
     if thumbnail and not thumbnail.startswith(('http://', 'https://', '/')):
         thumbnail = f"{ERPNEXT.base_url}/{thumbnail}"
@@ -443,7 +588,7 @@ def blog_to_hugo_frontmatter(blog: dict, mark_reviewed: bool = False) -> dict:
     # Build front matter
     front_matter = {
         'title': blog.get('title', 'Untitled'),
-        'description': blog.get('blog_intro', '')[:200] if blog.get(
+        'description': blog.get('blog_intro', '')[:500] if blog.get(
             'blog_intro') else '',
         'date': date_str,
         'author': blog.get('blogger', 'Kartoza'),
@@ -460,6 +605,10 @@ def blog_to_hugo_frontmatter(blog: dict, mark_reviewed: bool = False) -> dict:
         category = category.replace('-', ' ').title()
         front_matter['tags'].append(category)
 
+    # Unpublished in ERPNext
+    if blog.get('draft'):
+        front_matter['draft'] = True
+
     # Add review fields if requested
     if mark_reviewed:
         front_matter['reviewedBy'] = 'Automated Check'
@@ -468,12 +617,25 @@ def blog_to_hugo_frontmatter(blog: dict, mark_reviewed: bool = False) -> dict:
     return front_matter
 
 
+def get_blog_content(blog: dict) -> str:
+    """Get the blog content from the field matching its content type."""
+    if blog.get('content_type') == 'Markdown':
+        return blog.get('content_md') or ''
+    if blog.get('content_type') == 'HTML':
+        return blog.get('content_html') or ''
+    return blog.get('content') or blog.get('content_html') or ''
+
+
 def blog_to_hugo_content(blog: dict) -> str:
     """Convert ERPNext blog content to Hugo markdown using html2text."""
-    content = blog.get('content') or blog.get('content_html') or ''
+    content = get_blog_content(blog)
 
     if not content:
         return ''
+
+    # Markdown posts from the API need no conversion
+    if blog.get('content_type') == 'Markdown':
+        return clean_markdown(content)
 
     # Configure html2text for clean markdown output
     h = html2text.HTML2Text()
@@ -486,8 +648,227 @@ def blog_to_hugo_content(blog: dict) -> str:
     h.protect_links = True
     h.unicode_snob = True  # Use unicode instead of ASCII
 
+    # Take code blocks out first, so html2text and the list fixes can't
+    # mangle them
+    html, code_blocks = extract_code_blocks(fix_quill_lists(content))
+
     # Convert HTML to markdown
-    markdown = h.handle(content)
+    markdown = fix_list_markers(h.handle(html))
+
+    return clean_markdown(restore_code_blocks(markdown, code_blocks))
+
+
+CODE_BLOCK_PLACEHOLDER = 'KARTOZACODEBLOCK'
+
+
+def extract_code_blocks(html: str) -> tuple[str, list[str]]:
+    """Replace <pre> blocks with placeholders and render them as fenced code.
+
+    Quill stores each code line as a <div class="ql-code-block"> and indents
+    with non-breaking spaces, which html2text turns into code with a blank
+    line after every line.
+    """
+    soup = BeautifulSoup(html, 'html.parser')
+    code_blocks = []
+
+    for pre in soup.find_all('pre'):
+        quill_lines = pre.select('div.ql-code-block')
+        if quill_lines:
+            lines = [div.get_text() for div in quill_lines]
+            language = quill_lines[0].get('data-language', '')
+        else:
+            # get_text() drops <br>, which some code blocks use as newlines
+            for br in pre.find_all('br'):
+                br.replace_with('\n')
+            lines = pre.get_text().split('\n')
+            language = ''
+        if language == 'plain':
+            language = ''
+
+        code = '\n'.join(lines).replace('\xa0', ' ').strip('\n')
+        code_blocks.append(f'```{language}\n{code}\n```')
+
+        placeholder = soup.new_tag('p')
+        placeholder.string = f'{CODE_BLOCK_PLACEHOLDER}{len(code_blocks) - 1}'
+        pre.replace_with(placeholder)
+
+    return str(soup), code_blocks
+
+
+def restore_code_blocks(markdown: str, code_blocks: list[str]) -> str:
+    """Put the code blocks taken out by extract_code_blocks back.
+
+    The placeholder's prefix, which is the indent and any blockquote
+    markers, is repeated on every line of the code block.
+    """
+    def restore(match):
+        prefix = match.group(1)
+        code = code_blocks[int(match.group(2))]
+        return '\n'.join(
+            prefix + line if line else prefix.rstrip()
+            for line in code.split('\n')
+        )
+
+    return re.sub(
+        rf'^([ >]*){CODE_BLOCK_PLACEHOLDER}(\d+)$', restore, markdown,
+        flags=re.MULTILINE
+    )
+
+
+def fix_list_markers(markdown: str) -> str:
+    """Fix html2text list output for markdownlint (MD004, MD007).
+
+    html2text indents every list item by two extra spaces and uses "*"
+    bullets; markdownlint wants "-" bullets starting at the left margin.
+    The markdown must not contain code blocks, as code lines can look like
+    list items.
+    """
+    lines = []
+    for line in markdown.split('\n'):
+        if re.match(
+                rf' {{2}}\s*(?:[-*+] |\d+\. |{CODE_BLOCK_PLACEHOLDER})', line
+        ):
+            line = line[2:]
+        # Leave "* * *" horizontal rules alone
+        if not re.fullmatch(r'\*( \*)+', line.strip()):
+            line = re.sub(r'^(\s*)[*+](?= )', r'\1-', line)
+        lines.append(line)
+
+    return '\n'.join(lines)
+
+
+def fix_quill_lists(html: str) -> str:
+    """Convert Quill's flat lists into nested HTML lists.
+
+    Quill stores every list as a flat <ol>, with the list type in the
+    data-list attribute and the nesting level in a ql-indent-N class.
+    html2text does not know these, so it renders a flat numbered list.
+    """
+    soup = BeautifulSoup(html, 'html.parser')
+
+    # Quill UI helpers, not content
+    for ui in soup.select('span.ql-ui'):
+        ui.decompose()
+
+    for quill_list in soup.find_all(['ol', 'ul']):
+        items = quill_list.find_all('li', recursive=False)
+        if not any(li.has_attr('data-list') for li in items):
+            continue
+
+        roots = []
+        stack = []  # (level, list tag) from outermost to innermost
+        for li in items:
+            level = 0
+            for cls in li.get('class', []):
+                match = re.fullmatch(r'ql-indent-(\d+)', cls)
+                if match:
+                    level = int(match.group(1))
+            tag = 'ol' if li.get('data-list') == 'ordered' else 'ul'
+            del li['data-list']
+            li['class'] = [
+                cls for cls in li.get('class', [])
+                if not cls.startswith('ql-indent-')
+            ]
+
+            # Close deeper lists, and a same-level list of another type
+            while stack and stack[-1][0] > level:
+                stack.pop()
+            if stack and stack[-1][0] == level and stack[-1][1].name != tag:
+                stack.pop()
+
+            if not stack or stack[-1][0] < level:
+                new_list = soup.new_tag(tag)
+                if stack:
+                    stack[-1][1].find_all('li', recursive=False)[-1].append(
+                        new_list
+                    )
+                else:
+                    roots.append(new_list)
+                stack.append((level, new_list))
+
+            stack[-1][1].append(li.extract())
+
+        quill_list.replace_with(*roots)
+
+    # Quill keeps counting ordered lists that are only split by code blocks
+    for ordered_list in soup.find_all('ol'):
+        previous = ordered_list.find_previous_sibling()
+        while previous is not None and previous.name == 'pre':
+            previous = previous.find_previous_sibling()
+        if previous is not None and previous.name == 'ol':
+            start = int(previous.get('start', 1))
+            count = len(previous.find_all('li', recursive=False))
+            ordered_list['start'] = str(start + count)
+
+    return str(soup)
+
+
+def trim_code_span(match: re.Match, line: str) -> str:
+    """Trim an inline code span, keeping a space to separate it from words."""
+    before = line[match.start() - 1] if match.start() > 0 else ' '
+    after = line[match.end()] if match.end() < len(line) else ' '
+    lead = ' ' if match.group(1) and before.isalnum() else ''
+    trail = ' ' if match.group(3) and after.isalnum() else ''
+    return f'{lead}`{match.group(2)}`{trail}'
+
+
+def clean_markdown(markdown: str) -> str:
+    """Clean up markdown so the output passes markdownlint.
+
+    Drops zero-width characters, empty headings and trailing whitespace,
+    collapses multiple blank lines (MD009, MD012), and makes links to
+    kartoza.com relative.
+    """
+    # Zero-width characters usually come from copy-pasting into ERPNext
+    markdown = re.sub(r'[​‌‍﻿]', '', markdown)
+
+    # https://www.kartoza.com/en/page/ -> /en/page/
+    markdown = re.sub(
+        r'(\]\(<?)https?://(?:www\.)?kartoza\.com(?![\w.-])/?', r'\1/',
+        markdown
+    )
+
+    # Move spaces out of link text: "[ here ](url)" -> " [here](url) " (MD039)
+    markdown = re.sub(
+        r'(?<!!)\[( *)([^\]\n]*?)( *)\]\(([^)\n]*)\)',
+        r'\1[\2](\4)\3', markdown
+    )
+
+    lines = []
+    in_code_block = False
+    # (original level, new level) of the enclosing headings
+    heading_stack = []
+    for line in markdown.split('\n'):
+        stripped = line.rstrip()
+        if stripped.lstrip().startswith(('```', '~~~')):
+            in_code_block = not in_code_block
+        # Drop empty headings like "###", but not "#" comments in code
+        if not in_code_block and re.fullmatch(r'#{1,6}', stripped):
+            continue
+        # Headings may only go one level deeper at a time (MD001). The page
+        # title is the h1, so the first heading can be at most an h2.
+        heading = re.match(r'(#{1,6})(\s.*)$', stripped)
+        if not in_code_block and heading:
+            level = len(heading.group(1))
+            while heading_stack and heading_stack[-1][0] >= level:
+                heading_stack.pop()
+            parent_level = heading_stack[-1][1] if heading_stack else 1
+            new_level = min(level, parent_level + 1)
+            heading_stack.append((level, new_level))
+            stripped = '#' * new_level + heading.group(2)
+        # Drop spaces inside inline code: "a ` code `." -> "a `code`." (MD038)
+        if not in_code_block and '``' not in stripped:
+            stripped = re.sub(
+                r'`( *)([^`\n]*?[^ `\n])( *)`',
+                lambda match: trim_code_span(match, stripped), stripped
+            )
+        # Keep two-space hard line breaks, drop any other trailing whitespace
+        if stripped and line.endswith('  '):
+            stripped += '  '
+        lines.append(stripped)
+
+    # Collapse multiple blank lines
+    markdown = re.sub(r'\n{3,}', '\n\n', '\n'.join(lines))
 
     return markdown.strip()
 
@@ -556,6 +937,7 @@ def print_status_table(results: list[dict], dry_run: bool = False) -> None:
             title,
             r.get('date', '-')[:10],
             r.get('author', '-')[:15],
+            'Unpublished' if r.get('draft') else 'Published',
             status,
             fidelity_str
         ])
@@ -574,7 +956,7 @@ def print_status_table(results: list[dict], dry_run: bool = False) -> None:
     print("=" * 80, file=sys.stderr)
 
     # Print table using tabulate
-    headers = ['Title', 'Date', 'Author', 'Status', 'Fidelity']
+    headers = ['Title', 'Date', 'Author', 'State', 'Status', 'Fidelity']
     print(tabulate(table_data, headers=headers, tablefmt='simple'),
           file=sys.stderr)
 
@@ -584,11 +966,14 @@ def print_status_table(results: list[dict], dry_run: bool = False) -> None:
     unchanged_count = sum(1 for r in results if r['status'] == 'unchanged')
     updated_count = sum(1 for r in results if r['status'] == 'updated')
     error_count = sum(1 for r in results if r['status'] == 'error')
+    skipped_count = sum(1 for r in results if r['status'] == 'skipped')
+    unpublished_count = sum(1 for r in results if r.get('draft'))
 
     print(
         f"  Summary: {len(results)} total | {new_count} new | "
         f"{unchanged_count} unchanged | "
-        f"{updated_count} updated | {error_count} errors",
+        f"{updated_count} updated | {skipped_count} skipped | "
+        f"{error_count} errors | {unpublished_count} unpublished",
         file=sys.stderr)
     print("=" * 80, file=sys.stderr)
 
@@ -653,7 +1038,13 @@ def main():
         print("No blogs found or error occurred.", file=sys.stderr)
         sys.exit(2)
 
-    print(f"Found {len(blogs)} published blogs", file=sys.stderr)
+    unpublished_blogs = fetch_unpublished_blogs()
+    print(
+        f"Found {len(blogs)} published and {len(unpublished_blogs)} "
+        f"unpublished (draft) blogs",
+        file=sys.stderr
+    )
+    blogs += unpublished_blogs
 
     if args.list:
         # Just list the blogs
@@ -664,7 +1055,8 @@ def main():
                 'date': str(blog.get('published_on', ''))[:10],
                 'author': blog.get('blogger', 'Unknown'),
                 'status': 'available',
-                'fidelity': '-'
+                'fidelity': '-',
+                'draft': bool(blog.get('draft'))
             })
         print_status_table(results, dry_run=True)
         return
@@ -683,7 +1075,11 @@ def main():
                 f"Fetching {i + 1}/{len(blogs)}: "
                 f"{blog.get('title', 'Untitled')}",
                 file=sys.stderr)
-        blog_detail = fetch_blog_detail(blog_name)
+        # Unpublished blogs have no public page, but already have content
+        if blog.get('draft'):
+            blog_detail = blog
+        else:
+            blog_detail = fetch_blog_detail(blog_name)
         if not blog_detail:
             results.append({
                 'title': blog.get('title', 'Untitled'),
@@ -691,7 +1087,8 @@ def main():
                 'author': blog.get('blogger', 'Unknown'),
                 'status': 'error',
                 'fidelity': '-',
-                'file': ''
+                'file': '',
+                'draft': bool(blog.get('draft'))
             })
             errors_occurred = True
             continue
@@ -709,7 +1106,8 @@ def main():
             'author': blog.get('blogger', 'Unknown'),
             'status': sync_result['status'],
             'fidelity': sync_result['fidelity'],
-            'file': sync_result.get('file', '')
+            'file': sync_result.get('file', ''),
+            'draft': bool(blog.get('draft'))
         })
 
     # Output results

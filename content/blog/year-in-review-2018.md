@@ -2,11 +2,11 @@
 author: Carina Christelis
 date: '2018-12-18'
 description: It’s been another awesome year for our Team. We have come a long way
-  since establishing Kartoza in 2014, building many different software products.
+  since establishing Kartoza in 2014, building many different softw
 erpnext_id: /blog/uncategorised/year-in-review-2018
 erpnext_modified: '2018-12-18'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-23'
 tags:
 - Uncategorised
 thumbnail: /img/blog/erpnext/admire_at_stand.jpg
@@ -81,15 +81,13 @@ The MyFarmWeb app is available only to customers of AgriTechnovation.
 
 ![](/img/blog/erpnext/fbis.png)
 
-**BIMS - Limpopo & FBIS:** Through our partnerships with LEDET (the Limpopo Provincial Government Department of Economic Development, Environment and Tourism) and the Freshwater Research Centre we have been working on a new web platform for managing and visualising biodiversity data. We have many plans for new features and improvements to the platform over the course of 2019. Contact us if you are looking for a customised web platform for hosting your biodiversity data! View the [FBIS site](<https://kartoza.us4.list-manage.com/track/click?u=d07318ebc34b9facdb4a6a77a&id=7f2bb47e07&e=127016f863>).
+**BIMS - Limpopo & FBIS:** Through our partnerships with LEDET (the Limpopo Provincial Government Department of Economic Development, Environment and Tourism) and the Freshwater Research Centre we have been working on a new web platform for managing and visualising biodiversity data. We have many plans for new features and improvements to the platform over the course of 2019. Contact us if you are looking for a customised web platform for hosting your biodiversity data! View the FBIS site [here](<https://kartoza.us4.list-manage.com/track/click?u=d07318ebc34b9facdb4a6a77a&id=7f2bb47e07&e=127016f863>).
 
 ### MapCampaigner
 
 ![](/img/blog/erpnext/mapcampaigner.png)
 
 [MapCampaigner:](<https://campaigns.hotosm.org/about>) We worked with our friends at the Humanitarian OpenStreetmap Team (HOT) to develop a new version of MapCampaigner. “The OSM Campaign Manager project aims to bring field data collectors and campaign managers together on a single platform. Campaign managers are able to set up specific campaign types to evaluate the progress of field campaigns. Remote mapping projects can also be connected to campaigns.”
-
-###
 
 ### Cape Town Marathon
 
@@ -103,17 +101,17 @@ The MyFarmWeb app is available only to customers of AgriTechnovation.
 
 ![](/img/blog/erpnext/gis_box.png)
 
-We launched GISBOX a few months ago, which is an on-premise, managed open source GIS server packed with ready-to use data. Check out more info on this exciting product on the [GISBOX page](</shop/product/gis-box/>).
+We launched GISBOX a few months ago, which is an on-premise, managed open source GIS server packed with ready-to use data. Check out more info on this exciting product [here](</shop/product/gis-box/>).
 
 ### Training Courses
 
 ![](/img/blog/erpnext/trainingcourse.jpg)
 
-We presented several courses throughout the year covering various FOSS GIS technologies. In the image above, Admire presents a QGIS course at our Johannesburg office. See our upcoming [2019 courses](</training-courses/>).
+We presented several courses throughout the year covering various FOSS GIS technologies. In the image above, Admire presents a QGIS course at our Johannesburg office. See our upcoming 2019 courses [here](</training-courses/>).
 
 ### Limosa Open Source GIS Support
 
-We rely on our experience to give you the assurance that there’s always someone to call for help should you need it. Kartoza is the first organisation to our knowledge to provide QGIS and other FOSS GIS commercial support to businesses and individuals across South Africa and the rest of Africa. Our support team has a mix of friendly first- and second-line support staff to ensure an efficient response to support queries. Read more about our [support service](<https://kartoza.us4.list-manage.com/track/click?u=d07318ebc34b9facdb4a6a77a&id=5597252758&e=127016f863>).
+We rely on our experience to give you the assurance that there’s always someone to call for help should you need it. Kartoza is the first organisation to our knowledge to provide QGIS and other FOSS GIS commercial support to businesses and individuals across South Africa and the rest of Africa. Our support team has a mix of friendly first- and second-line support staff to ensure an efficient response to support queries. Read more about our support service [here](<https://kartoza.us4.list-manage.com/track/click?u=d07318ebc34b9facdb4a6a77a&id=5597252758&e=127016f863>).
 
 [Contact us](<https://kartoza.us4.list-manage.com/track/click?u=d07318ebc34b9facdb4a6a77a&id=04b268e0a6&e=127016f863>) for support collaboration in 2019.
 

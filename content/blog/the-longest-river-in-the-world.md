@@ -21,34 +21,29 @@ A challenge like this will probably be best answered by using remote sensing. Th
 
 Let me take you through the steps I took to determine the length of the rivers myself.
 
-  1. Download the 15 second (500m) vector river datasets from <https://www.hydrosheds.org/>.
-  2. Copy the shapefiles into Geopackage. I want to make use of the spatial index.
-  3. Using Python and the Fiona library I extracted the basins for the Nile and the Amazon by recusively walking upstream from an identified discharge river line. This is where the built-in spatial index in Geopackage helps a lot.
-  4. I also had to extend the rivers to reach the ocean. The Amazon was extended by about 255km and the Nile was extended by 3km. The enourmous size of the Amazon near the mouth of the river complicates it for remote sensing and hydrologists to display it as a normal river hierarchy.
-  5. Use GRASS's  _v.net_ tool in QGIS's processing toolbox to generate nodes for the river network.
-  6. Calculate the length of each river edge using the  _$length_ function in the field calculator of QGIS. The wonderful thing about this function is that it will calculate the lengths of the river segments in metres even though your data is not projected.
-  7. Recusively walking upstream calculate the distance of each node from the discharge node at the ocean using Jupyter, Python and Fiona.
-  8. Back in QGIS sort the node's distance from furthest to zero for the discharge. Voilá, you have the length of the river and the ID of the node.
-  9. Back in Jupyter load the river network into the NetworkX library and determine the route from the furthest node to the discharge.
-  10. Extract and highlight the river segments that are part of the route.
-
-
+1. Download the 15 second (500m) vector river datasets from <https://www.hydrosheds.org/>.
+2. Copy the shapefiles into Geopackage. I want to make use of the spatial index.
+3. Using Python and the Fiona library I extracted the basins for the Nile and the Amazon by recusively walking upstream from an identified discharge river line. This is where the built-in spatial index in Geopackage helps a lot.
+4. I also had to extend the rivers to reach the ocean. The Amazon was extended by about 255km and the Nile was extended by 3km. The enourmous size of the Amazon near the mouth of the river complicates it for remote sensing and hydrologists to display it as a normal river hierarchy.
+5. Use GRASS's  _v.net_ tool in QGIS's processing toolbox to generate nodes for the river network.
+6. Calculate the length of each river edge using the  _$length_ function in the field calculator of QGIS. The wonderful thing about this function is that it will calculate the lengths of the river segments in metres even though your data is not projected.
+7. Recusively walking upstream calculate the distance of each node from the discharge node at the ocean using Jupyter, Python and Fiona.
+8. Back in QGIS sort the node's distance from furthest to zero for the discharge. Voilá, you have the length of the river and the ID of the node.
+9. Back in Jupyter load the river network into the NetworkX library and determine the route from the furthest node to the discharge.
+10. Extract and highlight the river segments that are part of the route.
 
 ![](/img/blog/erpnext/OCk8lHE.jpg)
 
-  
-
-
 Values in brackets are from alternative sources.
 
-**RiverWikipedia Length (km)National Geograhic Article (km)HydroSHEDS Length (km)**|   
-|   
-|   
-  
+**RiverWikipedia Length (km)National Geograhic Article (km)HydroSHEDS Length (km)**|  
+|  
+|  
+
 ---|---|---|---  
 Nile| 6 650 km (7 088)| 6 695 km| 6 827 km  
 Amazon| 6 400 km (6 992)| 6 800 km| 6 230 km  
-  
+
 I don't think the Nile will be removed from its position as the longest river in the world any time soon.
 
 P.S. I have also calculated the Strahler order of each river segment. But that might be a topic for another blog post.
