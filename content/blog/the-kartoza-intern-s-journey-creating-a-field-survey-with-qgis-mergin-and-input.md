@@ -6,7 +6,7 @@ description: Simple, powerful and efficient field data collection is vital for a
 erpnext_id: /blog/qgis/the-kartoza-interns-journey-creating-a-field-survey-with-qgis-mergin-and-input
 erpnext_modified: '2021-05-17'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-26'
 tags:
 - Qgis
 thumbnail: /img/blog/erpnext/mergin_login.jpg
@@ -14,15 +14,13 @@ title: The Kartoza Intern's Journey Creating a Field Survey with QGIS, Mergin an
   Input
 ---
 
-# 
-
-Simple, powerful and efficient field data collection is vital for any project with a geospatial aspect. [Input](<https://inputapp.io/en/>) is a FOSS application created by [Lutra consulting](<https://www.lutraconsulting.co.uk/>) that brings the power of QGIS to a portable device for data collection. The Kartoza intern team was challenged to get to grips with Input. The team decided to keep it simple and create a project to collect data from local parks, including paths, trees and infrastructure. This blog follows the journey taken by the team and includes tips and tricks to help novice users. 
+Simple, powerful and efficient field data collection is vital for any project with a geospatial aspect. [Input](<https://inputapp.io/en/>) is a FOSS application created by [Lutra consulting](<https://www.lutraconsulting.co.uk/>) that brings the power of QGIS to a portable device for data collection. The Kartoza intern team was challenged to get to grips with Input. The team decided to keep it simple and create a project to collect data from local parks, including paths, trees and infrastructure. This blog follows the journey taken by the team and includes tips and tricks to help novice users.
 
 The Input workflow can be split into three parts: 1) a mobile field data collection solution (Input), 2) a data storage and synchronisation solution (Mergin) and 3) an office desktop solution (QGIS). Input is essentially a mobile version of QGIS. Input can be downloaded and installed free of charge to Android and iOS phones and/or tablets.
 
 The intern team started with an [introductory video](<https://www.youtube.com/watch?v=8AZ9gPAhL_4>) presented by Hans van der Kwast on the creation of field surveys using QGIS, Mergin and Input. There is also a [completely free step-by-step tutorial](<https://ocw.un-ihe.org/course/view.php?id=11&section=7>) and sample data to experiment with associated with the introductory video. The intern team, with a background using QGIS, found the video guide sufficient to get started creating a project.
 
-Firstly, each member of the intern group [registered themselves for a Mergin account](<https://public.cloudmergin.com/>) __(Fig.1). Mergin is a cloud service that allows for the storage, administration and synchronization of Geo-data. Data stored in Mergin can be managed from the Mergin website, the Input application, or in QGIS using the Mergin plugin (Fig.2). Mergin is used to share projects with other Mergin users. With the QGIS plugin, you can create, delete and synchronise projects and data to local storage. 
+Firstly, each member of the intern group [registered themselves for a Mergin account](<https://public.cloudmergin.com/>) (Fig.1). Mergin is a cloud service that allows for the storage, administration and synchronization of Geo-data. Data stored in Mergin can be managed from the Mergin website, the Input application, or in QGIS using the Mergin plugin (Fig.2). Mergin is used to share projects with other Mergin users. With the QGIS plugin, you can create, delete and synchronise projects and data to local storage.
 
 ![](/img/blog/erpnext/mergin_login.jpg)
 
@@ -32,10 +30,9 @@ _Figure 1: The[Mergin website](<https://public.cloudmergin.com/>) with registrat
 
 _Figure 2: The Mergin plugin available in the QGIS plugin manager._
 
-A QGIS project for field data collection is simple to create; even for beginners. To start open a new QGIS project and save all the data into a single .qgs (file type recognized by Input) project file. Firstly, in the project create context by including base maps. the interns used online base maps due to an urban setting with a constant mobile data connection. The interns chose an OpenStreetMap (OSM) base map because it gives helpful context in urban areas. There are multiple options for online maps. Users can use the QuickMapServices plugin or other web map services to get base maps. The interns chose to include Google satellite and Google street map to the parks project (Fig.3).   
+A QGIS project for field data collection is simple to create; even for beginners. To start open a new QGIS project and save all the data into a single .qgs (file type recognized by Input) project file. Firstly, in the project create context by including base maps. the interns used online base maps due to an urban setting with a constant mobile data connection. The interns chose an OpenStreetMap (OSM) base map because it gives helpful context in urban areas. There are multiple options for online maps. Users can use the QuickMapServices plugin or other web map services to get base maps. The interns chose to include Google satellite and Google street map to the parks project (Fig.3).
 
-
-Offline layers are essential in field collection instances where there is no access to the Internet or mobile data. For OSM to be available offline, it needs to be converted to MBTiles. For further tips and step-by-step instructions on adding different base maps and images and converting them into offline versions, see the project free tutorial and video linked above. 
+Offline layers are essential in field collection instances where there is no access to the Internet or mobile data. For OSM to be available offline, it needs to be converted to MBTiles. For further tips and step-by-step instructions on adding different base maps and images and converting them into offline versions, see the project free tutorial and video linked above.
 
 ![](/img/blog/erpnext/parks_projects.jpg)
 
@@ -57,13 +54,13 @@ _Figure 5: Form creation in the Attributes From tab of the layer properties with
 
  _Figure 6: the attributes form shown in QGIS when digitising._
 
-To finish the project in QGIS, the layers need to be organised and assigned into map themes for online and offline use. Firstly, make sure the base maps are at the bottom of the list of layers and that the layers make cartographic sense. The points should be above the lines and lines above polygons. The base maps should be assigned to different themes, including an offline theme if MBTiles were made. This can be done by checking and un-checking the base map layers, assigning each to its own theme, and saving the project with the themes. Finally, the project needs to be uploaded to Mergin. The Mergin plugin can be found in the browser tab (Fig.7), and once configured using the user's login credentials, a project can be added. Right-click on Mergin select create a new project. Follow the prompts and make sure to select the current project folder in the dialogue box. The Mergin plugin will automatically synchronise the project folder up to the Mergin cloud. The project will be available under the My protects tab (Fig.7) and can be found on the web-based Mergin page. 
+To finish the project in QGIS, the layers need to be organised and assigned into map themes for online and offline use. Firstly, make sure the base maps are at the bottom of the list of layers and that the layers make cartographic sense. The points should be above the lines and lines above polygons. The base maps should be assigned to different themes, including an offline theme if MBTiles were made. This can be done by checking and un-checking the base map layers, assigning each to its own theme, and saving the project with the themes. Finally, the project needs to be uploaded to Mergin. The Mergin plugin can be found in the browser tab (Fig.7), and once configured using the user's login credentials, a project can be added. Right-click on Mergin select create a new project. Follow the prompts and make sure to select the current project folder in the dialogue box. The Mergin plugin will automatically synchronise the project folder up to the Mergin cloud. The project will be available under the My protects tab (Fig.7) and can be found on the web-based Mergin page.
 
 ![](/img/blog/erpnext/parks_browser.jpg)
 
 _Figure 7: Mergin expanded in the browser panel of QGIS._
 
-Once the project is stored in Mergin, it can be accessed and synchronised using Input. Input can be downloaded from the app store of a phone or tablet (Fig.8.A). Once opened for the first time, Input will prompt the user to sign in with their Mergin credentials. Then the projects can be accessed under the projects tab (Fig.8.B). Projects can be accessed by downloading them onto the portable device using the download button. The home page of Projects is where the projects can be synchronised from and to Mergin when the device is online (Fig.8.B). Synchronisation should happen any time that changes are made to the project in QGIS so that the changes can be seen in Input or after data has been collected in Input to update the desktop QGIS project. Once the project is downloaded, clicking on the project will open it and take the user to the main page. The app navigation is intuitive. To explore the project, it is best to start by going through the More tab. Under More the is browse features that shows the project layers, the map themes where base maps can be changed, and the settings for the data collection (Fig.8.C). On the main page, there are tabs for recording data and centreing the GPS (Input uses the inbuilt GPS unless another device is connected to the phone or tablet) (Fig.8.C).
+Once the project is stored in Mergin, it can be accessed and synchronised using Input. Input can be downloaded from the app store of a phone or tablet (Fig.8.A). Once opened for the first time, Input will prompt the user to sign in with their Mergin credentials. Then the projects can be accessed under the projects tab (Fig.8.B). Projects can be accessed by downloading them onto the portable device using the download button. The home page of Projects is where the projects can be synchronised from and to Mergin when the device is online (Fig.8.B). Synchronisation should happen any time that changes are made to the project in QGIS so that the changes can be seen in Input or after data has been collected in Input to update the desktop QGIS project. Once the project is downloaded, clicking on the project will open it and take the user to the main page. The app navigation is intuitive. To explore the project, it is best to start by going through the More tab. Under More the is browse features that shows the project layers, the map themes where base maps can be changed, and the settings for the data collection (Fig.8.C). On the main page, there are tabs for recording data and centring the GPS (Input uses the inbuilt GPS unless another device is connected to the phone or tablet) (Fig.8.C).
 
 ![](/img/blog/erpnext/input_immag_1.jpg)
 

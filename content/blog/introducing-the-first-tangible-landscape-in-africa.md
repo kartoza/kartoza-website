@@ -2,7 +2,7 @@
 author: Gavin Fleming
 date: '2016-10-12'
 description: As part of Kartoza's outreach programme, I recently helped the geography
-  department at St Johns College in Johannesburg set up a <a href="ht
+  department at St Johns College in Johannesburg set up a Tangible Landscape
 erpnext_id: /blog/uncategorised/introducing-the-first-tangible-landscape-in-africa
 erpnext_modified: '2016-10-12'
 reviewedBy: Automated Check

@@ -39,8 +39,6 @@ Mergin Maps is a mobile version of QGIS. While it is mainly a survey tool to be 
 
 [QField](<https://docs.qfield.org/get-started/>) is a similar alternative to Mergin Maps, also based on QGIS.
 
-###
-
 ![](/img/blog/erpnext/gXTb2MH.png)
 
 ## Getting help

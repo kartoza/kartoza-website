@@ -6,7 +6,7 @@ description: This book is an essential guide for any new QGIS user, a fantastic 
 erpnext_id: /blog/conference/kartoza-book-review-discover-qgis-3x-second-edition
 erpnext_modified: '2022-09-30'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-26'
 tags:
 - Conference
 thumbnail: /img/blog/erpnext/Blog Post with the Author Instagram (4).png

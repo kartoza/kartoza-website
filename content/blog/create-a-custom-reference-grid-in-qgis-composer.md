@@ -27,17 +27,14 @@ Create another grid to show the labels in the centre of the visible grid cells. 
 
 Finally set up the label expression (Click the epsilon next to the custom format field)
 
-    CASE 
-    
-    WHEN @grid_axis = 'y'
-    
-    THEN substr('ABCDEFGHIJKLMNOPQRST', (@grid_number + 2.5) / 5 , 1) 
-    
-    WHEN @grid_axis = 'x'
-    
-    THEN (@grid_number + 2.5) / 5
-    
-    END
+```
+CASE
+WHEN @grid_axis = 'y'
+THEN substr('ABCDEFGHIJKLMNOPQRST', (@grid_number + 2.5) / 5 , 1)
+WHEN @grid_axis = 'x'
+THEN (@grid_number + 2.5) / 5
+END
+```
 
 Replace the 5's with your interval value and the 2.5's with your offset value.
 

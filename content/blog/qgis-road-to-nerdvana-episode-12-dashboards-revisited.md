@@ -2,7 +2,7 @@
 author: Seabilwe Tilodi
 date: '2021-01-26'
 description: 'In case you missed out on Episode 12 of our QGIS Road to Nerdvana, click
-  on the link and enjoy the stream: QGIS Road to Nerdvana Episode 12'
+  on the link and enjoy the stream: QGIS Road to Nerdvana Episode 12 In this'
 erpnext_id: /blog/qgis/qgis-road-to-nerdvana-episode-12-dashboards-revisited
 erpnext_modified: '2021-01-26'
 reviewedBy: Automated Check

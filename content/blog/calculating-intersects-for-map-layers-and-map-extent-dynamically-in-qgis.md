@@ -6,7 +6,7 @@ description: Recently we have been working on a project that involves simulating
 erpnext_id: /blog/python/calculating-intersects-for-map-layers-and-map-extent-dynamically-in-qgis
 erpnext_modified: '2020-02-17'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-26'
 tags:
 - Python
 thumbnail: /img/blog/erpnext/printing-area.png
@@ -23,7 +23,7 @@ On each topographic map is printed map sheets that correspond to the printed are
 
 In order to generate the list as above, I had to do an intersection between the map extent and map layer in QGIS. Since the attributes of layers are not exposed I could not use in built expressions.
 
-### Getting extent of a map using QGIS expressions
+## Getting extent of a map using QGIS expressions
 
 `map_get(item_variables('main_map'), 'map_extent')`
 
@@ -31,7 +31,7 @@ Where main_map is the Item ID of a map. This will return a QGIS Geometry which c
 
 ![Item ID](/img/blog/erpnext/map-id.png)
 
-### Writing a custom function in QGIS
+## Writing a custom function in QGIS
 
 In order to achieve what I needed, I had to write a custom QGIS function to do the map intersects with the layer features.
 
@@ -48,7 +48,7 @@ In order to achieve what I needed, I had to write a custom QGIS function to do t
 `field_name_idx = f.fieldNameIndex(source_attribute)`  
 `field_value = f.attributes()[field_name_idx]`  
 `records.append(field_value)`  
-` result = ','.join(records) `  
+`result = ','.join(records)`  
 `return result`
 
 In the map composer, I then added a text box so that I could use the custom function.
@@ -57,6 +57,4 @@ In the map composer, I then added a text box so that I could use the custom func
 
 This will give us the list of map sheets intersecting the layer **index1in50k** using the attribute **sh_no**
 
-**![](/img/blog/erpnext/map-sheets-intersections.png)**
-
-****
+![](/img/blog/erpnext/map-sheets-intersections.png)

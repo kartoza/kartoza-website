@@ -2,7 +2,7 @@
 author: Tim Sutton
 date: '2017-10-07'
 description: 'If you are using QGIS 3 master builds on MacOS and encounter issues
-  with the display of processing dialog layouts like this: <img alt="" sr'
+  with the display of processing dialog layouts like this:'
 erpnext_id: /blog/qgis/how-to-resolve-issues-with-qgis-3-processing-dialog-layouts-on-macos
 erpnext_modified: '2017-10-07'
 reviewedBy: Automated Check

@@ -5,7 +5,7 @@ description: This article builds upon an earlier blog post by Tim Sutton on usin
 erpnext_id: /blog/uncategorised/mounting-a-storage-drive-in-hetzner-cloud-for-rancher-deployments
 erpnext_modified: '2019-04-11'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-26'
 tags:
 - Uncategorised
 thumbnail: /img/blog/erpnext/volumes-server.png
@@ -24,7 +24,7 @@ Hetzner now provides cloud storage option equivalent to Amazon S3 which we now u
 
 [docker-geoserver](<https://github.com/kartoza/docker-geoserver>) ,[docker-postgis](<https://github.com/kartoza/docker-postgis>) and [docker-sftp-backup](<https://github.com/kartoza/docker-sftp-backup>) deployed through rancher orchestration. These services require substantial space due to the GeoServer data directory storing raster images. In this setup, we will be adding extra storage to manage PostGIS backs. Using the same setup we could expand the storage space for our GeoServer container.
 
-1\. Login into the hosting provider ([http://hetzner.de](<http://hetzner.de>)).
+1\. Login into the hosting provider (<http://hetzner.de>).
 
 2\. Select your server and then navigate to the volumes section.
 
@@ -32,12 +32,12 @@ Hetzner now provides cloud storage option equivalent to Amazon S3 which we now u
 
 3\. Select an appropriate size to buy. Since our backup strategy uses the docker-sftp-backup we need to identify how much storage space we need. So in order to do this, I have decided on the following metrics
 
-Variable | Number to keep | Total Size  
----|---|---  
-DAILY number of daily backups to keep | 2 | 20 g  
-MONTHLY number of monthly backups to keep | 6 | 60  
-YEARLY number of yearly backups to keep | 1 | 10  
-  
+| Variable                                  | Number to keep | Total Size |
+|-------------------------------------------|----------------|------------|
+| DAILY number of daily backups to keep     | 2              | 20 g       |
+| MONTHLY number of monthly backups to keep | 6              | 60         |
+| YEARLY number of yearly backups to keep   | 1              | 10         |
+
 The numbers above are based inspecting a manual backup which is roughly about 8gig and I then assumed in the future the backup would grow up to 10gig.
 
 4\. Attach your storage driver to your specific server instance.

@@ -6,7 +6,7 @@ description: As a leading Open Source GIS company, Kartoza aims to introduce peo
 erpnext_id: /blog/education/an-interns-perspective-on-her-working-experience-at-kartoza-during-the-summer-vacation
 erpnext_modified: '2018-02-05'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-26'
 tags:
 - Education
 thumbnail: /img/blog/erpnext/image.png
@@ -14,25 +14,23 @@ title: An Intern's Perspective on Her Working Experience at Kartoza During the S
   Vacation
 ---
 
-As a leading Open Source GIS company, Kartoza aims to introduce people and organisations to the world of Open Source GIS in South Africa. The majority of educational institutions in South Africa still teach students GIS and Remote Sensing using proprietary software. During the last few years, there has been a steady increase in institutions migrating to using Open Source GIS systems.  
-  
-Kartoza is always on the lookout for young and talented students to enroll them in our vacation work or internship program with a possibility of employment. The following story is the experience from our most recent intern, Natalia Dambe, a Master's Student at the University of Cape Town. In her words:
+As a leading Open Source GIS company, Kartoza aims to introduce people and organisations to the world of Open Source GIS in South Africa. The majority of educational institutions in South Africa still teach students GIS and Remote Sensing using proprietary software. During the last few years, there has been a steady increase in institutions migrating to using Open Source GIS systems.
+
+Kartoza is always on the lookout for young and talented students to enrol them in our vacation work or internship program with a possibility of employment. The following story is the experience from our most recent intern, Natalia Dambe, a Master's Student at the University of Cape Town. In her words:
 
 ![](/img/blog/erpnext/image.png)
 
 “ _Doing what’s right, the right way, at the right time,_ summarises my vacation work experience at Kartoza, a Free and Open Source GIS (FOSS GIS) company in Stellenbosch, South Africa. I am Natalia Dambe, a Geomatics Master student at the University of Cape Town (2018). I just finished my four weeks vacation work with Kartoza.
 
-I was mainly involved with map styling. Kartoza had previously styled (NGI vector data) to resemble the 1:50 000 [topographic map. ](<https://github.com/kartoza/topostyle>)NGI had since migrated the vector data and I was involved in migrating the old styles to match the new data architecture. For my introduction to QGIS, I used the [QGIS Training Workshop](<https://github.com/kartoza/QGISTrainingWorkshop>) material developed by Kartoza. This provided me with the opportunity to learn QGIS and do a quality analysis of the material to provide documentation fixes.
+I was mainly involved with map styling. Kartoza had previously styled (NGI vector data) to resemble the 1:50 000 [topographic map.](<https://github.com/kartoza/topostyle>) NGI had since migrated the vector data and I was involved in migrating the old styles to match the new data architecture. For my introduction to QGIS, I used the [QGIS Training Workshop](<https://github.com/kartoza/QGISTrainingWorkshop>) material developed by Kartoza. This provided me with the opportunity to learn QGIS and do a quality analysis of the material to provide documentation fixes.
 
 Some of my daily tasks introduced me to using SpatiaLite and to publishing maps using Geoserver and QGIS server. I have always been fascinated by the web component of GIS and at Kartoza they develop their websites mainly using Django (a python framework) and OpenLayers and Leaflet for viewing GIS data. I was introduced to Leaflet and OpenLayers by using the QGIS2web plugin which renders data styled in QGIS either using Leaflet or OpenLayers.
 
 My remote sensing skills had been limited to using proprietary GIS software and at Kartoza I was introduced to some tools available to do remote sensing, namely:
 
-  * GRASS GIS
-  * QGIS Processing Framework
-  * QGIS Plugins like Semi-automated classification.
-
-
+- GRASS GIS
+- QGIS Processing Framework
+- QGIS Plugins like Semi-automated classification.
 
 Below is an example of the classification I did using the semi-automated classification plugin.
 

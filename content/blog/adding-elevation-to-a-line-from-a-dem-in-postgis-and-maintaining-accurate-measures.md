@@ -2,11 +2,11 @@
 author: Gavin Fleming
 date: '2018-08-22'
 description: This is the second in a three part series on the behind-the-scenes GIS
-  work that can go into planning a complex event, in this case the Cape
+  work that can go into planning a complex event, in this case the Cape Town Marathon.
 erpnext_id: /blog/postgis/adding-elevation-to-a-line-from-a-dem-in-postgis-and-maintaining-accurate-measures
 erpnext_modified: '2018-08-22'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-26'
 tags:
 - Postgis
 thumbnail: /img/blog/erpnext/screenshot_2018-11-22_at_13.02.30.png
@@ -34,7 +34,9 @@ We are going to update the Z (elevation) and M (measure) values of every vertex 
 
 For elevation we're going to use a raster DEM (digital elevation model) **within the database**. The City of Cape Town has an accessible, open data portal and I found a [10m DEM there](<https://web1.capetown.gov.za/web1/opendataportal/DocumentDetail?DocumentName=10m_Grid_GeoTiff.zip&DatasetDocument=http://cityapps.capetown.gov.za/sites/opendatacatalog/Documents/Digital%20elevation%20model/10m_Grid_GeoTiff.zip&DatasetName=Digital+elevation+model>). So I downloaded it and then loaded it into my PostGIS database:
 
-    raster2pgsql -C -I -M -F -Y -s 40019 -t 100x100 10m_BA.tif dem | psql -d mydb
+```
+raster2pgsql -C -I -M -F -Y -s 40019 -t 100x100 10m_BA.tif dem | psql -d mydb
+```
 
 ![QGIS 3D image of the Cape Town Marathon and 22km trail run](/img/blog/erpnext/ctm3d.png)
 
@@ -42,38 +44,42 @@ The marathon and long trail routes in QGIS 3D
 
 Then I had to make sure that each route's geometry field catered for 4 dimensions:
 
-    ALTER TABLE marathon ALTER COLUMN geom TYPE geometry(LinestringZM,4326) USING ST_Force4D(geom);
+```
+ALTER TABLE marathon ALTER COLUMN geom TYPE geometry(LinestringZM,4326) USING ST_Force4D(geom);
+```
 
 Next I created this function:
 
-    --you need a DEM called 'dem' in SRID WGS19 loaded in the database for this to work  
-    --adapted from http://blog.mathieu-leplatre.info/drape-lines-on-a-dem-with-postgis.html  
-    CREATE OR REPLACE FUNCTION update_ZM()  
-      RETURNS trigger AS  
-    $BODY$  
-    BEGIN  
-     EXECUTE format('WITH line AS  
-        (SELECT ST_Transform($1.geom,40019) as geom),  
-      points2d AS  
-        (SELECT (ST_DumpPoints(geom)).geom AS geom FROM line),  
-      cells AS  
-        (SELECT p.geom AS geom, ST_Value(d.rast, 1, p.geom) AS val  
-         FROM %I.dem d, points2d p  
-         WHERE ST_Intersects(d.rast, p.geom)),  
-      points3d AS  
-        (SELECT ST_SetSRID(ST_MakePoint(ST_X(geom), ST_Y(geom), val), 40019) AS geom FROM cells),  
-      line3d AS  
-        (SELECT ST_MakeLine(ST_Transform(geom,4326)) AS geom FROM points3d),  
-      line4d AS  
-        (SELECT ST_AddMeasure(geom,0,st_length(geom::geography)/1000) AS geom FROM line3d)  
-      UPDATE %I.%I a  
-         SET geom = line4d.geom  
-         FROM line4d  
-         WHERE a.id = $1.id', TG_TABLE_SCHEMA, TG_TABLE_SCHEMA, TG_TABLE_NAME) USING NEW;                      
-     RETURN NEW;  
-    END;  
-    $BODY$  
-    LANGUAGE plpgsql;
+```
+--you need a DEM called 'dem' in SRID WGS19 loaded in the database for this to work
+--adapted from http://blog.mathieu-leplatre.info/drape-lines-on-a-dem-with-postgis.html
+CREATE OR REPLACE FUNCTION update_ZM()
+  RETURNS trigger AS
+$BODY$
+BEGIN
+ EXECUTE format('WITH line AS
+    (SELECT ST_Transform($1.geom,40019) as geom),
+  points2d AS
+    (SELECT (ST_DumpPoints(geom)).geom AS geom FROM line),
+  cells AS
+    (SELECT p.geom AS geom, ST_Value(d.rast, 1, p.geom) AS val
+     FROM %I.dem d, points2d p
+     WHERE ST_Intersects(d.rast, p.geom)),
+  points3d AS
+    (SELECT ST_SetSRID(ST_MakePoint(ST_X(geom), ST_Y(geom), val), 40019) AS geom FROM cells),
+  line3d AS
+    (SELECT ST_MakeLine(ST_Transform(geom,4326)) AS geom FROM points3d),
+  line4d AS
+    (SELECT ST_AddMeasure(geom,0,st_length(geom::geography)/1000) AS geom FROM line3d)
+  UPDATE %I.%I a
+     SET geom = line4d.geom
+     FROM line4d
+     WHERE a.id = $1.id', TG_TABLE_SCHEMA, TG_TABLE_SCHEMA, TG_TABLE_NAME) USING NEW;  
+ RETURN NEW;
+END;
+$BODY$
+LANGUAGE plpgsql;
+```
 
 The `update_ZM()` function does the following:
 
@@ -89,12 +95,14 @@ The function is a dynamic trigger function, which means it will run when a trigg
 
 The last step is to add the trigger to any line table you want to run this function on:
 
-    DROP TRIGGER update_zm ON marathon;  
-    CREATE TRIGGER update_zm  
-      AFTER INSERT OR UPDATE OF geom  
-      ON marathon  
-      FOR EACH ROW  
-      WHEN (pg_trigger_depth() = 0)  
-      EXECUTE PROCEDURE update_ZM();
+```
+DROP TRIGGER update_zm ON marathon;
+CREATE TRIGGER update_zm
+  AFTER INSERT OR UPDATE OF geom
+  ON marathon
+  FOR EACH ROW
+  WHEN (pg_trigger_depth() = 0)
+  EXECUTE PROCEDURE update_ZM();
+```
 
 This trigger runs the `update_ZM()` function on each record that you add or edit. If you are editing in QGIS, this means as soon as you hit Save.
