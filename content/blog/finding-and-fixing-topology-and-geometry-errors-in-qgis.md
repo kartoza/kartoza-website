@@ -2,7 +2,8 @@
 author: Admire Nyakudya
 date: '2020-11-23'
 description: Google Maps, Google Earth, Uber are examples leading software/apps that
-  are driven by GIS. They have allowed the ordinary person inadvertent
+  are driven by GIS. They have allowed the ordinary person inadvertently to use GIS
+  and appreciate its power without needing an un
 erpnext_id: /blog/qgis/finding-and-fixing-topology-and-geometry-errors-in-qgis
 erpnext_modified: '2020-11-23'
 reviewedBy: Automated Check
@@ -51,5 +52,5 @@ The following are the steps I took to inspect the layer
 - Symbolize the difference layer using outer fill to only highlight the areas where there are gaps.  
 ![](/img/blog/erpnext/gaps-slivers.png)  
 ![](/img/blog/erpnext/gaps-layers.png)  
-  
-  - Finally, to fix all these errors you would need to run the algorithm 'Delete duplicate geometries', activate snapping, and then correct the errors manually. Alternatively, you could run the processing algorithm v.clean provided you understand what the parameters mean.
+
+- Finally, to fix all these errors you would need to run the algorithm 'Delete duplicate geometries', activate snapping, and then correct the errors manually. Alternatively, you could run the processing algorithm v.clean provided you understand what the parameters mean.

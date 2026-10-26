@@ -2,7 +2,7 @@
 author: Tim Sutton
 date: '2019-04-17'
 description: Toni Olsen from Freshwater Research Center (http://frcsa.org.za) presenting
-  the Freshwater Biodiversity Informations System (FBIS) version 2
+  the Freshwater Biodiversity Informations System (FBIS) version 2 at the launch workshop
 erpnext_id: /blog/uncategorised/fbis-2-launch-workshop
 erpnext_modified: '2019-04-17'
 reviewedBy: Automated Check

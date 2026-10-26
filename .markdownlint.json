@@ -1,6 +1,7 @@
 {
   "default": true,
   "MD001": true,
+  "MD059": false,
   "MD060": false,
   "MD003": { "style": "atx" },
   "MD004": { "style": "dash" },

@@ -2,11 +2,12 @@
 author: Amy Ternent
 date: '2022-05-20'
 description: Learning online has become an essential part of education globally. Kartoza
-  has answered the call for up-to-date, engaging and dynamic teach
+  has answered the call for up-to-date, engaging and dynamic teaching material by
+  updating our QGIS and GeoNode teaching platforms.
 erpnext_id: /blog/qgis/a-step-forward-in-kartozas-qgis-and-geonode-training
 erpnext_modified: '2022-05-20'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-26'
 tags:
 - Qgis
 thumbnail: /img/blog/erpnext/CUyMF0g.jpg
@@ -44,5 +45,3 @@ For more on FOSSGIS training with Kartoza see [Kartoza Training & Education](</e
 For some interesting videos on using QGIS, visit the Kartoza [Road to Nerdvana](<https://www.youtube.com/playlist?list=PLhZmjLdJAZWwTZIWKo5cZfKHW-606qw7p>) series on YouTube.
 
 Also see the [QGIS Training Manual](<https://docs.qgis.org/3.16/en/docs/training_manual/index.html>) and [A Gentle Introduction to GIS](<https://docs.qgis.org/3.16/en/docs/gentle_gis_introduction>)
-
-[](<https://docs.qgis.org/3.16/en/docs/training_manual/index.html>)

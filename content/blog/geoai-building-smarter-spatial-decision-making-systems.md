@@ -2,14 +2,14 @@
 author: Jeff Osundwa
 date: '2026-07-21'
 description: Discover how GeoAI combines artificial intelligence and GIS to predict,
-  analyse, and solve real-world challenges with smarter, location-base
+  analyse, and solve real-world challenges with smarter, location-based decisions.
 erpnext_id: /blog/ai/geoai-building-smarter-spatial-decision-making-systems
 erpnext_modified: '2026-07-21'
 reviewedBy: Automated Check
-reviewedDate: '2026-07-22'
+reviewedDate: '2026-10-26'
 tags:
 - Ai
-thumbnail: /img/blog/erpnext/placeholder.png
+thumbnail: /img/blog/placeholder.png
 title: 'GeoAI: Building Smarter Spatial Decision-Making Systems'
 ---
 

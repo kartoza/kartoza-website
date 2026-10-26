@@ -6,7 +6,7 @@ description: Over the past year, we have been working on GeoSpatialHosting (GSH)
 erpnext_id: /blog/hosting/get-ready-geospatial-hosting-is-on-the-way
 erpnext_modified: '2025-09-09'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-26'
 tags:
 - Hosting
 thumbnail: /img/blog/erpnext/Wk5apyN.png
@@ -23,18 +23,18 @@ We are pleased to share that the platform has now reached a production-ready sta
 
 We are currently focussing on:
 
-  1. **Reliability testing** – running high-load simulations to confirm performance.
-  2. **User experience improvements** – refining the interface for smoother use.
-  3. **Support preparation** – creating documentation, tutorials, and troubleshooting materials.
-  4. **Customisation** – ensuring theming and configuration options are available for different needs.
+- **Reliability testing** – running high-load simulations to confirm performance.
+- **User experience improvements** – refining the interface for smoother use.
+- **Support preparation** – creating documentation, tutorials, and troubleshooting materials.
+- **Customisation** – ensuring theming and configuration options are available for different needs.
 
 ## Products Available at Launch
 
 The first set of tools available on the platform include:
 
-  1. G3W-Suite
-  2. GeoNode
-  3. GeoServer
+- G3W-Suite
+- GeoNode
+- GeoServer
 
 These products will be offered in a range of subscription tiers to accommodate different use cases and budgets. For organisations that require a more tailored solution, our team can assist with custom configurations and deployments.
 

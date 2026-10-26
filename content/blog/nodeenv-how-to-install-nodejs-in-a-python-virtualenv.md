@@ -6,7 +6,7 @@ description: Setup and run NodeJS using nodeenv. Nodeenv is similar to virtualen
 erpnext_id: /blog/uncategorised/nodeenv-how-to-install-nodejs-in-a-python-virtualenv
 erpnext_modified: '2014-08-24'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-26'
 tags:
 - Uncategorised
 thumbnail: /img/blog/placeholder.png
@@ -18,111 +18,108 @@ Here at Kartoza, working in python virtual environments is our default modus ope
 **Install host operating system dependencies**
 
 You need to have python-virtualenv and curl installed - under ubuntu and debian derived distros you can simply do:
-    
-    
-    sudo apt-get install python-virtualenv curl
 
-  
-
+```
+sudo apt-get install python-virtualenv curl
+```
 
 **Setup your virtualenv and install nodeenv in it**
-    
-    
-    DEV=${HOME}/dev/javascript/nodedemo mkdir -p $DEV; cd $DEV  
-    virtualenv venv  
-    source venv/bin/activate  
-    pip install nodeenv
 
-  
-
+```
+DEV=${HOME}/dev/javascript/nodedemo mkdir -p $DEV; cd $DEV
+virtualenv venv
+source venv/bin/activate
+pip install nodeenv
+```
 
 You should see output similar to this after running the above commands:
-    
-    
-    Downloading/unpacking nodeenv  
-     Using download cache from /home/timlinux/.cache/pip/https%3A%2F%2Fpypi.python.org%2Fpackages%2Fsource%2Fn%2Fnodeenv%2Fnodeenv-0.11.0.tar.gz  
-     Running setup.py (path:/home/timlinux/dev/javascript/nodedemo/venv/build/nodeenv/setup.py) egg_info for package nodeenv  
-       
-     no previously-included directories found matching 'debian/nodeenv'  
-     no previously-included directories found matching 'debian/sdist'  
-     warning: no previously-included files matching '*.log' found under directory 'debian'  
-     warning: no previously-included files matching '*.substvars' found under directory 'debian'  
-     warning: no previously-included files matching 'files' found under directory 'debian'  
-    Installing collected packages: nodeenv  
-     Running setup.py install for nodeenv  
-       
-     no previously-included directories found matching 'debian/nodeenv'  
-     no previously-included directories found matching 'debian/sdist'  
-     warning: no previously-included files matching '*.log' found under directory 'debian'  
-     warning: no previously-included files matching '*.substvars' found under directory 'debian'  
-     warning: no previously-included files matching 'files' found under directory 'debian'  
-     Installing nodeenv script to /home/timlinux/dev/javascript/nodedemo/venv/bin  
-    Successfully installed nodeenv  
-    Cleaning up...
 
-  
+```
+Downloading/unpacking nodeenv
+ Using download cache from /home/timlinux/.cache/pip/https%3A%2F%2Fpypi.python.org%2Fpackages%2Fsource%2Fn%2Fnodeenv%2Fnodeenv-0.11.0.tar.gz
+ Running setup.py (path:/home/timlinux/dev/javascript/nodedemo/venv/build/nodeenv/setup.py) egg_info for package nodeenv
+
+ no previously-included directories found matching 'debian/nodeenv'
+ no previously-included directories found matching 'debian/sdist'
+ warning: no previously-included files matching '*.log' found under directory 'debian'
+ warning: no previously-included files matching '*.substvars' found under directory 'debian'
+ warning: no previously-included files matching 'files' found under directory 'debian'
+Installing collected packages: nodeenv
+ Running setup.py install for nodeenv
+
+ no previously-included directories found matching 'debian/nodeenv'
+ no previously-included directories found matching 'debian/sdist'
+ warning: no previously-included files matching '*.log' found under directory 'debian'
+ warning: no previously-included files matching '*.substvars' found under directory 'debian'
+ warning: no previously-included files matching 'files' found under directory 'debian'
+ Installing nodeenv script to /home/timlinux/dev/javascript/nodedemo/venv/bin
+Successfully installed nodeenv
+Cleaning up...
+```
+
 Now we need to install node and npm (the node package manager) into the nodeenv. And here is the good part - you can install a specific version in the process:
-    
-    
-    source nenv/bin/activate
-    
-    
-    nodeenv --node=0.10.31 nenv
+
+```
+source nenv/bin/activate
+```
+
+```
+nodeenv --node=0.10.31 nenv
+```
 
 **Update (5 Sept 2014):** The nodeenv **`-p`** option will install node into your python venv which will make your life easier probably.
 
-  
 **Using your shiny new virtual node installation**
 
 Once npm is installed you can then go on to install any node packages using npm. For example here we install and run the [nodeschool](<http://nodeschool.io/#learn-you-node> "Node School Home Page") tutorial packages:
-    
-    
-    npm install -g learnyounode  
-    learnyounode
 
-  
+```
+npm install -g learnyounode
+learnyounode
+```
+
 **Note:** Do remember that you need to source your python virtualenv and nodeenv before you use your virtual node env:
-    
-    
-    source venv/bin/activate  
-    source nenv/bin/activate
 
-  
+```
+source venv/bin/activate
+source nenv/bin/activate
+```
+
 **Troubleshooting: If you get something like this when building:**
-    
-    
-     * Install node.js (0.4.6) ..Traceback (most recent call last):  
-     File "/home/timlinux/dev/javascript/nodedemo/venv/bin/nodeenv", line 9, in <module>  
-     load_entry_point('nodeenv==0.11.0', 'console_scripts', 'nodeenv')()  
-     File "/home/timlinux/dev/javascript/nodedemo/venv/local/lib/python2.7/site-packages/nodeenv.py", line 765, in main  
-     create_environment(env_dir, opt)  
-     File "/home/timlinux/dev/javascript/nodedemo/venv/local/lib/python2.7/site-packages/nodeenv.py", line 674, in create_environment  
-     install_node(env_dir, src_dir, opt)  
-     File "/home/timlinux/dev/javascript/nodedemo/venv/local/lib/python2.7/site-packages/nodeenv.py", line 563, in install_node  
-     build_node_from_src(env_dir, src_dir, node_src_dir, opt)  
-     File "/home/timlinux/dev/javascript/nodedemo/venv/local/lib/python2.7/site-packages/nodeenv.py", line 537, in build_node_from_src  
-     callit([make_cmd] + make_opts, opt.verbose, True, node_src_dir, env)  
-     File "/home/timlinux/dev/javascript/nodedemo/venv/local/lib/python2.7/site-packages/nodeenv.py", line 420, in callit  
-     % (cmd_desc, proc.returncode))  
-    OSError: Command make --jobs=2 failed with error code 2
 
-  
+```
+ * Install node.js (0.4.6) ..Traceback (most recent call last):
+ File "/home/timlinux/dev/javascript/nodedemo/venv/bin/nodeenv", line 9, in <module>
+ load_entry_point('nodeenv==0.11.0', 'console_scripts', 'nodeenv')()
+ File "/home/timlinux/dev/javascript/nodedemo/venv/local/lib/python2.7/site-packages/nodeenv.py", line 765, in main
+ create_environment(env_dir, opt)
+ File "/home/timlinux/dev/javascript/nodedemo/venv/local/lib/python2.7/site-packages/nodeenv.py", line 674, in create_environment
+ install_node(env_dir, src_dir, opt)
+ File "/home/timlinux/dev/javascript/nodedemo/venv/local/lib/python2.7/site-packages/nodeenv.py", line 563, in install_node
+ build_node_from_src(env_dir, src_dir, node_src_dir, opt)
+ File "/home/timlinux/dev/javascript/nodedemo/venv/local/lib/python2.7/site-packages/nodeenv.py", line 537, in build_node_from_src
+ callit([make_cmd] + make_opts, opt.verbose, True, node_src_dir, env)
+ File "/home/timlinux/dev/javascript/nodedemo/venv/local/lib/python2.7/site-packages/nodeenv.py", line 420, in callit
+ % (cmd_desc, proc.returncode))
+OSError: Command make --jobs=2 failed with error code 2
+```
+
 Older versions of node don't always build nicely for me - try using a more recent version.
 
 **Troubleshooting: If you are behind an http proxy, you should first tell npm:**
-    
-    
-    nenv/bin/npm config set proxy http://192.168.2.2:3128  
-    nenv/bin/npm config set https-proxy http://192.168.2.2:3128
 
-  
+```
+nenv/bin/npm config set proxy http://192.168.2.2:3128
+nenv/bin/npm config set https-proxy http://192.168.2.2:3128
+```
+
 **Troubleshooting: /usr/bin/env: node: No such file or directory**
 
 Make sure you have sourced venv and node:
-    
-    
-    source venv/bin/activate  
-    source nenv/bin/activate
 
-  
+```
+source venv/bin/activate
+source nenv/bin/activate
+```
+
 For more information on how to use nodeenv, please see the [nodeenv project page](<https://github.com/ekalinin/nodeenv>) on github.
