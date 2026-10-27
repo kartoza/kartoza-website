@@ -1,8 +1,7 @@
 ---
 author: Gavin Fleming
 date: '2015-01-13'
-description: 'Today we wanted to find all the multipart features in this layer: <img
-  alt="" height="748" src="/files/blog-posts/multipart-features-before.'
+description: A quick hack to select all multipart features in QGIS
 erpnext_id: /blog/fossgis/a-quick-hack-to-select-all-multipart-features-in-qgis
 erpnext_modified: '2015-01-13'
 reviewedBy: Automated Check

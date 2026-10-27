@@ -5,7 +5,7 @@ description: STAC API plugin A QGIS plugin that allow browsing STAC API catalogs
 erpnext_id: /blog/qgis/qgis-stac-api-plugin
 erpnext_modified: '2022-02-03'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-26'
 tags:
 - Qgis
 thumbnail: /img/blog/erpnext/toolbar-726x37.png
@@ -18,18 +18,16 @@ The new plugin comes with features that give the user a comfortable interface an
 
 The plugin supports searching for STAC item resources, loading and downloading STAC items and retrieving information about STAC API services.
 
-#### How to install the plugin
+## How to install the plugin
 
 The plugin is available to download and install in QGIS from the [official QGIS plugin repository](<https://plugins.qgis.org>).
 
 To install the plugin, follow these steps.
 
-  * Launch QGIS and open plugin manager.
-  * Search for **STAC API Browser** in the**All** page of the manager.
-  * Click on the **STAC API Browser** result item and plugin information will show up.
-  * Click the **Install Plugin** button at the bottom of the dialog to install the plugin.
-
-
+- Launch QGIS and open plugin manager.
+- Search for **STAC API Browser** in the **All** page of the manager.
+- Click on the **STAC API Browser** result item and plugin information will show up.
+- Click the **Install Plugin** button at the bottom of the dialog to install the plugin.
 
 # Available features
 
@@ -43,11 +41,9 @@ The corresponding STAC API service used when searching needs to ensure that it h
 
 The plugin contains the following filters that can be used when searching for STAC item objects.
 
-  * Date filter - users can search for single instance temporal resources or resources with a temporal range.
-  * Spatial extent filter - users can provide a bounding box against which the results should be filtered.
-  * Advanced filter - this enables usage of STAC API filter languages to provide advanced queries for the search. For more information see <https://github.com/radiantearth/stac-api-spec/tree/master/fragments/filter>.
-
-
+- Date filter - users can search for single instance temporal resources or resources with a temporal range.
+- Spatial extent filter - users can provide a bounding box against which the results should be filtered.
+- Advanced filter - this enables usage of STAC API filter languages to provide advanced queries for the search. For more information see <https://github.com/radiantearth/stac-api-spec/tree/master/fragments/filter>.
 
 ## Accessing STAC assets
 
@@ -109,7 +105,7 @@ All the search filters can be used only when their corresponding group boxes hav
 
 For the **Advanced filter** group, the available filter languages are based on the supported STAC API filter languages. When **STAC_QUERY** is used then filter input will be treated as a query text as defined in <https://github.com/radiantearth/stac-api-spec/tree/master/fragments/query>. If **CQL_JSON** is selected then you can use a CQL filter text as defined in <https://github.com/radiantearth/stac-api-spec/tree/master/fragments/filter>.
 
-![](/img/blog/erpnext/filters-956x1059.png)   
+![](/img/blog/erpnext/filters-956x1059.png)  
 _Available filters_
 
 ![](/img/blog/erpnext/search_result_stac_api_plugin-925x877.png)
@@ -127,11 +123,11 @@ The plugin currently supports loading assets as [Cloud optimised GeoTIFF (CoG)](
 ![](/img/blog/erpnext/view_assets-825x885.png)  
 _Image showing the button used for viewing the STAC item assets_
 
-The assets dialog will be opened. From the assehttps://oldsite.kartoza.com/media/uploads/stac_api_plugin/.thumbnails/view_assets.png/view_assets-825x885.pngts list click the **Add assets as layers** button to add the item into QGIS as a CoG layer. To download the asset click the **Download asset** button.
+The assets dialog will be opened. From the assets <https://oldsite.kartoza.com/media/uploads/stac_api_plugin/.thumbnails/view_assets.png/view_assets-825x885.png> list click the **Add assets as layers** button to add the item into QGIS as a CoG layer. To download the asset click the **Download asset** button.
 
 # Notes
 
-The STAC API plugin source code is published with a GPL v3 licence and the source code is availalbe in this [Github repository](<https://github.com/stac-utils/qgis-stac-plugin>).
+The STAC API plugin source code is published with a GPL v3 licence and the source code is available in this [Github repository](<https://github.com/stac-utils/qgis-stac-plugin>).
 
 If you have any issue or question when using the plugin or a support or new feature request please visit the [issue page](<https://github.com/stac-utils/qgis-stac-plugin/issues>) and see the [documentation](<https://stac-utils.github.io/qgis-stac-plugin>).
 

@@ -2,11 +2,12 @@
 author: Zulfikar Akbar Muzakki
 date: '2021-02-01'
 description: Working with Django, we must be familiar with makemigrations and the
-  migrate command. We use makemigrations to automa
+  migrate command. We use makemigrations to automatically generate migration files,
+  and migrate to apply them.
 erpnext_id: /blog/python/making-django-custom-migrations
 erpnext_modified: '2021-02-01'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-26'
 tags:
 - Python
 thumbnail: /img/blog/placeholder.png
@@ -18,66 +19,69 @@ Working with Django, we must be familiar with `makemigrations` and the `migrate`
 ## Problem
 
 Recently I stumbled upon a problem where in short, I need to add `created_at` and `updated_at` (both are DateTimeField) to an existing table. Here’s the model for that table.
-    
-    
-    Class FarmerSample(models.Model):  
-        geom = models.PointField()  
-        farm = models.IntegerField()  
-        datum = models.DateField()  
-        sample_number = models.CharField(max_length=128)  
-      
-        def __str__(self):  
-            return '{} | {}'.format(self.id, self.datum)  
-    
+
+```
+Class FarmerSample(models.Model):
+    geom = models.PointField()
+    farm = models.IntegerField()
+    datum = models.DateField()
+    sample_number = models.CharField(max_length=128)
+
+    def __str__(self):
+        return '{} | {}'.format(self.id, self.datum)
+```
 
 `FarmerSample` data has `datum` field, which is the date a record is associated with. It is not the date when a record was created, because they are most likely created or saved to the database a few days after the observations, which makes the the creation date more recent than the `datum`. I will not go into the detail as to why I need to add a field to indicate when a record was created and updated, but will focus only on my approach.
 
 When we query the data, they look like:
-    
-    
-    (venv) kartoza@kartoza-thinkbook:~/mysite$ ./manage.py shell  
-    Python 3.6.12 (default, Aug 17 2020, 23:45:20)   
-    [GCC 9.3.0] on linux  
-    Type "help", "copyright", "credits" or "license" for more information.  
-    (InteractiveConsole)  
-    >>> from app.models import FarmerSample  
-    >>> FarmerSample.objects.all()  
-    <QuerySet [<FarmerSample: 1 | 2019-11-06>, <FarmerSample: 2 | 2020-09-01>]>
+
+```
+(venv) kartoza@kartoza-thinkbook:~/mysite$ ./manage.py shell
+Python 3.6.12 (default, Aug 17 2020, 23:45:20)
+[GCC 9.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from app.models import FarmerSample
+>>> FarmerSample.objects.all()
+<QuerySet [<FarmerSample: 1 | 2019-11-06>, <FarmerSample: 2 | 2020-09-01>]>
+```
 
 Now that I need a field to indicate the timestamp when a record was created or updated, I just need to change the model to:
-    
-    
-    Class FarmerSample(models.Model):  
-        geom = models.PointField()  
-        farm = models.IntegerField()  
-        datum = models.DateField()  
-        sample_number = models.CharField(max_length=128)  
-        created_at = models.DateTimeField(auto_now_add=True)  
-        updated_at = models.DateTimeField(auto_now=True)  
-      
-        def __str__(self):  
-            return '{} | {} | {} | {}'.format(self.id, self.datum, self.created_at, self.updated_at)  
-    
+
+```
+Class FarmerSample(models.Model):
+    geom = models.PointField()
+    farm = models.IntegerField()
+    datum = models.DateField()
+    sample_number = models.CharField(max_length=128)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '{} | {} | {} | {}'.format(self.id, self.datum, self.created_at, self.updated_at)
+```
 
 Setting `auto_now=True` to `DateTimeField` will let Django update its value when the object is saved, while `auto_now_add=True` in `DateTimeField` will let Django update its value when the object is created. With those in mind, `auto_now_add=True` works well to indicate when a record was created, while `auto_now=True` could tell us when was the last time a record was updated.
 
 When we do a migration, Django will add a value for the new fields. And in our case, Django will ask us the default value when running `makemigrations`:
-    
-    
-    You are trying to add the field 'created_at' with 'auto_now_add=True' to farmersample without a default; the database needs something to populate existing rows.  
-      
-     1) Provide a one-off default now (will be set on all existing rows)  
-     2) Quit, and let me add a default in models.py  
-    Select an option:
+
+```
+You are trying to add the field 'created_at' with 'auto_now_add=True' to farmersample without a default; the database needs something to populate existing rows.
+
+ 1) Provide a one-off default now (will be set on all existing rows)
+ 2) Quit, and let me add a default in models.py
+Select an option:
+```
 
 I choose 1 and these prompts show:
-    
-    
-    Please enter the default value now, as valid Python  
-    You can accept the default 'timezone.now' by pressing 'Enter' or you can provide another value.  
-    The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now  
-    Type 'exit' to exit this prompt  
-    [default: timezone.now] >>>
+
+```
+Please enter the default value now, as valid Python
+You can accept the default 'timezone.now' by pressing 'Enter' or you can provide another value.
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type 'exit' to exit this prompt
+[default: timezone.now] >>>
+```
 
 I will just press enter, and those with `auto_now_add` and `auto_now` set as True will have the value of `timezone.now()`. While this is not what I want, at least now they have their respective values.
 
@@ -87,148 +91,148 @@ Now, I want the value to be based on its `datum`. Yes, I did not track when the 
 
 There are 2 possible solutions for this:
 
-1\. Create a command to fill `created_at```.
+1\. Create a command to fill `created_at`.
 
 2\. Make a custom migration.
 
 I chose the latter, as creating a one-off Django command in the first option just to do such a simple thing is overkill and kind of make a bloated codebase. This is when `RunPython` comes into its own. You can check the documentation [here](<https://docs.djangoproject.com/en/3.1/ref/migration-operations/#django.db.migrations.operations.RunPython>).
 
 My migration file currently looks like this.
-    
-    
-    # Generated by Django 2.2.14 on 2021-01-28 05:20  
-    from django.db import migrations, models  
-      
-      
-    class Migration(migrations.Migration):  
-      
-        dependencies = [  
-            ('live_layer', '0020_auto_20201221_0433'),  
-        ]  
-      
-        operations = [  
-            migrations.AddField(  
-                model_name='farmersample',  
-                name='created_at',  
-                field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now),  
-                preserve_default=False,  
-            ),  
-            migrations.AddField(  
-                model_name='farmersample',  
-                name='updated_at',  
-                field=models.DateTimeField(auto_now=True),  
-            )  
-        ]
+
+```
+# Generated by Django 2.2.14 on 2021-01-28 05:20
+from django.db import migrations, models
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('live_layer', '0020_auto_20201221_0433'),
+    ]
+
+    operations = [
+        migrations.AddField(
+            model_name='farmersample',
+            name='created_at',
+            field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now),
+            preserve_default=False,
+        ),
+        migrations.AddField(
+            model_name='farmersample',
+            name='updated_at',
+            field=models.DateTimeField(auto_now=True),
+        )
+    ]
+```
 
 With `RunPython`, I could call some function when I run the migration file. First, I will create a function to set `created_at` to be 2 days after datum.
-    
-    
-    import pytz  
-    import django.utils.timezone  
-    from datetime import datetime, time, timedelta  
-    from django.conf import settings  
-      
-      
-    def set_created_at(apps, schema_editor):  
-        live_layer_db = schema_editor.connection.alias  
-        # Get the model  
-        FarmerSample = apps.get_model("live_layer", "FarmerSample")  
-      
-        # Loop through all objects and set created_at  
-        for data in FarmerSample.objects.using(live_layer_db).all():  
-            # Datum is DateField, while created_at is DateTimeField with Timezone.  
-            # First, we need to get the datum value with timezone  
-            datum_with_tz = datetime.combine(data.datum, time(0, 0), tzinfo=pytz.timezone(settings.TIME_ZONE))  
-      
-            # Set created_at to 2 days after datum.  
-            created_at = datum_with_tz + timedelta(2)  
-            data.created_at = created_at  
-            data.save()
+
+```
+import pytz
+import django.utils.timezone
+from datetime import datetime, time, timedelta
+from django.conf import settings
+
+def set_created_at(apps, schema_editor):
+    live_layer_db = schema_editor.connection.alias
+    # Get the model
+    FarmerSample = apps.get_model("live_layer", "FarmerSample")
+
+    # Loop through all objects and set created_at
+    for data in FarmerSample.objects.using(live_layer_db).all():
+        # Datum is DateField, while created_at is DateTimeField with Timezone.
+        # First, we need to get the datum value with timezone
+        datum_with_tz = datetime.combine(data.datum, time(0, 0), tzinfo=pytz.timezone(settings.TIME_ZONE))
+
+        # Set created_at to 2 days after datum.
+        created_at = datum_with_tz + timedelta(2)
+        data.created_at = created_at
+        data.save()
+```
 
 `apps` and `schema_editor` are default parameters so `RunPython` can run this function.
 
 ## Custom Migration Pitfall
 
-One thing to note when using RunPython is that if we supply only a forward function, then the migration will not be reversible. A forward function is a function that will be called when applying a migration. To be able to unapply a custom migration file, we must also provide a reverse function, which is a funtion that will be called when unapplying the migration. In our case, our migration adds new fields and sets the value for them, so our reverse function does not need to do anything (like reverting the `created_at` value) because the fields will be removed anyway.
-    
-    
-    def unset_created_at(apps, schema_editor):  
-        # Our migrations added a new field, so when we unapply, those field will be deleted.  
-        # It's useless reverting the value of created_at when eventually the field itself is removed.  
-        pass
+One thing to note when using RunPython is that if we supply only a forward function, then the migration will not be reversible. A forward function is a function that will be called when applying a migration. To be able to unapply a custom migration file, we must also provide a reverse function, which is a function that will be called when unapplying the migration. In our case, our migration adds new fields and sets the value for them, so our reverse function does not need to do anything (like reverting the `created_at` value) because the fields will be removed anyway.
+
+```
+def unset_created_at(apps, schema_editor):
+    # Our migrations added a new field, so when we unapply, those field will be deleted.
+    # It's useless reverting the value of created_at when eventually the field itself is removed.
+    pass
+```
 
 Then, we must call both forward and reverse function inside the migration’s operations.
 
 `migrations.RunPython(set_created_at, unset_created_at, atomic=True)`
 
 So now, our migration file looks like this.
-    
-    
-    # Generated by Django 2.2.14 on 2021-01-28 05:20  
-      
-    import pytz  
-    import django.utils.timezone  
-    from datetime import datetime, time, timedelta  
-    from django.conf import settings  
-    from django.db import migrations, models  
-      
-      
-    def set_created_at(apps, schema_editor):  
-        live_layer_db = schema_editor.connection.alias  
-        # Get the model  
-        FarmerSample = apps.get_model("live_layer", "FarmerSample")  
-      
-        # Loop through all objects and set created_at  
-        for data in FarmerSample.objects.using(live_layer_db).all():  
-            # Datum is DateField, while created_at is DateTimeField with Timezone.  
-            # First, we need to get the datum value with timezone  
-            datum_with_tz = datetime.combine(data.datum, time(0, 0), tzinfo=pytz.timezone(settings.TIME_ZONE))  
-      
-            # Set created_at to 2 days after datum.  
-            created_at = datum_with_tz + timedelta(2)  
-            data.created_at = created_at  
-            data.save()  
-      
-      
-    def unset_created_at(apps, schema_editor):  
-        # Our migratios added a new field, so when we unapply those field will be deleted.  
-        # It's useless reverting the value of created_at when eventually the field itself is removed.  
-        pass  
-      
-      
-    class Migration(migrations.Migration):  
-      
-        dependencies = [  
-            ('live_layer', '0020_auto_20201221_0433'),  
-        ]  
-      
-        operations = [  
-            migrations.AddField(  
-                model_name='farmersample',  
-                name='created_at',  
-                field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now),  
-                preserve_default=False,  
-            ),  
-            migrations.AddField(  
-                model_name='farmersample',  
-                name='updated_at',  
-                field=models.DateTimeField(auto_now=True),  
-            ),  
-            migrations.RunPython(set_created_at, unset_created_at, atomic=True)  
-        ]
+
+```
+# Generated by Django 2.2.14 on 2021-01-28 05:20
+
+import pytz
+import django.utils.timezone
+from datetime import datetime, time, timedelta
+from django.conf import settings
+from django.db import migrations, models
+
+def set_created_at(apps, schema_editor):
+    live_layer_db = schema_editor.connection.alias
+    # Get the model
+    FarmerSample = apps.get_model("live_layer", "FarmerSample")
+
+    # Loop through all objects and set created_at
+    for data in FarmerSample.objects.using(live_layer_db).all():
+        # Datum is DateField, while created_at is DateTimeField with Timezone.
+        # First, we need to get the datum value with timezone
+        datum_with_tz = datetime.combine(data.datum, time(0, 0), tzinfo=pytz.timezone(settings.TIME_ZONE))
+
+        # Set created_at to 2 days after datum.
+        created_at = datum_with_tz + timedelta(2)
+        data.created_at = created_at
+        data.save()
+
+def unset_created_at(apps, schema_editor):
+    # Our migratios added a new field, so when we unapply those field will be deleted.
+    # It's useless reverting the value of created_at when eventually the field itself is removed.
+    pass
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('live_layer', '0020_auto_20201221_0433'),
+    ]
+
+    operations = [
+        migrations.AddField(
+            model_name='farmersample',
+            name='created_at',
+            field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now),
+            preserve_default=False,
+        ),
+        migrations.AddField(
+            model_name='farmersample',
+            name='updated_at',
+            field=models.DateTimeField(auto_now=True),
+        ),
+        migrations.RunPython(set_created_at, unset_created_at, atomic=True)
+    ]
+```
 
 Finally, run `python manage.py migrate` and check whether the created_at and updated_at has been updated. You must exit the current shell first, then re-enter the shell to check the updated data otherwise you will see old-formatted data.
-    
-    
-    (venv) kartoza@kartoza-thinkbook:~/mysite$ ./manage.py shell  
-    Python 3.6.12 (default, Aug 17 2020, 23:45:20)   
-    [GCC 9.3.0] on linux  
-    Type "help", "copyright", "credits" or "license" for more information.  
-    (InteractiveConsole)  
-    >>> from app.models import FarmerSample  
-    >>> FarmerSample.objects.all()  
-    >>> FarmerSample.objects.all()  
-    <QuerySet [<FarmerSample: 1 | 2019-11-06 | 2019-11-08 00:00:00+00:00 | 2021-01-29 02:59:56.747043+00:00>, <FarmerSample: 2 | 2020-09-01 | 2020-09-03 00:00:00+00:00 | 2021-01-29 02:59:56.747789+00:00>]>
+
+```
+(venv) kartoza@kartoza-thinkbook:~/mysite$ ./manage.py shell
+Python 3.6.12 (default, Aug 17 2020, 23:45:20)
+[GCC 9.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from app.models import FarmerSample
+>>> FarmerSample.objects.all()
+>>> FarmerSample.objects.all()
+<QuerySet [<FarmerSample: 1 | 2019-11-06 | 2019-11-08 00:00:00+00:00 | 2021-01-29 02:59:56.747043+00:00>, <FarmerSample: 2 | 2020-09-01 | 2020-09-03 00:00:00+00:00 | 2021-01-29 02:59:56.747789+00:00>]>
+```
 
 According to what we defined in our `FarmerSample`'s `__str__`, we can see that the `created_at` is already set to 2 days after the `datum`. `updated_at` on the other hand, is set to the datetime when we did the migrations, because that was when we updated the data with specific `created_at` value.
 

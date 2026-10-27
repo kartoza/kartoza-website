@@ -31,21 +31,25 @@ I first created an event table with the ids of the routes and the distances at w
 
 Then because we're working in the local CRS for Cape Town, which does not come standard in GIS software, I had to add the the WGS19 CRS (called 'HBK_NO19' in QGIS) to PostGIS by running this query, giving it the arbitrary id of 40019:
 
-    ​INSERT INTO spatial_ref_sys (srid,proj4text)   
-        VALUES (40019,'+proj=tmerc +lat_0=0 +lon_0=19 +k=1 +x_0=0 +y_0=0 +axis=enu +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs');
+```
+INSERT INTO spatial_ref_sys (srid,proj4text)
+    VALUES (40019,'+proj=tmerc +lat_0=0 +lon_0=19 +k=1 +x_0=0 +y_0=0 +axis=enu +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs');
+```
 
 I then created a view like this for each route.
 
-    CREATE OR REPLACE VIEW markers_marathon AS  
-    WITH m19 AS   
-        (SELECT ST_Transform(m.geom,40019) AS geom, mm.dist, ST_Length(geom::geography) AS length   
-         FROM marathon m  
-         JOIN marker_events mm  
-         ON m.route_id = mm.route)  
-    SELECT row_number() over()::int4 AS id, ST_Lineinterpolatepoint(geom,dist/length) AS geom,   
-        CASE WHEN round(dist/1000.0,1)::character varying LIKE '%.0' THEN (dist/1000) ELSE round(dist/1000.0,1) END AS dist   
-        FROM m19  
-        WHERE dist <= length;
+```
+CREATE OR REPLACE VIEW markers_marathon AS
+WITH m19 AS
+    (SELECT ST_Transform(m.geom,40019) AS geom, mm.dist, ST_Length(geom::geography) AS length
+     FROM marathon m
+     JOIN marker_events mm
+     ON m.route_id = mm.route)
+SELECT row_number() over()::int4 AS id, ST_Lineinterpolatepoint(geom,dist/length) AS geom,
+    CASE WHEN round(dist/1000.0,1)::character varying LIKE '%.0' THEN (dist/1000) ELSE round(dist/1000.0,1) END AS dist
+    FROM m19
+    WHERE dist <= length;
+```
 
 The `WITH` subquery prepares a table that has the route in each row projected to the local CRS, along with the marker distance from the event table and the length of the route (very accurately calculated on the spheroid and taking into account elevation changes, since the geometry has Z values).
 

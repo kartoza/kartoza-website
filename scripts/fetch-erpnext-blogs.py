@@ -3,7 +3,8 @@
 Sync blog articles from ERPNext to Hugo with fidelity checking.
 
 Features:
-- Fetches all published blog articles from ERPNext
+- Fetches all blog articles from the ERPNext REST API; unpublished ones
+  become Hugo drafts, but only when they already exist locally
 - Compares with local Hugo content (text-only, ignoring formatting)
 - ERPNext is authoritative: overwrites local content when different
 - Auto-marks articles as reviewed when fidelity check passes
@@ -11,6 +12,7 @@ Features:
 
 Environment variables:
     ERPNEXT_URL: ERPNext instance URL (default: https://erp.kartoza.com)
+    ERPNEXT_API_KEY, ERPNEXT_API_SECRET: API credentials (required)
 
 Usage:
     ./fetch-erpnext-blogs.py              # Full sync with fidelity checking
@@ -19,6 +21,7 @@ Usage:
     ./fetch-erpnext-blogs.py --verbose    # Verbose output
 """
 
+import html
 import html2text
 import json
 import re
@@ -36,6 +39,7 @@ from fetch_erpnext_client import ERPNextClient
 from fetch_erpnext_utilities import (
     check_fidelity,
     find_local_file,
+    normalize_for_comparison,
     read_local_file,
     slugify,
     update_review_fields,
@@ -49,6 +53,11 @@ KARTOZA_URL = 'https://kartoza.com'
 
 # Image storage path relative to Hugo static folder
 IMAGE_DIR = 'img/blog/erpnext'
+
+PLACEHOLDER_IMAGE = '/img/blog/placeholder.png'
+# Placeholder paths that mean the post has no image of its own; the
+# second is a copy older syncs downloaded by mistake
+PLACEHOLDER_IMAGES = (PLACEHOLDER_IMAGE, f'/{IMAGE_DIR}/placeholder.png')
 
 
 def download_image(
@@ -65,14 +74,28 @@ def download_image(
         Local path to use in markdown
         (e.g., /img/blog/erpnext/xxx.png) or None on failure
     """
+    # Site paths that already exist, like the placeholder, stay as they are
+    if (url.startswith('/') and not url.startswith(('/files/', '/private/'))
+            and (static_dir / url.lstrip('/')).exists()):
+        return url
+
     # Normalize the URL
-    if url.startswith('/files/'):
+    if url.startswith('/private/files/'):
+        # Private files need auth, so fetch them from ERPNext directly
+        full_url = f"{ERPNEXT.base_url}{url}"
+        filename = url.split('/')[-1]
+    elif url.startswith('/files/'):
         full_url = f"{KARTOZA_URL}{url}"
         filename = url.split('/')[-1]
     elif url.startswith('/'):
         full_url = f"{KARTOZA_URL}{url}"
         filename = url.split('/')[-1]
-    elif 'kartoza.com/files/' in url or 'erp.kartoza.com/files/' in url:
+    elif re.search(r'kartoza\.erpnext\.com/(private/)?files/', url):
+        # The old ERPNext host is gone, the files now live on ERPNext
+        path = re.sub(r'^https?://kartoza\.erpnext\.com', '', url)
+        full_url = f"{ERPNEXT.base_url}{path}"
+        filename = url.split('/')[-1]
+    elif re.search(r'kartoza\.com/(private/)?files/', url):
         full_url = url
         filename = url.split('/')[-1]
     else:
@@ -153,7 +176,7 @@ def process_thumbnail(
         Local path or original URL if download failed
     """
     if not thumbnail_url:
-        return '/img/blog/placeholder.png'
+        return PLACEHOLDER_IMAGE
 
     local_path = download_image(thumbnail_url, static_dir, verbose=verbose)
     return local_path if local_path else thumbnail_url
@@ -182,17 +205,21 @@ def sync_blog(
     """
     erpnext_id = blog.get('name', '')
     title = blog.get('title', 'Untitled')
-    erpnext_content = blog.get('content') or blog.get('content_html') or ''
+    erpnext_content = get_blog_content(blog)
 
     # Find existing local file
     local_file = find_local_file(content_dir, erpnext_id, title)
+    result = read_local_file(local_file) if local_file else None
 
     if local_file and not force:
         # File exists - check fidelity (skip if force mode)
-        result = read_local_file(local_file)
         if result:
             local_frontmatter, local_content = result
-            if check_fidelity(local_content, erpnext_content):
+            # A change of published state always needs a rewrite
+            same_draft = (
+                bool(local_frontmatter.get('draft')) == bool(blog.get('draft'))
+            )
+            if same_draft and check_fidelity(local_content, erpnext_content):
                 # Content matches - fidelity passed
                 # Update review fields if not already set
                 if not local_frontmatter.get('reviewedBy'):
@@ -210,6 +237,9 @@ def sync_blog(
         # Force mode - overwrite existing file
         status = 'forced'
         filepath = local_file
+    elif blog.get('draft'):
+        # Unpublished and not on the site yet, so nothing to add
+        return {'status': 'skipped', 'fidelity': '-', 'file': ''}
     else:
         # New file
         status = 'new'
@@ -231,6 +261,39 @@ def sync_blog(
                 front_matter['thumbnail'], static_dir, verbose=verbose
             )
 
+    if result:
+        local_frontmatter, local_content = result
+
+        # Descriptions are often written by hand locally, so keep the local
+        # one, unless it is a cut-off part of the ERPNext one or broken HTML
+        local_description = str(local_frontmatter.get('description') or '')
+        erpnext_description = front_matter.get('description') or ''
+        # A full sentence was finished by hand, so it is not cut off
+        local_is_cut = (
+            not re.search(r'[.!?…"\')’”]$', local_description.strip())
+            and comparable_description(local_description)
+            in comparable_description(erpnext_description)
+            and len(erpnext_description) > len(local_description)
+        )
+        if (local_description and '<' not in local_description
+                and not local_is_cut):
+            front_matter['description'] = local_description
+
+        # Keep the local thumbnail when ERPNext has no image for the post
+        local_thumbnail = local_frontmatter.get('thumbnail')
+        if (front_matter.get('thumbnail') in PLACEHOLDER_IMAGES
+                and local_thumbnail
+                and local_thumbnail not in PLACEHOLDER_IMAGES):
+            front_matter['thumbnail'] = local_thumbnail
+
+        # Keep the previous review fields if the content itself did not change
+        if (local_frontmatter.get('reviewedDate')
+                and comparable_text(local_content) ==
+                comparable_text(content)):
+            for field in ('reviewedBy', 'reviewedDate'):
+                if local_frontmatter.get(field):
+                    front_matter[field] = local_frontmatter[field]
+
     # Build file content
     file_content = "---\n"
     file_content += yaml.dump(
@@ -248,174 +311,121 @@ def sync_blog(
     }
 
 
-def fetch_blog_list() -> list[dict]:
-    """Fetch list of all published blog posts using the public list API with pagination."""
+def comparable_description(text: str) -> str:
+    """Normalize a description: quotes, whitespace and case."""
+    text = text.replace('’', "'").replace('‘', "'")
+    text = text.replace('“', '"').replace('”', '"')
+    return ' '.join(text.split()).lower()
+
+
+def comparable_text(markdown: str) -> str:
+    """Normalize markdown so cleanup-only changes don't count as changes.
+
+    Applies the same cleanup as new content, and ignores code fences, which
+    older content had as indented code blocks.
+    """
+    markdown = clean_markdown(fix_list_markers(markdown))
+    markdown = re.sub(r'^\s*```.*$', '', markdown, flags=re.MULTILINE)
+    # Ignore table pipes and separator rows, as older content had no padding
+    markdown = re.sub(r'^[\s|:-]*-{3,}[\s|:-]*$', '', markdown, flags=re.MULTILINE)
+    markdown = markdown.replace('|', ' ')
+    return normalize_for_comparison(markdown)
+
+
+def fetch_blogger_name(blogger: str) -> str:
+    """Fetch a blogger's full name, falling back to the blogger ID."""
+    try:
+        response = ERPNEXT.get(
+            f"{ERPNEXT.base_url}/api/resource/Blogger/{blogger}"
+        )
+        response.raise_for_status()
+        return response.json().get('data', {}).get('full_name') or blogger
+    except (requests.RequestException, json.JSONDecodeError):
+        return blogger
+
+
+def find_first_image(post: dict) -> str:
+    """Find the first image URL in a blog post's content.
+
+    This is what the public blog list uses as cover image.
+    """
+    content = get_blog_content(post)
+    if post.get('content_type') == 'Markdown':
+        match = re.search(r'!\[[^\]]*\]\(<?([^)>\s]+)', content)
+        return match.group(1) if match else ''
+
+    img = BeautifulSoup(content, 'html.parser').find('img', src=True)
+    return img['src'] if img else ''
+
+
+def fetch_blogs() -> list[dict]:
+    """Fetch all blog posts, with their content, using the REST API.
+
+    The REST API has the source of every post: the Markdown of Markdown
+    posts, which the public page renders badly, and the full blog intro,
+    which the page's meta description cuts at 140 characters. Unpublished
+    posts are synced as Hugo drafts.
+    """
+    fields = [
+        'name', 'title', 'route', 'published', 'blogger', 'blog_category',
+        'published_on', 'creation', 'blog_intro', 'meta_image',
+        'content_type', 'content', 'content_md', 'content_html',
+    ]
+    try:
+        response = ERPNEXT.get(
+            f"{ERPNEXT.base_url}/api/resource/Blog Post",
+            params={
+                'fields': json.dumps(fields),
+                'order_by': 'published_on desc',
+                'limit_page_length': 0,
+            }
+        )
+        response.raise_for_status()
+        posts = response.json().get('data', [])
+    except (requests.RequestException, json.JSONDecodeError) as e:
+        print(f"Error fetching blogs: {e}", file=sys.stderr)
+        return []
+
+    blogger_names = {}
     blogs = []
-    limit_start = 0
-    page_size = 20
+    for post in posts:
+        category = post.get('blog_category') or 'uncategorised'
+        route = post.get('route') or f"blog/{category}/{post['name']}"
+        # The category tag comes from the URL path, like the site's URLs
+        parts = route.strip('/').split('/')
+        if len(parts) >= 3:
+            category = parts[1]
 
-    while True:
-        url = f"{ERPNEXT.base_url}/api/method/frappe.www.list.get"
-        params = {
-            'doctype': 'Blog Post',
-            'limit_start': limit_start,
-            'pathname': '/blog'
-        }
+        blogger = post.get('blogger') or 'Kartoza'
+        if blogger not in blogger_names:
+            blogger_names[blogger] = fetch_blogger_name(blogger)
 
-        try:
-            response = ERPNEXT.get(url, params=params)
-            response.raise_for_status()
-            data = response.json()
-        except requests.RequestException as e:
-            print(
-                f"Error fetching blog list "
-                f"(page {limit_start // page_size + 1}): {e}",
-                file=sys.stderr)
-            break
-        except json.JSONDecodeError as e:
-            print(f"Error parsing blog list response: {e}", file=sys.stderr)
-            break
-
-        message = data.get('message', {})
-        raw_result = message.get('raw_result', '[]')
-
-        # Parse the raw_result JSON string
-        try:
-            page_blogs = json.loads(
-                raw_result) if isinstance(raw_result, str) else raw_result
-        except json.JSONDecodeError:
-            page_blogs = []
-
-        if not page_blogs:
-            break
-
-        # Transform to our format
-        for blog in page_blogs:
-            route = blog.get('route', '')
-            blogs.append({
-                'name': f"/{route}" if route and not route.startswith(
-                    '/') else route,
-                'title': blog.get('title', 'Untitled'),
-                'blog_category': blog.get('blog_category', 'uncategorised'),
-                'published_on': blog.get('published_on', ''),
-                'blogger': blog.get('blogger', 'Kartoza'),
-                'content': blog.get('content', ''),
-                'cover_image': blog.get('cover_image', ''),
-                'modified': blog.get('published_on', ''),
-                # Use published date as modified
-            })
-
-        # Check if there are more pages
-        show_more = message.get('show_more', False)
-        next_start = message.get('next_start', 0)
-
-        if not show_more or next_start <= limit_start:
-            break
-
-        limit_start = next_start
+        published_on = post.get('published_on') or post.get('creation') or ''
+        blogs.append({
+            'name': f"/{route.strip('/')}",
+            # Collapse stray whitespace, newlines and &nbsp; from the editor
+            'title': ' '.join(
+                html.unescape(post.get('title') or '').split()
+            ) or 'Untitled',
+            'blog_intro': ' '.join(
+                html.unescape(post.get('blog_intro') or '').split()
+            ),
+            'blogger': blogger_names[blogger],
+            'published_on': published_on,
+            'modified': published_on,  # Use published date as modified
+            'blog_category': category,
+            'content_type': post.get('content_type'),
+            'content': post.get('content') or '',
+            'content_md': post.get('content_md') or '',
+            'content_html': post.get('content_html') or '',
+            # The public list uses the first image in the content as cover
+            'featured_image': (
+                post.get('meta_image') or find_first_image(post)
+            ),
+            'draft': not post.get('published'),
+        })
 
     return blogs
-
-
-def fetch_blog_detail(name: str) -> dict | None:
-    """
-    Fetch full blog post details.
-
-    Since fetch_blog_list now returns full details, this function just returns
-    the blog data if it was passed directly, or fetches from the web page as fallback.
-    """
-    # If name is already a dict with full data, return it
-    if isinstance(name, dict):
-        return name
-
-    # Fallback: scrape the public blog page
-    url = f"{ERPNEXT.base_url}{name}"
-
-    try:
-        response = ERPNEXT.get(url)
-        response.raise_for_status()
-    except requests.RequestException as e:
-        print(f"Error fetching blog '{name}': {e}", file=sys.stderr)
-        return None
-
-    soup = BeautifulSoup(response.text, 'html.parser')
-
-    # Extract metadata from meta tags
-    def get_meta(attr_name, attr_value):
-        tag = soup.find('meta', attrs={attr_name: attr_value})
-        return tag.get('content', '') if tag else ''
-
-    # Get title from og:title (has proper capitalization) or meta name
-    title = get_meta(
-        'property', 'og:title'
-    ) or get_meta('name', 'title') or get_meta(
-        'name', 'name'
-    )
-    if not title:
-        h1 = soup.find('h1', class_='blog-title')
-        title = h1.get_text(strip=True) if h1 else 'Untitled'
-    # Clean up title prefix
-    title = re.sub(r'^Kartoza\s*-\s*', '', title)
-
-    # Get description/intro
-    description = get_meta(
-        'name', 'description'
-    ) or get_meta('property', 'og:description')
-    if not description:
-        intro = soup.find('p', class_='blog-intro')
-        description = intro.get_text(strip=True) if intro else ''
-
-    # Get author - prefer full name from avatar/author link over meta tag username
-    author = None
-    # Try to get full name from avatar span
-    avatar_span = soup.find('span', class_='avatar', attrs={'title': True})
-    if avatar_span:
-        author = avatar_span.get('title')
-    # Or from author link
-    if not author:
-        author_link = soup.find(
-            'a', href=lambda h: h and '/blog?blogger=' in h
-        )
-        if author_link:
-            author = author_link.get_text(strip=True)
-    # Fallback to meta tag
-    if not author:
-        author = get_meta(
-            'name', 'author'
-        ) or get_meta('property', 'og:author') or 'Kartoza'
-
-    # Get published date
-    published_on = get_meta(
-        'name', 'datePublished'
-    ) or get_meta('property', 'og:published_on')
-    if not published_on:
-        time_tag = soup.find('time', attrs={'datetime': True})
-        published_on = time_tag['datetime'] if time_tag else ''
-
-    # Get featured image
-    image = get_meta('name', 'image') or get_meta('property', 'og:image') or ''
-
-    # Get content from article body
-    content = ''
-    article_body = soup.find('div', attrs={'itemprop': 'articleBody'})
-    if article_body:
-        content = str(article_body)
-
-    # Extract category from URL path
-    parts = name.split('/')
-    category = parts[2] if len(parts) >= 3 else 'uncategorised'
-
-    return {
-        'name': name,
-        'title': title,
-        'blog_intro': description,
-        'blogger': author,
-        'published_on': published_on,
-        'modified': published_on,  # Use published date as modified
-        'blog_category': category,
-        'content': content,
-        'featured_image': image,
-    }
 
 
 def blog_to_hugo_frontmatter(blog: dict, mark_reviewed: bool = False) -> dict:
@@ -432,10 +442,7 @@ def blog_to_hugo_frontmatter(blog: dict, mark_reviewed: bool = False) -> dict:
         date_str = datetime.now().strftime('%Y-%m-%d')
 
     # Get thumbnail from featured_image or use placeholder
-    # Get thumbnail from cover_image (API) or featured_image (scraping) or use placeholder
-    thumbnail = blog.get(
-        'cover_image', ''
-    ) or blog.get('featured_image', '') or '/img/blog/placeholder.png'
+    thumbnail = blog.get('featured_image', '') or PLACEHOLDER_IMAGE
     # Ensure full URL for external images
     if thumbnail and not thumbnail.startswith(('http://', 'https://', '/')):
         thumbnail = f"{ERPNEXT.base_url}/{thumbnail}"
@@ -443,7 +450,7 @@ def blog_to_hugo_frontmatter(blog: dict, mark_reviewed: bool = False) -> dict:
     # Build front matter
     front_matter = {
         'title': blog.get('title', 'Untitled'),
-        'description': blog.get('blog_intro', '')[:200] if blog.get(
+        'description': blog.get('blog_intro', '')[:500] if blog.get(
             'blog_intro') else '',
         'date': date_str,
         'author': blog.get('blogger', 'Kartoza'),
@@ -460,6 +467,10 @@ def blog_to_hugo_frontmatter(blog: dict, mark_reviewed: bool = False) -> dict:
         category = category.replace('-', ' ').title()
         front_matter['tags'].append(category)
 
+    # Unpublished in ERPNext
+    if blog.get('draft'):
+        front_matter['draft'] = True
+
     # Add review fields if requested
     if mark_reviewed:
         front_matter['reviewedBy'] = 'Automated Check'
@@ -468,12 +479,25 @@ def blog_to_hugo_frontmatter(blog: dict, mark_reviewed: bool = False) -> dict:
     return front_matter
 
 
+def get_blog_content(blog: dict) -> str:
+    """Get the blog content from the field matching its content type."""
+    if blog.get('content_type') == 'Markdown':
+        return blog.get('content_md') or ''
+    if blog.get('content_type') == 'HTML':
+        return blog.get('content_html') or ''
+    return blog.get('content') or blog.get('content_html') or ''
+
+
 def blog_to_hugo_content(blog: dict) -> str:
     """Convert ERPNext blog content to Hugo markdown using html2text."""
-    content = blog.get('content') or blog.get('content_html') or ''
+    content = get_blog_content(blog)
 
     if not content:
         return ''
+
+    # Markdown posts from the API need no conversion
+    if blog.get('content_type') == 'Markdown':
+        return clean_markdown(content)
 
     # Configure html2text for clean markdown output
     h = html2text.HTML2Text()
@@ -485,9 +509,558 @@ def blog_to_hugo_content(blog: dict) -> str:
     h.inline_links = True
     h.protect_links = True
     h.unicode_snob = True  # Use unicode instead of ASCII
+    # Tables with full pipes; without them a one-column table reads as a
+    # setext heading (MD003, MD022)
+    h.pad_tables = True
+
+    # Take code blocks out first, so html2text and the list fixes can't
+    # mangle them
+    html, code_blocks = extract_code_blocks(
+        fix_inline_formatting(
+            fix_quill_blockquotes(fix_quill_lists(fix_split_lists(content)))
+        )
+    )
 
     # Convert HTML to markdown
-    markdown = h.handle(content)
+    markdown = fix_list_markers(h.handle(html))
+
+    return clean_markdown(
+        nest_code_in_lists(restore_code_blocks(markdown, code_blocks))
+    )
+
+
+def nest_code_in_lists(markdown: str) -> str:
+    """Indent code blocks between numbered steps into the step above.
+
+    A code block at the left margin ends a list, so the next step starts a
+    new list at "2." or "6.", which markdownlint rejects (MD029). Indented,
+    the code belongs to the step above and the steps stay one list.
+    """
+    lines = markdown.split('\n')
+    result = []
+    i = 0
+    last_item = None  # (number, content indent) of the last top-level step
+    while i < len(lines):
+        line = lines[i]
+        item = re.match(r'(\d+)[.)]( +)', line)
+        if item:
+            last_item = (int(item.group(1)), len(item.group(0)))
+        elif line.startswith('```') and last_item:
+            # Find the end of the code block and the next non-blank line
+            end = i + 1
+            while end < len(lines) and not lines[end].startswith('```'):
+                end += 1
+            following = end + 1
+            while following < len(lines) and not lines[following].strip():
+                following += 1
+            next_item = (
+                re.match(r'(\d+)[.)] ', lines[following])
+                if following < len(lines) else None
+            )
+            if (end < len(lines) and next_item
+                    and int(next_item.group(1)) == last_item[0] + 1):
+                indent = ' ' * last_item[1]
+                result.extend(
+                    indent + code_line if code_line else code_line
+                    for code_line in lines[i:end + 1]
+                )
+                i = end + 1
+                continue
+        elif line.strip() and not line.startswith(' '):
+            last_item = None  # Text at the left margin ends the list
+        result.append(line)
+        i += 1
+
+    return '\n'.join(result)
+
+
+CODE_BLOCK_PLACEHOLDER = 'KARTOZACODEBLOCK'
+
+
+def extract_code_blocks(html: str) -> tuple[str, list[str]]:
+    """Replace <pre> blocks with placeholders and render them as fenced code.
+
+    Quill stores each code line as a <div class="ql-code-block"> and indents
+    with non-breaking spaces, which html2text turns into code with a blank
+    line after every line.
+    """
+    soup = BeautifulSoup(html, 'html.parser')
+    code_blocks = []
+
+    # Multi-line inline code that is a paragraph of its own is really a code
+    # block; html2text would turn it into inline code spanning lines (MD038)
+    for code in soup.find_all('code'):
+        parent = code.parent
+        if code.find_parent('pre') or not code.find('br') or parent is None:
+            continue
+        others = [
+            child for child in parent.contents
+            if child is not code and (not isinstance(child, str) or child.strip())
+        ]
+        if parent.name not in ('p', 'div') or others:
+            continue
+        for br in code.find_all('br'):
+            br.replace_with('\n')
+        text = code.get_text()
+
+        # Pieces in paragraphs that follow each other form one code block
+        previous = parent.previous_sibling
+        while isinstance(previous, str) and not previous.strip():
+            previous = previous.previous_sibling
+        if getattr(previous, 'name', None) == 'pre' and previous.get(
+                'data-from-code'):
+            previous.string = previous.get_text() + '\n' + text
+            parent.decompose()
+        else:
+            pre = soup.new_tag('pre', attrs={'data-from-code': '1'})
+            pre.string = text
+            parent.replace_with(pre)
+
+    for pre in soup.find_all('pre'):
+        quill_lines = pre.select('div.ql-code-block')
+        if quill_lines:
+            lines = [div.get_text() for div in quill_lines]
+            language = quill_lines[0].get('data-language', '')
+        else:
+            # get_text() drops <br>, which some code blocks use as newlines
+            for br in pre.find_all('br'):
+                br.replace_with('\n')
+            lines = pre.get_text().split('\n')
+            language = ''
+        if language == 'plain':
+            language = ''
+
+        code = '\n'.join(lines).replace('\xa0', ' ').strip('\n')
+        code_blocks.append(f'```{language}\n{code}\n```')
+
+        placeholder = soup.new_tag('p')
+        placeholder.string = f'{CODE_BLOCK_PLACEHOLDER}{len(code_blocks) - 1}'
+        pre.replace_with(placeholder)
+
+    return str(soup), code_blocks
+
+
+def restore_code_blocks(markdown: str, code_blocks: list[str]) -> str:
+    """Put the code blocks taken out by extract_code_blocks back.
+
+    The placeholder's prefix, which is the indent and any blockquote
+    markers, is repeated on every line of the code block.
+    """
+    def restore(match):
+        prefix = match.group(1)
+        code = code_blocks[int(match.group(2))]
+        return '\n'.join(
+            prefix + line if line else prefix.rstrip()
+            for line in code.split('\n')
+        )
+
+    return re.sub(
+        rf'^([ >]*){CODE_BLOCK_PLACEHOLDER}(\d+)$', restore, markdown,
+        flags=re.MULTILINE
+    )
+
+
+def fix_list_markers(markdown: str) -> str:
+    """Fix html2text list output for markdownlint (MD004, MD007).
+
+    html2text indents every list item by two extra spaces and uses "*"
+    bullets; markdownlint wants "-" bullets starting at the left margin.
+    The markdown must not contain code blocks, as code lines can look like
+    list items.
+    """
+    lines = []
+    for line in markdown.split('\n'):
+        if re.match(
+                rf' {{2}}\s*(?:[-*+] |\d+\. |{CODE_BLOCK_PLACEHOLDER})', line
+        ):
+            line = line[2:]
+        # Leave "* * *" horizontal rules alone
+        if not re.fullmatch(r'\*( \*)+', line.strip()):
+            line = re.sub(r'^(\s*)[*+](?= )', r'\1-', line)
+        lines.append(line)
+
+    return '\n'.join(lines)
+
+
+def fix_split_lists(html: str) -> str:
+    """Join lists that the editor split up, and drop empty paragraphs.
+
+    Some posts have every item in its own list wrapped in a second list,
+    like <ul><ul><li>, with empty paragraphs between them. html2text then
+    indents every item (MD007) and restarts every numbered item at 1.
+    """
+    soup = BeautifulSoup(html, 'html.parser')
+
+    # Empty paragraphs only add blank lines: <p></p>, <p><br>&nbsp;</p>
+    for paragraph in soup.find_all('p'):
+        if (not paragraph.get_text().replace('\xa0', '').strip()
+                and not paragraph.find(['img', 'iframe', 'video'])):
+            paragraph.decompose()
+
+    # A list holding nothing but lists is unwrapped: <ul><ul><li>
+    unwrapped = True
+    while unwrapped:
+        unwrapped = False
+        for outer in soup.find_all(['ul', 'ol']):
+            children = [
+                child for child in outer.children
+                if not isinstance(child, str) or child.strip()
+            ]
+            if children and all(
+                    getattr(child, 'name', None) in ('ul', 'ol')
+                    for child in children):
+                outer.unwrap()
+                unwrapped = True
+                break
+
+    # Lists of the same kind next to each other are one list
+    for current in soup.find_all(['ul', 'ol']):
+        if current.parent is None:
+            continue  # Already merged into the previous one
+        following = current.next_sibling
+        while following is not None:
+            if isinstance(following, str) and not following.strip():
+                following = following.next_sibling
+                continue
+            if getattr(following, 'name', None) != current.name:
+                break
+            for item in list(following.children):
+                current.append(item.extract())
+            next_sibling = following.next_sibling
+            following.decompose()
+            following = next_sibling
+
+    return str(soup)
+
+
+INLINE_TAGS = ['code', 'strong', 'b', 'em', 'i']
+
+
+def fix_inline_formatting(html: str) -> str:
+    """Tidy inline code and emphasis that older editors left messy.
+
+    Pasted posts split one piece of code over several <code> tags inside
+    <span>s, and have emphasis around only spaces or punctuation, or with
+    spaces inside it. html2text turns these into "`a``b`", "_._" or
+    "** text**" (MD037, MD038).
+    """
+    soup = BeautifulSoup(html, 'html.parser')
+
+    def outside_pre(tags):
+        return [tag for tag in tags if not tag.find_parent('pre')]
+
+    # Spans and fonts only carry styling, which markdown can't keep
+    for tag in outside_pre(soup.find_all(['span', 'font'])):
+        tag.unwrap()
+    soup = BeautifulSoup(str(soup), 'html.parser')  # Join the split strings
+
+    # Emphasis around nothing but spaces or punctuation is no emphasis, and
+    # code around nothing but spaces or a <br> is no code
+    for tag in outside_pre(soup.find_all(['strong', 'b', 'em', 'i'])):
+        if tag.parent is not None and not re.search(r'\w', tag.get_text()):
+            tag.unwrap()
+    for tag in outside_pre(soup.find_all('code')):
+        # A <br> at the end of inline code would break it over two lines
+        for br in reversed(tag.find_all('br')):
+            after = ''.join(
+                text for text in br.find_all_next(string=True)
+                if tag in text.parents
+            )
+            if after.strip():
+                break
+            br.decompose()
+        if tag.parent is not None and not tag.get_text().strip():
+            tag.unwrap()
+
+    # A markdown table row is one line, so table cells can't break lines
+    for cell in soup.find_all(['td', 'th']):
+        for br in cell.find_all('br'):
+            br.replace_with(' ')
+        for paragraph in cell.find_all('p'):
+            paragraph.insert_after(' ')
+            paragraph.unwrap()
+
+    # A <br> at the end of a paragraph or list item breaks nothing
+    for br in outside_pre(soup.find_all('br')):
+        rest = br.next_siblings
+        if br.parent is not None and br.parent.name in ('p', 'li') and not any(
+                not isinstance(sibling, str) or sibling.strip()
+                for sibling in rest):
+            br.decompose()
+
+    # The same tags right next to each other are one: <code>a</code><code>b
+    for tag in outside_pre(soup.find_all(INLINE_TAGS)):
+        if tag.parent is None:
+            continue
+        following = tag.next_sibling
+        while getattr(following, 'name', None) == tag.name:
+            for child in list(following.children):
+                tag.append(child.extract())
+            following.decompose()
+            following = tag.next_sibling
+
+    # Spaces at the edges go outside: <strong>Note: </strong> -> **Note:**
+    # Innermost first, so a space moved out of an <em> also leaves the
+    # <strong> around it
+    for tag in reversed(outside_pre(soup.find_all(INLINE_TAGS))):
+        if tag.parent is None or not tag.get_text().strip():
+            continue
+        first = tag.contents[0]
+        if isinstance(first, str) and first != first.lstrip():
+            first.replace_with(first.lstrip())
+            tag.insert_before(' ')
+        last = tag.contents[-1]
+        if isinstance(last, str) and last != last.rstrip():
+            last.replace_with(last.rstrip())
+            tag.insert_after(' ')
+
+    return str(soup)
+
+
+def fix_quill_blockquotes(html: str) -> str:
+    """Merge Quill's one-line blockquotes into one blockquote.
+
+    Quill stores every line of a quote as its own <blockquote>, which
+    html2text renders as separate quotes with blank lines between them
+    (MD028).
+    """
+    soup = BeautifulSoup(html, 'html.parser')
+
+    def next_blockquote(element):
+        """The next sibling if it is a blockquote with only whitespace between."""
+        sibling = element.next_sibling
+        while isinstance(sibling, str) and not sibling.strip():
+            sibling = sibling.next_sibling
+        if getattr(sibling, 'name', None) == 'blockquote':
+            return sibling
+        return None
+
+    for blockquote in soup.find_all('blockquote'):
+        if blockquote.parent is None:
+            continue  # Already merged into the previous one
+        following = next_blockquote(blockquote)
+        while following is not None:
+            blockquote.append(soup.new_tag('br'))
+            for child in list(following.children):
+                blockquote.append(child.extract())
+            following.decompose()
+            following = next_blockquote(blockquote)
+
+    return str(soup)
+
+
+def fix_quill_lists(html: str) -> str:
+    """Convert Quill's flat lists into nested HTML lists.
+
+    Quill stores every list as a flat <ol>, with the list type in the
+    data-list attribute and the nesting level in a ql-indent-N class.
+    html2text does not know these, so it renders a flat numbered list.
+    """
+    soup = BeautifulSoup(html, 'html.parser')
+
+    # Quill UI helpers, not content
+    for ui in soup.select('span.ql-ui'):
+        ui.decompose()
+
+    for quill_list in soup.find_all(['ol', 'ul']):
+        items = quill_list.find_all('li', recursive=False)
+        if not any(li.has_attr('data-list') for li in items):
+            continue
+
+        roots = []
+        stack = []  # (level, list tag) from outermost to innermost
+        for li in items:
+            level = 0
+            for cls in li.get('class', []):
+                match = re.fullmatch(r'ql-indent-(\d+)', cls)
+                if match:
+                    level = int(match.group(1))
+            tag = 'ol' if li.get('data-list') == 'ordered' else 'ul'
+            del li['data-list']
+            li['class'] = [
+                cls for cls in li.get('class', [])
+                if not cls.startswith('ql-indent-')
+            ]
+
+            # Close deeper lists, and a same-level list of another type
+            while stack and stack[-1][0] > level:
+                stack.pop()
+            if stack and stack[-1][0] == level and stack[-1][1].name != tag:
+                stack.pop()
+
+            if not stack or stack[-1][0] < level:
+                new_list = soup.new_tag(tag)
+                if stack:
+                    stack[-1][1].find_all('li', recursive=False)[-1].append(
+                        new_list
+                    )
+                else:
+                    roots.append(new_list)
+                stack.append((level, new_list))
+
+            stack[-1][1].append(li.extract())
+
+        quill_list.replace_with(*roots)
+
+    # Quill keeps counting ordered lists that are only split by code blocks
+    for ordered_list in soup.find_all('ol'):
+        previous = ordered_list.find_previous_sibling()
+        while previous is not None and previous.name == 'pre':
+            previous = previous.find_previous_sibling()
+        if previous is not None and previous.name == 'ol':
+            start = int(previous.get('start', 1))
+            count = len(previous.find_all('li', recursive=False))
+            ordered_list['start'] = str(start + count)
+
+    return str(soup)
+
+
+def trim_code_span(match: re.Match, line: str) -> str:
+    """Trim an inline code span, keeping a space to separate it from words."""
+    before = line[match.start() - 1] if match.start() > 0 else ' '
+    after = line[match.end()] if match.end() < len(line) else ' '
+    lead = ' ' if match.group(1) and before.isalnum() else ''
+    trail = ' ' if match.group(3) and after.isalnum() else ''
+    return f'{lead}`{match.group(2)}`{trail}'
+
+
+def wrap_bare_urls(line: str) -> str:
+    """Turn bare URLs into autolinks: "see https://x.org." -> "see <https://x.org>." (MD034).
+
+    Inline code, markdown links and existing autolinks are left alone.
+    """
+    def wrap(match):
+        url = match.group(0)
+        # Sentence punctuation after a URL is not part of it
+        trailing = re.search(r'[.,;:!?]+$', url)
+        if trailing:
+            url, rest = url[:trailing.start()], trailing.group(0)
+        else:
+            rest = ''
+        if url.endswith(')') and '(' not in url:
+            url, rest = url[:-1], ')' + rest
+        return f'<{url}>{rest}'
+
+    parts = re.split(r'(`[^`]*`|!?\[[^\]]*\]\([^)]*\)|<[^>\s]+>)', line)
+    return ''.join(
+        part if i % 2 else re.sub(r'https?://[^\s<>`"\]]+', wrap, part)
+        for i, part in enumerate(parts)
+    )
+
+
+def clean_markdown(markdown: str) -> str:
+    """Clean up markdown so the output passes markdownlint.
+
+    Drops zero-width characters, empty headings and trailing whitespace,
+    collapses multiple blank lines (MD009, MD012), and makes links to
+    kartoza.com relative.
+    """
+    # Zero-width characters usually come from copy-pasting into ERPNext
+    markdown = re.sub(r'[​‌‍﻿]', '', markdown)
+
+    # https://www.kartoza.com/en/page/ -> /en/page/
+    markdown = re.sub(
+        r'(\]\(<?)https?://(?:www\.)?kartoza\.com(?![\w.-])/?', r'\1/',
+        markdown
+    )
+
+    # Move spaces out of link text: "[ here ](url)" -> " [here](url) " (MD039)
+    markdown = re.sub(
+        r'(?<!!)\[( *)([^\]\n]*?)( *)\]\(([^)\n]*)\)',
+        r'\1[\2](\4)\3', markdown
+    )
+
+    lines = []
+    in_code_block = False
+    # (original level, new level) of the enclosing headings
+    heading_stack = []
+    # Next number of the open ordered lists, by indent
+    list_numbers = {}
+    # Whether the previous line was a heading, which needs a blank line below
+    after_heading = False
+    for line in markdown.split('\n'):
+        stripped = line.rstrip()
+        if stripped.lstrip().startswith(('```', '~~~')):
+            in_code_block = not in_code_block
+        # Drop empty headings like "###", but not "#" comments in code
+        if not in_code_block and re.fullmatch(r'#{1,6}', stripped):
+            continue
+        # Headings may only go one level deeper at a time (MD001). The page
+        # title is the h1, so the first heading can be at most an h2.
+        heading = re.match(r'(#{1,6})(\s.*)$', stripped)
+        if not in_code_block and heading:
+            level = len(heading.group(1))
+            while heading_stack and heading_stack[-1][0] >= level:
+                heading_stack.pop()
+            parent_level = heading_stack[-1][1] if heading_stack else 1
+            new_level = min(level, parent_level + 1)
+            heading_stack.append((level, new_level))
+            # No trailing punctuation like "Overview:" (MD026); "?" is fine
+            text = re.sub(r'\\?[.,;:!。，；：！]+$', '', heading.group(2).rstrip())
+            stripped = '#' * new_level + (text if text.strip() else heading.group(2))
+        # Number ordered list items in sequence, from the first item's number
+        # (MD029). Markdown renders them in sequence anyway, so typos like a
+        # repeated "4)" don't change the page.
+        if not in_code_block and stripped:
+            indent = len(stripped) - len(stripped.lstrip(' '))
+            item = re.match(r'( *)(\d+)([.)]\s.*)$', stripped)
+            bullet = re.match(r' *[-*+]\s', stripped)
+            for open_indent in list(list_numbers):
+                # Deeper lists end at any line that is not deeper still,
+                # and a list ends at text or a bullet at its own indent
+                if (open_indent > indent
+                        or open_indent == indent and not item):
+                    del list_numbers[open_indent]
+            if item:
+                number = list_numbers.get(indent, int(item.group(2)))
+                list_numbers[indent] = number + 1
+                stripped = f'{item.group(1)}{number}{item.group(3)}'
+            elif not bullet and indent == 0:
+                list_numbers.clear()
+        if not in_code_block:
+            # One space after a blockquote ">" (MD027): "> text", not
+            # ">  text". Nested list items in a quote keep their indent.
+            stripped = re.sub(
+                r'^((?:> ?)*>) {2,}(?![-*+] |\d+[.)] )(?=\S)', r'\1 ',
+                stripped
+            )
+            # "*" and "+" bullets become "-" (MD004), but not "* * *" rules
+            if not re.fullmatch(r'\*( \*)+', stripped.strip()):
+                stripped = re.sub(r'^(\s*)[*+](?= )', r'\1-', stripped)
+            # A list right below a sentence needs a blank line before it
+            # (MD032). Only "-" and "1." lists, as other numbers can't start
+            # a list there and would change the page.
+            previous = lines[-1] if lines else ''
+            if (re.match(r'(- |1[.)] )', stripped) and previous.strip()
+                    and not previous.startswith((' ', '>'))
+                    and not re.match(r'([-*+]|\d+[.)]) ', previous)):
+                lines.append('')
+            stripped = wrap_bare_urls(stripped)
+        # Drop spaces inside inline code: "a ` code `." -> "a `code`." (MD038)
+        if not in_code_block and '``' not in stripped:
+            stripped = re.sub(
+                r'`( *)([^`\n]*?[^ `\n])( *)`',
+                lambda match: trim_code_span(match, stripped), stripped
+            )
+        # Headings need blank lines above and below them (MD022)
+        if after_heading and stripped:
+            lines.append('')
+        after_heading = bool(heading) and not in_code_block
+        if after_heading and lines and lines[-1].strip():
+            lines.append('')
+        # Empty blockquote lines are just ">" (MD027), and one is enough
+        if not in_code_block and re.fullmatch(r'[> ]*>', stripped):
+            stripped = re.sub(r'> +', '>', stripped)
+            if not lines or lines[-1] != stripped:
+                lines.append(stripped)
+            continue
+        # Keep two-space hard line breaks, drop any other trailing whitespace
+        if stripped and line.endswith('  '):
+            stripped += '  '
+        lines.append(stripped)
+
+    # Collapse multiple blank lines
+    markdown = re.sub(r'\n{3,}', '\n\n', '\n'.join(lines))
 
     return markdown.strip()
 
@@ -556,6 +1129,7 @@ def print_status_table(results: list[dict], dry_run: bool = False) -> None:
             title,
             r.get('date', '-')[:10],
             r.get('author', '-')[:15],
+            'Unpublished' if r.get('draft') else 'Published',
             status,
             fidelity_str
         ])
@@ -574,7 +1148,7 @@ def print_status_table(results: list[dict], dry_run: bool = False) -> None:
     print("=" * 80, file=sys.stderr)
 
     # Print table using tabulate
-    headers = ['Title', 'Date', 'Author', 'Status', 'Fidelity']
+    headers = ['Title', 'Date', 'Author', 'State', 'Status', 'Fidelity']
     print(tabulate(table_data, headers=headers, tablefmt='simple'),
           file=sys.stderr)
 
@@ -584,11 +1158,14 @@ def print_status_table(results: list[dict], dry_run: bool = False) -> None:
     unchanged_count = sum(1 for r in results if r['status'] == 'unchanged')
     updated_count = sum(1 for r in results if r['status'] == 'updated')
     error_count = sum(1 for r in results if r['status'] == 'error')
+    skipped_count = sum(1 for r in results if r['status'] == 'skipped')
+    unpublished_count = sum(1 for r in results if r.get('draft'))
 
     print(
         f"  Summary: {len(results)} total | {new_count} new | "
         f"{unchanged_count} unchanged | "
-        f"{updated_count} updated | {error_count} errors",
+        f"{updated_count} updated | {skipped_count} skipped | "
+        f"{error_count} errors | {unpublished_count} unpublished",
         file=sys.stderr)
     print("=" * 80, file=sys.stderr)
 
@@ -646,14 +1223,27 @@ def main():
         )
         sys.exit(2)
 
+    if not ERPNEXT.has_credentials:
+        print(
+            "Warning: API credentials not set; the Blog Post REST API "
+            "needs ERPNEXT_API_KEY and ERPNEXT_API_SECRET and may return "
+            "HTTP 401/403.",
+            file=sys.stderr
+        )
+
     print(f"Fetching blog list from {ERPNEXT.base_url}...", file=sys.stderr)
-    blogs = fetch_blog_list()
+    blogs = fetch_blogs()
 
     if not blogs:
         print("No blogs found or error occurred.", file=sys.stderr)
         sys.exit(2)
 
-    print(f"Found {len(blogs)} published blogs", file=sys.stderr)
+    unpublished_count = sum(1 for blog in blogs if blog.get('draft'))
+    print(
+        f"Found {len(blogs) - unpublished_count} published and "
+        f"{unpublished_count} unpublished (draft) blogs",
+        file=sys.stderr
+    )
 
     if args.list:
         # Just list the blogs
@@ -664,7 +1254,8 @@ def main():
                 'date': str(blog.get('published_on', ''))[:10],
                 'author': blog.get('blogger', 'Unknown'),
                 'status': 'available',
-                'fidelity': '-'
+                'fidelity': '-',
+                'draft': bool(blog.get('draft'))
             })
         print_status_table(results, dry_run=True)
         return
@@ -677,28 +1268,15 @@ def main():
         if not blog_name:
             continue
 
-        # Fetch full blog content by scraping the web page (has proper HTML formatting)
         if args.verbose:
             print(
-                f"Fetching {i + 1}/{len(blogs)}: "
+                f"Syncing {i + 1}/{len(blogs)}: "
                 f"{blog.get('title', 'Untitled')}",
                 file=sys.stderr)
-        blog_detail = fetch_blog_detail(blog_name)
-        if not blog_detail:
-            results.append({
-                'title': blog.get('title', 'Untitled'),
-                'date': str(blog.get('published_on', ''))[:10],
-                'author': blog.get('blogger', 'Unknown'),
-                'status': 'error',
-                'fidelity': '-',
-                'file': ''
-            })
-            errors_occurred = True
-            continue
 
         # Sync the blog
         sync_result = sync_blog(
-            blog_detail, content_dir, static_dir,
+            blog, content_dir, static_dir,
             dry_run=args.dry_run, force=args.force,
             skip_images=args.skip_images, verbose=args.verbose
         )
@@ -709,7 +1287,8 @@ def main():
             'author': blog.get('blogger', 'Unknown'),
             'status': sync_result['status'],
             'fidelity': sync_result['fidelity'],
-            'file': sync_result.get('file', '')
+            'file': sync_result.get('file', ''),
+            'draft': bool(blog.get('draft'))
         })
 
     # Output results

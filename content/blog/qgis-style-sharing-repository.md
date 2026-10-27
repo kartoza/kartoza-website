@@ -14,17 +14,8 @@ title: QGIS Style Sharing Repository
 
 Woohoo! A new way to share styles in QGIS! Work sponsored by Kartoza.
 
-  
-
-
 Sumandari (one of our developers) has been working on an exciting new functionality that she as been adding onto the QGIS plug-in website.
 
-  
-
-
-﻿Here is the link to the session [QGIS Style Repositiry Demo](<https://youtu.be/lQAMvTgDQl4>)
-
-  
-
+Here is the link to the session [QGIS Style Repositiry Demo](<https://youtu.be/lQAMvTgDQl4>)
 
 Don't forget to leave your comments and subscribe to get more content!

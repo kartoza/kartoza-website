@@ -6,7 +6,7 @@ description: As a QGIS full stack web developer funded by QGIS I had the privile
 erpnext_id: /blog/conference/first-QGIS-conference-experience-a-journey-of-collaboration-and-innovation
 erpnext_modified: '2024-11-15'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-26'
 tags:
 - Conference
 thumbnail: /img/blog/erpnext/iuoUXZT.jpg
@@ -65,11 +65,11 @@ Outside of the conference, I had a wonderful time exploring Bratislava with Selm
 
 ![](/img/blog/erpnext/tZ7Qo0F.png)
 
-**_From left to right:_**_Selma and I at the conference entrance, Street from the STU to the Old Town, Maximilliánova fontána._
+**_From left to right:_** _Selma and I at the conference entrance, Street from the STU to the Old Town, Maximilliánova fontána._
 
 ![](/img/blog/erpnext/6GvdaZH.png)
 
-**_From left to right:_**_Old Town Street, UFO from Bratislava Castle, Bratislava Castle._
+**_From left to right:_** _Old Town Street, UFO from Bratislava Castle, Bratislava Castle._
 
 ## Thank You to the QGIS Community
 

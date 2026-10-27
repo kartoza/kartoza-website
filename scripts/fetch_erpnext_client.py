@@ -9,6 +9,7 @@ Environment variables:
 
 import os
 from pathlib import Path
+from urllib.parse import urlparse
 
 import requests
 from requests.adapters import HTTPAdapter
@@ -114,10 +115,15 @@ class ERPNextClient:
             'User-Agent': 'kartoza-website-sync/1.0',
         })
 
-        if self.api_key and self.api_secret:
-            session.headers.update({'Authorization': f'token {self.api_key}:{self.api_secret}'})
-
         return session
+
+    def _auth_headers(self, url: str) -> dict:
+        """Return the auth header, but only for requests to ERPNext itself."""
+        if not self.has_credentials:
+            return {}
+        if urlparse(url).netloc != urlparse(self.base_url).netloc:
+            return {}
+        return {'Authorization': f'token {self.api_key}:{self.api_secret}'}
 
     @property
     def has_credentials(self) -> bool:
@@ -132,8 +138,11 @@ class ERPNextClient:
     def get(self, path: str, **kwargs) -> requests.Response:
         kwargs.setdefault('timeout', 30)
         url = self.resolve_url(path)
+        kwargs['headers'] = {**self._auth_headers(url), **kwargs.get('headers', {})}
         return self.session.get(url, **kwargs)
 
     def post(self, path: str, **kwargs) -> requests.Response:
         kwargs.setdefault('timeout', 30)
-        return self.session.post(self.resolve_url(path), **kwargs)
+        url = self.resolve_url(path)
+        kwargs['headers'] = {**self._auth_headers(url), **kwargs.get('headers', {})}
+        return self.session.post(url, **kwargs)

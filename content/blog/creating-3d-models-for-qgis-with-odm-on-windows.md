@@ -2,11 +2,12 @@
 author: Victoria Neema
 date: '2022-02-07'
 description: This post is a walkthrough showing you how to create a 3D model using
-  ODM and Blender from the video frames of a video shot on your cellphon
+  ODM and Blender from the video frames of a video shot on your cellphone and use
+  the 3D model as a symbol in QGIS.
 erpnext_id: /blog/qgis/creating-3d-models-for-qgis-with-odm-on-windows
 erpnext_modified: '2022-02-07'
 reviewedBy: Automated Check
-reviewedDate: '2026-04-13'
+reviewedDate: '2026-10-26'
 tags:
 - Qgis
 thumbnail: https://oldsite.kartoza.com/media/uploads/.thumbnails/flowerpotsmall.gif/flowerpotsmall-270x480.gif
@@ -19,11 +20,11 @@ This post is a walkthrough showing you how to create a 3D model using ODM and Bl
 
 In this article we describe the setup for Windows users. If you are on another platform, you can follow the broad strokes of this tutorial, it should work for you on macOS and Linux too.
 
-  1. [ffmpeg](<https://www.ffmpeg.org/download.html#build-windows>)
-  2. [ImageMagick](<https://imagemagick.org/script/download.php#windows>)
-  3. [Blender](<https://www.blender.org/download/>)
-  4. [QGIS](<https://qgis.org/en/site/forusers/download.html>)
-  5. [WebODM](<https://www.opendronemap.org/webodm/download/>) or [ODM command line toolkit](<https://hub.docker.com/r/opendronemap/odm>)
+- [ffmpeg](<https://www.ffmpeg.org/download.html#build-windows>)
+- [ImageMagick](<https://imagemagick.org/script/download.php#windows>)
+- [Blender](<https://www.blender.org/download/>)
+- [QGIS](<https://qgis.org/en/site/forusers/download.html>)
+- [WebODM](<https://www.opendronemap.org/webodm/download/>) or [ODM command line toolkit](<https://hub.docker.com/r/opendronemap/odm>)
 
 ### Configuring ffmpeg
 
@@ -49,12 +50,12 @@ Create a new folder that will be your working directory and put the video into t
 
 For this demo the video's properties were:
 
-  1. length: 1 minute 1 second
-  2. frame width: 1920
-  3. frame height: 1080
-  4. data rate: 17035kps
-  5. total bitrate: 17131 kbps
-  6. frame rate: 29.95 frames/second (fps)
+- length: 1 minute 1 second
+- frame width: 1920
+- frame height: 1080
+- data rate: 17035kps
+- total bitrate: 17131 kbps
+- frame rate: 29.95 frames/second (fps)
 
 Open the Windows Command Prompt and change the working directory using the command `cd` to where the video file is located (your working directory). Execute the command below to extract the frames (images) from the video at 1 frame/second (fps) [2].
 
@@ -98,74 +99,72 @@ This way just uses straight ODM from a docker container and is probably easier a
 
 Place your video frame images from the previous step in a subfolder of your current working directory (e.g. here I put them in the FlowerPot/images subfolder):
 
-```text
-FlowerPot
-├── images
-│ ├── image-0000001.png
-│ ├── image-0000002.png
-│ ├── image-0000003.png
-│ ├── image-0000004.png
-│ ├── image-0000005.png
-│ ├── image-0000006.png
-│ ├── image-0000007.png
-│ ├── image-0000008.png
-│ ├── image-0000009.png
-│ ├── image-0000010.png
-│ ├── image-0000011.png
-│ ├── image-0000012.png
-│ ├── image-0000013.png
-│ ├── image-0000014.png
-│ ├── image-0000015.png
-│ ├── image-0000016.png
-│ ├── image-0000017.png
-│ ├── image-0000018.png
-│ ├── image-0000019.png
-│ ├── image-0000020.png
-│ ├── image-0000021.png
-│ ├── image-0000022.png
-│ ├── image-0000023.png
-│ ├── image-0000024.png
-│ ├── image-0000025.png
-│ ├── image-0000026.png
-│ ├── image-0000027.png
-│ ├── image-0000028.png
-│ ├── image-0000029.png
-│ ├── image-0000030.png
-│ ├── image-0000031.png
-│ ├── image-0000032.png
-│ ├── image-0000033.png
-│ ├── image-0000034.png
-│ ├── image-0000035.png
-│ ├── image-0000036.png
-│ ├── image-0000037.png
-│ ├── image-0000038.png
-│ ├── image-0000039.png
-│ ├── image-0000040.png
-│ ├── image-0000041.png
-│ ├── image-0000042.png
-│ ├── image-0000043.png
-│ ├── image-0000044.png
-│ ├── image-0000045.png
-│ ├── image-0000046.png
-│ ├── image-0000047.png
-│ ├── image-0000048.png
-│ ├── image-0000049.png
-│ ├── image-0000050.png
-│ ├── image-0000051.png
-│ ├── image-0000052.png
-│ ├── image-0000053.png
-│ ├── image-0000054.png
-│ ├── image-0000055.png
-│ ├── image-0000056.png
-│ ├── image-0000057.png
-│ ├── image-0000058.png
-│ ├── image-0000059.png
-│ ├── image-0000060.png
-│ └── image-0000061.png
-├── FlowerPot.gif
-├── FlowerPotSmall.gif
-└── FlowerPotVideo.mp4
-```
+> FlowerPot  
+> ├── images  
+> │ ├── image-0000001.png  
+> │ ├── image-0000002.png  
+> │ ├── image-0000003.png  
+> │ ├── image-0000004.png  
+> │ ├── image-0000005.png  
+> │ ├── image-0000006.png  
+> │ ├── image-0000007.png  
+> │ ├── image-0000008.png  
+> │ ├── image-0000009.png  
+> │ ├── image-0000010.png  
+> │ ├── image-0000011.png  
+> │ ├── image-0000012.png  
+> │ ├── image-0000013.png  
+> │ ├── image-0000014.png  
+> │ ├── image-0000015.png  
+> │ ├── image-0000016.png  
+> │ ├── image-0000017.png  
+> │ ├── image-0000018.png  
+> │ ├── image-0000019.png  
+> │ ├── image-0000020.png  
+> │ ├── image-0000021.png  
+> │ ├── image-0000022.png  
+> │ ├── image-0000023.png  
+> │ ├── image-0000024.png  
+> │ ├── image-0000025.png  
+> │ ├── image-0000026.png  
+> │ ├── image-0000027.png  
+> │ ├── image-0000028.png  
+> │ ├── image-0000029.png  
+> │ ├── image-0000030.png  
+> │ ├── image-0000031.png  
+> │ ├── image-0000032.png  
+> │ ├── image-0000033.png  
+> │ ├── image-0000034.png  
+> │ ├── image-0000035.png  
+> │ ├── image-0000036.png  
+> │ ├── image-0000037.png  
+> │ ├── image-0000038.png  
+> │ ├── image-0000039.png  
+> │ ├── image-0000040.png  
+> │ ├── image-0000041.png  
+> │ ├── image-0000042.png  
+> │ ├── image-0000043.png  
+> │ ├── image-0000044.png  
+> │ ├── image-0000045.png  
+> │ ├── image-0000046.png  
+> │ ├── image-0000047.png  
+> │ ├── image-0000048.png  
+> │ ├── image-0000049.png  
+> │ ├── image-0000050.png  
+> │ ├── image-0000051.png  
+> │ ├── image-0000052.png  
+> │ ├── image-0000053.png  
+> │ ├── image-0000054.png  
+> │ ├── image-0000055.png  
+> │ ├── image-0000056.png  
+> │ ├── image-0000057.png  
+> │ ├── image-0000058.png  
+> │ ├── image-0000059.png  
+> │ ├── image-0000060.png  
+> │ └── image-0000061.png  
+> ├── FlowerPot.gif  
+> ├── FlowerPotSmall.gif  
+> └── FlowerPotVideo.mp4
 
 Then run this docker command:
 
