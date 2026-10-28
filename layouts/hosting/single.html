@@ -80,7 +80,7 @@
                 <div class="card is-padded">
                     <h4 class="card-title is-small">Pricing</h4>
                     {{ $tiers := .Params.pricing_tiers | default .Params.api_tiers }}
-                    <div class="card-list">
+                    <div class="card-list is-plain">
                     {{ range $tiers }}
                     <div class="card-list-item is-stacked">
                         <div>

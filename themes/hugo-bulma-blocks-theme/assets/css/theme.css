@@ -423,6 +423,10 @@ label > .card {
     border-left: 4px solid var(--card-border-color, var(--primary));
 }
 
+.card.has-border-dark {
+    --card-border-color: var(--primary-dark);
+}
+
 .card.has-border-accent {
     --card-border-color: var(--accent);
 }
@@ -524,6 +528,11 @@ label > .card {
 
 .card-title a:hover {
     color: var(--primary);
+}
+
+.card-title.is-mono {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1rem;
 }
 
 .card-title.is-small {
@@ -783,6 +792,15 @@ label > .card {
     background: var(--accent);
 }
 
+.card-icon.is-round {
+    border-radius: 50%;
+}
+
+.card.has-text-centered > .card-icon {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .card-icon.is-large {
     width: 60px;
     height: 60px;
@@ -1008,6 +1026,32 @@ a.card-list-item:hover .card-list-meta {
 .card-stat-label {
     color: var(--text-muted);
     font-size: 0.75rem;
+}
+
+/* Plain figures: no tile, bigger value, uppercase label.
+   .is-rating on a stat makes its value orange. */
+.card-stats.is-plain .card-stat {
+    background: none;
+    padding: 0.5rem;
+}
+
+.card-stats.is-plain .card-stat > i {
+    color: var(--text-dark);
+}
+
+.card-stats.is-plain .card-stat-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.card-stats.is-plain .card-stat-label {
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.card-stat.is-rating .card-stat-value {
+    color: #f39c12;
 }
 
 /* Text on coloured cards */

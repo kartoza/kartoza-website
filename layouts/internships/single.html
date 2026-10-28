@@ -524,25 +524,14 @@
 </section>
 
 <!-- Final CTA -->
-<section class="careers-cta">
-    <div class="container">
-        <div class="careers-cta-content">
-            <div class="cta-icon">
-                <i class="fas fa-graduation-cap"></i>
-            </div>
-            <h2>Ready to Start Your GIS Career?</h2>
-            <p>Join our internship program and gain real-world experience with open source geospatial technology.</p>
-            <a href="mailto:info@kartoza.com?subject=Internship%20Application" class="button is-primary is-large">
-                <span class="icon"><i class="fas fa-envelope"></i></span>
-                <span>Apply for Internship</span>
-            </a>
-            <div class="cta-note">
-                <i class="fas fa-info-circle"></i>
-                <span>Internships provide no guarantee of employment, but opportunities may arise for outstanding candidates.</span>
-            </div>
-        </div>
-    </div>
-</section>
+{{ partial "section-cta.html" (dict
+    "title"          "Ready to Start Your GIS Career?"
+    "subtitle"       "Join our internship program and gain real-world experience with open source geospatial technology."
+    "primaryUrl"     "mailto:info@kartoza.com?subject=Internship%20Application"
+    "primaryIcon"    "fas fa-envelope"
+    "primaryLabel"   "Apply for Internship"
+    "topIcon"        "fas fa-graduation-cap"
+) }}
 
 {{ partial "page-reviewer.html" . }}
 {{ partial "footer.html" . }}

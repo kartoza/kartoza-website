@@ -36,7 +36,7 @@
                     </span>
                     {{ end }}
                     {{ if .Params.rating }}
-                    <span class="plugin-stat-badge">
+                    <span class="plugin-stat-badge rating">
                         <i class="fas fa-star"></i> {{ .Params.rating }}
                     </span>
                     {{ end }}
@@ -76,18 +76,14 @@
             <!-- Sidebar -->
             <aside class="plugin-article-sidebar card-stack">
                 <!-- Quick Install Card -->
-                <div class="card is-padded is-primary">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-puzzle-piece"></i>
-                        </div>
-                        <div class="card-content">
-                            <span class="card-eyebrow">QGIS Plugin</span>
-                            <span class="card-title">{{ .Title }}</span>
-                        </div>
+                <div class="card is-padded is-primary has-text-centered">
+                    <div class="card-icon is-large is-round">
+                        <i class="fas fa-puzzle-piece"></i>
                     </div>
+                    <span class="card-eyebrow">QGIS Plugin</span>
+                    <h3 class="card-title">{{ .Title }}</h3>
                     {{ if .Params.plugin_url }}
-                    <a href="{{ .Params.plugin_url }}" target="_blank" rel="noopener" class="button is-accent is-fullwidth">
+                    <a href="{{ .Params.plugin_url }}" target="_blank" rel="noopener" class="button is-light is-fullwidth">
                         <i class="fas fa-download"></i> Install from QGIS
                     </a>
                     <p class="card-meta">
@@ -102,7 +98,7 @@
                     <h4 class="card-title is-small">
                         <i class="fas fa-chart-bar"></i> Plugin Stats
                     </h4>
-                    <div class="card-stats">
+                    <div class="card-stats is-plain">
                         {{ if .Params.downloads }}
                         <div class="card-stat">
                             <i class="fas fa-download"></i>
@@ -111,7 +107,7 @@
                         </div>
                         {{ end }}
                         {{ if .Params.rating }}
-                        <div class="card-stat">
+                        <div class="card-stat is-rating">
                             <i class="fas fa-star"></i>
                             <span class="card-stat-value">{{ .Params.rating }}</span>
                             <span class="card-stat-label">Rating</span>

@@ -238,7 +238,7 @@
                         {{ range $related }}
                         <a href="{{ .Permalink }}" class="card-list-item">
                             {{ if .Params.logo }}
-                            <span class="card-avatar"><img src="{{ .Params.logo }}" alt="{{ .Title }}"></span>
+                            <span class="card-avatar is-light"><img src="{{ .Params.logo }}" alt="{{ .Title }}"></span>
                             {{ else }}
                             <span class="card-avatar">
                                 <i class="fas fa-handshake"></i>
