@@ -41,7 +41,7 @@
 
                     <!-- Features -->
                     {{ if .features }}
-                    <ul class="checklist">
+                    <ul class="checklist is-columns">
                         {{ range .features }}
                         <li>
                             <i class="fas fa-check-circle"></i>
@@ -55,12 +55,12 @@
                 <!-- CTA -->
                 <div class="button-group">
                     {{ if .external }}
-                    <a href="{{ .url }}" target="_blank" rel="noopener" class="button is-primary is-medium">
+                    <a href="{{ .url }}" target="_blank" rel="noopener" class="button is-primary is-medium is-fullwidth">
                         <span>{{ .cta }}</span>
                         <span class="icon"><i class="fas fa-external-link-alt"></i></span>
                     </a>
                     {{ else }}
-                    <a href="{{ .url }}" class="button is-primary is-medium">
+                    <a href="{{ .url }}" class="button is-primary is-medium is-fullwidth">
                         <span>{{ .cta }}</span>
                         <span class="icon"><i class="fas fa-arrow-right"></i></span>
                     </a>

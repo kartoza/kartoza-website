@@ -148,6 +148,10 @@
     color: var(--white);
 }
 
+.button .btn-loading {
+    display: none; /* Bulma's .is-loading spinner replaces the label */
+}
+
 .button.is-light {
     background: white;
     border: 2px solid white;
@@ -559,6 +563,11 @@ label > .card {
     flex-grow: 1;
 }
 
+.card-description.is-lead {
+    color: var(--text-dark);
+    font-size: 1.25rem;
+}
+
 .card-description:last-child {
     margin-bottom: 0;
 }
@@ -581,6 +590,10 @@ label > .card {
     font-weight: 600;
     transition: color var(--transition-fast);
     margin-top: auto;
+}
+
+.card.has-text-centered .card-link {
+    align-self: center;
 }
 
 .card-link:hover {
@@ -612,6 +625,12 @@ label > .card {
 .card-meta .is-highlight {
     color: var(--accent);
     font-weight: 600;
+}
+
+/* A lone tag in a column card keeps its own width */
+.card-content > .tag {
+    align-self: flex-start;
+    margin-bottom: 0.75rem;
 }
 
 /* Row of Bulma .tag elements inside a card */
@@ -1061,6 +1080,18 @@ a.card-list-item:hover .card-list-meta {
     margin: 0 0 1rem;
     padding: 0;
     list-style: none;
+}
+
+.checklist.is-columns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.6rem 1.5rem;
+}
+
+@media screen and (min-width: 769px) {
+    .checklist.is-columns {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .checklist > * {
