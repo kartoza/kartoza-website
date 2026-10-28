@@ -5691,7 +5691,7 @@ body:has(.blog-hero) .contextmenu {
 .mbadge {
     display: inline-block;
     background: rgba(238, 179, 72, 0.15);
-    color: var(--accent);
+    color: var(--primary-dark); /* yellow on pale yellow was hard to read */
     font-size: 0.75rem;
     font-weight: 700;
     padding: 0.35rem 0.65rem;
@@ -8420,6 +8420,7 @@ body:has(.blog-hero) .contextmenu {
 
 .docker-content table th {
     background: var(--light-bg);
+    color: var(--text-dark); /* was white on the light background */
     padding: 0.75rem 1rem;
     text-align: left;
     font-weight: 600;

@@ -148,6 +148,10 @@
     color: var(--white);
 }
 
+.card.is-primary .button.is-light {
+    color: var(--primary); /* white button on a blue card keeps blue text */
+}
+
 .button .btn-loading {
     display: none; /* Bulma's .is-loading spinner replaces the label */
 }
@@ -897,6 +901,12 @@ label > .card {
     padding: 0.35rem;
 }
 
+.card-avatar.is-inverted img {
+    object-fit: contain;
+    padding: 0.35rem;
+    filter: brightness(0) invert(1); /* white logo on the blue tile */
+}
+
 .card-avatar img {
     width: 100%;
     height: 100%;
@@ -1066,6 +1076,10 @@ a.card-list-item:hover .card-list-meta {
 .card.is-dark .card-title.is-small i,
 .card.is-accent .card-title.is-small i {
     color: rgba(255, 255, 255, 0.85);
+}
+
+.card.is-primary .card-icon.is-accent {
+    background: var(--accent);
 }
 
 .card.is-primary .card-icon,
