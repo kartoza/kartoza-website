@@ -349,8 +349,9 @@
     gap: 1.5rem;
 }
 
-.card-stack > .card.is-padded:not(:last-child) {
-    margin-bottom: 0;
+.card-stack > .card.is-padded:not(:last-child),
+:is(.office-cards, [class*="-grid"], [class*="-wrapper"]) > .card.is-padded:not(:last-child) {
+    margin-bottom: 0; /* grids space their cards with gap, not margin */
 }
 
 /* Surface */
