@@ -154,18 +154,18 @@
                 {{ end }}
 
                 <!-- Get Started Card -->
-                <div class="card is-padded has-border-top has-border-accent has-text-centered" id="get-started">
-                    <div class="card-icon is-large">
+                <div class="card is-padded is-primary has-text-centered" id="get-started">
+                    <div class="card-icon is-large is-accent">
                         <i class="fas fa-paper-plane"></i>
                     </div>
                     <h3 class="card-title">Get Started Today</h3>
                     <p class="card-description">Ready to transform your workflows with {{ .Title }}? Let's discuss your requirements.</p>
-                    <a href="{{ relURL "contact-us/" }}?subject={{ .Title }}%20Enquiry" class="button is-primary is-fullwidth">
+                    <a href="{{ relURL "contact-us/" }}?subject={{ .Title }}%20Enquiry" class="button is-light is-fullwidth">
                         <span class="icon"><i class="fas fa-envelope"></i></span>
                         <span>Request Quote</span>
                     </a>
                     {{ if .Params.demoUrl }}
-                    <a href="{{ .Params.demoUrl }}" target="_blank" rel="noopener" class="button is-secondary is-fullwidth">
+                    <a href="{{ .Params.demoUrl }}" target="_blank" rel="noopener" class="button is-light is-fullwidth">
                         <span class="icon"><i class="fas fa-play-circle"></i></span>
                         <span>Request Demo</span>
                     </a>
