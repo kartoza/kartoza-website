@@ -14,23 +14,25 @@
         {{ end }}
 
         <!-- Learning Paths Overview -->
-        <div class="button-group is-centered">
-            <a href="#track-desktop-gis" class="button is-secondary">
-                <i class="fas fa-desktop"></i>
-                Desktop GIS & Cartography
-            </a>
-            <a href="#track-server-infrastructure" class="button is-secondary">
-                <i class="fas fa-server"></i>
-                Spatial Databases
-            </a>
-            <a href="#track-development" class="button is-secondary">
-                <i class="fas fa-code"></i>
-                Custom & Enterprise
-            </a>
-            <a href="#track-foundational" class="button is-secondary">
-                <i class="fas fa-book"></i>
-                Education & Schools
-            </a>
+        <div class="card is-padded mb-6">
+            <div class="button-group is-centered">
+                <a href="#track-desktop-gis" class="button is-light">
+                    <i class="fas fa-desktop"></i>
+                    Desktop GIS & Cartography
+                </a>
+                <a href="#track-server-infrastructure" class="button is-light">
+                    <i class="fas fa-server"></i>
+                    Spatial Databases
+                </a>
+                <a href="#track-development" class="button is-light">
+                    <i class="fas fa-code"></i>
+                    Custom & Enterprise
+                </a>
+                <a href="#track-foundational" class="button is-light">
+                    <i class="fas fa-book"></i>
+                    Education & Schools
+                </a>
+            </div>
         </div>
 
         <!-- Desktop GIS & Cartography -->
@@ -49,7 +51,7 @@
             <div class="training-track-sequence">
                 {{ range $index, $course := $desktopCourses.ByWeight }}
                 <article class="card is-tile">
-                    <div class="card-image is-cover">
+                    <div class="card-image is-cover is-top">
                         <a href="{{ .Permalink }}">
                             {{ $thumbnail := .Params.thumbnail | default "/img/banner-courses.png" }}
                             <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" loading="lazy">
@@ -127,7 +129,7 @@
             <div class="training-track-sequence">
                 {{ range $index, $course := $serverCourses.ByWeight }}
                 <article class="card is-tile">
-                    <div class="card-image is-cover">
+                    <div class="card-image is-cover is-top">
                         <a href="{{ .Permalink }}">
                             {{ $thumbnail := .Params.thumbnail | default "/img/banner-courses.png" }}
                             <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" loading="lazy">
@@ -198,7 +200,7 @@
             <div class="training-track-sequence">
                 {{ range $index, $course := $devCourses.ByWeight }}
                 <article class="card is-tile">
-                    <div class="card-image is-cover">
+                    <div class="card-image is-cover is-top">
                         <a href="{{ .Permalink }}">
                             {{ $thumbnail := .Params.thumbnail | default "/img/banner-courses.png" }}
                             <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" loading="lazy">
@@ -269,7 +271,7 @@
             <div class="training-track-sequence">
                 {{ range $index, $course := $foundCourses.ByWeight }}
                 <article class="card is-tile">
-                    <div class="card-image is-cover">
+                    <div class="card-image is-cover is-top">
                         <a href="{{ .Permalink }}">
                             {{ $thumbnail := .Params.thumbnail | default "/img/banner-courses.png" }}
                             <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" loading="lazy">

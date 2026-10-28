@@ -39,7 +39,9 @@
             {{ if or (not $thumb) (eq $thumb "/img/blog/placeholder.png") }}{{ $thumb = "/img/banner-blog.png" }}{{ end }}
             <div class="column is-6">
                 <a class="card" href="{{ .RelPermalink }}">
-                    <img src="{{ $thumb | absURL }}" alt="{{ .Title }}">
+                    <div class="card-image is-cover is-banner">
+                        <img src="{{ $thumb | absURL }}" alt="{{ .Title }}">
+                    </div>
                     <div class="card-content">
                         <span class="card-eyebrow">Latest article</span>
                         <h2 class="card-title">{{ .Title }}</h2>

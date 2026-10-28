@@ -323,6 +323,7 @@
 
 .card.is-padded.is-large {
     padding: 2.5rem;
+    font-size: 1rem; /* Bulma's .is-large would make the text 1.5rem */
 }
 
 @media screen and (max-width: 768px) {
@@ -337,8 +338,8 @@
 }
 
 /* Column of cards spaced by gap (sidebars). Put it on the wrapper.
-   :where() keeps it overridable by a page's own grid layout. */
-:where(.card-stack) {
+   Plain class selector so it also wins over Bulma's `aside {display:block}`. */
+.card-stack {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -427,6 +428,14 @@ label > .card {
     position: relative;
     overflow: hidden;
     aspect-ratio: var(--card-image-ratio, 16 / 9);
+}
+
+.card-image.is-cover.is-banner {
+    --card-image-ratio: 11 / 4;
+}
+
+.card-image.is-cover.is-top img {
+    object-position: top;
 }
 
 .card-image.is-cover > a {
