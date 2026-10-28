@@ -1233,10 +1233,25 @@ a.card-list-item:hover .card-list-meta {
 .page-nav-link {
     display: flex;
     flex-direction: column;
-    padding: 1rem 1.5rem;
-    border-radius: var(--radius-md);
-    background: var(--light-bg);
+    padding: 0.5rem 0; /* plain row: no box, blends into the page */
     transition: all var(--transition-fast);
+}
+
+.page-nav-link .card-avatar {
+    border-radius: 50%;
+    border: 2px solid var(--white);
+    box-shadow: var(--shadow-sm);
+}
+
+.page-nav .button.is-secondary {
+    border-color: transparent;
+    background: var(--light-bg);
+    color: var(--text-dark);
+}
+
+.page-nav .button.is-secondary:hover {
+    background: var(--primary);
+    color: var(--white);
 }
 
 .page-nav-link.is-next {
@@ -1283,14 +1298,8 @@ a.card-list-item:hover .card-list-meta {
     font-size: 0.875rem;
 }
 
-a.page-nav-link:hover {
-    background: var(--primary);
-}
-
-a.page-nav-link:hover .page-nav-direction,
-a.page-nav-link:hover .page-nav-title,
-a.page-nav-link:hover .page-nav-meta {
-    color: var(--white);
+a.page-nav-link:hover .page-nav-title {
+    color: var(--primary);
 }
 
 @media screen and (max-width: 768px) {
