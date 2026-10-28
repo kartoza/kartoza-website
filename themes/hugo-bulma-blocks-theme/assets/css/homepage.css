@@ -13121,7 +13121,7 @@ html {
    ============================================ */
 .why-section,
 .about-stats,
-.section-cta {
+.section-cta:not(.is-light) {
     background: #262727 url('/img/dark-contours.svg') center / cover no-repeat !important;
 }
 

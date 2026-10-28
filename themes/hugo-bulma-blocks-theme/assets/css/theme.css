@@ -1326,6 +1326,31 @@ a.page-nav-link:hover .page-nav-meta {
     font-size: 2rem;
 }
 
+.section-cta.is-light {
+    position: relative;
+    z-index: 0; /* local stacking context for the edge motifs */
+    overflow: hidden;
+    padding: 3rem 1.5rem;
+    background: var(--white);
+    color: var(--text-dark);
+    border-top: 1px solid var(--light-bg-alt);
+}
+
+.section-cta.is-light .site-edge-motif {
+    width: 145px;
+    opacity: 0.85;
+}
+
+.section-cta.is-light .title {
+    color: var(--primary-dark) !important;
+    margin-bottom: 1.25rem;
+}
+
+.section-cta.is-light .subtitle {
+    color: var(--text-muted);
+    margin-bottom: 2rem !important;
+}
+
 @media screen and (max-width: 768px) {
     .section-cta {
         padding: 3rem 1rem;

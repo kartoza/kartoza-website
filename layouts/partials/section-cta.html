@@ -11,6 +11,7 @@
     secondaryLabel - secondary button text
     secondaryExternal - true to open the secondary link in a new tab (optional)
     topIcon        - Font Awesome class shown as a large icon above the title (optional)
+    variant        - "light" for a white band with edge motifs (use when another dark band is on the page); default is the dark contour band
 
   Usage:
     {{ partial "section-cta.html" (dict
@@ -25,18 +26,22 @@
         "topIcon"        "fas fa-rocket"
     ) }}
 */}}
-<section class="section section-cta">
+<section class="section section-cta{{ if eq .variant "light" }} is-light{{ end }}">
+    {{- if eq .variant "light" }}
+    <div class="site-edge-motif site-edge-motif-left" aria-hidden="true"></div>
+    <div class="site-edge-motif site-edge-motif-right" aria-hidden="true"></div>
+    {{- end }}
     <div class="container has-text-centered">
         {{ with .topIcon }}<div class="section-cta-top-icon"><i class="{{ . }}"></i></div>{{ end }}
         <h2 class="title is-3">{{ .title }}</h2>
         {{ with .subtitle }}<p class="subtitle is-5">{{ . }}</p>{{ end }}
         <div class="button-group is-centered">
-            <a class="button is-accent is-medium border-width-2" href="{{ .primaryUrl }}"{{ if .primaryExternal }} target="_blank" rel="noopener"{{ end }}>
+            <a class="button {{ if eq .variant "light" }}is-primary{{ else }}is-accent{{ end }} is-medium border-width-2" href="{{ .primaryUrl }}"{{ if .primaryExternal }} target="_blank" rel="noopener"{{ end }}>
                 <span class="icon"><i class="{{ .primaryIcon }}"></i></span>
                 <span>{{ .primaryLabel }}</span>
             </a>
             {{ with .secondaryUrl }}
-            <a class="button is-light is-medium" href="{{ . }}"{{ if $.secondaryExternal }} target="_blank" rel="noopener"{{ end }}>
+            <a class="button {{ if eq $.variant "light" }}is-secondary{{ else }}is-light{{ end }} is-medium" href="{{ . }}"{{ if $.secondaryExternal }} target="_blank" rel="noopener"{{ end }}>
                 <span class="icon"><i class="{{ $.secondaryIcon }}"></i></span>
                 <span>{{ $.secondaryLabel }}</span>
             </a>
