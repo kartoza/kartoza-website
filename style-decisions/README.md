@@ -15,5 +15,8 @@ Each image shows `main` on the left (black labels) and the PR on the right (red 
 | 05 | [05-icon-accent-colour.png](05-icon-accent-colour.png) | Icon tiles: **yellow** (partner Key Features, support-ticket lock, homepage "Why Work With Kartoza") · **blue** (about, most others) | **Blue** (`.card-icon`); yellow is `.card-icon.is-accent` |
 | 06 | [06-meta-highlight-colour.png](06-meta-highlight-colour.png) | Highlighted text in plugin card meta: client name **blue** · in-house "By: Kartoza" **yellow** | **Yellow** (`.card-meta .is-highlight`) |
 | 10 | [10-cta-box-style.png](10-cta-box-style.png) | CTA boxes: **blue box** (partner sidebar "Get Started Today", plugin CTA band) · **dark band** (most pages) · **white card** | Section CTA = dark band; sidebar CTA = `card is-primary` (blue) |
+| 07 | [07-tag-style.png](07-tag-style.png) | Tags: **blue solid** (team skills, app cards, hero) · **neutral grey** (gallery, portfolio, docker, streams) · **pale yellow** (course, solution) | **Neutral grey** inside cards; team skills no longer blue |
+| 08 | [08-list-marker-sidebar.png](08-list-marker-sidebar.png) | Sidebar lists (partner Our Services, gallery Technologies): **black check-circle** · feature lists elsewhere: **green check** | Sidebar lists **black** (`checklist is-dark`, as main); feature lists green |
+| 09 | [09-sidebar-rows.png](09-sidebar-rows.png) | Sidebar rows: **plain rows with dividers** (training calendar, team Education) · **grey chips** (apps, plugins, docs) | Clickable links = **grey chips**; static info (Education, Location) = **plain** (`card-list is-plain`). Training calendar is still chips; main had plain rows there |
 
 Once a style is chosen, the change is one value in `themes/hugo-bulma-blocks-theme/assets/css/theme.css`.

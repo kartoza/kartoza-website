@@ -1168,6 +1168,11 @@ a.card-list-item:hover .card-list-meta {
     color: var(--success);
 }
 
+.checklist.is-dark > * > i,
+.checklist.is-dark > * > .icon {
+    color: var(--text-dark);
+}
+
 .card.is-primary .checklist > * > i,
 .card.is-dark .checklist > * > i,
 .card.is-accent .checklist > * > i,
