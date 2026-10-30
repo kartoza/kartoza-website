@@ -72,10 +72,6 @@ a.heading-anchor {
     object-fit: cover;
 }
 
-.card .card-content {
-    padding: 1.25rem;
-}
-
 .card .card-content .title {
     color: #383939;
     margin-bottom: 0.25rem;
@@ -302,34 +298,6 @@ section.is-fluid > .container.is-fluid {
 .careers-job-meta-item i {
     color: #EEB348;
     font-size: 0.875rem;
-}
-
-.careers-job-apply {
-    margin-top: 3rem;
-    padding: 2rem;
-    background: #F5F5F2;
-    border-radius: 4px;
-    border-left: 4px solid #54A2CC;
-}
-
-.careers-job-apply h3 {
-    color: #383939;
-    font-size: 1.25rem;
-    margin-bottom: 0.75rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.careers-job-apply p {
-    color: #676869;
-    margin-bottom: 1.5rem;
-}
-
-.careers-job-apply-buttons {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
 }
 
 /* No left offset: a positive margin-left here pushed the icon+label group right of

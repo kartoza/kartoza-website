@@ -52,12 +52,12 @@
         <div class="columns is-multiline mt-5">
             {{ range .Params.features }}
             <div class="column is-4">
-                <div class="hosting-feature-card">
-                    <div class="hosting-feature-icon">
+                <div class="card is-flat is-padded has-text-centered">
+                    <div class="card-icon is-large">
                         <i class="fas {{ .icon }}"></i>
                     </div>
-                    <h3>{{ .title }}</h3>
-                    <p>{{ .description }}</p>
+                    <h3 class="card-title">{{ .title }}</h3>
+                    <p class="card-description">{{ .description }}</p>
                 </div>
             </div>
             {{ end }}
@@ -70,38 +70,40 @@
 <article class="section hosting-content-section">
     <div class="container">
         <div class="hosting-article-wrapper">
-            <div class="hosting-article-content content">
+            <div class="card is-padded is-large hosting-article-content content">
                 {{ .Content }}
             </div>
 
             <!-- Sidebar with Pricing (if available) -->
             {{ if or .Params.pricing_tiers .Params.api_tiers }}
             <aside class="hosting-article-sidebar">
-                <div class="hosting-pricing-card">
-                    <h4 class="hosting-pricing-title">Pricing</h4>
+                <div class="card is-padded">
+                    <h4 class="card-title is-small">Pricing</h4>
                     {{ $tiers := .Params.pricing_tiers | default .Params.api_tiers }}
+                    <div class="card-list is-plain">
                     {{ range $tiers }}
-                    <div class="hosting-pricing-tier">
-                        <div class="pricing-tier-header">
-                            <span class="pricing-tier-name">{{ .name }}</span>
-                            <span class="pricing-tier-price">{{ .price }}</span>
+                    <div class="card-list-item is-stacked">
+                        <div>
+                            <span class="card-list-title">{{ .name }}</span>
+                            <span class="card-stat-value">{{ .price }}</span>
                             {{ if .price_alt }}
-                            <span class="pricing-tier-alt">{{ .price_alt }}</span>
+                            <span class="card-list-meta">{{ .price_alt }}</span>
                             {{ end }}
                         </div>
                         {{ if .users }}
-                        <p class="pricing-tier-users">{{ .users }}</p>
+                        <p class="card-list-meta">{{ .users }}</p>
                         {{ end }}
                         {{ if .requests }}
-                        <p class="pricing-tier-requests">{{ .requests }}</p>
+                        <p class="card-list-meta">{{ .requests }}</p>
                         {{ end }}
-                        <ul class="pricing-tier-features">
+                        <ul class="checklist">
                             {{ range .features }}
                             <li><i class="fas fa-check"></i> {{ . }}</li>
                             {{ end }}
                         </ul>
                     </div>
                     {{ end }}
+                    </div>
                 </div>
             </aside>
             {{ end }}
@@ -117,13 +119,13 @@
         <div class="columns is-multiline mt-5">
             {{ range .Params.dataset_categories }}
             <div class="column is-4">
-                <div class="hosting-category-card">
-                    <div class="hosting-category-icon">
+                <div class="card is-flat is-padded has-text-centered">
+                    <div class="card-icon is-large">
                         <i class="fas {{ .icon }}"></i>
                     </div>
-                    <h3>{{ .title }}</h3>
-                    <p>{{ .description }}</p>
-                    <span class="hosting-category-coverage">
+                    <h3 class="card-title">{{ .title }}</h3>
+                    <p class="card-description">{{ .description }}</p>
+                    <span class="card-meta">
                         <i class="fas fa-globe"></i> {{ .coverage }}
                     </span>
                 </div>
@@ -155,51 +157,43 @@
 </section>
 {{ else }}
 <!-- Standard CTA for available services -->
-<section class="section hosting-cta-section">
-    <div class="container">
-        <div class="hosting-cta-content">
-            <h2>Ready to Get Started?</h2>
-            <p>Contact us to learn more about {{ .Title }} or start your free trial today.</p>
-            <div class="hosting-cta-buttons">
-                <a href="{{ absURL "contact-us/" }}?subject={{ .Title | urlquery }}" class="button is-primary is-large">
-                    <span class="icon"><i class="fas fa-envelope"></i></span>
-                    <span>Contact Us</span>
-                </a>
-                <a href="{{ absURL "hosting/" }}" class="button is-light is-large">
-                    <span class="icon"><i class="fas fa-th-large"></i></span>
-                    <span>View All Services</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+{{ partial "section-cta.html" (dict
+    "title"          "Ready to Get Started?"
+    "subtitle"       (print "Contact us to learn more about " .Title " or start your free trial today.")
+    "primaryUrl"     (print (absURL "contact-us/") "?subject=" (.Title | urlquery))
+    "primaryIcon"    "fas fa-envelope"
+    "primaryLabel"   "Contact Us"
+    "secondaryUrl"   (absURL "hosting/")
+    "secondaryIcon"  "fas fa-th-large"
+    "secondaryLabel" "View All Services"
+) }}
 {{ end }}
 
 <!-- Navigation -->
-<nav class="hosting-navigation">
+<nav class="page-nav">
     <div class="container">
-        <div class="hosting-nav-wrapper">
+        <div class="page-nav-inner">
             {{ with .PrevInSection }}
-            <a href="{{ .Permalink }}" class="hosting-nav-link hosting-nav-prev">
-                <span class="hosting-nav-direction"><i class="fas fa-arrow-left"></i> Previous</span>
-                <span class="hosting-nav-title">{{ .Title | truncate 30 }}</span>
+            <a href="{{ .Permalink }}" class="page-nav-link is-prev">
+                <span class="page-nav-direction"><i class="fas fa-arrow-left"></i> Previous</span>
+                <span class="page-nav-title">{{ .Title | truncate 30 }}</span>
             </a>
             {{ else }}
-            <div class="hosting-nav-link hosting-nav-empty"></div>
+            <div class="page-nav-link is-empty"></div>
             {{ end }}
 
-            <a href="{{ absURL "hosting/" }}" class="hosting-nav-all">
+            <a href="{{ absURL "hosting/" }}" class="button is-secondary">
                 <i class="fas fa-th-large"></i>
                 All Services
             </a>
 
             {{ with .NextInSection }}
-            <a href="{{ .Permalink }}" class="hosting-nav-link hosting-nav-next">
-                <span class="hosting-nav-direction">Next <i class="fas fa-arrow-right"></i></span>
-                <span class="hosting-nav-title">{{ .Title | truncate 30 }}</span>
+            <a href="{{ .Permalink }}" class="page-nav-link is-next">
+                <span class="page-nav-direction">Next <i class="fas fa-arrow-right"></i></span>
+                <span class="page-nav-title">{{ .Title | truncate 30 }}</span>
             </a>
             {{ else }}
-            <div class="hosting-nav-link hosting-nav-empty"></div>
+            <div class="page-nav-link is-empty"></div>
             {{ end }}
         </div>
     </div>

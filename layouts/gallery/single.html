@@ -51,7 +51,7 @@
                 </iframe>
             </div>
             <div class="gallery-map-controls">
-                <a href="{{ .Params.mapUrl }}" target="_blank" rel="noopener" class="button is-small is-primary is-outlined">
+                <a href="{{ .Params.mapUrl }}" target="_blank" rel="noopener" class="button is-small is-secondary">
                     <span class="icon"><i class="fas fa-expand"></i></span>
                     <span>View Fullscreen</span>
                 </a>
@@ -67,7 +67,7 @@
         <div class="columns is-variable is-8">
             <!-- Main Content -->
             <div class="column is-8">
-                <div class="gallery-content">
+                <div class="card is-padded is-large gallery-content">
                     {{ .Content }}
                 </div>
             </div>
@@ -76,14 +76,14 @@
             <div class="column is-4">
                 <!-- Technologies Card -->
                 {{ if .Params.tags }}
-                <div class="gallery-sidebar-card">
-                    <h3 class="gallery-sidebar-card-title">
+                <div class="card is-padded">
+                    <h3 class="card-title is-small">
                         <span class="icon"><i class="fas fa-layer-group"></i></span>
                         Technologies Used
                     </h3>
-                    <div class="gallery-tech-list">
+                    <div class="checklist is-dark">
                         {{ range .Params.tags }}
-                        <div class="gallery-tech-item">
+                        <div>
                             <span class="icon"><i class="fas fa-check-circle"></i></span>
                             <span>{{ . }}</span>
                         </div>
@@ -93,27 +93,27 @@
                 {{ end }}
 
                 <!-- Map Info Card -->
-                <div class="gallery-sidebar-card">
-                    <h3 class="gallery-sidebar-card-title">
+                <div class="card is-padded">
+                    <h3 class="card-title is-small">
                         <span class="icon"><i class="fas fa-info-circle"></i></span>
                         Map Information
                     </h3>
-                    <div class="gallery-info-list">
+                    <div class="card-list is-plain">
                         {{ if .Date }}
-                        <div class="gallery-info-item">
-                            <span class="gallery-info-label">Created</span>
-                            <span class="gallery-info-value">{{ .Date.Format "January 2006" }}</span>
+                        <div class="card-list-item">
+                            <span class="card-list-meta">Created</span>
+                            <span class="card-list-title">{{ .Date.Format "January 2006" }}</span>
                         </div>
                         {{ end }}
                         {{ if .Params.mapUrl }}
-                        <div class="gallery-info-item">
-                            <span class="gallery-info-label">Type</span>
-                            <span class="gallery-info-value">Interactive Web Map</span>
+                        <div class="card-list-item">
+                            <span class="card-list-meta">Type</span>
+                            <span class="card-list-title">Interactive Web Map</span>
                         </div>
                         {{ end }}
-                        <div class="gallery-info-item">
-                            <span class="gallery-info-label">Status</span>
-                            <span class="gallery-info-value">
+                        <div class="card-list-item">
+                            <span class="card-list-meta">Status</span>
+                            <span class="card-list-title">
                                 <span class="tag is-success is-light">Live</span>
                             </span>
                         </div>
@@ -121,15 +121,15 @@
                 </div>
 
                 <!-- CTA Card -->
-                <div class="gallery-sidebar-card gallery-cta-card">
-                    <div class="gallery-cta-icon">
+                <div class="card is-padded is-primary has-text-centered">
+                    <div class="card-icon is-large">
                         <i class="fas fa-map-marked-alt"></i>
                     </div>
-                    <h3 class="gallery-cta-title">Need a Custom Map?</h3>
-                    <p class="gallery-cta-text">
+                    <h3 class="card-title">Need a Custom Map?</h3>
+                    <p class="card-description">
                         We create beautiful, interactive web maps tailored to your data and requirements.
                     </p>
-                    <a href="{{ absURL "contact-us/" }}?subject=Custom%20Map%20Enquiry" class="button is-primary is-medium">
+                    <a href="{{ absURL "contact-us/" }}?subject=Custom%20Map%20Enquiry" class="button is-light is-medium">
                         <span class="icon"><i class="fas fa-envelope"></i></span>
                         <span>Get in Touch</span>
                     </a>
@@ -152,21 +152,21 @@
         <div class="columns is-multiline">
             {{ range $related }}
             <div class="column is-4">
-                <article class="gallery-related-card">
-                    <div class="gallery-related-image">
+                <article class="card is-tile">
+                    <div class="card-image is-cover">
                         <a href="{{ .Permalink }}">
                             {{ $thumbnail := .Params.thumbnail | default "/img/banner-gallery.png" }}
                             <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" loading="lazy">
-                            <div class="gallery-related-overlay">
+                            <div class="card-overlay">
                                 <span class="icon"><i class="fas fa-map"></i></span>
                             </div>
                         </a>
                     </div>
-                    <div class="gallery-related-content">
-                        <h4 class="gallery-related-title">
+                    <div class="card-content">
+                        <h4 class="card-title">
                             <a href="{{ .Permalink }}">{{ .Title }}</a>
                         </h4>
-                        <p class="gallery-related-description">
+                        <p class="card-description">
                             {{ .Description | truncate 80 }}
                         </p>
                     </div>
@@ -175,7 +175,7 @@
             {{ end }}
         </div>
         <div class="has-text-centered mt-5">
-            <a href="{{ absURL "gallery/" }}" class="button is-primary is-outlined is-medium">
+            <a href="{{ absURL "gallery/" }}" class="button is-secondary is-medium">
                 <span class="icon"><i class="fas fa-th"></i></span>
                 <span>View All Maps</span>
             </a>
@@ -185,26 +185,16 @@
 {{ end }}
 
 <!-- Final CTA Section -->
-<section class="section gallery-final-cta">
-    <div class="container">
-        <div class="gallery-final-cta-content">
-            <h2 class="gallery-final-cta-title">Ready to Bring Your Data to Life?</h2>
-            <p class="gallery-final-cta-text">
-                From simple location maps to complex spatial analysis platforms, we build web maps that engage users and deliver insights.
-            </p>
-            <div class="gallery-final-cta-buttons">
-                <a href="{{ absURL "contact-us/" }}" class="button is-primary is-medium">
-                    <span class="icon"><i class="fas fa-rocket"></i></span>
-                    <span>Start Your Project</span>
-                </a>
-                <a href="{{ absURL "solutions/software-development/" }}" class="button is-light is-medium">
-                    <span class="icon"><i class="fas fa-code"></i></span>
-                    <span>Our Development Services</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+{{ partial "section-cta.html" (dict
+    "title"          "Ready to Bring Your Data to Life?"
+    "subtitle"       "From simple location maps to complex spatial analysis platforms, we build web maps that engage users and deliver insights."
+    "primaryUrl"     (absURL "contact-us/")
+    "primaryIcon"    "fas fa-rocket"
+    "primaryLabel"   "Start Your Project"
+    "secondaryUrl"   (absURL "solutions/software-development/")
+    "secondaryIcon"  "fas fa-code"
+    "secondaryLabel" "Our Development Services"
+) }}
 
 {{ partial "page-reviewer.html" . }}
 {{ partial "footer.html" . }}

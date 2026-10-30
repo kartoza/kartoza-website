@@ -11,27 +11,27 @@
 
 {{ if $futureEvents }}
 {{/* Scheduled sessions exist — show per-event cart buttons */}}
-<div class="sidebar-card upcoming-events-card">
-  <h4><i class="fas fa-calendar-alt"></i> Upcoming Sessions</h4>
-  <div class="upcoming-events-list">
+<div class="card is-padded">
+  <h4 class="card-title is-small"><i class="fas fa-calendar-alt"></i> Upcoming Sessions</h4>
+  <div class="card-list">
     {{ range $futureEvents }}
-    <div class="upcoming-event-item">
+    <div class="card-list-item">
       <div class="event-date-badge">
         {{ $d := time .start }}
         <span class="month">{{ $d.Format "Jan" }}</span>
         <span class="day">{{ $d.Format "02" }}</span>
       </div>
-      <div class="event-info">
-        <span class="dates">{{ .date_display }}</span>
-        <span class="location"><i class="fas fa-map-marker-alt"></i> {{ .location }}</span>
+      <div class="card-list-content">
+        <span class="card-list-title">{{ .date_display }}</span>
+        <span class="card-list-meta"><i class="fas fa-map-marker-alt"></i> {{ .location }}</span>
         {{ if .price }}
         {{- $symbol := "R" -}}
         {{- if and .price_currency (ne .price_currency "ZAR") }}{{ $symbol = .price_currency }}{{ end -}}
-        <span class="price"><i class="fas fa-tag"></i> {{ $symbol }} {{ lang.FormatNumber 0 .price }} <span style="font-size:0.875em; opacity:0.75;">excl. VAT</span></span>
+        <span class="card-list-meta"><i class="fas fa-tag"></i> {{ $symbol }} {{ lang.FormatNumber 0 .price }} <span style="font-size:0.875em; opacity:0.75;">excl. VAT</span></span>
         {{ end }}
       </div>
       {{ $contactUrl := printf "/contact-us/?course=%s&date=%s&location=%s" (.title | urlquery) (.date_display | urlquery) (.location | urlquery) }}
-      <div class="course-buy-block" style="display: flex; gap: 0.5rem; flex-direction: column">
+      <div class="course-buy-block button-group is-vertical">
         {{ if and .item_code .price }}
         <a href="/login/?next={{ $.RelPermalink }}" data-item-code="{{ .item_code }}" class="login-buy button is-small is-primary">Login</a>
         {{ end }}
@@ -72,24 +72,24 @@
 {{ else if .Params.item_code }}
 {{/* No scheduled events: free courses get the email-access card; paid courses get purchase details. */}}
 {{ if .Params.isFree }}
-<div class="sidebar-card upcoming-events-card free-course-card">
+<div class="card is-padded">
   {{ template "free-block" . }}
 </div>
 {{ else }}
-<div class="sidebar-card upcoming-events-card">
-  <h4><i class="fas fa-infinity"></i> Self-Paced Course</h4>
-  <p style="font-size: 0.875rem; color: #676869; margin-bottom: 1rem;">
+<div class="card is-padded">
+  <h4 class="card-title is-small"><i class="fas fa-infinity"></i> Self-Paced Course</h4>
+  <p class="card-description">
     Start any time — work through the material at your own pace.
   </p>
   {{ if .Params.price }}
   {{- $symbol := "R" -}}
   {{- if and .Params.price_currency (ne .Params.price_currency "ZAR") }}{{ $symbol = .Params.price_currency }}{{ end -}}
-  <p style="font-size: 0.875rem; color: #676869; margin-bottom: 1rem;">
-    <i class="fas fa-tag" style="color: #3C7D54; margin-right: 0.25rem;"></i>
+  <p class="card-meta">
+    <i class="fas fa-tag"></i>
     <strong>{{ $symbol }} {{ lang.FormatNumber 0 .Params.price }}</strong> <span style="font-size:0.875em; opacity:0.75;">excl. VAT</span>
   </p>
   {{ end }}
-  <div class="course-buy-block" style="display: flex; gap: 0.5rem; flex-direction: column">
+  <div class="course-buy-block button-group is-vertical">
     {{ if .Params.price }}
     <a href="/login/?next={{ .RelPermalink }}" data-item-code="{{ .Params.item_code }}" class="login-buy button is-primary">Login to Buy</a>
     {{ end }}
@@ -215,137 +215,25 @@
 {{ define "free-block" }}
 {{ $freeDisplay := "none" }}
 {{ if .Params.isFree }}{{ $freeDisplay = "flex" }}{{ end }}
-<div class="course-free-block free-course-content" style="display:{{ $freeDisplay }};">
-  <div class="free-course-badge"><span aria-hidden="true">🎁</span> FREE COURSE</div>
-  <p class="free-course-description">
+<div class="course-free-block button-group is-vertical" style="display:{{ $freeDisplay }};">
+  <div class="tag is-primary is-light"><span aria-hidden="true">🎁</span> FREE COURSE</div>
+  <p class="card-description">
     This lesson is free. Enter your email and we will send the enrollment key and course link straight away.
   </p>
-  <div id="free-access-form">
+  <div id="free-access-form" class="button-group is-vertical">
     <input id="free-access-email" type="email" class="input"
            placeholder="your@email.com" aria-label="Email address" />
-    <button id="free-access-btn" class="button">
+    <button id="free-access-btn" class="button is-accent is-fullwidth">
       <span>Get free access</span><span aria-hidden="true">→</span>
     </button>
   </div>
   <div id="free-access-msg"></div>
   <a href="{{ printf "/contact-us/?course=%s&subject=Course%%20Enquiry" (.Title | urlquery) }}"
-     class="button free-course-question">Ask a question</a>
+     class="button is-secondary is-fullwidth">Ask a question</a>
 </div>
 {{ end }}
 
 <style>
-.upcoming-events-card h4 {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  color: #383939;
-}
-
-.upcoming-events-card h4 i {
-  color: #3C7D54;
-}
-
-.free-course-card {
-  background: #fff;
-}
-
-.free-course-content {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.free-course-badge {
-  align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.35rem 0.7rem;
-  border-radius: 4px;
-  background: #e4f2f9;
-  color: #173f5f;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
-
-.free-course-description {
-  margin: 0.15rem 0 0.1rem;
-  color: #676869;
-  font-size: 0.875rem;
-  line-height: 1.55;
-}
-
-.free-course-content #free-access-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.free-course-content #free-access-email {
-  min-height: 40px;
-  border: 1px solid #d5e0e8;
-  border-radius: 4px;
-  box-shadow: none;
-}
-
-.free-course-content #free-access-btn {
-  width: 100%;
-  justify-content: center;
-  gap: 0.35rem;
-  min-height: 40px;
-  border: 0;
-  border-radius: 4px;
-  background: #f0b544;
-  color: #1f2a30;
-  font-weight: 700;
-}
-
-.free-course-content #free-access-btn:hover,
-.free-course-content #free-access-btn:focus-visible {
-  background: #EEB348;
-}
-
-.free-course-question {
-  width: 100%;
-  justify-content: center;
-  min-height: 40px;
-  border: 1px solid #d5e0e8;
-  border-radius: 4px;
-  background: #fff;
-  color: #383939;
-}
-
-.free-course-question:hover,
-.free-course-question:focus-visible {
-  border-color: #54A2CC;
-  color: #2f91c3;
-}
-
-.free-course-content #free-access-msg:empty {
-  display: none;
-}
-
-.upcoming-events-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.upcoming-event-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem;
-  background: #f8f9fa;
-  border-radius: 4px;
-  transition: background 0.2s;
-}
-
-.upcoming-event-item:hover {
-  background: #e9ecef;
-}
 
 .event-date-badge {
   display: flex;
@@ -371,43 +259,5 @@
   font-size: 1.25rem;
   font-weight: 700;
   line-height: 1.2;
-}
-
-.event-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  min-width: 0;
-}
-
-.event-info .dates {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #383939;
-}
-
-.event-info .location {
-  font-size: 0.75rem;
-  color: #676869;
-}
-
-.event-info .location i {
-  color: #3C7D54;
-  margin-right: 0.25rem;
-}
-
-.event-info .price {
-  font-size: 0.75rem;
-  color: #676869;
-}
-
-.event-info .price i {
-  color: #3C7D54;
-  margin-right: 0.25rem;
-}
-
-.upcoming-event-item .button {
-  flex-shrink: 0;
 }
 </style>

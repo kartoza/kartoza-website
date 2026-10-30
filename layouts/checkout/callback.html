@@ -2,22 +2,18 @@
 {{ partial "menu.html" . }}
 
 <style>
+.callback-section .card {
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .callback-section {
     padding: 6rem 1.5rem;
     background: #F5F5F2;
     min-height: 70vh;
     display: flex;
     align-items: center;
-}
-.callback-card {
-    background: #fff;
-    border-radius: 4px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    padding: 3rem 2rem;
-    text-align: center;
-    max-width: 560px;
-    margin: 0 auto;
-    width: 100%;
 }
 .callback-icon {
     font-size: 4rem;
@@ -50,7 +46,7 @@
 
 <section class="callback-section">
     <div class="container">
-        <div class="callback-card">
+        <div class="card is-padded is-large has-text-centered">
             <div class="callback-icon loading" id="cb-icon"><i class="fas fa-spinner fa-spin"></i></div>
             <div class="callback-title" id="cb-title">Processing your payment&hellip;</div>
             <p class="callback-text" id="cb-text">Please wait while we confirm your order.</p>

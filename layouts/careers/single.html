@@ -57,35 +57,35 @@
             <p class="section-heading-sub">We offer more than just a job - we offer a lifestyle</p>
         </div>
         <div class="jobs-grid">
-            <div class="jobs-card">
-                <span class="jobs-icon"><i class="fas fa-home"></i></span>
-                <h3>Remote-First</h3>
-                <p>Work from anywhere in the world. Our team spans multiple continents and timezones. Your office is wherever you're most productive.</p>
+            <div class="card is-padded is-tile">
+                <span class="card-icon is-large"><i class="fas fa-home"></i></span>
+                <h3 class="card-title">Remote-First</h3>
+                <p class="card-description">Work from anywhere in the world. Our team spans multiple continents and timezones. Your office is wherever you're most productive.</p>
             </div>
-            <div class="jobs-card">
-                <span class="jobs-icon"><i class="fas fa-clock"></i></span>
-                <h3>Flexible Hours</h3>
-                <p>Life doesn't fit into 9-to-5. We trust you to manage your time and deliver excellent work on your own schedule.</p>
+            <div class="card is-padded is-tile">
+                <span class="card-icon is-large"><i class="fas fa-clock"></i></span>
+                <h3 class="card-title">Flexible Hours</h3>
+                <p class="card-description">Life doesn't fit into 9-to-5. We trust you to manage your time and deliver excellent work on your own schedule.</p>
             </div>
-            <div class="jobs-card">
-                <span class="jobs-icon"><i class="fab fa-osi"></i></span>
-                <h3>Open Source Impact</h3>
-                <p>Your contributions go into projects used by millions worldwide. Build your professional reputation while making a difference.</p>
+            <div class="card is-padded is-tile">
+                <span class="card-icon is-large"><i class="fab fa-osi"></i></span>
+                <h3 class="card-title">Open Source Impact</h3>
+                <p class="card-description">Your contributions go into projects used by millions worldwide. Build your professional reputation while making a difference.</p>
             </div>
-            <div class="jobs-card">
-                <span class="jobs-icon"><i class="fas fa-users"></i></span>
-                <h3>Small Team, Big Impact</h3>
-                <p>Every voice matters. Your ideas shape our direction. No corporate bureaucracy - just passionate people solving real problems.</p>
+            <div class="card is-padded is-tile">
+                <span class="card-icon is-large"><i class="fas fa-users"></i></span>
+                <h3 class="card-title">Small Team, Big Impact</h3>
+                <p class="card-description">Every voice matters. Your ideas shape our direction. No corporate bureaucracy - just passionate people solving real problems.</p>
             </div>
-            <div class="jobs-card">
-                <span class="jobs-icon"><i class="fas fa-graduation-cap"></i></span>
-                <h3>Continuous Learning</h3>
-                <p>Conference attendance, training budgets, and a culture that encourages experimentation and growth.</p>
+            <div class="card is-padded is-tile">
+                <span class="card-icon is-large"><i class="fas fa-graduation-cap"></i></span>
+                <h3 class="card-title">Continuous Learning</h3>
+                <p class="card-description">Conference attendance, training budgets, and a culture that encourages experimentation and growth.</p>
             </div>
-            <div class="jobs-card">
-                <span class="jobs-icon"><i class="fas fa-heart"></i></span>
-                <h3>Meaningful Work</h3>
-                <p>Help governments, NGOs, and organisations use spatial data to make better decisions for people and planet.</p>
+            <div class="card is-padded is-tile">
+                <span class="card-icon is-large"><i class="fas fa-heart"></i></span>
+                <h3 class="card-title">Meaningful Work</h3>
+                <p class="card-description">Help governments, NGOs, and organisations use spatial data to make better decisions for people and planet.</p>
             </div>
         </div>
     </div>
@@ -102,21 +102,21 @@
             <p class="section-heading-sub">We value curiosity, initiative, and a genuine passion for geospatial technology.</p>
         </div>
         <div class="jobs-grid jobs-grid-2">
-            <div class="jobs-req">
-                <span class="jobs-icon"><i class="fas fa-wifi"></i></span>
-                <div><strong>Reliable Connectivity</strong><span>High-speed internet for seamless collaboration</span></div>
+            <div class="card is-padded is-row">
+                <span class="card-icon is-large"><i class="fas fa-wifi"></i></span>
+                <div class="card-list-content"><strong class="card-list-title">Reliable Connectivity</strong><span class="card-list-meta">High-speed internet for seamless collaboration</span></div>
             </div>
-            <div class="jobs-req">
-                <span class="jobs-icon"><i class="fas fa-language"></i></span>
-                <div><strong>English Fluency</strong><span>Clear written and spoken communication</span></div>
+            <div class="card is-padded is-row">
+                <span class="card-icon is-large"><i class="fas fa-language"></i></span>
+                <div class="card-list-content"><strong class="card-list-title">English Fluency</strong><span class="card-list-meta">Clear written and spoken communication</span></div>
             </div>
-            <div class="jobs-req">
-                <span class="jobs-icon"><i class="fas fa-tasks"></i></span>
-                <div><strong>Self-Organisation</strong><span>Initiative and independent work ethic</span></div>
+            <div class="card is-padded is-row">
+                <span class="card-icon is-large"><i class="fas fa-tasks"></i></span>
+                <div class="card-list-content"><strong class="card-list-title">Self-Organisation</strong><span class="card-list-meta">Initiative and independent work ethic</span></div>
             </div>
-            <div class="jobs-req">
-                <span class="jobs-icon"><i class="fas fa-globe"></i></span>
-                <div><strong>Timezone Flexibility</strong><span>Some overlap with the team for collaboration</span></div>
+            <div class="card is-padded is-row">
+                <span class="card-icon is-large"><i class="fas fa-globe"></i></span>
+                <div class="card-list-content"><strong class="card-list-title">Timezone Flexibility</strong><span class="card-list-meta">Some overlap with the team for collaboration</span></div>
             </div>
         </div>
     </div>
@@ -135,12 +135,12 @@
         </div>
         <div class="jobs-grid jobs-grid-2">
             {{ range $openJobs }}
-            <div class="jobs-card">
-                {{ with .Params.department }}<span class="jobs-tag">{{ . }}</span>{{ end }}
-                <h3>{{ .Title }}</h3>
-                {{ with .Params.location }}<p class="jobs-meta"><i class="fas fa-map-marker-alt"></i> {{ . }}</p>{{ end }}
-                <p>{{ .Plain | truncate 250 "..." }}</p>
-                <a href="{{ .Permalink }}" class="jobs-link">View position <i class="fas fa-arrow-right"></i></a>
+            <div class="card is-padded is-tile">
+                {{ with .Params.department }}<span class="tag is-accent">{{ . }}</span>{{ end }}
+                <h3 class="card-title">{{ .Title }}</h3>
+                {{ with .Params.location }}<p class="card-meta"><i class="fas fa-map-marker-alt"></i> {{ . }}</p>{{ end }}
+                <p class="card-description">{{ .Plain | truncate 250 "..." }}</p>
+                <a href="{{ .Permalink }}" class="card-link">View position <i class="fas fa-arrow-right"></i></a>
             </div>
             {{ end }}
         </div>
@@ -159,26 +159,26 @@
             <p class="section-heading-sub">Don't see a perfect match? We're always looking for talented people</p>
         </div>
         <div class="jobs-grid">
-            <div class="jobs-card">
-                <span class="jobs-icon"><i class="fas fa-code"></i></span>
-                <h3>Software Development</h3>
-                <p>Build the tools that power spatial decision making around the world.</p>
-                <ul class="jobs-skills"><li>Python, Django, Flask</li><li>QGIS, Qt, C++</li><li>JavaScript, Web Mapping</li><li>Mobile Development</li><li>UI/UX Design</li></ul>
-                <a href="mailto:jobs@kartoza.com?subject=Software%20Development%20Position" class="jobs-link">Express interest <i class="fas fa-arrow-right"></i></a>
+            <div class="card is-padded is-tile">
+                <span class="card-icon is-large"><i class="fas fa-code"></i></span>
+                <h3 class="card-title">Software Development</h3>
+                <p class="card-description">Build the tools that power spatial decision making around the world.</p>
+                <ul class="checklist"><li>Python, Django, Flask</li><li>QGIS, Qt, C++</li><li>JavaScript, Web Mapping</li><li>Mobile Development</li><li>UI/UX Design</li></ul>
+                <a href="mailto:jobs@kartoza.com?subject=Software%20Development%20Position" class="card-link">Express interest <i class="fas fa-arrow-right"></i></a>
             </div>
-            <div class="jobs-card">
-                <span class="jobs-icon"><i class="fas fa-map-marked-alt"></i></span>
-                <h3>GIS Specialist</h3>
-                <p>Transform spatial data into insights that drive real-world impact.</p>
-                <ul class="jobs-skills"><li>Spatial Analysis & Data Science</li><li>PostGIS, GeoServer, GDAL</li><li>Cartography & Visualisation</li><li>Remote Sensing</li><li>Domain Expertise</li></ul>
-                <a href="mailto:jobs@kartoza.com?subject=GIS%20Specialist%20Position" class="jobs-link">Express interest <i class="fas fa-arrow-right"></i></a>
+            <div class="card is-padded is-tile">
+                <span class="card-icon is-large"><i class="fas fa-map-marked-alt"></i></span>
+                <h3 class="card-title">GIS Specialist</h3>
+                <p class="card-description">Transform spatial data into insights that drive real-world impact.</p>
+                <ul class="checklist"><li>Spatial Analysis & Data Science</li><li>PostGIS, GeoServer, GDAL</li><li>Cartography & Visualisation</li><li>Remote Sensing</li><li>Domain Expertise</li></ul>
+                <a href="mailto:jobs@kartoza.com?subject=GIS%20Specialist%20Position" class="card-link">Express interest <i class="fas fa-arrow-right"></i></a>
             </div>
-            <div class="jobs-card">
-                <span class="jobs-icon"><i class="fas fa-chalkboard-teacher"></i></span>
-                <h3>Training & Support</h3>
-                <p>Empower others to harness the power of open source geospatial tools.</p>
-                <ul class="jobs-skills"><li>Training Delivery</li><li>Content Development</li><li>Technical Support</li><li>Community Engagement</li><li>Documentation</li></ul>
-                <a href="mailto:jobs@kartoza.com?subject=Training%20Position" class="jobs-link">Express interest <i class="fas fa-arrow-right"></i></a>
+            <div class="card is-padded is-tile">
+                <span class="card-icon is-large"><i class="fas fa-chalkboard-teacher"></i></span>
+                <h3 class="card-title">Training & Support</h3>
+                <p class="card-description">Empower others to harness the power of open source geospatial tools.</p>
+                <ul class="checklist"><li>Training Delivery</li><li>Content Development</li><li>Technical Support</li><li>Community Engagement</li><li>Documentation</li></ul>
+                <a href="mailto:jobs@kartoza.com?subject=Training%20Position" class="card-link">Express interest <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </div>
@@ -195,25 +195,25 @@
             <p class="section-heading-sub">Your journey starts here</p>
         </div>
         <div class="jobs-grid jobs-grid-4">
-            <div class="jobs-step">
-                <span class="jobs-step-number">1</span>
-                <h3>Prepare Your Application</h3>
-                <p>Gather your CV, motivation statement, and portfolio showcasing your best work.</p>
+            <div class="card is-padded">
+                <span class="card-icon is-large">1</span>
+                <h3 class="card-title">Prepare Your Application</h3>
+                <p class="card-description">Gather your CV, motivation statement, and portfolio showcasing your best work.</p>
             </div>
-            <div class="jobs-step">
-                <span class="jobs-step-number">2</span>
-                <h3>Send to jobs@kartoza.com</h3>
-                <p>Include salary expectations and your location. Don't forget code samples!</p>
+            <div class="card is-padded">
+                <span class="card-icon is-large">2</span>
+                <h3 class="card-title">Send to jobs@kartoza.com</h3>
+                <p class="card-description">Include salary expectations and your location. Don't forget code samples!</p>
             </div>
-            <div class="jobs-step">
-                <span class="jobs-step-number">3</span>
-                <h3>Interview &amp; Technical Review</h3>
-                <p>Meet the team and show us what you can do. We love seeing passion in action.</p>
+            <div class="card is-padded">
+                <span class="card-icon is-large">3</span>
+                <h3 class="card-title">Interview &amp; Technical Review</h3>
+                <p class="card-description">Meet the team and show us what you can do. We love seeing passion in action.</p>
             </div>
-            <div class="jobs-step">
-                <span class="jobs-step-number">4</span>
-                <h3>Welcome to Kartoza!</h3>
-                <p>Join our global team and start making an impact from day one.</p>
+            <div class="card is-padded">
+                <span class="card-icon is-large">4</span>
+                <h3 class="card-title">Welcome to Kartoza!</h3>
+                <p class="card-description">Join our global team and start making an impact from day one.</p>
             </div>
         </div>
         <div class="jobs-checklist">
@@ -241,20 +241,13 @@
 </section>
 
 <!-- Final CTA -->
-<section class="section blog-cta-section">
-    <div class="container">
-        <div class="blog-cta-content">
-            <h2 class="blog-cta-title">Ready to Make Your Mark on the Map?</h2>
-            <p class="blog-cta-text">We review applications continuously. Even if there's no perfect match today, we'd love to hear from you.</p>
-            <div class="blog-cta-buttons">
-                <a class="button is-primary is-medium" href="mailto:jobs@kartoza.com">
-                    <span class="icon"><i class="fas fa-envelope"></i></span>
-                    <span>Send Your Application</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+{{ partial "section-cta.html" (dict
+    "title"        "Ready to Make Your Mark on the Map?"
+    "subtitle"     "We review applications continuously. Even if there's no perfect match today, we'd love to hear from you."
+    "primaryUrl"   "mailto:jobs@kartoza.com"
+    "primaryIcon"  "fas fa-envelope"
+    "primaryLabel" "Send Your Application"
+) }}
 
 {{ partial "page-reviewer.html" . }}
 {{ partial "footer.html" . }}

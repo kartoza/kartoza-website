@@ -32,147 +32,25 @@
     flex-wrap: wrap;
 }
 
-.office-card {
-    background: #ffffff;
-    border-radius: 4px;
-    padding: 2rem;
-    width: 100%;
+/* Two office cards side by side, wrapping on narrow screens */
+.office-cards > .card {
+    flex: 0 1 400px;
     max-width: 400px;
-    box-shadow: 0 4px 20px rgba(56, 57, 57, 0.08);
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
 }
 
-.office-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: #54A2CC;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.office-card:hover {
-    box-shadow: 0 12px 40px rgba(56, 57, 57, 0.15);
-    border-color: rgba(84, 162, 204, 0.2);
-}
-
-.office-card:hover::before {
-    opacity: 1;
-}
-
-.office-card.is-active {
-    border-color: #54A2CC;
-    box-shadow: 0 8px 14px rgba(84, 162, 204, 0.11);
-}
-
-.office-card.is-active::before {
-    opacity: 1;
+@media screen and (max-width: 768px) {
+    .office-cards > .card {
+        flex-basis: auto;
+        width: 100%;
+        max-width: 100%;
+    }
 }
 
 /* Your Location Badge */
-.office-card .your-location-badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: #EEB348;
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.25rem 0.75rem;
-    border-radius: 4px;
-    display: none;
-}
-
-.office-card.is-active .your-location-badge {
-    display: block;
-    animation: pulse-badge 2s ease-in-out infinite;
-}
 
 @keyframes pulse-badge {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.05); }
-}
-
-.office-card-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.office-flag {
-    font-size: 2rem;
-    line-height: 1;
-}
-
-.office-card-title {
-    flex: 1;
-}
-
-.office-card-title h4 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #383939;
-    margin: 0 0 0.25rem 0;
-}
-
-.office-card-title .office-entity {
-    font-size: 0.875rem;
-    color: #676869;
-    font-weight: 500;
-}
-
-.office-card-body p {
-    color: #676869;
-    margin-bottom: 1.25rem;
-    line-height: 1.6;
-}
-
-.office-details {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-}
-
-.office-detail {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.875rem;
-    color: #676869;
-}
-
-.office-detail .icon {
-    color: #54A2CC;
-    width: 20px;
-    text-align: center;
-}
-
-.office-detail a {
-    color: #54A2CC;
-    text-decoration: none;
-    transition: color 0.25s ease;
-}
-
-.office-detail a:hover {
-    color: #383939;
-}
-
-.office-card-cta {
-    display: flex;
-    gap: 0.75rem;
-}
-
-.office-card-cta .button {
-    flex: 1;
-    justify-content: center;
 }
 
 /* Regional Pricing Display */
@@ -326,14 +204,6 @@ body.region-INTL .price-hint .price-usd {
         align-items: center;
     }
 
-    .office-card {
-        max-width: 100%;
-    }
-
-    .office-card-cta {
-        flex-direction: column;
-    }
-
     .footer-offices {
         flex-direction: column;
         gap: 1.5rem;
@@ -352,31 +222,6 @@ body.region-INTL .price-hint .price-usd {
 
     .office-cards {
         gap: 1rem;
-    }
-
-    .office-card {
-        padding: 1.5rem;
-        border-radius: 4px;
-    }
-
-    .office-flag {
-        font-size: 2rem;
-    }
-
-    .office-card-title h4 {
-        font-size: 1rem;
-    }
-
-    .office-card-title .office-entity {
-        font-size: 0.875rem;
-    }
-
-    .office-card-body p {
-        font-size: 0.875rem;
-    }
-
-    .office-detail {
-        font-size: 0.875rem;
     }
 
     .footer-offices {
@@ -414,45 +259,6 @@ body.region-INTL .price-hint .price-usd {
 @media screen and (max-width: 375px) {
     .regional-presence-section {
         padding: 2rem 0;
-    }
-
-    .office-card {
-        padding: 1.25rem;
-    }
-
-    .office-card-header {
-        gap: 0.75rem;
-        margin-bottom: 1rem;
-    }
-
-    .office-flag {
-        font-size: 1.5rem;
-    }
-
-    .office-card-title h4 {
-        font-size: 1rem;
-    }
-
-    .office-details {
-        gap: 0.5rem;
-        margin-bottom: 1rem;
-    }
-
-    .office-detail {
-        font-size: 0.875rem;
-        gap: 0.5rem;
-    }
-
-    .office-card-cta .button {
-        font-size: 0.875rem;
-        padding: 0.6rem 1rem;
-    }
-
-    .your-location-badge {
-        font-size: 0.75rem;
-        padding: 0.2rem 0.5rem;
-        top: 0.75rem;
-        right: 0.75rem;
     }
 
     .footer-regional {

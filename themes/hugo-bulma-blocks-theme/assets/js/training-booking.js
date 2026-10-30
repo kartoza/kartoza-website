@@ -63,7 +63,7 @@
         if (checkoutBtn) checkoutBtn.addEventListener('click', handleCheckout);
 
         // Smooth scroll for booking buttons
-        document.querySelectorAll('.booking-scroll-btn').forEach(btn => {
+        document.querySelectorAll('a[href="#booking-section"]').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 const bookingSection = document.querySelector('#booking-section');
@@ -75,7 +75,7 @@
     }
 
     function handleSessionSelection(e) {
-        const sessionCard = e.target.closest('.session-card');
+        const sessionCard = e.target.closest('[data-session-id]');
         if (!sessionCard) return;
 
         // Store session data
@@ -92,10 +92,10 @@
         bookingState.venueType = bookingState.sessionData.venueType;
 
         // Visual feedback
-        document.querySelectorAll('.session-card').forEach(card => {
-            card.classList.remove('selected');
+        document.querySelectorAll('[data-session-id]').forEach(card => {
+            card.classList.remove('is-selected');
         });
-        sessionCard.classList.add('selected');
+        sessionCard.classList.add('is-selected');
 
         // Navigate to next step
         setTimeout(() => {
@@ -173,7 +173,7 @@
 
     function updateDiscountEligibility() {
         // This is just visual feedback - actual calculation happens in step 3
-        const discountItems = document.querySelectorAll('.discount-item');
+        const discountItems = document.querySelectorAll('.booking-widget .card-list-item');
         const attendeeCount = bookingState.attendeeCount;
 
         discountItems.forEach(item => {

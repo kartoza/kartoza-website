@@ -38,13 +38,15 @@
             {{ $thumb := .Params.thumbnail }}
             {{ if or (not $thumb) (eq $thumb "/img/blog/placeholder.png") }}{{ $thumb = "/img/banner-blog.png" }}{{ end }}
             <div class="column is-6">
-                <a class="blog-list-hero-featured" href="{{ .RelPermalink }}">
-                    <img src="{{ $thumb | absURL }}" alt="{{ .Title }}">
-                    <div class="blog-list-hero-featured-body">
-                        <span class="blog-list-hero-featured-label">Latest article</span>
-                        <h2 class="blog-list-hero-featured-title">{{ .Title }}</h2>
-                        <p class="blog-list-hero-featured-summary">{{ .Summary | plainify | truncate 140 }}</p>
-                        <span class="blog-list-hero-featured-meta">
+                <a class="card" href="{{ .RelPermalink }}">
+                    <div class="card-image is-cover is-banner">
+                        <img src="{{ $thumb | absURL }}" alt="{{ .Title }}">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-eyebrow">Latest article</span>
+                        <h2 class="card-title">{{ .Title }}</h2>
+                        <p class="card-description">{{ .Summary | plainify | truncate 140 }}</p>
+                        <span class="card-meta">
                             {{ .Date.Format "Jan 2, 2006" }}{{ with .Params.author }} &middot; {{ . }}{{ end }}
                         </span>
                     </div>
@@ -196,25 +198,25 @@
         const tagsAttr = post.tags ? post.tags.join(' ') : '';
         return `
             <div class="column is-4-desktop is-6-tablet filter-item" data-tags="${tagsAttr}">
-                <article class="blog-card">
-                    <div class="blog-card-image">
+                <article class="card is-tile">
+                    <div class="card-image is-cover">
                         <a href="${post.url}">
                             <img src="${post.thumbnail}" alt="${post.title}" loading="lazy">
                         </a>
                     </div>
-                    <div class="blog-card-content">
-                        <div class="blog-card-meta">
-                            <span class="blog-card-date">
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span>
                                 <i class="fas fa-calendar-alt"></i>
                                 ${post.date}
                             </span>
-                            ${post.author ? `<span class="blog-card-author">${post.author}</span>` : ''}
+                            ${post.author ? `<span class="is-highlight">${post.author}</span>` : ''}
                         </div>
-                        <h3 class="blog-card-title">
+                        <h3 class="card-title">
                             <a href="${post.url}">${post.title}</a>
                         </h3>
-                        <p class="blog-card-excerpt">${post.excerpt}</p>
-                        <a href="${post.url}" class="blog-card-link">
+                        <p class="card-description">${post.excerpt}</p>
+                        <a href="${post.url}" class="card-link">
                             Read More <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>

@@ -98,19 +98,6 @@
     white-space: nowrap;
     align-self: center;
 }
-.orders-clear-btn {
-    padding: 0.5rem 0.85rem;
-    font-size: 0.875rem;
-    border: 1.5px solid #D1D1D1;
-    border-radius: 4px;
-    background: #fff;
-    color: #676869;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: border-color 0.15s, color 0.15s;
-    font-family: inherit;
-}
-.orders-clear-btn:hover { border-color: #B0473C; color: #B0473C; }
 
 /* Results summary */
 .orders-meta {
@@ -126,22 +113,6 @@
 .orders-meta-count strong { color: #383939; }
 
 /* Order cards */
-.order-card {
-    background: #fff;
-    border-radius: 4px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    margin-bottom: 1.25rem;
-    overflow: hidden;
-}
-.order-card-header {
-    padding: 1rem 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #D1D1D1;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
 .order-ref { font-family: monospace; font-size: 0.875rem; font-weight: 700; color: #383939; }
 .order-date { font-size: 0.875rem; color: #676869; }
 .order-status {
@@ -158,11 +129,6 @@
 .order-item-name  { font-size: 1rem; font-weight: 600; color: #383939; }
 .order-item-code  { font-size: 0.75rem; color: #8A8B8B; font-family: monospace; margin-top: 0.1rem; }
 .order-item-price { font-weight: 700; color: #54A2CC; white-space: nowrap; }
-.order-card-footer {
-    padding: 0.75rem 1.5rem;
-    background: #F5F5F2; border-top: 1px solid #D1D1D1;
-    display: flex; align-items: center; justify-content: space-between; font-size: 0.875rem;
-}
 .order-total         { font-weight: 700; color: #383939; }
 .order-invoice-ref   { font-size: 0.875rem; color: #676869; font-family: monospace; }
 
@@ -228,27 +194,6 @@
     margin-top: 1.5rem;
     flex-wrap: wrap;
 }
-.ord-page-btn {
-    min-width: 36px; height: 36px;
-    padding: 0 0.6rem;
-    border: 1.5px solid #D1D1D1;
-    border-radius: 4px;
-    background: #fff;
-    color: #676869;
-    font-size: 0.875rem;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: border-color 0.15s, color 0.15s, background 0.15s;
-    font-family: inherit;
-}
-.ord-page-btn:hover:not(:disabled):not(.is-active) {
-    border-color: #54A2CC; color: #54A2CC;
-}
-.ord-page-btn.is-active {
-    background: #54A2CC; border-color: #54A2CC; color: #fff;
-}
-.ord-page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .ord-page-ellipsis { color: #8A8B8B; font-size: 0.875rem; padding: 0 0.25rem; align-self: center; }
 </style>
 
@@ -318,7 +263,7 @@
                 <input type="date" id="ord-date-from" style="padding-left:0.75rem;" onchange="ordFilter()" oninput="ordFilter()">
                 <span class="orders-toolbar-date-label">To</span>
                 <input type="date" id="ord-date-to"   style="padding-left:0.75rem;" onchange="ordFilter()" oninput="ordFilter()">
-                <button class="orders-clear-btn" onclick="ordClearFilters()">
+                <button class="button is-small is-secondary" onclick="ordClearFilters()">
                     <i class="fas fa-times" style="margin-right:0.3rem;"></i>Clear
                 </button>
             </div>
@@ -515,8 +460,8 @@
                 : '<span></span>';
 
             return (
-                '<div class="order-card">' +
-                    '<div class="order-card-header">' +
+                '<div class="card is-padded">' +
+                    '<div class="card-header">' +
                         '<div>' +
                             '<div class="order-ref">'  + escHtml(order.name) + '</div>' +
                             '<div class="order-date">' + fmtDate(order.transaction_date) + '</div>' +
@@ -525,7 +470,7 @@
                     '</div>' +
                     itemsHtml +
                     buildMoodleSection(order) +
-                    '<div class="order-card-footer">' +
+                    '<div class="card-footer">' +
                         invoiceFooterHtml +
                         '<span class="order-total">Total: ' + fmt(order.grand_total, order.currency) + '</span>' +
                     '</div>' +
@@ -542,18 +487,18 @@
         if (totalPages <= 1) { pagination.innerHTML = ''; return; }
 
         var html = '';
-        html += '<button class="ord-page-btn" onclick="ordGoPage(' + (current - 1) + ')"' +
+        html += '<button class="button is-small" onclick="ordGoPage(' + (current - 1) + ')"' +
             (current === 1 ? ' disabled' : '') + '><i class="fas fa-chevron-left"></i></button>';
 
         buildPageRange(current, totalPages).forEach(function(p) {
             if (p === '…') {
                 html += '<span class="ord-page-ellipsis">…</span>';
             } else {
-                html += '<button class="ord-page-btn' + (p === current ? ' is-active' : '') + '" onclick="ordGoPage(' + p + ')">' + p + '</button>';
+                html += '<button class="button is-small' + (p === current ? ' is-active' : '') + '" onclick="ordGoPage(' + p + ')">' + p + '</button>';
             }
         });
 
-        html += '<button class="ord-page-btn" onclick="ordGoPage(' + (current + 1) + ')"' +
+        html += '<button class="button is-small" onclick="ordGoPage(' + (current + 1) + ')"' +
             (current === totalPages ? ' disabled' : '') + '><i class="fas fa-chevron-right"></i></button>';
 
         pagination.innerHTML = html;

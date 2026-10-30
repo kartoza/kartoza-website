@@ -34,20 +34,6 @@
     justify-content: center;
 }
 .auth-card-wrapper { width: 100%; max-width: 480px; margin: -2rem auto 0; }
-.auth-card {
-    background: #fff;
-    border-radius: 4px;
-    box-shadow: 0 8px 40px rgba(56, 57, 57,0.12);
-    overflow: hidden;
-    position: relative;
-}
-.auth-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 4px;
-    background: var(--primary2, #383939);
-}
 .auth-form-panel { padding: 2rem; }
 .auth-form-header { margin-bottom: 1.75rem; text-align: center; }
 .auth-form-icon {
@@ -97,20 +83,6 @@
 
 .auth-field-hint { font-size: 0.75rem; color: var(--dark1, #676869); margin-top: 0.35rem; }
 
-.auth-submit {
-    width: 100%; padding: 0.875rem; border: none; border-radius: 4px;
-    background: var(--primary2, #383939);
-    color: #fff; font-size: 1rem; font-weight: 700; cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    letter-spacing: 0.02em; font-family: inherit; margin-top: 0.5rem;
-}
-.auth-submit:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(84, 162, 204,0.35); }
-.auth-submit:disabled { opacity: 0.7; cursor: not-allowed; }
-.auth-submit .btn-text, .auth-submit .btn-loading { display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
-.auth-submit .btn-loading { display: none; }
-.auth-submit.is-loading .btn-text   { display: none; }
-.auth-submit.is-loading .btn-loading { display: flex; }
-
 .auth-message {
     border-radius: 4px; padding: 1rem 1.25rem; margin-top: 1.25rem;
     display: none; align-items: flex-start; gap: 0.75rem;
@@ -120,13 +92,6 @@
 .auth-message.is-error   { background: rgba(176, 71, 60,0.08); border: 1px solid rgba(176, 71, 60,0.2); color: #B0473C; }
 .auth-message.is-success { background: rgba(60, 125, 84,0.08); border: 1px solid rgba(60, 125, 84,0.2); color: #3C7D54; }
 .auth-message i { margin-top: 0.1rem; flex-shrink: 0; }
-
-.auth-card-footer {
-    padding: 1.25rem 2rem; border-top: 1px solid var(--light2, #D1D1D1);
-    text-align: center; font-size: 0.875rem; color: var(--dark1, #676869);
-}
-.auth-card-footer a { color: var(--primary2, #383939); font-weight: 600; text-decoration: none; }
-.auth-card-footer a:hover { text-decoration: underline; }
 </style>
 
 <section class="auth-hero">
@@ -140,7 +105,7 @@
 
 <section class="auth-section">
     <div class="auth-card-wrapper">
-        <div class="auth-card">
+        <div class="card has-border-top has-border-dark">
 
             <!-- Invalid / missing key -->
             <div class="auth-form-panel" id="panel-invalid" style="display:none;">
@@ -151,7 +116,7 @@
                     <h2>Invalid Link</h2>
                     <p>This reset link is invalid or has expired.</p>
                 </div>
-                <a href="/login/" class="auth-submit" style="display:flex; align-items:center; justify-content:center; gap:0.5rem; text-decoration:none;">
+                <a href="/login/" class="button is-primary is-fullwidth" style="display:flex; align-items:center; justify-content:center; gap:0.5rem; text-decoration:none;">
                     <i class="fas fa-arrow-left"></i> Back to Sign In
                 </a>
             </div>
@@ -196,7 +161,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="auth-submit" id="reset-submit">
+                    <button type="submit" class="button is-primary is-fullwidth" id="reset-submit">
                         <span class="btn-text">
                             <i class="fas fa-save"></i> Set New Password
                         </span>
@@ -221,12 +186,12 @@
                     <h2>Password Updated</h2>
                     <p>Your password has been changed successfully.</p>
                 </div>
-                <a href="/login/" class="auth-submit" style="display:flex; align-items:center; justify-content:center; gap:0.5rem; text-decoration:none;">
+                <a href="/login/" class="button is-primary is-fullwidth" style="display:flex; align-items:center; justify-content:center; gap:0.5rem; text-decoration:none;">
                     <i class="fas fa-sign-in-alt"></i> Sign In
                 </a>
             </div>
 
-            <div class="auth-card-footer">
+            <div class="card-footer is-centered">
                 <a href="/login/">Back to sign in</a>
             </div>
         </div>

@@ -45,28 +45,28 @@
                         {{ $tagList = $tagList | append (. | urlize) }}
                     {{ end }}
                     <div class="column filter-item" data-tags="{{ delimit $tagList " " }}">
-                        <article class="app-card">
-                            <div class="app-card-image">
+                        <article class="card is-tile">
+                            <div class="card-image is-cover">
                                 <a href="{{ .Permalink }}">
                                     {{ $thumbnail := .Params.thumbnail | default "/img/banner-apps.png" }}
                                     <img src="{{ absURL $thumbnail }}" alt="{{ .Title }}" loading="lazy">
                                 </a>
                             </div>
-                            <div class="app-card-content">
+                            <div class="card-content">
                                 {{ if .Params.tags }}
-                                <div class="app-card-tags">
+                                <div class="card-tags">
                                     {{ range first 2 .Params.tags }}
-                                    <span class="app-card-tag">{{ . }}</span>
+                                    <span class="tag">{{ . }}</span>
                                     {{ end }}
                                 </div>
                                 {{ end }}
-                                <h3 class="app-card-title">
+                                <h3 class="card-title">
                                     <a href="{{ .Permalink }}">{{ .Title }}</a>
                                 </h3>
-                                <p class="app-card-description">
+                                <p class="card-description">
                                     {{ .Description | truncate 120 }}
                                 </p>
-                                <a href="{{ .Permalink }}" class="app-card-link">
+                                <a href="{{ .Permalink }}" class="card-link">
                                     View App <i class="fas fa-arrow-right"></i>
                                 </a>
                             </div>
@@ -84,8 +84,8 @@
 
             <!-- Filter Sidebar -->
             <aside class="apps-filter-sidebar">
-                <div class="filter-sidebar-card">
-                    <h4 class="filter-sidebar-title">
+                <div class="card is-padded">
+                    <h4 class="card-title is-small">
                         <i class="fas fa-filter"></i> Filter by Type
                     </h4>
                     <div class="filter-sidebar-tabs">

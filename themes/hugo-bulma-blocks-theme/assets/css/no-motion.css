@@ -24,12 +24,9 @@
 /* Elements that used to be revealed on scroll are shown immediately. */
 .faq-item-modern,
 .form-field,
-.main-card,
 .product-card.product-featured,
 .product-card-small,
 .service-card,
-.sidebar-card,
-.why-item,
 .shadowing-text,
 .shadowing-visual {
   opacity: 1 !important;
@@ -40,8 +37,6 @@
 .card-glow,
 .orb-glow,
 .social-orb:hover .orb-glow,
-.hosting-pathway-icon-glow,
-.hosting-pathway-card:hover .hosting-pathway-icon-glow,
 .nudge-glow,
 .partner-showcase-logo-glow {
   display: none !important;

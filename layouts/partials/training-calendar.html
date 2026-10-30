@@ -40,31 +40,31 @@
         {{ $eventTitle := .title }}
         {{ $coursePage := site.GetPage .url }}
         {{ if not $coursePage }}{{ with first 1 (where site.RegularPages "Title" .title) }}{{ $coursePage = index . 0 }}{{ end }}{{ end }}
-        <div class="training-event-card training-card" data-event-start="{{ .start }}" data-event-end="{{ .end }}" data-event-title="{{ .title }}" style="--course-color: {{ if eq .title "Introduction to QGIS" }}#3C7D54{{ else if eq .title "Introduction to PostGIS" }}#383939{{ else if eq .title "Enterprise GIS" }}#EEB348{{ else }}#8e6bbd{{ end }}">
+        <div class="card is-tile" data-event-start="{{ .start }}" data-event-end="{{ .end }}" data-event-title="{{ .title }}" style="--course-color: {{ if eq .title "Introduction to QGIS" }}#3C7D54{{ else if eq .title "Introduction to PostGIS" }}#383939{{ else if eq .title "Enterprise GIS" }}#EEB348{{ else }}#8e6bbd{{ end }}">
             {{ $thumbnail := "/img/banner-courses.png" }}
             {{ $level := "" }}
             {{ with $coursePage }}{{ $thumbnail = .Params.thumbnail | default "/img/banner-courses.png" }}{{ $level = .Params.level | default "" }}{{ end }}
-            <div class="training-event-image training-card-image"><img src="{{ $thumbnail | relURL }}" alt="{{ $eventTitle }} course cover" loading="lazy">
-                {{ with $level }}<span class="training-card-badge level-{{ . | lower | urlize }}">{{ . }}</span>{{ end }}
+            <div class="card-image is-cover"><img src="{{ $thumbnail | relURL }}" alt="{{ $eventTitle }} course cover" loading="lazy">
+                {{ partial "card-level-badge.html" $level }}
             </div>
-            <div class="training-event-details">
-                <h3 class="event-title">
+            <div class="card-content">
+                <h3 class="card-title">
                     <a href="{{ $courseSlug }}">{{ .title }}</a>
                 </h3>
                 {{ if .location }}
-                <p class="event-location">
+                <p class="card-meta">
                     <i class="fas fa-map-marker-alt"></i>
                     {{ .location }}
                 </p>
                 {{ end }}
                 {{ if and .start .end }}
-                <p class="event-time">
+                <p class="card-meta">
                     <i class="fas fa-clock"></i>
                     {{ (time .start).Format "Jan 2" }} - {{ (time .end).Format "Jan 2, 2006" }}
                 </p>
                 {{ end }}
                 {{ if .price }}
-                <p class="event-price">
+                <p class="card-meta">
                     <i class="fas fa-tag"></i>
                     {{- $symbol := "R" -}}
                     {{- if and .price_currency (ne .price_currency "ZAR") }}{{ $symbol = .price_currency }}{{ end -}}
@@ -72,13 +72,13 @@
                 </p>
                 {{ end }}
                 {{ if .spots_available }}
-                <p class="event-spots {{ if lt (int .spots_available) 5 }}spots-low{{ end }}">
+                <p class="card-meta {{ if lt (int .spots_available) 5 }}has-text-danger{{ end }}">
                     <i class="fas fa-users"></i>
                     {{ .spots_available }} spots available
                 </p>
                 {{ end }}
             </div>
-            <div class="training-event-actions">
+            <div class="card-footer">
                 <a href="{{ $courseSlug }}" class="button is-small is-light">
                     <span class="icon"><i class="fas fa-info-circle"></i></span>
                     <span>Details</span>
@@ -88,7 +88,7 @@
                 {{ if and .item_code .price }}
                 <a href="/login/?next={{ $.RelPermalink }}" data-item-code="{{ .item_code }}" class="login-buy button is-small is-primary">Login</a>
                 {{ end }}
-                <a href="{{ $contactUrl }}" class="button is-small training-event-enquiry">
+                <a href="{{ $contactUrl }}" class="button is-small">
                     <span>Enquiry</span>
                 </a>
             </div>
@@ -97,13 +97,13 @@
     </div>
     </div>
     {{ else }}
-    <div class="training-calendar-empty">
-        <div class="empty-calendar-icon">
+    <div class="card is-padded is-large has-text-centered">
+        <div class="card-icon is-large">
             <i class="fas fa-calendar-times"></i>
         </div>
-        <h3>No Scheduled Events</h3>
-        <p>We don't have any public training sessions scheduled at the moment.</p>
-        <p>Contact us to arrange custom training for your organisation.</p>
+        <h3 class="card-title">No Scheduled Events</h3>
+        <p class="card-description">We don't have any public training sessions scheduled at the moment.</p>
+        <p class="card-description">Contact us to arrange custom training for your organisation.</p>
         <a href="/contact-us/" class="button is-primary">
             <span class="icon"><i class="fas fa-envelope"></i></span>
             <span>Request Training</span>
@@ -120,25 +120,25 @@
     {{ end }}
 {{ end }}
 {{ if or $selfPacedCourses $freeResources }}
-<div class="training-calendar-self-paced-card">
+<div class="card is-padded">
     {{ if $selfPacedCourses }}
-    <h3><i class="fas fa-book-open"></i> Self-Paced Courses</h3>
-    <div class="training-calendar-self-paced-list">
+    <h3 class="card-title is-small"><i class="fas fa-book-open"></i> Self-Paced Courses</h3>
+    <div class="card-list">
         {{ range $selfPacedCourses }}
-        <a href="{{ .RelPermalink }}" class="training-calendar-self-paced-item">
-            <span>{{ .Title }}</span><i class="fas fa-arrow-right" aria-hidden="true"></i>
+        <a href="{{ .RelPermalink }}" class="card-list-item">
+            <span class="card-list-content">{{ .Title }}</span><i class="fas fa-arrow-right" aria-hidden="true"></i>
         </a>
         {{ end }}
     </div>
     </div>
     {{ end }}
     {{ if $freeResources }}
-<div class="training-calendar-self-paced-card training-calendar-free-card">
-    <h3><i class="fas fa-gift"></i> Free GIS Resources</h3>
-    <div class="training-calendar-self-paced-list">
+<div class="card is-padded">
+    <h3 class="card-title is-small"><i class="fas fa-gift"></i> Free GIS Resources</h3>
+    <div class="card-list">
         {{ range $freeResources }}
-        <a href="{{ .RelPermalink }}" class="training-calendar-self-paced-item">
-            <span>{{ .Title }}</span><i class="fas fa-arrow-right" aria-hidden="true"></i>
+        <a href="{{ .RelPermalink }}" class="card-list-item">
+            <span class="card-list-content">{{ .Title }}</span><i class="fas fa-arrow-right" aria-hidden="true"></i>
         </a>
         {{ end }}
     </div>
@@ -180,7 +180,7 @@
   const results = calendar.querySelector('[data-calendar-results]');
   const days = calendar.querySelector('[data-calendar-days]');
   const monthLabel = calendar.querySelector('[data-calendar-month]');
-  const cards = [...calendar.querySelectorAll('.training-event-card')];
+  const cards = [...calendar.querySelectorAll('[data-event-start]')];
   const seenCourses = new Set();
   calendar.querySelectorAll('[data-course-legend]').forEach(item => { if (seenCourses.has(item.dataset.courseLegend)) item.remove(); else seenCourses.add(item.dataset.courseLegend); });
   const events = cards.map(card => ({ card, start: new Date(`${card.dataset.eventStart}T00:00:00`), end: new Date(`${card.dataset.eventEnd}T00:00:00`), color: getComputedStyle(card).getPropertyValue('--course-color').trim() }));
@@ -280,21 +280,6 @@
     gap: 1.5rem;
 }
 
-.training-event-card {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    padding: 1rem;
-    background: white;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.training-event-card:hover {
-    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-}
-
 .training-event-date {
     display: flex;
     flex-direction: column;
@@ -322,132 +307,6 @@
 .event-year {
     font-size: 0.75rem;
     opacity: 0.8;
-}
-
-.training-event-details {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-.training-event-image {
-    overflow: hidden;
-    border-radius: 4px 4px 0 0;
-    aspect-ratio: 16 / 9;
-}
-
-.training-event-card.training-card {
-    padding: 0;
-}
-
-.training-event-card.training-card .training-event-details,
-.training-event-card.training-card .training-event-actions {
-    padding-right: 1.5rem;
-    padding-left: 1.5rem;
-}
-
-.training-event-card.training-card .training-event-actions {
-    padding-bottom: 1.5rem;
-}
-
-.training-event-image img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.event-title {
-    margin: 0 0 0.5rem;
-    font-size: 1.25rem;
-}
-
-.event-title a {
-    color: #383939;
-    text-decoration: none;
-}
-
-.event-title a:hover {
-    color: #3C7D54;
-}
-
-.training-event-details p {
-    margin: 0.25rem 0;
-    font-size: 0.875rem;
-    color: #676869;
-}
-
-.training-event-details i {
-    width: 20px;
-    margin-right: 0.5rem;
-    color: #3C7D54;
-}
-
-.event-spots.spots-low {
-    color: #dc3545;
-}
-
-.event-spots.spots-low i {
-    color: #dc3545;
-}
-
-.training-event-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    justify-content: center;
-}
-
-.training-event-actions .button.is-light {
-    border: 1px solid var(--primary);
-    background: var(--white);
-    color: #000;
-}
-
-.training-event-actions .button.is-light:hover,
-.training-event-actions .button.is-light:focus-visible,
-.training-event-actions .button.is-light:active {
-    border-color: var(--primary);
-    background: var(--primary);
-    color: var(--white);
-}
-
-.training-event-actions .login-buy:hover,
-.training-event-actions .login-buy:focus-visible,
-.training-event-actions .login-buy:active,
-.training-event-actions .login-buy.is-success {
-    border-color: var(--accent);
-    background: var(--accent);
-    color: var(--white);
-}
-
-.training-event-actions .training-event-enquiry:hover,
-.training-event-actions .training-event-enquiry:focus-visible,
-.training-event-actions .training-event-enquiry:active {
-    border-color: var(--accent);
-    background: var(--accent);
-    color: var(--white);
-}
-
-.training-calendar-empty {
-    text-align: center;
-    padding: 3rem;
-}
-
-.empty-calendar-icon {
-    font-size: 4rem;
-    color: #dee2e6;
-    margin-bottom: 1rem;
-}
-
-.training-calendar-empty h3 {
-    color: #676869;
-    margin-bottom: 0.5rem;
-}
-
-.training-calendar-empty p {
-    color: #868e96;
-    margin-bottom: 1rem;
 }
 
 .training-calendar-month-view {
@@ -565,8 +424,7 @@
 }
 
 .training-calendar-results[hidden],
-.training-calendar-month-view[hidden],
-.training-event-card[hidden] {
+.training-calendar-month-view[hidden] {
     display: none;
 }
 
@@ -590,61 +448,6 @@
     top: auto;
 }
 
-.training-calendar-self-paced-card {
-    margin-top: 1.25rem;
-    padding: 1.5rem;
-    border-radius: 4px;
-    background: var(--white);
-    box-shadow: 0 4px 16px rgba(56, 57, 57, 0.12);
-}
-
-.training-calendar-self-paced-card h3 {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 0 0 1rem;
-    color: #383939;
-    font-size: 1rem;
-}
-
-.training-calendar-self-paced-card h3 i {
-    color: var(--primary);
-}
-
-.training-calendar-self-paced-card .training-calendar-free-title {
-    margin-top: 1.25rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid #eef2f4;
-}
-
-.training-calendar-self-paced-list {
-    display: flex;
-    flex-direction: column;
-}
-
-.training-calendar-self-paced-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 0.75rem 0;
-    color: #383939;
-    text-decoration: none;
-}
-
-.training-calendar-self-paced-item + .training-calendar-self-paced-item {
-    border-top: 1px solid #eef2f4;
-}
-
-.training-calendar-self-paced-item i {
-    color: var(--primary);
-}
-
-.training-calendar-self-paced-item:hover,
-.training-calendar-self-paced-item:focus-visible {
-    color: var(--primary-dark);
-}
-
 @media (max-width: 768px) {
     .training-sidebar {
         position: static;
@@ -652,11 +455,6 @@
 
     .training-calendar-results .training-calendar-grid {
         grid-template-columns: 1fr;
-    }
-
-    .training-event-card {
-        grid-template-columns: 1fr;
-        text-align: center;
     }
 
     .training-event-date {
@@ -667,11 +465,6 @@
 
     .event-day {
         font-size: 1.5rem;
-    }
-
-    .training-event-actions {
-        flex-direction: row;
-        justify-content: center;
     }
 }
 </style>

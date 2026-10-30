@@ -48,21 +48,21 @@
         </div>
         <div class="team-grid team-grid-leadership">
             {{ range (sort . "Params.weight") }}
-            <a href="{{ .Permalink }}" class="team-member team-member-featured team-member-clickable">
-                <div class="team-member-image">
+            <a href="{{ .Permalink }}" class="card is-tile">
+                <div class="card-image is-cover is-square">
                     <img src="{{ absURL .Params.image }}" alt="{{ .Title }}" loading="lazy">
                     {{ with .Params.country }}
-                    <div class="team-member-location">
+                    <div class="card-image-caption">
                         <i class="fas fa-map-marker-alt"></i>
                         <span>{{ . }}</span>
                     </div>
                     {{ end }}
                 </div>
-                <div class="team-member-content">
-                    <h3 class="team-member-name">{{ .Title }}</h3>
-                    <span class="team-member-role">{{ .Params.role }}</span>
-                    <p class="team-member-bio">{{ .Params.bio }}</p>
-                    <span class="team-member-view-profile">
+                <div class="card-content">
+                    <h3 class="card-title">{{ .Title }}</h3>
+                    <span class="tag is-primary is-light">{{ .Params.role }}</span>
+                    <p class="card-description">{{ .Params.bio }}</p>
+                    <span class="card-link">
                         <i class="fas fa-arrow-right"></i> View Profile
                     </span>
                 </div>
@@ -86,21 +86,21 @@
         </div>
         <div class="team-grid">
             {{ range (sort . "Params.weight") }}
-            <a href="{{ .Permalink }}" class="team-member team-member-clickable">
-                <div class="team-member-image">
+            <a href="{{ .Permalink }}" class="card is-tile">
+                <div class="card-image is-cover is-square">
                     <img src="{{ absURL .Params.image }}" alt="{{ .Title }}" loading="lazy">
                     {{ with .Params.country }}
-                    <div class="team-member-location">
+                    <div class="card-image-caption">
                         <i class="fas fa-map-marker-alt"></i>
                         <span>{{ . }}</span>
                     </div>
                     {{ end }}
                 </div>
-                <div class="team-member-content">
-                    <h3 class="team-member-name">{{ .Title }}</h3>
-                    <span class="team-member-role">{{ .Params.role }}</span>
-                    <p class="team-member-bio">{{ .Params.bio }}</p>
-                    <span class="team-member-view-profile">
+                <div class="card-content">
+                    <h3 class="card-title">{{ .Title }}</h3>
+                    <span class="tag is-primary is-light">{{ .Params.role }}</span>
+                    <p class="card-description">{{ .Params.bio }}</p>
+                    <span class="card-link">
                         <i class="fas fa-arrow-right"></i> View Profile
                     </span>
                 </div>
@@ -124,21 +124,21 @@
         </div>
         <div class="team-grid">
             {{ range (sort . "Params.weight") }}
-            <a href="{{ .Permalink }}" class="team-member team-member-clickable">
-                <div class="team-member-image">
+            <a href="{{ .Permalink }}" class="card is-tile">
+                <div class="card-image is-cover is-square">
                     <img src="{{ absURL .Params.image }}" alt="{{ .Title }}" loading="lazy">
                     {{ with .Params.country }}
-                    <div class="team-member-location">
+                    <div class="card-image-caption">
                         <i class="fas fa-map-marker-alt"></i>
                         <span>{{ . }}</span>
                     </div>
                     {{ end }}
                 </div>
-                <div class="team-member-content">
-                    <h3 class="team-member-name">{{ .Title }}</h3>
-                    <span class="team-member-role">{{ .Params.role }}</span>
-                    <p class="team-member-bio">{{ .Params.bio }}</p>
-                    <span class="team-member-view-profile">
+                <div class="card-content">
+                    <h3 class="card-title">{{ .Title }}</h3>
+                    <span class="tag is-primary is-light">{{ .Params.role }}</span>
+                    <p class="card-description">{{ .Params.bio }}</p>
+                    <span class="card-link">
                         <i class="fas fa-arrow-right"></i> View Profile
                     </span>
                 </div>
@@ -162,21 +162,21 @@
         </div>
         <div class="team-grid">
             {{ range (sort . "Params.weight") }}
-            <a href="{{ .Permalink }}" class="team-member team-member-clickable">
-                <div class="team-member-image">
+            <a href="{{ .Permalink }}" class="card is-tile">
+                <div class="card-image is-cover is-square">
                     <img src="{{ absURL .Params.image }}" alt="{{ .Title }}" loading="lazy">
                     {{ with .Params.country }}
-                    <div class="team-member-location">
+                    <div class="card-image-caption">
                         <i class="fas fa-map-marker-alt"></i>
                         <span>{{ . }}</span>
                     </div>
                     {{ end }}
                 </div>
-                <div class="team-member-content">
-                    <h3 class="team-member-name">{{ .Title }}</h3>
-                    <span class="team-member-role">{{ .Params.role }}</span>
-                    <p class="team-member-bio">{{ .Params.bio }}</p>
-                    <span class="team-member-view-profile">
+                <div class="card-content">
+                    <h3 class="card-title">{{ .Title }}</h3>
+                    <span class="tag is-primary is-light">{{ .Params.role }}</span>
+                    <p class="card-description">{{ .Params.bio }}</p>
+                    <span class="card-link">
                         <i class="fas fa-arrow-right"></i> View Profile
                     </span>
                 </div>
@@ -200,21 +200,21 @@
         </div>
         <div class="team-grid">
             {{ range (sort . "Params.weight") }}
-            <a href="{{ .Permalink }}" class="team-member team-member-clickable">
-                <div class="team-member-image">
+            <a href="{{ .Permalink }}" class="card is-tile">
+                <div class="card-image is-cover is-square">
                     <img src="{{ absURL .Params.image }}" alt="{{ .Title }}" loading="lazy">
                     {{ with .Params.country }}
-                    <div class="team-member-location">
+                    <div class="card-image-caption">
                         <i class="fas fa-map-marker-alt"></i>
                         <span>{{ . }}</span>
                     </div>
                     {{ end }}
                 </div>
-                <div class="team-member-content">
-                    <h3 class="team-member-name">{{ .Title }}</h3>
-                    <span class="team-member-role">{{ .Params.role }}</span>
-                    <p class="team-member-bio">{{ .Params.bio }}</p>
-                    <span class="team-member-view-profile">
+                <div class="card-content">
+                    <h3 class="card-title">{{ .Title }}</h3>
+                    <span class="tag is-primary is-light">{{ .Params.role }}</span>
+                    <p class="card-description">{{ .Params.bio }}</p>
+                    <span class="card-link">
                         <i class="fas fa-arrow-right"></i> View Profile
                     </span>
                 </div>
@@ -238,21 +238,21 @@
         </div>
         <div class="team-grid">
             {{ range (sort . "Params.weight") }}
-            <a href="{{ .Permalink }}" class="team-member team-member-clickable">
-                <div class="team-member-image">
+            <a href="{{ .Permalink }}" class="card is-tile">
+                <div class="card-image is-cover is-square">
                     <img src="{{ absURL .Params.image }}" alt="{{ .Title }}" loading="lazy">
                     {{ with .Params.country }}
-                    <div class="team-member-location">
+                    <div class="card-image-caption">
                         <i class="fas fa-map-marker-alt"></i>
                         <span>{{ . }}</span>
                     </div>
                     {{ end }}
                 </div>
-                <div class="team-member-content">
-                    <h3 class="team-member-name">{{ .Title }}</h3>
-                    <span class="team-member-role">{{ .Params.role }}</span>
-                    <p class="team-member-bio">{{ .Params.bio }}</p>
-                    <span class="team-member-view-profile">
+                <div class="card-content">
+                    <h3 class="card-title">{{ .Title }}</h3>
+                    <span class="tag is-primary is-light">{{ .Params.role }}</span>
+                    <p class="card-description">{{ .Params.bio }}</p>
+                    <span class="card-link">
                         <i class="fas fa-arrow-right"></i> View Profile
                     </span>
                 </div>
@@ -276,21 +276,21 @@
         </div>
         <div class="team-grid team-grid-leadership">
             {{ range (sort . "Params.weight") }}
-            <a href="{{ .Permalink }}" class="team-member team-member-featured team-member-clickable">
-                <div class="team-member-image">
+            <a href="{{ .Permalink }}" class="card is-tile">
+                <div class="card-image is-cover is-square">
                     <img src="{{ absURL .Params.image }}" alt="{{ .Title }}" loading="lazy">
                     {{ with .Params.country }}
-                    <div class="team-member-location">
+                    <div class="card-image-caption">
                         <i class="fas fa-map-marker-alt"></i>
                         <span>{{ . }}</span>
                     </div>
                     {{ end }}
                 </div>
-                <div class="team-member-content">
-                    <h3 class="team-member-name">{{ .Title }}</h3>
-                    <span class="team-member-role">{{ .Params.role }}</span>
-                    <p class="team-member-bio">{{ .Params.bio }}</p>
-                    <span class="team-member-view-profile">
+                <div class="card-content">
+                    <h3 class="card-title">{{ .Title }}</h3>
+                    <span class="tag is-primary is-light">{{ .Params.role }}</span>
+                    <p class="card-description">{{ .Params.bio }}</p>
+                    <span class="card-link">
                         <i class="fas fa-arrow-right"></i> View Profile
                     </span>
                 </div>
