@@ -1010,7 +1010,7 @@
 
 .portfolio-filter-sidebar {
     position: sticky;
-    top: 2rem;
+    top: 5rem;
 }
 
 .filter-sidebar-tabs {
@@ -3483,7 +3483,7 @@ body:has(.blog-hero) .contextmenu {
 
 .apps-filter-sidebar {
     position: sticky;
-    top: 2rem;
+    top: 5rem;
 }
 
 /* Apps grid inside layout - no extra margins */
