@@ -10851,7 +10851,7 @@ body:has(.blog-hero) .contextmenu {
 
 /* Plugins Section */
 .plugins-section {
-    background: var(--white);
+    background: var(--light-bg);
     padding: 3rem 1.5rem;
 }
 
