@@ -1,11 +1,11 @@
 ---
 author: Jeff Osundwa
-date: '2026-08-21'
+date: '2026-07-17'
 description: How a South African geospatial consultancy's Docker images became the
   backbone of open-source GIS infrastructure.
 draft: true
 erpnext_id: /blog/docker/21-million-pulls-the-story-behind-kartozas-geospatial-docker-images
-erpnext_modified: '2026-08-21'
+erpnext_modified: '2026-07-17 11:22:29.575795'
 reviewedBy: Automated Check
 reviewedDate: '2026-10-26'
 tags:
