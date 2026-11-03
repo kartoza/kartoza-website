@@ -3231,7 +3231,6 @@ body:has(.blog-hero) .contextmenu {
     width: 100%;
     height: auto;
     border-radius: var(--radius-lg);
-    margin: 2.5rem 0;
     box-shadow:
         0 4px 6px rgba(56, 57, 57, 0.1),
         0 10px 40px rgba(56, 57, 57, 0.15),
