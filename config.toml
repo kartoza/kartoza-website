@@ -49,6 +49,12 @@ mainSections = ["blog"]
 # Uses the same public gateway as production; requires allow_cors in ERPNext site_config.json.
 erpnextBaseUrl = "https://erp.kartoza.com"
 
+# Site-wide kill-switch for course booking/purchasing.
+# Override via HUGO_PARAMS_COURSEPURCHASEDISABLED / HUGO_PARAMS_COURSEPURCHASEDISABLEDMESSAGE
+# in .env (see .env.example) — `make serve` and `make build` load that file automatically.
+coursePurchaseDisabled = false
+coursePurchaseDisabledMessage = "Course bookings are temporarily unavailable. Please contact us to enquire about this course."
+
 # Min hugo version
 minHugoVersion = "0.139.0"
 description = "Kartoza - Open Source Geospatial Solutions"

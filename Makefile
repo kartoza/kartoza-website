@@ -59,11 +59,13 @@ help:
 
 # Hugo targets
 serve:
+	set -a; [ -f .env ] && . ./.env; set +a; \
 	HUGO_PARAMS_GITCOMMIT=$$(git rev-parse --short HEAD) \
 	HUGO_PARAMS_GITVERSION=$$(git describe --tags --always) \
 	hugo server
 
 build:
+	set -a; [ -f .env ] && . ./.env; set +a; \
 	HUGO_PARAMS_GITCOMMIT=$$(git rev-parse --short HEAD) \
 	HUGO_PARAMS_GITVERSION=$$(git describe --tags --always) \
 	hugo
