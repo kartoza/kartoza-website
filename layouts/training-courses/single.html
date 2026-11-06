@@ -1,5 +1,8 @@
 {{- $shouldRender := partial "review-check.html" . -}}
-{{- $allowBooking := .Params.allow_booking | default false -}}
+{{- $courseBookable := .Params.allow_booking | default false -}}
+{{- $purchaseDisabled := site.Params.coursePurchaseDisabled | default false -}}
+{{- $purchaseDisabledMessage := site.Params.coursePurchaseDisabledMessage | default "Course bookings are temporarily unavailable. Please contact us to enquire about this course." -}}
+{{- $allowBooking := and $courseBookable (not $purchaseDisabled) -}}
 {{- $courseSlug := path.Base .File.Dir -}}
 {{- if $shouldRender -}}
 {{ partial "header.html" . }}
@@ -87,6 +90,8 @@
                         <span class="icon"><i class="fas fa-calendar-check"></i></span>
                         <span>View Dates & Book</span>
                     </a>
+                    {{ else if and $courseBookable $purchaseDisabled }}
+                    <p class="notification is-warning is-light">{{ $purchaseDisabledMessage }}</p>
                     {{ end }}
                     <!-- <a href="#course-content" class="button is-light is-medium">
                         <span class="icon"><i class="fas fa-info-circle"></i></span>
@@ -189,6 +194,11 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                {{ else if and $courseBookable $purchaseDisabled }}
+                <div class="card is-padded has-border-top">
+                    <h4 class="card-title is-small"><i class="fas fa-calendar-check"></i> Book Your Spot</h4>
+                    <p class="card-description">{{ $purchaseDisabledMessage }}</p>
                 </div>
                 {{ end }}
 
@@ -588,6 +598,24 @@
         </script>
     </div>
 </section>
+{{ else if and $courseBookable $purchaseDisabled }}
+<section class="booking-section" id="booking-section">
+    <div class="container">
+        <div class="no-sessions-message">
+            <i class="fas fa-calendar-times"></i>
+            <h3>Bookings Currently Unavailable</h3>
+            <p>{{ $purchaseDisabledMessage }}</p>
+            <a href="{{ absURL "contact-us/" }}?course={{ .Title | urlquery }}&subject=Training%20Enquiry" class="button is-primary is-medium">
+                <span class="icon"><i class="fas fa-envelope"></i></span>
+                <span>Contact Us</span>
+            </a>
+        </div>
+    </div>
+</section>
+<script>
+    window.trainingScheduleData = window.trainingScheduleData || {};
+    window.currentCourse = window.currentCourse || {{ $courseSlug | jsonify | safeJS }};
+</script>
 {{ else }}
 <!-- Hidden placeholder to keep layout/JS stable when booking is disabled -->
 <section class="booking-section" id="booking-section" style="display:none;" aria-hidden="true"></section>

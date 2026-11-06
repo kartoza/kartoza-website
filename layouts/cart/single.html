@@ -423,6 +423,10 @@
 
         list.querySelectorAll('.qty-inc').forEach(function (btn) {
             btn.addEventListener('click', function () {
+                if (window._coursePurchaseDisabled) {
+                    showToast(window._coursePurchaseDisabledMessage, 'warning');
+                    return;
+                }
                 var qty = parseInt(btn.dataset.qty, 10) || 1;
                 setQty(btn.dataset.itemCode, qty + 1);
             });

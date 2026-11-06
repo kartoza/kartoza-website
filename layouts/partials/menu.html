@@ -237,6 +237,9 @@
 </div>
 
 <script>
+window._coursePurchaseDisabled = {{ site.Params.coursePurchaseDisabled | default false }};
+window._coursePurchaseDisabledMessage = {{ site.Params.coursePurchaseDisabledMessage | default "Course bookings are temporarily unavailable. Please contact us to enquire about this course." | jsonify | safeJS }};
+
 // Auth nav state — runs on every page
 (function() {
     var AUTH_KEY = 'kartoza_auth';
@@ -349,6 +352,10 @@
     });
 
     window.addCart = async function(itemCode, qty) {
+        if (window._coursePurchaseDisabled) {
+            showToast(window._coursePurchaseDisabledMessage, 'warning')
+            throw new Error('Course purchasing is disabled')
+        }
         qty = (qty && qty > 0) ? Math.round(qty) : 1;
         let data
         try {

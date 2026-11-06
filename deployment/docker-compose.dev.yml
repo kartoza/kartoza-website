@@ -5,6 +5,9 @@ services:
     image: kartoza-website:base
     container_name: kartoza-hugo-serve
     user: root
+    environment:
+      - HUGO_PARAMS_COURSEPURCHASEDISABLED=${HUGO_PARAMS_COURSEPURCHASEDISABLED:-false}
+      - HUGO_PARAMS_COURSEPURCHASEDISABLEDMESSAGE=${HUGO_PARAMS_COURSEPURCHASEDISABLEDMESSAGE:-}
     volumes:
       - ..:/src
     working_dir: /src

@@ -147,7 +147,16 @@
 {{ end }}
 <script>
   const auth = getAuth()
-  if (auth) {
+  if (window._coursePurchaseDisabled) {
+    document.querySelectorAll('.login-buy').forEach(el => {
+      const unavailable = document.createElement('button')
+      unavailable.className = el.className
+      unavailable.textContent = 'Unavailable'
+      unavailable.title = window._coursePurchaseDisabledMessage
+      unavailable.disabled = true
+      el.replaceWith(unavailable)
+    })
+  } else if (auth) {
     document.querySelectorAll('.login-buy').forEach(el => {
       const cart = document.createElement('a')
       cart.id = 'add-cart'
