@@ -1,4 +1,5 @@
 ---
+erpnext_id: "HR-EMP-00052"
 title: "Danang Tri Massandy"
 role: "Senior Software Developer"
 department: "Development"
