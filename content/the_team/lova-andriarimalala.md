@@ -1,4 +1,5 @@
 ---
+erpnext_id: "HR-EMP-00073"
 title: "Lova Andriarimalala"
 role: "QGIS Full Stack Developer"
 department: "Development"

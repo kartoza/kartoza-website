@@ -1,4 +1,5 @@
 ---
+erpnext_id: "HR-EMP-00057"
 title: "Bhaskar Pandranki"
 role: "DevOps Engineer"
 department: "DevOps & Infrastructure"

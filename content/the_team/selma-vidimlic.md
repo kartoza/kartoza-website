@@ -1,4 +1,5 @@
 ---
+erpnext_id: "HR-EMP-00068"
 title: "Selma Vidimlic Husic"
 role: "QGIS Document Writer"
 department: "Training & Documentation"

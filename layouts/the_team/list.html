@@ -34,6 +34,7 @@
 {{ $devops := where $visibleMembers ".Params.department" "DevOps & Infrastructure" }}
 {{ $operations := where $visibleMembers ".Params.department" "Operations & Administration" }}
 {{ $pm := where $visibleMembers ".Params.department" "Project Management" }}
+{{ $sales := where $visibleMembers ".Params.department" "Sales & Business Development" }}
 
 <!-- Leadership Section -->
 {{ with $leadership }}
@@ -275,6 +276,43 @@
 
         </div>
         <div class="team-grid team-grid-leadership">
+            {{ range (sort . "Params.weight") }}
+            <a href="{{ .Permalink }}" class="card is-tile">
+                <div class="card-image is-cover is-square">
+                    <img src="{{ absURL .Params.image }}" alt="{{ .Title }}" loading="lazy">
+                    {{ with .Params.country }}
+                    <div class="card-image-caption">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>{{ . }}</span>
+                    </div>
+                    {{ end }}
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">{{ .Title }}</h3>
+                    <span class="tag is-primary is-light">{{ .Params.role }}</span>
+                    <p class="card-description">{{ .Params.bio }}</p>
+                    <span class="card-link">
+                        <i class="fas fa-arrow-right"></i> View Profile
+                    </span>
+                </div>
+            </a>
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{ end }}
+
+{{ with $sales }}
+<section class="team-section team-sales">
+    <div class="container">
+        <div class="section-heading team-section-header">
+            <div class="section-heading-main">
+                <span class="section-heading-eyebrow">Connecting clients with open source solutions</span>
+                <h2 class="section-heading-title">Sales & Business Development</h2>
+            </div>
+
+        </div>
+        <div class="team-grid">
             {{ range (sort . "Params.weight") }}
             <a href="{{ .Permalink }}" class="card is-tile">
                 <div class="card-image is-cover is-square">
